@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ОВР — Задание №19 ЕГЭ по химии</title>
+<style>
+:root{
+  --bg:#F0F7FF;--surface:#fff;--surface2:#E8F2FF;
+  --navy:#0C1A2E;--ink:#1E3A5F;--muted:#4A6080;--border:#CBD9EE;
+  --blue:#2563EB;--blue-soft:#DBEAFE;
+  --amber:#EA580C;--amber-soft:#FFEDD5;
+  --green:#059669;--green-soft:#D1FAE5;
+  --purple:#7C3AED;--purple-soft:#EDE9FE;
+  --red:#DC2626;--red-soft:#FEE2E2;
+  --gold:#D97706;--gold-soft:#FEF3C7;
+  --r:12px;--rs:8px;
+  --sh:0 2px 12px rgba(12,26,46,.09);
+  --shm:0 4px 24px rgba(12,26,46,.14);
+  --mono:'Courier New','Lucida Console',monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0C1A2E;--surface:#1A2E4A;--surface2:#162540;
+  --navy:#E8F2FF;--ink:#B8D4F0;--muted:#7A9DC0;--border:#2A4060;
+  --blue:#60A5FA;--blue-soft:#1E3A5F;--amber:#FB923C;--amber-soft:#451A03;
+  --green:#34D399;--green-soft:#064E3B;--purple:#A78BFA;--purple-soft:#2E1065;
+  --red:#F87171;--red-soft:#450A0A;--gold:#FCD34D;--gold-soft:#451A03;
+  --sh:0 2px 12px rgba(0,0,0,.3);--shm:0 4px 24px rgba(0,0,0,.4);
+}}
+:root[data-theme="dark"]{
+  --bg:#0C1A2E;--surface:#1A2E4A;--surface2:#162540;
+  --navy:#E8F2FF;--ink:#B8D4F0;--muted:#7A9DC0;--border:#2A4060;
+  --blue:#60A5FA;--blue-soft:#1E3A5F;--amber:#FB923C;--amber-soft:#451A03;
+  --green:#34D399;--green-soft:#064E3B;--purple:#A78BFA;--purple-soft:#2E1065;
+  --red:#F87171;--red-soft:#450A0A;--gold:#FCD34D;--gold-soft:#451A03;
+  --sh:0 2px 12px rgba(0,0,0,.3);--shm:0 4px 24px rgba(0,0,0,.4);
+}
+:root[data-theme="light"]{
+  --bg:#F0F7FF;--surface:#fff;--surface2:#E8F2FF;
+  --navy:#0C1A2E;--ink:#1E3A5F;--muted:#4A6080;--border:#CBD9EE;
+  --blue:#2563EB;--blue-soft:#DBEAFE;--amber:#EA580C;--amber-soft:#FFEDD5;
+  --green:#059669;--green-soft:#D1FAE5;--purple:#7C3AED;--purple-soft:#EDE9FE;
+  --red:#DC2626;--red-soft:#FEE2E2;--gold:#D97706;--gold-soft:#FEF3C7;
+  --sh:0 2px 12px rgba(12,26,46,.09);--shm:0 4px 24px rgba(12,26,46,.14);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  background:var(--bg);color:var(--navy);line-height:1.6;min-height:100vh}
+a{color:var(--blue)}
+
+/* progress */
+#prog-wrap{position:fixed;top:0;left:0;right:0;height:4px;z-index:999;background:var(--border)}
+#prog-bar{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--amber));transition:width .1s linear}
+
+/* header */
+.site-header{background:var(--navy);color:#fff;padding:56px 24px 48px;position:relative;overflow:hidden}
+.site-header::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 80% 20%,rgba(37,99,235,.35) 0%,transparent 60%),
+             radial-gradient(ellipse at 10% 80%,rgba(234,88,12,.2) 0%,transparent 50%);
+  pointer-events:none}
+.header-inner{max-width:820px;margin:0 auto;position:relative}
+.header-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:14px}
+.header-title{font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.1;color:#fff;text-wrap:balance;margin-bottom:16px}
+.header-title span{color:#60A5FA}
+.header-sub{font-size:17px;color:rgba(255,255,255,.65);max-width:560px;line-height:1.5}
+.header-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+  padding:5px 12px;border-radius:100px;background:rgba(255,255,255,.1);
+  color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15)}
+.chip.blue{background:rgba(37,99,235,.3);color:#93C5FD;border-color:rgba(37,99,235,.4)}
+.chip.amber{background:rgba(234,88,12,.3);color:#FED7AA;border-color:rgba(234,88,12,.4)}
+.chip.green{background:rgba(5,150,105,.3);color:#6EE7B7;border-color:rgba(5,150,105,.4)}
+
+/* layout */
+.shell{max-width:820px;margin:0 auto;padding:40px 20px 80px}
+
+/* toc */
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px 28px;margin-bottom:40px;box-shadow:var(--sh)}
+.toc-title{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.toc ol{padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.toc li{font-size:14px}
+.toc a{color:var(--blue);font-weight:500;text-decoration:none}
+.toc a:hover{text-decoration:underline}
+
+/* section */
+.section{margin-bottom:56px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.section-title{font-size:clamp(20px,3.5vw,28px);font-weight:800;color:var(--navy);line-height:1.2;text-wrap:balance;margin-bottom:24px}
+
+/* cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px;box-shadow:var(--sh);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shm)}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card.blue-l{border-left:4px solid var(--blue)}
+.card.amber-l{border-left:4px solid var(--amber)}
+.card.green-l{border-left:4px solid var(--green)}
+.card.purple-l{border-left:4px solid var(--purple)}
+.card.red-l{border-left:4px solid var(--red)}
+.card.gold-l{border-left:4px solid var(--gold)}
+.card-icon{font-size:28px;margin-bottom:10px}
+.card-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.card-body{font-size:14px;color:var(--ink);line-height:1.6}
+.card-body p+p{margin-top:8px}
+.card-body strong{color:var(--navy);font-weight:700}
+
+/* def box */
+.def-box{border-radius:var(--r);padding:20px 24px;border:1.5px solid;margin-bottom:20px;font-size:15px;line-height:1.6}
+.def-box.blue{background:var(--blue-soft);border-color:var(--blue);color:var(--ink)}
+.def-box.amber{background:var(--amber-soft);border-color:var(--amber);color:var(--ink)}
+.def-box.green{background:var(--green-soft);border-color:var(--green);color:var(--ink)}
+.def-box.purple{background:var(--purple-soft);border-color:var(--purple);color:var(--ink)}
+.def-box .label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;opacity:.7}
+.def-box strong{font-weight:800}
+
+/* diagram */
+.diagram{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px;margin-bottom:24px;box-shadow:var(--sh);overflow-x:auto}
+.diag-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:15px;margin-bottom:10px}
+.diag-row:last-child{margin-bottom:0}
+.diag-box{padding:8px 14px;border-radius:var(--rs);font-weight:700;font-size:14px;white-space:nowrap}
+.diag-box.ox{background:var(--amber-soft);color:var(--amber);border:1.5px solid var(--amber)}
+.diag-box.red{background:var(--green-soft);color:var(--green);border:1.5px solid var(--green)}
+.diag-box.neutral{background:var(--surface2);color:var(--muted);border:1.5px solid var(--border)}
+.diag-arrow{font-size:18px;color:var(--muted)}
+.diag-e{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--blue);
+  background:var(--blue-soft);padding:3px 8px;border-radius:6px}
+
+/* table */
+.tbl-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--sh)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface)}
+thead th{background:var(--navy);color:#fff;padding:12px 16px;text-align:left;
+  font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+tbody td{padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even) td{background:var(--surface2)}
+td .ox{color:var(--amber);font-weight:700}
+td .red{color:var(--green);font-weight:700}
+td .both{color:var(--purple);font-weight:700}
+td code{font-family:var(--mono);font-size:13px;background:var(--surface2);padding:1px 5px;border-radius:4px}
+
+/* formula SO notation */
+.so-above{display:inline-flex;flex-direction:column;align-items:center;line-height:1;vertical-align:middle}
+.so-above .so-val{font-family:var(--mono);font-size:11px;font-weight:800;line-height:1;margin-bottom:2px}
+.so-above .so-el{font-size:inherit}
+.so-blue{color:var(--blue)}
+.so-amber{color:var(--amber)}
+.so-green{color:var(--green)}
+.so-red{color:var(--red)}
+.so-muted{color:var(--muted)}
+
+/* ovr reaction box */
+.rxn-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:20px 24px;box-shadow:var(--sh);overflow-x:auto;margin:16px 0}
+.rxn-formula{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--navy);
+  display:flex;align-items:center;flex-wrap:wrap;gap:4px;line-height:2.2}
+.rxn-coef{font-size:15px;font-weight:900;color:var(--blue);margin-right:1px}
+.rxn-plus,.rxn-arr{font-size:17px;color:var(--muted);padding:0 4px}
+.hl-ox{color:var(--amber);border-bottom:2px solid var(--amber)}
+.hl-red{color:var(--green);border-bottom:2px solid var(--green)}
+
+/* steps */
+.steps{display:flex;flex-direction:column;gap:16px}
+.step{display:flex;gap:16px;align-items:flex-start;background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--r);padding:20px;box-shadow:var(--sh)}
+.step-num{min-width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;flex-shrink:0}
+.step-content{flex:1}
+.step-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.step-body{font-size:14px;color:var(--ink);line-height:1.6}
+.step-body code{font-family:var(--mono);font-size:13px;background:var(--blue-soft);
+  padding:1px 5px;border-radius:4px;color:var(--blue)}
+.step-example{margin-top:10px;background:var(--surface2);border-radius:var(--rs);
+  padding:12px 14px;font-size:13px;color:var(--ink);font-family:var(--mono);line-height:1.8;overflow-x:auto}
+.step-example .comm{color:var(--muted);font-family:sans-serif;font-size:12px}
+
+/* electron balance table in step 3 */
+.ebal{width:100%;border-collapse:collapse;font-size:13px;font-family:var(--mono);margin-top:10px}
+.ebal td{padding:6px 10px;border:1px solid var(--border)}
+.ebal th{padding:6px 10px;border:1px solid var(--border);background:var(--surface2);
+  font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-family:sans-serif;font-weight:700}
+.ebal .eox{color:var(--amber);font-weight:700}
+.ebal .ered{color:var(--green);font-weight:700}
+.ebal .emul{color:var(--blue);font-weight:800}
+
+/* error cards */
+.error-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.error-card{background:var(--red-soft);border:1.5px solid var(--red);border-radius:var(--r);padding:20px}
+.error-icon{font-size:24px;margin-bottom:8px}
+.error-title{font-size:14px;font-weight:700;color:var(--red);margin-bottom:8px}
+.error-body{font-size:13px;color:var(--ink);line-height:1.5}
+.error-fix{margin-top:10px;font-size:13px;color:var(--green);font-weight:600;
+  padding-top:10px;border-top:1px solid rgba(220,38,38,.2)}
+
+/* lifehacks */
+.hack-list{display:flex;flex-direction:column;gap:12px}
+.hack{display:flex;gap:14px;align-items:flex-start;background:var(--gold-soft);
+  border:1px solid var(--gold);border-radius:var(--r);padding:16px 18px}
+.hack-icon{font-size:22px;flex-shrink:0}
+.hack-text{font-size:14px;color:var(--ink);line-height:1.5}
+.hack-text strong{color:var(--navy);font-weight:700}
+
+/* ════ CAROUSEL ══════════════════════════════════════ */
+.carousel-wrap{position:relative;user-select:none}
+
+.carousel-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;flex-wrap:wrap;gap:10px
+}
+.carousel-counter{font-size:14px;font-weight:700;color:var(--muted)}
+.carousel-counter span{color:var(--navy);font-size:18px}
+
+.carousel-prog{
+  flex:1;min-width:120px;height:6px;background:var(--surface2);
+  border-radius:100px;overflow:hidden
+}
+.carousel-prog-fill{
+  height:100%;background:linear-gradient(90deg,var(--blue),var(--green));
+  transition:width .35s ease;width:0
+}
+
+#prac-score-bar{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:14px 20px;display:flex;align-items:center;gap:16px;
+  box-shadow:var(--sh);margin-bottom:20px;flex-wrap:wrap
+}
+.ps-label{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.ps-nums{font-size:24px;font-weight:900;color:var(--navy);font-variant-numeric:tabular-nums}
+
+/* the card stage */
+.carousel-stage{
+  perspective:1000px;min-height:320px;
+  display:flex;align-items:stretch
+}
+.ccard{
+  flex:1;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:28px 28px 24px;box-shadow:var(--shm);
+  display:none;flex-direction:column;gap:12px;
+  transition:opacity .22s,transform .22s
+}
+.ccard.active{display:flex}
+.ccard.slide-left{animation:slideLeft .22s ease both}
+.ccard.slide-right{animation:slideRight .22s ease both}
+@keyframes slideLeft{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+@keyframes slideRight{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
+.ccard.correct{border-color:var(--green)}
+.ccard.wrong{border-color:var(--red)}
+
+.ccard-num{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ccard-q{font-size:15px;color:var(--ink);line-height:1.5}
+.ccard-formula{
+  font-family:var(--mono);font-size:22px;font-weight:700;color:var(--navy);
+  background:var(--surface2);border-radius:var(--rs);
+  padding:14px 18px;display:inline-block;letter-spacing:.04em;
+  align-self:flex-start;line-height:2
+}
+.hl{color:var(--amber);border-bottom:2.5px solid var(--amber);padding-bottom:1px}
+.ccard-input-row{display:flex;gap:10px;align-items:center;margin-top:4px}
+.ccard-input{
+  flex:1;padding:11px 14px;font-size:17px;font-family:var(--mono);
+  border:1.5px solid var(--border);border-radius:var(--rs);
+  background:var(--bg);color:var(--navy);outline:none;
+  transition:border-color .2s;max-width:160px
+}
+.ccard-input:focus{border-color:var(--blue)}
+.ccard-input.ok{border-color:var(--green);background:var(--green-soft)}
+.ccard-input.err{border-color:var(--red);background:var(--red-soft)}
+.ccard-input:read-only{opacity:.7}
+.ccard-btn{
+  padding:11px 20px;border-radius:var(--rs);font-size:14px;font-weight:700;
+  cursor:pointer;border:none;background:var(--blue);color:#fff;
+  transition:background .15s,transform .1s;flex-shrink:0
+}
+.ccard-btn:hover{background:var(--ink)}
+.ccard-btn:active{transform:scale(.97)}
+.ccard-btn:disabled{opacity:.5;cursor:default;transform:none}
+.ccard-feedback{font-size:14px;font-weight:600;min-height:22px}
+.ccard-feedback.ok{color:var(--green)}
+.ccard-feedback.err{color:var(--red)}
+
+/* nav buttons */
+.carousel-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px}
+.cnav-btn{
+  width:48px;height:48px;border-radius:50%;border:1.5px solid var(--border);
+  background:var(--surface);color:var(--navy);font-size:20px;cursor:pointer;
+  box-shadow:var(--sh);transition:background .15s,transform .1s;
+  display:flex;align-items:center;justify-content:center
+}
+.cnav-btn:hover{background:var(--surface2);transform:scale(1.06)}
+.cnav-btn:active{transform:scale(.95)}
+.cnav-btn:disabled{opacity:.3;cursor:default;transform:none}
+.cnav-dots{display:flex;gap:6px;align-items:center}
+.cnav-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--border);transition:all .2s;cursor:pointer
+}
+.cnav-dot.act{background:var(--blue);width:24px;border-radius:4px}
+
+/* finish button */
+.finish-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;margin-top:16px;padding:14px 20px;
+  background:var(--navy);color:#fff;border:none;border-radius:var(--r);
+  font-size:15px;font-weight:700;cursor:pointer;
+  box-shadow:var(--shm);transition:background .15s,transform .1s;
+}
+.finish-btn:hover{background:var(--ink);transform:translateY(-1px)}
+.finish-btn:active{transform:scale(.98)}
+
+/* results overlay */
+.results-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(12,26,46,.7);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.results-overlay.show{opacity:1;pointer-events:auto}
+.results-card{
+  background:var(--surface);border-radius:var(--r);padding:36px 32px;
+  max-width:420px;width:100%;box-shadow:0 20px 60px rgba(12,26,46,.3);
+  text-align:center;
+  transform:translateY(30px);transition:transform .3s;
+}
+.results-overlay.show .results-card{transform:none}
+.res-grade{font-size:28px;margin-bottom:16px}
+.res-ring-wrap{display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.res-ring{
+  width:140px;height:140px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.res-ring-inner{
+  width:104px;height:104px;border-radius:50%;
+  background:var(--surface);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:2px;
+  box-shadow:inset 0 0 0 2px var(--border);
+}
+.res-pct{font-size:34px;font-weight:900;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums}
+.res-pct-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.res-stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px
+}
+.res-stat{
+  background:var(--surface2);border-radius:var(--rs);padding:12px;
+}
+.res-stat-num{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums}
+.res-stat-num.good{color:var(--green)}
+.res-stat-num.bad{color:var(--red)}
+.res-stat-label{font-size:12px;color:var(--muted);margin-top:2px}
+.res-err-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:13px;border-radius:var(--rs);
+  background:var(--red-soft);color:var(--red);
+  border:1.5px solid var(--red);font-size:14px;font-weight:700;
+  cursor:pointer;transition:background .15s;margin-bottom:10px;
+}
+.res-err-btn:hover{background:var(--red);color:#fff}
+.res-retry-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:13px;border-radius:var(--rs);
+  background:var(--blue-soft);color:var(--blue);
+  border:1.5px solid var(--blue);font-size:14px;font-weight:700;
+  cursor:pointer;transition:background .15s;
+}
+.res-retry-btn:hover{background:var(--blue);color:#fff}
+.res-close{
+  position:absolute;top:16px;right:16px;
+  width:32px;height:32px;border-radius:50%;
+  background:var(--surface2);border:1px solid var(--border);
+  font-size:16px;cursor:pointer;color:var(--muted);
+  display:flex;align-items:center;justify-content:center;
+}
+.res-close:hover{background:var(--border)}
+
+/* error mode section */
+.error-mode-section{
+  display:none;margin-top:32px;padding:24px;
+  background:var(--red-soft);border:2px solid var(--red);
+  border-radius:var(--r);
+}
+.em-header{
+  display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap
+}
+.em-badge{
+  font-size:12px;font-weight:700;padding:4px 12px;border-radius:100px;
+  background:var(--red);color:#fff;letter-spacing:.05em;text-transform:uppercase;
+}
+.em-title{font-size:18px;font-weight:800;color:var(--navy)}
+.em-sub{font-size:13px;color:var(--ink);margin-bottom:16px;line-height:1.5}
+
+/* homework */
+.hw-block{background:linear-gradient(135deg,var(--navy) 0%,var(--ink) 100%);
+  border-radius:var(--r);padding:32px;color:#fff;margin-top:24px;box-shadow:var(--shm)}
+.hw-title{font-size:20px;font-weight:900;margin-bottom:6px}
+.hw-sub{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:24px}
+.hw-links{display:flex;flex-direction:column;gap:12px}
+.hw-link{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);border-radius:var(--rs);
+  padding:14px 18px;text-decoration:none;color:#fff;transition:background .15s}
+.hw-link:hover{background:rgba(255,255,255,.14);color:#fff}
+.hw-link-icon{font-size:22px;flex-shrink:0}
+.hw-link-info{flex:1}
+.hw-link-title{font-size:14px;font-weight:700;margin-bottom:2px}
+.hw-link-desc{font-size:12px;color:rgba(255,255,255,.55)}
+.hw-link-arrow{opacity:.4;font-size:18px;flex-shrink:0}
+
+/* back to top / theme */
+#back-top{position:fixed;bottom:24px;right:20px;width:44px;height:44px;border-radius:50%;
+  background:var(--navy);color:#fff;border:none;font-size:18px;cursor:pointer;
+  box-shadow:var(--shm);display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:100}
+#back-top.show{opacity:1;pointer-events:auto}
+#back-top:hover{transform:translateY(-3px)}
+#theme-btn{position:fixed;bottom:80px;right:20px;width:40px;height:40px;border-radius:50%;
+  background:var(--surface);color:var(--navy);border:1.5px solid var(--border);
+  font-size:16px;cursor:pointer;box-shadow:var(--sh);
+  display:flex;align-items:center;justify-content:center;z-index:100;transition:background .2s}
+#theme-btn:hover{background:var(--surface2)}
+
+/* fade-in */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease}
+.fade-in.visible{opacity:1;transform:none}
+
+/* two-col for def boxes */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+
+/* mobile */
+@media(max-width:600px){
+  .shell{padding:24px 14px 80px}
+  .site-header{padding:40px 16px 36px}
+  .card-grid,.error-cards{grid-template-columns:1fr}
+  .ans-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+  .step{gap:12px}
+  .step-num{min-width:34px;height:34px;font-size:15px}
+  .hw-block{padding:24px 18px}
+  .diag-row{font-size:13px}
+  .two-col{grid-template-columns:1fr}
+  .ccard{padding:20px 16px}
+  .ccard-formula{font-size:18px}
+  .rxn-formula{font-size:14px}
+  .so-above .so-val{font-size:10px}
+}
+@media(max-width:380px){
+  .header-title{font-size:24px}
+  .ccard-input{font-size:15px}
+}
+</style>
+</head>
+<body>
+
+<div id="prog-wrap"><div id="prog-bar"></div></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-eyebrow">ЕГЭ по химии · Задание №19</div>
+    <h1 class="header-title">Окислительно-<br><span>восстановительные</span><br>реакции</h1>
+    <p class="header-sub">Полный разбор: что такое ОВР, как составить электронный баланс и как решать задание №19 без ошибок</p>
+    <div class="header-chips">
+      <span class="chip blue">📘 Теория</span>
+      <span class="chip amber">⚡ Окислители</span>
+      <span class="chip green">🔋 Восстановители</span>
+      <span class="chip">55 задач</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+
+<nav class="toc fade-in">
+  <div class="toc-title">Содержание</div>
+  <ol>
+    <li><a href="#s1">Что такое ОВР</a></li>
+    <li><a href="#s2">Окислитель и восстановитель</a></li>
+    <li><a href="#s3">Окисление и восстановление</a></li>
+    <li><a href="#s4">Алгоритм решения задания №19</a></li>
+    <li><a href="#s5">Сильные окислители и восстановители</a></li>
+    <li><a href="#s7">Лайфхаки</a></li>
+    <li><a href="#s8">55 задач — карточки</a></li>
+    <li><a href="#s9">Задания для самостоятельной работы</a></li>
+  </ol>
+</nav>
+
+<!-- ══ S1 ══ -->
+<section class="section fade-in" id="s1">
+  <div class="section-label">Раздел 1</div>
+  <h2 class="section-title">Что такое ОВР — простым языком</h2>
+  <div class="def-box blue">
+    <div class="label">Определение</div>
+    <strong>Окислительно-восстановительные реакции (ОВР)</strong> — это реакции, в ходе которых <strong>степени окисления</strong> атомов элементов изменяются. Одни атомы <strong>отдают электроны</strong>, другие — <strong>принимают</strong>.
+  </div>
+  <p style="font-size:15px;color:var(--ink);margin-bottom:20px;line-height:1.7">
+    Представь атом как человека с деньгами. Отдаёт деньги — «беднеет» (степень окисления растёт). Получает — «богатеет» (степень окисления падает). Электроны — это валюта химии.
+  </p>
+  <div class="diagram">
+    <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Схема ОВР</div>
+    <div class="diag-row">
+      <div class="diag-box ox">Окислитель</div>
+      <span class="diag-arrow">+</span>
+      <div class="diag-box red">Восстановитель</div>
+      <span class="diag-arrow">→</span>
+      <div class="diag-box neutral">Продукт восст.</div>
+      <span class="diag-arrow">+</span>
+      <div class="diag-box neutral">Продукт окисл.</div>
+    </div>
+    <div class="diag-row" style="margin-top:14px;gap:6px;align-items:center">
+      <div style="flex:1;height:2px;background:var(--amber);border-radius:2px"></div>
+      <div class="diag-e">e⁻ переходят от восстановителя к окислителю</div>
+      <div style="flex:1;height:2px;background:var(--green);border-radius:2px"></div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card blue-l fade-in">
+      <div class="card-icon">⚡</div>
+      <div class="card-title">Электроны — главное</div>
+      <div class="card-body">В ОВР всегда передаются электроны. Нет передачи электронов — нет ОВР.</div>
+    </div>
+    <div class="card green-l fade-in">
+      <div class="card-icon">⚖️</div>
+      <div class="card-title">Баланс электронов</div>
+      <div class="card-body">Сколько e⁻ отдал восстановитель — столько принял окислитель. Основа метода электронного баланса.</div>
+    </div>
+    <div class="card amber-l fade-in">
+      <div class="card-icon">🔄</div>
+      <div class="card-title">Две полуреакции</div>
+      <div class="card-body">Любую ОВР можно разбить на <strong>окисление</strong> (отдача e⁻) и <strong>восстановление</strong> (приём e⁻). Они происходят одновременно.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S2 ══ -->
+<section class="section fade-in" id="s2">
+  <div class="section-label">Раздел 2</div>
+  <h2 class="section-title">Окислитель и восстановитель</h2>
+  <div class="two-col">
+    <div class="def-box amber">
+      <div class="label">Окислитель</div>
+      <strong>Принимает e⁻ → восстанавливается</strong><br>
+      → степень окисления <strong>понижается ↓</strong><br><br>
+      Атом получает электроны — сам при этом <em>восстанавливается</em>.
+    </div>
+    <div class="def-box green">
+      <div class="label">Восстановитель</div>
+      <strong>Отдаёт e⁻ → окисляется</strong><br>
+      → степень окисления <strong>повышается ↑</strong><br><br>
+      Атом теряет электроны — сам при этом <em>окисляется</em>.
+    </div>
+  </div>
+  <div class="def-box purple" style="margin-bottom:24px">
+    <div class="label">Хитрость — запомни наоборот!</div>
+    <strong>Окислитель</strong> — сам <em>восстанавливается</em> (С.О. ↓)&nbsp;&nbsp;|&nbsp;&nbsp;
+    <strong>Восстановитель</strong> — сам <em>окисляется</em> (С.О. ↑)<br><br>
+    Окислитель окисляет <em>других</em>, а сам принимает e⁻ и восстанавливается.
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Свойство</th>
+          <th>🟠 Окислитель</th>
+          <th>🟢 Восстановитель</th>
+          <th>🔵 И то и другое</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Что делает</strong></td><td>Принимает e⁻</td><td>Отдаёт e⁻</td><td>И то и другое</td></tr>
+        <tr><td><strong>Процесс</strong></td><td class="ox">Восстанавливается</td><td class="red">Окисляется</td><td class="both">Диспропорционирование</td></tr>
+        <tr><td><strong>С.О.</strong></td><td>Понижается ↓</td><td>Повышается ↑</td><td>Промежуточная</td></tr>
+        <tr><td><strong>Примеры</strong></td>
+          <td><code>KMn<sup>+7</sup>O₄</code>, <code>HN<sup>+5</sup>O₃</code></td>
+          <td><code>N<sup>−3</sup>H₃</code>, <code>H₂S<sup>−2</sup></code></td>
+          <td><code>S<sup>+4</sup>O₂</code>, <code>HN<sup>+3</sup>O₂</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══ S3 ══ -->
+<section class="section fade-in" id="s3">
+  <div class="section-label">Раздел 3</div>
+  <h2 class="section-title">Окисление и восстановление</h2>
+  <div class="two-col">
+    <div class="card amber-l">
+      <div class="card-icon">🔺</div>
+      <div class="card-title">Окисление</div>
+      <div class="card-body">
+        Процесс <strong>отдачи электронов</strong>. Происходит с <strong>восстановителем</strong>. С.О. <strong>повышается</strong>.<br><br>
+        <span style="font-family:var(--mono);font-size:14px;color:var(--amber)">S<sup>−2</sup> − 2e⁻ → S<sup>0</sup></span>
+      </div>
+    </div>
+    <div class="card green-l">
+      <div class="card-icon">🔻</div>
+      <div class="card-title">Восстановление</div>
+      <div class="card-body">
+        Процесс <strong>принятия электронов</strong>. Происходит с <strong>окислителем</strong>. С.О. <strong>понижается</strong>.<br><br>
+        <span style="font-family:var(--mono);font-size:14px;color:var(--green)">Mn<sup>+7</sup> + 5e⁻ → Mn<sup>+2</sup></span>
+      </div>
+    </div>
+  </div>
+  <div class="def-box blue">
+    <div class="label">Степень окисления (С.О.)</div>
+    Условный заряд атома, если бы все электроны перешли к более <strong>электроотрицательному</strong> элементу. Условная величина — но именно по ней определяем окислитель и восстановитель.
+  </div>
+</section>
+
+<!-- ══ S4 — ALGORITHM ══ -->
+<section class="section fade-in" id="s4">
+  <div class="section-label">Раздел 4</div>
+  <h2 class="section-title">Алгоритм решения задания №19</h2>
+
+  <p style="font-size:15px;color:var(--ink);margin-bottom:16px;line-height:1.7">
+    Разберём на конкретной реакции — одной из самых частых на ЕГЭ:
+  </p>
+
+  <!-- исходная реакция без СО -->
+  <div class="rxn-box">
+    <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Исходная реакция</div>
+    <div class="rxn-formula" style="font-size:17px">
+      KMnO₄ &nbsp;<span class="rxn-plus">+</span>&nbsp; H₂S &nbsp;<span class="rxn-plus">+</span>&nbsp; H₂SO₄ &nbsp;<span class="rxn-arr">→</span>&nbsp; MnSO₄ &nbsp;<span class="rxn-plus">+</span>&nbsp; S↓ &nbsp;<span class="rxn-plus">+</span>&nbsp; K₂SO₄ &nbsp;<span class="rxn-plus">+</span>&nbsp; H₂O
+    </div>
+  </div>
+
+  <div class="steps">
+
+    <!-- ШАГ 1 -->
+    <div class="step fade-in">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Расставь степени окисления у всех элементов</div>
+        <div class="step-body">
+          Начинай с элементов с постоянной С.О.: металлы I А (+1), II А (+2), F (−1), O (−2), H (+1). Переменные элементы — через уравнение суммы.
+
+          <!-- реакция с С.О. над каждым элементом -->
+          <div class="rxn-box" style="margin-top:14px;background:var(--surface2)">
+            <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px">Реакция со степенями окисления</div>
+            <div style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--navy);line-height:3;display:flex;flex-wrap:wrap;align-items:center;gap:4px;overflow-x:auto">
+
+              <!-- KMnO4 -->
+              <span class="so-above"><span class="so-val so-blue">+1</span><span class="so-el">K</span></span><span class="so-above"><span class="so-val so-amber hl-ox" style="text-decoration:underline;text-decoration-color:var(--amber)">+7</span><span class="so-el">Mn</span></span><span class="so-above"><span class="so-val so-muted">−2</span><span class="so-el">O</span></span><span style="color:var(--muted);font-size:13px">₄</span>
+
+              <span style="color:var(--muted);padding:0 4px">+</span>
+
+              <!-- H2S -->
+              <span class="so-above"><span class="so-val so-muted">+1</span><span class="so-el">H</span></span><span style="color:var(--muted);font-size:13px">₂</span><span class="so-above"><span class="so-val so-green hl-red" style="text-decoration:underline;text-decoration-color:var(--green)">−2</span><span class="so-el">S</span></span>
+
+              <span style="color:var(--muted);padding:0 4px">+</span>
+
+              <!-- H2SO4 -->
+              <span class="so-above"><span class="so-val so-muted">+1</span><span class="so-el">H</span></span><span style="color:var(--muted);font-size:13px">₂</span><span class="so-above"><span class="so-val so-muted">+6</span><span class="so-el">S</span></span><span class="so-above"><span class="so-val so-muted">−2</span><span class="so-el">O</span></span><span style="color:var(--muted);font-size:13px">₄</span>
+
+              <span style="color:var(--muted);padding:0 8px">→</span>
+
+              <!-- MnSO4 -->
+              <span class="so-above"><span class="so-val so-green">+2</span><span class="so-el">Mn</span></span><span class="so-above"><span class="so-val so-muted">+6</span><span class="so-el">S</span></span><span class="so-above"><span class="so-val so-muted">−2</span><span class="so-el">O</span></span><span style="color:var(--muted);font-size:13px">₄</span>
+
+              <span style="color:var(--muted);padding:0 4px">+</span>
+
+              <!-- S0 -->
+              <span class="so-above"><span class="so-val so-amber">0</span><span class="so-el">S</span></span>↓
+
+              <span style="color:var(--muted);padding:0 4px">+</span>
+
+              <!-- K2SO4 -->
+              <span class="so-above"><span class="so-val so-muted">+1</span><span class="so-el">K</span></span><span style="color:var(--muted);font-size:13px">₂</span><span class="so-above"><span class="so-val so-muted">+6</span><span class="so-el">S</span></span><span class="so-above"><span class="so-val so-muted">−2</span><span class="so-el">O</span></span><span style="color:var(--muted);font-size:13px">₄</span>
+
+              <span style="color:var(--muted);padding:0 4px">+</span>
+
+              <!-- H2O -->
+              <span class="so-above"><span class="so-val so-muted">+1</span><span class="so-el">H</span></span><span style="color:var(--muted);font-size:13px">₂</span><span class="so-above"><span class="so-val so-muted">−2</span><span class="so-el">O</span></span>
+            </div>
+            <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:12px;font-size:13px">
+              <span style="background:var(--amber-soft);color:var(--amber);padding:4px 10px;border-radius:6px;font-weight:700">🟠 Mn: +7 → изменилась!</span>
+              <span style="background:var(--green-soft);color:var(--green);padding:4px 10px;border-radius:6px;font-weight:700">🟢 S: −2 → изменилась!</span>
+              <span style="background:var(--surface);color:var(--muted);padding:4px 10px;border-radius:6px;border:1px solid var(--border)">K, H, O — не изменились</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ШАГ 2 -->
+    <div class="step fade-in">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Найди атомы, у которых изменилась С.О. — определи окислитель и восстановитель</div>
+        <div class="step-body">
+          Сравни С.О. в реагентах и продуктах. Повысилась → окисление (восстановитель). Понизилась → восстановление (окислитель).
+          <div class="step-example">
+<span class="ebal" style="display:table;width:auto">
+Mn: <span style="color:var(--amber)">+7</span> → <span style="color:var(--green)">+2</span>  &nbsp; С.О. понизилась → восстанавливается → <b>окислитель</b> (KMnO₄)
+S:  <span style="color:var(--green)">−2</span> → <span style="color:var(--amber)">0</span>   &nbsp;&nbsp; С.О. повысилась  → окисляется     → <b>восстановитель</b> (H₂S)
+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /steps -->
+</section>
+
+<!-- ══ S5 ══ -->
+<section class="section fade-in" id="s5">
+  <div class="section-label">Раздел 5</div>
+  <h2 class="section-title">Сильные окислители и восстановители</h2>
+
+  <div class="def-box blue" style="margin-bottom:24px">
+    <div class="label">Правило прогноза</div>
+    <strong>Высшая С.О.</strong> → только окислитель &nbsp;|&nbsp; <strong>Низшая С.О.</strong> → только восстановитель &nbsp;|&nbsp; <strong>Промежуточная</strong> → и то и другое
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px">
+
+    <!-- ОКИСЛИТЕЛИ -->
+    <div class="card amber-l fade-in">
+      <div class="card-icon">⚡</div>
+      <div class="card-title">Только окислители — С.О. понижается после стрелки</div>
+      <div class="card-body">
+        Атомы в <strong>высшей</strong> С.О. — принимают e⁻, некуда повышать.<br><br>
+        <div style="display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:13px">
+          <div style="background:var(--amber-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">KMnO₄ — Mn: +7 → +2</div>
+            2KMn<span style="color:var(--amber);font-size:11px;vertical-align:super">+7</span>O₄ + 5H₂S + 3H₂SO₄<br>→ 2Mn<span style="color:var(--green);font-size:11px;vertical-align:super">+2</span>SO₄ + 5S↓ + K₂SO₄ + 8H₂O
+          </div>
+          <div style="background:var(--amber-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">HNO₃ (конц.) — N: +5 → +4</div>
+            Cu + 4HN<span style="color:var(--amber);font-size:11px;vertical-align:super">+5</span>O₃(конц.)<br>→ Cu(NO₃)₂ + 2N<span style="color:var(--green);font-size:11px;vertical-align:super">+4</span>O₂↑ + 2H₂O
+          </div>
+          <div style="background:var(--amber-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">H₂SO₄ (конц.) — S: +6 → +4</div>
+            Zn + 2H₂S<span style="color:var(--amber);font-size:11px;vertical-align:super">+6</span>O₄(конц.)<br>→ ZnSO₄ + S<span style="color:var(--green);font-size:11px;vertical-align:super">+4</span>O₂↑ + 2H₂O
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ВОССТАНОВИТЕЛИ -->
+    <div class="card green-l fade-in">
+      <div class="card-icon">🔋</div>
+      <div class="card-title">Только восстановители — С.О. повышается после стрелки</div>
+      <div class="card-body">
+        Атомы в <strong>низшей</strong> С.О. — отдают e⁻, некуда понижать.<br><br>
+        <div style="display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:13px">
+          <div style="background:var(--green-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">H₂S — S: −2 → +4</div>
+            2H₂S<span style="color:var(--red);font-size:11px;vertical-align:super">−2</span> + 3O₂<br>→ 2S<span style="color:var(--amber);font-size:11px;vertical-align:super">+4</span>O₂ + 2H₂O
+          </div>
+          <div style="background:var(--green-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">NH₃ — N: −3 → +2</div>
+            4N<span style="color:var(--red);font-size:11px;vertical-align:super">−3</span>H₃ + 5O₂<br>→ 4N<span style="color:var(--amber);font-size:11px;vertical-align:super">+2</span>O + 6H₂O
+          </div>
+          <div style="background:var(--green-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">Na — Na: 0 → +1</div>
+            2Na<span style="color:var(--red);font-size:11px;vertical-align:super">0</span> + Cl₂<br>→ 2Na<span style="color:var(--amber);font-size:11px;vertical-align:super">+1</span>Cl
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- И ТО И ДРУГОЕ -->
+    <div class="card purple-l fade-in">
+      <div class="card-icon">🔄</div>
+      <div class="card-title">И окислитель, и восстановитель — после стрелки С.О. одного элемента и повышается, и понижается</div>
+      <div class="card-body">
+        Атомы с <strong>промежуточной</strong> С.О. — могут и отдавать, и принимать e⁻.<br><br>
+        <div style="display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:13px">
+          <div style="background:var(--purple-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--purple);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">Cl₂ — Cl: 0 → −1 и 0 → +1</div>
+            Cl₂<span style="color:var(--purple);font-size:11px;vertical-align:super">0</span> + 2NaOH<br>→ NaCl<span style="color:var(--green);font-size:11px;vertical-align:super">−1</span> + NaClO<span style="color:var(--amber);font-size:11px;vertical-align:super">+1</span> + H₂O
+          </div>
+          <div style="background:var(--purple-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--purple);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">H₂O₂ — O: −1 → −2 и −1 → 0</div>
+            2H₂O<span style="color:var(--purple);font-size:11px;vertical-align:super">−1</span>₂<br>→ 2H₂O<span style="color:var(--green);font-size:11px;vertical-align:super">−2</span> + O<span style="color:var(--amber);font-size:11px;vertical-align:super">0</span>₂↑
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- НЕ ОВР -->
+    <div class="card red-l fade-in">
+      <div class="card-icon">🚫</div>
+      <div class="card-title">Это НЕ ОВР — С.О. не меняется!</div>
+      <div class="card-body">
+        Если степени окисления всех элементов <strong>одинаковы</strong> в реагентах и продуктах — это не ОВР.<br><br>
+        <div style="display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:13px">
+          <div style="background:var(--red-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--red);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">Нейтрализация — СО не меняются</div>
+            Na<span style="color:var(--muted);font-size:10px;vertical-align:super">+1</span>OH + HCl → Na<span style="color:var(--muted);font-size:10px;vertical-align:super">+1</span>Cl + H₂O<br>
+            <span style="font-family:sans-serif;font-size:11px;color:var(--red)">Na: +1→+1, Cl: −1→−1 ❌ ОВР</span>
+          </div>
+          <div style="background:var(--red-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--red);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">Обмен — СО не меняются</div>
+            BaCl₂ + Na₂SO₄ → BaSO₄↓ + 2NaCl<br>
+            <span style="font-family:sans-serif;font-size:11px;color:var(--red)">Ba: +2→+2, S: +6→+6 ❌ ОВР</span>
+          </div>
+          <div style="background:var(--red-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--red);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">Разложение карбоната — СО не меняются</div>
+            CaCO₃ → CaO + CO₂<br>
+            <span style="font-family:sans-serif;font-size:11px;color:var(--red)">Ca: +2→+2, C: +4→+4 ❌ ОВР</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ S7 ══ -->
+<section class="section fade-in" id="s7">
+  <div class="section-label">Раздел 7</div>
+  <h2 class="section-title">Лайфхаки для задания №19</h2>
+  <div class="hack-list">
+    <div class="hack fade-in">
+      <div class="hack-icon">🎯</div>
+      <div class="hack-text"><strong>«ПОВО» — мнемоника</strong><br>
+      <strong>П</strong>ринимает → <strong>О</strong>кислитель → <strong>В</strong>осстанавливается. Отдаёт → Восстановитель → Окисляется.</div>
+    </div>
+    <div class="hack fade-in">
+      <div class="hack-icon">⚡</div>
+      <div class="hack-text"><strong>«Флажки» — быстрое распознавание</strong><br>
+      Увидел KMnO₄, K₂Cr₂O₇, HNO₃ (конц.), H₂SO₄ (конц.) — сразу пиши «окислитель». H₂S, KI, NH₃, металл — «восстановитель».</div>
+    </div>
+    <div class="hack fade-in">
+      <div class="hack-icon">📊</div>
+      <div class="hack-text"><strong>Метод «стрелка» для С.О.</strong><br>
+      Нарисуй над формулой стрелку: С.О. в реагенте → С.О. в продукте. Стрелка ↑ = окисление, ↓ = восстановление.</div>
+    </div>
+    <div class="hack fade-in">
+      <div class="hack-icon">🚀</div>
+      <div class="hack-text"><strong>Порядок расстановки С.О.</strong><br>
+      Сначала K, Na, Ca, Ba, F. Потом O, H. Последними — переменные (N, S, Mn, Cr, Fe) через сумму = заряду.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S8 — CAROUSEL ══ -->
+<section class="section fade-in" id="s8">
+  <div class="section-label">Раздел 8</div>
+  <h2 class="section-title">55 задач — определи степень окисления</h2>
+
+  <!-- NOTEBOOK INSTRUCTION -->
+  <div style="background:var(--gold-soft);border:2px solid var(--gold);border-radius:var(--r);padding:20px 22px;margin-bottom:24px">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">📓 Задание в тетрадь</div>
+    <p style="font-size:15px;color:var(--navy);font-weight:700;margin-bottom:8px">Для каждого из 45 соединений запиши в тетрадь решение по образцу:</p>
+    <div style="background:var(--surface);border-radius:var(--rs);padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--ink);line-height:2;overflow-x:auto">
+      <div style="color:var(--muted);font-family:sans-serif;font-size:11px;margin-bottom:4px">ОБРАЗЕЦ — Na₂SO₄</div>
+      сульфат натрия = Na (+1·2) − (−2·4) = <span style="color:var(--blue);font-weight:800">+6</span>
+    </div>
+    <p style="font-size:13px;color:var(--ink);margin-top:10px">Для ионов: сумма С.О. всех атомов = <strong>заряду иона</strong>, а не нулю.</p>
+    <div style="background:var(--surface);border-radius:var(--rs);padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--ink);line-height:2;overflow-x:auto;margin-top:8px">
+      <div style="color:var(--muted);font-family:sans-serif;font-size:11px;margin-bottom:4px">ОБРАЗЕЦ для иона — SO₄²⁻</div>
+      сульфат-ион = (−2·4) − (−2) = <span style="color:var(--blue);font-weight:800">+6</span>
+    </div>
+  </div>
+
+  <p style="font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.5">
+    Сначала реши в тетради, затем проверь здесь. <strong>1–30</strong> — вещества · <strong>31–45</strong> — ионы · <strong>46–55</strong> — соединения со скобками. Листай ← → или свайпом.
+  </p>
+
+  <div id="prac-score-bar">
+    <div>
+      <div class="ps-label">Выполнено</div>
+      <div class="ps-nums"><span id="ps-done">0</span> / 55</div>
+    </div>
+    <div style="flex:1;min-width:80px;height:6px;background:var(--surface2);border-radius:100px;overflow:hidden">
+      <div id="ps-fill" style="height:100%;background:linear-gradient(90deg,var(--blue),var(--green));transition:width .4s ease;width:0"></div>
+    </div>
+    <div>
+      <div class="ps-label">Правильно</div>
+      <div class="ps-nums" style="color:var(--green)" id="ps-right">0</div>
+    </div>
+  </div>
+
+  <div class="carousel-wrap">
+    <div class="carousel-header">
+      <div class="carousel-counter">Карточка <span id="cc-cur">1</span> из 55</div>
+      <div class="carousel-prog"><div class="carousel-prog-fill" id="cc-prog"></div></div>
+    </div>
+
+    <div class="carousel-stage" id="carousel-stage">
+      <!-- cards injected by JS -->
+    </div>
+
+    <div class="carousel-nav">
+      <button class="cnav-btn" id="cnav-prev" onclick="carouselGo(-1)" title="Назад">←</button>
+      <div class="cnav-dots" id="cnav-dots"></div>
+      <button class="cnav-btn" id="cnav-next" onclick="carouselGo(1)" title="Вперёд">→</button>
+    </div>
+  </div>
+
+  <button class="finish-btn" id="finish-btn" onclick="showResults()" style="display:none">
+    📊 Посмотреть результат
+  </button>
+
+  <!-- ERROR MODE SECTION -->
+  <div class="error-mode-section" id="error-mode-section">
+    <div class="em-header">
+      <span class="em-badge">✏️ Работа над ошибками</span>
+      <span class="em-title">Повтори задания, в которых была ошибка</span>
+    </div>
+    <p class="em-sub">Ниже — только те соединения, где ты ошибся. Реши их заново. За каждый правильный ответ засчитывается результат.</p>
+
+    <div id="prac-score-bar-em" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 20px;display:flex;align-items:center;gap:16px;box-shadow:var(--sh);margin-bottom:16px;flex-wrap:wrap">
+      <div>
+        <div class="ps-label">Задание</div>
+        <div class="ps-nums"><span id="em-cur">1</span> / <span id="em-total">0</span></div>
+      </div>
+      <div style="flex:1;min-width:80px;height:6px;background:var(--surface2);border-radius:100px;overflow:hidden">
+        <div id="em-fill" style="height:100%;background:linear-gradient(90deg,var(--red),var(--amber));transition:width .4s ease;width:0"></div>
+      </div>
+      <div>
+        <div class="ps-label">Верно</div>
+        <div class="ps-nums" style="color:var(--green)" id="em-right">0</div>
+      </div>
+    </div>
+
+    <div class="carousel-wrap">
+      <div class="carousel-stage" id="error-stage" style="min-height:280px"></div>
+      <div class="carousel-nav" style="margin-top:12px">
+        <button class="cnav-btn" id="em-prev" onclick="errGo(-1)">←</button>
+        <div class="cnav-dots" id="em-dots"></div>
+        <button class="cnav-btn" id="em-next" onclick="errGo(1)">→</button>
+      </div>
+    </div>
+
+    <button class="finish-btn" style="margin-top:16px;background:var(--red)" onclick="showErrorResults()">
+      📊 Результат работы над ошибками
+    </button>
+  </div>
+</section>
+
+<!-- RESULTS OVERLAY -->
+<div class="results-overlay" id="results-overlay">
+  <div class="results-card" style="position:relative">
+    <button class="res-close" onclick="closeResults()">✕</button>
+    <div class="res-grade" id="res-grade">🏆</div>
+    <div class="res-ring-wrap">
+      <div class="res-ring" id="res-ring">
+        <div class="res-ring-inner" id="res-ring-inner-color">
+          <span class="res-pct" id="res-pct-num">0%</span>
+          <span class="res-pct-label">результат</span>
+        </div>
+      </div>
+    </div>
+    <div class="res-stats">
+      <div class="res-stat">
+        <div class="res-stat-num good" id="res-correct">0</div>
+        <div class="res-stat-label">✅ Верно</div>
+      </div>
+      <div class="res-stat">
+        <div class="res-stat-num bad" id="res-wrong">0</div>
+        <div class="res-stat-label">❌ Ошибок</div>
+      </div>
+    </div>
+    <button class="res-err-btn" id="res-error-btn" onclick="startErrorMode()" style="display:none">
+      <span>✏️ Работа над ошибками</span>
+    </button>
+    <button class="res-retry-btn" onclick="retryAll()">
+      🔄 Начать заново
+    </button>
+  </div>
+</div>
+
+<!-- ══ S9 ══ -->
+<section class="section fade-in" id="s9">
+  <h2 class="section-title">Задания для самостоятельной работы</h2>
+
+  <!-- ПРИСТУПИТЬ -->
+  <div style="background:var(--surface);border:2px dashed var(--blue);border-radius:var(--r);padding:14px 18px;margin-bottom:24px;font-size:15px;color:var(--ink)">
+    ☝️ После перехода по ссылке нажми кнопку <strong style="color:var(--blue)">«Приступить»</strong> — без этого ответы не засчитаются ни в задании №19, ни в линии 5.
+  </div>
+
+  <!-- ИНСТРУКЦИЯ ПО ТЕТРАДИ -->
+  <div style="background:var(--gold-soft);border:2px solid var(--gold);border-radius:var(--r);padding:20px 24px;margin-bottom:28px">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">📓 Как оформлять решение в тетради — задание №19</div>
+
+    <p style="font-size:15px;color:var(--navy);font-weight:700;margin-bottom:14px">Для каждой реакции из задания №19 выполни в тетради три шага:</p>
+
+    <div style="display:flex;flex-direction:column;gap:14px">
+
+      <!-- ШАГ 1 -->
+      <div style="background:var(--surface);border-radius:var(--rs);padding:14px 16px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:8px">Шаг 1 — Расставь степени окисления над каждым элементом</div>
+        <p style="font-size:13px;color:var(--ink);margin-bottom:10px">Над каждым символом элемента в реакции запиши его степень окисления. Это обязательно для всех атомов — и тех, что меняют С.О., и тех, что не меняют.</p>
+        <div style="font-family:var(--mono);font-size:14px;color:var(--ink);line-height:2.2;overflow-x:auto;padding:4px 0">
+          <span style="display:inline-block;position:relative;padding-top:18px">
+            <!-- степени над символами через sup-эмуляцию -->
+            <span style="font-size:11px;color:var(--red);font-weight:700;vertical-align:super">0</span>Zn
+          </span>
+          &thinsp;+&thinsp;
+          <span style="font-size:11px;color:var(--red);font-weight:700;vertical-align:super">+1</span>H<sub>2</sub>
+          <span style="font-size:11px;color:var(--muted);font-weight:700;vertical-align:super">−2</span>SO<sub>4</sub>
+          &thinsp;→&thinsp;
+          <span style="font-size:11px;color:var(--green);font-weight:700;vertical-align:super">+2</span>ZnSO<sub>4</sub>
+          &thinsp;+&thinsp;
+          <span style="font-size:11px;color:var(--green);font-weight:700;vertical-align:super">0</span>H<sub>2</sub>↑
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:6px">Zn: 0 → +2 &nbsp;|&nbsp; H: +1 → 0 &nbsp;|&nbsp; S и O не меняются</p>
+      </div>
+
+      <!-- ШАГ 2 -->
+      <div style="background:var(--surface);border-radius:var(--rs);padding:14px 16px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:8px">Шаг 2 — Укажи, кто окислитель, кто восстановитель</div>
+        <p style="font-size:13px;color:var(--ink);margin-bottom:8px">Рядом с реакцией стрелками покажи изменение степени окисления и подпиши роль:</p>
+        <div style="font-family:var(--mono);font-size:13px;color:var(--ink);line-height:2">
+          Zn<sup>0</sup> − 2e⁻ → Zn<sup>+2</sup> &nbsp;&nbsp;<span style="color:var(--red);font-weight:700">восстановитель (окисляется)</span><br>
+          H<sup>+1</sup> + 2e⁻ → H<sup>0</sup> &nbsp;&nbsp;&nbsp;<span style="color:var(--blue);font-weight:700">окислитель (восстанавливается)</span>
+        </div>
+      </div>
+
+      <!-- ШАГ 3 -->
+      <div style="background:var(--surface);border-radius:var(--rs);padding:14px 16px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:8px">Шаг 3 — Запиши ответ</div>
+        <div style="font-family:var(--mono);font-size:13px;color:var(--ink);line-height:2">
+          Окислитель: H<sub>2</sub>SO<sub>4</sub> (атом <strong>H</strong>)<br>
+          Восстановитель: <strong>Zn</strong>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="font-size:13px;color:var(--navy);font-weight:600;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+      ⚠️ Степени окисления расставляй над реакцией ручкой другого цвета — так проверяющий сразу видит ход твоих рассуждений. Без этого оформления решение не засчитывается полностью.
+    </p>
+  </div>
+
+  <!-- ЗАДАНИЕ №19 -->
+  <div style="border:2.5px solid var(--blue);border-radius:var(--r);overflow:hidden;margin-bottom:20px">
+    <div style="background:var(--blue);padding:12px 18px;display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:14px;font-weight:700;color:#fff">1. Задание №19 — ОВР, электронный баланс</span>
+    </div>
+    <div style="padding:16px 18px;background:var(--surface);display:flex;flex-direction:column;gap:14px">
+      <div style="font-size:13px;color:var(--ink);line-height:1.7">
+        <strong>Порядок работы:</strong> открой задание → нажми «Приступить» → решай каждую реакцию сам → оформляй в тетради по образцу выше (степени окисления ручкой другого цвета над каждым элементом) → только потом смотри разбор.<br><br>
+        После прохождения теста обязательно проведи <strong>работу над ошибками</strong>: посмотри, в чём была ошибка, разбери реакцию заново и закрепи.
+      </div>
+      <a href="https://neofamily.ru/himiya/variants/my/1763409?uuid=c717d984-d291-48b1-8a0a-da7f134d6d48" target="_blank" rel="noopener"
+        style="display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;font-size:15px;font-weight:700;padding:13px 22px;border-radius:var(--rs);text-decoration:none;width:fit-content">
+        🔗 Открыть задание №19
+        <span style="font-size:18px">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ЛИНИЯ 5 -->
+  <div style="border:2.5px solid var(--green);border-radius:var(--r);overflow:hidden;margin-bottom:20px">
+    <div style="background:var(--green);padding:12px 18px;display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:14px;font-weight:700;color:#fff">2. Линия 5 — тренировка</span>
+    </div>
+    <div style="padding:16px 18px;background:var(--surface);display:flex;flex-direction:column;gap:14px">
+      <div style="font-size:13px;color:var(--ink);line-height:1.7">
+        <strong>Выполняй внимательно, вникая в каждое задание.</strong><br><br>
+        При возникновении затруднений — обязательно открой свои конспекты и повтори нужный материал, прежде чем смотреть ответ.<br><br>
+        Если возникла проблема с решением — разбери, в чём именно была ошибка, и закрепи этот момент. После прохождения теста проведи <strong>работу над ошибками</strong>: вернись к неверным ответам, разбери каждый и запиши правильное решение в тетрадь.
+      </div>
+      <a href="https://neofamily.ru/himiya/variants/my/786424?uuid=59c40bba-e124-41c2-820b-513c0121fccf" target="_blank" rel="noopener"
+        style="display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;font-size:15px;font-weight:700;padding:13px 22px;border-radius:var(--rs);text-decoration:none;width:fit-content">
+        🔗 Открыть линию 5
+        <span style="font-size:18px">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</div><!-- /shell -->
+
+<button id="theme-btn" onclick="toggleTheme()" title="Тема">🌙</button>
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">↑</button>
+
+<script>
+/* ─────────────────────────────────────────────────
+   TASKS
+───────────────────────────────────────────────── */
+const TASKS=[
+  {n:1,  ask:'Na₂<span class="hl">S</span>O₄',   hint:'S в сульфате натрия',          ans:'+6'},
+  {n:2,  ask:'K<span class="hl">Mn</span>O₄',    hint:'Mn в перманганате калия',       ans:'+7'},
+  {n:3,  ask:'<span class="hl">Cr</span>₂O₃',    hint:'Cr в оксиде хрома(III)',        ans:'+3'},
+  {n:4,  ask:'H<span class="hl">N</span>O₃',     hint:'N в азотной кислоте',           ans:'+5'},
+  {n:5,  ask:'<span class="hl">Fe</span>₂O₃',    hint:'Fe в оксиде железа(III)',       ans:'+3'},
+  {n:6,  ask:'K₂<span class="hl">Cr</span>₂O₇',  hint:'Cr в дихромате калия',          ans:'+6'},
+  {n:7,  ask:'<span class="hl">Mn</span>O₂',     hint:'Mn в диоксиде марганца',        ans:'+4'},
+  {n:8,  ask:'H₂<span class="hl">S</span>',      hint:'S в сероводороде',              ans:'-2'},
+  {n:9,  ask:'<span class="hl">N</span>H₃',      hint:'N в аммиаке',                   ans:'-3'},
+  {n:10, ask:'<span class="hl">C</span>O₂',      hint:'C в углекислом газе',           ans:'+4'},
+  {n:11, ask:'H<span class="hl">N</span>O₂',     hint:'N в азотистой кислоте',         ans:'+3'},
+  {n:12, ask:'Na₂<span class="hl">S</span>O₃',   hint:'S в сульфите натрия',           ans:'+4'},
+  {n:13, ask:'<span class="hl">S</span>O₂',      hint:'S в диоксиде серы',             ans:'+4'},
+  {n:14, ask:'<span class="hl">C</span>H₄',      hint:'C в метане',                    ans:'-4'},
+  {n:15, ask:'<span class="hl">N</span>O₂',      hint:'N в диоксиде азота',            ans:'+4'},
+  {n:16, ask:'<span class="hl">N</span>₂O',      hint:'N в оксиде азота(I)',            ans:'+1'},
+  {n:17, ask:'H<span class="hl">Cl</span>O₄',    hint:'Cl в хлорной кислоте',          ans:'+7'},
+  {n:18, ask:'Na<span class="hl">Cl</span>O₃',   hint:'Cl в хлорате натрия',           ans:'+5'},
+  {n:19, ask:'H<span class="hl">Cl</span>O',     hint:'Cl в хлорноватистой кислоте',   ans:'+1'},
+  {n:20, ask:'H₂<span class="hl">O</span>₂',     hint:'O в пероксиде водорода',        ans:'-1'},
+  {n:21, ask:'Na₂<span class="hl">O</span>₂',    hint:'O в пероксиде натрия',          ans:'-1'},
+  {n:22, ask:'<span class="hl">N</span>₂O₃',     hint:'N в оксиде азота(III)',          ans:'+3'},
+  {n:23, ask:'Ca₃(<span class="hl">P</span>O₄)₂',hint:'P в ортофосфате кальция',       ans:'+5'},
+  {n:24, ask:'K₂<span class="hl">Mn</span>O₄',   hint:'Mn в манганате калия',           ans:'+6'},
+  {n:25, ask:'<span class="hl">P</span>H₃',      hint:'P в фосфине',                   ans:'-3'},
+  {n:26, ask:'<span class="hl">N</span>₂H₄',     hint:'N в гидразине',                 ans:'-2'},
+  {n:27, ask:'H₃<span class="hl">P</span>O₃',    hint:'P в фосфористой кислоте',       ans:'+3'},
+  {n:28, ask:'<span class="hl">O</span>F₂',      hint:'O в дифториде кислорода',       ans:'+2'},
+  {n:29, ask:'<span class="hl">Fe</span>O',      hint:'Fe в оксиде железа(II)',        ans:'+2'},
+  {n:30, ask:'Na<span class="hl">Cl</span>O₂',   hint:'Cl в хлорите натрия',           ans:'+3'},
+  // ── ИОНЫ (31–45) ──────────────────────────────
+  {n:31, ask:'<span class="hl">S</span>O₄²⁻',      hint:'S в сульфат-ионе',               ans:'+6', ion:true},
+  {n:32, ask:'<span class="hl">N</span>O₃⁻',       hint:'N в нитрат-ионе',                ans:'+5', ion:true},
+  {n:33, ask:'<span class="hl">P</span>O₄³⁻',      hint:'P в фосфат-ионе',                ans:'+5', ion:true},
+  {n:34, ask:'<span class="hl">C</span>O₃²⁻',      hint:'C в карбонат-ионе',              ans:'+4', ion:true},
+  {n:35, ask:'<span class="hl">Mn</span>O₄⁻',      hint:'Mn в перманганат-ионе',          ans:'+7', ion:true},
+  {n:36, ask:'<span class="hl">Cr</span>₂O₇²⁻',   hint:'Cr в дихромат-ионе',             ans:'+6', ion:true},
+  {n:37, ask:'<span class="hl">Cr</span>O₄²⁻',     hint:'Cr в хромат-ионе',               ans:'+6', ion:true},
+  {n:38, ask:'<span class="hl">Cl</span>O₃⁻',      hint:'Cl в хлорат-ионе',               ans:'+5', ion:true},
+  {n:39, ask:'<span class="hl">N</span>O₂⁻',       hint:'N в нитрит-ионе',                ans:'+3', ion:true},
+  {n:40, ask:'<span class="hl">S</span>O₃²⁻',      hint:'S в сульфит-ионе',               ans:'+4', ion:true},
+  {n:41, ask:'<span class="hl">N</span>H₄⁺',       hint:'N в катионе аммония',            ans:'-3', ion:true},
+  {n:42, ask:'<span class="hl">Mn</span>O₄²⁻',     hint:'Mn в манганат-ионе',             ans:'+6', ion:true},
+  {n:43, ask:'<span class="hl">I</span>O₃⁻',       hint:'I в иодат-ионе',                 ans:'+5', ion:true},
+  {n:44, ask:'H<span class="hl">P</span>O₄²⁻',     hint:'P в гидрофосфат-ионе',           ans:'+5', ion:true},
+  {n:45, ask:'<span class="hl">Cl</span>O⁻',       hint:'Cl в гипохлорит-ионе',           ans:'+1', ion:true},
+  // ── СОЕДИНЕНИЯ СО СКОБКАМИ (46–55) ────────────
+  {n:46, ask:'Al₂(<span class="hl">C</span>O₃)₃',   hint:'C в карбонате алюминия',          ans:'+4', bracket:true},
+  {n:47, ask:'Fe₂(<span class="hl">S</span>O₄)₃',   hint:'S в сульфате железа(III)',         ans:'+6', bracket:true},
+  {n:48, ask:'Cu(<span class="hl">N</span>O₃)₂',    hint:'N в нитрате меди(II)',             ans:'+5', bracket:true},
+  {n:49, ask:'Ca(H<span class="hl">C</span>O₃)₂',   hint:'C в гидрокарбонате кальция',      ans:'+4', bracket:true},
+  {n:50, ask:'<span class="hl">Fe</span>(OH)₃',    hint:'Fe в гидроксиде железа(III)',     ans:'+3', bracket:true},
+  {n:51, ask:'<span class="hl">Cr</span>(OH)₃',    hint:'Cr в гидроксиде хрома(III)',      ans:'+3', bracket:true},
+  {n:52, ask:'Ba(<span class="hl">Mn</span>O₄)₂',  hint:'Mn в перманганате бария',          ans:'+7', bracket:true},
+  {n:53, ask:'K<span class="hl">Al</span>(SO₄)₂',  hint:'Al в квасцах KAl(SO₄)₂',          ans:'+3', bracket:true},
+  {n:54, ask:'NH₄H<span class="hl">C</span>O₃',    hint:'C в гидрокарбонате аммония',       ans:'+4', bracket:true},
+  {n:55, ask:'Mg₃(<span class="hl">P</span>O₄)₂',   hint:'P в фосфате магния',               ans:'+5', bracket:true},
+];
+
+const TOTAL = TASKS.length; // 55
+
+/* ─────────────────────────────────────────────────
+   STATE
+───────────────────────────────────────────────── */
+let done = 0, right = 0, cur = 0;
+let errors = [];       // indices into TASKS that were answered wrong
+let errQueue = [];     // TASKS objects for error-mode
+let errCur = 0, errDone = 0, errRight = 0;
+
+/* ─────────────────────────────────────────────────
+   HELPERS
+───────────────────────────────────────────────── */
+function norm(s){
+  return s.trim()
+    .replace(/−/g,'-').replace(/–/g,'-')
+    .replace(/\s/g,'')
+    .replace(/^([0-9])/,'+$1');
+}
+
+function cardHTML(t, idPrefix, checkFn){
+  const isIon     = t.ion     || false;
+  const isBracket = t.bracket || false;
+  const badge = isIon
+    ? '<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:var(--purple-soft);color:var(--purple);letter-spacing:.06em;text-transform:uppercase">ИОН</span>'
+    : isBracket
+    ? '<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:var(--green-soft);color:var(--green);letter-spacing:.06em;text-transform:uppercase">( )</span>'
+    : '';
+  const qText = isIon
+    ? 'Определите С.О. выделенного элемента в ионе (сумма С.О. = заряду иона):'
+    : isBracket
+    ? 'Определите С.О. выделенного элемента. Учти индексы в скобках:'
+    : 'Определите степень окисления выделенного элемента:';
+  return `
+    <div class="ccard-num" style="display:flex;align-items:center;gap:8px">
+      <span>Задание ${t.n} из ${TOTAL}</span>
+      ${badge}
+    </div>
+    <div class="ccard-q">${qText}</div>
+    <div class="ccard-formula">${t.ask}</div>
+    <div class="ccard-input-row">
+      <input class="ccard-input" id="${idPrefix}i" type="text" placeholder=""
+        autocomplete="off" onkeydown="if(event.key==='Enter')${checkFn}">
+      <button class="ccard-btn" id="${idPrefix}b" onclick="${checkFn}">Проверить</button>
+    </div>
+    <div class="ccard-feedback" id="${idPrefix}f"></div>
+  `;
+}
+
+/* ─────────────────────────────────────────────────
+   MAIN CAROUSEL
+───────────────────────────────────────────────── */
+const stage = document.getElementById('carousel-stage');
+const dotsWrap = document.getElementById('cnav-dots');
+
+TASKS.forEach((t, i) => {
+  const card = document.createElement('div');
+  card.className = 'ccard' + (i === 0 ? ' active' : '');
+  card.id = 'cc' + i;
+  card.innerHTML = cardHTML(t, 'ci' + i + '_', `checkCard(${i})`);
+  stage.appendChild(card);
+});
+
+function buildDots(){
+  dotsWrap.innerHTML = '';
+  let start = Math.max(0, cur - 3);
+  let end = Math.min(TOTAL - 1, start + 6);
+  start = Math.max(0, end - 6);
+  for(let i = start; i <= end; i++){
+    const d = document.createElement('div');
+    d.className = 'cnav-dot' + (i === cur ? ' act' : '');
+    const idx = i;
+    d.onclick = () => goTo(idx, 0);
+    dotsWrap.appendChild(d);
+  }
+}
+buildDots();
+
+function goTo(idx, dir){
+  if(idx < 0 || idx >= TOTAL) return;
+  document.getElementById('cc' + cur).classList.remove('active');
+  cur = idx;
+  const next = document.getElementById('cc' + cur);
+  next.classList.remove('slide-left','slide-right');
+  void next.offsetWidth;
+  if(dir > 0) next.classList.add('slide-left');
+  else if(dir < 0) next.classList.add('slide-right');
+  next.classList.add('active');
+  document.getElementById('cc-cur').textContent = cur + 1;
+  document.getElementById('cc-prog').style.width = ((cur + 1) / TOTAL * 100) + '%';
+  document.getElementById('cnav-prev').disabled = cur === 0;
+  document.getElementById('cnav-next').disabled = cur === TOTAL - 1;
+  buildDots();
+  const inp = document.getElementById('ci' + cur + '_i');
+  if(inp && !inp.readOnly) setTimeout(() => inp.focus(), 250);
+}
+
+function carouselGo(dir){ goTo(cur + dir, dir); }
+document.getElementById('cnav-prev').disabled = true;
+
+function checkCard(i){
+  const t = TASKS[i];
+  const inp = document.getElementById('ci' + i + '_i');
+  const btn = document.getElementById('ci' + i + '_b');
+  const fb  = document.getElementById('ci' + i + '_f');
+  const card = document.getElementById('cc' + i);
+  const raw = inp.value.trim();
+  if(!raw){ inp.focus(); return; }
+
+  const ok = norm(raw) === norm(t.ans);
+  inp.readOnly = true;
+  btn.disabled = true;
+  btn.textContent = '✓';
+
+  if(ok){
+    inp.classList.add('ok'); card.classList.add('correct');
+    fb.className = 'ccard-feedback ok';
+    fb.textContent = '✅ Верно!';
+    right++;
+  } else {
+    inp.classList.add('err'); card.classList.add('wrong');
+    fb.className = 'ccard-feedback err';
+    fb.innerHTML = `❌ Правильно: <strong>${t.ans}</strong> — ${t.hint}`;
+    errors.push(t);
+  }
+  done++;
+  document.getElementById('ps-done').textContent = done;
+  document.getElementById('ps-right').textContent = right;
+  document.getElementById('ps-fill').style.width = (done / TOTAL * 100) + '%';
+
+  // show finish button once at least 5 done
+  if(done >= 5) document.getElementById('finish-btn').style.display = 'flex';
+
+  if(ok && cur < TOTAL - 1){
+    setTimeout(() => goTo(cur + 1, 1), 1100);
+  }
+  if(done === TOTAL){
+    setTimeout(showResults, 700);
+  }
+}
+
+/* keyboard + swipe for main carousel */
+document.addEventListener('keydown', e => {
+  if(document.getElementById('results-overlay').classList.contains('show')) return;
+  const isInput = document.activeElement && document.activeElement.tagName === 'INPUT';
+  if(!isInput){
+    if(e.key === 'ArrowRight') carouselGo(1);
+    if(e.key === 'ArrowLeft')  carouselGo(-1);
+  }
+});
+let tx0 = null;
+stage.addEventListener('touchstart', e => { tx0 = e.touches[0].clientX; }, {passive:true});
+stage.addEventListener('touchend', e => {
+  if(tx0 === null) return;
+  const dx = e.changedTouches[0].clientX - tx0;
+  if(Math.abs(dx) > 50) carouselGo(dx < 0 ? 1 : -1);
+  tx0 = null;
+}, {passive:true});
+
+/* ─────────────────────────────────────────────────
+   RESULTS OVERLAY
+───────────────────────────────────────────────── */
+function gradeText(pct){
+  if(pct === 100) return '🏆 Идеально! Всё верно!';
+  if(pct >= 80)   return '🎉 Отлично! Молодец!';
+  if(pct >= 60)   return '💪 Хорошо, но есть куда расти';
+  if(pct >= 40)   return '📚 Нужно повторить материал';
+  return '🔄 Разбери ошибки и попробуй снова';
+}
+
+function gradeColor(pct){
+  if(pct >= 80) return 'var(--green)';
+  if(pct >= 60) return 'var(--gold)';
+  return 'var(--red)';
+}
+
+function fillResultsOverlay(totalDone, totalRight, totalWrong){
+  const pct = totalDone > 0 ? Math.round(totalRight / totalDone * 100) : 0;
+  const color = gradeColor(pct);
+  document.getElementById('res-grade').textContent = gradeText(pct);
+  document.getElementById('res-pct-num').textContent = pct + '%';
+  document.getElementById('res-correct').textContent = totalRight;
+  document.getElementById('res-wrong').textContent = totalWrong;
+  document.getElementById('res-ring').style.background =
+    `conic-gradient(${color} ${pct}%, var(--border) 0)`;
+  document.getElementById('res-pct-num').style.color = color;
+}
+
+function showResults(){
+  fillResultsOverlay(done, right, done - right);
+  const errBtn = document.getElementById('res-error-btn');
+  if(errors.length > 0){
+    errBtn.style.display = 'flex';
+    errBtn.querySelector('span').textContent = `✏️ Работа над ошибками (${errors.length} задания)`;
+  } else {
+    errBtn.style.display = 'none';
+  }
+  document.getElementById('results-overlay').classList.add('show');
+}
+
+function closeResults(){
+  document.getElementById('results-overlay').classList.remove('show');
+}
+
+function retryAll(){
+  closeResults();
+  // reset all cards
+  done = 0; right = 0; cur = 0; errors = [];
+  TASKS.forEach((t, i) => {
+    const inp = document.getElementById('ci' + i + '_i');
+    const btn = document.getElementById('ci' + i + '_b');
+    const fb  = document.getElementById('ci' + i + '_f');
+    const card = document.getElementById('cc' + i);
+    if(!inp) return;
+    inp.value = ''; inp.readOnly = false;
+    inp.className = 'ccard-input';
+    btn.disabled = false; btn.textContent = 'Проверить';
+    fb.className = 'ccard-feedback'; fb.textContent = '';
+    card.classList.remove('correct','wrong','active');
+  });
+  document.getElementById('ps-done').textContent = 0;
+  document.getElementById('ps-right').textContent = 0;
+  document.getElementById('ps-fill').style.width = '0';
+  document.getElementById('finish-btn').style.display = 'none';
+  document.getElementById('error-mode-section').style.display = 'none';
+  goTo(0, 0);
+  document.getElementById('s8').scrollIntoView({behavior:'smooth'});
+}
+
+/* ─────────────────────────────────────────────────
+   ERROR MODE CAROUSEL
+───────────────────────────────────────────────── */
+const errStage = document.getElementById('error-stage');
+const errDots  = document.getElementById('em-dots');
+
+function startErrorMode(){
+  closeResults();
+  errQueue = [...errors];
+  errors = [];
+  errCur = 0; errDone = 0; errRight = 0;
+
+  // build error cards
+  errStage.innerHTML = '';
+  errQueue.forEach((t, i) => {
+    const card = document.createElement('div');
+    card.className = 'ccard' + (i === 0 ? ' active' : '');
+    card.id = 'ecc' + i;
+    card.innerHTML = cardHTML(t, 'eci' + i + '_', `checkErrCard(${i})`);
+    errStage.appendChild(card);
+  });
+
+  document.getElementById('em-total').textContent = errQueue.length;
+  document.getElementById('em-cur').textContent = 1;
+  document.getElementById('em-fill').style.width = (1 / errQueue.length * 100) + '%';
+  document.getElementById('em-right').textContent = 0;
+  buildErrDots();
+  updateErrNav();
+
+  const sec = document.getElementById('error-mode-section');
+  sec.style.display = 'block';
+  setTimeout(() => sec.scrollIntoView({behavior:'smooth', block:'start'}), 100);
+}
+
+function buildErrDots(){
+  errDots.innerHTML = '';
+  const total = errQueue.length;
+  let start = Math.max(0, errCur - 3);
+  let end   = Math.min(total - 1, start + 6);
+  start = Math.max(0, end - 6);
+  for(let i = start; i <= end; i++){
+    const d = document.createElement('div');
+    d.className = 'cnav-dot' + (i === errCur ? ' act' : '');
+    const idx = i;
+    d.onclick = () => errGoTo(idx, 0);
+    errDots.appendChild(d);
+  }
+}
+
+function updateErrNav(){
+  document.getElementById('em-prev').disabled = errCur === 0;
+  document.getElementById('em-next').disabled = errCur === errQueue.length - 1;
+}
+
+function errGoTo(idx, dir){
+  if(idx < 0 || idx >= errQueue.length) return;
+  document.getElementById('ecc' + errCur).classList.remove('active');
+  errCur = idx;
+  const next = document.getElementById('ecc' + errCur);
+  next.classList.remove('slide-left','slide-right');
+  void next.offsetWidth;
+  if(dir > 0) next.classList.add('slide-left');
+  else if(dir < 0) next.classList.add('slide-right');
+  next.classList.add('active');
+  document.getElementById('em-cur').textContent = errCur + 1;
+  document.getElementById('em-fill').style.width = ((errCur + 1) / errQueue.length * 100) + '%';
+  buildErrDots();
+  updateErrNav();
+  const inp = document.getElementById('eci' + errCur + '_i');
+  if(inp && !inp.readOnly) setTimeout(() => inp.focus(), 250);
+}
+
+function errGo(dir){ errGoTo(errCur + dir, dir); }
+
+function checkErrCard(i){
+  const t = errQueue[i];
+  const inp  = document.getElementById('eci' + i + '_i');
+  const btn  = document.getElementById('eci' + i + '_b');
+  const fb   = document.getElementById('eci' + i + '_f');
+  const card = document.getElementById('ecc' + i);
+  const raw  = inp.value.trim();
+  if(!raw){ inp.focus(); return; }
+
+  const ok = norm(raw) === norm(t.ans);
+  inp.readOnly = true;
+  btn.disabled = true;
+  btn.textContent = '✓';
+
+  if(ok){
+    inp.classList.add('ok'); card.classList.add('correct');
+    fb.className = 'ccard-feedback ok';
+    fb.textContent = '✅ Верно! Молодец, разобрался!';
+    errRight++;
+    document.getElementById('em-right').textContent = errRight;
+  } else {
+    inp.classList.add('err'); card.classList.add('wrong');
+    fb.className = 'ccard-feedback err';
+    fb.innerHTML = `❌ Снова неверно. Ответ: <strong>${t.ans}</strong> — ${t.hint}`;
+    errors.push(t); // ещё раз в ошибки
+  }
+  errDone++;
+
+  if(ok && errCur < errQueue.length - 1){
+    setTimeout(() => errGoTo(errCur + 1, 1), 1100);
+  }
+  if(errDone === errQueue.length){
+    setTimeout(showErrorResults, 700);
+  }
+}
+
+function showErrorResults(){
+  fillResultsOverlay(errDone, errRight, errDone - errRight);
+  const errBtn = document.getElementById('res-error-btn');
+  if(errors.length > 0){
+    errBtn.style.display = 'flex';
+    errBtn.querySelector('span').textContent = `✏️ Снова работа над ошибками (${errors.length})`;
+  } else {
+    errBtn.style.display = 'none';
+  }
+  document.getElementById('results-overlay').classList.add('show');
+}
+
+/* ─────────────────────────────────────────────────
+   SCROLL PROGRESS + BACK TOP
+───────────────────────────────────────────────── */
+window.addEventListener('scroll', () => {
+  const s = document.documentElement;
+  const pct = (s.scrollTop / (s.scrollHeight - s.clientHeight)) * 100;
+  document.getElementById('prog-bar').style.width = Math.min(pct, 100) + '%';
+  document.getElementById('back-top').classList.toggle('show', s.scrollTop > 400);
+}, {passive:true});
+
+/* ─────────────────────────────────────────────────
+   THEME
+───────────────────────────────────────────────── */
+function toggleTheme(){
+  const root = document.documentElement;
+  const isDark = root.dataset.theme === 'dark';
+  root.dataset.theme = isDark ? 'light' : 'dark';
+  document.getElementById('theme-btn').textContent = isDark ? '🌙' : '☀️';
+}
+(function(){
+  if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+    document.documentElement.dataset.theme = 'dark';
+    document.getElementById('theme-btn').textContent = '☀️';
+  }
+})();
+
+/* ─────────────────────────────────────────────────
+   SCROLL ANIMATIONS
+───────────────────────────────────────────────── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
