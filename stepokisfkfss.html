@@ -1,0 +1,2353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ Линия 5 — Классификация + Степень окисления</title>
+    <style>
+        :root {
+            --bg: #F6F5FC;
+            --surface: #ffffff;
+            --surface2: #F0EEFF;
+            --ink: #1C1B29;
+            --ink2: #3E3C5A;
+            --muted: #8A88A8;
+            --border: #E2E5EC;
+            --p500: #7B61DB;
+            --p600: #6248C4;
+            --p700: #4E35A0;
+            --p800: #3D2785;
+            --p100: #F0EEFF;
+            --green: #1D9E75;
+            --green-t: #E1F5EE;
+            --green-d: #085041;
+            --red: #A32D2D;
+            --red-t: #FCEBEB;
+            --red-d: #7A2020;
+            --amber: #BA7517;
+            --amber-t: #FAEEDA;
+            --amber-d: #633806;
+            --blue: #2563EB;
+            --blue-soft: #DBEAFE;
+            --r: 12px;
+            --rs: 8px;
+            --shadow: 0 1px 3px rgba(20,21,26,.06), 0 4px 16px rgba(20,21,26,.06);
+            --shm: 0 4px 20px rgba(60,40,160,.12);
+            --mono: 'Courier New', monospace;
+            --font: 'Segoe UI', system-ui, sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+            font-size: 15px;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .shell { max-width: 900px; margin: 0 auto; }
+
+        .hero {
+            background: linear-gradient(135deg, #2D1B69, #4E35A0 55%, #7B61DB 100%);
+            padding: 28px 24px;
+            border-radius: var(--r);
+            margin-bottom: 24px;
+            color: #fff;
+        }
+        .hero h1 {
+            font-size: clamp(24px, 3.5vw, 34px);
+            font-weight: 800;
+            letter-spacing: -.02em;
+            margin-bottom: 4px;
+        }
+        .hero h1 em { color: #BDB2F3; font-style: normal; }
+        .hero p { color: rgba(255,255,255,.75); font-size: 15px; }
+        .hero .stats {
+            display: flex;
+            gap: 14px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: rgba(255,255,255,.8);
+        }
+        .hero .stats span { background: rgba(255,255,255,.12); padding: 3px 12px; border-radius: 20px; }
+
+        .tabs {
+            display: flex;
+            gap: 4px;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--muted);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: color .15s, border-color .15s;
+            border-radius: 0;
+        }
+        .tab-btn:hover { color: var(--p700); }
+        .tab-btn.active { color: var(--p700); border-bottom-color: var(--p500); }
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; }
+
+        .trainer-wrap {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 22px;
+            box-shadow: var(--shadow);
+            margin-bottom: 16px;
+        }
+        .stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 20px;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        .stat-item {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .stat-item .num { font-size: 18px; font-weight: 800; }
+        .stat-item .num.green { color: var(--green); }
+        .stat-item .num.red { color: var(--red); }
+        .stat-item .num.gray { color: var(--muted); }
+        .stat-item .num.amber { color: var(--amber); }
+        .progress-track {
+            flex: 1;
+            min-width: 80px;
+            height: 5px;
+            background: var(--surface2);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--p500), var(--green));
+            width: 0;
+            transition: width .3s ease;
+        }
+
+        .task-prompt {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px 10px;
+            margin: 8px 0 12px;
+            font-size: 14px;
+        }
+        .task-grid .cell { padding: 3px 0; border-bottom: 1px dashed var(--border); }
+        .task-grid .cell .label { font-weight: 700; color: var(--p700); margin-right: 5px; }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px 10px;
+            margin: 6px 0 12px;
+            font-size: 13px;
+            background: var(--surface2);
+            padding: 8px 12px;
+            border-radius: var(--rs);
+        }
+        .options-grid .opt .num { font-weight: 700; color: var(--p700); margin-right: 3px; }
+
+        .task-formula {
+            font-family: var(--mono);
+            font-size: 22px;
+            font-weight: 700;
+            background: var(--surface2);
+            padding: 10px 16px;
+            border-radius: var(--rs);
+            display: inline-block;
+            margin-bottom: 12px;
+            letter-spacing: .04em;
+        }
+        .task-formula .hl { color: var(--amber); border-bottom: 2.5px solid var(--amber); padding-bottom: 1px; }
+        .badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 100px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            margin-left: 4px;
+        }
+        .badge-ion { background: #EDE9FE; color: #7C3AED; }
+        .badge-bracket { background: var(--green-t); color: var(--green-d); }
+        .badge-simple { background: var(--amber-t); color: var(--amber-d); }
+        .badge-acid { background: #FEF3C7; color: #92400E; }
+        .badge-ammonium { background: #DBEAFE; color: #1E40AF; }
+        .badge-penalty { background: var(--red-t); color: var(--red-d); }
+        .badge-retry { background: var(--amber-t); color: var(--amber-d); }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 8px 0 10px;
+        }
+        .input-row input {
+            padding: 9px 14px;
+            font-size: 17px;
+            font-family: var(--mono);
+            border: 2px solid var(--border);
+            border-radius: var(--rs);
+            background: var(--bg);
+            color: var(--ink);
+            outline: none;
+            transition: border-color .2s;
+            max-width: 170px;
+            width: 100%;
+        }
+        .input-row input:focus { border-color: var(--p500); }
+        .input-row input.ok { border-color: var(--green); background: var(--green-t); }
+        .input-row input.err { border-color: var(--red); background: var(--red-t); }
+        .input-row input:read-only { opacity: .7; }
+        .input-hint { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+        .btn {
+            padding: 9px 22px;
+            border: none;
+            border-radius: var(--rs);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            background: var(--p600);
+            color: #fff;
+            transition: background .15s, transform .1s;
+            white-space: nowrap;
+        }
+        .btn:hover { background: var(--p700); transform: translateY(-1px); }
+        .btn:disabled { opacity: .5; cursor: default; transform: none; }
+        .btn-success { background: var(--green); }
+        .btn-success:hover { background: var(--green-d); }
+        .btn-danger { background: var(--red); }
+        .btn-danger:hover { background: var(--red-d); }
+        .btn-secondary { background: var(--surface2); color: var(--p700); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: var(--border); }
+
+        .feedback {
+            font-size: 14px;
+            font-weight: 600;
+            min-height: 22px;
+            margin: 4px 0 10px;
+        }
+        .feedback.ok { color: var(--green); }
+        .feedback.err { color: var(--red); }
+        .feedback.info { color: var(--p700); }
+
+        .nav-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .nav-row .nav-btns { display: flex; gap: 6px; }
+        .nav-row .nav-btns button {
+            min-width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 17px;
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            color: var(--ink);
+            cursor: pointer;
+            transition: background .15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-row .nav-btns button:hover:not(:disabled) { background: var(--surface2); }
+        .nav-row .nav-btns button:disabled { opacity: .3; cursor: default; }
+
+        .result-box {
+            background: var(--surface);
+            border-radius: var(--r);
+            padding: 28px 22px;
+            text-align: center;
+            box-shadow: var(--shm);
+            border: 1px solid var(--border);
+        }
+        .result-box .grade { font-size: 30px; margin-bottom: 6px; }
+        .result-box .pct { font-size: 44px; font-weight: 900; color: var(--p700); }
+        .result-box .stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 14px 0 20px;
+            flex-wrap: wrap;
+        }
+        .result-box .stats .num { font-size: 26px; font-weight: 800; }
+        .result-box .stats .label { font-size: 13px; color: var(--muted); }
+        .result-box .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+        .error-mode-badge {
+            background: var(--red-t);
+            border: 2px solid var(--red);
+            border-radius: var(--r);
+            padding: 10px 16px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-weight: 700;
+            color: var(--red-d);
+        }
+
+        @media(max-width:600px) {
+            .hero { padding: 20px 16px; }
+            .task-grid { grid-template-columns: 1fr; }
+            .options-grid { grid-template-columns: 1fr; }
+            .input-row input { max-width: 100%; }
+            .nav-row { flex-direction: column; align-items: stretch; }
+            .nav-row .nav-btns { justify-content: center; }
+            .tabs .tab-btn { padding: 8px 12px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="shell">
+
+<header class="hero">
+    <h1>ЕГЭ Линия 5 <em>#5</em></h1>
+    <p>Классификация веществ + Степень окисления</p>
+    <div class="stats" id="hero-stats">
+        <span id="hero-mode">📚 Режим: Классификация</span>
+        <span id="hero-total">📚 Всего: 0</span>
+        <span id="hero-queue">⏳ В очереди: 0</span>
+        <span id="hero-errors">❌ Ошибок: 0</span>
+    </div>
+</header>
+
+<div class="tabs" id="tabHeaders">
+    <button class="tab-btn active" data-tab="classify">Классификация</button>
+    <button class="tab-btn" data-tab="so">Степень окисления</button>
+</div>
+
+<div class="tab-pane active" id="pane-classify"><div id="classify-app"></div></div>
+<div class="tab-pane" id="pane-so"><div id="so-app"></div></div>
+
+</div>
+
+<script>
+    // ═══════════════════════════════════════════════════════════
+    // 1. ДАННЫЕ ДЛЯ КЛАССИФИКАЦИИ (88 заданий из двух PDF)
+    // ═══════════════════════════════════════════════════════════
+
+    const classifyTasks = [
+        // ---- PDF №1 (38 заданий) ----
+        {
+            id: 1,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) основание; Б) соль сильной кислоты; В) кислотный оксид.',
+            a: '(MgOH)₂CO₃',
+            b: 'Fe₂O₃',
+            c: 'оксид хрома(III)',
+            d: 'едкий натр',
+            e: 'сернистый газ',
+            f: 'фторид натрия',
+            g: 'Be(OH)₂',
+            h: 'KHSO₄',
+            i: 'K₃PO₄',
+            answer: [4, 8, 5],
+            full: 'А–4, Б–8, В–5'
+        },
+        {
+            id: 2,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) двухосновную кислоту; Б) амфотерный оксид; В) щёлочь.',
+            a: 'BeO',
+            b: 'гидроксид магния',
+            c: 'фтороводородная кислота',
+            d: 'хромовая кислота',
+            e: 'CaC₂',
+            f: 'CaO',
+            g: 'KOH',
+            h: 'пропановая кислота',
+            i: 'NO',
+            answer: [4, 1, 7],
+            full: 'А–4, Б–1, В–7'
+        },
+        {
+            id: 3,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) кислотный оксид; Б) кислую соль; В) амфотерный гидроксид.',
+            a: 'Fe₂O₃',
+            b: 'сульфид железа(III)',
+            c: 'HMnO₄',
+            d: 'оксид хрома(VI)',
+            e: 'CrO',
+            f: 'CaO',
+            g: 'Cr(OH)₂',
+            h: 'NH₄HCO₃',
+            i: 'Be(OH)₂',
+            answer: [4, 8, 9],
+            full: 'А–4, Б–8, В–9'
+        },
+        {
+            id: 4,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) кислотный оксид; Б) среднюю соль; В) амфотерный гидроксид.',
+            a: 'P₂O₃',
+            b: 'сульфат железа(III)',
+            c: 'HMnO₄',
+            d: 'оксид хрома(II)',
+            e: 'Cr₂O₃',
+            f: 'CaO',
+            g: 'Cr(OH)₂',
+            h: 'NH₄HCO₃',
+            i: 'Be(OH)₂',
+            answer: [1, 2, 9],
+            full: 'А–1, Б–2, В–9'
+        },
+        {
+            id: 5,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) двухосновную кислоту; Б) амфотерный оксид; В) щёлочь.',
+            a: 'BeO',
+            b: 'гидроксид магния',
+            c: 'фтороводородная кислота',
+            d: 'щавелевая кислота',
+            e: 'CaC₂',
+            f: 'CaO',
+            g: 'NaOH',
+            h: 'пропионовая кислота',
+            i: 'NO',
+            answer: [4, 1, 7],
+            full: 'А–4, Б–1, В–7'
+        },
+        {
+            id: 6,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) кислотный оксид; Б) амфотерный оксид; В) двухосновную кислоту.',
+            a: 'бромоводородная кислота',
+            b: 'Ca(HCO₃)₂',
+            c: 'гидроксид магния',
+            d: 'SO₂',
+            e: 'кремниевая кислота',
+            f: 'Na₃P',
+            g: 'ZnO',
+            h: 'CrO',
+            i: 'NH₄Cl',
+            answer: [4, 7, 5],
+            full: 'А–4, Б–7, В–5'
+        },
+        {
+            id: 7,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) нерастворимое основание; Б) кислую соль; В) одноосновную кислоту.',
+            a: 'CaHPO₄',
+            b: 'гидроксид железа(III)',
+            c: 'бутановая кислота',
+            d: 'сернистая кислота',
+            e: '(CuOH)₂CO₃',
+            f: 'CaO',
+            g: 'Mn(OH)₂',
+            h: 'NH₄Cl',
+            i: 'Zn(OH)₂',
+            answer: [7, 1, 3],
+            full: 'А–7, Б–1, В–3'
+        },
+        {
+            id: 8,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) кислотный оксид; Б) амфотерный оксид; В) одноосновную кислоту.',
+            a: 'N₂O₅',
+            b: 'NaHCO₃',
+            c: 'гидроксид хрома(III)',
+            d: 'сульфат бария',
+            e: 'уксусная кислота',
+            f: 'Li₂SO₄',
+            g: 'NO',
+            h: 'Al₂O₃',
+            i: 'ортофосфорная кислота',
+            answer: [1, 8, 5],
+            full: 'А–1, Б–8, В–5'
+        },
+        {
+            id: 9,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) нерастворимое основание; Б) кислую соль; В) несолеобразующий оксид.',
+            a: 'NH₄HS',
+            b: '(NH₄)₂CO₃',
+            c: 'H₃BO₃',
+            d: 'гидроксид лития',
+            e: 'CH₄',
+            f: 'CO',
+            g: 'Cr(OH)₂',
+            h: 'Mg₃N₂',
+            i: 'ZnO',
+            answer: [7, 1, 6],
+            full: 'А–7, Б–1, В–6'
+        },
+        {
+            id: 10,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) растворимое основание; Б) кислую соль; В) несолеобразующий оксид.',
+            a: 'сода пищевая',
+            b: '(NH₄)₂CO₃',
+            c: 'H₃BO₃',
+            d: 'гидроксид бария',
+            e: 'метан',
+            f: 'NO',
+            g: 'Cr(OH)₂',
+            h: 'BaO₂',
+            i: 'ZnO',
+            answer: [4, 1, 6],
+            full: 'А–4, Б–1, В–6'
+        },
+        {
+            id: 11,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) кислотный оксид; Б) нерастворимую соль; В) одноосновную кислоту.',
+            a: 'N₂O',
+            b: 'NaHCO₃',
+            c: 'гидроксид хрома(III)',
+            d: 'силикат кальция',
+            e: 'C₃H₇COOH',
+            f: 'Li₂SO₄',
+            g: 'SO₂',
+            h: 'Al₂O₃',
+            i: 'сероводородная кислота',
+            answer: [7, 4, 5],
+            full: 'А–7, Б–4, В–5'
+        },
+        {
+            id: 12,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) среднюю соль; Б) кислотный оксид; В) двухосновную кислоту.',
+            a: 'гашёная известь',
+            b: 'гидроксид магния',
+            c: 'азотная кислота',
+            d: 'угольная кислота',
+            e: 'фосфид натрия',
+            f: 'негашёная известь',
+            g: 'CrO₃',
+            h: 'NH₄Cl',
+            i: 'Zn(OH)₂',
+            answer: [8, 7, 4],
+            full: 'А–8, Б–7, В–4'
+        },
+        {
+            id: 13,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) нерастворимое основание; Б) среднюю соль; В) одноосновную кислоту.',
+            a: 'NaHSO₄',
+            b: 'гидроксид железа(III)',
+            c: 'хлорная кислота',
+            d: 'сернистая кислота',
+            e: 'CH₄',
+            f: 'CaO',
+            g: 'Fe(OH)₂',
+            h: 'сульфат аммония',
+            i: 'Zn(OH)₂',
+            answer: [7, 8, 3],
+            full: 'А–7, Б–8, В–3'
+        },
+        {
+            id: 14,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) растворимое основание; Б) кислую соль; В) несолеобразующий оксид.',
+            a: 'Ca(HS)₂',
+            b: '(NH₄)₂CO₃',
+            c: 'H₃BO₃',
+            d: 'гидроксид лития',
+            e: 'CH₄',
+            f: 'CO',
+            g: 'Cr(OH)₂',
+            h: 'Mg₃N₂',
+            i: 'ZnO',
+            answer: [4, 1, 6],
+            full: 'А–4, Б–1, В–6'
+        },
+        {
+            id: 15,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) кислотный оксид; Б) амфотерный гидроксид; В) двухосновную кислоту.',
+            a: 'Mg(HCO₃)₂',
+            b: 'гидроксид магния',
+            c: 'азотная кислота',
+            d: 'кремниевая кислота',
+            e: 'Na₃P',
+            f: 'CaO',
+            g: 'CrO₃',
+            h: 'NH₄Cl',
+            i: 'Zn(OH)₂',
+            answer: [7, 9, 4],
+            full: 'А–7, Б–9, В–4'
+        },
+        {
+            id: 16,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) кислотный оксид; Б) нерастворимую соль; В) одноосновную кислоту.',
+            a: 'N₂O',
+            b: 'NaHCO₃',
+            c: 'гидроксид хрома(III)',
+            d: 'сульфат бария',
+            e: 'CH₃COOH',
+            f: 'Li₂SO₄',
+            g: 'NO₂',
+            h: 'Al₂O₃',
+            i: 'ортофосфорная кислота',
+            answer: [7, 4, 5],
+            full: 'А–7, Б–4, В–5'
+        },
+        {
+            id: 17,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) кислотный оксид; Б) нерастворимую соль; В) одноосновную кислоту.',
+            a: 'N₂O',
+            b: 'NaHCO₃',
+            c: 'гидроксид хрома(III)',
+            d: 'сульфит кальция',
+            e: 'CH₃COOH',
+            f: 'Li₂SO₄',
+            g: 'CO₂',
+            h: 'Al₂O₃',
+            i: 'ортофосфорная кислота',
+            answer: [7, 4, 5],
+            full: 'А–7, Б–4, В–5'
+        },
+        {
+            id: 18,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) нерастворимое основание; Б) среднюю соль; В) двухосновную кислоту.',
+            a: 'Ca(HSO₄)₂',
+            b: 'гидроксид железа(III)',
+            c: 'азотная кислота',
+            d: 'сернистая кислота',
+            e: 'CH₄',
+            f: 'CaO',
+            g: 'Cr(OH)₂',
+            h: 'NH₄Cl',
+            i: 'Zn(OH)₂',
+            answer: [7, 8, 4],
+            full: 'А–7, Б–8, В–4'
+        },
+        {
+            id: 19,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) амфотерный гидроксид; Б) среднюю соль; В) двухосновную кислоту.',
+            a: 'Ca(HSO₄)₂',
+            b: 'гидроксид железа(II)',
+            c: 'пропановая кислота',
+            d: 'сернистая кислота',
+            e: 'CH₄',
+            f: 'CaO',
+            g: 'Cr(OH)₂',
+            h: '(NH₄)₂CO₃',
+            i: 'Zn(OH)₂',
+            answer: [9, 8, 4],
+            full: 'А–9, Б–8, В–4'
+        },
+        {
+            id: 20,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) растворимое основание; Б) кислую соль; В) несолеобразующий оксид.',
+            a: 'Sr(HS)₂',
+            b: '(NH₄)₂CO₃',
+            c: 'H₃BO₃',
+            d: 'гидроксид бария',
+            e: 'CH₄',
+            f: 'NO',
+            g: 'Cr(OH)₂',
+            h: 'Mg₃N₂',
+            i: 'ZnO',
+            answer: [4, 1, 6],
+            full: 'А–4, Б–1, В–6'
+        },
+        {
+            id: 21,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) одноосновную кислоту; Б) амфотерный гидроксид; В) щёлочь.',
+            a: 'Be(OH)₂',
+            b: 'гидроксид магния',
+            c: 'фтороводородная кислота',
+            d: 'хромовая кислота',
+            e: 'CaC₂',
+            f: 'CaO',
+            g: 'LiOH',
+            h: 'угольная кислота',
+            i: 'NO',
+            answer: [3, 1, 7],
+            full: 'А–3, Б–1, В–7'
+        },
+        {
+            id: 22,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) кислотный оксид; Б) амфотерный гидроксид; В) двухосновную кислоту.',
+            a: 'LiHSO₄',
+            b: 'гидроксид магния',
+            c: 'хлорная кислота',
+            d: 'кремниевая кислота',
+            e: 'Na₃P',
+            f: 'CaO',
+            g: 'Mn₂O₇',
+            h: 'NH₄Cl',
+            i: 'Fe(OH)₃',
+            answer: [7, 9, 4],
+            full: 'А–7, Б–9, В–4'
+        },
+        {
+            id: 23,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) основной оксид; Б) кислую соль; В) амфотерный гидроксид.',
+            a: 'P₂O₃',
+            b: 'гидроксид железа(III)',
+            c: 'HMnO₄',
+            d: 'оксид хрома(VI)',
+            e: 'Cr₂O₃',
+            f: 'CaO',
+            g: 'Cr(OH)₂',
+            h: 'NH₄HCO₃',
+            i: 'Ba(OH)₂',
+            answer: [6, 8, 2],
+            full: 'А–6, Б–8, В–2'
+        },
+        {
+            id: 24,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) одноосновную кислоту; Б) несолеобразующий оксид; В) щёлочь.',
+            a: 'BeO',
+            b: 'гидроксид магния',
+            c: 'пропановая кислота',
+            d: 'хромовая кислота',
+            e: 'CaC₂',
+            f: 'CaO',
+            g: 'NaOH',
+            h: 'щавелевая кислота',
+            i: 'NO',
+            answer: [3, 9, 7],
+            full: 'А–3, Б–9, В–7'
+        },
+        {
+            id: 25,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) кислотный оксид; Б) среднюю соль; В) амфотерный гидроксид.',
+            a: 'N₂O',
+            b: 'фосфат железа(III)',
+            c: 'HMnO₄',
+            d: 'оксид хрома(VI)',
+            e: 'Cr₂O₃',
+            f: 'CaO',
+            g: 'Cr(OH)₂',
+            h: 'NH₄HCO₃',
+            i: 'Be(OH)₂',
+            answer: [4, 2, 9],
+            full: 'А–4, Б–2, В–9'
+        },
+        {
+            id: 26,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) щёлочь; Б) кислую соль; В) несолеобразующий оксид.',
+            a: 'Mg(HS)₂',
+            b: '(NH₄)₂CO₃',
+            c: 'H₃BO₃',
+            d: 'гидроксид лития',
+            e: 'гидрид калия',
+            f: 'N₂O',
+            g: 'Cr(OH)₂',
+            h: 'поташ',
+            i: 'ZnO',
+            answer: [4, 1, 6],
+            full: 'А–4, Б–1, В–6'
+        },
+        {
+            id: 27,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) нерастворимое основание; Б) кислотный оксид; В) одноосновную кислоту.',
+            a: 'Mg(HCO₃)₂',
+            b: 'гидроксид магния',
+            c: 'бромоводородная кислота',
+            d: 'кремниевая кислота',
+            e: 'Na₃P',
+            f: 'CaO',
+            g: 'CrO₃',
+            h: 'NH₄Cl',
+            i: 'Zn(OH)₂',
+            answer: [2, 7, 3],
+            full: 'А–2, Б–7, В–3'
+        },
+        {
+            id: 28,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) одноосновную кислоту; Б) амфотерный оксид; В) щёлочь.',
+            a: 'ZnO',
+            b: 'гидроксид магния',
+            c: 'сероводородная кислота',
+            d: 'хромовая кислота',
+            e: 'CaC₂',
+            f: 'CaO',
+            g: 'CsOH',
+            h: 'метафосфорная кислота',
+            i: 'NO',
+            answer: [8, 1, 7],
+            full: 'А–8, Б–1, В–7'
+        },
+        {
+            id: 29,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) кислотный оксид; Б) кислую соль; В) основание.',
+            a: 'FeO',
+            b: 'карбонат гидроксомеди(II)',
+            c: 'HMnO₄',
+            d: 'оксид марганца(VII)',
+            e: 'Cr₂O₃',
+            f: 'CaO',
+            g: 'Cr(OH)₂',
+            h: 'гидрокарбонат аммония',
+            i: 'Be(OH)₂',
+            answer: [4, 8, 7],
+            full: 'А–4, Б–8, В–7'
+        },
+        {
+            id: 30,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) нерастворимое основание; Б) среднюю соль; В) двухосновную кислоту.',
+            a: 'малахит',
+            b: 'гидроксид железа(III)',
+            c: 'бромоводородная кислота',
+            d: 'сероводородная кислота',
+            e: 'CH₄',
+            f: 'CaO',
+            g: 'Fe(OH)₂',
+            h: 'CuCl',
+            i: 'Zn(OH)₂',
+            answer: [7, 8, 4],
+            full: 'А–7, Б–8, В–4'
+        },
+        {
+            id: 31,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) кислотный оксид; Б) нерастворимую соль; В) одноосновную кислоту.',
+            a: 'N₂O',
+            b: 'NaHCO₃',
+            c: 'гидроксид хрома(III)',
+            d: 'фосфат бария',
+            e: 'C₂H₅COOH',
+            f: 'медный купорос',
+            g: 'кремнезём',
+            h: 'Al₂O₃',
+            i: 'кремниевая кислота',
+            answer: [7, 4, 5],
+            full: 'А–7, Б–4, В–5'
+        },
+        {
+            id: 32,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) двухосновную кислоту; Б) среднюю соль; В) амфотерный гидроксид.',
+            a: 'NaH₂PO₄',
+            b: 'Zn(OH)₂',
+            c: 'HNO₂',
+            d: 'H₂SO₃',
+            e: 'фосфин',
+            f: 'ZnO',
+            g: 'цинк',
+            h: 'аммиачная селитра',
+            i: 'Fe(OH)₂',
+            answer: [4, 8, 2],
+            full: 'А–4, Б–8, В–2'
+        },
+        {
+            id: 33,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) соль сернистой кислоты; Б) щёлочь; В) амфотерный оксид.',
+            a: 'Be(OH)₂',
+            b: 'гипс',
+            c: 'CrO₃',
+            d: 'гидросульфит натрия',
+            e: 'SO₃',
+            f: 'гашёная известь',
+            g: 'BeO',
+            h: 'сульфид хрома(II)',
+            i: 'Mg(OH)₂',
+            answer: [4, 6, 7],
+            full: 'А–4, Б–6, В–7'
+        },
+        {
+            id: 34,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) кислоту; Б) среднюю соль; В) кислотный оксид.',
+            a: 'гашёная известь',
+            b: 'гидроксид бария',
+            c: 'аммиачная селитра',
+            d: 'Na₂CO₃',
+            e: 'H₂SiO₃',
+            f: 'Fe₂O₃',
+            g: 'Cr(OH)₂',
+            h: 'NH₄HCO₃',
+            i: 'SO₂',
+            answer: [5, 3, 9],
+            full: 'А–5, Б–3, В–9'
+        },
+        {
+            id: 35,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) нерастворимое основание; Б) кислую соль; В) амфотерный оксид.',
+            a: 'гашёная известь',
+            b: 'гидроксид бария',
+            c: 'аммиачная селитра',
+            d: 'Al₂(SO₄)₃',
+            e: 'NO',
+            f: 'нитрат аммония',
+            g: 'оксид алюминия',
+            h: 'NH₄HCO₃',
+            i: 'гидроксид кальция',
+            answer: [9, 7, 6],
+            full: 'А–9, Б–7, В–6'
+        },
+        {
+            id: 36,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) кислую соль; Б) несолеобразующий оксид; В) кислотный оксид.',
+            a: 'Al₂(SO₄)₃',
+            b: 'NO',
+            c: 'нитрат аммония',
+            d: 'оксид алюминия',
+            e: 'NH₄HCO₃',
+            f: 'MnO₂',
+            g: 'CO₂',
+            h: 'H₂O',
+            i: 'гидроксид кальция',
+            answer: [5, 2, 7],
+            full: 'А–5, Б–2, В–7'
+        },
+        {
+            id: 37,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) среднюю соль; Б) основание; В) амфотерный оксид.',
+            a: '(NH₄)₂SO₄',
+            b: 'гашёная известь',
+            c: 'HClO',
+            d: 'CaHPO₄',
+            e: 'гидроксид хрома(III)',
+            f: 'BaO₂',
+            g: 'оксид фосфора(III)',
+            h: 'оксид железа(III)',
+            i: 'Zn(OH)₂',
+            answer: [1, 2, 8],
+            full: 'А–1, Б–2, В–8'
+        },
+        {
+            id: 38,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) основание; Б) несолеобразующий оксид; В) основную соль.',
+            a: 'KHSO₄',
+            b: 'NO₂',
+            c: 'пищевая сода',
+            d: 'Al(OH)₃',
+            e: 'негашёная известь',
+            f: 'гашёная известь',
+            g: 'SO₂',
+            h: 'угарный газ',
+            i: '(CuOH)₂CO₃',
+            answer: [6, 8, 9],
+            full: 'А–6, Б–8, В–9'
+        },
+
+        // ---- PDF №2 (50 заданий) ----
+        {
+            id: 39,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) соль хлорной кислоты; Б) щёлочь; В) несолеобразующий оксид.',
+            a: 'угарный газ',
+            b: 'Ca(OH)₂',
+            c: 'KClO₃',
+            d: 'KClO₄',
+            e: 'CuO',
+            f: 'оксид хлора(I)',
+            g: 'KClO',
+            h: 'гидроксид хрома(II)',
+            i: 'Cu(OH)₂',
+            answer: [4, 2, 1],
+            full: 'А–4, Б–2, В–1'
+        },
+        {
+            id: 40,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) среднюю соль; Б) кислотный оксид; В) нерастворимое основание.',
+            a: 'Ca(OCl)₂',
+            b: 'Ba(OH)₂',
+            c: 'CrO₃',
+            d: 'Ca(H₂PO₄)₂',
+            e: 'угарный газ',
+            f: 'Zn(OH)₂',
+            g: 'гидроксид магния',
+            h: 'Fe₂O₃',
+            i: 'SiCl₄',
+            answer: [1, 3, 7],
+            full: 'А–1, Б–3, В–7'
+        },
+        {
+            id: 41,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) нерастворимое основание; Б) кислую соль; В) несолеобразующий оксид.',
+            a: 'фторид кремния',
+            b: 'LiOH',
+            c: 'CaO₂',
+            d: 'NaHS',
+            e: 'Al(OH)₃',
+            f: '(NH₄)₂S',
+            g: 'Cs₂O',
+            h: 'гидроксид железа(II)',
+            i: 'NO',
+            answer: [8, 4, 9],
+            full: 'А–8, Б–4, В–9'
+        },
+        {
+            id: 42,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) сильную кислоту; Б) оксид; В) щёлочь.',
+            a: 'силан',
+            b: 'сернистая кислота',
+            c: 'гашёная известь',
+            d: 'HClO₃',
+            e: 'серный колчедан',
+            f: 'HF',
+            g: 'питьевая сода',
+            h: 'NH₄HSO₄',
+            i: 'вода',
+            answer: [4, 9, 3],
+            full: 'А–4, Б–9, В–3'
+        },
+        {
+            id: 43,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) среднюю соль; Б) несолеобразующий оксид; В) амфотерный оксид.',
+            a: 'гидроксид хрома(II)',
+            b: 'Ca(OH)₂',
+            c: 'N₂O',
+            d: 'Al(OH)₂Cl',
+            e: 'бромид фосфора(III)',
+            f: '(NH₄)₂CO₃',
+            g: 'H₂O₂',
+            h: 'Cr₂O₃',
+            i: 'Zn(OH)₂',
+            answer: [6, 3, 8],
+            full: 'А–6, Б–3, В–8'
+        },
+        {
+            id: 44,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) основание; Б) кислую соль; В) кислотный оксид.',
+            a: 'CO',
+            b: 'гидроксокарбонат меди(II)',
+            c: 'гипохлорит калия',
+            d: 'кварц',
+            e: 'гидроксид алюминия',
+            f: 'BeO',
+            g: 'гидросульфит лития',
+            h: 'Zn(OH)₂',
+            i: 'гидроксид хрома(II)',
+            answer: [9, 7, 4],
+            full: 'А–9, Б–7, В–4'
+        },
+        {
+            id: 45,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) кислоту; Б) среднюю соль; В) кислотный оксид.',
+            a: 'HNO₃',
+            b: 'карбонат натрия',
+            c: 'H₂SO₄',
+            d: 'Na₂SO₄',
+            e: 'SO₂',
+            f: 'CaO',
+            g: 'CO₂',
+            h: 'K₂CO₃',
+            i: 'HCl',
+            answer: [3, 2, 5],
+            full: 'А–3, Б–2, В–5'
+        },
+        {
+            id: 46,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) кислоту; Б) основную соль; В) среднюю соль.',
+            a: 'HNO₃',
+            b: 'гидроксокарбонат меди(II)',
+            c: 'NaCl',
+            d: 'H₂SO₄',
+            e: '(CuOH)₂CO₃',
+            f: 'KCl',
+            g: 'Mg(OH)Cl',
+            h: 'NH₄Cl',
+            i: 'HCl',
+            answer: [1, 5, 3],
+            full: 'А–1, Б–5, В–3'
+        },
+        {
+            id: 47,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) щёлочь; Б) основную соль; В) амфотерный гидроксид.',
+            a: 'NaH₂PO₄',
+            b: 'негашёная известь',
+            c: 'HOCl',
+            d: 'гидрокарбонат натрия',
+            e: 'Cr(OH)₂',
+            f: 'Ba(OH)₂',
+            g: '(MgOH)₂CO₃',
+            h: 'Mg(OH)₂',
+            i: 'Be(OH)₂',
+            answer: [6, 7, 9],
+            full: 'А–6, Б–7, В–9'
+        },
+        {
+            id: 48,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) пероксид; Б) кислотный оксид; В) амфотерный гидроксид.',
+            a: 'Fe₃O₄',
+            b: 'Ba(OH)₂',
+            c: 'N₂O',
+            d: 'Na[Al(OH)₄]',
+            e: 'SiO₂',
+            f: '(ZnOH)₂CO₃',
+            g: 'CaO₂',
+            h: 'NO',
+            i: 'Be(OH)₂',
+            answer: [7, 5, 9],
+            full: 'А–7, Б–5, В–9'
+        },
+        {
+            id: 49,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) среднюю соль; Б) кислотный оксид; В) нерастворимое основание.',
+            a: 'SiCl₄',
+            b: 'гидроксид бария',
+            c: 'Mn₂O₇',
+            d: 'гидрофосфат кальция',
+            e: 'NO',
+            f: 'Zn(OH)₂',
+            g: 'Cr(OH)₂',
+            h: 'оксид хрома(III)',
+            i: 'Ba(OCl)₂',
+            answer: [9, 3, 7],
+            full: 'А–9, Б–3, В–7'
+        },
+        {
+            id: 50,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) среднюю соль; Б) основание; В) амфотерный оксид.',
+            a: 'хлорид серы(II)',
+            b: 'Be(OH)₂',
+            c: 'SrCl₂',
+            d: 'Mg(H₂PO₄)₂',
+            e: 'гидроксид хрома(II)',
+            f: 'BaO₂',
+            g: 'оксид фосфора(III)',
+            h: 'Fe₂O₃',
+            i: 'Zn(OH)₂',
+            answer: [3, 5, 8],
+            full: 'А–3, Б–5, В–8'
+        },
+        {
+            id: 51,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) двухосновную кислоту; Б) среднюю соль; В) амфотерный гидроксид.',
+            a: 'NaH₂PO₄',
+            b: 'Zn(OH)₂',
+            c: 'HNO₂',
+            d: 'H₂SO₃',
+            e: 'фосфин',
+            f: 'ZnO',
+            g: 'цинк',
+            h: 'NH₄NO₃',
+            i: 'Fe(OH)₂',
+            answer: [4, 8, 2],
+            full: 'А–4, Б–8, В–2'
+        },
+        {
+            id: 52,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) основной оксид; Б) соль; В) щёлочь.',
+            a: 'Al₂O₃',
+            b: 'гашёная известь',
+            c: 'SiO₂',
+            d: 'CO',
+            e: 'негашёная известь',
+            f: 'SO₂',
+            g: 'HF',
+            h: 'мрамор',
+            i: 'аммиак',
+            answer: [5, 8, 2],
+            full: 'А–5, Б–8, В–2'
+        },
+        {
+            id: 53,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) несолеобразующий оксид; Б) среднюю соль; В) основную соль.',
+            a: 'CO₂',
+            b: 'кварц',
+            c: 'MnO₂',
+            d: 'SF₆',
+            e: 'Fe(OH)₂',
+            f: 'едкий натр',
+            g: 'бертолетова соль',
+            h: 'веселящий газ',
+            i: 'малахит',
+            answer: [8, 7, 9],
+            full: 'А–8, Б–7, В–9'
+        },
+        {
+            id: 54,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) щёлочь; Б) среднюю соль; В) кислую соль.',
+            a: 'фосфин',
+            b: 'малахит',
+            c: 'Al(OH)₃',
+            d: 'Al(OH)₂Cl',
+            e: 'PCl₅',
+            f: 'гидроксокарбонат цинка',
+            g: 'питьевая сода',
+            h: 'едкое кали',
+            i: 'калийная селитра',
+            answer: [8, 9, 7],
+            full: 'А–8, Б–9, В–7'
+        },
+        {
+            id: 55,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) пероксид; Б) кислотный оксид; В) кислую соль.',
+            a: 'мел',
+            b: 'пирит',
+            c: 'Rb₂O',
+            d: 'V₂O₅',
+            e: 'железная окалина',
+            f: 'Na₂O₂',
+            g: 'поваренная соль',
+            h: 'ацетат калия',
+            i: 'дигидрофосфат аммония',
+            answer: [6, 4, 9],
+            full: 'А–6, Б–4, В–9'
+        },
+        {
+            id: 56,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) оксид; Б) гидроксид; В) соль.',
+            a: 'SiBr₄',
+            b: 'известняк',
+            c: 'H₂S',
+            d: 'силан',
+            e: 'хлороводород',
+            f: 'фосфин',
+            g: 'хлорная кислота',
+            h: 'OF₂',
+            i: 'веселящий газ',
+            answer: [9, 7, 2],
+            full: 'А–9, Б–7, В–2'
+        },
+        {
+            id: 57,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) кислотный оксид; Б) двухосновную кислоту; В) высший гидроксид.',
+            a: 'FeSO₄·7H₂O',
+            b: 'CO',
+            c: 'SO₂',
+            d: 'хлорная кислота',
+            e: 'сернистая кислота',
+            f: 'негашёная известь',
+            g: 'BaO',
+            h: 'KAl(SO₄)₂',
+            i: 'Li₃N',
+            answer: [3, 5, 4],
+            full: 'А–3, Б–5, В–4'
+        },
+        {
+            id: 58,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) щёлочь; Б) среднюю соль; В) основной оксид.',
+            a: 'нитрат калия',
+            b: 'сульфид аммония',
+            c: 'гидроксид алюминия',
+            d: 'оксид магния',
+            e: 'гидроксид лития',
+            f: 'сульфат бария',
+            g: 'оксид цезия',
+            h: 'хлорид натрия',
+            i: 'гидроксид калия',
+            answer: [5, 2, 7],
+            full: 'А–5, Б–2, В–7'
+        },
+        {
+            id: 59,
+            prompt: 'Среди предложенных названий веществ выберите: А) хлорат; Б) кислую соль; В) кислотный оксид.',
+            a: 'изолейцин',
+            b: 'хлорид аммония',
+            c: 'питьевая сода',
+            d: 'бертолетова соль',
+            e: 'кремнезём',
+            f: 'малахит',
+            g: 'едкий натр',
+            h: 'пирит',
+            i: 'гашёная известь',
+            answer: [4, 3, 5],
+            full: 'А–4, Б–3, В–5'
+        },
+        {
+            id: 60,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) аминокислоту; Б) двойную соль; В) оксид.',
+            a: 'KNaSO₄',
+            b: 'CaO',
+            c: 'Ba(OH)₂',
+            d: 'аланин',
+            e: 'SiC',
+            f: 'Na',
+            g: 'анилин',
+            h: 'поташ',
+            i: 'силан',
+            answer: [4, 1, 2],
+            full: 'А–4, Б–1, В–2'
+        },
+        {
+            id: 61,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) пероксид; Б) кислотный оксид; В) амфотерный гидроксид.',
+            a: 'алмаз',
+            b: 'Fe(OH)₂',
+            c: 'фосген',
+            d: 'мел',
+            e: 'Zn(OH)₂',
+            f: 'BaO₂',
+            g: 'аммиачная селитра',
+            h: 'Mn₂O₇',
+            i: 'CaCO₃',
+            answer: [6, 8, 5],
+            full: 'А–6, Б–8, В–5'
+        },
+        {
+            id: 62,
+            prompt: 'Среди предложенных формул веществ выберите: А) двухосновную кислоту; Б) среднюю соль; В) амфотерный гидроксид.',
+            a: 'HNO₃',
+            b: 'H₂CO₃',
+            c: 'H₃PO₄',
+            d: 'MgO',
+            e: 'ZnO',
+            f: 'SO₃',
+            g: 'NaH₂PO₄',
+            h: 'Zn(OH)₂',
+            i: 'Ba(NO₃)₂',
+            answer: [2, 9, 8],
+            full: 'А–2, Б–9, В–8'
+        },
+        {
+            id: 63,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) сильную кислоту; Б) гидроксид; В) амфотерный оксид.',
+            a: 'H₃PO₄',
+            b: 'MgO',
+            c: 'HF',
+            d: 'питьевая сода',
+            e: 'NH₃',
+            f: 'Cr₂O₃',
+            g: 'HBr',
+            h: 'CO₂',
+            i: 'H₂',
+            answer: [7, 1, 6],
+            full: 'А–7, Б–1, В–6'
+        },
+        {
+            id: 64,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) соль азотной кислоты; Б) бинарное соединение; В) кислую соль.',
+            a: '(NH₄)₂SO₄',
+            b: 'гипс',
+            c: 'H₂O₂',
+            d: 'питьевая сода',
+            e: 'NH₄NO₃',
+            f: 'Mg(OH)₂',
+            g: 'малахит',
+            h: 'NaNO₂',
+            i: 'нитрит калия',
+            answer: [5, 3, 4],
+            full: 'А–5, Б–3, В–4'
+        },
+        {
+            id: 65,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) слабую кислоту; Б) основную соль; В) кислотный оксид.',
+            a: 'Ba(NO₃)₂',
+            b: 'азотная кислота',
+            c: '(ZnOH)₂CO₃',
+            d: 'Al₂O₃',
+            e: 'SO₂',
+            f: 'MgO',
+            g: 'H₂CO₃',
+            h: 'K₂HPO₄',
+            i: 'хлорная кислота',
+            answer: [7, 3, 5],
+            full: 'А–7, Б–3, В–5'
+        },
+        {
+            id: 66,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) соль азотной кислоты; Б) нерастворимое основание; В) основную соль.',
+            a: 'малахит',
+            b: 'KNO₃',
+            c: 'гипс',
+            d: 'Al(OH)₃',
+            e: '(NH₄)₂SO₃',
+            f: 'Mg(OH)₂',
+            g: 'NaNO₂',
+            h: 'H₂O₂',
+            i: 'K₂HPO₄',
+            answer: [2, 6, 1],
+            full: 'А–2, Б–6, В–1'
+        },
+        {
+            id: 67,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) основание; Б) газообразный оксид; В) кислую соль.',
+            a: '(NH₄)₂SO₄',
+            b: 'P₂O₃',
+            c: 'Ca(HCO₃)₂',
+            d: 'Cr(OH)₃',
+            e: 'NaOH',
+            f: 'пирит',
+            g: 'SO₂',
+            h: 'FeO',
+            i: 'NH₄Cl',
+            answer: [5, 7, 3],
+            full: 'А–5, Б–7, В–3'
+        },
+        {
+            id: 68,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) основание; Б) сильную кислоту; В) кислотный оксид.',
+            a: 'CrO',
+            b: 'Fe₂O₃',
+            c: '(MgOH)₂CO₃',
+            d: 'NaOH',
+            e: 'P₂O₅',
+            f: 'H₂SO₄',
+            g: 'Zn(OH)₂',
+            h: 'HNO₃',
+            i: 'HF',
+            answer: [4, 8, 5],
+            full: 'А–4, Б–8, В–5'
+        },
+        {
+            id: 69,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) несолеобразующий оксид; Б) нерастворимое основание; В) слабую кислоту.',
+            a: 'NO',
+            b: 'SrO',
+            c: 'HNO₃',
+            d: 'H₂SiO₃',
+            e: 'Zn(OH)₂',
+            f: 'Mg(OH)₂',
+            g: 'HCl',
+            h: 'Ba(OH)₂',
+            i: 'NH₄HCO₃',
+            answer: [1, 6, 4],
+            full: 'А–1, Б–6, В–4'
+        },
+        {
+            id: 70,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) кислотный оксид; Б) основание; В) сильную кислоту.',
+            a: 'CrO',
+            b: 'Fe₂O₃',
+            c: '(MgOH)₂CO₃',
+            d: 'NaOH',
+            e: 'P₂O₅',
+            f: 'H₂SO₄',
+            g: 'Zn(OH)₂',
+            h: 'HNO₃',
+            i: 'HF',
+            answer: [5, 4, 8],
+            full: 'А–5, Б–4, В–8'
+        },
+        {
+            id: 71,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) несолеобразующий оксид; Б) кислоту; В) щёлочь.',
+            a: 'H₂SiO₃',
+            b: 'Mg(OH)₂',
+            c: 'H₂CO₃',
+            d: 'Fe₂O₃',
+            e: 'Al₂O₃',
+            f: 'N₂O',
+            g: 'SiO₂',
+            h: '(BeOH)₂CO₃',
+            i: 'NaOH',
+            answer: [6, 1, 9],
+            full: 'А–6, Б–1, В–9'
+        },
+        {
+            id: 72,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) соль сильной кислоты; Б) основную соль; В) амфотерный оксид.',
+            a: 'BaO',
+            b: 'Na₂O₂',
+            c: 'гипохлорит калия',
+            d: '(CuOH)₂CO₃',
+            e: 'Na₂S',
+            f: 'NaHSO₄',
+            g: 'Mn₂O₇',
+            h: 'Cr₂O₃',
+            i: 'K₂CO₃',
+            answer: [6, 4, 8],
+            full: 'А–6, Б–4, В–8'
+        },
+        {
+            id: 73,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) несолеобразующий оксид; Б) растворимую кислоту; В) щёлочь.',
+            a: 'CaO',
+            b: 'CO',
+            c: 'NaOH',
+            d: 'H₂SiO₃',
+            e: 'Mg(OH)₂',
+            f: 'NO₂',
+            g: 'Zn(OH)₂',
+            h: 'Cr₂O₃',
+            i: 'HClO₄',
+            answer: [2, 9, 3],
+            full: 'А–2, Б–9, В–3'
+        },
+        {
+            id: 74,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) несолеобразующий оксид; Б) щёлочь; В) среднюю соль.',
+            a: 'NaAlO₂',
+            b: 'питьевая сода',
+            c: 'P₂O₅',
+            d: 'Be(OH)₂',
+            e: 'гидроксокарбонат магния',
+            f: 'NO',
+            g: 'Cl₂O₇',
+            h: 'KOH',
+            i: 'Mg(OH)₂',
+            answer: [6, 8, 1],
+            full: 'А–6, Б–8, В–1'
+        },
+        {
+            id: 75,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) несолеобразующий оксид; Б) растворимое основание; В) сильную кислоту.',
+            a: 'MgCO₃',
+            b: 'HF',
+            c: 'Ag₂O',
+            d: 'CO',
+            e: 'NaOH',
+            f: 'Fe(OH)₃',
+            g: 'SO₃',
+            h: 'пиролюзит',
+            i: 'HClO₄',
+            answer: [4, 5, 9],
+            full: 'А–4, Б–5, В–9'
+        },
+        {
+            id: 76,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) соль сильной кислоты; Б) сильную кислоту; В) амфотерный оксид.',
+            a: 'MgO',
+            b: 'соляная кислота',
+            c: 'Al₂O₃',
+            d: 'алмаз',
+            e: 'кальцинированная сода',
+            f: 'CrO₃',
+            g: 'N₂O',
+            h: 'ZnBr₂',
+            i: 'HClO',
+            answer: [8, 2, 3],
+            full: 'А–8, Б–2, В–3'
+        },
+        {
+            id: 77,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) основание; Б) амфотерный оксид; В) основную соль.',
+            a: 'гашёная известь',
+            b: 'P₂O₃',
+            c: 'Fe₂O₃',
+            d: 'BaO₂',
+            e: '(NH₄)₂SO₄',
+            f: 'Ca(HSO₄)₂',
+            g: 'Zn(OH)₂',
+            h: 'малахит',
+            i: 'Na[Al(OH)₄]',
+            answer: [1, 3, 8],
+            full: 'А–1, Б–3, В–8'
+        },
+        {
+            id: 78,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) соль азотной кислоты; Б) кислотный оксид; В) щёлочь.',
+            a: 'гашёная известь',
+            b: 'CO',
+            c: 'KClO₃',
+            d: 'Fe₂O₃',
+            e: 'SiO₂',
+            f: 'N₂O',
+            g: 'NaHCO₃',
+            h: 'NH₄NO₃',
+            i: 'KNO₃',
+            answer: [9, 5, 1],
+            full: 'А–9, Б–5, В–1'
+        },
+        {
+            id: 79,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) среднюю соль; Б) гидроксид; В) амфотерный оксид.',
+            a: 'CrO₃',
+            b: 'NaH₂PO₃',
+            c: 'HCl',
+            d: '(NH₄)₂SO₄',
+            e: 'негашёная известь',
+            f: 'гашёная известь',
+            g: 'Cr₂O₃',
+            h: 'NH₄H₂PO₄',
+            i: 'BaO₂',
+            answer: [4, 6, 7],
+            full: 'А–4, Б–6, В–7'
+        },
+        {
+            id: 80,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) комплексную соль; Б) солеобразующий оксид; В) кислоту.',
+            a: 'тетрагидроксоцинкат натрия',
+            b: 'CaHPO₄',
+            c: 'KAl(SO₄)₂',
+            d: 'CO₂',
+            e: 'N₂O',
+            f: 'CO',
+            g: 'NH₃',
+            h: 'H₂S',
+            i: 'KAlO₂',
+            answer: [1, 4, 8],
+            full: 'А–1, Б–4, В–8'
+        },
+        {
+            id: 81,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) кислотный оксид; Б) среднюю соль; В) амфотерный гидроксид.',
+            a: 'NaHCO₃',
+            b: 'N₂O',
+            c: 'Cl₂O',
+            d: '(NH₄)₂CO₃',
+            e: 'Cr₂O₃',
+            f: 'Ba(OH)₂',
+            g: '(MgOH)₂CO₃',
+            h: 'Mg(OH)₂',
+            i: 'Zn(OH)₂',
+            answer: [3, 4, 9],
+            full: 'А–3, Б–4, В–9'
+        },
+        {
+            id: 82,
+            prompt: 'Среди предложенных формул веществ выберите: А) пероксид; Б) соль амфотерного оксида; В) щёлочь.',
+            a: 'O₂F₂',
+            b: 'CaO₂',
+            c: 'K₂O',
+            d: 'Fe(OH)₂',
+            e: 'BeSO₄',
+            f: 'NaOH',
+            g: 'Cu(NO₃)₂',
+            h: 'KO₂',
+            i: 'KMnO₄',
+            answer: [2, 5, 6],
+            full: 'А–2, Б–5, В–6'
+        },
+        {
+            id: 83,
+            prompt: 'Среди предложенных формул/названий веществ выберите: А) сильную кислоту; Б) амфотерный гидроксид; В) кислотный оксид.',
+            a: 'малахит',
+            b: 'Al₂O₃',
+            c: 'HF',
+            d: 'HI',
+            e: 'Fe(OH)₂',
+            f: 'Be(OH)₂',
+            g: 'CrO₃',
+            h: 'CaO₂',
+            i: 'SnO₂',
+            answer: [4, 6, 7],
+            full: 'А–4, Б–6, В–7'
+        },
+        {
+            id: 84,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) несолеобразующий оксид; Б) кислотный оксид; В) кислую соль.',
+            a: 'Ba(NO₃)₂',
+            b: 'азотная кислота',
+            c: '(ZnOH)NO₃',
+            d: 'CO',
+            e: 'Cr₂O₃',
+            f: 'MgO',
+            g: 'CO₂',
+            h: 'K₂HPO₄',
+            i: 'хлорная кислота',
+            answer: [4, 7, 8],
+            full: 'А–4, Б–7, В–8'
+        },
+        {
+            id: 85,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) сильную кислоту; Б) кислую соль; В) кислотный оксид.',
+            a: 'HF',
+            b: 'KHCO₃',
+            c: 'CO₂',
+            d: 'CO',
+            e: 'N₂O',
+            f: 'поташ',
+            g: 'H₂SO₄',
+            h: 'HNO₂',
+            i: 'NaCl',
+            answer: [7, 2, 3],
+            full: 'А–7, Б–2, В–3'
+        },
+        {
+            id: 86,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) среднюю соль; Б) амфотерный оксид; В) амфотерный гидроксид.',
+            a: 'KClO₃',
+            b: 'Fe₂O₃',
+            c: 'Ba(OH)₂',
+            d: 'NaHCO₃',
+            e: 'NaH₂PO₄',
+            f: 'NH₄H₂PO₄',
+            g: 'Fe(OH)₂',
+            h: 'кремнезём',
+            i: 'Zn(OH)₂',
+            answer: [1, 2, 9],
+            full: 'А–1, Б–2, В–9'
+        },
+        {
+            id: 87,
+            prompt: 'Среди предложенных формул и названий веществ выберите: А) среднюю соль; Б) кислотный оксид; В) амфотерный гидроксид.',
+            a: 'BaCl₂',
+            b: 'SO₂',
+            c: 'Al(OH)₃',
+            d: 'Na₂SO₄',
+            e: 'CO₂',
+            f: 'Zn(OH)₂',
+            g: 'KNO₃',
+            h: 'SO₃',
+            i: 'Mg(OH)₂',
+            answer: [4, 2, 6],
+            full: 'А–4, Б–2, В–6'
+        }
+    ];
+
+    // ═══════════════════════════════════════════════════════════
+    // 2. ДАННЫЕ ДЛЯ СТЕПЕНИ ОКИСЛЕНИЯ (110 заданий)
+    // ═══════════════════════════════════════════════════════════
+
+    const soTasksRaw = [
+        // ---- Простые вещества (С.О. = 0) ----
+        { id: 1001, ask: '<span class="hl">Fe</span>', hint: 'железо — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1002, ask: '<span class="hl">Cu</span>', hint: 'медь — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1003, ask: '<span class="hl">Zn</span>', hint: 'цинк — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1004, ask: '<span class="hl">Al</span>', hint: 'алюминий — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1005, ask: '<span class="hl">S</span>₈', hint: 'сера — простое вещество (S₈)', ans: '0', badge: 'simple' },
+        { id: 1006, ask: '<span class="hl">O</span>₂', hint: 'кислород — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1007, ask: '<span class="hl">N</span>₂', hint: 'азот — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1008, ask: '<span class="hl">Cl</span>₂', hint: 'хлор — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1009, ask: '<span class="hl">H</span>₂', hint: 'водород — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1010, ask: '<span class="hl">Na</span>', hint: 'натрий — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1011, ask: '<span class="hl">Mg</span>', hint: 'магний — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1012, ask: '<span class="hl">C</span>', hint: 'углерод — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1013, ask: '<span class="hl">Ca</span>', hint: 'кальций — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1014, ask: '<span class="hl">P</span>₄', hint: 'фосфор — простое вещество (P₄)', ans: '0', badge: 'simple' },
+        { id: 1015, ask: '<span class="hl">I</span>₂', hint: 'иод — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1016, ask: '<span class="hl">K</span>', hint: 'калий — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1017, ask: '<span class="hl">Br</span>₂', hint: 'бром — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1018, ask: '<span class="hl">Ag</span>', hint: 'серебро — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1019, ask: '<span class="hl">Au</span>', hint: 'золото — простое вещество', ans: '0', badge: 'simple' },
+        { id: 1020, ask: '<span class="hl">Pt</span>', hint: 'платина — простое вещество', ans: '0', badge: 'simple' },
+        // ---- Оксиды, кислоты, соли ----
+        { id: 1021, ask: 'Na₂<span class="hl">S</span>O₄', hint: 'S в сульфате натрия', ans: '+6' },
+        { id: 1022, ask: 'K<span class="hl">Mn</span>O₄', hint: 'Mn в перманганате калия', ans: '+7' },
+        { id: 1023, ask: '<span class="hl">Cr</span>₂O₃', hint: 'Cr в оксиде хрома(III)', ans: '+3' },
+        { id: 1024, ask: 'H<span class="hl">N</span>O₃', hint: 'N в азотной кислоте', ans: '+5' },
+        { id: 1025, ask: '<span class="hl">Fe</span>₂O₃', hint: 'Fe в оксиде железа(III)', ans: '+3' },
+        { id: 1026, ask: 'K₂<span class="hl">Cr</span>₂O₇', hint: 'Cr в дихромате калия', ans: '+6' },
+        { id: 1027, ask: '<span class="hl">Mn</span>O₂', hint: 'Mn в диоксиде марганца', ans: '+4' },
+        { id: 1028, ask: 'H₂<span class="hl">S</span>', hint: 'S в сероводороде', ans: '-2' },
+        { id: 1029, ask: '<span class="hl">N</span>H₃', hint: 'N в аммиаке', ans: '-3' },
+        { id: 1030, ask: '<span class="hl">C</span>O₂', hint: 'C в углекислом газе', ans: '+4' },
+        { id: 1031, ask: 'H<span class="hl">N</span>O₂', hint: 'N в азотистой кислоте', ans: '+3' },
+        { id: 1032, ask: 'Na₂<span class="hl">S</span>O₃', hint: 'S в сульфите натрия', ans: '+4' },
+        { id: 1033, ask: '<span class="hl">S</span>O₂', hint: 'S в диоксиде серы', ans: '+4' },
+        { id: 1034, ask: '<span class="hl">C</span>H₄', hint: 'C в метане', ans: '-4' },
+        { id: 1035, ask: '<span class="hl">N</span>O₂', hint: 'N в диоксиде азота', ans: '+4' },
+        { id: 1036, ask: '<span class="hl">N</span>₂O', hint: 'N в оксиде азота(I)', ans: '+1' },
+        { id: 1037, ask: 'H<span class="hl">Cl</span>O₄', hint: 'Cl в хлорной кислоте', ans: '+7' },
+        { id: 1038, ask: 'Na<span class="hl">Cl</span>O₃', hint: 'Cl в хлорате натрия', ans: '+5' },
+        { id: 1039, ask: 'H<span class="hl">Cl</span>O', hint: 'Cl в хлорноватистой кислоте', ans: '+1' },
+        { id: 1040, ask: 'H₂<span class="hl">O</span>₂', hint: 'O в пероксиде водорода', ans: '-1' },
+        { id: 1041, ask: 'Na₂<span class="hl">O</span>₂', hint: 'O в пероксиде натрия', ans: '-1' },
+        { id: 1042, ask: '<span class="hl">N</span>₂O₃', hint: 'N в оксиде азота(III)', ans: '+3' },
+        { id: 1043, ask: 'Ca₃(<span class="hl">P</span>O₄)₂', hint: 'P в ортофосфате кальция', ans: '+5', badge: 'bracket' },
+        { id: 1044, ask: 'K₂<span class="hl">Mn</span>O₄', hint: 'Mn в манганате калия', ans: '+6' },
+        { id: 1045, ask: '<span class="hl">P</span>H₃', hint: 'P в фосфине', ans: '-3' },
+        { id: 1046, ask: '<span class="hl">N</span>₂H₄', hint: 'N в гидразине', ans: '-2' },
+        { id: 1047, ask: 'H₃<span class="hl">P</span>O₃', hint: 'P в фосфористой кислоте', ans: '+3' },
+        { id: 1048, ask: '<span class="hl">O</span>F₂', hint: 'O в дифториде кислорода', ans: '+2' },
+        { id: 1049, ask: '<span class="hl">Fe</span>O', hint: 'Fe в оксиде железа(II)', ans: '+2' },
+        { id: 1050, ask: 'Na<span class="hl">Cl</span>O₂', hint: 'Cl в хлорите натрия', ans: '+3' },
+        // ---- Ионы ----
+        { id: 1051, ask: '<span class="hl">S</span>O₄²⁻', hint: 'S в сульфат-ионе', ans: '+6', badge: 'ion' },
+        { id: 1052, ask: '<span class="hl">N</span>O₃⁻', hint: 'N в нитрат-ионе', ans: '+5', badge: 'ion' },
+        { id: 1053, ask: '<span class="hl">P</span>O₄³⁻', hint: 'P в фосфат-ионе', ans: '+5', badge: 'ion' },
+        { id: 1054, ask: '<span class="hl">C</span>O₃²⁻', hint: 'C в карбонат-ионе', ans: '+4', badge: 'ion' },
+        { id: 1055, ask: '<span class="hl">Mn</span>O₄⁻', hint: 'Mn в перманганат-ионе', ans: '+7', badge: 'ion' },
+        { id: 1056, ask: '<span class="hl">Cr</span>₂O₇²⁻', hint: 'Cr в дихромат-ионе', ans: '+6', badge: 'ion' },
+        { id: 1057, ask: '<span class="hl">Cr</span>O₄²⁻', hint: 'Cr в хромат-ионе', ans: '+6', badge: 'ion' },
+        { id: 1058, ask: '<span class="hl">Cl</span>O₃⁻', hint: 'Cl в хлорат-ионе', ans: '+5', badge: 'ion' },
+        { id: 1059, ask: '<span class="hl">N</span>O₂⁻', hint: 'N в нитрит-ионе', ans: '+3', badge: 'ion' },
+        { id: 1060, ask: '<span class="hl">S</span>O₃²⁻', hint: 'S в сульфит-ионе', ans: '+4', badge: 'ion' },
+        { id: 1061, ask: '<span class="hl">N</span>H₄⁺', hint: 'N в катионе аммония', ans: '-3', badge: 'ion' },
+        { id: 1062, ask: '<span class="hl">Mn</span>O₄²⁻', hint: 'Mn в манганат-ионе', ans: '+6', badge: 'ion' },
+        { id: 1063, ask: '<span class="hl">I</span>O₃⁻', hint: 'I в иодат-ионе', ans: '+5', badge: 'ion' },
+        { id: 1064, ask: 'H<span class="hl">P</span>O₄²⁻', hint: 'P в гидрофосфат-ионе', ans: '+5', badge: 'ion' },
+        { id: 1065, ask: '<span class="hl">Cl</span>O⁻', hint: 'Cl в гипохлорит-ионе', ans: '+1', badge: 'ion' },
+        // ---- Соединения со скобками ----
+        { id: 1066, ask: 'Al₂(<span class="hl">C</span>O₃)₃', hint: 'C в карбонате алюминия', ans: '+4', badge: 'bracket' },
+        { id: 1067, ask: 'Fe₂(<span class="hl">S</span>O₄)₃', hint: 'S в сульфате железа(III)', ans: '+6', badge: 'bracket' },
+        { id: 1068, ask: 'Cu(<span class="hl">N</span>O₃)₂', hint: 'N в нитрате меди(II)', ans: '+5', badge: 'bracket' },
+        { id: 1069, ask: 'Ca(H<span class="hl">C</span>O₃)₂', hint: 'C в гидрокарбонате кальция', ans: '+4', badge: 'bracket' },
+        { id: 1070, ask: '<span class="hl">Fe</span>(OH)₃', hint: 'Fe в гидроксиде железа(III)', ans: '+3', badge: 'bracket' },
+        { id: 1071, ask: '<span class="hl">Cr</span>(OH)₃', hint: 'Cr в гидроксиде хрома(III)', ans: '+3', badge: 'bracket' },
+        { id: 1072, ask: 'Ba(<span class="hl">Mn</span>O₄)₂', hint: 'Mn в перманганате бария', ans: '+7', badge: 'bracket' },
+        { id: 1073, ask: 'K<span class="hl">Al</span>(SO₄)₂', hint: 'Al в квасцах', ans: '+3', badge: 'bracket' },
+        { id: 1074, ask: 'NH₄H<span class="hl">C</span>O₃', hint: 'C в гидрокарбонате аммония', ans: '+4', badge: 'bracket' },
+        { id: 1075, ask: 'Mg₃(<span class="hl">P</span>O₄)₂', hint: 'P в фосфате магния', ans: '+5', badge: 'bracket' },
+        // ---- Кислые соли ----
+        { id: 1076, ask: 'NaH<span class="hl">C</span>O₃', hint: 'C в гидрокарбонате натрия', ans: '+4', badge: 'acid' },
+        { id: 1077, ask: 'KH<span class="hl">C</span>O₃', hint: 'C в гидрокарбонате калия', ans: '+4', badge: 'acid' },
+        { id: 1078, ask: 'NaH<span class="hl">S</span>O₄', hint: 'S в гидросульфате натрия', ans: '+6', badge: 'acid' },
+        { id: 1079, ask: 'KH<span class="hl">S</span>O₄', hint: 'S в гидросульфате калия', ans: '+6', badge: 'acid' },
+        { id: 1080, ask: 'NaH₂<span class="hl">P</span>O₄', hint: 'P в дигидрофосфате натрия', ans: '+5', badge: 'acid' },
+        { id: 1081, ask: 'Na₂H<span class="hl">P</span>O₄', hint: 'P в гидрофосфате натрия', ans: '+5', badge: 'acid' },
+        { id: 1082, ask: 'KH₂<span class="hl">P</span>O₄', hint: 'P в дигидрофосфате калия', ans: '+5', badge: 'acid' },
+        { id: 1083, ask: 'NaH<span class="hl">S</span>', hint: 'S в гидросульфиде натрия', ans: '-2', badge: 'acid' },
+        { id: 1084, ask: 'KH<span class="hl">S</span>', hint: 'S в гидросульфиде калия', ans: '-2', badge: 'acid' },
+        { id: 1085, ask: 'NH₄H<span class="hl">C</span>O₃', hint: 'C в гидрокарбонате аммония', ans: '+4', badge: 'acid' },
+        // ---- Соединения аммония ----
+        { id: 1086, ask: '<span class="hl">N</span>H₄Cl', hint: 'N в хлориде аммония', ans: '-3', badge: 'ammonium' },
+        { id: 1087, ask: '(<span class="hl">N</span>H₄)₂SO₄', hint: 'N в сульфате аммония', ans: '-3', badge: 'ammonium' },
+        { id: 1088, ask: '(<span class="hl">N</span>H₄)₂CO₃', hint: 'N в карбонате аммония', ans: '-3', badge: 'ammonium' },
+        { id: 1089, ask: '(<span class="hl">N</span>H₄)₂HPO₄', hint: 'N в гидрофосфате аммония', ans: '-3', badge: 'ammonium' },
+        { id: 1090, ask: '<span class="hl">N</span>H₄H₂PO₄', hint: 'N в дигидрофосфате аммония', ans: '-3', badge: 'ammonium' },
+        { id: 1091, ask: '<span class="hl">N</span>H₄HSO₄', hint: 'N в гидросульфате аммония', ans: '-3', badge: 'ammonium' },
+        { id: 1092, ask: '(<span class="hl">N</span>H₄)₂Cr₂O₇', hint: 'N в дихромате аммония', ans: '-3', badge: 'ammonium' },
+        // ---- Дополнительные ионы ----
+        { id: 1093, ask: 'H<span class="hl">C</span>O₃⁻', hint: 'C в гидрокарбонат-ионе', ans: '+4', badge: 'ion' },
+        { id: 1094, ask: 'H<span class="hl">S</span>O₄⁻', hint: 'S в гидросульфат-ионе', ans: '+6', badge: 'ion' },
+        { id: 1095, ask: 'H<span class="hl">S</span>O₃⁻', hint: 'S в гидросульфит-ионе', ans: '+4', badge: 'ion' },
+        { id: 1096, ask: 'H₂<span class="hl">P</span>O₄⁻', hint: 'P в дигидрофосфат-ионе', ans: '+5', badge: 'ion' },
+        { id: 1097, ask: 'H<span class="hl">P</span>O₄²⁻', hint: 'P в гидрофосфат-ионе', ans: '+5', badge: 'ion' },
+        { id: 1098, ask: 'H<span class="hl">S</span>⁻', hint: 'S в гидросульфид-ионе', ans: '-2', badge: 'ion' },
+        // ---- Сложные соли с аммонием ----
+        { id: 1099, ask: '(NH₄)₂<span class="hl">S</span>O₄', hint: 'S в сульфате аммония', ans: '+6', badge: 'ammonium' },
+        { id: 1100, ask: '(NH₄)₂<span class="hl">C</span>O₃', hint: 'C в карбонате аммония', ans: '+4', badge: 'ammonium' },
+        { id: 1101, ask: '<span class="hl">N</span>H₄NO₃', hint: 'N в NH₄⁺ (нитрат аммония)', ans: '-3', badge: 'ammonium' },
+        { id: 1102, ask: 'NH₄<span class="hl">N</span>O₃', hint: 'N в NO₃⁻ (нитрат аммония)', ans: '+5', badge: 'ammonium' },
+        { id: 1103, ask: '(NH₄)₂H<span class="hl">P</span>O₄', hint: 'P в гидрофосфате аммония', ans: '+5', badge: 'ammonium' },
+        { id: 1104, ask: '<span class="hl">N</span>H₄H₂PO₄', hint: 'N в дигидрофосфате аммония', ans: '-3', badge: 'ammonium' },
+        { id: 1105, ask: 'NH₄<span class="hl">N</span>O₂', hint: 'N в NO₂⁻ (нитрит аммония)', ans: '+3', badge: 'ammonium' },
+        { id: 1106, ask: '<span class="hl">N</span>H₄NO₂', hint: 'N в NH₄⁺ (нитрит аммония)', ans: '-3', badge: 'ammonium' },
+        { id: 1107, ask: '(NH₄)₂<span class="hl">Cr</span>₂O₇', hint: 'Cr в дихромате аммония', ans: '+6', badge: 'ammonium' },
+        { id: 1108, ask: '<span class="hl">N</span>H₄HS', hint: 'N в гидросульфиде аммония', ans: '-3', badge: 'ammonium' },
+        { id: 1109, ask: 'NH₄<span class="hl">H</span>S', hint: 'S в HS⁻ (гидросульфид аммония)', ans: '-2', badge: 'ammonium' },
+        { id: 1110, ask: '<span class="hl">N</span>H₄NO₃', hint: 'N в NH₄⁺ (нитрат аммония)', ans: '-3', badge: 'ammonium' }
+    ];
+
+    // Перемешиваем задания по С.О.
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+    const soTasks = shuffleArray(soTasksRaw);
+
+    // ═══════════════════════════════════════════════════════════
+    // 3. УНИВЕРСАЛЬНЫЙ ДВИЖОК ДЛЯ ОБОИХ РЕЖИМОВ
+    // ═══════════════════════════════════════════════════════════
+
+    const states = { classify: null, so: null };
+
+    function createState(tasks, type, mainCount) {
+        const shuffled = shuffleArray([...tasks]);
+        const main = shuffled.slice(0, mainCount);
+        const penalty = shuffled.slice(mainCount);
+
+        return {
+            tasks: tasks,
+            type: type,
+            mainTasks: main,
+            penaltyTasks: penalty,
+            queue: main.map((t, i) => ({ ...t, from: 'main', idx: i })),
+            pos: 0,
+            correct: 0,
+            wrong: 0,
+            answered: new Set(),
+            wrongSet: new Set(),
+            penaltyUsed: 0,
+            totalMain: main.length,
+            totalPenalty: penalty.length,
+            mode: 'main',
+            timerSec: 0,
+            timerInt: null,
+            retryQueue: [],
+            retryPos: 0,
+            retryCorrect: 0,
+            retryAnswered: new Set(),
+        };
+    }
+
+    function getState(mode) {
+        if (!states[mode]) {
+            const tasks = mode === 'classify' ? classifyTasks : soTasks;
+            const mainCount = mode === 'classify' ? 50 : 110;
+            states[mode] = createState(tasks, mode, mainCount);
+            const s = states[mode];
+            s.timerInt = setInterval(() => {
+                s.timerSec++;
+                if (s.mode === 'main' || s.mode === 'retry') {
+                    const container = document.getElementById(mode === 'classify' ? 'classify-app' : 'so-app');
+                    if (container) {
+                        const timeEl = container.querySelector('.stat-item:last-child .num');
+                        if (timeEl) timeEl.textContent = fmtTime(s.timerSec);
+                    }
+                }
+            }, 1000);
+        }
+        return states[mode];
+    }
+
+    function fmtTime(s) { return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); }
+
+    function getBadgeLabel(badge) {
+        if (!badge) return '';
+        const map = { 'ion': 'ион', 'bracket': '( )', 'simple': 'простое', 'acid': 'кислая соль', 'ammonium': 'аммоний' };
+        return map[badge] || '';
+    }
+
+    function getBadgeClass(badge) {
+        if (!badge) return '';
+        const map = { 'ion': 'badge-ion', 'bracket': 'badge-bracket', 'simple': 'badge-simple', 'acid': 'badge-acid',
+            'ammonium': 'badge-ammonium' };
+        return map[badge] || '';
+    }
+
+    function render(mode) {
+        const state = getState(mode);
+        const container = document.getElementById(mode === 'classify' ? 'classify-app' : 'so-app');
+        if (!container) return;
+
+        if (state.mode === 'done') {
+            renderResult(mode, container);
+            return;
+        }
+
+        if (state.mode === 'retry') {
+            renderRetry(mode, container);
+            return;
+        }
+
+        if (state.queue.length === 0) {
+            state.mode = 'done';
+            renderResult(mode, container);
+            return;
+        }
+
+        const task = state.queue[state.pos];
+        const queueLen = state.queue.length;
+        const done = state.answered.size;
+        const total = state.totalMain + state.penaltyUsed;
+        const pct = done > 0 ? Math.round(state.correct / done * 100) : 0;
+        const penaltyInQueue = state.queue.filter(t => t.from === 'penalty').length;
+
+        let html = `
+        <div class="stats-bar">
+          <div class="stat-item">✅ <span class="num green">${state.correct}</span></div>
+          <div class="stat-item">❌ <span class="num red">${state.wrong}</span></div>
+          <div class="stat-item">📊 <span class="num gray">${done}/${total}</span></div>
+          <div class="stat-item">🎯 <span class="num" style="color:var(--p700)">${pct}%</span></div>
+          <div class="progress-track"><div class="progress-fill" style="width:${Math.min(done/total*100,100)}%"></div></div>
+          <div class="stat-item">⏱️ <span class="num" style="color:var(--muted);font-size:16px">${fmtTime(state.timerSec)}</span></div>
+        </div>
+        <div class="trainer-wrap">
+          <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+            <span style="font-size:13px;color:var(--muted)">
+              Задание ${state.pos+1} из ${queueLen}
+              ${task.from === 'penalty' ? ' <span class="badge-penalty">⚡ штрафное</span>' : ''}
+              ${state.wrongSet.has(task.id) ? ' <span class="badge-queue">🔄 повтор</span>' : ''}
+            </span>
+            <span style="font-size:13px;color:var(--muted)">
+              ⚡ штрафных в очереди: ${penaltyInQueue} | всего: ${state.penaltyUsed}
+            </span>
+          </div>
+        `;
+
+        if (mode === 'classify') {
+            html += `
+            <div class="task-prompt">${task.prompt}</div>
+            <div class="task-grid">
+              <div class="cell"><span class="label">1)</span> ${task.a}</div>
+              <div class="cell"><span class="label">2)</span> ${task.b}</div>
+              <div class="cell"><span class="label">3)</span> ${task.c}</div>
+              <div class="cell"><span class="label">4)</span> ${task.d}</div>
+              <div class="cell"><span class="label">5)</span> ${task.e}</div>
+              <div class="cell"><span class="label">6)</span> ${task.f}</div>
+              <div class="cell"><span class="label">7)</span> ${task.g}</div>
+              <div class="cell"><span class="label">8)</span> ${task.h}</div>
+              <div class="cell"><span class="label">9)</span> ${task.i}</div>
+            </div>
+            <div style="font-size:13px;color:var(--muted);margin:4px 0 8px">Введите три цифры (А→Б→В), например 485</div>
+            <div class="input-row">
+              <input type="text" id="classify-input" placeholder="три цифры" maxlength="6" autocomplete="off">
+              <button class="btn" id="classify-btn" onclick="checkAnswer('classify')">Проверить</button>
+            </div>
+            <div class="feedback" id="classify-feedback"></div>
+          `;
+        } else {
+            const badge = task.badge || '';
+            const badgeLabel = getBadgeLabel(badge);
+            const badgeClass = getBadgeClass(badge);
+            html += `<div style="font-size:13px;color:var(--muted);margin-bottom:6px">`;
+            if (badge) html += `<span class="badge ${badgeClass}">${badgeLabel}</span> `;
+            html += `</div>`;
+            html += `<div class="task-formula">${task.ask}</div>`;
+            html += `<div class="input-row">
+            <input type="text" id="so-input" placeholder="например +6" maxlength="6" autocomplete="off">
+            <button class="btn" id="so-btn" onclick="checkAnswer('so')">Проверить</button>
+          </div>
+          <div class="input-hint">Введите степень окисления со знаком (+6 или -2)</div>
+          <div class="feedback" id="so-feedback"></div>`;
+        }
+
+        html += `
+          <div class="nav-row">
+            <div class="nav-btns">
+              <button onclick="goTo('${mode}', ${state.pos-1})" ${state.pos===0?'disabled':''}>←</button>
+              <button onclick="goTo('${mode}', ${state.pos+1})" ${state.pos===queueLen-1?'disabled':''}>→</button>
+            </div>
+          </div>
+        </div>
+        `;
+
+        container.innerHTML = html;
+
+        const inp = document.getElementById(mode === 'classify' ? 'classify-input' : 'so-input');
+        if (inp && !inp.readOnly) setTimeout(() => inp.focus(), 200);
+
+        document.getElementById('hero-mode').textContent = `📚 Режим: ${mode === 'classify' ? 'Классификация' : 'Степень окисления'}`;
+        document.getElementById('hero-total').textContent = `📚 Всего: ${total}`;
+        document.getElementById('hero-queue').textContent = `⏳ В очереди: ${queueLen}`;
+        document.getElementById('hero-errors').textContent = `❌ Ошибок: ${state.wrong}`;
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // 4. ОСТАЛЬНЫЕ ФУНКЦИИ
+    // ═══════════════════════════════════════════════════════════
+
+    function checkAnswer(mode) {
+        const state = getState(mode);
+        if (state.mode === 'done' || state.mode === 'retry') return;
+        if (state.queue.length === 0) { state.mode = 'done';
+            render(mode); return; }
+
+        const task = state.queue[state.pos];
+        const inp = document.getElementById(mode === 'classify' ? 'classify-input' : 'so-input');
+        const fb = document.getElementById(mode === 'classify' ? 'classify-feedback' : 'so-feedback');
+        if (!inp || !fb) return;
+
+        const raw = inp.value.trim();
+        if (!raw) { inp.focus(); return; }
+
+        let ok = false;
+        let correctAnswer = '';
+
+        if (mode === 'classify') {
+            const digits = raw.replace(/[^0-9]/g, '');
+            if (digits.length < 3) {
+                fb.className = 'feedback info';
+                fb.textContent = 'Введите ровно три цифры (например, 485)';
+                return;
+            }
+            const user = digits.slice(0, 3).split('').map(Number);
+            const corr = task.answer;
+            ok = user[0] === corr[0] && user[1] === corr[1] && user[2] === corr[2];
+            correctAnswer = task.full;
+        } else {
+            const normalized = raw.trim().replace(/−/g, '-').replace(/–/g, '-').replace(/\s/g, '');
+            ok = normalized === task.ans;
+            correctAnswer = task.ans;
+        }
+
+        inp.readOnly = true;
+        document.getElementById(mode === 'classify' ? 'classify-btn' : 'so-btn').disabled = true;
+
+        if (ok) {
+            inp.classList.add('ok');
+            fb.className = 'feedback ok';
+            fb.textContent = `✅ Верно! ${correctAnswer}`;
+            state.correct++;
+            state.answered.add(task.id);
+            state.queue.splice(state.pos, 1);
+        } else {
+            inp.classList.add('err');
+            fb.className = 'feedback err';
+            fb.textContent = `❌ Неверно. Правильно: ${correctAnswer}`;
+            state.wrong++;
+            state.wrongSet.add(task.id);
+
+            const taskCopy = { ...task };
+            state.queue.push(taskCopy);
+
+            if (mode === 'classify') {
+                if (state.penaltyTasks.length > 0 && state.penaltyUsed < state.totalPenalty) {
+                    const penaltyTask = state.penaltyTasks[state.penaltyUsed];
+                    state.queue.push({
+                        ...penaltyTask,
+                        from: 'penalty',
+                        idx: state.penaltyUsed
+                    });
+                    state.penaltyUsed++;
+                } else {
+                    fb.textContent += ' ⚠️ Штрафные задания закончились!';
+                }
+            } else {
+                fb.textContent += ' 🔄 Задание добавлено в конец очереди';
+            }
+        }
+
+        if (state.queue.length === 0) {
+            state.mode = 'done';
+            setTimeout(() => render(mode), 500);
+            return;
+        }
+
+        if (state.pos >= state.queue.length) state.pos = state.queue.length - 1;
+        setTimeout(() => render(mode), 800);
+    }
+
+    function goTo(mode, newPos) {
+        const state = getState(mode);
+        if (state.mode === 'done' || state.mode === 'retry') return;
+        if (newPos < 0 || newPos >= state.queue.length) return;
+        state.pos = newPos;
+        render(mode);
+    }
+
+    function renderResult(mode, container) {
+        const state = getState(mode);
+        const total = state.totalMain + state.penaltyUsed;
+        const pct = total > 0 ? Math.round(state.correct / total * 100) : 0;
+        const wrongCount = state.wrongSet.size;
+
+        let html = `
+        <div class="result-box">
+          <div class="grade">${pct>=90?'🏆':pct>=70?'🎉':pct>=50?'💪':'📚'}</div>
+          <div class="pct">${pct}%</div>
+          <div class="stats">
+            <div><div class="num" style="color:var(--green)">${state.correct}</div><div class="label">Верно</div></div>
+            <div><div class="num" style="color:var(--red)">${state.wrong}</div><div class="label">Ошибок</div></div>
+            ${mode === 'classify' ? `<div><div class="num" style="color:var(--amber)">${state.penaltyUsed}</div><div class="label">Штрафных</div></div>` : ''}
+            <div><div class="num" style="color:var(--muted)">${fmtTime(state.timerSec)}</div><div class="label">Время</div></div>
+          </div>
+          <div class="actions">
+        `;
+
+        if (wrongCount > 0) {
+            html += `<button class="btn btn-danger" onclick="startRetryMode('${mode}')">✏️ Работа над ошибками (${wrongCount})</button>`;
+        } else {
+            html += `<div style="color:var(--green);font-weight:700">✨ Все задания выполнены без ошибок!</div>`;
+        }
+        html += `<button class="btn btn-secondary" onclick="restartMode('${mode}')">🔄 Начать заново</button>`;
+        html += `</div></div>`;
+
+        container.innerHTML = html;
+
+        document.getElementById('hero-mode').textContent = `📚 Режим: ${mode === 'classify' ? 'Классификация' : 'Степень окисления'}`;
+        document.getElementById('hero-total').textContent = `📚 Всего: ${total}`;
+        document.getElementById('hero-queue').textContent = `⏳ В очереди: 0`;
+        document.getElementById('hero-errors').textContent = `❌ Ошибок: ${state.wrong}`;
+    }
+
+    function startRetryMode(mode) {
+        const state = getState(mode);
+        const wrongTasks = [];
+
+        const allTasks = [...state.mainTasks, ...state.penaltyTasks.slice(0, state.penaltyUsed)];
+        for (const task of allTasks) {
+            if (state.wrongSet.has(task.id)) {
+                wrongTasks.push({ ...task });
+            }
+        }
+
+        if (wrongTasks.length === 0) {
+            alert('Нет заданий для работы над ошибками!');
+            return;
+        }
+
+        state.retryQueue = shuffleArray(wrongTasks);
+        state.retryPos = 0;
+        state.retryCorrect = 0;
+        state.retryAnswered = new Set();
+        state.mode = 'retry';
+
+        state.savedQueue = [...state.queue];
+        state.savedPos = state.pos;
+
+        state.queue = state.retryQueue.map((t, i) => ({ ...t, from: 'retry', idx: i }));
+        state.pos = 0;
+
+        render(mode);
+    }
+
+    function renderRetry(mode, container) {
+        const state = getState(mode);
+        if (state.queue.length === 0) {
+            state.mode = 'done';
+            renderResult(mode, container);
+            return;
+        }
+
+        const task = state.queue[state.pos];
+        const queueLen = state.queue.length;
+
+        let html = `
+        <div class="error-mode-badge">
+          <span style="font-size:20px">✏️</span>
+          <span>Работа над ошибками · <strong>${state.pos+1}</strong> из ${queueLen}</span>
+          <span style="margin-left:auto;font-weight:700;color:var(--green)">✅ ${state.retryCorrect} верно</span>
+        </div>
+        <div class="trainer-wrap">
+          <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+            <span style="font-size:13px;color:var(--muted)">Задание ${state.pos+1} из ${queueLen}</span>
+          </div>
+        `;
+
+        if (mode === 'classify') {
+            html += `
+            <div class="task-prompt">${task.prompt}</div>
+            <div class="task-grid">
+              <div class="cell"><span class="label">1)</span> ${task.a}</div>
+              <div class="cell"><span class="label">2)</span> ${task.b}</div>
+              <div class="cell"><span class="label">3)</span> ${task.c}</div>
+              <div class="cell"><span class="label">4)</span> ${task.d}</div>
+              <div class="cell"><span class="label">5)</span> ${task.e}</div>
+              <div class="cell"><span class="label">6)</span> ${task.f}</div>
+              <div class="cell"><span class="label">7)</span> ${task.g}</div>
+              <div class="cell"><span class="label">8)</span> ${task.h}</div>
+              <div class="cell"><span class="label">9)</span> ${task.i}</div>
+            </div>
+            <div style="font-size:13px;color:var(--muted);margin:4px 0 8px">Введите три цифры (А→Б→В)</div>
+            <div class="input-row">
+              <input type="text" id="classify-retry-input" placeholder="три цифры" maxlength="6" autocomplete="off">
+              <button class="btn" id="classify-retry-btn" onclick="checkRetry('classify')">Проверить</button>
+            </div>
+            <div class="feedback" id="classify-retry-feedback"></div>
+          `;
+        } else {
+            const badge = task.badge || '';
+            const badgeLabel = getBadgeLabel(badge);
+            const badgeClass = getBadgeClass(badge);
+            html += `<div style="font-size:13px;color:var(--muted);margin-bottom:6px">`;
+            if (badge) html += `<span class="badge ${badgeClass}">${badgeLabel}</span> `;
+            html += `</div>`;
+            html += `<div class="task-formula">${task.ask}</div>`;
+            html += `<div class="input-row">
+            <input type="text" id="so-retry-input" placeholder="например +6" maxlength="6" autocomplete="off">
+            <button class="btn" id="so-retry-btn" onclick="checkRetry('so')">Проверить</button>
+          </div>
+          <div class="input-hint">Введите степень окисления со знаком</div>
+          <div class="feedback" id="so-retry-feedback"></div>`;
+        }
+
+        html += `
+          <div class="nav-row">
+            <div class="nav-btns">
+              <button onclick="retryGo('${mode}', ${state.pos-1})" ${state.pos===0?'disabled':''}>←</button>
+              <button onclick="retryGo('${mode}', ${state.pos+1})" ${state.pos===queueLen-1?'disabled':''}>→</button>
+            </div>
+          </div>
+        </div>
+        `;
+
+        container.innerHTML = html;
+
+        const inp = document.getElementById(mode === 'classify' ? 'classify-retry-input' : 'so-retry-input');
+        if (inp && !inp.readOnly) setTimeout(() => inp.focus(), 200);
+
+        document.getElementById('hero-mode').textContent = `📚 Режим: ${mode === 'classify' ? 'Классификация' : 'Степень окисления'}`;
+        document.getElementById('hero-queue').textContent = `⏳ В очереди: ${queueLen}`;
+        document.getElementById('hero-errors').textContent = `❌ Ошибок: ${state.wrong}`;
+    }
+
+    function checkRetry(mode) {
+        const state = getState(mode);
+        if (state.mode !== 'retry') return;
+        if (state.queue.length === 0) { state.mode = 'done';
+            render(mode); return; }
+
+        const task = state.queue[state.pos];
+        const inp = document.getElementById(mode === 'classify' ? 'classify-retry-input' : 'so-retry-input');
+        const fb = document.getElementById(mode === 'classify' ? 'classify-retry-feedback' : 'so-retry-feedback');
+        if (!inp || !fb) return;
+
+        const raw = inp.value.trim();
+        if (!raw) { inp.focus(); return; }
+
+        let ok = false;
+        let correctAnswer = '';
+
+        if (mode === 'classify') {
+            const digits = raw.replace(/[^0-9]/g, '');
+            if (digits.length < 3) {
+                fb.className = 'feedback info';
+                fb.textContent = 'Введите ровно три цифры';
+                return;
+            }
+            const user = digits.slice(0, 3).split('').map(Number);
+            const corr = task.answer;
+            ok = user[0] === corr[0] && user[1] === corr[1] && user[2] === corr[2];
+            correctAnswer = task.full;
+        } else {
+            const normalized = raw.trim().replace(/−/g, '-').replace(/–/g, '-').replace(/\s/g, '');
+            ok = normalized === task.ans;
+            correctAnswer = task.ans;
+        }
+
+        inp.readOnly = true;
+        document.getElementById(mode === 'classify' ? 'classify-retry-btn' : 'so-retry-btn').disabled = true;
+
+        if (ok) {
+            inp.classList.add('ok');
+            fb.className = 'feedback ok';
+            fb.textContent = `✅ Верно! ${correctAnswer}`;
+            state.retryCorrect++;
+            state.retryAnswered.add(task.id);
+            state.queue.splice(state.pos, 1);
+        } else {
+            inp.classList.add('err');
+            fb.className = 'feedback err';
+            fb.textContent = `❌ Неверно. Правильно: ${correctAnswer}`;
+            // Добавляем в конец очереди для повторной попытки
+            const taskCopy = { ...task };
+            state.queue.push(taskCopy);
+            // Проверяем, не зациклилось ли
+            if (state.queue.length > 50) {
+                fb.textContent += ' ⚠️ Слишком много ошибок. Начните заново.';
+                state.mode = 'done';
+                setTimeout(() => render(mode), 500);
+                return;
+            }
+        }
+
+        if (state.queue.length === 0) {
+            state.mode = 'done';
+            setTimeout(() => render(mode), 500);
+            return;
+        }
+
+        if (state.pos >= state.queue.length) state.pos = state.queue.length - 1;
+        setTimeout(() => render(mode), 800);
+    }
+
+    function retryGo(mode, newPos) {
+        const state = getState(mode);
+        if (state.mode !== 'retry') return;
+        if (newPos < 0 || newPos >= state.queue.length) return;
+        state.pos = newPos;
+        render(mode);
+    }
+
+    function restartMode(mode) {
+        const state = getState(mode);
+        if (state.timerInt) { clearInterval(state.timerInt);
+            state.timerInt = null; }
+
+        const tasks = mode === 'classify' ? classifyTasks : soTasks;
+        const mainCount = mode === 'classify' ? 50 : 110;
+        const newState = createState(tasks, mode, mainCount);
+
+        newState.timerInt = setInterval(() => {
+            newState.timerSec++;
+            if (newState.mode === 'main' || newState.mode === 'retry') {
+                const container = document.getElementById(mode === 'classify' ? 'classify-app' : 'so-app');
+                if (container) {
+                    const timeEl = container.querySelector('.stat-item:last-child .num');
+                    if (timeEl) timeEl.textContent = fmtTime(newState.timerSec);
+                }
+            }
+        }, 1000);
+
+        states[mode] = newState;
+        render(mode);
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // 5. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК И ИНИЦИАЛИЗАЦИЯ
+    // ═══════════════════════════════════════════════════════════
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const tab = this.dataset.tab;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+            document.getElementById('pane-' + tab).classList.add('active');
+            render(tab);
+        });
+    });
+
+    // Инициализация
+    render('classify');
+
+    // Экспортируем функции
+    window.checkAnswer = checkAnswer;
+    window.goTo = goTo;
+    window.startRetryMode = startRetryMode;
+    window.restartMode = restartMode;
+    window.checkRetry = checkRetry;
+    window.retryGo = retryGo;
+</script>
+</body>
+</html>
