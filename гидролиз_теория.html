@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Гидролиз — ЕГЭ Химия 2026–2027</title>
+<style>
+:root{
+  --p900:#003545;--p800:#004F65;--p700:#006B8A;
+  --p600:#0088B0;--p500:#00A3D4;--p400:#33BCE0;
+  --p300:#6DD4EE;--p200:#B3E8F7;--p100:#E0F6FD;--p50:#F4FCFF;
+  --ink:#141C1F;--ink2:#293237;--ink3:#6A8490;
+  --line:#D0E9F0;--card:#FFFFFF;--bg:#F2FAFD;--white:#fff;
+  --green:#1D9E75;--green-t:#E1F5EE;--green-d:#085041;
+  --amber:#B46A00;--amber-t:#FDF5E6;--amber-d:#4A2B00;
+  --red:#A32D2D;--red-t:#FCEBEB;--red-d:#7A2020;
+  --r:12px;--r-sm:8px;--r-lg:20px;
+  --shadow:0 1px 3px rgba(0,60,90,.06),0 4px 16px rgba(0,60,90,.06);
+  --shm:0 4px 20px rgba(0,136,176,.18);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+  --text:var(--ink);--text2:var(--ink2);--text3:var(--ink3);
+  --accent:var(--p600);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{padding-bottom:56px;font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px}
+
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:var(--p100);z-index:999}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--p600),var(--p400));width:0;transition:width .1s}
+
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+.hero{background:linear-gradient(135deg,#003545 0%,#005F80 55%,#0099CC 100%);padding:56px 32px 48px;margin:0 -24px 48px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,160,210,.25) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.82);border-radius:20px;padding:4px 14px;font-size:12px;font-family:var(--mono);letter-spacing:.6px;margin-bottom:20px}
+.hero h1{font-size:clamp(28px,5vw,48px);font-weight:800;line-height:1.06;letter-spacing:-.03em;color:#fff;margin-bottom:14px;position:relative;z-index:1}
+.hero h1 em{color:#A8E6F8;font-style:normal}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.75);line-height:1.7;max-width:560px;margin-bottom:28px;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.hero-chip{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.9);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+
+.toc{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:22px 26px;margin-bottom:48px;box-shadow:var(--shadow)}
+.toc-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p600);font-family:var(--mono);margin-bottom:14px}
+.toc ol{padding-left:20px}
+.toc li{padding:4px 0;font-size:14px}
+.toc a{color:var(--ink2);text-decoration:none;transition:color .15s}
+.toc a:hover{color:var(--p600)}
+
+.section{margin-bottom:56px}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--p200);cursor:pointer;user-select:none;transition:background .15s;border-radius:10px;padding:6px 8px;margin:-6px -8px}
+.section-header:hover{background:var(--p100)}
+.section-header::after{content:"▲";font-size:13px;color:var(--p600);margin-left:auto;transition:transform .25s;display:inline-block}
+.section-header.collapsed::after{transform:rotate(180deg)}
+.acc-body{overflow:hidden;transition:max-height .35s ease,opacity .25s;max-height:9999px;opacity:1}
+.acc-body.collapsed{max-height:0!important;opacity:0}
+.section-num{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,#003545,#0099CC);color:#fff;font-family:var(--mono);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,136,176,.35)}
+.section-title{font-size:clamp(18px,2.5vw,24px);font-weight:700;color:#003545;line-height:1.2}
+
+h2.sub-title{font-size:17px;font-weight:700;color:var(--p700);margin:28px 0 12px;display:flex;align-items:center;gap:8px}
+h2.sub-title::before{content:'';width:4px;height:20px;background:var(--p500);border-radius:2px;flex-shrink:0}
+h3.mini-title{font-size:14.5px;font-weight:600;color:var(--ink);margin:18px 0 8px}
+p.body{font-size:14.5px;line-height:1.75;color:var(--ink2);margin-bottom:14px}
+p.body strong{color:var(--ink)}
+
+.box{border-radius:var(--r-sm);padding:14px 18px;margin:14px 0;font-size:14px;line-height:1.7}
+.box-title{font-weight:700;font-size:13.5px;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:#FFF8E1;border-left:4px solid #F59E0B;color:#78350F}
+.box-danger{background:var(--red-t);border-left:4px solid var(--red);color:var(--red-d)}
+.box-success{background:var(--green-t);border-left:4px solid var(--green);color:var(--green-d)}
+.box ul,.box ol{padding-left:20px;margin:6px 0}
+.box li{margin:4px 0;font-size:13.5px}
+
+.eq-block{background:var(--white);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 18px;margin:10px 0;box-shadow:var(--shadow)}
+.eq{font-family:var(--mono);font-size:13.5px;color:var(--p900);line-height:2.1;display:block}
+.eq-hdr{display:block;background:linear-gradient(90deg,#E0F6FD,#F4FCFF);border-left:4px solid #0099CC;border-radius:0 6px 6px 0;padding:5px 12px;margin:10px 0 4px;font-family:var(--font);font-size:13px;font-weight:700;color:#003545;}
+
+.table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);margin:14px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:13.5px}
+.table-wrap th{background:linear-gradient(135deg,#003545,#0088B0);color:#fff;font-weight:600;padding:10px 14px;text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--p50)}
+tr:hover td{background:var(--p100);transition:background .15s}
+
+.chip{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.5px;padding:3px 9px;border-radius:5px;font-weight:600;white-space:nowrap}
+
+.trap-box{background:#fff5f5;border:2px solid #ef4444;border-radius:var(--r-sm);padding:14px 18px;margin:14px 0}
+.trap-box .trap-hd{color:#dc2626;font-weight:800;font-size:13.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.trap-box ul{margin:0;padding-left:18px;font-size:13px;line-height:1.8}
+
+.must-memo{background:#e0f6fd;border:2px solid #0088B0;border-radius:var(--r-sm);padding:14px 18px;margin:14px 0}
+.must-memo .mm-hd{color:#003545;font-weight:800;font-size:13.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.must-memo ul{margin:0;padding-left:18px;font-size:13px;line-height:1.8}
+
+/* схема */
+.scheme-box{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;background:var(--white);border:1.5px solid var(--p200);border-radius:var(--r);padding:18px;margin:14px 0;box-shadow:var(--shadow)}
+.scheme-cell{border:1.5px solid var(--p400);border-radius:8px;padding:8px 14px;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--p800);background:var(--p50);text-align:center;white-space:nowrap}
+.scheme-arrow{font-size:20px;color:var(--p500);font-weight:700}
+.scheme-plus{font-size:18px;color:var(--ink3);font-weight:700}
+
+/* среды */
+.env-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:600px){.env-grid{grid-template-columns:1fr}}
+.env-card{border-radius:var(--r-sm);padding:14px;border:1.5px solid}
+.env-water{background:#E0F6FD;border-color:#0088B0}
+.env-acid{background:#FFF1F0;border-color:#ef4444}
+.env-base{background:#E8F5E9;border-color:#1D9E75}
+.env-title{font-weight:700;font-size:13px;margin-bottom:8px}
+.env-eq{font-family:var(--mono);font-size:12.5px;line-height:1.9;color:var(--p900)}
+
+/* MCQ */
+.mcq-wrap{margin:24px 0 4px}
+.mcq-title{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#003545;font-family:var(--mono);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.mcq-title::before{content:'';display:block;flex:1;height:1px;background:var(--line)}
+.mcq-block{background:var(--bg);border:1.5px solid var(--line);border-radius:var(--r-sm);padding:14px 16px;margin-bottom:10px}
+.mcq-q{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:10px;line-height:1.55}
+.mcq-opts{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px}
+@media(max-width:520px){.mcq-opts{grid-template-columns:1fr}}
+.mcq-opt{background:var(--white);border:1.5px solid var(--line);border-radius:var(--r-sm);padding:8px 11px;font-size:13px;cursor:pointer;text-align:left;color:var(--ink2);transition:all .15s;line-height:1.4;font-family:var(--font)}
+.mcq-opt:hover{border-color:var(--p400);background:var(--p100);color:var(--p700)}
+.mcq-fb{font-size:13px;padding:7px 10px;border-radius:var(--r-sm);display:none;margin-top:2px}
+
+/* FLASHCARDS */
+.fc-section{background:linear-gradient(135deg,#003545,#0088B0);border-radius:var(--r-lg);padding:32px 28px;margin:48px 0;color:#fff}
+.fc-header{text-align:center;margin-bottom:24px}
+.fc-title{font-size:clamp(18px,3vw,26px);font-weight:700;color:#fff;margin-bottom:6px}
+.fc-sub{font-size:14px;color:rgba(255,255,255,.65);line-height:1.6}
+.fc-stats{display:flex;justify-content:center;gap:24px;margin-bottom:16px;font-size:13px;color:rgba(255,255,255,.7);font-family:var(--mono)}
+.fc-stats span{color:#fff;font-weight:700;font-size:16px}
+.fc-counter{text-align:center;font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.5);margin-bottom:14px}
+.fc-perspective{perspective:900px;width:100%;max-width:560px;margin:0 auto;cursor:pointer}
+.fc-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,0,.2,1);min-height:180px}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);display:flex;align-items:center;justify-content:center;padding:24px 28px;text-align:center;min-height:180px;flex-direction:column;gap:8px}
+.fc-front{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);font-size:clamp(15px,2.5vw,19px);font-family:var(--mono);color:#fff;line-height:1.5}
+.fc-back{background:var(--white);transform:rotateY(180deg);font-family:var(--mono);font-size:clamp(13px,2vw,16px);color:#003545;line-height:1.6}
+.fc-hint{font-family:var(--font);font-size:12px;color:var(--ink3);margin-top:6px;font-style:italic}
+.fc-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:4px}
+.fc-back-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:var(--p600);margin-bottom:4px}
+.fc-flip-btn{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:14px;font-weight:600;border-radius:var(--r-sm);padding:11px 26px;cursor:pointer;transition:background .2s;margin:18px auto;width:fit-content}
+.fc-flip-btn:hover{background:rgba(255,255,255,.25)}
+.fc-btn-row{display:none;gap:12px;justify-content:center;margin-top:14px}
+.fc-btn-know{background:#1D9E75;color:#fff;border:none;border-radius:var(--r-sm);padding:11px 26px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-know:hover{background:#187F5E}
+.fc-btn-dontknow{background:#C0392B;color:#fff;border:none;border-radius:var(--r-sm);padding:11px 26px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-dontknow:hover{background:#A0311F}
+.fc-keys{text-align:center;font-size:11.5px;color:rgba(255,255,255,.35);margin-top:12px;font-family:var(--mono)}
+.fc-result{display:none;text-align:center;padding:20px}
+.fc-result h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:12px}
+.fc-res-row{display:flex;gap:16px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.fc-res-card{background:rgba(255,255,255,.1);border-radius:var(--r-sm);padding:12px 22px;min-width:100px}
+.fc-res-num{font-size:28px;font-weight:700}
+.fc-res-lbl{font-size:11px;color:rgba(255,255,255,.6);font-family:var(--mono);margin-top:2px}
+.fc-restart-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.fc-restart-btn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;border-radius:var(--r-sm);padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
+.fc-restart-btn:hover{background:rgba(255,255,255,.25)}
+.fc-restart-btn.primary{background:#0088B0;border-color:#0088B0}
+
+#back-top{position:fixed;bottom:24px;right:24px;width:42px;height:42px;border-radius:12px;background:var(--p600);color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(0,136,176,.35);display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .2s;opacity:0;pointer-events:none}
+#back-top.visible{opacity:1;pointer-events:all}
+#back-top:hover{transform:translateY(-2px)}
+
+.tag-izb{background:#D1FAE5;color:#065F46;border-radius:4px;padding:1px 6px;font-size:10.5px;font-weight:700}
+.tag-ned{background:#FEE2E2;color:#7F1D1D;border-radius:4px;padding:1px 6px;font-size:10.5px;font-weight:700}
+.tag-щел{background:#EDE9FE;color:#4C1D95;border-radius:4px;padding:1px 6px;font-size:10.5px;font-weight:700}
+
+.double-hydro-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0}
+@media(max-width:600px){.double-hydro-grid{grid-template-columns:1fr}}
+.dh-card{background:var(--white);border:1.5px solid var(--line);border-radius:var(--r-sm);padding:12px;box-shadow:var(--shadow)}
+.dh-cat{font-weight:700;font-size:12px;color:var(--p700);margin-bottom:6px}
+.dh-eq{font-family:var(--mono);font-size:11.5px;color:var(--ink2);line-height:1.8}
+
+@media(max-width:540px){.shell{padding:0 14px 60px}.hero{padding:36px 18px 32px;margin:0 -14px 32px}}
+</style>
+</head>
+<body>
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">ЕГЭ Химия 2026–2027 · Задания №11, 30–31</div>
+  <h1>Гидролиз:<br><em>необратимый,<br>двойной, совместный</em></h1>
+  <p class="hero-sub">Теория с заданиями после каждого блока + 70 флэш-карточек. От простого к сложному.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Необратимый гидролиз</span>
+    <span class="hero-chip">Гидриды и пероксиды</span>
+    <span class="hero-chip">Нитриды и фосфиды</span>
+    <span class="hero-chip">Карбиды и силициды</span>
+    <span class="hero-chip">Сульфиды Al и Cr</span>
+    <span class="hero-chip">Галогениды неметаллов</span>
+    <span class="hero-chip">Двойной гидролиз</span>
+    <span class="hero-chip">Соли MeO₂ˣ⁻</span>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Содержание</div>
+  <ol>
+    <li><a href="#s1">Необратимый гидролиз — основные понятия</a></li>
+    <li><a href="#s2">Гидролиз гидридов и пероксидов</a></li>
+    <li><a href="#s3">Гидролиз нитридов и фосфидов</a></li>
+    <li><a href="#s4">Гидролиз карбидов и силицидов</a></li>
+    <li><a href="#s5">Гидролиз сульфидов Al и Cr. Галогениды неметаллов</a></li>
+    <li><a href="#s6">Двойной (совместный) гидролиз солей</a></li>
+    <li><a href="#s7">Гидролиз солей MeO₂ˣ⁻</a></li>
+    <li><a href="#s8">70 флэш-карточек</a></li>
+  </ol>
+</div>
+
+<!-- ══ SECTION 1 ══ -->
+<section class="section" id="s1">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">1</div>
+    <h2 class="section-title">Необратимый гидролиз — основные понятия</h2>
+  </div>
+  <div class="acc-body collapsed">
+
+  <h2 class="sub-title">Что такое необратимый гидролиз?</h2>
+  <p class="body"><strong>Необратимый гидролиз</strong> — обменная реакция взаимодействия веществ с водой, приводящая к их <strong>полному разложению</strong>.</p>
+
+  <div class="box box-info">
+    <div class="box-title">💧 Какие вещества гидролизуются необратимо?</div>
+    Карбиды, гидриды, нитриды, фосфиды, силициды и ковалентные галогениды <strong>полностью разрушаются</strong> при взаимодействии с водой — реакция необратимая.
+  </div>
+
+  <h2 class="sub-title">Общая схема</h2>
+  <p class="body">В результате необратимого гидролиза бинарных соединений образуются:</p>
+  <div class="scheme-box">
+    <div class="scheme-cell">A<sup>+y</sup>B<sup>−x</sup></div>
+    <div class="scheme-plus">+</div>
+    <div class="scheme-cell">H₂O</div>
+    <div class="scheme-arrow">→</div>
+    <div class="scheme-cell">Гидроксид A<br><small style="font-weight:400;font-size:11px">с.о. +y</small></div>
+    <div class="scheme-plus">+</div>
+    <div class="scheme-cell">Водородное соед. B<br><small style="font-weight:400;font-size:11px">с.о. −x</small></div>
+  </div>
+
+  <div class="eq-block">
+    <span class="eq-hdr">Примеры общей схемы</span>
+    <span class="eq">Al³⁺N³⁻ + 3H₂O → Al(OH)₃↓ + NH₃↑</span>
+    <span class="eq">P⁵⁺Cl⁻₅ + 4H₂O → H₃PO₄ + 5HCl↑</span>
+  </div>
+
+  <h2 class="sub-title">Три среды проведения гидролиза</h2>
+  <div class="env-grid">
+    <div class="env-card env-water">
+      <div class="env-title" style="color:#005F80">💧 Водная среда (вода)</div>
+      <div class="env-eq">Образуются гидроксиды<br>и летучие водородные соединения</div>
+    </div>
+    <div class="env-card env-acid">
+      <div class="env-title" style="color:#dc2626">🧪 Кислая среда</div>
+      <div class="env-eq">Образуются соли<br>(гидроксид нейтрализуется кислотой)</div>
+    </div>
+    <div class="env-card env-base">
+      <div class="env-title" style="color:#065f46">⚗️ Щелочная среда</div>
+      <div class="env-eq">Образуются гидроксокомплексы<br>(если металл амфотерный)</div>
+    </div>
+  </div>
+
+  <div class="must-memo">
+    <div class="mm-hd">📌 Запомни: летучие водородные соединения</div>
+    <ul>
+      <li>Гидриды (H⁻) → H₂↑</li>
+      <li>Нитриды (N³⁻) → NH₃↑</li>
+      <li>Фосфиды (P³⁻) → PH₃↑ (фосфин)</li>
+      <li>Карбиды (C²⁻, C⁴⁻) → C₂H₂↑ (ацетилен) или CH₄↑ (метан)</li>
+      <li>Силициды (Si⁴⁻) → SiH₄↑ (силан)</li>
+      <li>Сульфиды (S²⁻) → H₂S↑</li>
+    </ul>
+  </div>
+
+  <div class="mcq-wrap">
+    <div class="mcq-title">✎ Проверь себя</div>
+
+    <div class="mcq-block" data-correct="2">
+      <div class="mcq-q">1. В результате необратимого гидролиза бинарного соединения A⁺ʸB⁻ˣ + H₂O образуются:</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) Кислота и основание</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) Соль и вода</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) Гидроксид A и водородное соединение B</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) Оксид A и кислота</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+
+    <div class="mcq-block" data-correct="1">
+      <div class="mcq-q">2. Какие вещества подвергаются необратимому гидролизу?</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) NaCl, KNO₃</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) AlN, CaC₂, Na₄Si</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) Na₂CO₃, CuSO₄</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) NaOH, HCl</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+
+    <div class="mcq-block" data-correct="0">
+      <div class="mcq-q">3. При гидролизе нитрида в щелочной среде (амфотерный металл) образуется:</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) Гидроксокомплекс + NH₃</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) Соль аммония + гидроксид</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) Оксид + NH₄⁺</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) Кислота + азот</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 2 ══ -->
+<section class="section" id="s2">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">2</div>
+    <h2 class="section-title">Гидролиз гидридов и пероксидов</h2>
+  </div>
+  <div class="acc-body collapsed">
+
+  <h2 class="sub-title">1. Гидролиз гидридов (H⁻)</h2>
+  <p class="body">Гидриды активных металлов гидролизуются с образованием <strong>гидроксида металла</strong> и <strong>водорода H₂</strong>.</p>
+
+  <div class="env-grid">
+    <div class="env-card env-water">
+      <div class="env-title" style="color:#005F80">💧 Вода</div>
+      <div class="env-eq">KH + HOH → KOH + H₂↑<br>CaH₂ + 2H₂O → Ca(OH)₂ + 2H₂↑</div>
+    </div>
+    <div class="env-card env-acid">
+      <div class="env-title" style="color:#dc2626">🧪 Кислая среда</div>
+      <div class="env-eq">NaH + HCl → NaCl + H₂↑<br>CaH₂ + 2HCl → CaCl₂ + 2H₂↑</div>
+    </div>
+    <div class="env-card env-base" style="background:#f0f4f8;border-color:#cbd5e1">
+      <div class="env-title" style="color:#64748b">Щелочная среда</div>
+      <div class="env-eq" style="color:#64748b">Реакция не характерна</div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">2. Гидролиз пероксидов (O₂²⁻)</h2>
+
+  <div class="env-grid">
+    <div class="env-card env-water">
+      <div class="env-title" style="color:#005F80">💧 Без нагрева</div>
+      <div class="env-eq">Na₂O₂ + H₂O → 2NaOH + H₂O₂<br>BaO₂ + 2H₂O → Ba(OH)₂ + H₂O₂</div>
+    </div>
+    <div class="env-card" style="background:#FFF8E1;border:1.5px solid #F59E0B">
+      <div class="env-title" style="color:#78350F">🔥 При нагреве</div>
+      <div class="env-eq" style="color:#78350F">2Na₂O₂ + 2H₂O →(t) 4NaOH + O₂↑<br><small>(H₂O₂ разлагается при нагреве)</small></div>
+    </div>
+    <div class="env-card env-acid">
+      <div class="env-title" style="color:#dc2626">🧪 Кислая среда</div>
+      <div class="env-eq">Na₂O₂ + 2HCl → 2NaCl + H₂O₂<br>2Na₂O₂ + 4HCl →(t) 4NaCl + O₂↑ + 2H₂O</div>
+    </div>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">⚠️ Важно про пероксиды</div>
+    При нагреве H₂O₂ разлагается: <strong>2H₂O₂ →(t) O₂↑ + 2H₂O</strong>.<br>
+    Поэтому при горячем гидролизе пероксидов конечный продукт — щёлочь и O₂ (а не H₂O₂).
+  </div>
+
+  <div class="mcq-wrap">
+    <div class="mcq-title">✎ Проверь себя</div>
+
+    <div class="mcq-block" data-correct="1">
+      <div class="mcq-q">4. При гидролизе NaH в воде образуется:</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) NaOH + O₂↑</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) NaOH + H₂↑</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) Na₂O + H₂O</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) NaH₂O + H₂↑</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+
+    <div class="mcq-block" data-correct="2">
+      <div class="mcq-q">5. При горячем гидролизе Na₂O₂ с водой образуются:</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) NaOH + H₂O₂</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) Na₂O + H₂O</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) NaOH + O₂↑</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) NaOH + H₂↑</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+
+    <div class="mcq-block" data-correct="3">
+      <div class="mcq-q">6. CaH₂ реагирует с HCl. Что образуется?</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) Ca(OH)₂ + HCl</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) CaCl₂ + H₂O</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) CaO + HCl + H₂</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) CaCl₂ + 2H₂↑</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 3 ══ -->
+<section class="section" id="s3">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">3</div>
+    <h2 class="section-title">Гидролиз нитридов и фосфидов</h2>
+  </div>
+  <div class="acc-body collapsed">
+
+  <h2 class="sub-title">3. Гидролиз нитридов (N³⁻)</h2>
+  <p class="body">В результате образуются <strong>гидроксид металла</strong> и <strong>аммиак NH₃</strong>.</p>
+
+  <div class="env-grid">
+    <div class="env-card env-water">
+      <div class="env-title" style="color:#005F80">💧 Вода</div>
+      <div class="env-eq">Na₃N + 3HOH → 3NaOH + NH₃↑<br>Ca₃N₂ + 6H₂O → 3Ca(OH)₂ + 2NH₃↑<br>Mg₃N₂ + 6H₂O → 3Mg(OH)₂↓ + 2NH₃↑</div>
+    </div>
+    <div class="env-card env-acid">
+      <div class="env-title" style="color:#dc2626">🧪 Кислая среда</div>
+      <div class="env-eq">Na₃N + 4HNO₃ → 3NaNO₃ + NH₄NO₃<br>Ca₃N₂ + 8HCl → 3CaCl₂ + 2NH₄Cl<br>AlN + 4HNO₃ → Al(NO₃)₃ + NH₄NO₃<br><small>(NH₃ реагирует с кислотой → соль аммония)</small></div>
+    </div>
+    <div class="env-card env-base">
+      <div class="env-title" style="color:#065f46">⚗️ Щелочная среда (амф. металл)</div>
+      <div class="env-eq">AlN + NaOH + 3H₂O → Na[Al(OH)₄] + NH₃↑<br><small>(Al(OH)₃ растворяется в изб. NaOH)</small></div>
+    </div>
+  </div>
+
+  <div class="box box-info">
+    <div class="box-title">💡 Ключевое отличие кислой и щелочной среды для нитридов</div>
+    <ul class="box">
+      <li><strong>Кислая среда:</strong> NH₃ + кислота → соль аммония (NH₄⁺)</li>
+      <li><strong>Щелочная среда (амф. металл):</strong> Al(OH)₃ + изб. NaOH → Na[Al(OH)₄] — гидроксокомплекс</li>
+    </ul>
+  </div>
+
+  <h2 class="sub-title">4. Гидролиз фосфидов (P³⁻)</h2>
+  <p class="body">В результате образуются <strong>гидроксид металла</strong> и <strong>фосфин PH₃</strong>.</p>
+
+  <div class="env-grid">
+    <div class="env-card env-water">
+      <div class="env-title" style="color:#005F80">💧 Вода</div>
+      <div class="env-eq">Li₃P + 3H₂O → 3LiOH + PH₃↑<br>Zn₃P₂ + 6H₂O → 3Zn(OH)₂ + 2PH₃↑<br>AlP + 3H₂O → Al(OH)₃ + PH₃↑</div>
+    </div>
+    <div class="env-card env-acid">
+      <div class="env-title" style="color:#dc2626">🧪 Кислая среда</div>
+      <div class="env-eq">2Li₃P + 3H₂SO₄ → 3Li₂SO₄ + 2PH₃↑<br>Zn₃P₂ + 3H₂SO₄ → 3ZnSO₄ + 2PH₃↑<br>2AlP + 3H₂SO₄ → Al₂(SO₄)₃ + 2PH₃↑</div>
+    </div>
+    <div class="env-card env-base">
+      <div class="env-title" style="color:#065f46">⚗️ Щелочная среда (амф. металл)</div>
+      <div class="env-eq">Zn₃P₂ + 6NaOH + 6H₂O → 3Na₂[Zn(OH)₄] + 2PH₃↑<br>AlP + NaOH + 3H₂O → Na[Al(OH)₄] + PH₃↑</div>
+    </div>
+  </div>
+
+  <div class="trap-box">
+    <div class="trap-hd">⚠️ Фосфин не реагирует с кислотой!</div>
+    <ul>
+      <li>Аммиак NH₃ — основание, реагирует с кислотами → NH₄⁺</li>
+      <li>Фосфин PH₃ — очень слабое основание, <strong>не образует солей с кислотами</strong> в обычных условиях</li>
+      <li>Поэтому при гидролизе фосфидов в кислой среде фосфин <strong>улетает</strong>, а не нейтрализуется</li>
+    </ul>
+  </div>
+
+  <div class="mcq-wrap">
+    <div class="mcq-title">✎ Проверь себя</div>
+
+    <div class="mcq-block" data-correct="0">
+      <div class="mcq-q">7. При гидролизе AlN в воде образуются:</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) Al(OH)₃↓ + NH₃↑</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) AlN + H₂O — реакция не идёт</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) Al₂O₃ + NH₄OH</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) AlOH + N₂↑</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+
+    <div class="mcq-block" data-correct="3">
+      <div class="mcq-q">8. AlN + NaOH(р-р) + H₂O →</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) Al(OH)₃ + NaNO₃ + H₂</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) NaAlO₂ + NH₃ + H₂O</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) Al(NO₃)₃ + NaOH</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) Na[Al(OH)₄] + NH₃↑</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+
+    <div class="mcq-block" data-correct="1">
+      <div class="mcq-q">9. Чем принципиально отличается гидролиз фосфидов от гидролиза нитридов в кислой среде?</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) Фосфиды не реагируют с кислотами</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) PH₃ не образует солей с кислотой (слабое основание)</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) Фосфин сразу окисляется кислотой</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) Нет отличий</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 4 ══ -->
+<section class="section" id="s4">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">4</div>
+    <h2 class="section-title">Гидролиз карбидов и силицидов</h2>
+  </div>
+  <div class="acc-body collapsed">
+
+  <h2 class="sub-title">5. Гидролиз карбидов (ацетиленидов C₂²⁻ и метанидов C⁴⁻)</h2>
+  <p class="body">Карбиды делятся на два типа по продукту гидролиза:</p>
+
+  <div class="eq-block">
+    <span class="eq-hdr">Ацетилениды (C₂²⁻) → ацетилен C₂H₂↑</span>
+    <span class="eq">K₂C₂ + 2H₂O → 2KOH + C₂H₂↑</span>
+    <span class="eq">Na₂C₂ + 2H₂O → 2NaOH + C₂H₂↑</span>
+    <span class="eq">CaC₂ + 2H₂O → Ca(OH)₂ + C₂H₂↑</span>
+  </div>
+
+  <div class="eq-block">
+    <span class="eq-hdr">Метаниды (C⁴⁻) → метан CH₄↑</span>
+    <span class="eq">Al₄C₃ + 12H₂O → 4Al(OH)₃↓ + 3CH₄↑</span>
+    <span class="eq">Be₂C + 4H₂O → 2Be(OH)₂↓ + CH₄↑</span>
+  </div>
+
+  <div class="env-grid">
+    <div class="env-card env-acid">
+      <div class="env-title" style="color:#dc2626">🧪 Кислая среда</div>
+      <div class="env-eq">Na₂C₂ + 2HBr → 2NaBr + C₂H₂↑<br>CaC₂ + 2HBr → CaBr₂ + C₂H₂↑<br>Al₄C₃ + 12HBr → 4AlBr₃ + 3CH₄↑</div>
+    </div>
+    <div class="env-card env-base">
+      <div class="env-title" style="color:#065f46">⚗️ Щелочная среда (амф. металл)</div>
+      <div class="env-eq">Al₄C₃ + 4KOH + 12H₂O → 4K[Al(OH)₄] + 3CH₄↑<br>Be₂C + 4KOH → 2K₂[Be(OH)₄] + CH₄↑</div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">6. Гидролиз силицидов (Si⁴⁻)</h2>
+  <p class="body">В результате образуются <strong>гидроксид металла</strong> и <strong>силан SiH₄</strong>.</p>
+
+  <div class="env-grid">
+    <div class="env-card env-water">
+      <div class="env-title" style="color:#005F80">💧 Вода</div>
+      <div class="env-eq">Na₄Si + 4H₂O → 4NaOH + SiH₄↑<br>Mg₂Si + 4H₂O → 2Mg(OH)₂ + SiH₄↑</div>
+    </div>
+    <div class="env-card env-acid">
+      <div class="env-title" style="color:#dc2626">🧪 Кислая среда</div>
+      <div class="env-eq">Na₄Si + 2H₂SO₄ → 2Na₂SO₄ + SiH₄↑<br>Mg₂Si + 2H₂SO₄ → 2MgSO₄ + SiH₄↑</div>
+    </div>
+  </div>
+
+  <div class="mcq-wrap">
+    <div class="mcq-title">✎ Проверь себя</div>
+
+    <div class="mcq-block" data-correct="2">
+      <div class="mcq-q">10. CaC₂ + H₂O → ? Какой газ выделяется?</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) CH₄↑</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) CO₂↑</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) C₂H₂↑</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) H₂↑</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+
+    <div class="mcq-block" data-correct="0">
+      <div class="mcq-q">11. Al₄C₃ + 12H₂O →</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) 4Al(OH)₃↓ + 3CH₄↑</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) Al₂O₃ + C₂H₂↑ + H₂O</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) AlOH + CH₄↑</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) 4Al(OH)₃↓ + 3C₂H₂↑</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+
+    <div class="mcq-block" data-correct="3">
+      <div class="mcq-q">12. Al₄C₃ + KOH + H₂O →</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) K₃AlO₃ + CH₄↑</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) Al(OH)₃ + K₂CO₃ + H₂</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) KAlO₂ + CH₄↑ + H₂O</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) K[Al(OH)₄] + CH₄↑</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 5 ══ -->
+<section class="section" id="s5">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">5</div>
+    <h2 class="section-title">Гидролиз сульфидов Al и Cr. Галогениды неметаллов</h2>
+  </div>
+  <div class="acc-body collapsed">
+
+  <h2 class="sub-title">7. Гидролиз сульфидов алюминия и хрома (III)</h2>
+  <p class="body">Сульфиды Al₂S₃ и Cr₂S₃ — особые случаи: оба продукта (амфотерный гидроксид и H₂S) слабые, поэтому реакция идёт до конца.</p>
+
+  <div class="env-grid">
+    <div class="env-card env-water">
+      <div class="env-title" style="color:#005F80">💧 Вода</div>
+      <div class="env-eq">Al₂S₃ + 6H₂O → 2Al(OH)₃↓ + 3H₂S↑<br>Cr₂S₃ + 6H₂O → 2Cr(OH)₃↓ + 3H₂S↑</div>
+    </div>
+    <div class="env-card env-acid">
+      <div class="env-title" style="color:#dc2626">🧪 Кислая среда</div>
+      <div class="env-eq">Al₂S₃ + 6HCl → 2AlCl₃ + 3H₂S↑<br>Cr₂S₃ + 6HCl → 2CrCl₃ + 3H₂S↑</div>
+    </div>
+    <div class="env-card env-base">
+      <div class="env-title" style="color:#065f46">⚗️ Щелочная среда</div>
+      <div class="env-eq">Al₂S₃ + 8KOH → 2K[Al(OH)₄] + 3K₂S<br>Cr₂S₃ + 12KOH → 2K₃[Cr(OH)₆] + 3K₂S</div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">Гидролиз галогенидов неметаллов (ковалентных)</h2>
+  <p class="body">В результате образуются <strong>кислородсодержащая кислота</strong> и <strong>галогеноводород</strong>.</p>
+
+  <div class="eq-block">
+    <span class="eq-hdr">В водной среде</span>
+    <span class="eq">PCl₅ + 4H₂O → H₃PO₄ + 5HCl</span>
+    <span class="eq">PCl₃ + 3H₂O → H₃PO₃ + 3HCl</span>
+    <span class="eq">SiCl₄ + 3H₂O → H₂SiO₃ + 4HCl</span>
+    <span class="eq">COCl₂ + H₂O → CO₂ + 2HCl (фосген)</span>
+  </div>
+
+  <h2 class="sub-title">В щелочной среде (продукты нейтрализации кислот)</h2>
+  <div class="eq-block">
+    <span class="eq-hdr">PCl₅ + KOH — в зависимости от количества щёлочи</span>
+    <span class="eq">PCl₅ + 8KOH(изб.) → 5KCl + K₃PO₄ + 4H₂O</span>
+    <span class="eq">PCl₅ + 7KOH(нед.) → 5KCl + K₂HPO₄ + 3H₂O</span>
+    <span class="eq">PCl₅ + 6KOH(б. нед.) → 5KCl + KH₂PO₄ + 2H₂O</span>
+  </div>
+  <div class="eq-block">
+    <span class="eq-hdr">Другие галогениды в щелочи (изб.)</span>
+    <span class="eq">PCl₃ + 5KOH(изб.) → 3KCl + K₂HPO₃ + 2H₂O</span>
+    <span class="eq">SiCl₄ + 6KOH(изб.) → 4KCl + K₂SiO₃ + 3H₂O</span>
+    <span class="eq">COCl₂ + 4KOH(изб.) → 2KCl + K₂CO₃ + 2H₂O</span>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">⚠️ Правило для PCl₅ + KOH</div>
+    Степень нейтрализации H₃PO₄ зависит от количества KOH:<br>
+    • Изб. KOH → K₃PO₄ (средняя соль)<br>
+    • Нед. KOH (2/3) → K₂HPO₄ (двузамещённая)<br>
+    • Большой недостаток (1/3) → KH₂PO₄ (однозамещённая)
+  </div>
+
+  <div class="mcq-wrap">
+    <div class="mcq-title">✎ Проверь себя</div>
+
+    <div class="mcq-block" data-correct="1">
+      <div class="mcq-q">13. Al₂S₃ + H₂O →</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) Al₂O₃ + H₂S↑</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) 2Al(OH)₃↓ + 3H₂S↑</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) Al(HS)₃ + H₂O</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) AlSO₄ + H₂O</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+
+    <div class="mcq-block" data-correct="0">
+      <div class="mcq-q">14. PCl₅ + 4H₂O →</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) H₃PO₄ + 5HCl</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) P₂O₅ + HCl</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) H₃PO₃ + 3HCl</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) PCl₃ + H₂O</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+
+    <div class="mcq-block" data-correct="2">
+      <div class="mcq-q">15. PCl₅ + 8KOH(изб.) →</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) 5KCl + K₂HPO₄ + 3H₂O</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) 5KCl + KH₂PO₄ + 2H₂O</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) 5KCl + K₃PO₄ + 4H₂O</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) KCl + K₃PO₄ + H₂O</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 6 ══ -->
+<section class="section" id="s6">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">6</div>
+    <h2 class="section-title">Двойной (совместный) гидролиз солей</h2>
+  </div>
+  <div class="acc-body collapsed">
+
+  <h2 class="sub-title">Механизм двойного гидролиза</h2>
+  <p class="body">Соли, образованные <strong>слабой летучей кислотой</strong> и <strong>слабым нерастворимым основанием</strong>, нельзя получить смешиванием растворов — происходит <strong>взаимное усиление гидролиза</strong>.</p>
+
+  <div class="box box-info">
+    <div class="box-title">💡 Механизм (на примере AlCl₃ + Na₂CO₃)</div>
+    Al³⁺ + HOH ⇌ Al(OH)²⁺ + H⁺ — среда кислая<br>
+    CO₃²⁻ + HOH ⇌ HCO₃⁻ + OH⁻ — среда щелочная<br>
+    При смешивании H⁺ и OH⁻ нейтрализуются → равновесие смещается вправо → гидролиз идёт до конца.<br>
+    <strong>Признак: осадок ↓ + газ ↑ одновременно.</strong>
+  </div>
+
+  <h2 class="sub-title">Пары, дающие двойной гидролиз</h2>
+  <div class="scheme-box" style="flex-direction:column;gap:14px">
+    <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;align-items:center">
+      <div style="text-align:center">
+        <div style="font-weight:700;color:var(--p700);margin-bottom:6px">Катионы</div>
+        <div class="scheme-cell" style="margin:4px">Al³⁺</div>
+        <div class="scheme-cell" style="margin:4px">Cr³⁺</div>
+        <div class="scheme-cell" style="margin:4px">Fe³⁺</div>
+      </div>
+      <div style="font-size:32px;color:var(--p400)">✕</div>
+      <div style="text-align:center">
+        <div style="font-weight:700;color:var(--p700);margin-bottom:6px">Анионы</div>
+        <div class="scheme-cell" style="margin:4px">CO₃²⁻ / HCO₃⁻</div>
+        <div class="scheme-cell" style="margin:4px">SO₃²⁻ / HSO₃⁻</div>
+        <div class="scheme-cell" style="margin:4px">S²⁻ / HS⁻</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trap-box">
+    <div class="trap-hd">⚠️ Важно: Fe³⁺ + сульфиды/сульфиты</div>
+    <ul>
+      <li>При сливании солей Fe(III) с сульфидами и сульфитами протекает <strong>окислительно-восстановительная реакция</strong>, а не двойной гидролиз</li>
+      <li>Двойной гидролиз: Al³⁺ и Cr³⁺ с CO₃²⁻, SO₃²⁻, S²⁻; Fe³⁺ только с CO₃²⁻</li>
+    </ul>
+  </div>
+
+  <h2 class="sub-title">Совместный гидролиз со средними солями</h2>
+  <div class="double-hydro-grid">
+    <div class="dh-card">
+      <div class="dh-cat">Al³⁺ + CO₃²⁻</div>
+      <div class="dh-eq">2AlCl₃ + 3K₂CO₃ + 6H₂O →<br>2Al(OH)₃↓ + 3CO₂↑ + 6KCl</div>
+    </div>
+    <div class="dh-card">
+      <div class="dh-cat">Al³⁺ + SO₃²⁻</div>
+      <div class="dh-eq">2Al(NO₃)₃ + 3Na₂SO₃ + 6H₂O →<br>2Al(OH)₃↓ + 3SO₂↑ + 6NaNO₃</div>
+    </div>
+    <div class="dh-card">
+      <div class="dh-cat">Al³⁺ + S²⁻</div>
+      <div class="dh-eq">Al₂(SO₄)₃ + 3Na₂S + 6H₂O →<br>2Al(OH)₃↓ + 3H₂S↑ + 3Na₂SO₄</div>
+    </div>
+    <div class="dh-card">
+      <div class="dh-cat">Cr³⁺ + CO₃²⁻</div>
+      <div class="dh-eq">2CrBr₃ + 3Na₂CO₃ + 6H₂O →<br>2Cr(OH)₃↓ + 3CO₂↑ + 6NaBr</div>
+    </div>
+    <div class="dh-card">
+      <div class="dh-cat">Cr³⁺ + S²⁻</div>
+      <div class="dh-eq">Cr₂(SO₄)₃ + 3Na₂S + 6H₂O →<br>2Cr(OH)₃↓ + 3H₂S↑ + 3Na₂SO₄</div>
+    </div>
+    <div class="dh-card">
+      <div class="dh-cat">Fe³⁺ + CO₃²⁻</div>
+      <div class="dh-eq">2FeCl₃ + 3K₂CO₃ + 3H₂O →<br>2Fe(OH)₃↓ + 3CO₂↑ + 6KCl</div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">Совместный гидролиз с кислыми солями</h2>
+  <div class="eq-block">
+    <span class="eq">AlCl₃ + 3KHCO₃ → Al(OH)₃↓ + 3CO₂↑ + 3KCl</span>
+    <span class="eq">Al(NO₃)₃ + 3NaHSO₃ → Al(OH)₃↓ + 3SO₂↑ + 3NaNO₃</span>
+    <span class="eq">Al₂(SO₄)₃ + 6NaHS + 6H₂O → 2Al(OH)₃↓ + 6H₂S↑ + 3Na₂SO₄</span>
+    <span class="eq">CrCl₃ + 3KHCO₃ → Cr(OH)₃↓ + 3CO₂↑ + 3KCl</span>
+    <span class="eq">FeCl₃ + 3KHCO₃ → Fe(OH)₃↓ + 3CO₂↑ + 3KCl</span>
+  </div>
+
+  <h2 class="sub-title">Совместный гидролиз солей двухвалентных металлов</h2>
+  <p class="body">При совместном гидролизе солей двухвалентных металлов образуются <strong>основные соли</strong>:</p>
+  <div class="eq-block">
+    <span class="eq">2CuSO₄ + 2K₂CO₃ + H₂O → (CuOH)₂CO₃↓ + CO₂↑ + 2K₂SO₄</span>
+  </div>
+  <div class="box box-warn">
+    <div class="box-title">⚠️ Видимый признак</div>
+    Образуется <strong>зелёный осадок</strong> (CuOH)₂CO₃ — основная соль, а не голубой Cu(OH)₂.<br>
+    В заданиях ЕГЭ подразумевают образование средних карбонатов.
+  </div>
+
+  <div class="mcq-wrap">
+    <div class="mcq-title">✎ Проверь себя</div>
+
+    <div class="mcq-block" data-correct="0">
+      <div class="mcq-q">16. Что образуется при смешивании растворов AlCl₃ и Na₂CO₃?</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) Al(OH)₃↓ + CO₂↑ + NaCl</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) Al₂(CO₃)₃↓</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) Al₂O₃ + Na₂CO₃</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) Реакция не идёт</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+
+    <div class="mcq-block" data-correct="2">
+      <div class="mcq-q">17. Какие соли не образуются при двойном гидролизе Fe³⁺?</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) Fe(OH)₃↓ + CO₂↑</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) Fe(OH)₃↓ + HCO₃⁻</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) Fe(OH)₃↓ + H₂S↑ (идёт ОВР!)</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) Fe(OH)₃↓ + CO₂↑ + соль</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+
+    <div class="mcq-block" data-correct="1">
+      <div class="mcq-q">18. Качественный признак двойного гидролиза:</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) Только выделение газа</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) Образование осадка ↓ и выделение газа ↑ одновременно</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) Только выпадение осадка</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) Изменение цвета раствора</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 7 ══ -->
+<section class="section" id="s7">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">7</div>
+    <h2 class="section-title">Гидролиз солей MeO₂ˣ⁻</h2>
+  </div>
+  <div class="acc-body collapsed">
+
+  <h2 class="sub-title">Что такое соли MeO₂ˣ⁻?</h2>
+  <p class="body">Это соли, кислотный остаток которых образован <strong>амфотерным металлом</strong>: алюминаты (AlO₂⁻), цинкаты (ZnO₂²⁻), хроматы-метасоединения (CrO₂⁻), ферриты (FeO₂⁻).</p>
+
+  <h2 class="sub-title">1. Водный гидролиз</h2>
+  <p class="body">Средние соли реагируют с водой с образованием <strong>гидроксокомплексов</strong> (кроме ферритов):</p>
+  <div class="eq-block">
+    <span class="eq">K₂ZnO₂ + 2H₂O → K₂[Zn(OH)₄]</span>
+    <span class="eq">NaAlO₂ + 2H₂O → Na[Al(OH)₄]</span>
+    <span class="eq">NaCrO₂ + 2H₂O → Na[Cr(OH)₄]</span>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">⚠️ Ферриты — исключение</div>
+    Fe(OH)₃ проявляет слабые амфотерные свойства и не растворяется в разбавленных щелочах, поэтому феррит гидролизуется иначе:<br>
+    <strong>NaFeO₂ + 2H₂O → Fe(OH)₃↓ + NaOH</strong>
+  </div>
+
+  <h2 class="sub-title">2. Кислотный гидролиз</h2>
+  <p class="body">Гидроксокомплексы полностью разрушаются с образованием средних солей:</p>
+  <div class="eq-block">
+    <span class="eq">K₂ZnO₂ + 4HCl → 2KCl + ZnCl₂ + 2H₂O</span>
+    <span class="eq">NaAlO₂ + 4HNO₃ → NaNO₃ + Al(NO₃)₃ + 2H₂O</span>
+    <span class="eq">2NaFeO₂ + 4H₂SO₄ → Na₂SO₄ + Fe₂(SO₄)₃ + 4H₂O</span>
+  </div>
+
+  <div class="mcq-wrap">
+    <div class="mcq-title">✎ Проверь себя</div>
+
+    <div class="mcq-block" data-correct="2">
+      <div class="mcq-q">19. NaAlO₂ + 2H₂O →</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) Al₂O₃ + NaOH</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) Al(OH)₃↓ + NaOH</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) Na[Al(OH)₄]</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) NaOH + AlH₃</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+
+    <div class="mcq-block" data-correct="3">
+      <div class="mcq-q">20. NaFeO₂ + H₂O →</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) Na[Fe(OH)₄]</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) FeO + NaOH</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) Fe₂O₃ + Na₂O + H₂O</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) Fe(OH)₃↓ + NaOH</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+
+    <div class="mcq-block" data-correct="1">
+      <div class="mcq-q">21. NaAlO₂ + 4HNO₃ →</div>
+      <div class="mcq-opts">
+        <button class="mcq-opt" onclick="mcqPick(this,0)">A) Al(NO₃)₃ + Na₂O + H₂O</button>
+        <button class="mcq-opt" onclick="mcqPick(this,1)">Б) NaNO₃ + Al(NO₃)₃ + 2H₂O</button>
+        <button class="mcq-opt" onclick="mcqPick(this,2)">В) NaAlO₂ + HNO₃ — не реагируют</button>
+        <button class="mcq-opt" onclick="mcqPick(this,3)">Г) Al(OH)₃↓ + NaNO₃</button>
+      </div>
+      <div class="mcq-fb"></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ══ FLASHCARDS ══ -->
+<div class="fc-section" id="s8">
+  <div class="fc-header">
+    <div class="fc-title">🃏 70 флэш-карточек — Гидролиз</div>
+    <div class="fc-sub">Нажми на карточку чтобы перевернуть. Отмечай что знаешь, а что нет.</div>
+  </div>
+  <div class="fc-stats">
+    Знаю: <span id="fc-know">0</span> &nbsp;|&nbsp; Не знаю: <span id="fc-dk">0</span> &nbsp;|&nbsp; Осталось: <span id="fc-left">70</span>
+  </div>
+  <div class="fc-counter" id="fc-counter">Карточка 1 из 70</div>
+
+  <div class="fc-perspective" onclick="fcFlip()">
+    <div class="fc-inner" id="fc-inner">
+      <div class="fc-face fc-front">
+        <div class="fc-tag" id="fc-tag">ВОПРОС</div>
+        <div id="fc-front-text"></div>
+      </div>
+      <div class="fc-face fc-back">
+        <div class="fc-back-tag" id="fc-back-tag">ОТВЕТ</div>
+        <div id="fc-back-text"></div>
+        <div class="fc-hint" id="fc-hint"></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="fc-flip-btn" onclick="fcFlip()">🔄 Перевернуть</button>
+  <div class="fc-btn-row" id="fc-btn-row">
+    <button class="fc-btn-know" onclick="fcAnswer(true)">✓ Знаю</button>
+    <button class="fc-btn-dontknow" onclick="fcAnswer(false)">✗ Не знаю</button>
+  </div>
+  <div class="fc-keys">пробел — перевернуть · ← не знаю · → знаю</div>
+
+  <div class="fc-result" id="fc-result">
+    <h3>Готово! 🎉</h3>
+    <div class="fc-res-row">
+      <div class="fc-res-card"><div class="fc-res-num" id="res-know" style="color:#1D9E75">0</div><div class="fc-res-lbl">ЗНАЮ</div></div>
+      <div class="fc-res-card"><div class="fc-res-num" id="res-dk" style="color:#C0392B">0</div><div class="fc-res-lbl">НЕ ЗНАЮ</div></div>
+    </div>
+    <div class="fc-restart-row">
+      <button class="fc-restart-btn primary" onclick="fcRestart(false)">Сначала (все)</button>
+      <button class="fc-restart-btn" onclick="fcRestart(true)">Только ошибки</button>
+    </div>
+  </div>
+</div>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const FC_CARDS=[
+  // Необратимый гидролиз — понятие
+  {q:'Необратимый гидролиз — это?',a:'Обменная реакция веществ с водой, приводящая к их полному разложению',tag:'Теория'},
+  {q:'Какие классы веществ гидролизуются необратимо?',a:'Карбиды, гидриды, нитриды, фосфиды, силициды, ковалентные галогениды',tag:'Теория'},
+  {q:'Продукты необратимого гидролиза A⁺ʸB⁻ˣ + H₂O →',a:'Гидроксид A (с.о. +y) + летучее водородное соединение B (с.о. −x)',tag:'Теория'},
+  {q:'Летучее водородное соединение нитридов (N³⁻)?',a:'NH₃ (аммиак)',tag:'Теория'},
+  {q:'Летучее водородное соединение фосфидов (P³⁻)?',a:'PH₃ (фосфин)',tag:'Теория'},
+  {q:'Летучее водородное соединение силицидов (Si⁴⁻)?',a:'SiH₄ (силан)',tag:'Теория'},
+  {q:'Летучее водородное соединение ацетиленидов (C₂²⁻)?',a:'C₂H₂ (ацетилен)',tag:'Теория'},
+  {q:'Летучее водородное соединение метанидов (C⁴⁻)?',a:'CH₄ (метан)',tag:'Теория'},
+  {q:'Продукт гидролиза гидридов (H⁻)?',a:'Гидроксид металла + H₂↑',tag:'Теория'},
+  {q:'Продукт гидролиза сульфидов Al₂S₃?',a:'Al(OH)₃↓ + H₂S↑',tag:'Теория'},
+  // Гидриды
+  {q:'KH + HOH →',a:'KOH + H₂↑',tag:'Гидриды'},
+  {q:'CaH₂ + 2H₂O →',a:'Ca(OH)₂ + 2H₂↑',tag:'Гидриды'},
+  {q:'NaH + HCl →',a:'NaCl + H₂↑',tag:'Гидриды'},
+  {q:'CaH₂ + 2HCl →',a:'CaCl₂ + 2H₂↑',tag:'Гидриды'},
+  // Пероксиды
+  {q:'Na₂O₂ + H₂O (без нагрева) →',a:'2NaOH + H₂O₂',tag:'Пероксиды'},
+  {q:'BaO₂ + 2H₂O →',a:'Ba(OH)₂ + H₂O₂',tag:'Пероксиды'},
+  {q:'2Na₂O₂ + 2H₂O →(t)',a:'4NaOH + O₂↑ (H₂O₂ разлагается при нагреве)',tag:'Пероксиды'},
+  {q:'Na₂O₂ + 2HCl →',a:'2NaCl + H₂O₂',tag:'Пероксиды'},
+  {q:'2Na₂O₂ + 4HCl →(t)',a:'4NaCl + O₂↑ + 2H₂O',tag:'Пероксиды'},
+  // Нитриды
+  {q:'Na₃N + 3HOH →',a:'3NaOH + NH₃↑',tag:'Нитриды'},
+  {q:'Ca₃N₂ + 6H₂O →',a:'3Ca(OH)₂ + 2NH₃↑',tag:'Нитриды'},
+  {q:'Mg₃N₂ + 6H₂O →',a:'3Mg(OH)₂↓ + 2NH₃↑',tag:'Нитриды'},
+  {q:'AlN + 3H₂O →',a:'Al(OH)₃↓ + NH₃↑',tag:'Нитриды'},
+  {q:'Ca₃N₂ + 8HCl →',a:'3CaCl₂ + 2NH₄Cl',tag:'Нитриды'},
+  {q:'AlN + 4HNO₃ →',a:'Al(NO₃)₃ + NH₄NO₃',tag:'Нитриды'},
+  {q:'AlN + NaOH + 3H₂O →',a:'Na[Al(OH)₄] + NH₃↑',tag:'Нитриды'},
+  {q:'Почему в кислой среде из нитридов образуется NH₄⁺?',a:'NH₃ — основание, реагирует с кислотой: NH₃ + H⁺ → NH₄⁺',tag:'Нитриды'},
+  // Фосфиды
+  {q:'Li₃P + 3H₂O →',a:'3LiOH + PH₃↑',tag:'Фосфиды'},
+  {q:'Zn₃P₂ + 6H₂O →',a:'3Zn(OH)₂ + 2PH₃↑',tag:'Фосфиды'},
+  {q:'AlP + 3H₂O →',a:'Al(OH)₃ + PH₃↑',tag:'Фосфиды'},
+  {q:'Zn₃P₂ + 3H₂SO₄ →',a:'3ZnSO₄ + 2PH₃↑',tag:'Фосфиды'},
+  {q:'AlP + NaOH + 3H₂O →',a:'Na[Al(OH)₄] + PH₃↑',tag:'Фосфиды'},
+  {q:'Zn₃P₂ + 6NaOH + 6H₂O →',a:'3Na₂[Zn(OH)₄] + 2PH₃↑',tag:'Фосфиды'},
+  {q:'Почему PH₃ не реагирует с кислотой (в отличие от NH₃)?',a:'Фосфин — очень слабое основание, не образует солей в обычных условиях',tag:'Фосфиды'},
+  // Карбиды
+  {q:'CaC₂ + 2H₂O →',a:'Ca(OH)₂ + C₂H₂↑',tag:'Карбиды'},
+  {q:'Na₂C₂ + 2H₂O →',a:'2NaOH + C₂H₂↑',tag:'Карбиды'},
+  {q:'Al₄C₃ + 12H₂O →',a:'4Al(OH)₃↓ + 3CH₄↑',tag:'Карбиды'},
+  {q:'Be₂C + 4H₂O →',a:'2Be(OH)₂↓ + CH₄↑',tag:'Карбиды'},
+  {q:'CaC₂ + 2HBr →',a:'CaBr₂ + C₂H₂↑',tag:'Карбиды'},
+  {q:'Al₄C₃ + 4KOH + 12H₂O →',a:'4K[Al(OH)₄] + 3CH₄↑',tag:'Карбиды'},
+  {q:'Be₂C + 4KOH →',a:'2K₂[Be(OH)₄] + CH₄↑',tag:'Карбиды'},
+  // Силициды
+  {q:'Na₄Si + 4H₂O →',a:'4NaOH + SiH₄↑',tag:'Силициды'},
+  {q:'Mg₂Si + 4H₂O →',a:'2Mg(OH)₂ + SiH₄↑',tag:'Силициды'},
+  {q:'Mg₂Si + 2H₂SO₄ →',a:'2MgSO₄ + SiH₄↑',tag:'Силициды'},
+  // Сульфиды Al и Cr
+  {q:'Al₂S₃ + 6H₂O →',a:'2Al(OH)₃↓ + 3H₂S↑',tag:'Сульфиды'},
+  {q:'Cr₂S₃ + 6H₂O →',a:'2Cr(OH)₃↓ + 3H₂S↑',tag:'Сульфиды'},
+  {q:'Al₂S₃ + 6HCl →',a:'2AlCl₃ + 3H₂S↑',tag:'Сульфиды'},
+  {q:'Al₂S₃ + 8KOH →',a:'2K[Al(OH)₄] + 3K₂S',tag:'Сульфиды'},
+  {q:'Cr₂S₃ + 12KOH →',a:'2K₃[Cr(OH)₆] + 3K₂S',tag:'Сульфиды'},
+  // Галогениды неметаллов
+  {q:'PCl₅ + 4H₂O →',a:'H₃PO₄ + 5HCl',tag:'Галогениды'},
+  {q:'PCl₃ + 3H₂O →',a:'H₃PO₃ + 3HCl',tag:'Галогениды'},
+  {q:'SiCl₄ + 3H₂O →',a:'H₂SiO₃ + 4HCl',tag:'Галогениды'},
+  {q:'COCl₂ + H₂O →',a:'CO₂ + 2HCl',tag:'Галогениды'},
+  {q:'PCl₅ + 8KOH(изб.) →',a:'5KCl + K₃PO₄ + 4H₂O',tag:'Галогениды'},
+  {q:'PCl₅ + 7KOH(нед.) →',a:'5KCl + K₂HPO₄ + 3H₂O',tag:'Галогениды'},
+  {q:'SiCl₄ + 6KOH(изб.) →',a:'4KCl + K₂SiO₃ + 3H₂O',tag:'Галогениды'},
+  {q:'COCl₂ + 4KOH(изб.) →',a:'2KCl + K₂CO₃ + 2H₂O',tag:'Галогениды'},
+  // Двойной гидролиз
+  {q:'2AlCl₃ + 3Na₂CO₃ + 3H₂O →',a:'2Al(OH)₃↓ + 3CO₂↑ + 6NaCl',tag:'Двойной гидролиз'},
+  {q:'2Al(NO₃)₃ + 3Na₂SO₃ + 6H₂O →',a:'2Al(OH)₃↓ + 3SO₂↑ + 6NaNO₃',tag:'Двойной гидролиз'},
+  {q:'Al₂(SO₄)₃ + 3Na₂S + 6H₂O →',a:'2Al(OH)₃↓ + 3H₂S↑ + 3Na₂SO₄',tag:'Двойной гидролиз'},
+  {q:'2FeCl₃ + 3K₂CO₃ + 3H₂O →',a:'2Fe(OH)₃↓ + 3CO₂↑ + 6KCl',tag:'Двойной гидролиз'},
+  {q:'AlCl₃ + 3KHCO₃ →',a:'Al(OH)₃↓ + 3CO₂↑ + 3KCl',tag:'Двойной гидролиз'},
+  {q:'FeCl₃ + 3KHCO₃ →',a:'Fe(OH)₃↓ + 3CO₂↑ + 3KCl',tag:'Двойной гидролиз'},
+  {q:'Качественный признак двойного гидролиза',a:'Образование осадка ↓ + выделение газа ↑ одновременно',tag:'Двойной гидролиз'},
+  {q:'Почему нельзя получить Al₂(CO₃)₃ смешиванием растворов?',a:'Взаимное усиление гидролиза: Al³⁺ и CO₃²⁻ полностью гидролизуются → Al(OH)₃↓ + CO₂↑',tag:'Двойной гидролиз'},
+  // Соли MeO₂⁻
+  {q:'NaAlO₂ + 2H₂O →',a:'Na[Al(OH)₄]',tag:'MeO₂ˣ⁻'},
+  {q:'K₂ZnO₂ + 2H₂O →',a:'K₂[Zn(OH)₄]',tag:'MeO₂ˣ⁻'},
+  {q:'NaFeO₂ + 2H₂O →',a:'Fe(OH)₃↓ + NaOH (феррит — исключение!)',tag:'MeO₂ˣ⁻'},
+  {q:'NaAlO₂ + 4HNO₃ →',a:'NaNO₃ + Al(NO₃)₃ + 2H₂O',tag:'MeO₂ˣ⁻'},
+  {q:'K₂ZnO₂ + 4HCl →',a:'2KCl + ZnCl₂ + 2H₂O',tag:'MeO₂ˣ⁻'},
+  {q:'2NaFeO₂ + 4H₂SO₄ →',a:'Na₂SO₄ + Fe₂(SO₄)₃ + 4H₂O',tag:'MeO₂ˣ⁻'},
+  {q:'Почему NaFeO₂ гидролизуется иначе, чем NaAlO₂?',a:'Fe(OH)₃ — слабый амфотерный гидроксид, не растворяется в разб. щелочах',tag:'MeO₂ˣ⁻'},
+];
+
+let fcDeck=[...Array(FC_CARDS.length).keys()];
+let fcPos=0,fcFlipped=false,fcKnow=0,fcDk=0,fcDontKnowList=[];
+
+function fcRender(){
+  const idx=fcDeck[fcPos];
+  const card=FC_CARDS[idx];
+  document.getElementById('fc-front-text').textContent=card.q;
+  document.getElementById('fc-back-text').textContent='';
+  document.getElementById('fc-hint').textContent='';
+  document.getElementById('fc-tag').textContent=card.tag||'ВОПРОС';
+  document.getElementById('fc-back-tag').textContent='ОТВЕТ';
+  document.getElementById('fc-counter').textContent=`Карточка ${fcPos+1} из ${fcDeck.length}`;
+  document.getElementById('fc-know').textContent=fcKnow;
+  document.getElementById('fc-dk').textContent=fcDk;
+  document.getElementById('fc-left').textContent=fcDeck.length-fcPos;
+  const inner=document.getElementById('fc-inner');
+  inner.classList.remove('flipped');
+  fcFlipped=false;
+  document.getElementById('fc-btn-row').style.display='none';
+}
+
+function fcFlip(){
+  const inner=document.getElementById('fc-inner');
+  fcFlipped=!fcFlipped;
+  inner.classList.toggle('flipped',fcFlipped);
+  if(fcFlipped){
+    inner.addEventListener('transitionend',function onDone(){
+      inner.removeEventListener('transitionend',onDone);
+      if(!fcFlipped)return;
+      const card=FC_CARDS[fcDeck[fcPos]];
+      document.getElementById('fc-back-text').textContent=card.a;
+      document.getElementById('fc-btn-row').style.display='flex';
+    });
+  } else {
+    document.getElementById('fc-back-text').textContent='';
+    document.getElementById('fc-btn-row').style.display='none';
+  }
+}
+
+function fcAnswer(know){
+  if(know){fcKnow++;}else{fcDk++;fcDontKnowList.push(fcDeck[fcPos]);}
+  fcPos++;
+  if(fcPos>=fcDeck.length){
+    document.getElementById('res-know').textContent=fcKnow;
+    document.getElementById('res-dk').textContent=fcDk;
+    document.getElementById('fc-inner').parentElement.style.display='none';
+    document.querySelector('.fc-flip-btn').style.display='none';
+    document.getElementById('fc-btn-row').style.display='none';
+    document.querySelector('.fc-keys').style.display='none';
+    document.getElementById('fc-counter').style.display='none';
+    document.querySelector('.fc-stats').style.display='none';
+    document.getElementById('fc-result').style.display='block';
+  } else {
+    fcRender();
+  }
+}
+
+function fcRestart(onlyWrong){
+  fcKnow=0;fcDk=0;
+  fcDeck=onlyWrong&&fcDontKnowList.length?[...fcDontKnowList]:[...Array(FC_CARDS.length).keys()];
+  fcDontKnowList=[];fcPos=0;
+  document.getElementById('fc-inner').parentElement.style.display='';
+  document.querySelector('.fc-flip-btn').style.display='';
+  document.querySelector('.fc-keys').style.display='';
+  document.getElementById('fc-counter').style.display='';
+  document.querySelector('.fc-stats').style.display='';
+  document.getElementById('fc-result').style.display='none';
+  fcRender();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.code==='Space'){e.preventDefault();fcFlip();}
+  if(e.code==='ArrowRight'&&fcFlipped)fcAnswer(true);
+  if(e.code==='ArrowLeft'&&fcFlipped)fcAnswer(false);
+});
+
+fcRender();
+</script>
+</div><!-- /shell -->
+
+<script>
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop||document.body.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('pf').style.width=pct+'%';
+  document.getElementById('back-top').classList.toggle('visible',pct>8);
+});
+
+function toggleSection(hdr){
+  hdr.classList.toggle('collapsed');
+  const body=hdr.nextElementSibling;
+  if(body.classList.contains('collapsed')){
+    body.style.overflow='hidden';
+    body.style.maxHeight=body.scrollHeight+'px';
+    body.style.opacity='1';
+    body.classList.remove('collapsed');
+    setTimeout(()=>{body.style.maxHeight='none';body.style.overflow='visible';},380);
+  } else {
+    body.style.overflow='hidden';
+    body.style.maxHeight=body.scrollHeight+'px';
+    requestAnimationFrame(()=>{
+      body.style.maxHeight='0';
+      body.style.opacity='0';
+    });
+    body.classList.add('collapsed');
+  }
+}
+
+function mcqPick(btn,idx){
+  const block=btn.closest('.mcq-block');
+  if(block.dataset.done)return;
+  block.dataset.done='1';
+  const correct=+block.dataset.correct;
+  const opts=block.querySelectorAll('.mcq-opt');
+  const fb=block.querySelector('.mcq-fb');
+  opts.forEach((o,i)=>{
+    o.disabled=true;
+    if(i===correct){o.style.background='#d1fae5';o.style.borderColor='#10b981';o.style.color='#065f46';}
+    else if(i===idx&&idx!==correct){o.style.background='#fee2e2';o.style.borderColor='#ef4444';o.style.color='#7f1d1d';}
+  });
+  if(idx===correct){
+    fb.style.display='block';fb.style.background='#d1fae5';fb.style.color='#065f46';
+    fb.textContent='✓ Верно!';
+  } else {
+    fb.style.display='block';fb.style.background='#fee2e2';fb.style.color='#7f1d1d';
+    fb.textContent='✗ Неверно. Правильный ответ выделен зелёным.';
+  }
+}
+</script>
+</body>
+</html>
