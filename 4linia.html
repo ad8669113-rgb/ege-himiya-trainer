@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Химическая связь и кристаллические решётки — ЕГЭ Химия 2026–2027</title>
+<style>
+:root{
+  --p900:#003545;--p800:#004F65;--p700:#006B8A;
+  --p600:#0088B0;--p500:#00A3D4;--p400:#33BCE0;
+  --p300:#6DD4EE;--p200:#B3E8F7;--p100:#E0F6FD;--p50:#F4FCFF;
+  --ink:#141C1F;--ink2:#293237;--ink3:#6A8490;
+  --line:#D0E9F0;--card:#FFFFFF;--bg:#F2FAFD;--white:#fff;
+  --green:#1D9E75;--green-t:#E1F5EE;--green-d:#085041;
+  --amber:#B46A00;--amber-t:#FDF5E6;--amber-d:#4A2B00;
+  --red:#A32D2D;--red-t:#FCEBEB;--red-d:#7A2020;
+  --r:12px;--r-sm:8px;--r-lg:20px;
+  --shadow:0 1px 3px rgba(0,60,90,.06),0 4px 16px rgba(0,60,90,.06);
+  --shm:0 4px 20px rgba(0,136,176,.18);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+  --text:var(--ink);--text2:var(--ink2);--text3:var(--ink3);
+  --accent:var(--p600);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{padding-bottom:56px;font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px}
+
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:var(--p100);z-index:999}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--p600),var(--p400));width:0;transition:width .1s}
+
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO — коричневый с тёмно-голубыми горошками */
+.hero{
+  background: #5c3d2e;
+  padding:56px 32px 48px;
+  margin:0 -24px 48px;
+  position:relative;
+  overflow:hidden;
+  border-radius:0 0 var(--r-lg) var(--r-lg);
+  z-index:1;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle at 12% 18%, #1e3a5f 28px, transparent 28px),
+    radial-gradient(circle at 35% 72%, #1e3a5f 36px, transparent 36px),
+    radial-gradient(circle at 62% 15%, #1e3a5f 24px, transparent 24px),
+    radial-gradient(circle at 85% 55%, #1e3a5f 32px, transparent 32px),
+    radial-gradient(circle at 22% 92%, #1e3a5f 40px, transparent 40px),
+    radial-gradient(circle at 75% 88%, #1e3a5f 26px, transparent 26px),
+    radial-gradient(circle at 48% 44%, #1e3a5f 30px, transparent 30px),
+    radial-gradient(circle at 92% 30%, #1e3a5f 22px, transparent 22px),
+    radial-gradient(circle at 5% 45%, #1e3a5f 18px, transparent 18px);
+  background-size:100% 100%;
+  background-repeat:no-repeat;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  top:-40%;
+  right:-10%;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(30,58,95,.20) 0%,transparent 70%);
+  pointer-events:none;
+  z-index:0;
+}
+.hero-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:rgba(255,255,255,.11);
+  border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.82);
+  border-radius:20px;
+  padding:4px 14px;
+  font-size:12px;
+  font-family:var(--mono);
+  letter-spacing:.6px;
+  margin-bottom:20px;
+  position:relative;
+  z-index:1;
+}
+.hero h1{
+  font-size:clamp(28px,5vw,48px);
+  font-weight:800;
+  line-height:1.06;
+  letter-spacing:-.03em;
+  color:#fff;
+  margin-bottom:14px;
+  position:relative;
+  z-index:1;
+}
+.hero h1 em{color:#8ECAE6;font-style:normal}
+.hero-sub{
+  font-size:16px;
+  color:rgba(255,255,255,.75);
+  line-height:1.7;
+  max-width:560px;
+  margin-bottom:28px;
+  position:relative;
+  z-index:1;
+}
+.hero-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  position:relative;
+  z-index:1;
+}
+.hero-chip{
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.22);
+  color:rgba(255,255,255,.9);
+  padding:5px 14px;
+  border-radius:16px;
+  font-size:12.5px;
+  font-weight:500;
+}
+
+.section{margin-bottom:56px}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--p200);cursor:pointer;user-select:none;transition:background .15s;border-radius:10px;padding:6px 8px;margin:-6px -8px}
+.section-header:hover{background:var(--p100)}
+.section-header::after{content:"▲";font-size:13px;color:var(--p600);margin-left:auto;transition:transform .25s;display:inline-block}
+.section-header.collapsed::after{transform:rotate(180deg)}
+.acc-body{overflow:hidden;transition:max-height .35s ease,opacity .25s;max-height:9999px;opacity:1}
+.acc-body.collapsed{max-height:0!important;opacity:0}
+.section-num{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,#5c3d2e,#1e3a5f);color:#fff;font-family:var(--mono);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(30,58,95,.35)}
+.section-title{font-size:clamp(18px,2.5vw,24px);font-weight:700;color:#003545;line-height:1.2}
+
+h2.sub-title{font-size:17px;font-weight:700;color:var(--p700);margin:28px 0 12px;display:flex;align-items:center;gap:8px}
+h2.sub-title::before{content:'';width:4px;height:20px;background:var(--p500);border-radius:2px;flex-shrink:0}
+h3.mini-title{font-size:14.5px;font-weight:600;color:var(--ink);margin:18px 0 8px}
+p.body{font-size:14.5px;line-height:1.75;color:var(--ink2);margin-bottom:14px}
+p.body strong{color:var(--ink)}
+
+.box{border-radius:var(--r-sm);padding:14px 18px;margin:14px 0;font-size:14px;line-height:1.7}
+.box-title{font-weight:700;font-size:13.5px;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:#FFF8E1;border-left:4px solid #F59E0B;color:#78350F}
+.box-danger{background:var(--red-t);border-left:4px solid var(--red);color:var(--red-d)}
+.box-success{background:var(--green-t);border-left:4px solid var(--green);color:var(--green-d)}
+.box-remember{background:#EEF2FF;border-left:4px solid #6366F1;color:#3730A3}
+.box-trap{background:#FEF2F2;border-left:4px solid #DC2626;color:#991B1B}
+.box ul,.box ol{padding-left:20px;margin:6px 0}
+.box li{margin:4px 0;font-size:13.5px}
+
+.eq-block{background:var(--white);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 18px;margin:10px 0;box-shadow:var(--shadow)}
+.eq{font-family:var(--mono);font-size:13.5px;color:var(--p900);line-height:2.1;display:block}
+.eq-hdr{display:block;background:linear-gradient(90deg,#E0F6FD,#F4FCFF);border-left:4px solid #0099CC;border-radius:0 6px 6px 0;padding:5px 12px;margin:10px 0 4px;font-family:var(--font);font-size:13px;font-weight:700;color:#003545}
+
+.table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);margin:14px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:13.5px}
+.table-wrap th{background:linear-gradient(135deg,#003545,#0088B0);color:#fff;font-weight:600;padding:10px 14px;text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--p50)}
+tr:hover td{background:var(--p100);transition:background .15s}
+
+.chip{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.5px;padding:3px 9px;border-radius:5px;font-weight:600;white-space:nowrap}
+.chip-blue{background:#EEF2FF;color:#3730A3}
+.chip-green{background:#D1FAE5;color:#065F46}
+.chip-red{background:#FEE2E2;color:#991B1B}
+.chip-yellow{background:#FEF3C7;color:#92400E}
+.chip-purple{background:#EDE9FE;color:#4C1D95}
+
+.scheme-box{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;background:var(--white);border:1.5px solid var(--p200);border-radius:var(--r);padding:18px;margin:14px 0;box-shadow:var(--shadow)}
+.scheme-cell{border:1.5px solid var(--p400);border-radius:8px;padding:8px 14px;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--p800);background:var(--p50);text-align:center;white-space:nowrap}
+.scheme-arrow{font-size:20px;color:var(--p500);font-weight:700}
+.scheme-plus{font-size:18px;color:var(--ink3);font-weight:700}
+
+.alg-box{background:var(--white);border:2px solid var(--p400);border-radius:var(--r);padding:20px 24px;margin:14px 0;box-shadow:var(--shadow)}
+.alg-step{display:flex;align-items:center;gap:12px;padding:8px 0}
+.alg-num{width:30px;height:30px;border-radius:50%;background:var(--p600);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;font-family:var(--mono)}
+.alg-arrow{text-align:center;color:var(--p400);font-size:18px;line-height:1;padding:2px 0}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:12px 0}
+@media(max-width:700px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.bond-card{border-radius:var(--r-sm);padding:16px 18px;border:1.5px solid;transition:transform .15s,box-shadow .15s}
+.bond-card:hover{transform:translateY(-2px);box-shadow:var(--shm)}
+.bond-card .bond-name{font-size:16px;font-weight:800;margin-bottom:6px}
+.bond-card .bond-desc{font-size:13px;line-height:1.6;color:var(--text2)}
+.bond-card .bond-examples{font-size:12px;color:var(--text3);margin-top:6px;font-family:var(--mono)}
+.bond-card.c-nonpolar{border-color:#3B82F6;background:#EFF6FF}
+.bond-card.c-polar{border-color:#8B5CF6;background:#F5F3FF}
+.bond-card.ionic{border-color:#EF4444;background:#FEF2F2}
+.bond-card.metallic{border-color:#F59E0B;background:#FFFBEB}
+.bond-card.hydrogen{border-color:#10B981;background:#ECFDF5}
+
+.lattice-card{border-radius:var(--r-sm);padding:16px 18px;border:1.5px solid;transition:transform .15s,box-shadow .15s}
+.lattice-card:hover{transform:translateY(-2px);box-shadow:var(--shm)}
+.lattice-card .lat-name{font-size:16px;font-weight:800;margin-bottom:4px}
+.lattice-card .lat-nodes{font-size:13px;color:var(--text2);margin-bottom:4px}
+.lattice-card .lat-props{font-size:12px;color:var(--text3);line-height:1.6}
+.lattice-card .lat-examples{font-size:12px;color:var(--text3);margin-top:4px;font-family:var(--mono)}
+.lattice-card.lat-molecular{border-color:#3B82F6;background:#EFF6FF}
+.lattice-card.lat-atomic{border-color:#8B5CF6;background:#F5F3FF}
+.lattice-card.lat-ionic{border-color:#EF4444;background:#FEF2F2}
+.lattice-card.lat-metallic{border-color:#F59E0B;background:#FFFBEB}
+
+.must-memo{background:#e0f6fd;border:2px solid #0088B0;border-radius:var(--r-sm);padding:14px 18px;margin:14px 0}
+.must-memo .mm-hd{color:#003545;font-weight:800;font-size:13.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.must-memo ul{margin:0;padding-left:18px;font-size:13px;line-height:1.8}
+
+.trap-box{background:#fff5f5;border:2px solid #ef4444;border-radius:var(--r-sm);padding:14px 18px;margin:14px 0}
+.trap-box .trap-hd{color:#dc2626;font-weight:800;font-size:13.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.trap-box ul{margin:0;padding-left:18px;font-size:13px;line-height:1.8}
+
+.ege-tip{background:#FEF3C7;border:2px solid #F59E0B;border-radius:var(--r-sm);padding:14px 18px;margin:14px 0}
+.ege-tip .tip-hd{color:#92400E;font-weight:800;font-size:13.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.ege-tip ul{margin:0;padding-left:18px;font-size:13px;line-height:1.8}
+
+/* флэшкарты */
+.fc-section{background:linear-gradient(135deg,#003545,#0088B0);border-radius:var(--r-lg);padding:32px 28px;margin:48px 0;color:#fff}
+.fc-header{text-align:center;margin-bottom:24px}
+.fc-title{font-size:clamp(18px,3vw,26px);font-weight:700;color:#fff;margin-bottom:6px}
+.fc-sub{font-size:14px;color:rgba(255,255,255,.65);line-height:1.6}
+.fc-stats{display:flex;justify-content:center;gap:24px;margin-bottom:16px;font-size:13px;color:rgba(255,255,255,.7);font-family:var(--mono)}
+.fc-stats span{color:#fff;font-weight:700;font-size:16px}
+.fc-counter{text-align:center;font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.5);margin-bottom:14px}
+.fc-perspective{perspective:900px;width:100%;max-width:560px;margin:0 auto;cursor:pointer}
+.fc-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,0,.2,1);min-height:180px}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);display:flex;align-items:center;justify-content:center;padding:24px 28px;text-align:center;min-height:180px;flex-direction:column;gap:8px}
+.fc-front{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);font-size:clamp(15px,2.5vw,19px);font-family:var(--mono);color:#fff;line-height:1.5}
+.fc-back{background:var(--white);transform:rotateY(180deg);font-family:var(--mono);font-size:clamp(13px,2vw,16px);color:#003545;line-height:1.6}
+.fc-hint{font-family:var(--font);font-size:12px;color:var(--ink3);margin-top:6px;font-style:italic}
+.fc-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:4px}
+.fc-back-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:var(--p600);margin-bottom:4px}
+.fc-flip-btn{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:14px;font-weight:600;border-radius:var(--r-sm);padding:11px 26px;cursor:pointer;transition:background .2s;margin:18px auto;width:fit-content}
+.fc-flip-btn:hover{background:rgba(255,255,255,.25)}
+.fc-btn-row{display:none;gap:12px;justify-content:center;margin-top:14px}
+.fc-btn-know{background:#1D9E75;color:#fff;border:none;border-radius:var(--r-sm);padding:11px 26px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-know:hover{background:#187F5E}
+.fc-btn-dontknow{background:#C0392B;color:#fff;border:none;border-radius:var(--r-sm);padding:11px 26px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-dontknow:hover{background:#A0311F}
+.fc-keys{text-align:center;font-size:11.5px;color:rgba(255,255,255,.35);margin-top:12px;font-family:var(--mono)}
+.fc-result{display:none;text-align:center;padding:20px}
+.fc-result h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:12px}
+.fc-res-row{display:flex;gap:16px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.fc-res-card{background:rgba(255,255,255,.1);border-radius:var(--r-sm);padding:12px 22px;min-width:100px}
+.fc-res-num{font-size:28px;font-weight:700}
+.fc-res-lbl{font-size:11px;color:rgba(255,255,255,.6);font-family:var(--mono);margin-top:2px}
+.fc-restart-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.fc-restart-btn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;border-radius:var(--r-sm);padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
+.fc-restart-btn:hover{background:rgba(255,255,255,.25)}
+.fc-restart-btn.primary{background:#0088B0;border-color:#0088B0}
+
+#back-top{position:fixed;bottom:24px;right:24px;width:42px;height:42px;border-radius:12px;background:var(--p600);color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(0,136,176,.35);display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .2s;opacity:0;pointer-events:none}
+#back-top.visible{opacity:1;pointer-events:all}
+#back-top:hover{transform:translateY(-2px)}
+
+@media(max-width:540px){.shell{padding:0 14px 60px}.hero{padding:36px 18px 32px;margin:0 -14px 32px}.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* === БЛОК ПРАКТИКИ === */
+.practice-block{margin:28px 0 12px}
+.practice-block .p-title{font-size:15px;font-weight:700;color:var(--p700);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.practice-block .p-title::before{content:'🧪';font-size:18px}
+.practice-item{background:#fff;border:1.5px solid var(--line);border-radius:var(--r-sm);padding:16px 20px;margin-bottom:14px;box-shadow:var(--shadow)}
+.practice-item .q{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:10px;line-height:1.5}
+.practice-item .opts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.practice-item .opts .opt{font-size:13px;color:var(--text2);padding:4px 8px;border-radius:4px;background:var(--bg2);display:flex;align-items:center;gap:6px}
+.practice-item .opts .opt .num{font-weight:700;color:var(--p600);font-family:var(--mono);min-width:20px}
+.practice-item .input-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.practice-item .input-row input{width:80px;padding:6px 10px;border:1.5px solid var(--line);border-radius:6px;font-size:16px;font-family:var(--mono);text-align:center;outline:none;transition:border-color .2s}
+.practice-item .input-row input:focus{border-color:var(--p500)}
+.practice-item .input-row button{background:var(--p600);color:#fff;border:none;border-radius:6px;padding:6px 16px;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
+.practice-item .input-row button:hover{background:var(--p700)}
+.practice-item .input-row button:disabled{opacity:.4;cursor:default}
+.practice-item .fb{font-size:14px;font-weight:600;margin-top:8px;padding:6px 12px;border-radius:6px;display:none}
+.practice-item .fb.ok{display:block;background:var(--green-t);color:var(--green-d);border:1px solid var(--green)}
+.practice-item .fb.err{display:block;background:var(--red-t);color:var(--red-d);border:1px solid var(--red)}
+@media(max-width:600px){.practice-item .opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">ЕГЭ Химия 2026–2027 · Задание №4</div>
+  <h1>Химическая связь<br>и <em>кристаллические<br>решётки</em></h1>
+  <p class="hero-sub">Полный конспект для подготовки к заданию №4. Всё, что нужно знать о типах связей и решёток — от простого к сложному.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Ковалентная неполярная</span>
+    <span class="hero-chip">Ковалентная полярная</span>
+    <span class="hero-chip">Ионная</span>
+    <span class="hero-chip">Металлическая</span>
+    <span class="hero-chip">Водородная</span>
+    <span class="hero-chip">Молекулярная решётка</span>
+    <span class="hero-chip">Атомная решётка</span>
+    <span class="hero-chip">Ионная решётка</span>
+    <span class="hero-chip">Металлическая решётка</span>
+  </div>
+</div>
+
+<!-- SECTION 1 -->
+<section class="section" id="s1">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">1</div>
+    <h2 class="section-title">Что такое химическая связь</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <p class="body"><strong>Химическая связь</strong> — это взаимодействие между атомами, благодаря которому они объединяются в молекулы, ионные соединения и кристаллы. В основе любой связи лежит <strong>электростатическое притяжение</strong> между заряженными частицами.</p>
+    <div class="box box-info"><div class="box-title">📌 Почему это важно?</div>Тип химической связи определяет <strong>физические свойства</strong> вещества: растворимость, электропроводность, температуру плавления, твёрдость, реакционную способность. Без понимания связей нельзя понять химию.</div>
+    <h2 class="sub-title">Основные виды химической связи</h2>
+    <div class="grid-2">
+      <div class="bond-card c-nonpolar"><div class="bond-name">🔵 Ковалентная неполярная</div><div class="bond-desc">Между <strong>одинаковыми</strong> атомами неметаллов. Общая электронная пара не смещена.</div><div class="bond-examples">H₂, O₂, N₂, Cl₂, F₂, I₂, Br₂, P₄, S₈</div></div>
+      <div class="bond-card c-polar"><div class="bond-name">🟣 Ковалентная полярная</div><div class="bond-desc">Между <strong>разными</strong> атомами неметаллов. Общая пара смещена к более электроотрицательному атому.</div><div class="bond-examples">HCl, H₂O, NH₃, SO₂, CO₂, HF, H₂S</div></div>
+      <div class="bond-card ionic"><div class="bond-name">🔴 Ионная</div><div class="bond-desc">Между <strong>металлом и неметаллом</strong> (или NH₄⁺ и кислотным остатком). Полная передача электрона.</div><div class="bond-examples">NaCl, KNO₃, CaCl₂, Al₂O₃, NH₄Cl, NaOH</div></div>
+      <div class="bond-card metallic"><div class="bond-name">🟡 Металлическая</div><div class="bond-desc">В <strong>металлах и сплавах</strong>. Катионы металлов в «электронном газе».</div><div class="bond-examples">Fe, Cu, Al, Na, Zn, сталь, бронза</div></div>
+      <div class="bond-card hydrogen" style="grid-column:1/3;"><div class="bond-name">🟢 Водородная</div><div class="bond-desc"><strong>Межмолекулярная</strong> связь между H одной молекулы (соединённым с F, O, N) и атомом F, O, N другой молекулы.</div><div class="bond-examples">HF, H₂O, H₂O₂, NH₃, спирты, карбоновые кислоты, фенолы, амины</div></div>
+    </div>
+    <div class="must-memo"><div class="mm-hd">📌 Запомни главное</div><ul><li><strong>Ковалентная</strong> — всегда между <strong>неметаллами</strong> (одинаковые → неполярная, разные → полярная)</li><li><strong>Ионная</strong> — всегда с участием <strong>металла</strong> (или NH₄⁺)</li><li><strong>Металлическая</strong> — только в <strong>металлах</strong> и сплавах</li><li><strong>Водородная</strong> — только если есть <strong>H–F, H–O или H–N</strong></li></ul></div>
+  </div>
+</section>
+
+<!-- SECTION 2 -->
+<section class="section" id="s2">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">2</div>
+    <h2 class="section-title">Ковалентная неполярная связь</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="box box-info"><div class="box-title">📖 Определение</div><strong>Ковалентная неполярная связь</strong> — связь, образованная <strong>одинаковыми</strong> атомами-неметаллами за счёт общей электронной пары. Электронная пара <strong>не смещена</strong> ни к одному из атомов (разность ЭО = 0).</div>
+    <h2 class="sub-title">Механизм образования</h2>
+    <p class="body">Каждый атом даёт по одному электрону в общее пользование. Образуется общая электронная пара — так возникает связь. Чем больше общих пар, тем <strong>кратнее</strong> связь.</p>
+    <div class="scheme-box"><div class="scheme-cell">H·</div><div class="scheme-plus">+</div><div class="scheme-cell">·H</div><div class="scheme-arrow">→</div><div class="scheme-cell">H:H</div><div class="scheme-arrow" style="font-size:14px;color:var(--text3)">(H–H)</div></div>
+    <div class="table-wrap"><table><thead><tr><th>Вещество</th><th>Формула</th><th>Кратность</th><th>Обозначение</th></tr></thead><tbody><tr><td>Водород</td><td>H₂</td><td>одинарная</td><td>H–H</td></tr><tr><td>Кислород</td><td>O₂</td><td>двойная</td><td>O=O</td></tr><tr><td>Азот</td><td>N₂</td><td>тройная</td><td>N≡N</td></tr><tr><td>Хлор</td><td>Cl₂</td><td>одинарная</td><td>Cl–Cl</td></tr><tr><td>Иод</td><td>I₂</td><td>одинарная</td><td>I–I</td></tr><tr><td>Сера</td><td>S₈</td><td>одинарная</td><td>S–S</td></tr><tr><td>Фтор</td><td>F₂</td><td>одинарная</td><td>F–F</td></tr></tbody></table></div>
+    <div class="box box-warn"><div class="box-title">⚠️ Важные исключения</div><ul><li><strong>PH₃</strong> — связь <strong>неполярная</strong> (ЭО(P) ≈ ЭО(H))</li><li><strong>Пероксиды</strong> (H₂O₂, Na₂O₂) — содержат связь <strong>O–O (неполярная)</strong></li><li><strong>CaC₂</strong> — содержит ион C₂²⁻ с тройной связью <strong>C≡C (неполярная)</strong></li></ul></div>
+    <div class="practice-block"><div class="p-title">Проверь себя — 4 задания</div><div id="p2"></div></div>
+  </div>
+</section>
+
+<!-- SECTION 3 -->
+<section class="section" id="s3">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">3</div>
+    <h2 class="section-title">Ковалентная полярная связь</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="box box-info"><div class="box-title">📖 Определение</div><strong>Ковалентная полярная связь</strong> — связь между <strong>разными</strong> атомами-неметаллами. Общая электронная пара <strong>смещена</strong> к более электроотрицательному атому, поэтому на атомах возникают <strong>δ+</strong> и <strong>δ−</strong>.</div>
+    <div class="scheme-box" style="flex-direction:column;gap:8px;"><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center;"><div class="scheme-cell" style="background:#fef9c3;border-color:#D97706;">H (δ+)</div><div class="scheme-plus">—</div><div class="scheme-cell" style="background:#fef2f2;border-color:#EF4444;">Cl (δ−)</div></div><div style="font-size:13px;color:var(--text2);">ЭО(H) = 2,1 &lt; ЭО(Cl) = 3,0 → пара смещена к хлору</div></div>
+    <div class="grid-2"><div><h3 class="mini-title">🔢 Кратность полярной связи</h3><div class="table-wrap"><table><thead><tr><th>Кратность</th><th>Обозначение</th><th>Примеры</th></tr></thead><tbody><tr><td>Одинарная</td><td>H–F</td><td>HF, HCl, HBr, H₂O, NH₃, H₂S, PH₃</td></tr><tr><td>Двойная</td><td>S=O</td><td>SO₂, NO₂, SO₃, CO₂</td></tr><tr><td>Тройная</td><td>C≡O</td><td>CO (угарный газ), NO</td></tr></tbody></table></div></div><div><h3 class="mini-title">📋 Примеры веществ</h3><div class="box" style="background:var(--bg2);border:1px solid var(--line);"><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:13px;"><div><strong>HCl</strong> — хлороводород</div><div><strong>H₂O</strong> — вода</div><div><strong>NH₃</strong> — аммиак</div><div><strong>H₂S</strong> — сероводород</div><div><strong>SO₂</strong> — диоксид серы</div><div><strong>HF</strong> — фтороводород</div><div><strong>CO₂</strong> — углекислый газ</div><div><strong>NO</strong> — оксид азота(II)</div><div><strong>PCl₃</strong> — трихлорид фосфора</div><div><strong>SiCl₄</strong> — четыреххлористый кремний</div></div></div></div></div>
+    <div class="box box-remember"><div class="box-title">🧠 σ и π связи</div><ul><li><strong>σ-связь</strong> — перекрывание вдоль оси между ядрами. Есть в <strong>любой</strong> ковалентной связи.</li><li><strong>π-связь</strong> — перекрывание по бокам от оси. Только в <strong>кратных</strong> связях (≥ двойная).</li><li>Одинарная = <strong>1σ</strong>; двойная = <strong>1σ + 1π</strong>; тройная = <strong>1σ + 2π</strong>.</li></ul></div>
+    <div class="practice-block"><div class="p-title">Проверь себя — 4 задания</div><div id="p3"></div></div>
+  </div>
+</section>
+
+<!-- SECTION 4 -->
+<section class="section" id="s4">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">4</div>
+    <h2 class="section-title">Донорно-акцепторный механизм</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="box box-info"><div class="box-title">📖 Что это?</div><strong>Донорно-акцепторный механизм</strong> — способ образования ковалентной связи, при котором один атом (<strong>донор</strong>) предоставляет готовую электронную пару, а другой (<strong>акцептор</strong>) — пустую орбиталь.</div>
+    <div class="scheme-box" style="flex-direction:column;gap:8px;"><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center;"><div class="scheme-cell" style="background:#dcfce7;border-color:#10B981;">NH₃ <span style="font-size:11px;font-weight:400;">(донор)</span></div><div class="scheme-plus">+</div><div class="scheme-cell" style="background:#fee2e2;border-color:#EF4444;">H⁺ <span style="font-size:11px;font-weight:400;">(акцептор)</span></div><div class="scheme-arrow">→</div><div class="scheme-cell" style="background:#fef9c3;border-color:#D97706;">[NH₄]⁺</div></div><div style="font-size:13px;color:var(--text2);">NH₃ отдаёт пару, H⁺ принимает → образуется ион аммония</div></div>
+    <h2 class="sub-title">Где встречается</h2>
+    <div class="grid-2"><div class="box" style="border:1.5px solid var(--p400);background:var(--p50);"><div style="font-weight:700;color:var(--p700);margin-bottom:8px;">🧪 В неорганике</div><ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.8;"><li><strong>NH₄⁺</strong> — в солях аммония (NH₄Cl, (NH₄)₂SO₄, NH₄NO₃, NH₄F и др.)</li><li><strong>PH₄⁺</strong> — хлорид фосфония (PH₄Cl)</li><li><strong>H₃O⁺</strong> — ион гидроксония</li><li><strong>CO</strong> (угарный газ) — одна из связей по ДАМ</li><li><strong>O₃</strong> (озон) — одна из O–O связей по ДАМ</li><li><strong>HNO₃, N₂O₅, KNO₃</strong> — одна из N–O связей по ДАМ</li></ul></div><div class="box" style="border:1.5px solid var(--p400);background:var(--p50);"><div style="font-weight:700;color:var(--p700);margin-bottom:8px;">🧪 В органике</div><ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.8;"><li><strong>Соли аминов</strong> — CH₃–NH₃⁺Cl⁻</li><li><strong>Комплексные соединения</strong> — [Cu(NH₃)₄]SO₄</li></ul></div></div>
+    <div class="trap-box"><div class="trap-hd">⚠️ Частая ошибка</div><ul><li><strong>NH₃</strong> (аммиак) — <strong>не</strong> содержит связей по ДАМ. Связь по ДАМ появляется <strong>только в NH₄⁺</strong> (ионе аммония).</li><li><strong>NH₄Cl</strong> — внутри NH₄⁺ есть одна связь по ДАМ.</li></ul></div>
+    <div class="practice-block"><div class="p-title">Проверь себя — 4 задания</div><div id="p4"></div></div>
+  </div>
+</section>
+
+<!-- SECTION 5 -->
+<section class="section" id="s5">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">5</div>
+    <h2 class="section-title">Ионная связь</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="box box-info"><div class="box-title">📖 Определение</div><strong>Ионная связь</strong> — связь между <strong>ионами</strong>, возникающая за счёт <strong>электростатического притяжения</strong> разноимённо заряженных ионов. Образуется при <strong>полной передаче</strong> электрона от металла к неметаллу (или от NH₄⁺ к кислотному остатку).</div>
+    <div class="scheme-box" style="flex-direction:column;gap:8px;"><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center;"><div class="scheme-cell" style="background:#EEF2FF;border-color:#6366F1;">Na⁰ <span style="font-size:11px;font-weight:400;">(отдаёт e⁻)</span></div><div class="scheme-arrow" style="font-size:14px;">→</div><div class="scheme-cell" style="background:#fef2f2;border-color:#EF4444;">Na⁺</div><div class="scheme-plus">+</div><div class="scheme-cell" style="background:#fef2f2;border-color:#EF4444;">Cl⁻</div></div><div style="font-size:13px;color:var(--text2);">Na⁺ + Cl⁻ → NaCl (хлорид натрия)</div></div>
+    <h2 class="sub-title">Когда связь ионная?</h2>
+    <div class="grid-2"><div><div class="box box-success"><div class="box-title">✅ Ионная связь есть</div><ul><li><strong>Металл + неметалл</strong> — NaCl, CaO, KF, MgBr₂, BaS, Na₂S</li><li><strong>NH₄⁺ + кислотный остаток</strong> — NH₄Cl, (NH₄)₂SO₄, NH₄NO₃, NH₄F</li><li><strong>Сложные ионы</strong> — NaNO₃ (Na⁺···NO₃⁻), K₂SO₄</li></ul></div></div><div><div class="box box-danger"><div class="box-title">❌ НЕ ионная</div><ul><li><strong>Кислоты</strong> — HCl, H₂SO₄, HNO₃ (ков. полярная)</li><li><strong>Оксиды неметаллов</strong> — SO₂, CO₂, NO₂ (ков. полярная)</li><li><strong>NH₃</strong> — нет иона NH₄⁺ (ков. полярная)</li><li><strong>NaOH</strong> — Na⁺···OH⁻ ионная, но внутри OH⁻ — O–H полярная</li></ul></div></div></div>
+    <div class="box box-remember"><div class="box-title">🧠 Лайфхак</div>Видишь формулу: <strong>металл + неметалл</strong> → скорее всего ионная. Видишь <strong>только неметаллы</strong> → ковалентная полярная.</div>
+    <div class="practice-block"><div class="p-title">Проверь себя — 4 задания</div><div id="p5"></div></div>
+  </div>
+</section>
+
+<!-- SECTION 6 -->
+<section class="section" id="s6">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">6</div>
+    <h2 class="section-title">Металлическая связь</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="box box-info"><div class="box-title">📖 Определение</div><strong>Металлическая связь</strong> — связь между <strong>катионами металлов</strong> и <strong>обобществлёнными электронами</strong> («электронный газ»). Возникает только в <strong>металлах и сплавах</strong>.</div>
+    <div class="box" style="background:var(--bg2);border:1.5px solid var(--line);text-align:center;padding:18px;"><div style="font-size:14px;color:var(--text2);margin-bottom:10px;">Схема металлической связи</div><div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;"><span class="scheme-cell" style="background:#EEF2FF;border-color:#6366F1;">Na⁺</span><span class="scheme-cell" style="background:#EEF2FF;border-color:#6366F1;">Na⁺</span><span class="scheme-cell" style="background:#EEF2FF;border-color:#6366F1;">Na⁺</span><span class="scheme-cell" style="background:#EEF2FF;border-color:#6366F1;">Na⁺</span></div><div style="font-size:13px;color:#6366F1;font-weight:700;margin:6px 0;">↕ &nbsp; электронный газ &nbsp; ↕</div><div style="font-size:12px;color:var(--text2);">Электроны свободно движутся между всеми катионами</div></div>
+    <div class="must-memo"><div class="mm-hd">📌 Вещества с металлической связью</div><ul><li><strong>Все металлы:</strong> Na, K, Fe, Cu, Al, Zn, Hg, Ag, Au, Pt</li><li><strong>Сплавы:</strong> сталь, бронза, латунь</li></ul></div>
+    <div class="practice-block"><div class="p-title">Проверь себя — 4 задания</div><div id="p6"></div></div>
+  </div>
+</section>
+
+<!-- SECTION 7 -->
+<section class="section" id="s7">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">7</div>
+    <h2 class="section-title">Водородная связь</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="box box-info"><div class="box-title">📖 Определение</div><strong>Водородная связь</strong> — <strong>межмолекулярная</strong> связь между атомом водорода одной молекулы (соединённым с F, O или N) и атомом F, O или N <strong>другой</strong> молекулы.</div>
+    <div class="box" style="background:var(--bg2);border:1.5px solid var(--line);text-align:center;padding:16px;"><div style="font-size:15px;font-family:var(--mono);color:#3730A3;letter-spacing:2px;margin-bottom:6px;">δ+H–Fδ− ··· δ+H–Fδ−</div><div style="font-size:12px;color:var(--text2);">··· — водородная связь (пунктирная)</div></div>
+    <div class="grid-2"><div><h3 class="mini-title">✅ Вещества с водородной связью</h3><div class="box box-success" style="border:1px solid #6EE7B7;"><ul><li><strong>HF</strong> — фтороводород (самая прочная)</li><li><strong>H₂O</strong> — вода</li><li><strong>H₂O₂</strong> — пероксид водорода</li><li><strong>NH₃</strong> — аммиак</li><li><strong>Спирты, кислоты, фенолы, амины</strong></li></ul></div></div><div><h3 class="mini-title">❌ НЕТ водородной связи</h3><div class="box box-danger" style="border:1px solid #FCA5A5;"><ul><li><strong>PH₃, H₂S, HCl, HBr, HI, CH₄, SiH₄</strong></li></ul></div><div class="box box-remember" style="margin-top:8px;"><div class="box-title">🧠 Запомни тройку</div>Водородная связь только при <strong>H–F, H–O, H–N</strong>!</div></div></div>
+    <div class="ege-tip"><div class="tip-hd">⭐ Чаще всего в ЕГЭ</div><ul><li>У какого вещества есть водородная связь? → проверяй наличие <strong>H–F, H–O или H–N</strong></li><li><strong>PH₃</strong> и <strong>H₂S</strong> — частые ловушки! У них <strong>нет</strong> водородной связи.</li></ul></div>
+    <div class="practice-block"><div class="p-title">Проверь себя — 4 задания</div><div id="p7"></div></div>
+  </div>
+</section>
+
+<!-- SECTION 8 -->
+<section class="section" id="s8">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">8</div>
+    <h2 class="section-title">Алгоритм определения типа связи</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="alg-box"><div class="alg-step"><div class="alg-num">1</div><div style="font-size:14px;font-weight:600;">Посмотри на формулу вещества</div></div><div class="alg-step"><div class="alg-num">2</div><div style="font-size:14px;font-weight:600;">Определи, какие элементы: металлы или неметаллы</div></div><div class="alg-arrow">↓</div><div class="alg-step" style="flex-wrap:wrap;gap:8px;"><div style="background:#EEF2FF;border-radius:8px;padding:10px 14px;flex:1;"><span style="font-weight:700;color:#3730A3;">Только неметаллы</span><br><span style="font-size:13px;">→ ковалентная</span></div><div style="background:#FEF2F2;border-radius:8px;padding:10px 14px;flex:1;"><span style="font-weight:700;color:#991B1B;">Металл + неметалл</span><br><span style="font-size:13px;">→ ионная</span></div><div style="background:#FFFBEB;border-radius:8px;padding:10px 14px;flex:1;"><span style="font-weight:700;color:#92400E;">Только металл</span><br><span style="font-size:13px;">→ металлическая</span></div></div><div class="alg-arrow">↓</div><div class="alg-step" style="flex-wrap:wrap;gap:8px;"><div style="background:#dcfce7;border-radius:8px;padding:10px 14px;flex:1;"><span style="font-weight:700;color:#065F46;">Ковалентная</span><br><span style="font-size:13px;">атомы одинаковые → неполярная<br>атомы разные → полярная</span></div><div style="background:#fef9c3;border-radius:8px;padding:10px 14px;flex:1;"><span style="font-weight:700;color:#92400E;">Проверь исключения</span><br><span style="font-size:13px;">PH₃ — неполярная!<br>NH₄⁺ — есть ДАМ-связь!</span></div></div><div class="alg-arrow">↓</div><div class="alg-step"><div class="alg-num">3</div><div style="font-size:14px;font-weight:600;">Запиши ответ</div></div></div>
+    <div class="must-memo"><div class="mm-hd">📌 Исключения для ЕГЭ</div><ul><li><strong>PH₃</strong> — неполярная (ЭО(P)≈ЭО(H))</li><li><strong>Пероксиды</strong> (H₂O₂, Na₂O₂) — O–O неполярная</li><li><strong>CaC₂</strong> — C≡C неполярная</li><li><strong>NH₄Cl</strong> — внутри NH₄⁺ есть ДАМ-связь</li></ul></div>
+  </div>
+</section>
+
+<!-- SECTION 9 -->
+<section class="section" id="s9">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">9</div>
+    <h2 class="section-title">Кристаллические решётки — общее понятие</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="box box-info"><div class="box-title">📖 Что такое кристаллическая решётка?</div><strong>Кристаллическая решётка</strong> — правильное периодическое расположение частиц (атомов, молекул или ионов) в пространстве. Тип решётки определяет физические свойства вещества.</div>
+    <div class="grid-2">
+      <div class="lattice-card lat-molecular"><div class="lat-name">🔵 Молекулярная</div><div class="lat-nodes">В узлах — <strong>молекулы</strong></div><div class="lat-props">Низкие Тпл, летучие, хрупкие</div><div class="lat-examples">H₂O, CO₂, I₂, HCl, S₈, P₄</div></div>
+      <div class="lattice-card lat-atomic"><div class="lat-name">🟣 Атомная</div><div class="lat-nodes">В узлах — <strong>атомы</strong></div><div class="lat-props">Очень высокие Тпл, очень твёрдые</div><div class="lat-examples">Алмаз, Si, SiO₂, B, SiC</div></div>
+      <div class="lattice-card lat-ionic"><div class="lat-name">🔴 Ионная</div><div class="lat-nodes">В узлах — <strong>ионы</strong> (+ и −)</div><div class="lat-props">Высокие Тпл, твёрдые, хрупкие, проводят в расплаве</div><div class="lat-examples">NaCl, KNO₃, CaO, NaOH, NH₄Cl</div></div>
+      <div class="lattice-card lat-metallic"><div class="lat-name">🟡 Металлическая</div><div class="lat-nodes">В узлах — <strong>атомы и катионы</strong> металлов</div><div class="lat-props">Пластичные, блестящие, тепло- и электропроводные</div><div class="lat-examples">Все металлы и сплавы</div></div>
+    </div>
+    <div class="box box-remember"><div class="box-title">🧠 Важно запомнить</div><ul><li><strong>Молекулярная</strong> — только у неметаллов (газы, жидкости)</li><li><strong>Атомная</strong> — только у твёрдых неметаллов</li><li><strong>Ионная</strong> — у солей, оксидов и гидроксидов металлов</li><li><strong>Металлическая</strong> — у металлов и сплавов</li></ul></div>
+  </div>
+</section>
+
+<!-- SECTION 10 -->
+<section class="section" id="s10">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">10</div>
+    <h2 class="section-title">Молекулярная решётка</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="box box-info"><div class="box-title">📖 Определение</div>В узлах молекулярной решётки — <strong>молекулы</strong>. Связи между молекулами — слабые (Ван-дер-Ваальса или водородные). Вещества с молекулярной решёткой — это <strong>газы, жидкости или летучие твёрдые вещества</strong>.</div>
+    <div class="grid-2"><div><div class="box box-warn" style="margin-top:0;"><div class="box-title">⚠️ Исключение</div>Лёд H₂O и HF имеют <strong>водородные связи</strong> → Тпл выше.</div></div><div><h3 class="mini-title">📋 Примеры</h3><div class="box" style="background:var(--p50);border:1px solid var(--p200);"><div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:13px;"><div><strong>H₂, N₂, O₂</strong> — газы</div><div><strong>F₂, Cl₂, Br₂</strong> — галогены</div><div><strong>I₂</strong> — твёрдый (возгоняется)</div><div><strong>P₄, S₈</strong></div><div><strong>H₂O, H₂O₂</strong></div><div><strong>CO₂, SO₂, SO₃</strong></div><div><strong>HCl, HF</strong></div><div><strong>CH₄, C₂H₆, NH₃</strong></div></div></div></div></div>
+    <div class="practice-block"><div class="p-title">Проверь себя — 4 задания</div><div id="p10"></div></div>
+  </div>
+</section>
+
+<!-- SECTION 11 -->
+<section class="section" id="s11">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">11</div>
+    <h2 class="section-title">Атомная решётка</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="box box-info"><div class="box-title">📖 Определение</div>В узлах атомной решётки — <strong>атомы</strong>, соединённые ковалентными связями по всему кристаллу. Очень твёрдые, высокие Тпл.</div>
+    <div class="grid-2"><div><div class="box box-warn" style="margin-top:0;"><div class="box-title">⚠️ Исключение</div><strong>Графит</strong> — атомная решётка, но <strong>проводит ток</strong>.</div></div><div><h3 class="mini-title">📋 Примеры</h3><div class="box" style="background:var(--p50);border:1px solid var(--p200);"><div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:13px;"><div><strong>Алмаз C</strong></div><div><strong>Графит C</strong></div><div><strong>Si</strong> — кремний</div><div><strong>B</strong> — бор</div><div><strong>SiO₂</strong> — кварц</div><div><strong>SiC</strong> — карборунд</div><div><strong>P</strong> — красный фосфор</div></div></div></div></div>
+    <div class="must-memo"><div class="mm-hd">📌 Правило</div><ul><li>Атомная решётка — только у <strong>твёрдых неметаллов</strong>.</li><li>Если вещество — твёрдый неметалл с очень высокой Тпл → атомная решётка.</li></ul></div>
+    <div class="practice-block"><div class="p-title">Проверь себя — 4 задания</div><div id="p11"></div></div>
+  </div>
+</section>
+
+<!-- SECTION 12 -->
+<section class="section" id="s12">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">12</div>
+    <h2 class="section-title">Ионная решётка</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="box box-info"><div class="box-title">📖 Определение</div>В узлах ионной решётки — <strong>катионы и анионы</strong>, удерживаемые электростатическим притяжением. Характерно для <strong>солей, оксидов и гидроксидов металлов</strong>.</div>
+    <div class="grid-2"><div><h3 class="mini-title">📋 Примеры</h3><div class="box" style="background:var(--p50);border:1px solid var(--p200);"><div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:13px;"><div><strong>NaCl</strong></div><div><strong>KNO₃</strong></div><div><strong>CaO</strong></div><div><strong>NaOH</strong></div><div><strong>Na₂CO₃</strong></div><div><strong>AlCl₃</strong></div><div><strong>NH₄Cl</strong></div><div><strong>Al₂O₃</strong></div></div></div></div><div><div class="box box-remember" style="margin-top:0;"><div class="box-title">🧠 Как узнать</div><ul><li><strong>Соли</strong> — NaCl, K₂SO₄, CaCO₃, AlCl₃, NH₄Cl</li><li><strong>Оксиды металлов</strong> — CaO, Na₂O, Fe₂O₃, Al₂O₃</li><li><strong>Гидроксиды металлов</strong> — NaOH, Ca(OH)₂, Al(OH)₃</li></ul></div></div></div>
+    <div class="practice-block"><div class="p-title">Проверь себя — 4 задания</div><div id="p12"></div></div>
+  </div>
+</section>
+
+<!-- SECTION 13 -->
+<section class="section" id="s13">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">13</div>
+    <h2 class="section-title">Металлическая решётка</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="box box-info"><div class="box-title">📖 Определение</div>В узлах металлической решётки — <strong>атомы и катионы металлов</strong>, между которыми перемещаются свободные электроны («электронный газ»). Характерно для <strong>всех металлов и сплавов</strong>.</div>
+    <div><h3 class="mini-title">📋 Примеры</h3><div class="box" style="background:var(--p50);border:1px solid var(--p200);"><div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:13px;"><div><strong>Fe</strong> — железо</div><div><strong>Cu</strong> — медь</div><div><strong>Al</strong> — алюминий</div><div><strong>Na, K</strong> — щелочные</div><div><strong>Zn</strong> — цинк</div><div><strong>Hg</strong> — ртуть</div><div><strong>Сталь, бронза, латунь</strong> — сплавы</div></div></div><div class="box box-remember" style="margin-top:8px;"><div class="box-title">🧠 Главное</div><strong>Все металлы и сплавы</strong> имеют металлическую решётку.</div></div>
+    <div class="practice-block"><div class="p-title">Проверь себя — 4 задания</div><div id="p13"></div></div>
+  </div>
+</section>
+
+<!-- SECTION 14 -->
+<section class="section" id="s14">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">14</div>
+    <h2 class="section-title">Алгоритм определения типа решётки</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="alg-box"><div class="alg-step"><div class="alg-num">1</div><div style="font-size:14px;font-weight:600;">Посмотри на <strong>агрегатное состояние</strong> и <strong>состав</strong></div></div><div class="alg-arrow">↓</div><div class="alg-step" style="flex-wrap:wrap;gap:8px;"><div style="background:#EFF6FF;border-radius:8px;padding:10px 14px;flex:1;"><span style="font-weight:700;color:#1E40AF;">Газ или жидкость</span><br><span style="font-size:13px;">→ <strong>молекулярная</strong></span></div><div style="background:#F5F3FF;border-radius:8px;padding:10px 14px;flex:1;"><span style="font-weight:700;color:#5B21B6;">Твёрдый неметалл</span><br><span style="font-size:13px;">→ <strong>атомная</strong></span></div><div style="background:#FEF2F2;border-radius:8px;padding:10px 14px;flex:1;"><span style="font-weight:700;color:#991B1B;">Соль, оксид или гидроксид металла</span><br><span style="font-size:13px;">→ <strong>ионная</strong></span></div><div style="background:#FFFBEB;border-radius:8px;padding:10px 14px;flex:1;"><span style="font-weight:700;color:#92400E;">Металл или сплав</span><br><span style="font-size:13px;">→ <strong>металлическая</strong></span></div></div><div class="alg-arrow">↓</div><div class="alg-step"><div class="alg-num">2</div><div style="font-size:14px;font-weight:600;">Проверь исключения</div></div></div>
+    <div class="ege-tip"><div class="tip-hd">⭐ Частые ловушки</div><ul><li><strong>Графит</strong> — атомная, но проводит ток.</li><li><strong>Белый фосфор P₄</strong> — <strong>молекулярная</strong>, красный фосфор — атомная.</li><li><strong>Все газы и жидкости</strong> → молекулярная.</li><li><strong>Все соли</strong> → ионная (включая NH₄Cl).</li></ul></div>
+  </div>
+</section>
+
+<!-- SECTION 15 -->
+<section class="section" id="s15">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">15</div>
+    <h2 class="section-title">Типичные ошибки и ловушки ЕГЭ</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="box box-danger"><div class="box-title">🚨 Частые ошибки</div><ul><li><strong>NaOH:</strong> считают только ионную, но есть O–H полярная.</li><li><strong>NH₄Cl:</strong> считают все связи ионными, но внутри NH₄⁺ — ков. полярная + ДАМ.</li><li><strong>PH₃:</strong> считают полярной, а она неполярная.</li><li><strong>HCl:</strong> считают водородную связь – её нет!</li><li><strong>Графит:</strong> считают непроводящим – а он проводит ток.</li></ul></div>
+    <div class="trap-box"><div class="trap-hd">⚠️ Ловушки</div><ul><li>«Ковалентная связь есть во всех веществах» — НЕТ! В NaCl её нет.</li><li>«Водородная связь у всех водородсодержащих» — НЕТ! Только у H–F, H–O, H–N.</li><li>«Все твёрдые вещества имеют атомную решётку» — НЕТ! Есть молекулярные (I₂) и ионные (NaCl).</li></ul></div>
+    <div class="must-memo"><div class="mm-hd">📌 Экспресс-шпаргалка для задания №4</div><ul><li><strong>Неполярная:</strong> H₂, O₂, N₂, F₂, Cl₂, Br₂, I₂, P₄, S₈, PH₃, пероксиды (O–O), CaC₂ (C≡C)</li><li><strong>Полярная:</strong> HCl, H₂O, NH₃, H₂S, SO₂, HF, CO₂, NO, PCl₃, SiCl₄</li><li><strong>Ионная:</strong> NaCl, KNO₃, CaCl₂, Al₂O₃, NaOH, NH₄Cl, Na₂CO₃</li><li><strong>Металлическая:</strong> все металлы и сплавы</li><li><strong>Водородная:</strong> HF, H₂O, H₂O₂, NH₃, спирты, кислоты, фенолы, амины</li></ul></div>
+  </div>
+</section>
+
+<!-- SECTION 16 — ФЛЭШКАРТЫ -->
+<section class="section" id="s16">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-num">16</div>
+    <h2 class="section-title">🧠 50 флэш-карточек</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="fc-section" style="margin:0;background:linear-gradient(135deg,#003545,#0088B0);border-radius:var(--r-lg);padding:32px 28px;color:#fff">
+      <div class="fc-header"><div class="fc-title">🃏 50 флэш-карточек — Химическая связь и решётки</div><div class="fc-sub">Нажми на карточку чтобы перевернуть. Отмечай что знаешь, а что нет.</div></div>
+      <div class="fc-stats">Знаю: <span id="fc-know">0</span> &nbsp;|&nbsp; Не знаю: <span id="fc-dk">0</span> &nbsp;|&nbsp; Осталось: <span id="fc-left">50</span></div>
+      <div class="fc-counter" id="fc-counter">Карточка 1 из 50</div>
+      <div class="fc-perspective" onclick="fcFlip()"><div class="fc-inner" id="fc-inner"><div class="fc-face fc-front"><div class="fc-tag" id="fc-tag">ВОПРОС</div><div id="fc-front-text"></div></div><div class="fc-face fc-back"><div class="fc-back-tag" id="fc-back-tag">ОТВЕТ</div><div id="fc-back-text"></div><div class="fc-hint" id="fc-hint"></div></div></div></div>
+      <button class="fc-flip-btn" onclick="fcFlip()">🔄 Перевернуть</button>
+      <div class="fc-btn-row" id="fc-btn-row"><button class="fc-btn-know" onclick="fcAnswer(true)">✓ Знаю</button><button class="fc-btn-dontknow" onclick="fcAnswer(false)">✗ Не знаю</button></div>
+      <div class="fc-keys">пробел — перевернуть · ← не знаю · → знаю</div>
+      <div class="fc-result" id="fc-result"><h3>🎉 Готово!</h3><div class="fc-res-row"><div class="fc-res-card"><div class="fc-res-num" id="res-know" style="color:#1D9E75">0</div><div class="fc-res-lbl">ЗНАЮ</div></div><div class="fc-res-card"><div class="fc-res-num" id="res-dk" style="color:#C0392B">0</div><div class="fc-res-lbl">НЕ ЗНАЮ</div></div></div><div class="fc-restart-row"><button class="fc-restart-btn primary" onclick="fcRestart(false)">Сначала (все)</button><button class="fc-restart-btn" onclick="fcRestart(true)">Только ошибки</button></div></div>
+    </div>
+  </div>
+</section>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+</div><!-- /shell -->
+
+<script>
+// ================================================================
+//  ДАННЫЕ ДЛЯ ПРАКТИКИ (40 заданий)
+// ================================================================
+const PRACTICE_DATA = {
+  p2: [
+    { q: 'Какие два вещества содержат <b>только</b> ковалентные неполярные связи?', opts: ['H₂', 'HCl', 'O₂', 'H₂O', 'NH₃'], ans: '13' },
+    { q: 'Какие два утверждения о ковалентной неполярной связи <b>верны</b>?', opts: ['Образуется между одинаковыми атомами неметаллов.', 'Электронная пара смещена к более электроотрицательному атому.', 'Характерна для металлов.', 'Разность электроотрицательностей равна нулю.', 'Образуется между разными атомами.'], ans: '14' },
+    { q: 'В каких двух молекулах есть <b>кратная</b> связь (двойная или тройная)?', opts: ['H₂', 'O₂', 'N₂', 'Cl₂', 'F₂'], ans: '23' },
+    { q: 'Какие два соединения являются <b>пероксидами</b> и содержат неполярную связь O–O?', opts: ['H₂O₂', 'Na₂O₂', 'CaO', 'MgO', 'K₂O'], ans: '12' }
+  ],
+  p3: [
+    { q: 'Какие два вещества имеют ковалентную полярную связь?', opts: ['H₂S', 'H₂', 'O₂', 'HF', 'N₂'], ans: '14' },
+    { q: 'Какие два вещества имеют ковалентную полярную связь?', opts: ['CO₂', 'H₂SiO₃ (кремниевая кислота)', 'NaCl', 'K₂O', 'O₂'], ans: '12' },
+    { q: 'В каких двух молекулах есть π-связи?', opts: ['HCl', 'SO₂', 'CO₂', 'K₂C₂ (карбид калия)', 'SiCl₄'], ans: '23' },
+    { q: 'Какие два вещества содержат только ковалентные полярные связи?', opts: ['SiCl₄', 'Cl₂', 'PCl₃', 'Br₂', 'I₂'], ans: '13' }
+  ],
+  p4: [
+    { q: 'В каких двух ионах/молекулах есть связь по ДАМ?', opts: ['NH₄⁺', 'NH₃', 'H₃O⁺', 'H₂O', 'CH₄'], ans: '13' },
+    { q: 'У каких двух соединений связь образована по ДАМ?', opts: ['[Cu(NH₃)₄]SO₄', 'O₃', 'Si', 'Li₃PO₄', 'NH₃'], ans: '12' },
+    { q: 'В каких двух соединениях есть связь по ДАМ?', opts: ['NaNO₃', 'NH₄Cl', 'KNO₃', '(NH₄)₂SO₄', 'CaCO₃'], ans: '24' },
+    { q: 'Какие два вещества содержат ДАМ-связь?', opts: ['CO', 'O₂', 'CO₂', 'HNO₃', 'H₂SO₄'], ans: '14' }
+  ],
+  p5: [
+    { q: 'Какие два вещества имеют ионную связь?', opts: ['NaCl', 'HCl', 'KNO₃', 'CO₂', 'NH₃'], ans: '13' },
+    { q: 'Найдите два соединения с ионной связью.', opts: ['Карбонат кальция', 'Хлорид фосфора(V)', 'Фосфат аммония', 'Кремний', 'Вода'], ans: '13' },
+    { q: 'В каких двух веществах есть ионная связь (наряду с ковалентной)?', opts: ['NaOH', 'SO₂', 'Cl₂', 'NH₄Cl', 'H₂SO₄'], ans: '14' },
+    { q: 'Какие два соединения имеют ионную кристаллическую решётку?', opts: ['NaCl', 'SiO₂', 'I₂', 'Al₂O₃', 'KNO₃'], ans: '15' }
+  ],
+  p6: [
+    { q: 'Какие два вещества имеют металлическую связь?', opts: ['Fe', 'Cu', 'NaCl', 'Al', 'H₂'], ans: '12' },
+    { q: 'Какие два утверждения о металлической связи <b>верны</b>?', opts: ['Связь между катионами и электронами.', 'Свободные электроны – «электронный газ».', 'Характерна для неметаллов.', 'Обусловливает электропроводность.', 'Направленная связь.'], ans: '14' },
+    { q: 'В каких двух веществах есть металлическая связь?', opts: ['Медь', 'NaCl', 'Железо', 'Al₂O₃', 'Вода'], ans: '13' },
+    { q: 'В каких двух объектах есть металлическая связь?', opts: ['Сталь', 'Сера', 'Кварц', 'Соль', 'Бронза'], ans: '15' }
+  ],
+  p7: [
+    { q: 'В каких двух веществах есть водородная связь?', opts: ['HF', 'HCl', 'H₂O', 'H₂S', 'HNO₃'], ans: '13' },
+    { q: 'Какие два условия необходимы для водородной связи?', opts: ['H при F/O/N', 'Наличие F/O/N в другой молекуле', 'H при любом элементе', 'Ионная связь', 'Высокая температура'], ans: '12' },
+    { q: 'У каких двух веществ <b>нет</b> водородной связи?', opts: ['PH₃', 'H₂O', 'NH₃', 'H₂S', 'Фенол'], ans: '14' },
+    { q: 'Какие два вещества имеют водородную связь?', opts: ['Пропановая кислота', 'Этан', 'Диметиловый эфир', 'Ацетон', 'Этанол'], ans: '15' }
+  ],
+  p10: [
+    { q: 'Какие два вещества имеют молекулярную решётку?', opts: ['H₂O (лёд)', 'CO₂ (сухой лёд)', 'SiO₂', 'NaCl', 'Fe'], ans: '12' },
+    { q: 'Какие два вещества имеют молекулярную решётку?', opts: ['HNO₃', 'SiO₂', 'CO (угарный газ)', 'NaCl', 'Fe'], ans: '13' },
+    { q: 'Какие два вещества при н.у. газы и имеют молекулярную решётку?', opts: ['H₂', 'Красный фосфор', 'Чёрный фосфор', 'N₂', 'Кремний'], ans: '14' },
+    { q: 'Какие два вещества имеют молекулярную решётку?', opts: ['SO₂', 'SiO₂', 'NaCl', 'Fe', 'SO₃'], ans: '15' }
+  ],
+  p11: [
+    { q: 'Какие два вещества имеют атомную решётку?', opts: ['Алмаз', 'Кремний (Si)', 'Иод (I₂)', 'SO₃', 'NaCl'], ans: '12' },
+    { q: 'Найдите два вещества с атомной решёткой.', opts: ['H₂SiO₃', 'Белый фосфор', 'Чёрный фосфор', 'I₂', 'CO₂'], ans: '13' },
+    { q: 'Для каких двух веществ характерна атомная решётка?', opts: ['Графит', 'Белый фосфор', 'CO₂', 'Алмаз', 'Сера'], ans: '14' },
+    { q: 'Какие два вещества имеют атомную решётку?', opts: ['SiC', 'CO', 'O₂', 'P₄', 'Кварц (SiO₂)'], ans: '15' }
+  ],
+  p12: [
+    { q: 'Какие два вещества имеют ионную решётку?', opts: ['NaCl', 'KNO₃', 'H₂O', 'SiO₂', 'Cu'], ans: '12' },
+    { q: 'Найдите два вещества с ионной решёткой.', opts: ['Li₂SiO₃', 'O₂', 'Na₄C', 'Алмаз', 'Si'], ans: '13' },
+    { q: 'Какие два соединения имеют ионную решётку?', opts: ['CaO', 'CO₂', 'SO₂', 'NH₄Cl', 'H₂SO₄'], ans: '14' },
+    { q: 'Какие два соединения имеют <b>только</b> ионную решётку?', opts: ['CaCl₂', 'NaNO₃', 'K₂SO₄', 'Na₂CO₃', 'Al₂S₃'], ans: '15' }
+  ],
+  p13: [
+    { q: 'Какие два вещества имеют металлическую решётку?', opts: ['Fe', 'Cu', 'NaCl', 'H₂SiO₃', 'H₂'], ans: '12' },
+    { q: 'Какие два вещества имеют металлическую решётку?', opts: ['Ca', 'S₈', 'Au', 'SiO₂', 'NaCl'], ans: '13' },
+    { q: 'Найдите два вещества с металлической решёткой.', opts: ['Сталь', 'NaCl', 'Hg', 'KNO₃', 'MgO'], ans: '13' },
+    { q: 'Какие два объекта имеют металлическую решётку?', opts: ['Сталь', 'Кварц', 'Сера', 'Лёд', 'Бронза'], ans: '15' }
+  ]
+};
+
+// ================================================================
+//  РЕНДЕР ПРАКТИКИ
+// ================================================================
+function renderPractice() {
+  for (const [blockId, tasks] of Object.entries(PRACTICE_DATA)) {
+    const container = document.getElementById(blockId);
+    if (!container) continue;
+    let html = '';
+    tasks.forEach((task, idx) => {
+      const id = blockId + '-' + idx;
+      html += `
+        <div class="practice-item" id="pi-${id}">
+          <div class="q">${task.q}</div>
+          <div class="opts">
+            ${task.opts.map((opt, i) => `<div class="opt"><span class="num">${i+1})</span> ${opt}</div>`).join('')}
+          </div>
+          <div class="input-row">
+            <input type="text" id="inp-${id}" maxlength="2" autocomplete="off">
+            <button onclick="checkPractice('${id}', '${task.ans}')">☑ Проверить</button>
+          </div>
+          <div class="fb" id="fb-${id}"></div>
+        </div>
+      `;
+    });
+    container.innerHTML = html;
+  }
+}
+
+function checkPractice(id, correct) {
+  const inp = document.getElementById('inp-' + id);
+  const fb = document.getElementById('fb-' + id);
+  const val = inp.value.replace(/\s/g, '');
+  if (!val) {
+    fb.className = 'fb err';
+    fb.textContent = 'Введите номера ответов (например, 13)';
+    return;
+  }
+  const sorted = val.split('').sort().join('');
+  const sortedCorrect = correct.split('').sort().join('');
+  if (sorted === sortedCorrect) {
+    fb.className = 'fb ok';
+    fb.textContent = '✅ Верно!';
+    inp.disabled = true;
+    inp.closest('.practice-item').querySelector('button').disabled = true;
+  } else {
+    fb.className = 'fb err';
+    fb.textContent = '❌ Попробуйте ещё раз.';
+  }
+}
+
+// ================================================================
+//  FLASHCARDS — 50 карточек (19 теория + 31 практика)
+// ================================================================
+const FC_CARDS = [
+  // Блок 1. Теория (19)
+  { q: 'Что такое химическая связь?', a: 'Взаимодействие между атомами, благодаря которому они объединяются в молекулы, ионные соединения и кристаллы.', tag: 'Теория' },
+  { q: 'Какие виды химической связи существуют?', a: 'Ковалентная (неполярная и полярная), ионная, металлическая, водородная.', tag: 'Теория' },
+  { q: 'Что такое ковалентная связь?', a: 'Связь, образованная за счёт общих электронных пар между атомами неметаллов.', tag: 'Теория' },
+  { q: 'Что такое ковалентная неполярная связь?', a: 'Связь между одинаковыми атомами неметаллов (электронная пара не смещена).', tag: 'Теория' },
+  { q: 'Что такое ковалентная полярная связь?', a: 'Связь между разными атомами неметаллов (электронная пара смещена к более ЭО атому).', tag: 'Теория' },
+  { q: 'Что такое ионная связь?', a: 'Связь между ионами за счёт электростатического притяжения (металл + неметалл или NH₄⁺ + кислотный остаток).', tag: 'Теория' },
+  { q: 'Что такое металлическая связь?', a: 'Связь между катионами металлов и обобществлёнными электронами («электронный газ»).', tag: 'Теория' },
+  { q: 'Что такое водородная связь?', a: 'Межмолекулярная связь между H одной молекулы (связанным с F/O/N) и F/O/N другой молекулы.', tag: 'Теория' },
+  { q: 'Между какими частицами возникает водородная связь?', a: 'Между атомом H одной молекулы (связанным с F/O/N) и атомом F/O/N другой молекулы.', tag: 'Теория' },
+  { q: 'Приведите примеры веществ с водородной связью.', a: 'HF, H₂O, H₂O₂, NH₃, спирты, карбоновые кислоты, фенолы, амины.', tag: 'Теория' },
+  { q: 'Что такое донорно-акцепторный механизм?', a: 'Способ образования ковалентной связи, где донор даёт пару, а акцептор – пустую орбиталь.', tag: 'Теория' },
+  { q: 'Примеры соединений с ДАМ-связью.', a: 'NH₄Cl, PH₄Cl, H₃O⁺, CO, O₃, HNO₃, N₂O₅, комплексные соединения, соли аминов.', tag: 'Теория' },
+  { q: 'Что такое кристаллическая решётка?', a: 'Правильное периодическое расположение частиц (атомов, молекул или ионов) в пространстве.', tag: 'Теория' },
+  { q: 'Какие виды кристаллических решёток существуют?', a: 'Молекулярная, атомная, ионная, металлическая.', tag: 'Теория' },
+  { q: 'Что такое атомная кристаллическая решётка?', a: 'Решётка, в узлах которой атомы, соединённые ковалентными связями по всему кристаллу (только твёрдые).', tag: 'Теория' },
+  { q: 'Что такое молекулярная кристаллическая решётка?', a: 'Решётка, в узлах которой молекулы, связанные слабыми силами (характерна для газов и жидкостей).', tag: 'Теория' },
+  { q: 'Что такое ионная кристаллическая решётка?', a: 'Решётка, в узлах которой катионы и анионы, удерживаемые электростатическим притяжением.', tag: 'Теория' },
+  { q: 'Что такое металлическая кристаллическая решётка?', a: 'Решётка, в узлах которой атомы и катионы металлов, между которыми свободные электроны.', tag: 'Теория' },
+  { q: 'Что такое σ- и π-связи?', a: 'σ – перекрывание вдоль оси; π – по бокам. Одинарная = 1σ, двойная = 1σ+1π, тройная = 1σ+2π.', tag: 'Теория' },
+  // Блок 2. Практика (31)
+  { q: 'Определите тип связи и решётки для NaCl.', a: 'Ионная связь, ионная решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для MgO.', a: 'Ионная связь, ионная решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для Al₂O₃.', a: 'Ионная связь, ионная решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для NH₄Cl.', a: 'Ионная (NH₄⁺–Cl⁻) + ков. полярная (N–H, одна ДАМ), ионная решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для NaOH.', a: 'Ионная (Na–O) + ков. полярная (O–H), ионная решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для NaNO₃.', a: 'Ионная (Na⁺–NO₃⁻) + ков. полярная (N–O), ионная решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для H₂O.', a: 'Ков. полярная, молекулярная решётка (жидкость); есть водородная связь.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для NH₃.', a: 'Ков. полярная, молекулярная решётка (газ); есть водородная связь.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для HF.', a: 'Ков. полярная, молекулярная решётка (газ); есть водородная связь.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для CH₃OH (метанол).', a: 'Ков. полярная, молекулярная решётка (жидкость); есть водородная связь.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для CH₃COOH (уксусная кислота).', a: 'Ков. полярная, молекулярная решётка (жидкость); есть водородная связь.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для HCl.', a: 'Ков. полярная, молекулярная решётка (газ); водородной связи нет.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для CH₄.', a: 'Ков. полярная, молекулярная решётка (газ); водородной связи нет.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для PH₃.', a: 'Ков. неполярная, молекулярная решётка (газ); водородной связи нет.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для H₂S.', a: 'Ков. полярная, молекулярная решётка (газ); водородной связи нет.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для CO₂.', a: 'Ков. полярная, молекулярная решётка (газ).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для SO₂.', a: 'Ков. полярная, молекулярная решётка (газ).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для SiO₂ (кварц).', a: 'Ков. полярная, атомная решётка (твёрдое).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для Si (кремний).', a: 'Ков. неполярная, атомная решётка (твёрдое).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для C (алмаз).', a: 'Ков. неполярная, атомная решётка (твёрдое).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для C (графит).', a: 'Ков. неполярная, атомная решётка (твёрдое, проводник).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для P (красный фосфор).', a: 'Ков. неполярная, атомная решётка (твёрдое).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для I₂.', a: 'Ков. неполярная, молекулярная решётка (твёрдое, возгоняется).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для P₄ (белый фосфор).', a: 'Ков. неполярная, молекулярная решётка (твёрдое).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для S₈ (сера).', a: 'Ков. неполярная, молекулярная решётка (твёрдое).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для O₂.', a: 'Ков. неполярная, молекулярная решётка (газ).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для Br₂.', a: 'Ков. неполярная, молекулярная решётка (жидкость).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для Fe.', a: 'Металлическая связь, металлическая решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для Cu.', a: 'Металлическая связь, металлическая решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для Al.', a: 'Металлическая связь, металлическая решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для Na.', a: 'Металлическая связь, металлическая решётка.', tag: 'Практика' }
+];
+
+// ================================================================
+//  ЛОГИКА ФЛЭШКАРТ
+// ================================================================
+let fcDeck=[...Array(FC_CARDS.length).keys()];
+let fcPos=0,fcFlipped=false,fcKnow=0,fcDk=0,fcDontKnowList=[];
+
+function fcRender(){
+  const idx=fcDeck[fcPos];
+  const card=FC_CARDS[idx];
+  document.getElementById('fc-front-text').textContent=card.q;
+  document.getElementById('fc-back-text').textContent='';
+  document.getElementById('fc-hint').textContent='';
+  document.getElementById('fc-tag').textContent=card.tag||'ВОПРОС';
+  document.getElementById('fc-back-tag').textContent='ОТВЕТ';
+  document.getElementById('fc-counter').textContent=`Карточка ${fcPos+1} из ${fcDeck.length}`;
+  document.getElementById('fc-know').textContent=fcKnow;
+  document.getElementById('fc-dk').textContent=fcDk;
+  document.getElementById('fc-left').textContent=fcDeck.length-fcPos;
+  const inner=document.getElementById('fc-inner');
+  inner.classList.remove('flipped');
+  fcFlipped=false;
+  document.getElementById('fc-btn-row').style.display='none';
+}
+
+function fcFlip(){
+  const inner=document.getElementById('fc-inner');
+  fcFlipped=!fcFlipped;
+  inner.classList.toggle('flipped',fcFlipped);
+  if(fcFlipped){
+    inner.addEventListener('transitionend',function onDone(){
+      inner.removeEventListener('transitionend',onDone);
+      if(!fcFlipped)return;
+      const card=FC_CARDS[fcDeck[fcPos]];
+      document.getElementById('fc-back-text').textContent=card.a;
+      document.getElementById('fc-btn-row').style.display='flex';
+    });
+  } else {
+    document.getElementById('fc-back-text').textContent='';
+    document.getElementById('fc-btn-row').style.display='none';
+  }
+}
+
+function fcAnswer(know){
+  if(know){fcKnow++;}else{fcDk++;fcDontKnowList.push(fcDeck[fcPos]);}
+  fcPos++;
+  if(fcPos>=fcDeck.length){
+    document.getElementById('res-know').textContent=fcKnow;
+    document.getElementById('res-dk').textContent=fcDk;
+    document.getElementById('fc-inner').parentElement.style.display='none';
+    document.querySelector('.fc-flip-btn').style.display='none';
+    document.getElementById('fc-btn-row').style.display='none';
+    document.querySelector('.fc-keys').style.display='none';
+    document.getElementById('fc-counter').style.display='none';
+    document.querySelector('.fc-stats').style.display='none';
+    document.getElementById('fc-result').style.display='block';
+  } else {
+    fcRender();
+  }
+}
+
+function fcRestart(onlyWrong){
+  fcKnow=0;fcDk=0;
+  fcDeck=onlyWrong&&fcDontKnowList.length?[...fcDontKnowList]:[...Array(FC_CARDS.length).keys()];
+  fcDontKnowList=[];fcPos=0;
+  document.getElementById('fc-inner').parentElement.style.display='';
+  document.querySelector('.fc-flip-btn').style.display='';
+  document.querySelector('.fc-keys').style.display='';
+  document.getElementById('fc-counter').style.display='';
+  document.querySelector('.fc-stats').style.display='';
+  document.getElementById('fc-result').style.display='none';
+  fcRender();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.code==='Space'){e.preventDefault();fcFlip();}
+  if(e.code==='ArrowRight'&&fcFlipped)fcAnswer(true);
+  if(e.code==='ArrowLeft'&&fcFlipped)fcAnswer(false);
+});
+
+// ================================================================
+//  ОБЩИЕ СКРИПТЫ
+// ================================================================
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop||document.body.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('pf').style.width=pct+'%';
+  document.getElementById('back-top').classList.toggle('visible',pct>8);
+});
+
+function toggleSection(hdr){
+  hdr.classList.toggle('collapsed');
+  const body=hdr.nextElementSibling;
+  if(body.classList.contains('collapsed')){
+    body.style.overflow='hidden';
+    body.style.maxHeight=body.scrollHeight+'px';
+    body.style.opacity='1';
+    body.classList.remove('collapsed');
+    setTimeout(()=>{body.style.maxHeight='none';body.style.overflow='visible';},380);
+  } else {
+    body.style.overflow='hidden';
+    body.style.maxHeight=body.scrollHeight+'px';
+    requestAnimationFrame(()=>{
+      body.style.maxHeight='0';
+      body.style.opacity='0';
+    });
+    body.classList.add('collapsed');
+  }
+}
+
+// ================================================================
+//  ИНИЦИАЛИЗАЦИЯ
+// ================================================================
+document.addEventListener('DOMContentLoaded', function() {
+  renderPractice();
+  fcRender();
+});
+</script>
+</body>
+</html>
