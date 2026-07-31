@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Периодический закон – тренды к F и Fr</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --cream: #e8ecf3;
+            --cream-light: #f4f6f9;
+            --brown-dark: #2d3a4a;
+            --brown-mid: #4a5a70;
+            --brown-dot: #4a5a70;
+            --brown-light: #8fa0b8;
+            --beige: #dde2ec;
+            --p600: #0088B0;
+            --p400: #33BCE0;
+            --p100: #E0F6FD;
+            --ink: #1a2233;
+            --ink2: #3a4a5c;
+            --ink3: #6b7a90;
+            --line: #cdd2dc;
+            --white: #FFFFFF;
+            --bg: #f4f6f9;
+            --shadow: 0 1px 4px rgba(30,50,80,0.07), 0 4px 16px rgba(30,50,80,0.05);
+            --r: 12px;
+            --r-sm: 8px;
+            --font: 'Segoe UI', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', 'Courier New', monospace;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+            font-size: 15px;
+            padding-bottom: 40px;
+        }
+        .prog-bar-wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--line);
+            z-index: 999;
+        }
+        .prog-bar-fill {
+            height: 3px;
+            background: linear-gradient(90deg, var(--brown-dark), var(--brown-mid));
+            width: 0;
+            transition: width 0.1s;
+        }
+        .shell {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            background-color: var(--cream);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='90'%3E%3Ctext x='8' y='32' font-size='22' font-weight='800' font-family='monospace' fill='%234a5a70' opacity='0.10'%3EF%3C/text%3E%3Ctext x='44' y='72' font-size='21' font-weight='800' font-family='monospace' fill='%234a5a70' opacity='0.10'%3EFr%3C/text%3E%3Ctext x='100' y='28' font-size='20' font-weight='800' font-family='monospace' fill='%234a5a70' opacity='0.10'%3ELi%3C/text%3E%3Ctext x='142' y='66' font-size='19' font-weight='800' font-family='monospace' fill='%234a5a70' opacity='0.10'%3ENa%3C/text%3E%3Ctext x='6' y='84' font-size='17' font-weight='800' font-family='monospace' fill='%234a5a70' opacity='0.10'%3ECl%3C/text%3E%3Ctext x='80' y='52' font-size='19' font-weight='800' font-family='monospace' fill='%234a5a70' opacity='0.10'%3EO%3C/text%3E%3C/svg%3E");
+            background-size: 180px 90px;
+            background-repeat: repeat;
+            background-position: 0 0;
+            padding: 48px 32px 40px;
+            margin: 0 -24px 40px;
+            border-radius: 0 0 var(--r) var(--r);
+            box-shadow: var(--shadow);
+            border-bottom: 2px solid var(--brown-light);
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(74, 90, 112, 0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(45, 58, 74, 0.08);
+            border: 1px solid rgba(45, 58, 74, 0.15);
+            color: var(--brown-dark);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 12px;
+            font-family: var(--mono);
+            letter-spacing: 0.6px;
+            margin-bottom: 18px;
+        }
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 44px);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+            color: var(--brown-dark);
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--brown-mid);
+        }
+        .hero-sub {
+            font-size: 16px;
+            color: var(--brown-mid);
+            line-height: 1.7;
+            max-width: 560px;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-chip {
+            background: rgba(45, 58, 74, 0.07);
+            border: 1px solid rgba(45, 58, 74, 0.12);
+            color: var(--brown-dark);
+            padding: 5px 14px;
+            border-radius: 16px;
+            font-size: 12.5px;
+            font-weight: 500;
+        }
+
+        /* ===== TOC ===== */
+        .toc {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            padding: 22px 26px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+        }
+        .toc-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--brown-mid);
+            font-family: var(--mono);
+            margin-bottom: 12px;
+        }
+        .toc ol {
+            padding-left: 20px;
+        }
+        .toc li {
+            padding: 4px 0;
+            font-size: 14px;
+        }
+        .toc a {
+            color: var(--ink2);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        .toc a:hover {
+            color: var(--brown-dark);
+        }
+
+        /* ===== Секции ===== */
+        .section {
+            margin-bottom: 48px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--line);
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.15s;
+            border-radius: 10px;
+            padding: 6px 8px;
+            margin: -6px -8px;
+        }
+        .section-header:hover {
+            background: var(--cream-light);
+        }
+        .section-header::after {
+            content: "▲";
+            font-size: 13px;
+            color: var(--brown-mid);
+            margin-left: auto;
+            transition: transform 0.25s;
+            display: inline-block;
+        }
+        .section-header.collapsed::after {
+            transform: rotate(180deg);
+        }
+        .acc-body {
+            overflow: hidden;
+            transition: max-height 0.35s ease, opacity 0.25s;
+            max-height: 9999px;
+            opacity: 1;
+        }
+        .acc-body.collapsed {
+            max-height: 0 !important;
+            opacity: 0;
+        }
+        .section-num {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            background: var(--brown-dark);
+            color: #fff;
+            font-family: var(--mono);
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(45, 58, 74, 0.25);
+        }
+        .section-title {
+            font-size: clamp(18px, 2.5vw, 24px);
+            font-weight: 700;
+            color: var(--brown-dark);
+            line-height: 1.2;
+        }
+
+        h2.sub-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--brown-mid);
+            margin: 28px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        h2.sub-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--brown-dark);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        p.body {
+            font-size: 14.5px;
+            line-height: 1.75;
+            color: var(--ink2);
+            margin-bottom: 14px;
+        }
+        p.body strong {
+            color: var(--ink);
+        }
+
+        .box {
+            border-radius: var(--r-sm);
+            padding: 14px 18px;
+            margin: 14px 0;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .box-title {
+            font-weight: 700;
+            font-size: 13.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .box-info {
+            background: var(--p100);
+            border-left: 4px solid var(--p600);
+            color: #003545;
+        }
+        .box-warn {
+            background: #FFF8E1;
+            border-left: 4px solid #F59E0B;
+            color: #78350F;
+        }
+        .box-success {
+            background: #E1F5EE;
+            border-left: 4px solid #1D9E75;
+            color: #085041;
+        }
+        .box ul,
+        .box ol {
+            padding-left: 20px;
+            margin: 6px 0;
+        }
+        .box li {
+            margin: 4px 0;
+            font-size: 13.5px;
+        }
+        .must-memo {
+            background: #E8F0E8;
+            border: 2px solid var(--brown-mid);
+            border-radius: var(--r-sm);
+            padding: 14px 18px;
+            margin: 14px 0;
+        }
+        .must-memo .mm-hd {
+            color: var(--brown-dark);
+            font-weight: 800;
+            font-size: 13.5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .must-memo ul {
+            margin: 0;
+            padding-left: 18px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* ===== Тренд-памятки ===== */
+        .trend-memo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            background: var(--cream-light);
+            border: 1.5px solid var(--line);
+            border-radius: var(--r-sm);
+            padding: 12px 18px;
+            margin: 14px 0;
+            flex-wrap: wrap;
+            font-family: var(--mono);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brown-dark);
+        }
+        .trend-memo .arrow {
+            font-size: 22px;
+            color: var(--brown-mid);
+        }
+        .trend-memo .label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink2);
+        }
+
+        /* ===== ПЕРИОДИЧЕСКАЯ ТАБЛИЦА (встроенная) ===== */
+        .pt-container {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            padding: 16px;
+            margin: 14px 0;
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+        }
+        .pt-container .pt-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--brown-dark);
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: var(--mono);
+            letter-spacing: 1px;
+        }
+        .pt-table {
+            border-collapse: collapse;
+            font-size: 11px;
+            margin: 0 auto;
+            white-space: nowrap;
+        }
+        .pt-table th,
+        .pt-table td {
+            border: 1px solid #c4b5fd;
+            padding: 2px 4px;
+            text-align: center;
+            min-width: 36px;
+            height: 32px;
+            vertical-align: middle;
+            transition: background 0.2s;
+        }
+        .pt-table .period-label {
+            background: var(--p100);
+            color: var(--p800);
+            font-weight: 700;
+            font-size: 12px;
+            width: 24px;
+        }
+        .pt-table .group-label {
+            background: var(--brown-dark);
+            color: #fff;
+            font-weight: 700;
+            font-size: 10px;
+        }
+        .pt-table .el-sym {
+            font-weight: 800;
+            font-size: 13px;
+        }
+        .pt-table .el-num {
+            font-size: 8px;
+            opacity: 0.7;
+            display: block;
+            line-height: 1.1;
+        }
+        .pt-table .trend-to-f {
+            background: #fee2e2;
+            border-color: #dc2626;
+        }
+        .pt-table .trend-to-fr {
+            background: #dbeafe;
+            border-color: #3b82f6;
+        }
+        .pt-table .trend-arrow-label {
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--brown-dark);
+        }
+
+        /* ===== MCQ ===== */
+        .mcq-wrap {
+            margin: 24px 0 4px;
+        }
+        .mcq-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--brown-dark);
+            font-family: var(--mono);
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mcq-title::before {
+            content: '';
+            display: block;
+            flex: 1;
+            height: 1px;
+            background: var(--line);
+        }
+        .mcq-block {
+            background: var(--white);
+            border: 1.5px solid var(--line);
+            border-radius: var(--r-sm);
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow);
+        }
+        .mcq-q {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 10px;
+            line-height: 1.55;
+        }
+        .mcq-opts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px;
+            margin-bottom: 8px;
+        }
+        @media (max-width: 520px) {
+            .mcq-opts {
+                grid-template-columns: 1fr;
+            }
+        }
+        .mcq-opt {
+            background: var(--cream-light);
+            border: 1.5px solid var(--line);
+            border-radius: var(--r-sm);
+            padding: 8px 11px;
+            font-size: 13px;
+            cursor: pointer;
+            text-align: left;
+            color: var(--ink2);
+            transition: all 0.15s;
+            line-height: 1.4;
+            font-family: var(--font);
+        }
+        .mcq-opt:hover {
+            border-color: var(--brown-mid);
+            background: #EDE3D7;
+            color: var(--brown-dark);
+        }
+        .mcq-fb {
+            font-size: 13px;
+            padding: 7px 10px;
+            border-radius: var(--r-sm);
+            display: none;
+            margin-top: 2px;
+        }
+
+        /* ===== Флэш-карточки (кратко) ===== */
+        .fc-section {
+            background: var(--brown-dark);
+            border-radius: var(--r);
+            padding: 32px 28px;
+            margin: 48px 0;
+            color: #fff;
+        }
+        .fc-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .fc-title {
+            font-size: clamp(18px, 3vw, 26px);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .fc-sub {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.6;
+        }
+        .fc-stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: var(--mono);
+        }
+        .fc-stats span {
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .fc-counter {
+            text-align: center;
+            font-family: var(--mono);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 14px;
+        }
+        .fc-perspective {
+            perspective: 900px;
+            width: 100%;
+            max-width: 560px;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+        .fc-inner {
+            position: relative;
+            width: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: 180px;
+        }
+        .fc-inner.flipped {
+            transform: rotateY(180deg);
+        }
+        .fc-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            border-radius: var(--r);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 28px;
+            text-align: center;
+            min-height: 180px;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .fc-front {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            font-size: clamp(15px, 2.5vw, 19px);
+            font-family: var(--mono);
+            color: #fff;
+            line-height: 1.5;
+        }
+        .fc-back {
+            background: var(--white);
+            transform: rotateY(180deg);
+            font-family: var(--mono);
+            font-size: clamp(13px, 2vw, 16px);
+            color: var(--brown-dark);
+            line-height: 1.6;
+        }
+        .fc-hint {
+            font-family: var(--font);
+            font-size: 12px;
+            color: var(--ink3);
+            margin-top: 6px;
+            font-style: italic;
+        }
+        .fc-tag {
+            font-size: 10px;
+            font-family: var(--font);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 4px;
+        }
+        .fc-back-tag {
+            font-size: 10px;
+            font-family: var(--font);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--brown-mid);
+            margin-bottom: 4px;
+        }
+        .fc-flip-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--r-sm);
+            padding: 11px 26px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin: 18px auto;
+            width: fit-content;
+        }
+        .fc-flip-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .fc-btn-row {
+            display: none;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 14px;
+        }
+        .fc-btn-know {
+            background: #1D9E75;
+            color: #fff;
+            border: none;
+            border-radius: var(--r-sm);
+            padding: 11px 26px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            flex: 1;
+            max-width: 200px;
+            transition: background 0.15s;
+        }
+        .fc-btn-know:hover {
+            background: #187F5E;
+        }
+        .fc-btn-dontknow {
+            background: #C0392B;
+            color: #fff;
+            border: none;
+            border-radius: var(--r-sm);
+            padding: 11px 26px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            flex: 1;
+            max-width: 200px;
+            transition: background 0.15s;
+        }
+        .fc-btn-dontknow:hover {
+            background: #A0311F;
+        }
+        .fc-keys {
+            text-align: center;
+            font-size: 11.5px;
+            color: rgba(255, 255, 255, 0.35);
+            margin-top: 12px;
+            font-family: var(--mono);
+        }
+        .fc-result {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        .fc-result h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+        .fc-res-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .fc-res-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--r-sm);
+            padding: 12px 22px;
+            min-width: 100px;
+        }
+        .fc-res-num {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .fc-res-lbl {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: var(--mono);
+            margin-top: 2px;
+        }
+        .fc-restart-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .fc-restart-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            border-radius: var(--r-sm);
+            padding: 9px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .fc-restart-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .fc-restart-btn.primary {
+            background: var(--p600);
+            border-color: var(--p600);
+        }
+
+        #back-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--brown-dark);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 4px 16px rgba(45, 58, 74, 0.28);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s, transform 0.2s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        #back-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        #back-top:hover {
+            transform: translateY(-2px);
+        }
+        @media (max-width: 540px) {
+            .shell {
+                padding: 0 14px 60px;
+            }
+            .hero {
+                padding: 32px 18px 28px;
+                margin: 0 -14px 32px;
+            }
+        }
+
+        /* === Б2: стрелки трендов === */
+        .trend2 {
+            background: var(--cream-light);
+            border: 1.5px solid var(--line);
+            border-radius: var(--r-sm);
+            padding: 14px 18px;
+            margin: 14px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .trend2-section { display: flex; flex-direction: column; gap: 6px; }
+        .trend2-lbl { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--brown-mid); margin-bottom: 4px; }
+        .trend2-hrow { display: flex; align-items: center; gap: 0; }
+        .trend2-pole {
+            font-size: 15px; font-weight: 800; font-family: var(--mono);
+            padding: 8px 14px; border-radius: 6px; white-space: nowrap; line-height: 1.2;
+        }
+        .trend2-pole small { display: block; font-size: 10px; font-weight: 500; opacity: .8; margin-top: 2px; }
+        .trend2-pole.fr { background: #dbeafe; color: #1e40af; }
+        .trend2-pole.f  { background: #fee2e2; color: #dc2626; }
+        .trend2-shaft { flex: 1; display: flex; align-items: center; gap: 0; padding: 0 4px; }
+        .trend2-larr { font-size: 16px; color: #1e40af; line-height: 1; }
+        .trend2-rarr { font-size: 16px; color: #dc2626; line-height: 1; }
+        .trend2-bar { flex: 1; height: 2px; background: linear-gradient(90deg, #3b82f6, #dc2626); margin: 0 2px; }
+        .trend2-hdesc { display: flex; justify-content: space-between; font-size: 11.5px; margin-top: 4px; }
+        .trend2-hdesc .fr-t { color: #1e40af; }
+        .trend2-hdesc .f-t  { color: #dc2626; }
+        .trend2-divider { height: 1px; background: var(--line); }
+        .trend2-vrow { display: flex; align-items: flex-start; gap: 14px; }
+        .trend2-vcol { display: flex; flex-direction: column; align-items: center; gap: 2px; padding-top: 2px; }
+        .trend2-vtop { font-size: 11px; font-weight: 700; color: #dc2626; }
+        .trend2-vbot { font-size: 11px; font-weight: 700; color: #1e40af; }
+        .trend2-vline { width: 2px; height: 44px; background: linear-gradient(180deg, #dc2626, #3b82f6); flex-shrink: 0; }
+        .trend2-vdesc { display: flex; flex-direction: column; gap: 6px; padding-top: 4px; font-size: 12px; line-height: 1.45; }
+        .trend2-vdesc .f-t  { color: #dc2626; }
+        .trend2-vdesc .fr-t { color: #1e40af; }
+        @media(max-width:520px){ .trend2-hdesc { flex-direction: column; gap: 4px; } }
+
+        /* === Вариант А: цветная ПС === */
+        .pta-wrap { position: relative; padding: 12px 12px 52px 28px; background: var(--cream-light); border-radius: var(--r-sm); border: 1.5px solid var(--line); overflow-x: auto; margin: 12px 0; }
+        .pta-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
+        .pta-leg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--ink2); }
+        .pta-dot { width: 11px; height: 11px; border-radius: 2px; flex-shrink: 0; }
+        .pta-tbl { border-collapse: collapse; min-width: 520px; }
+        .pta-tbl th { font-size: 9px; font-weight: 600; color: var(--ink3); text-align: center; padding: 2px 3px; }
+        .pta-tbl td { width: 30px; height: 28px; text-align: center; border-radius: 3px; padding: 1px; vertical-align: middle; }
+        .pta-tbl td.pl { font-size: 9px; color: var(--ink3); font-weight: 600; background: none; width: 14px; }
+        .pta-tbl td.gap { background: none; }
+        .pta-sym { display: block; font-size: 11px; font-weight: 700; line-height: 1.15; }
+        .pta-num { display: block; font-size: 7.5px; opacity: .55; line-height: 1; }
+        .es { background: #dbeafe; color: #1e3a8a; }
+        .ep { background: #d1fae5; color: #064e3b; }
+        .ed { background: #ede9fe; color: #3730a3; }
+        .ef { background: #fef3c7; color: #78350f; }
+        .pta-arr-h { position: absolute; bottom: 10px; left: 28px; right: 12px; display: flex; align-items: center; gap: 5px; }
+        .pta-arr-h .line { flex: 1; height: 2px; background: linear-gradient(to right, #3b82f6, #dc2626); }
+        .pta-arr-h .arrowhead { width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 8px solid #dc2626; }
+        .pta-arr-h .lbl { font-size: 10px; white-space: nowrap; }
+        .pta-arr-v { position: absolute; top: 42px; left: 4px; bottom: 52px; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+        .pta-arr-v .lbl-v { font-size: 9px; color: var(--ink3); writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; }
+        .pta-arr-v .line-v { flex: 1; width: 2px; background: linear-gradient(to bottom, #3b82f6, #dc2626); }
+        .pta-arr-v .arrowhead-d { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 8px solid #dc2626; }
+
+        /* === В2: split-таблица === */
+        .split-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-radius: var(--r-sm);
+            overflow: hidden;
+            border: 1.5px solid var(--line);
+            margin: 14px 0;
+            box-shadow: var(--shadow);
+        }
+        .split-side { padding: 14px 16px; }
+        .split-fr { background: #dbeafe; }
+        .split-f  { background: #fee2e2; }
+        .split-hd { font-size: 12px; font-weight: 700; margin-bottom: 10px; }
+        .split-hd.blue { color: #1e40af; }
+        .split-hd.red  { color: #dc2626; }
+        .split-elem { font-family: var(--mono); font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+        .split-elem.blue { color: #1e3a5f; }
+        .split-elem.red  { color: #7f1d1d; }
+        .split-prop { font-size: 12px; color: var(--ink2); padding: 3px 0; border-bottom: 1px solid rgba(0,0,0,.06); }
+        .split-prop:last-child { border: none; }
+        @media(max-width:520px){ .split-wrap { grid-template-columns: 1fr; } }
+
+        /* === Г: задание с вводом === */
+        .mcq-input-row { display: flex; gap: 8px; align-items: center; margin-bottom: 4px; }
+        .mcq-input-row input {
+            width: 110px; padding: 6px 10px;
+            border: 1.5px solid var(--line); border-radius: 6px;
+            font-size: 15px; font-family: var(--mono); text-align: center;
+            background: #fff; color: var(--ink); outline: none;
+            transition: border-color .2s;
+        }
+        .mcq-input-row input:focus { border-color: var(--brown-mid); }
+        .mcq-input-row button {
+            background: var(--brown-dark); color: #fff; border: none;
+            border-radius: 6px; padding: 7px 16px; font-size: 13px;
+            font-weight: 600; cursor: pointer; transition: background .15s;
+        }
+        .mcq-input-row button:hover { background: var(--brown-mid); }
+        .mcq-input-row button:disabled { opacity: .45; cursor: default; }
+    </style>
+</head>
+<body>
+    <div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+    <div class="shell">
+
+        <!-- ===== HERO ===== -->
+        <div class="hero">
+            <div class="hero-tag">ЕГЭ Химия 2026–2027 · Задание №2</div>
+            <h1>Периодический закон<br><em>Два полюса: F и Fr</em></h1>
+            <p class="hero-sub">Все свойства элементов стремятся либо к <strong>фтору</strong> (неметалличность, окислительная способность, кислотность), либо к <strong>францию</strong> (металличность, восстановительная способность, основность).</p>
+            <div class="hero-chips">
+                <span class="hero-chip">⬆️ К фтору</span>
+                <span class="hero-chip">⬇️ К францию</span>
+                <span class="hero-chip">Атомный радиус</span>
+                <span class="hero-chip">ЭО</span>
+                <span class="hero-chip">Энергия ионизации</span>
+                <span class="hero-chip">Оксиды и гидроксиды</span>
+            </div>
+        </div>
+
+        <!-- ===== TOC ===== -->
+        <!-- ============================================================ -->
+        <!-- ===== БЛОК 1: СТРОЕНИЕ ПС ===== -->
+        <section class="section" id="s1">
+            <div class="section-header collapsed" onclick="toggleSection(this)">
+                <div class="section-num">1</div>
+                <h2 class="section-title">Строение Периодической системы</h2>
+            </div>
+            <div class="acc-body collapsed">
+                <h2 class="sub-title">Периоды и группы</h2>
+                <p class="body"><strong>Период</strong> – горизонтальный ряд, номер = число энергетических уровней. <strong>Группа</strong> – вертикальный столбец, номер главной подгруппы (А) = число валентных электронов для s- и p-элементов.</p>
+                <div class="box box-info">
+                    <div class="box-title">📌 Ключевые моменты</div>
+                    <ul>
+                        <li>Малые периоды (1–3) содержат только s- и p-элементы → все они относятся к <strong>главным подгруппам</strong>.</li>
+                        <li>Побочные подгруппы (B) – это d-элементы (переходные металлы).</li>
+                        <li>Номер периода = число электронных слоёв, номер группы А = число валентных электронов.</li>
+                    </ul>
+                </div>
+                <div class="pta-wrap">
+                  <!-- Легенда -->
+                  <div class="pta-legend">
+                    <div class="pta-leg"><div class="pta-dot" style="background:#dbeafe"></div>s-элементы</div>
+                    <div class="pta-leg"><div class="pta-dot" style="background:#d1fae5"></div>p-элементы</div>
+                    <div class="pta-leg"><div class="pta-dot" style="background:#ede9fe"></div>d-элементы</div>
+                    <div class="pta-leg"><div class="pta-dot" style="background:#fef3c7"></div>f-элементы</div>
+                  </div>
+                  <!-- Вертикальная стрелка -->
+                  <div class="pta-arr-v">
+                    <div class="lbl-v">радиус ↑ · металличность ↑</div>
+                    <div class="line-v"></div>
+                    <div class="arrowhead-d"></div>
+                  </div>
+                  <!-- Таблица -->
+                  <table class="pta-tbl">
+                    <thead>
+                      <tr>
+                        <th></th><th>I</th><th>II</th><th>III</th><th>IV</th><th>V</th><th>VI</th><th>VII</th>
+                        <th>VIII-A</th><th>VIII-B</th><th>VIII-C</th>
+                        <th>I-B</th><th>II-B</th>
+                        <th>III</th><th>IV</th><th>V</th><th>VI</th><th>VII</th><th>0</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Период 1 -->
+                      <tr>
+                        <td class="pl">1</td>
+                        <td class="es"><span class="pta-num">1</span><span class="pta-sym">H</span></td>
+                        <td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td>
+                        <td class="ep"><span class="pta-num">2</span><span class="pta-sym">He</span></td>
+                      </tr>
+                      <!-- Период 2 -->
+                      <tr>
+                        <td class="pl">2</td>
+                        <td class="es"><span class="pta-num">3</span><span class="pta-sym">Li</span></td>
+                        <td class="es"><span class="pta-num">4</span><span class="pta-sym">Be</span></td>
+                        <td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td>
+                        <td class="ep"><span class="pta-num">5</span><span class="pta-sym">B</span></td>
+                        <td class="ep"><span class="pta-num">6</span><span class="pta-sym">C</span></td>
+                        <td class="ep"><span class="pta-num">7</span><span class="pta-sym">N</span></td>
+                        <td class="ep"><span class="pta-num">8</span><span class="pta-sym">O</span></td>
+                        <td class="ep"><span class="pta-num">9</span><span class="pta-sym">F</span></td>
+                        <td class="ep"><span class="pta-num">10</span><span class="pta-sym">Ne</span></td>
+                      </tr>
+                      <!-- Период 3 -->
+                      <tr>
+                        <td class="pl">3</td>
+                        <td class="es"><span class="pta-num">11</span><span class="pta-sym">Na</span></td>
+                        <td class="es"><span class="pta-num">12</span><span class="pta-sym">Mg</span></td>
+                        <td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td>
+                        <td class="ep"><span class="pta-num">13</span><span class="pta-sym">Al</span></td>
+                        <td class="ep"><span class="pta-num">14</span><span class="pta-sym">Si</span></td>
+                        <td class="ep"><span class="pta-num">15</span><span class="pta-sym">P</span></td>
+                        <td class="ep"><span class="pta-num">16</span><span class="pta-sym">S</span></td>
+                        <td class="ep"><span class="pta-num">17</span><span class="pta-sym">Cl</span></td>
+                        <td class="ep"><span class="pta-num">18</span><span class="pta-sym">Ar</span></td>
+                      </tr>
+                      <!-- Период 4 -->
+                      <tr>
+                        <td class="pl">4</td>
+                        <td class="es"><span class="pta-num">19</span><span class="pta-sym">K</span></td>
+                        <td class="es"><span class="pta-num">20</span><span class="pta-sym">Ca</span></td>
+                        <td class="ed"><span class="pta-num">21</span><span class="pta-sym">Sc</span></td>
+                        <td class="ed"><span class="pta-num">22</span><span class="pta-sym">Ti</span></td>
+                        <td class="ed"><span class="pta-num">23</span><span class="pta-sym">V</span></td>
+                        <td class="ed"><span class="pta-num">24</span><span class="pta-sym">Cr</span></td>
+                        <td class="ed"><span class="pta-num">25</span><span class="pta-sym">Mn</span></td>
+                        <td class="ed"><span class="pta-num">26</span><span class="pta-sym">Fe</span></td>
+                        <td class="ed"><span class="pta-num">27</span><span class="pta-sym">Co</span></td>
+                        <td class="ed"><span class="pta-num">28</span><span class="pta-sym">Ni</span></td>
+                        <td class="ed"><span class="pta-num">29</span><span class="pta-sym">Cu</span></td>
+                        <td class="ed"><span class="pta-num">30</span><span class="pta-sym">Zn</span></td>
+                        <td class="ep"><span class="pta-num">31</span><span class="pta-sym">Ga</span></td>
+                        <td class="ep"><span class="pta-num">32</span><span class="pta-sym">Ge</span></td>
+                        <td class="ep"><span class="pta-num">33</span><span class="pta-sym">As</span></td>
+                        <td class="ep"><span class="pta-num">34</span><span class="pta-sym">Se</span></td>
+                        <td class="ep"><span class="pta-num">35</span><span class="pta-sym">Br</span></td>
+                        <td class="ep"><span class="pta-num">36</span><span class="pta-sym">Kr</span></td>
+                      </tr>
+                      <!-- Период 5 -->
+                      <tr>
+                        <td class="pl">5</td>
+                        <td class="es"><span class="pta-num">37</span><span class="pta-sym">Rb</span></td>
+                        <td class="es"><span class="pta-num">38</span><span class="pta-sym">Sr</span></td>
+                        <td class="ed"><span class="pta-num">39</span><span class="pta-sym">Y</span></td>
+                        <td class="ed"><span class="pta-num">40</span><span class="pta-sym">Zr</span></td>
+                        <td class="ed"><span class="pta-num">41</span><span class="pta-sym">Nb</span></td>
+                        <td class="ed"><span class="pta-num">42</span><span class="pta-sym">Mo</span></td>
+                        <td class="ed"><span class="pta-num">43</span><span class="pta-sym">Tc</span></td>
+                        <td class="ed"><span class="pta-num">44</span><span class="pta-sym">Ru</span></td>
+                        <td class="ed"><span class="pta-num">45</span><span class="pta-sym">Rh</span></td>
+                        <td class="ed"><span class="pta-num">46</span><span class="pta-sym">Pd</span></td>
+                        <td class="ed"><span class="pta-num">47</span><span class="pta-sym">Ag</span></td>
+                        <td class="ed"><span class="pta-num">48</span><span class="pta-sym">Cd</span></td>
+                        <td class="ep"><span class="pta-num">49</span><span class="pta-sym">In</span></td>
+                        <td class="ep"><span class="pta-num">50</span><span class="pta-sym">Sn</span></td>
+                        <td class="ep"><span class="pta-num">51</span><span class="pta-sym">Sb</span></td>
+                        <td class="ep"><span class="pta-num">52</span><span class="pta-sym">Te</span></td>
+                        <td class="ep"><span class="pta-num">53</span><span class="pta-sym">I</span></td>
+                        <td class="ep"><span class="pta-num">54</span><span class="pta-sym">Xe</span></td>
+                      </tr>
+                      <!-- Период 6 -->
+                      <tr>
+                        <td class="pl">6</td>
+                        <td class="es"><span class="pta-num">55</span><span class="pta-sym">Cs</span></td>
+                        <td class="es"><span class="pta-num">56</span><span class="pta-sym">Ba</span></td>
+                        <td class="ed" style="font-size:8px;color:#5b21b6"><span class="pta-num">57–71</span><span class="pta-sym" style="font-size:9px">Ln*</span></td>
+                        <td class="ed"><span class="pta-num">72</span><span class="pta-sym">Hf</span></td>
+                        <td class="ed"><span class="pta-num">73</span><span class="pta-sym">Ta</span></td>
+                        <td class="ed"><span class="pta-num">74</span><span class="pta-sym">W</span></td>
+                        <td class="ed"><span class="pta-num">75</span><span class="pta-sym">Re</span></td>
+                        <td class="ed"><span class="pta-num">76</span><span class="pta-sym">Os</span></td>
+                        <td class="ed"><span class="pta-num">77</span><span class="pta-sym">Ir</span></td>
+                        <td class="ed"><span class="pta-num">78</span><span class="pta-sym">Pt</span></td>
+                        <td class="ed"><span class="pta-num">79</span><span class="pta-sym">Au</span></td>
+                        <td class="ed"><span class="pta-num">80</span><span class="pta-sym">Hg</span></td>
+                        <td class="ep"><span class="pta-num">81</span><span class="pta-sym">Tl</span></td>
+                        <td class="ep"><span class="pta-num">82</span><span class="pta-sym">Pb</span></td>
+                        <td class="ep"><span class="pta-num">83</span><span class="pta-sym">Bi</span></td>
+                        <td class="ep"><span class="pta-num">84</span><span class="pta-sym">Po</span></td>
+                        <td class="ep"><span class="pta-num">85</span><span class="pta-sym">At</span></td>
+                        <td class="ep"><span class="pta-num">86</span><span class="pta-sym">Rn</span></td>
+                      </tr>
+                      <!-- Период 7 -->
+                      <tr>
+                        <td class="pl">7</td>
+                        <td class="es"><span class="pta-num">87</span><span class="pta-sym">Fr</span></td>
+                        <td class="es"><span class="pta-num">88</span><span class="pta-sym">Ra</span></td>
+                        <td class="ed" style="color:#5b21b6"><span class="pta-num">89–103</span><span class="pta-sym" style="font-size:9px">An**</span></td>
+                        <td class="ed"><span class="pta-num">104</span><span class="pta-sym">Rf</span></td>
+                        <td class="ed"><span class="pta-num">105</span><span class="pta-sym">Db</span></td>
+                        <td class="ed"><span class="pta-num">106</span><span class="pta-sym">Sg</span></td>
+                        <td class="ed"><span class="pta-num">107</span><span class="pta-sym">Bh</span></td>
+                        <td class="ed"><span class="pta-num">108</span><span class="pta-sym">Hs</span></td>
+                        <td class="ed"><span class="pta-num">109</span><span class="pta-sym">Mt</span></td>
+                        <td class="ed"><span class="pta-num">110</span><span class="pta-sym">Ds</span></td>
+                        <td class="ed"><span class="pta-num">111</span><span class="pta-sym">Rg</span></td>
+                        <td class="ed"><span class="pta-num">112</span><span class="pta-sym">Cn</span></td>
+                        <td class="ep"><span class="pta-num">113</span><span class="pta-sym">Nh</span></td>
+                        <td class="ep"><span class="pta-num">114</span><span class="pta-sym">Fl</span></td>
+                        <td class="ep"><span class="pta-num">115</span><span class="pta-sym">Mc</span></td>
+                        <td class="ep"><span class="pta-num">116</span><span class="pta-sym">Lv</span></td>
+                        <td class="ep"><span class="pta-num">117</span><span class="pta-sym">Ts</span></td>
+                        <td class="ep"><span class="pta-num">118</span><span class="pta-sym">Og</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!-- f-блок -->
+                  <div style="margin-top:6px;display:flex;gap:4px;align-items:center;flex-wrap:wrap">
+                    <span style="font-size:9px;color:var(--ink3);margin-right:2px">*Лантаноиды:</span>
+                    <span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">La</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Ce</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Pr</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Nd</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Pm</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Sm</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Eu</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Gd</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Tb</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Dy</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Ho</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Er</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Tm</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Yb</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Lu</span>
+                  </div>
+                  <div style="margin-top:3px;display:flex;gap:4px;align-items:center;flex-wrap:wrap">
+                    <span style="font-size:9px;color:var(--ink3);margin-right:2px">**Актиноиды:</span>
+                    <span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Ac</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Th</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Pa</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">U</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Np</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Pu</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Am</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Cm</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Bk</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Cf</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Es</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Fm</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Md</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">No</span><span class="ef" style="border-radius:3px;padding:1px 4px;font-size:9px;font-weight:600">Lr</span>
+                  </div>
+                  <!-- Горизонтальная стрелка -->
+                  <div class="pta-arr-h">
+                    <span class="lbl" style="color:#1d4ed8;font-size:10px">Fr</span>
+                    <div class="line"></div>
+                    <div class="arrowhead"></div>
+                    <span class="lbl" style="color:#dc2626;font-size:10px">F &nbsp;|&nbsp; ЭО ↑ · неметалличность ↑ · радиус ↓</span>
+                  </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ===== БЛОК 2: АТОМНЫЙ РАДИУС ===== -->
+        <section class="section" id="s2">
+            <div class="section-header collapsed" onclick="toggleSection(this)">
+                <div class="section-num">2</div>
+                <h2 class="section-title">Атомный радиус – причины и тренды</h2>
+            </div>
+            <div class="acc-body collapsed">
+                <p class="body"><strong>Атомный радиус</strong> – расстояние от ядра до внешнего электронного облака.</p>
+                <div class="box box-info">
+                    <div class="box-title">📌 Почему радиус уменьшается слева → направо?</div>
+                    Заряд ядра растёт, число уровней не меняется – внешние электроны сильнее притягиваются, радиус <strong>уменьшается</strong>.
+                </div>
+                <div class="box box-info">
+                    <div class="box-title">📌 Почему радиус увеличивается сверху → вниз?</div>
+                    Добавляется новый энергетический уровень – внешние электроны дальше от ядра, радиус <strong>увеличивается</strong>.
+                </div>
+                <div class="trend2">
+                  <div class="trend2-section">
+                    <div class="trend2-lbl">По периоду →</div>
+                    <div class="trend2-hrow">
+                      <div class="trend2-pole fr">Fr<small>радиус max</small></div>
+                      <div class="trend2-shaft"><span class="trend2-larr">◀</span><div class="trend2-bar"></div><span class="trend2-rarr">▶</span></div>
+                      <div class="trend2-pole f">F<small>радиус min</small></div>
+                    </div>
+                    <div class="trend2-hdesc">
+                      <span class="fr-t">← радиус увеличивается</span>
+                      <span class="f-t">радиус уменьшается →</span>
+                    </div>
+                  </div>
+                  <div class="trend2-divider"></div>
+                  <div class="trend2-section">
+                    <div class="trend2-lbl">По группе ↕</div>
+                    <div class="trend2-vrow">
+                      <div class="trend2-vcol">
+                        <div class="trend2-vtop">↑ F</div>
+                        <div class="trend2-vline"></div>
+                        <div class="trend2-vbot">Fr ↓</div>
+                      </div>
+                      <div class="trend2-vdesc">
+                        <div class="f-t">↑ к фтору — радиус уменьшается</div>
+                        <div class="fr-t">↓ к францию — радиус увеличивается</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- ПС с радиусами -->
+                <div class="pta-wrap" style="padding-bottom:44px">
+                  <div class="pta-arr-v">
+                    <div class="lbl-v">радиус ↑</div>
+                    <div class="line-v"></div>
+                    <div class="arrowhead-d"></div>
+                  </div>
+                  <table class="pta-tbl" style="min-width:0">
+                    <thead>
+                      <tr><th></th><th>I</th><th>II</th><th>III</th><th>IV</th><th>V</th><th>VI</th><th>VII</th><th>0</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="pl">1</td>
+                        <td class="es"><span class="pta-num">53 пм</span><span class="pta-sym">H</span></td>
+                        <td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td>
+                        <td class="ep"><span class="pta-num">31</span><span class="pta-sym">He</span></td>
+                      </tr>
+                      <tr>
+                        <td class="pl">2</td>
+                        <td class="es"><span class="pta-num">167</span><span class="pta-sym">Li</span></td>
+                        <td class="es"><span class="pta-num">112</span><span class="pta-sym">Be</span></td>
+                        <td class="ep"><span class="pta-num">87</span><span class="pta-sym">B</span></td>
+                        <td class="ep"><span class="pta-num">77</span><span class="pta-sym">C</span></td>
+                        <td class="ep"><span class="pta-num">75</span><span class="pta-sym">N</span></td>
+                        <td class="ep"><span class="pta-num">73</span><span class="pta-sym">O</span></td>
+                        <td class="ep" style="outline:2px solid #dc2626;outline-offset:-2px"><span class="pta-num">64 min</span><span class="pta-sym">F</span></td>
+                        <td class="ep"><span class="pta-num">69</span><span class="pta-sym">Ne</span></td>
+                      </tr>
+                      <tr>
+                        <td class="pl">3</td>
+                        <td class="es" style="outline:2px solid #1d4ed8;outline-offset:-2px"><span class="pta-num">186 max</span><span class="pta-sym">Na</span></td>
+                        <td class="es"><span class="pta-num">160</span><span class="pta-sym">Mg</span></td>
+                        <td class="ep"><span class="pta-num">143</span><span class="pta-sym">Al</span></td>
+                        <td class="ep"><span class="pta-num">117</span><span class="pta-sym">Si</span></td>
+                        <td class="ep"><span class="pta-num">115</span><span class="pta-sym">P</span></td>
+                        <td class="ep"><span class="pta-num">104</span><span class="pta-sym">S</span></td>
+                        <td class="ep"><span class="pta-num">99</span><span class="pta-sym">Cl</span></td>
+                        <td class="ep"><span class="pta-num">98</span><span class="pta-sym">Ar</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="pta-arr-h">
+                    <span class="lbl" style="color:#1d4ed8;font-size:10px">Fr (max)</span>
+                    <div class="line"></div>
+                    <div class="arrowhead"></div>
+                    <span class="lbl" style="color:#dc2626;font-size:10px">F (min) &nbsp;|&nbsp; радиус убывает →</span>
+                  </div>
+                </div>
+                <!-- Практика -->
+                <div class="mcq-wrap">
+                    <div class="mcq-title">✎ Задания</div>
+                    <div class="mcq-block" data-answer="135">
+                        <div class="mcq-q">1. Из указанных выберите три элемента, которые находятся в одном периоде, и расположите их в порядке <strong>уменьшения атомного радиуса</strong>.<br>1) Li &nbsp; 2) P &nbsp; 3) B &nbsp; 4) Cu &nbsp; 5) N</div>
+                        <div class="mcq-input-row">
+                            <input type="text" onkeydown="if(event.key==='Enter')mcqCheck(this)">
+                            <button onclick="mcqCheck(this.previousElementSibling)">Проверить</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                    <div class="mcq-block" data-answer="153">
+                        <div class="mcq-q">2. Выберите три элемента одного периода и расположите их в порядке <strong>уменьшения атомного радиуса</strong>.<br>1) Be &nbsp; 2) H &nbsp; 3) O &nbsp; 4) Cu &nbsp; 5) N</div>
+                        <div class="mcq-input-row">
+                            <input type="text" onkeydown="if(event.key==='Enter')mcqCheck(this)">
+                            <button onclick="mcqCheck(this.previousElementSibling)">Проверить</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ===== БЛОК 3: ЭЛЕКТРООТРИЦАТЕЛЬНОСТЬ ===== -->
+        <section class="section" id="s3">
+            <div class="section-header collapsed" onclick="toggleSection(this)">
+                <div class="section-num">3</div>
+                <h2 class="section-title">Электроотрицательность – способность притягивать электроны</h2>
+            </div>
+            <div class="acc-body collapsed">
+                <p class="body"><strong>Электроотрицательность (ЭО)</strong> – способность атома притягивать общие электронные пары. Максимум – у фтора (4.0), минимум – у франция (~0.7).</p>
+                <div class="box box-info">
+                    <div class="box-title">📌 Тренды</div>
+                    <ul>
+                        <li>По периоду: <strong>возрастает</strong> слева → направо (радиус ↓, ядро сильнее притягивает).</li>
+                        <li>По группе: <strong>убывает</strong> сверху → вниз (радиус ↑, притяжение слабее).</li>
+                    </ul>
+                </div>
+                <div class="trend2">
+                  <div class="trend2-section">
+                    <div class="trend2-lbl">По периоду →</div>
+                    <div class="trend2-hrow">
+                      <div class="trend2-pole fr">Fr<small>ЭО min</small></div>
+                      <div class="trend2-shaft"><span class="trend2-larr">◀</span><div class="trend2-bar"></div><span class="trend2-rarr">▶</span></div>
+                      <div class="trend2-pole f">F<small>ЭО max</small></div>
+                    </div>
+                    <div class="trend2-hdesc">
+                      <span class="fr-t">← ЭО убывает</span>
+                      <span class="f-t">ЭО возрастает →</span>
+                    </div>
+                  </div>
+                  <div class="trend2-divider"></div>
+                  <div class="trend2-section">
+                    <div class="trend2-lbl">По группе ↕</div>
+                    <div class="trend2-vrow">
+                      <div class="trend2-vcol">
+                        <div class="trend2-vtop">↑ F</div>
+                        <div class="trend2-vline"></div>
+                        <div class="trend2-vbot">Fr ↓</div>
+                      </div>
+                      <div class="trend2-vdesc">
+                        <div class="f-t">↑ к фтору — ЭО возрастает</div>
+                        <div class="fr-t">↓ к францию — ЭО убывает</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- ПС с ЭО -->
+                <div class="pta-wrap" style="padding-bottom:44px">
+                  <div class="pta-arr-v">
+                    <div class="lbl-v">ЭО ↓</div>
+                    <div class="line-v"></div>
+                    <div class="arrowhead-d"></div>
+                  </div>
+                  <table class="pta-tbl" style="min-width:0">
+                    <thead>
+                      <tr><th></th><th>I</th><th>II</th><th>III</th><th>IV</th><th>V</th><th>VI</th><th>VII</th><th>0</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="pl">1</td>
+                        <td class="es"><span class="pta-num">2.1</span><span class="pta-sym">H</span></td>
+                        <td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td><td class="gap"></td>
+                        <td class="ep"><span class="pta-num">—</span><span class="pta-sym">He</span></td>
+                      </tr>
+                      <tr>
+                        <td class="pl">2</td>
+                        <td class="es"><span class="pta-num">1.0</span><span class="pta-sym">Li</span></td>
+                        <td class="es"><span class="pta-num">1.6</span><span class="pta-sym">Be</span></td>
+                        <td class="ep"><span class="pta-num">2.0</span><span class="pta-sym">B</span></td>
+                        <td class="ep"><span class="pta-num">2.5</span><span class="pta-sym">C</span></td>
+                        <td class="ep"><span class="pta-num">3.0</span><span class="pta-sym">N</span></td>
+                        <td class="ep"><span class="pta-num">3.5</span><span class="pta-sym">O</span></td>
+                        <td class="ep" style="outline:2px solid #dc2626;outline-offset:-2px"><span class="pta-num">4.0 max</span><span class="pta-sym">F</span></td>
+                        <td class="ep"><span class="pta-num">—</span><span class="pta-sym">Ne</span></td>
+                      </tr>
+                      <tr>
+                        <td class="pl">3</td>
+                        <td class="es" style="outline:2px solid #1d4ed8;outline-offset:-2px"><span class="pta-num">0.9 min</span><span class="pta-sym">Na</span></td>
+                        <td class="es"><span class="pta-num">1.2</span><span class="pta-sym">Mg</span></td>
+                        <td class="ep"><span class="pta-num">1.5</span><span class="pta-sym">Al</span></td>
+                        <td class="ep"><span class="pta-num">1.8</span><span class="pta-sym">Si</span></td>
+                        <td class="ep"><span class="pta-num">2.1</span><span class="pta-sym">P</span></td>
+                        <td class="ep"><span class="pta-num">2.5</span><span class="pta-sym">S</span></td>
+                        <td class="ep"><span class="pta-num">3.0</span><span class="pta-sym">Cl</span></td>
+                        <td class="ep"><span class="pta-num">—</span><span class="pta-sym">Ar</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="pta-arr-h">
+                    <span class="lbl" style="color:#1d4ed8;font-size:10px">Fr (min)</span>
+                    <div class="line"></div>
+                    <div class="arrowhead"></div>
+                    <span class="lbl" style="color:#dc2626;font-size:10px">F (max) &nbsp;|&nbsp; ЭО возрастает →</span>
+                  </div>
+                </div>
+                <!-- Практика -->
+                <div class="mcq-wrap">
+                    <div class="mcq-title">✎ Задания</div>
+                    <div class="mcq-block" data-answer="351">
+                        <div class="mcq-q">3. Выберите три элемента одного периода и расположите в порядке <strong>уменьшения ЭО</strong>.<br>1) B &nbsp; 2) Al &nbsp; 3) F &nbsp; 4) Fe &nbsp; 5) N</div>
+                        <div class="mcq-input-row">
+                            <input type="text" onkeydown="if(event.key==='Enter')mcqCheck(this)">
+                            <button onclick="mcqCheck(this.previousElementSibling)">Проверить</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ===== БЛОК 4: НЕМЕТАЛЛИЧЕСКИЕ / ОКИСЛИТЕЛЬНЫЕ / КИСЛОТНЫЕ – ВСЁ К ФТОРУ ===== -->
+        <section class="section" id="s4">
+            <div class="section-header collapsed" onclick="toggleSection(this)">
+                <div class="section-num">4</div>
+                <h2 class="section-title">Неметаллические, окислительные, кислотные – всё <span style="color:#dc2626;">к фтору</span></h2>
+            </div>
+            <div class="acc-body collapsed">
+                <p class="body"><strong>Неметаллические, окислительные и кислотные свойства</strong> – это три стороны одной медали. Все они характеризуют <strong>способность атома принимать электроны</strong> (окислитель) и образовывать соединения с кислотным характером.</p>
+                <div class="box box-info">
+                    <div class="box-title">📌 Общий тренд</div>
+                    <ul>
+                        <li>Эти свойства <strong>усиливаются</strong> при движении <strong>слева → направо</strong> по периоду и <strong>снизу → вверх</strong> по группе.</li>
+                        <li>Максимум – у <strong>фтора</strong> (F).</li>
+                        <li>Минимум – у <strong>франция</strong> (Fr).</li>
+                    </ul>
+                </div>
+                <div class="trend2">
+                  <div class="trend2-section">
+                    <div class="trend2-lbl">По периоду →</div>
+                    <div class="trend2-hrow">
+                      <div class="trend2-pole fr">Fr<small>min</small></div>
+                      <div class="trend2-shaft"><span class="trend2-larr">◀</span><div class="trend2-bar"></div><span class="trend2-rarr">▶</span></div>
+                      <div class="trend2-pole f">F<small>max</small></div>
+                    </div>
+                    <div class="trend2-hdesc">
+                      <span class="fr-t">← убывают</span>
+                      <span class="f-t">возрастают →</span>
+                    </div>
+                  </div>
+                  <div class="trend2-divider"></div>
+                  <div class="trend2-section">
+                    <div class="trend2-lbl">По группе ↕</div>
+                    <div class="trend2-vrow">
+                      <div class="trend2-vcol">
+                        <div class="trend2-vtop">↑ F</div>
+                        <div class="trend2-vline"></div>
+                        <div class="trend2-vbot">Fr ↓</div>
+                      </div>
+                      <div class="trend2-vdesc">
+                        <div class="f-t">↑ к фтору — неметалличность, окислит., кислотность возрастают</div>
+                        <div class="fr-t">↓ к францию — убывают</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="split-wrap">
+                  <div class="split-side split-fr">
+                    <div class="split-hd blue">← 🔵 Сторона франция (Fr)</div>
+                    <div class="split-elem blue">Fr, Cs, K, Na, Li…</div>
+                    <div class="split-prop">Металлы</div>
+                    <div class="split-prop">Слабые окислители</div>
+                    <div class="split-prop">Оксиды/гидроксиды — основные</div>
+                    <div class="split-prop">Неметалличность — min</div>
+                  </div>
+                  <div class="split-side split-f">
+                    <div class="split-hd red">🔴 Сторона фтора (F) →</div>
+                    <div class="split-elem red">F, O, N, Cl, S…</div>
+                    <div class="split-prop">Неметаллы</div>
+                    <div class="split-prop">Сильные окислители</div>
+                    <div class="split-prop">Оксиды/гидроксиды — кислотные</div>
+                    <div class="split-prop">Неметалличность — max</div>
+                  </div>
+                </div>
+                <div class="box box-warn">
+                    <div class="box-title">⚠️ Важно!</div>
+                    <strong>Кислотные свойства</strong> высших оксидов и гидроксидов изменяются так же, как неметаллические. То есть <strong>к фтору</strong> они усиливаются. Однако для летучих водородных соединений – исключение (смотри блок 7).
+                </div>
+                <!-- Практика -->
+                <div class="mcq-wrap">
+                    <div class="mcq-title">✎ Задания</div>
+                    <div class="mcq-block" data-answer="351">
+                        <div class="mcq-q">4. Выберите три <strong>неметалла</strong> и расположите их в порядке <strong>ослабления кислотных свойств</strong> их высших оксидов.<br>1) P &nbsp; 2) Na &nbsp; 3) Cl &nbsp; 4) Mn &nbsp; 5) S</div>
+                        <div class="mcq-input-row">
+                            <input type="text" onkeydown="if(event.key==='Enter')mcqCheck(this)">
+                            <button onclick="mcqCheck(this.previousElementSibling)">Проверить</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ===== БЛОК 5: МЕТАЛЛИЧЕСКИЕ / ВОССТАНОВИТЕЛЬНЫЕ / ОСНОВНЫЕ – ВСЁ К ФРАНЦИЮ ===== -->
+        <section class="section" id="s5">
+            <div class="section-header collapsed" onclick="toggleSection(this)">
+                <div class="section-num">5</div>
+                <h2 class="section-title">Металлические, восстановительные, основные – всё <span style="color:#3b82f6;">к францию</span></h2>
+            </div>
+            <div class="acc-body collapsed">
+                <p class="body"><strong>Металлические, восстановительные и основные свойства</strong> – противоположность предыдущей группе. Они характеризуют <strong>способность атома отдавать электроны</strong> (восстановитель) и образовывать соединения с основным характером.</p>
+                <div class="box box-info">
+                    <div class="box-title">📌 Общий тренд</div>
+                    <ul>
+                        <li>Эти свойства <strong>усиливаются</strong> при движении <strong>справа → налево</strong> по периоду и <strong>сверху → вниз</strong> по группе.</li>
+                        <li>Максимум – у <strong>франция</strong> (Fr).</li>
+                        <li>Минимум – у <strong>фтора</strong> (F).</li>
+                    </ul>
+                </div>
+                <div class="trend2">
+                  <div class="trend2-section">
+                    <div class="trend2-lbl">По периоду →</div>
+                    <div class="trend2-hrow">
+                      <div class="trend2-pole fr">Fr<small>max</small></div>
+                      <div class="trend2-shaft"><span class="trend2-larr">◀</span><div class="trend2-bar"></div><span class="trend2-rarr">▶</span></div>
+                      <div class="trend2-pole f">F<small>min</small></div>
+                    </div>
+                    <div class="trend2-hdesc">
+                      <span class="fr-t">← возрастают</span>
+                      <span class="f-t">убывают →</span>
+                    </div>
+                  </div>
+                  <div class="trend2-divider"></div>
+                  <div class="trend2-section">
+                    <div class="trend2-lbl">По группе ↕</div>
+                    <div class="trend2-vrow">
+                      <div class="trend2-vcol">
+                        <div class="trend2-vtop">↑ F</div>
+                        <div class="trend2-vline"></div>
+                        <div class="trend2-vbot">Fr ↓</div>
+                      </div>
+                      <div class="trend2-vdesc">
+                        <div class="f-t">↑ к фтору — металличность, восстанов., основность убывают</div>
+                        <div class="fr-t">↓ к францию — возрастают</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="split-wrap">
+                  <div class="split-side split-f">
+                    <div class="split-hd red">🔴 Сторона фтора (F) →</div>
+                    <div class="split-elem red">F, O, N, Cl, S…</div>
+                    <div class="split-prop">Неметаллы</div>
+                    <div class="split-prop">Слабые восстановители</div>
+                    <div class="split-prop">Оксиды/гидроксиды — кислотные</div>
+                    <div class="split-prop">Металличность — min</div>
+                  </div>
+                  <div class="split-side split-fr">
+                    <div class="split-hd blue">← 🔵 Сторона франция (Fr)</div>
+                    <div class="split-elem blue">Fr, Cs, K, Na, Li…</div>
+                    <div class="split-prop">Металлы</div>
+                    <div class="split-prop">Сильные восстановители</div>
+                    <div class="split-prop">Оксиды/гидроксиды — основные</div>
+                    <div class="split-prop">Металличность — max</div>
+                  </div>
+                </div>
+                <!-- Практика -->
+                <div class="mcq-wrap">
+                    <div class="mcq-title">✎ Задания</div>
+                    <div class="mcq-block" data-answer="531">
+                        <div class="mcq-q">5. Выберите три элемента одного периода и расположите их в порядке <strong>усиления восстановительных свойств</strong>.<br>1) Na &nbsp; 2) O &nbsp; 3) Al &nbsp; 4) F &nbsp; 5) Si</div>
+                        <div class="mcq-input-row">
+                            <input type="text" onkeydown="if(event.key==='Enter')mcqCheck(this)">
+                            <button onclick="mcqCheck(this.previousElementSibling)">Проверить</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ===== БЛОК 6: ЭНЕРГИЯ ИОНИЗАЦИИ ===== -->
+        <section class="section" id="s6">
+            <div class="section-header collapsed" onclick="toggleSection(this)">
+                <div class="section-num">6</div>
+                <h2 class="section-title">Энергия ионизации – как оторвать электрон</h2>
+            </div>
+            <div class="acc-body collapsed">
+                <p class="body"><strong>Энергия ионизации (I)</strong> – энергия, необходимая для отрыва внешнего электрона. Чем выше I, тем труднее оторвать электрон.</p>
+                <div class="box box-info">
+                    <div class="box-title">📌 Тренд</div>
+                    <ul>
+                        <li>По периоду: I <strong>возрастает</strong> слева → направо (радиус ↓, ядро сильнее держит).</li>
+                        <li>По группе: I <strong>убывает</strong> сверху → вниз (радиус ↑, электрон легче оторвать).</li>
+                    </ul>
+                </div>
+                <div class="trend2">
+                  <div class="trend2-section">
+                    <div class="trend2-lbl">По периоду →</div>
+                    <div class="trend2-hrow">
+                      <div class="trend2-pole fr">Fr<small>I min</small></div>
+                      <div class="trend2-shaft"><span class="trend2-larr">◀</span><div class="trend2-bar"></div><span class="trend2-rarr">▶</span></div>
+                      <div class="trend2-pole f">F<small>I max</small></div>
+                    </div>
+                    <div class="trend2-hdesc">
+                      <span class="fr-t">← убывает</span>
+                      <span class="f-t">возрастает →</span>
+                    </div>
+                  </div>
+                  <div class="trend2-divider"></div>
+                  <div class="trend2-section">
+                    <div class="trend2-lbl">По группе ↕</div>
+                    <div class="trend2-vrow">
+                      <div class="trend2-vcol">
+                        <div class="trend2-vtop">↑ F</div>
+                        <div class="trend2-vline"></div>
+                        <div class="trend2-vbot">Fr ↓</div>
+                      </div>
+                      <div class="trend2-vdesc">
+                        <div class="f-t">↑ к фтору — энергия ионизации возрастает</div>
+                        <div class="fr-t">↓ к францию — убывает</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Практика -->
+                <div class="mcq-wrap">
+                    <div class="mcq-title">✎ Задания</div>
+                    <div class="mcq-block" data-answer="453">
+                        <div class="mcq-q">6. Из указанных выберите три элемента одного периода и расположите их в порядке <strong>уменьшения восстановительной способности</strong> (т.е. увеличения энергии ионизации).<br>1) K &nbsp; 2) He &nbsp; 3) O &nbsp; 4) C &nbsp; 5) N</div>
+                        <div class="mcq-input-row">
+                            <input type="text" onkeydown="if(event.key==='Enter')mcqCheck(this)">
+                            <button onclick="mcqCheck(this.previousElementSibling)">Проверить</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ===== БЛОК 7: ЛЕТУЧИЕ ВОДОРОДНЫЕ СОЕДИНЕНИЯ (исключение) ===== -->
+        <section class="section" id="s7">
+            <div class="section-header collapsed" onclick="toggleSection(this)">
+                <div class="section-num">7</div>
+                <h2 class="section-title">Летучие водородные соединения – исключение</h2>
+            </div>
+            <div class="acc-body collapsed">
+                <p class="body"><strong>Летучие водородные соединения (ЛВС)</strong> – соединения неметаллов с водородом (HF, HCl, H₂S, NH₃ и др.). Их кислотные свойства изменяются <strong>иначе</strong>, чем у оксидов.</p>
+                <div class="box box-info">
+                    <div class="box-title">📌 Тренд кислотных свойств ЛВС</div>
+                    <ul>
+                        <li><strong>По периоду</strong> (слева → направо): кислотность <strong>усиливается</strong> (как и у оксидов).</li>
+                        <li><strong>По группе</strong> (сверху → вниз): кислотность <strong>тоже усиливается</strong> (HF &lt; HCl &lt; HBr &lt; HI). Это <strong>противоположно</strong> тренду для оксидов!</li>
+                    </ul>
+                </div>
+                <!-- Таблица ЛВС -->
+                <div class="box" style="border-left:4px solid #ec4899; background:#fdf4ff; margin-top:16px;">
+                    <div class="box-title" style="color:#9d174d; font-size:15px;">📋 Заучить: таблица водородных соединений</div>
+                    <div style="overflow-x:auto; margin-top:10px;">
+                    <table style="width:100%; border-collapse:collapse; font-size:13px; text-align:center;">
+                        <thead>
+                            <tr style="background:#6b21a8; color:#fff;">
+                                <th style="padding:8px 10px; border:1px solid #d8b4fe;">Группа →</th>
+                                <th style="padding:8px 10px; border:1px solid #d8b4fe;">IV</th>
+                                <th style="padding:8px 10px; border:1px solid #d8b4fe;">V</th>
+                                <th style="padding:8px 10px; border:1px solid #d8b4fe;">VI</th>
+                                <th style="padding:8px 10px; border:1px solid #d8b4fe;">VII</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; font-weight:700; background:#f3e8ff; color:#6b21a8;">Формула</td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; font-weight:700;">ЭН₄</td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; font-weight:700;">ЭН₃</td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; font-weight:700;">Н₂Э</td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; font-weight:700;">НЭ</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; font-weight:700; background:#f3e8ff; color:#6b21a8;">Период 2</td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#f5f5f5; font-size:12px; color:#555;"><strong>CH₄</strong><br><span style="font-size:11px;">не кислота,<br>не основание</span></td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#dbeafe;"><strong>NH₃</strong><br><span style="font-size:11px;">слабое основание</span></td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#fce7f3;"><strong>H₂O</strong><br><span style="font-size:11px;">амфотерное</span></td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#fee2e2;"><strong>HF</strong><br><span style="font-size:11px;">слабая кислота</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; font-weight:700; background:#f3e8ff; color:#6b21a8;">Период 3</td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#f5f5f5; font-size:12px; color:#555;"><strong>SiH₄</strong></td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#dbeafe;"><strong>PH₃</strong><br><span style="font-size:11px;">очень слабое основание</span></td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#fce7f3;"><strong>H₂S</strong><br><span style="font-size:11px;">слабая кислота</span></td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#fca5a5;"><strong>HCl</strong><br><span style="font-size:11px;">сильная кислота</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; font-weight:700; background:#f3e8ff; color:#6b21a8;">Период 4</td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#f5f5f5; font-size:12px; color:#555;"><strong>GeH₄</strong></td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#eff6ff;"><strong>AsH₃</strong></td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#fce7f3;"><strong>H₂Se</strong><br><span style="font-size:11px;">слабая кислота</span></td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#f87171; color:#fff;"><strong>HBr</strong><br><span style="font-size:11px; color:#fff;">сильная кислота</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; font-weight:700; background:#f3e8ff; color:#6b21a8;">Период 5</td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#f5f5f5; font-size:12px; color:#555;">—</td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#eff6ff;"><strong>SbH₃</strong></td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#fce7f3;"><strong>H₂Te</strong><br><span style="font-size:11px;">слабая кислота</span></td>
+                                <td style="padding:6px 8px; border:1px solid #e9d5ff; background:#dc2626; color:#fff;"><strong>HI</strong><br><span style="font-size:11px; color:#fff;">очень сильная кислота</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <div style="display:flex; gap:10px; margin-top:10px; font-size:12px; flex-wrap:wrap;">
+                        <span style="background:#dbeafe; border-radius:4px; padding:3px 8px; color:#1e40af;">🔵 Основные свойства убывают →</span>
+                        <span style="background:#fee2e2; border-radius:4px; padding:3px 8px; color:#991b1b;">🔴 Кислотные свойства возрастают →</span>
+                        <span style="background:#fce7f3; border-radius:4px; padding:3px 8px; color:#9d174d;">⚠️ В VII группе: кислотность растёт ↓ по группе (HF слабая!)</span>
+                    </div>
+                </div>
+                <div class="box box-warn">
+                    <div class="box-title">⚠️ Почему?</div>
+                    Кислотность ЛВС определяется <strong>прочностью связи H–E</strong>. Вниз по группе связь становится длиннее и слабее, поэтому водород легче отщепляется – кислота становится сильнее.
+                </div>
+                <div class="trend2">
+                  <div class="trend2-section">
+                    <div class="trend2-lbl">По периоду →</div>
+                    <div class="trend2-hrow">
+                      <div class="trend2-pole fr">Fr<small>min</small></div>
+                      <div class="trend2-shaft"><span class="trend2-larr">◀</span><div class="trend2-bar"></div><span class="trend2-rarr">▶</span></div>
+                      <div class="trend2-pole f">F<small>max</small></div>
+                    </div>
+                    <div class="trend2-hdesc">
+                      <span class="fr-t">← кислотность убывает</span>
+                      <span class="f-t">кислотность возрастает →</span>
+                    </div>
+                  </div>
+                  <div class="trend2-divider"></div>
+                  <div class="trend2-section">
+                    <div class="trend2-lbl">По группе ↕ ⚠️ исключение!</div>
+                    <div class="trend2-vrow">
+                      <div class="trend2-vcol">
+                        <div class="trend2-vtop" style="color:#dc2626;">↑ HF</div>
+                        <div class="trend2-vline"></div>
+                        <div class="trend2-vbot" style="color:#1e40af;">HI ↓</div>
+                      </div>
+                      <div class="trend2-vdesc">
+                        <div style="color:#7f1d1d; font-size:12px;">↑ HF — слабейшая кислота в группе</div>
+                        <div style="color:#1e3a5f; font-size:12px;">↓ вниз по группе — кислотность <strong>возрастает</strong> (HF &lt; HCl &lt; HBr &lt; HI)</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Практика -->
+                <div class="mcq-wrap">
+                    <div class="mcq-title">✎ Задания</div>
+                    <div class="mcq-block" data-answer="135">
+                        <div class="mcq-q">7. Выберите три элемента одной группы и расположите их водородные соединения в порядке <strong>усиления кислотных свойств</strong>.<br>1) F &nbsp; 2) Na &nbsp; 3) Cl &nbsp; 4) K &nbsp; 5) Br</div>
+                        <div class="mcq-input-row">
+                            <input type="text" onkeydown="if(event.key==='Enter')mcqCheck(this)">
+                            <button onclick="mcqCheck(this.previousElementSibling)">Проверить</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ===== БЛОК 8: ИТОГОВАЯ ПС СО ВСЕМИ ТРЕНДАМИ ===== -->
+        <section class="section" id="s8">
+            <div class="section-header collapsed" onclick="toggleSection(this)">
+                <div class="section-num">8</div>
+                <h2 class="section-title">Итоговая ПС – все тренды на одной таблице</h2>
+            </div>
+            <div class="acc-body collapsed">
+                <div class="split-wrap">
+                  <div class="split-side split-fr">
+                    <div class="split-hd blue">🔵 К францию (Fr) ←↓</div>
+                    <div class="split-elem blue">Fr, Cs, K, Na, Li…</div>
+                    <div class="split-prop">Металличность ↑</div>
+                    <div class="split-prop">Восстановительная способность ↑</div>
+                    <div class="split-prop">Основность оксидов/гидроксидов ↑</div>
+                    <div class="split-prop">Электроотрицательность ↓</div>
+                    <div class="split-prop">Энергия ионизации ↓</div>
+                    <div class="split-prop">Атомный радиус ↑</div>
+                  </div>
+                  <div class="split-side split-f">
+                    <div class="split-hd red">🔴 К фтору (F) →↑</div>
+                    <div class="split-elem red">F, O, N, Cl, S…</div>
+                    <div class="split-prop">Неметалличность ↑</div>
+                    <div class="split-prop">Окислительная способность ↑</div>
+                    <div class="split-prop">Кислотность оксидов/гидроксидов ↑</div>
+                    <div class="split-prop">Электроотрицательность ↑</div>
+                    <div class="split-prop">Энергия ионизации ↑</div>
+                    <div class="split-prop">Атомный радиус ↓</div>
+                  </div>
+                </div>
+                <div style="background:#fce7f3; padding:10px; border-radius:8px; border:1px solid #ec4899; margin-top:10px; font-size:13px;">
+                  <strong>⚠️ Исключение – летучие водородные соединения:</strong> кислотность <strong>растёт вниз по группе</strong> (HF &lt; HCl &lt; HBr &lt; HI).
+                </div>
+                <p class="body" style="text-align:center; color:var(--ink3); margin-top:8px;">
+                    Эта таблица – ваш главный помощник при решении задания №2. Запомните: <strong>всё, что «к фтору» – неметаллы, окислители, кислоты; всё, что «к францию» – металлы, восстановители, основания.</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- ===== ФЛЭШ-КАРТОЧКИ (кратко) ===== -->
+        <div class="fc-section">
+            <div class="fc-header">
+                <div class="fc-title">🃏 30 флэш-карточек – два полюса</div>
+                <div class="fc-sub">Нажми на карточку, переверни, отметь знание.</div>
+            </div>
+            <div class="fc-stats">
+                Знаю: <span id="fc-know">0</span> &nbsp;|&nbsp; Не знаю: <span id="fc-dk">0</span> &nbsp;|&nbsp; Осталось: <span id="fc-left">30</span>
+            </div>
+            <div class="fc-counter" id="fc-counter">Карточка 1 из 30</div>
+            <div class="fc-perspective" onclick="fcFlip()">
+                <div class="fc-inner" id="fc-inner">
+                    <div class="fc-face fc-front">
+                        <div class="fc-tag" id="fc-tag">ВОПРОС</div>
+                        <div id="fc-front-text"></div>
+                    </div>
+                    <div class="fc-face fc-back">
+                        <div class="fc-back-tag" id="fc-back-tag">ОТВЕТ</div>
+                        <div id="fc-back-text"></div>
+                        <div class="fc-hint" id="fc-hint"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="fc-flip-btn" onclick="fcFlip()">🔄 Перевернуть</button>
+            <div class="fc-btn-row" id="fc-btn-row">
+                <button class="fc-btn-know" onclick="fcAnswer(true)">✓ Знаю</button>
+                <button class="fc-btn-dontknow" onclick="fcAnswer(false)">✗ Не знаю</button>
+            </div>
+            <div class="fc-keys">пробел — перевернуть · ← не знаю · → знаю</div>
+            <div class="fc-result" id="fc-result">
+                <h3>Готово! 🎉</h3>
+                <div class="fc-res-row">
+                    <div class="fc-res-card"><div class="fc-res-num" id="res-know" style="color:#1D9E75">0</div><div class="fc-res-lbl">ЗНАЮ</div></div>
+                    <div class="fc-res-card"><div class="fc-res-num" id="res-dk" style="color:#C0392B">0</div><div class="fc-res-lbl">НЕ ЗНАЮ</div></div>
+                </div>
+                <div class="fc-restart-row">
+                    <button class="fc-restart-btn primary" onclick="fcRestart(false)">Сначала (все)</button>
+                    <button class="fc-restart-btn" onclick="fcRestart(true)">Только ошибки</button>
+                </div>
+            </div>
+        </div>
+
+        <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    </div>
+
+    <script>
+        // ========== СВОРАЧИВАНИЕ ==========
+        function toggleSection(hdr) {
+            hdr.classList.toggle('collapsed');
+            const body = hdr.nextElementSibling;
+            if (body.classList.contains('collapsed')) {
+                body.style.overflow = 'hidden';
+                body.style.maxHeight = body.scrollHeight + 'px';
+                body.style.opacity = '1';
+                body.classList.remove('collapsed');
+                setTimeout(() => { body.style.maxHeight = 'none';
+                    body.style.overflow = 'visible'; }, 380);
+            } else {
+                body.style.overflow = 'hidden';
+                body.style.maxHeight = body.scrollHeight + 'px';
+                requestAnimationFrame(() => {
+                    body.style.maxHeight = '0';
+                    body.style.opacity = '0';
+                });
+                body.classList.add('collapsed');
+            }
+        }
+
+        // ========== MCQ ==========
+        function mcqCheck(inp) {
+            const block = inp.closest('.mcq-block');
+            if (block.dataset.done) return;
+            const correct = block.dataset.answer;
+            const val = inp.value.replace(/\s/g, '');
+            const fb = block.querySelector('.mcq-fb');
+            if (!val) return;
+            if (val === correct) {
+                block.dataset.done = '1';
+                inp.disabled = true;
+                inp.closest('.mcq-input-row').querySelector('button').disabled = true;
+                fb.style.display = 'block'; fb.style.background = '#d1fae5'; fb.style.color = '#065f46'; fb.textContent = '✓ Верно!';
+            } else {
+                fb.style.display = 'block'; fb.style.background = '#fee2e2'; fb.style.color = '#7f1d1d'; fb.textContent = 'Попробуйте ещё раз.';
+            }
+        }
+
+        // ========== ФЛЭШ-КАРТОЧКИ ==========
+        const FC_CARDS = [
+            { q: 'Как изменяется неметалличность в периоде?', a: 'Усиливается слева → направо (к фтору)', tag: 'К F' },
+            { q: 'Как изменяется окислительная способность в группе?', a: 'Ослабевает сверху → вниз (к францию)', tag: 'К F' },
+            { q: 'Как изменяются кислотные свойства оксидов в периоде?', a: 'Усиливаются слева → направо', tag: 'К F' },
+            { q: 'Как изменяются металлические свойства в периоде?', a: 'Ослабевают слева → направо (к францию)', tag: 'К Fr' },
+            { q: 'Как изменяется восстановительная способность в группе?', a: 'Усиливается сверху → вниз (к францию)', tag: 'К Fr' },
+            { q: 'Как изменяются основные свойства оксидов в группе?', a: 'Усиливаются сверху → вниз', tag: 'К Fr' },
+            { q: 'Как изменяется атомный радиус в периоде?', a: 'Уменьшается слева → направо', tag: 'Радиус' },
+            { q: 'Как изменяется атомный радиус в группе?', a: 'Увеличивается сверху → вниз', tag: 'Радиус' },
+            { q: 'Как изменяется ЭО в периоде?', a: 'Возрастает слева → направо', tag: 'ЭО' },
+            { q: 'Как изменяется ЭО в группе?', a: 'Убывает сверху → вниз', tag: 'ЭО' },
+            { q: 'Какой элемент имеет максимальную ЭО?', a: 'Фтор (F)', tag: 'ЭО' },
+            { q: 'Какой элемент имеет минимальную ЭО?', a: 'Франций (Fr)', tag: 'ЭО' },
+            { q: 'Как изменяется энергия ионизации в периоде?', a: 'Возрастает слева → направо', tag: 'Ионизация' },
+            { q: 'Как изменяется энергия ионизации в группе?', a: 'Убывает сверху → вниз', tag: 'Ионизация' },
+            { q: 'Как изменяются кислотные свойства летучих водородных соединений в группе?', a: 'Усиливаются сверху → вниз (HF < HCl < HBr < HI)', tag: 'ЛВС' },
+            { q: 'Почему HF – слабая кислота?', a: 'Очень прочная связь H–F', tag: 'ЛВС' },
+            { q: 'Что такое диагональ B–At?', a: 'Условная граница между металлами и неметаллами', tag: 'Общее' },
+            { q: 'Какие элементы называют амфотерными?', a: 'Al, Zn, Sn, Pb – оксиды и гидроксиды проявляют и кислотные, и основные свойства', tag: 'Общее' },
+            { q: 'Чему равно число валентных электронов для главных подгрупп?', a: 'Номеру группы (А)', tag: 'Общее' },
+            { q: 'Где находятся d-элементы?', a: 'В побочных подгруппах (переходные металлы)', tag: 'Общее' },
+            { q: 'Почему у хлора радиус меньше, чем у натрия?', a: 'Хлор стоит правее в том же периоде, заряд ядра больше', tag: 'Радиус' },
+            { q: 'Почему у калия радиус больше, чем у натрия?', a: 'У калия 4 уровня, у натрия – 3', tag: 'Радиус' },
+            { q: 'Почему фтор – самый сильный окислитель?', a: 'Минимальный радиус и высокая ЭО – легко принимает электроны', tag: 'К F' },
+            { q: 'Почему франций – самый сильный восстановитель?', a: 'Максимальный радиус и низкая ЭО – легко отдаёт электроны', tag: 'К Fr' },
+            { q: 'Как изменяется основность гидроксидов в группе?', a: 'Усиливается сверху → вниз (к францию)', tag: 'К Fr' },
+            { q: 'Как изменяется кислотность гидроксидов в периоде?', a: 'Усиливается слева → направо (к фтору)', tag: 'К F' },
+            { q: 'Какие элементы в III периоде – металлы?', a: 'Na, Mg, Al (Si – полуметалл)', tag: 'Металлы' },
+            { q: 'Какие элементы в III периоде – неметаллы?', a: 'P, S, Cl (Ar – инертный газ)', tag: 'Неметаллы' },
+            { q: 'Почему у фтора нет высшего оксида +7?', a: 'Нет d-орбиталей, максимальная валентность I', tag: 'Общее' },
+            { q: 'Что такое энергия ионизации?', a: 'Энергия для отрыва внешнего электрона', tag: 'Ионизация' },
+        ];
+
+        let fcDeck = [...Array(FC_CARDS.length).keys()];
+        let fcPos = 0,
+            fcFlipped = false,
+            fcKnow = 0,
+            fcDk = 0,
+            fcDontKnowList = [];
+
+        function fcRender() {
+            const idx = fcDeck[fcPos];
+            const card = FC_CARDS[idx];
+            document.getElementById('fc-front-text').textContent = card.q;
+            document.getElementById('fc-back-text').textContent = '';
+            document.getElementById('fc-hint').textContent = '';
+            document.getElementById('fc-tag').textContent = card.tag || 'ВОПРОС';
+            document.getElementById('fc-back-tag').textContent = 'ОТВЕТ';
+            document.getElementById('fc-counter').textContent = `Карточка ${fcPos+1} из ${fcDeck.length}`;
+            document.getElementById('fc-know').textContent = fcKnow;
+            document.getElementById('fc-dk').textContent = fcDk;
+            document.getElementById('fc-left').textContent = fcDeck.length - fcPos;
+            const inner = document.getElementById('fc-inner');
+            inner.classList.remove('flipped');
+            fcFlipped = false;
+            document.getElementById('fc-btn-row').style.display = 'none';
+        }
+
+        function fcFlip() {
+            const inner = document.getElementById('fc-inner');
+            fcFlipped = !fcFlipped;
+            inner.classList.toggle('flipped', fcFlipped);
+            if (fcFlipped) {
+                const card = FC_CARDS[fcDeck[fcPos]];
+                document.getElementById('fc-back-text').textContent = card.a;
+                document.getElementById('fc-btn-row').style.display = 'flex';
+            } else {
+                document.getElementById('fc-back-text').textContent = '';
+                document.getElementById('fc-btn-row').style.display = 'none';
+            }
+        }
+
+        function fcAnswer(know) {
+            if (know) { fcKnow++; } else { fcDk++;
+                fcDontKnowList.push(fcDeck[fcPos]); }
+            fcPos++;
+            if (fcPos >= fcDeck.length) {
+                document.getElementById('res-know').textContent = fcKnow;
+                document.getElementById('res-dk').textContent = fcDk;
+                document.getElementById('fc-inner').parentElement.style.display = 'none';
+                document.querySelector('.fc-flip-btn').style.display = 'none';
+                document.getElementById('fc-btn-row').style.display = 'none';
+                document.querySelector('.fc-keys').style.display = 'none';
+                document.getElementById('fc-counter').style.display = 'none';
+                document.querySelector('.fc-stats').style.display = 'none';
+                document.getElementById('fc-result').style.display = 'block';
+            } else {
+                fcRender();
+            }
+        }
+
+        function fcRestart(onlyWrong) {
+            fcKnow = 0;
+            fcDk = 0;
+            fcDeck = onlyWrong && fcDontKnowList.length ? [...fcDontKnowList] : [...Array(FC_CARDS.length).keys()];
+            fcDontKnowList = [];
+            fcPos = 0;
+            document.getElementById('fc-inner').parentElement.style.display = '';
+            document.querySelector('.fc-flip-btn').style.display = '';
+            document.querySelector('.fc-keys').style.display = '';
+            document.getElementById('fc-counter').style.display = '';
+            document.querySelector('.fc-stats').style.display = '';
+            document.getElementById('fc-result').style.display = 'none';
+            fcRender();
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.code === 'Space') { e.preventDefault();
+                fcFlip(); }
+            if (e.code === 'ArrowRight' && fcFlipped) fcAnswer(true);
+            if (e.code === 'ArrowLeft' && fcFlipped) fcAnswer(false);
+        });
+
+        fcRender();
+
+        // ========== ПРОГРЕСС-БАР ==========
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+            document.getElementById('pf').style.width = pct + '%';
+            document.getElementById('back-top').classList.toggle('visible', pct > 8);
+        });
+    </script>
+</body>
+</html>
