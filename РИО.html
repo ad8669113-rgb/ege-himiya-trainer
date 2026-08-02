@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Электролитическая диссоциация · Ионные уравнения · Стальной стиль</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#eaeef3;color:#1e2a36;font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.6;padding-bottom:60px}
+  ::selection{background:#4a8db7;color:#fff}
+  .shell{max-width:1100px;margin:0 auto;padding:0 20px 40px}
+
+  .pbar{position:fixed;top:0;left:0;right:0;height:3px;z-index:999;background:#d0d9e3}
+  .pbar-fill{height:3px;background:linear-gradient(90deg,#2d5a7a,#4a8db7);width:0;transition:width .2s}
+
+  .hero{position:relative;background:linear-gradient(145deg,#d9e2ec 0%,#c5d1de 100%);padding:50px 30px 40px;border-radius:0 0 30px 30px;margin:-2px -20px 40px;overflow:hidden;border-bottom:3px solid #4a8db7;box-shadow:inset 0 2px 10px rgba(45,90,122,0.08)}
+  .hero-icons{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+  .hero-ion{position:absolute;font-family:'Segoe UI',monospace;font-weight:700;font-size:clamp(22px,4vw,48px);opacity:0.12;color:#2d5a7a;animation:floatIon 18s infinite alternate ease-in-out;white-space:nowrap}
+  .hero-ion:nth-child(1){top:10%;left:5%;animation-delay:0s}
+  .hero-ion:nth-child(2){top:70%;left:15%;animation-delay:2s;color:#4a6a7a;font-size:clamp(28px,5vw,56px)}
+  .hero-ion:nth-child(3){top:20%;right:10%;animation-delay:4s;color:#4a8db7}
+  .hero-ion:nth-child(4){bottom:15%;right:20%;animation-delay:1s;color:#2d5a7a}
+  .hero-ion:nth-child(5){top:50%;left:45%;animation-delay:3s;color:#6a8fa0;font-size:clamp(30px,5.5vw,64px)}
+  .hero-ion:nth-child(6){top:5%;left:60%;animation-delay:5s;color:#3a6b8f}
+  .hero-ion:nth-child(7){bottom:30%;left:75%;animation-delay:2.5s;color:#5b8db0}
+  .hero-ion:nth-child(8){top:40%;left:85%;animation-delay:4.5s;color:#2d5a7a}
+  .hero-ion:nth-child(9){top:80%;left:55%;animation-delay:6s;color:#4a6a7a}
+  .hero-ion:nth-child(10){top:15%;left:35%;animation-delay:3.5s;color:#4a8db7;font-size:clamp(18px,3vw,36px)}
+  @keyframes floatIon{
+    0%{transform:translate(0,0) scale(1) rotate(0deg)}
+    33%{transform:translate(20px,-30px) scale(1.05) rotate(5deg)}
+    66%{transform:translate(-10px,25px) scale(0.95) rotate(-3deg)}
+    100%{transform:translate(15px,-15px) scale(1.02) rotate(2deg)}
+  }
+  .hero-content{position:relative;z-index:1}
+  .hero-tag{display:inline-block;background:#2d5a7a;color:#fff;border-radius:20px;padding:4px 16px;font-size:12px;font-weight:600;letter-spacing:1px;margin-bottom:16px;font-family:monospace;box-shadow:0 2px 8px rgba(45,90,122,0.2)}
+  .hero h1{font-size:clamp(28px,5vw,48px);font-weight:800;line-height:1.1;color:#16344a;margin-bottom:10px;text-shadow:0 2px 4px rgba(255,255,255,0.5)}
+  .hero h1 em{color:#2d5a7a;font-style:normal;border-bottom:3px solid #4a8db7;padding-bottom:4px}
+  .hero p{color:#1e3b4f;font-size:16px;max-width:600px;margin-bottom:20px;font-weight:500;background:rgba(255,255,255,0.4);padding:6px 16px;border-radius:20px;display:inline-block;backdrop-filter:blur(2px)}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .hero-chip{background:rgba(255,255,255,0.7);border:1px solid #4a8db7;color:#1e3b4f;padding:4px 14px;border-radius:16px;font-size:12px;backdrop-filter:blur(2px);font-weight:500}
+
+  .section{margin-bottom:40px}
+  .s-header{display:flex;align-items:center;gap:14px;padding:8px 12px;margin:-8px -12px;border-radius:12px;cursor:pointer;transition:background .2s;user-select:none}
+  .s-header:hover{background:#dce5ee}
+  .s-header .num{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#2d5a7a,#4a8db7);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 2px 6px rgba(45,90,122,0.2)}
+  .s-header h2{font-size:clamp(18px,2.2vw,22px);font-weight:700;color:#16344a;flex:1}
+  .s-header .arrow{color:#2d5a7a;font-size:14px;transition:transform .3s;margin-left:auto}
+  .s-header.collapsed .arrow{transform:rotate(180deg)}
+  .s-body{overflow:hidden;transition:max-height .4s ease,opacity .25s;max-height:0;opacity:0}
+  .s-body.open{max-height:9999px;opacity:1}
+
+  .sub-title{font-size:17px;font-weight:700;color:#2d5a7a;margin:24px 0 10px;display:flex;align-items:center;gap:8px}
+  .sub-title::before{content:'';width:4px;height:20px;background:#4a8db7;border-radius:2px}
+  p{color:#2d3a48;margin-bottom:12px}
+  .box{background:#f4f7fa;border-left:4px solid #4a8db7;padding:12px 18px;border-radius:8px;margin:12px 0}
+  .box-title{font-weight:700;color:#2d5a7a;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .box ul{padding-left:20px;margin:6px 0}
+  .box li{color:#2d3a48;margin:4px 0}
+  .gold-line{height:1px;background:linear-gradient(90deg,transparent,#4a8db7,transparent);margin:18px 0}
+
+  .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid #b8c9d6;margin:12px 0;background:#fff;box-shadow:0 2px 8px rgba(45,90,122,0.05)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{font-weight:600;padding:8px 10px;text-align:center;border:1px solid #c8d4df;white-space:nowrap}
+  td{padding:6px 8px;text-align:center;border:1px solid #c8d4df;white-space:nowrap}
+  .cation-header{background:#2d5a7a;color:#fff;font-weight:700}
+  .anion-header{background:#4a6a7a;color:#fff;font-weight:700}
+  .soluble{color:#1d7a3c;font-weight:700}
+  .insoluble{color:#b33a3a;font-weight:700}
+  .slightly{color:#c97d1a;font-weight:700}
+
+  .scheme{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 16px;background:#f4f7fa;border:1px solid #b8c9d6;border-radius:12px;padding:16px;margin:12px 0}
+  .scheme .cell{background:#fff;border:1px solid #2d5a7a;border-radius:8px;padding:6px 14px;font-family:monospace;font-size:14px;color:#2d5a7a}
+  .scheme .arrow{font-size:22px;color:#2d5a7a}
+  .scheme .plus{font-size:18px;color:#6a8094}
+
+  .quiz{margin:18px 0 8px;background:#fff;border-radius:12px;padding:14px 18px;border:1px solid #c8d4df;box-shadow:0 2px 6px rgba(45,90,122,0.04)}
+  .quiz-q{font-weight:600;color:#1e2a36;margin-bottom:10px}
+  .quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  @media(max-width:500px){.quiz-opts{grid-template-columns:1fr}}
+  .quiz-btn{background:#f8fafc;border:1.5px solid #c8d4df;border-radius:8px;padding:8px 12px;color:#1e2a36;font-size:13px;text-align:left;cursor:pointer;transition:all .2s}
+  .quiz-btn:hover{background:#e2eaf2;border-color:#4a8db7}
+  .quiz-btn:disabled{opacity:.6;cursor:default}
+  .quiz-fb{margin-top:8px;padding:6px 12px;border-radius:6px;display:none;font-size:13px}
+
+  .task{background:#fff;border:1px solid #c8d4df;border-radius:12px;padding:16px 18px;margin:16px 0;box-shadow:0 2px 6px rgba(45,90,122,0.04)}
+  .task-num{display:inline-block;background:#2d5a7a;color:#fff;font-weight:800;padding:0 10px;border-radius:4px;font-size:12px;margin-bottom:8px}
+  .task-reagents{font-family:monospace;font-size:15px;color:#1e2a36;margin-bottom:4px}
+  .task-instruction{font-style:italic;color:#3d5a73;font-size:14px;margin-bottom:10px;border-bottom:1px dashed #c8d4df;padding-bottom:8px}
+  .task-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 6px}
+  .task-actions button{background:#f8fafc;border:1px solid #c8d4df;border-radius:8px;padding:6px 16px;color:#1e2a36;font-size:13px;cursor:pointer;transition:all .2s}
+  .task-actions button:hover{background:#e2eaf2;border-color:#4a8db7}
+  .task-actions .steel{background:linear-gradient(135deg,#2d5a7a,#4a8db7);border-color:#2d5a7a;color:#fff;font-weight:600}
+  .task-actions .steel:hover{background:linear-gradient(135deg,#3a6b8f,#5b9ec6)}
+  .task-answer{display:none;background:#f4f7fa;border:1px solid #4a8db7;border-radius:8px;padding:12px 16px;margin-top:12px;font-family:monospace;font-size:13px;color:#1e2a36;white-space:pre-wrap}
+  .task-answer .eq{color:#2d5a7a;display:block;margin:4px 0}
+  .task-hint{display:none;background:#f4f7fa;border-left:3px solid #4a8db7;padding:8px 12px;margin-top:8px;font-size:13px;color:#3d5a73}
+  .task-coeff{display:none;background:#f4f7fa;border:1px dashed #4a8db7;padding:6px 12px;margin-top:8px;font-family:monospace;color:#2d5a7a;font-size:13px}
+
+  .fc-section{background:#fff;border:1px solid #c8d4df;border-radius:24px;padding:30px 24px;margin:50px 0;box-shadow:0 4px 16px rgba(45,90,122,0.06)}
+  .fc-header{text-align:center;margin-bottom:20px}
+  .fc-header h2{font-size:clamp(22px,3vw,32px);color:#1e2a36;font-weight:800}
+  .fc-header h2 span{color:#2d5a7a}
+  .fc-stats{display:flex;justify-content:center;gap:24px;font-size:14px;color:#3d5a73;margin-bottom:10px}
+  .fc-stats b{color:#1e2a36}
+  .fc-counter{text-align:center;font-family:monospace;color:#6a8094;font-size:13px;margin-bottom:14px}
+  .fc-perspective{perspective:900px;max-width:580px;margin:0 auto;cursor:pointer}
+  .fc-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .4s;min-height:150px}
+  .fc-inner.flipped{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;display:flex;align-items:center;justify-content:center;padding:24px 28px;text-align:center;min-height:150px;flex-direction:column;gap:6px}
+  .fc-front{background:#f4f7fa;border:1.5px solid #4a8db7;color:#1e2a36;font-size:clamp(15px,2.2vw,19px);font-family:monospace;line-height:1.5}
+  .fc-back{background:#fff;border:1.5px solid #4a8db7;transform:rotateY(180deg);color:#1e2a36;font-size:clamp(14px,2vw,17px);font-family:monospace;line-height:1.6}
+  .fc-back .fc-ans{color:#2d5a7a}
+  .fc-tag{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#6a8094;margin-bottom:4px;font-family:sans-serif}
+  .fc-flip-btn{display:flex;align-items:center;gap:8px;margin:16px auto;background:#e2eaf2;border:1.5px solid #4a8db7;color:#2d5a7a;border-radius:10px;padding:10px 28px;font-weight:600;font-size:14px;cursor:pointer;transition:background .2s;width:fit-content}
+  .fc-flip-btn:hover{background:#c8d9e8}
+  .fc-btns{display:none;justify-content:center;gap:12px;margin-top:12px}
+  .fc-btns button{padding:10px 26px;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;transition:transform .1s}
+  .fc-btns button:active{transform:scale(.96)}
+  .fc-know{background:#2d7a4a;color:#fff}
+  .fc-know:hover{background:#3a9a5e}
+  .fc-dont{background:#b33a3a;color:#fff}
+  .fc-dont:hover{background:#cc4a4a}
+  .fc-keys{text-align:center;font-size:11px;color:#6a8094;margin-top:10px;font-family:monospace}
+  .fc-result{display:none;text-align:center;padding:16px}
+  .fc-result h3{color:#1e2a36;font-size:22px;margin-bottom:12px}
+  .fc-res-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+  .fc-res-card{background:#f4f7fa;border-radius:12px;padding:12px 24px;min-width:100px;border:1px solid #c8d4df}
+  .fc-res-num{font-size:28px;font-weight:800;color:#2d5a7a}
+  .fc-res-lbl{font-size:12px;color:#6a8094}
+  .fc-restart{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .fc-restart button{background:#f8fafc;border:1px solid #c8d4df;border-radius:8px;padding:8px 20px;color:#1e2a36;font-size:13px;cursor:pointer;transition:all .2s}
+  .fc-restart button:hover{background:#e2eaf2;border-color:#4a8db7}
+  .fc-restart .primary{background:#2d5a7a;border-color:#2d5a7a;color:#fff;font-weight:600}
+  .fc-restart .primary:hover{background:#3a6b8f}
+
+  .steel-text{color:#2d5a7a}
+  .mono{font-family:monospace}
+  button{cursor:pointer}
+
+  .legend-dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:4px}
+  @media(max-width:600px){
+    .hero{padding:30px 16px;margin:-2px -10px 30px}
+    .shell{padding:0 10px 30px}
+    .s-header{padding:6px 8px}
+    .fc-face{padding:16px}
+    .task-actions button{font-size:12px;padding:4px 12px}
+    table{font-size:11px}
+    th, td{padding:4px 5px}
+    .hero-ion{font-size:clamp(16px,3vw,28px)!important}
+  }
+</style>
+</head>
+<body>
+<div class="pbar"><div class="pbar-fill" id="pbar"></div></div>
+<div class="shell">
+
+<!-- HERO с анимированными ионами -->
+<div class="hero">
+  <div class="hero-icons">
+    <span class="hero-ion">Na⁺</span>
+    <span class="hero-ion">Cl⁻</span>
+    <span class="hero-ion">Mg²⁺</span>
+    <span class="hero-ion">SO₄²⁻</span>
+    <span class="hero-ion">K⁺</span>
+    <span class="hero-ion">OH⁻</span>
+    <span class="hero-ion">Ca²⁺</span>
+    <span class="hero-ion">CO₃²⁻</span>
+    <span class="hero-ion">Al³⁺</span>
+    <span class="hero-ion">NO₃⁻</span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">ЕГЭ ХИМИЯ · ЗАДАНИЯ 29–30</div>
+    <h1>Электролитическая <em>диссоциация</em><br>Ионные уравнения</h1>
+    <p>11 блоков теории · 22 мини‑задания · 30 задач (10 из ЕГЭ) · 30 флеш‑карточек</p>
+    <div class="hero-chips">
+      <span class="hero-chip">Электролиты</span>
+      <span class="hero-chip">Диссоциация</span>
+      <span class="hero-chip">Сильные/слабые</span>
+      <span class="hero-chip">Кислоты, основания, соли</span>
+      <span class="hero-chip">Полное и сокращённое</span>
+      <span class="hero-chip">РИО</span>
+      <span class="hero-chip">Осадок · Газ · Вода</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== БЛОК 1 ===== -->
+<section class="section" id="b1">
+  <div class="s-header collapsed" onclick="toggle(this)">
+    <span class="num">1</span>
+    <h2>Что такое электролиты</h2>
+    <span class="arrow">▾</span>
+  </div>
+  <div class="s-body">
+    <p><strong>Электролиты</strong> — вещества, растворы которых <span class="steel-text">проводят электрический ток</span>. Почему? Потому что в растворе они распадаются на <span class="steel-text">заряженные частицы</span> — <strong>ионы</strong>.</p>
+    <p><strong>Неэлектролиты</strong> — не проводят ток, ионов в растворе нет (например, сахар, спирт).</p>
+    <div class="box">
+      <div class="box-title">⚡ Примеры</div>
+      <ul>
+        <li><span class="steel-text">Электролит:</span> NaCl (поваренная соль) — в воде даёт ионы Na⁺ и Cl⁻</li>
+        <li><span class="steel-text">Неэлектролит:</span> C₁₂H₂₂O₁₁ (сахароза) — в воде не распадается</li>
+        <li>Вода — очень слабый электролит (незначительно диссоциирует)</li>
+      </ul>
+    </div>
+    <div class="gold-line"></div>
+    <div class="quiz" id="q1">
+      <div class="quiz-q">1. Какие из перечисленных веществ являются электролитами?</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" onclick="quizCheck(this,0,1)">A) NaCl и HCl</button>
+        <button class="quiz-btn" onclick="quizCheck(this,1,1)">Б) Сахар и спирт</button>
+        <button class="quiz-btn" onclick="quizCheck(this,2,1)">В) Вода и сахар</button>
+        <button class="quiz-btn" onclick="quizCheck(this,3,1)">Г) Соль и сахар</button>
+      </div>
+      <div class="quiz-fb"></div>
+    </div>
+    <div class="quiz" id="q2">
+      <div class="quiz-q">2. Почему раствор поваренной соли проводит ток?</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" onclick="quizCheck(this,0,2)">A) В нём есть свободные электроны</button>
+        <button class="quiz-btn" onclick="quizCheck(this,1,2)">Б) В нём есть ионы Na⁺ и Cl⁻</button>
+        <button class="quiz-btn" onclick="quizCheck(this,2,2)">В) Соль растворяется с выделением тепла</button>
+        <button class="quiz-btn" onclick="quizCheck(this,3,2)">Г) Соль окрашивает воду</button>
+      </div>
+      <div class="quiz-fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== БЛОК 2 ===== -->
+<section class="section" id="b2">
+  <div class="s-header collapsed" onclick="toggle(this)">
+    <span class="num">2</span>
+    <h2>Электролитическая диссоциация</h2>
+    <span class="arrow">▾</span>
+  </div>
+  <div class="s-body">
+    <p><span class="steel-text">Электролитическая диссоциация</span> — процесс распада вещества на ионы под действием молекул воды.</p>
+    <div class="scheme">
+      <span class="cell">NaCl (кристалл)</span>
+      <span class="plus">+</span>
+      <span class="cell">H₂O</span>
+      <span class="arrow">→</span>
+      <span class="cell">Na⁺ (катион)</span>
+      <span class="plus">+</span>
+      <span class="cell">Cl⁻ (анион)</span>
+    </div>
+    <p><strong>Ионы</strong> — заряженные частицы. <span class="steel-text">Катионы</span> (+), <span class="steel-text">анионы</span> (−).</p>
+    
+    <div class="box">
+      <div class="box-title">🧪 Классификация ионов</div>
+      <ul>
+        <li><strong>По составу:</strong> простые (Mg²⁺, Cl⁻) и сложные (PO₄³⁻, NH₄⁺)</li>
+        <li><strong>По заряду:</strong> катионы (+) и анионы (−)</li>
+      </ul>
+    </div>
+
+    <div class="box" style="border-left-color: #4a6a7a;">
+      <div class="box-title" style="color:#2d5a7a;">📊 Таблица растворимости (компактная)</div>
+      <p style="font-size:14px;"><strong>Как пользоваться:</strong> Катионы (положительные ионы) расположены <strong>по горизонтали</strong> (синий фон). Анионы (отрицательные) — <strong>по вертикали</strong> (серо-голубой фон). Заряд иона определяется по его месту в таблице.</p>
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th style="background:#d0d9e3;border:1px solid #b8c9d6;">Катионы →<br>Анионы ↓</th>
+            <th class="cation-header">H⁺</th>
+            <th class="cation-header">Na⁺</th>
+            <th class="cation-header">K⁺</th>
+            <th class="cation-header">NH₄⁺</th>
+            <th class="cation-header">Mg²⁺</th>
+            <th class="cation-header">Ca²⁺</th>
+            <th class="cation-header">Ba²⁺</th>
+            <th class="cation-header">Al³⁺</th>
+            <th class="cation-header">Zn²⁺</th>
+            <th class="cation-header">Cu²⁺</th>
+            <th class="cation-header">Fe³⁺</th>
+            <th class="cation-header">Ag⁺</th>
+          </tr>
+          <tr><td class="anion-header">OH⁻</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="insoluble">Н</td><td class="slightly">М</td><td class="soluble">Р</td><td class="insoluble">Н</td><td class="insoluble">Н</td><td class="insoluble">Н</td><td class="insoluble">Н</td><td class="insoluble">−</td></tr>
+          <tr><td class="anion-header">Cl⁻</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="insoluble">Н</td></tr>
+          <tr><td class="anion-header">SO₄²⁻</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="slightly">М</td><td class="insoluble">Н</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="slightly">М</td></tr>
+          <tr><td class="anion-header">NO₃⁻</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td></tr>
+          <tr><td class="anion-header">CO₃²⁻</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="insoluble">Н</td><td class="insoluble">Н</td><td class="insoluble">Н</td><td class="insoluble">−</td><td class="insoluble">Н</td><td class="insoluble">Н</td><td class="insoluble">−</td><td class="insoluble">Н</td></tr>
+          <tr><td class="anion-header">PO₄³⁻</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="soluble">Р</td><td class="insoluble">Н</td><td class="insoluble">Н</td><td class="insoluble">Н</td><td class="insoluble">Н</td><td class="insoluble">Н</td><td class="insoluble">Н</td><td class="insoluble">Н</td><td class="insoluble">Н</td></tr>
+        </table>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:6px;font-size:13px;justify-content:center;">
+        <span><span class="legend-dot" style="background:#1d7a3c;"></span> <span class="soluble">Р</span> — растворимо</span>
+        <span><span class="legend-dot" style="background:#b33a3a;"></span> <span class="insoluble">Н</span> — нерастворимо</span>
+        <span><span class="legend-dot" style="background:#c97d1a;"></span> <span class="slightly">М</span> — малорастворимо</span>
+        <span><span class="legend-dot" style="background:#8a7f6f;"></span> − — в воде разлагается</span>
+      </div>
+      <p style="font-size:13px;margin-top:6px;">💡 <strong>Важно:</strong> Заряды ионов можно определить по их положению в таблице. Например, <strong>Na</strong> находится в первой группе → заряд <strong>+1</strong> (Na⁺). <strong>SO₄</strong> — остаток серной кислоты → заряд <strong>−2</strong> (SO₄²⁻).</p>
+    </div>
+
+    <div class="quiz" id="q3">
+      <div class="quiz-q">3. На какие ионы распадётся KOH при диссоциации?</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" onclick="quizCheck(this,0,3)">A) K⁺ и OH⁻</button>
+        <button class="quiz-btn" onclick="quizCheck(this,1,3)">Б) K²⁺ и O²⁻</button>
+        <button class="quiz-btn" onclick="quizCheck(this,2,3)">В) K⁺ и H⁺</button>
+        <button class="quiz-btn" onclick="quizCheck(this,3,3)">Г) K⁻ и OH⁺</button>
+      </div>
+      <div class="quiz-fb"></div>
+    </div>
+    <div class="quiz" id="q4">
+      <div class="quiz-q">4. Какие ионы образуются при диссоциации Na₂SO₄?</div>
+      <div class="quiz-opts">
+        <button class="quiz-btn" onclick="quizCheck(this,0,4)">A) Na⁺ и SO₄²⁻</button>
+        <button class="quiz-btn" onclick="quizCheck(this,1,4)">Б) Na²⁺ и SO₄⁻</button>
+        <button class="quiz-btn" onclick="quizCheck(this,2,4)">В) Na⁺ и S⁶⁺</button>
+        <button class="quiz-btn" onclick="quizCheck(this,3,4)">Г) Na⁺ и O₂²⁻</button>
+      </div>
+      <div class="quiz-fb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== БЛОК 3 ===== -->
+<section class="section" id="b3">
+  <div class="s-header collapsed" onclick="toggle(this)"><span class="num">3</span><h2>Сильные и слабые электролиты</h2><span class="arrow">▾</span></div>
+  <div class="s-body">
+    <p><span class="steel-text">Сильные</span> — диссоциируют почти полностью (→). <span class="steel-text">Слабые</span> — частично (⇄).</p>
+    <div class="table-wrap"><table><tr><th>Сильные (→)</th><th>Слабые (⇄)</th></tr><tr><td>Растворимые соли</td><td>Нерастворимые соли</td></tr><tr><td>Щёлочи (NaOH, KOH, Ba(OH)₂, Sr(OH)₂, Ca(OH)₂)</td><td>Нерастворимые основания, NH₃·H₂O</td></tr><tr><td>HCl, HBr, HI, H₂SO₄, HNO₃, HClO₄ и др.</td><td>HF, H₂S, H₂SO₃, HNO₂, H₃PO₄, H₂CO₃, H₂SiO₃, органические кислоты</td></tr><tr><td></td><td>Вода</td></tr></table></div>
+    <div class="quiz" id="q5"><div class="quiz-q">5. Какое вещество является сильным электролитом?</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,5)">A) H₂CO₃</button><button class="quiz-btn" onclick="quizCheck(this,1,5)">Б) NaOH</button><button class="quiz-btn" onclick="quizCheck(this,2,5)">В) H₂S</button><button class="quiz-btn" onclick="quizCheck(this,3,5)">Г) NH₃·H₂O</button></div><div class="quiz-fb"></div></div>
+    <div class="quiz" id="q6"><div class="quiz-q">6. Какой знак (→ или ⇄) ставим при диссоциации слабого электролита?</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,6)">A) →</button><button class="quiz-btn" onclick="quizCheck(this,1,6)">Б) ⇄</button><button class="quiz-btn" onclick="quizCheck(this,2,6)">В) =</button><button class="quiz-btn" onclick="quizCheck(this,3,6)">Г) ≠</button></div><div class="quiz-fb"></div></div>
+  </div>
+</section>
+
+<!-- ===== БЛОК 4 ===== -->
+<section class="section" id="b4">
+  <div class="s-header collapsed" onclick="toggle(this)"><span class="num">4</span><h2>Диссоциация кислот</h2><span class="arrow">▾</span></div>
+  <div class="s-body">
+    <p><span class="steel-text">Кислоты</span> → катионы водорода H⁺ и анионы кислотного остатка.</p>
+    <div class="box"><div class="box-title">📝 Примеры</div><ul><li>HCl → H⁺ + Cl⁻</li><li>H₂SO₄ → 2H⁺ + SO₄²⁻</li><li>H₃PO₄ ⇄ H⁺ + H₂PO₄⁻ (по ступеням, слабая)</li></ul></div>
+    <div class="quiz" id="q7"><div class="quiz-q">7. Запиши диссоциацию HNO₃ (выбери правильную запись).</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,7)">A) HNO₃ → H⁺ + NO₃⁻</button><button class="quiz-btn" onclick="quizCheck(this,1,7)">Б) HNO₃ → H₂⁺ + NO₃²⁻</button><button class="quiz-btn" onclick="quizCheck(this,2,7)">В) HNO₃ → H⁺ + NO₂⁻ + O²⁻</button><button class="quiz-btn" onclick="quizCheck(this,3,7)">Г) HNO₃ → H⁺ + N³⁻ + O₂²⁻</button></div><div class="quiz-fb"></div></div>
+    <div class="quiz" id="q8"><div class="quiz-q">8. При диссоциации H₂SO₄ по первой ступени образуется:</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,8)">A) H⁺ + HSO₄⁻</button><button class="quiz-btn" onclick="quizCheck(this,1,8)">Б) 2H⁺ + SO₄²⁻</button><button class="quiz-btn" onclick="quizCheck(this,2,8)">В) H⁺ + SO₄²⁻</button><button class="quiz-btn" onclick="quizCheck(this,3,8)">Г) H₂⁺ + SO₄⁻</button></div><div class="quiz-fb"></div></div>
+  </div>
+</section>
+
+<!-- ===== БЛОК 5 ===== -->
+<section class="section" id="b5">
+  <div class="s-header collapsed" onclick="toggle(this)"><span class="num">5</span><h2>Диссоциация оснований</h2><span class="arrow">▾</span></div>
+  <div class="s-body">
+    <p><span class="steel-text">Основания</span> → катион металла (или NH₄⁺) + гидроксид-ионы OH⁻.</p>
+    <div class="box"><div class="box-title">📝 Примеры</div><ul><li>NaOH → Na⁺ + OH⁻</li><li>Ba(OH)₂ → Ba²⁺ + 2OH⁻</li><li>NH₄OH ⇄ NH₄⁺ + OH⁻ (слабое)</li></ul></div>
+    <div class="quiz" id="q9"><div class="quiz-q">9. Какая запись верна для диссоциации Ca(OH)₂?</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,9)">A) Ca(OH)₂ → Ca²⁺ + 2OH⁻</button><button class="quiz-btn" onclick="quizCheck(this,1,9)">Б) Ca(OH)₂ → Ca⁺ + OH⁻</button><button class="quiz-btn" onclick="quizCheck(this,2,9)">В) Ca(OH)₂ → Ca²⁺ + OH₂²⁻</button><button class="quiz-btn" onclick="quizCheck(this,3,9)">Г) Ca(OH)₂ ⇄ Ca²⁺ + 2OH⁻</button></div><div class="quiz-fb"></div></div>
+    <div class="quiz" id="q10"><div class="quiz-q">10. При диссоциации NH₄OH образуются:</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,10)">A) NH₄⁺ и OH⁻</button><button class="quiz-btn" onclick="quizCheck(this,1,10)">Б) NH₃ и H₂O</button><button class="quiz-btn" onclick="quizCheck(this,2,10)">В) N³⁻ и H⁺</button><button class="quiz-btn" onclick="quizCheck(this,3,10)">Г) NH₄⁺ и H₂O</button></div><div class="quiz-fb"></div></div>
+  </div>
+</section>
+
+<!-- ===== БЛОК 6 ===== -->
+<section class="section" id="b6">
+  <div class="s-header collapsed" onclick="toggle(this)"><span class="num">6</span><h2>Диссоциация солей</h2><span class="arrow">▾</span></div>
+  <div class="s-body">
+    <p><span class="steel-text">Соли</span> → катион металла (или NH₄⁺) + анион кислотного остатка. <strong>Всегда в одну ступень</strong>.</p>
+    <div class="box"><div class="box-title">📝 Примеры</div><ul><li>CaCl₂ → Ca²⁺ + 2Cl⁻</li><li>Na₂SO₄ → 2Na⁺ + SO₄²⁻</li><li><span class="steel-text">Кислые соли:</span> NaHCO₃ → Na⁺ + HCO₃⁻ (не распадается дальше!)</li></ul></div>
+    <div class="quiz" id="q11"><div class="quiz-q">11. Как диссоциирует Al₂(SO₄)₃?</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,11)">A) 2Al³⁺ + 3SO₄²⁻</button><button class="quiz-btn" onclick="quizCheck(this,1,11)">Б) Al₂⁺ + SO₄³⁻</button><button class="quiz-btn" onclick="quizCheck(this,2,11)">В) 2Al⁺ + 3SO₄⁻</button><button class="quiz-btn" onclick="quizCheck(this,3,11)">Г) Al³⁺ + SO₄²⁻</button></div><div class="quiz-fb"></div></div>
+    <div class="quiz" id="q12"><div class="quiz-q">12. Какие ионы даёт NaHSO₄ в растворе?</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,12)">A) Na⁺ + H⁺ + SO₄²⁻</button><button class="quiz-btn" onclick="quizCheck(this,1,12)">Б) Na⁺ + HSO₄⁻</button><button class="quiz-btn" onclick="quizCheck(this,2,12)">В) Na⁺ + SO₄²⁻ + H⁺</button><button class="quiz-btn" onclick="quizCheck(this,3,12)">Г) Na²⁺ + HSO₄⁻</button></div><div class="quiz-fb"></div></div>
+  </div>
+</section>
+
+<!-- ===== БЛОК 7 ===== -->
+<section class="section" id="b7">
+  <div class="s-header collapsed" onclick="toggle(this)"><span class="num">7</span><h2>Молекулярные уравнения</h2><span class="arrow">▾</span></div>
+  <div class="s-body">
+    <p><span class="steel-text">Молекулярное уравнение</span> — это обычная запись реакции с формулами веществ (без ионов).</p>
+    <div class="box"><div class="box-title">🧪 Пример</div><ul><li>NaOH + HCl → NaCl + H₂O</li><li>BaCl₂ + Na₂SO₄ → BaSO₄↓ + 2NaCl</li></ul></div>
+    <div class="quiz" id="q13"><div class="quiz-q">13. Допиши молекулярное уравнение: KOH + HNO₃ → ...</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,13)">A) KNO₃ + H₂O</button><button class="quiz-btn" onclick="quizCheck(this,1,13)">Б) KNO₃ + H₂</button><button class="quiz-btn" onclick="quizCheck(this,2,13)">В) KNO₂ + H₂O</button><button class="quiz-btn" onclick="quizCheck(this,3,13)">Г) K₃N + H₂O</button></div><div class="quiz-fb"></div></div>
+    <div class="quiz" id="q14"><div class="quiz-q">14. Коэффициент перед NaCl в уравнении BaCl₂ + Na₂SO₄ → BaSO₄ + NaCl равен:</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,14)">A) 1</button><button class="quiz-btn" onclick="quizCheck(this,1,14)">Б) 2</button><button class="quiz-btn" onclick="quizCheck(this,2,14)">В) 3</button><button class="quiz-btn" onclick="quizCheck(this,3,14)">Г) 4</button></div><div class="quiz-fb"></div></div>
+  </div>
+</section>
+
+<!-- ===== БЛОК 8 ===== -->
+<section class="section" id="b8">
+  <div class="s-header collapsed" onclick="toggle(this)"><span class="num">8</span><h2>Полное ионное уравнение</h2><span class="arrow">▾</span></div>
+  <div class="s-body">
+    <p><span class="steel-text">Алгоритм</span>:</p><ol style="padding-left:20px;color:#2d3a48;margin-bottom:12px"><li>Записать молекулярное уравнение с коэффициентами.</li><li>Определить сильные растворимые электролиты.</li><li>Расписать их на ионы (сохраняя коэффициенты).</li><li>Оставить в молекулярном виде: осадки, газы, слабые электролиты, воду.</li></ol>
+    <div class="box"><div class="box-title">📝 Пример</div><ul><li><strong>Мол.:</strong> BaCl₂ + Na₂SO₄ → BaSO₄↓ + 2NaCl</li><li><strong>Полн. ион.:</strong> Ba²⁺ + 2Cl⁻ + 2Na⁺ + SO₄²⁻ → BaSO₄↓ + 2Na⁺ + 2Cl⁻</li></ul></div>
+    <div class="quiz" id="q15"><div class="quiz-q">15. В полном ионном уравнении для реакции NaOH + HCl → NaCl + H₂O, какие вещества расписывают на ионы?</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,15)">A) NaOH, HCl, NaCl</button><button class="quiz-btn" onclick="quizCheck(this,1,15)">Б) Только NaOH и HCl</button><button class="quiz-btn" onclick="quizCheck(this,2,15)">В) Только NaCl</button><button class="quiz-btn" onclick="quizCheck(this,3,15)">Г) Все, кроме H₂O</button></div><div class="quiz-fb"></div></div>
+    <div class="quiz" id="q16"><div class="quiz-q">16. Какая запись является полным ионным для реакции KOH + HBr → KBr + H₂O?</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,16)">A) K⁺ + OH⁻ + H⁺ + Br⁻ → K⁺ + Br⁻ + H₂O</button><button class="quiz-btn" onclick="quizCheck(this,1,16)">Б) KOH + HBr → KBr + H₂O</button><button class="quiz-btn" onclick="quizCheck(this,2,16)">В) K⁺ + OH⁻ + H⁺ + Br⁻ → K⁺ + Br⁻ + H₂O</button><button class="quiz-btn" onclick="quizCheck(this,3,16)">Г) OH⁻ + H⁺ → H₂O</button></div><div class="quiz-fb"></div></div>
+  </div>
+</section>
+
+<!-- ===== БЛОК 9 ===== -->
+<section class="section" id="b9">
+  <div class="s-header collapsed" onclick="toggle(this)"><span class="num">9</span><h2>Сокращённое ионное уравнение</h2><span class="arrow">▾</span></div>
+  <div class="s-body">
+    <p><span class="steel-text">Сокращённое ионное</span> получается из полного удалением одинаковых ионов ("зрителей") из левой и правой частей.</p>
+    <div class="box"><div class="box-title">📝 Пример</div><ul><li><strong>Полн.:</strong> Ba²⁺ + 2Cl⁻ + 2Na⁺ + SO₄²⁻ → BaSO₄↓ + 2Na⁺ + 2Cl⁻</li><li><strong>Сокр.:</strong> Ba²⁺ + SO₄²⁻ → BaSO₄↓</li><li>Зрители: 2Na⁺ и 2Cl⁻ (сокращаются)</li></ul></div>
+    <div class="quiz" id="q17"><div class="quiz-q">17. Какие ионы являются "зрителями" в реакции Na₂CO₃ + 2HCl → 2NaCl + CO₂↑ + H₂O?</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,17)">A) Na⁺ и Cl⁻</button><button class="quiz-btn" onclick="quizCheck(this,1,17)">Б) CO₃²⁻ и H⁺</button><button class="quiz-btn" onclick="quizCheck(this,2,17)">В) Na⁺ и H⁺</button><button class="quiz-btn" onclick="quizCheck(this,3,17)">Г) Cl⁻ и CO₃²⁻</button></div><div class="quiz-fb"></div></div>
+    <div class="quiz" id="q18"><div class="quiz-q">18. Какое сокращённое ионное уравнение соответствует реакции NaOH + HCl?</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,18)">A) H⁺ + OH⁻ → H₂O</button><button class="quiz-btn" onclick="quizCheck(this,1,18)">Б) Na⁺ + Cl⁻ → NaCl</button><button class="quiz-btn" onclick="quizCheck(this,2,18)">В) Na⁺ + OH⁻ → NaOH</button><button class="quiz-btn" onclick="quizCheck(this,3,18)">Г) H⁺ + Cl⁻ → HCl</button></div><div class="quiz-fb"></div></div>
+  </div>
+</section>
+
+<!-- ===== БЛОК 10 ===== -->
+<section class="section" id="b10">
+  <div class="s-header collapsed" onclick="toggle(this)"><span class="num">10</span><h2>Условия протекания РИО</h2><span class="arrow">▾</span></div>
+  <div class="s-body">
+    <p>Реакция ионного обмена идёт до конца, если образуется:</p><ul style="padding-left:20px;color:#2d3a48"><li><span class="steel-text">Осадок ↓</span> (нерастворимое вещество)</li><li><span class="steel-text">Газ ↑</span> (летучее соединение)</li><li><span class="steel-text">Слабый электролит</span> (например, H₂O, слабая кислота)</li></ul>
+    <div class="box"><div class="box-title">🧪 Примеры</div><ul><li>Ba²⁺ + SO₄²⁻ → BaSO₄↓ (осадок)</li><li>CO₃²⁻ + 2H⁺ → CO₂↑ + H₂O (газ + вода)</li><li>H⁺ + OH⁻ → H₂O (вода)</li><li><span class="steel-text">Особые случаи:</span> NH₄⁺ + OH⁻ → NH₃↑ + H₂O; HCO₃⁻ + H⁺ → CO₂↑ + H₂O</li></ul></div>
+    <div class="quiz" id="q19"><div class="quiz-q">19. Какое условие позволяет реакции CuSO₄ + NaOH → Cu(OH)₂↓ + Na₂SO₄ пройти до конца?</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,19)">A) Образуется осадок Cu(OH)₂</button><button class="quiz-btn" onclick="quizCheck(this,1,19)">Б) Выделяется газ</button><button class="quiz-btn" onclick="quizCheck(this,2,19)">В) Образуется вода</button><button class="quiz-btn" onclick="quizCheck(this,3,19)">Г) Изменяется цвет</button></div><div class="quiz-fb"></div></div>
+    <div class="quiz" id="q20"><div class="quiz-q">20. Какая реакция ионного обмена возможна?</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,20)">A) NaCl + KNO₃</button><button class="quiz-btn" onclick="quizCheck(this,1,20)">Б) Na₂CO₃ + HCl</button><button class="quiz-btn" onclick="quizCheck(this,2,20)">В) BaSO₄ + HCl</button><button class="quiz-btn" onclick="quizCheck(this,3,20)">Г) CuS + HNO₃ (разб.)</button></div><div class="quiz-fb"></div></div>
+  </div>
+</section>
+
+<!-- ===== БЛОК 11 ===== -->
+<section class="section" id="b11">
+  <div class="s-header collapsed" onclick="toggle(this)"><span class="num">11</span><h2>Алгоритм решения (памятка)</h2><span class="arrow">▾</span></div>
+  <div class="s-body">
+    <div style="background:#f4f7fa;border:2px solid #4a8db7;border-radius:16px;padding:20px 24px;">
+      <p style="font-weight:700;color:#2d5a7a;font-size:18px;margin-bottom:12px;">ШАГ 1</p><p>Запиши молекулярное уравнение и расставь коэффициенты.</p>
+      <p style="font-weight:700;color:#2d5a7a;font-size:18px;margin:12px 0 6px;">ШАГ 2</p><p>Определи, какие вещества — сильные растворимые электролиты.</p>
+      <p style="font-weight:700;color:#2d5a7a;font-size:18px;margin:12px 0 6px;">ШАГ 3</p><p>Распиши их на ионы (сохраняя коэффициенты) → получи полное ионное.</p>
+      <p style="font-weight:700;color:#2d5a7a;font-size:18px;margin:12px 0 6px;">ШАГ 4</p><p>Сократи одинаковые ионы слева и справа ("зрители").</p>
+      <p style="font-weight:700;color:#2d5a7a;font-size:18px;margin:12px 0 6px;">ШАГ 5</p><p>Запиши сокращённое ионное уравнение.</p>
+    </div>
+    <p style="margin-top:12px;">⚠️ <span class="steel-text">Важно:</span> осадки, газы, слабые электролиты и воду <strong>не расписываем</strong> на ионы!</p>
+    <div class="quiz" id="q21"><div class="quiz-q">21. Какой шаг алгоритма нужно выполнить в первую очередь?</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,21)">A) Расписать на ионы</button><button class="quiz-btn" onclick="quizCheck(this,1,21)">Б) Написать молекулярное уравнение</button><button class="quiz-btn" onclick="quizCheck(this,2,21)">В) Сократить ионы</button><button class="quiz-btn" onclick="quizCheck(this,3,21)">Г) Определить осадок</button></div><div class="quiz-fb"></div></div>
+    <div class="quiz" id="q22"><div class="quiz-q">22. Что НЕЛЬЗЯ расписывать на ионы в полном ионном уравнении?</div><div class="quiz-opts"><button class="quiz-btn" onclick="quizCheck(this,0,22)">A) Растворимые соли</button><button class="quiz-btn" onclick="quizCheck(this,1,22)">Б) Сильные кислоты</button><button class="quiz-btn" onclick="quizCheck(this,2,22)">В) Осадки и воду</button><button class="quiz-btn" onclick="quizCheck(this,3,22)">Г) Щёлочи</button></div><div class="quiz-fb"></div></div>
+  </div>
+</section>
+
+<!-- ===== ФИНАЛЬНЫЙ ТРЕНАЖЁР (30 ЗАДАНИЙ) ===== -->
+<section id="train">
+  <div style="margin:40px 0 20px;border-top:2px solid #4a8db7;padding-top:20px;">
+    <h2 style="font-size:28px;color:#1e2a36;display:flex;align-items:center;gap:12px;">
+      <span style="background:#2d5a7a;color:#fff;padding:0 12px;border-radius:6px;font-size:20px;">30</span>
+      Финальный тренажёр
+    </h2>
+    <p style="color:#3d5a73;">20 авторских + 10 реальных заданий из сборника ЕГЭ. Нажмите кнопку, чтобы увидеть решение.</p>
+  </div>
+  <div id="task-container"></div>
+</section>
+
+<!-- ===== ФЛЕШ-КАРТОЧКИ ===== -->
+<section id="flash" class="fc-section">
+  <div class="fc-header">
+    <h2>🃏 <span>30</span> флеш‑карточек</h2>
+    <p style="color:#3d5a73;">Проверьте знание ключевых терминов и реакций</p>
+  </div>
+  <div class="fc-stats">
+    Знаю: <b id="fc-know">0</b> &nbsp;|&nbsp; Не знаю: <b id="fc-dk">0</b> &nbsp;|&nbsp; Осталось: <b id="fc-left">30</b>
+  </div>
+  <div class="fc-counter" id="fc-counter">Карточка 1 из 30</div>
+  <div class="fc-perspective" onclick="fcFlip()">
+    <div class="fc-inner" id="fc-inner">
+      <div class="fc-face fc-front">
+        <div class="fc-tag" id="fc-tag">ВОПРОС</div>
+        <div id="fc-front-text"></div>
+      </div>
+      <div class="fc-face fc-back">
+        <div class="fc-tag" style="color:#2d5a7a;">ОТВЕТ</div>
+        <div id="fc-back-text" class="fc-ans"></div>
+      </div>
+    </div>
+  </div>
+  <button class="fc-flip-btn" onclick="fcFlip()">🔄 Перевернуть</button>
+  <div class="fc-btns" id="fc-btns">
+    <button class="fc-know" onclick="fcAnswer(true)">✓ Знаю</button>
+    <button class="fc-dont" onclick="fcAnswer(false)">✗ Не знаю</button>
+  </div>
+  <div class="fc-keys">пробел — перевернуть · ← не знаю · → знаю</div>
+  <div class="fc-result" id="fc-result">
+    <h3>Готово! 🎉</h3>
+    <div class="fc-res-row">
+      <div class="fc-res-card"><div class="fc-res-num" id="res-know" style="color:#2d5a7a;">0</div><div class="fc-res-lbl">ЗНАЮ</div></div>
+      <div class="fc-res-card"><div class="fc-res-num" id="res-dk" style="color:#b33a3a;">0</div><div class="fc-res-lbl">НЕ ЗНАЮ</div></div>
+    </div>
+    <div class="fc-restart">
+      <button class="primary" onclick="fcRestart(false)">Сначала (все)</button>
+      <button onclick="fcRestart(true)">Только ошибки</button>
+    </div>
+  </div>
+</section>
+
+</div><!-- /shell -->
+
+<script>
+// ===== аккордеон =====
+function toggle(el) {
+  const body = el.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  if (isOpen) {
+    body.classList.remove('open');
+    el.classList.add('collapsed');
+  } else {
+    body.classList.add('open');
+    el.classList.remove('collapsed');
+    setTimeout(() => el.scrollIntoView({behavior:'smooth',block:'start'}), 100);
+  }
+}
+
+// ===== мини-задания =====
+function quizCheck(btn, idx, qid) {
+  const parent = btn.closest('.quiz');
+  if (parent.dataset.done) return;
+  parent.dataset.done = '1';
+  const correctMap = {
+    1:0,2:1,3:0,4:0,5:1,6:1,7:0,8:0,9:0,10:0,
+    11:0,12:1,13:0,14:1,15:3,16:0,17:0,18:0,19:0,20:1,
+    21:1,22:2
+  };
+  const correct = correctMap[qid];
+  const opts = parent.querySelectorAll('.quiz-btn');
+  const fb = parent.querySelector('.quiz-fb');
+  opts.forEach((o,i) => {
+    o.disabled = true;
+    if (i === correct) { o.style.borderColor = '#4a8db7'; o.style.background = '#e2eaf2'; }
+    else if (i === idx && idx !== correct) { o.style.borderColor = '#b33a3a'; o.style.background = '#fde8e8'; }
+  });
+  fb.style.display = 'block';
+  if (idx === correct) {
+    fb.style.background = '#e6f5ed'; fb.style.color = '#1d6b3c';
+    fb.textContent = '✓ Верно!';
+  } else {
+    fb.style.background = '#fde8e8'; fb.style.color = '#b33a3a';
+    fb.textContent = '✗ Неверно. Правильный ответ выделен синим.';
+  }
+}
+
+// ===== ФИНАЛЬНЫЙ ТРЕНАЖЁР (30 задач) =====
+const tasks = [
+  // 1-20 авторские
+  { reac: 'NaOH + HCl →', mol: 'NaOH + HCl → NaCl + H₂O', full: 'Na⁺ + OH⁻ + H⁺ + Cl⁻ → Na⁺ + Cl⁻ + H₂O', short: 'H⁺ + OH⁻ → H₂O', hint: 'Реакция нейтрализации, образуется вода.' },
+  { reac: 'KOH + HNO₃ →', mol: 'KOH + HNO₃ → KNO₃ + H₂O', full: 'K⁺ + OH⁻ + H⁺ + NO₃⁻ → K⁺ + NO₃⁻ + H₂O', short: 'H⁺ + OH⁻ → H₂O', hint: 'Нейтрализация, вода.' },
+  { reac: 'Na₂CO₃ + HCl →', mol: 'Na₂CO₃ + 2HCl → 2NaCl + CO₂↑ + H₂O', full: '2Na⁺ + CO₃²⁻ + 2H⁺ + 2Cl⁻ → 2Na⁺ + 2Cl⁻ + CO₂↑ + H₂O', short: 'CO₃²⁻ + 2H⁺ → CO₂↑ + H₂O', hint: 'Выделяется углекислый газ.' },
+  { reac: 'BaCl₂ + Na₂SO₄ →', mol: 'BaCl₂ + Na₂SO₄ → BaSO₄↓ + 2NaCl', full: 'Ba²⁺ + 2Cl⁻ + 2Na⁺ + SO₄²⁻ → BaSO₄↓ + 2Na⁺ + 2Cl⁻', short: 'Ba²⁺ + SO₄²⁻ → BaSO₄↓', hint: 'Осадок сульфата бария.' },
+  { reac: 'CuSO₄ + NaOH →', mol: 'CuSO₄ + 2NaOH → Cu(OH)₂↓ + Na₂SO₄', full: 'Cu²⁺ + SO₄²⁻ + 2Na⁺ + 2OH⁻ → Cu(OH)₂↓ + 2Na⁺ + SO₄²⁻', short: 'Cu²⁺ + 2OH⁻ → Cu(OH)₂↓', hint: 'Осадок гидроксида меди (II).' },
+  { reac: 'NH₄OH + HCl →', mol: 'NH₄OH + HCl → NH₄Cl + H₂O', full: 'NH₄⁺ + OH⁻ + H⁺ + Cl⁻ → NH₄⁺ + Cl⁻ + H₂O', short: 'H⁺ + OH⁻ → H₂O', hint: 'Слабое основание нейтрализуется.' },
+  { reac: 'Na₃PO₄ + HBr →', mol: 'Na₃PO₄ + 3HBr → 3NaBr + H₃PO₄', full: '3Na⁺ + PO₄³⁻ + 3H⁺ + 3Br⁻ → 3Na⁺ + 3Br⁻ + H₃PO₄', short: 'PO₄³⁻ + 3H⁺ → H₃PO₄', hint: 'Образуется слабая фосфорная кислота.' },
+  { reac: 'BaCl₂ + AgNO₃ →', mol: 'BaCl₂ + 2AgNO₃ → 2AgCl↓ + Ba(NO₃)₂', full: 'Ba²⁺ + 2Cl⁻ + 2Ag⁺ + 2NO₃⁻ → 2AgCl↓ + Ba²⁺ + 2NO₃⁻', short: 'Ag⁺ + Cl⁻ → AgCl↓', hint: 'Осадок хлорида серебра.' },
+  { reac: 'NaHCO₃ + H₂SO₄ →', mol: '2NaHCO₃ + H₂SO₄ → Na₂SO₄ + 2CO₂↑ + 2H₂O', full: '2Na⁺ + 2HCO₃⁻ + 2H⁺ + SO₄²⁻ → 2Na⁺ + SO₄²⁻ + 2CO₂↑ + 2H₂O', short: 'HCO₃⁻ + H⁺ → CO₂↑ + H₂O', hint: 'Кислая соль + кислота → газ CO₂.' },
+  { reac: 'NH₄Cl + NaOH →', mol: 'NH₄Cl + NaOH → NaCl + NH₃↑ + H₂O', full: 'NH₄⁺ + Cl⁻ + Na⁺ + OH⁻ → Na⁺ + Cl⁻ + NH₃↑ + H₂O', short: 'NH₄⁺ + OH⁻ → NH₃↑ + H₂O', hint: 'Выделяется аммиак.' },
+  { reac: 'H₂SO₄ + 2NaOH →', mol: 'H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O', full: '2H⁺ + SO₄²⁻ + 2Na⁺ + 2OH⁻ → 2Na⁺ + SO₄²⁻ + 2H₂O', short: 'H⁺ + OH⁻ → H₂O', hint: 'Полная нейтрализация серной кислоты.' },
+  { reac: 'CuSO₄ + Na₂S →', mol: 'CuSO₄ + Na₂S → CuS↓ + Na₂SO₄', full: 'Cu²⁺ + SO₄²⁻ + 2Na⁺ + S²⁻ → CuS↓ + 2Na⁺ + SO₄²⁻', short: 'Cu²⁺ + S²⁻ → CuS↓', hint: 'Осадок сульфида меди (II), нерастворим в кислотах.' },
+  { reac: 'BaSO₄ + HCl →', mol: 'реакция не идёт', full: '—', short: '—', hint: 'BaSO₄ нерастворим в кислотах, реакция невозможна.' },
+  { reac: 'Pb(NO₃)₂ + Na₂SO₄ →', mol: 'Pb(NO₃)₂ + Na₂SO₄ → PbSO₄↓ + 2NaNO₃', full: 'Pb²⁺ + 2NO₃⁻ + 2Na⁺ + SO₄²⁻ → PbSO₄↓ + 2Na⁺ + 2NO₃⁻', short: 'Pb²⁺ + SO₄²⁻ → PbSO₄↓', hint: 'Осадок сульфата свинца.' },
+  { reac: 'AlCl₃ + 3NaOH (нед.) →', mol: 'AlCl₃ + 3NaOH → Al(OH)₃↓ + 3NaCl', full: 'Al³⁺ + 3Cl⁻ + 3Na⁺ + 3OH⁻ → Al(OH)₃↓ + 3Na⁺ + 3Cl⁻', short: 'Al³⁺ + 3OH⁻ → Al(OH)₃↓', hint: 'Амфотерный гидроксид в недостатке щёлочи.' },
+  { reac: 'Ca(HCO₃)₂ + Ca(OH)₂ →', mol: 'Ca(HCO₃)₂ + Ca(OH)₂ → 2CaCO₃↓ + 2H₂O', full: 'Ca²⁺ + 2HCO₃⁻ + Ca²⁺ + 2OH⁻ → 2CaCO₃↓ + 2H₂O', short: 'Ca²⁺ + HCO₃⁻ + OH⁻ → CaCO₃↓ + H₂O', hint: 'Кислая соль + основание → осадок карбоната.' },
+  { reac: 'NaHCO₃ + NaOH →', mol: 'NaHCO₃ + NaOH → Na₂CO₃ + H₂O', full: 'Na⁺ + HCO₃⁻ + Na⁺ + OH⁻ → 2Na⁺ + CO₃²⁻ + H₂O', short: 'HCO₃⁻ + OH⁻ → CO₃²⁻ + H₂O', hint: 'Кислая соль + щёлочь → средняя соль + вода.' },
+  { reac: 'Na₂SO₃ + 2HBr →', mol: 'Na₂SO₃ + 2HBr → 2NaBr + SO₂↑ + H₂O', full: '2Na⁺ + SO₃²⁻ + 2H⁺ + 2Br⁻ → 2Na⁺ + 2Br⁻ + SO₂↑ + H₂O', short: 'SO₃²⁻ + 2H⁺ → SO₂↑ + H₂O', hint: 'Выделяется сернистый газ.' },
+  { reac: 'Mg(HCO₃)₂ + 2HCl →', mol: 'Mg(HCO₃)₂ + 2HCl → MgCl₂ + 2CO₂↑ + 2H₂O', full: 'Mg²⁺ + 2HCO₃⁻ + 2H⁺ + 2Cl⁻ → Mg²⁺ + 2Cl⁻ + 2CO₂↑ + 2H₂O', short: 'HCO₃⁻ + H⁺ → CO₂↑ + H₂O', hint: 'Кислая соль + кислота → углекислый газ.' },
+  { reac: 'FeCl₃ + 3KHCO₃ →', mol: 'FeCl₃ + 3KHCO₃ → Fe(OH)₃↓ + 3CO₂↑ + 3KCl', full: 'Fe³⁺ + 3Cl⁻ + 3K⁺ + 3HCO₃⁻ → Fe(OH)₃↓ + 3CO₂↑ + 3K⁺ + 3Cl⁻', short: 'Fe³⁺ + 3HCO₃⁻ → Fe(OH)₃↓ + 3CO₂↑', hint: 'Двойной гидролиз с кислой солью — осадок и газ.' },
+  // 21-30 — реальные задания из PDF (сборник Добротина)
+  { reac: 'Ba(NO₃)₂ + Fe₂(SO₄)₃ →', mol: '3Ba(NO₃)₂ + Fe₂(SO₄)₃ → 3BaSO₄↓ + 2Fe(NO₃)₃', full: '3Ba²⁺ + 6NO₃⁻ + 2Fe³⁺ + 3SO₄²⁻ → 3BaSO₄↓ + 2Fe³⁺ + 6NO₃⁻', short: 'Ba²⁺ + SO₄²⁻ → BaSO₄↓', hint: 'Образуется осадок сульфата бария.' },
+  { reac: 'CuCl₂ + NaOH →', mol: 'CuCl₂ + 2NaOH → Cu(OH)₂↓ + 2NaCl', full: 'Cu²⁺ + 2Cl⁻ + 2Na⁺ + 2OH⁻ → Cu(OH)₂↓ + 2Na⁺ + 2Cl⁻', short: 'Cu²⁺ + 2OH⁻ → Cu(OH)₂↓', hint: 'Осадок гидроксида меди (II).' },
+  { reac: '(NH₄)₂SO₃ + HBr →', mol: '(NH₄)₂SO₃ + 2HBr → 2NH₄Br + SO₂↑ + H₂O', full: '2NH₄⁺ + SO₃²⁻ + 2H⁺ + 2Br⁻ → 2NH₄⁺ + 2Br⁻ + SO₂↑ + H₂O', short: 'SO₃²⁻ + 2H⁺ → SO₂↑ + H₂O', hint: 'Выделяется газ SO₂, осадка нет.' },
+  { reac: 'Ba(ClO₃)₂ + H₂SO₄ →', mol: 'Ba(ClO₃)₂ + H₂SO₄ → BaSO₄↓ + 2HClO₃', full: 'Ba²⁺ + 2ClO₃⁻ + 2H⁺ + SO₄²⁻ → BaSO₄↓ + 2H⁺ + 2ClO₃⁻', short: 'Ba²⁺ + SO₄²⁻ → BaSO₄↓', hint: 'Осадок сульфата бария.' },
+  { reac: 'MgCO₃ + H₂SO₄ →', mol: 'MgCO₃ + H₂SO₄ → MgSO₄ + CO₂↑ + H₂O', full: 'MgCO₃ + 2H⁺ + SO₄²⁻ → Mg²⁺ + SO₄²⁻ + CO₂↑ + H₂O', short: 'MgCO₃ + 2H⁺ → Mg²⁺ + CO₂↑ + H₂O', hint: 'Осадок растворяется, выделяется CO₂.' },
+  { reac: 'K₂CO₃ + HClO₄ →', mol: 'K₂CO₃ + 2HClO₄ → 2KClO₄ + CO₂↑ + H₂O', full: '2K⁺ + CO₃²⁻ + 2H⁺ + 2ClO₄⁻ → 2K⁺ + 2ClO₄⁻ + CO₂↑ + H₂O', short: 'CO₃²⁻ + 2H⁺ → CO₂↑ + H₂O', hint: 'Выделение газа.' },
+  { reac: 'Mg(HCO₃)₂ + H₂SO₄ →', mol: 'Mg(HCO₃)₂ + H₂SO₄ → MgSO₄ + 2CO₂↑ + 2H₂O', full: 'Mg²⁺ + 2HCO₃⁻ + 2H⁺ + SO₄²⁻ → Mg²⁺ + SO₄²⁻ + 2CO₂↑ + 2H₂O', short: 'HCO₃⁻ + H⁺ → CO₂↑ + H₂O', hint: 'Кислая соль + кислота.' },
+  { reac: 'ZnBr₂ + NaOH →', mol: 'ZnBr₂ + 2NaOH → Zn(OH)₂↓ + 2NaBr', full: 'Zn²⁺ + 2Br⁻ + 2Na⁺ + 2OH⁻ → Zn(OH)₂↓ + 2Na⁺ + 2Br⁻', short: 'Zn²⁺ + 2OH⁻ → Zn(OH)₂↓', hint: 'Осадок гидроксида цинка (допустим комплекс).' },
+  { reac: 'Ca(OH)₂ + HCl →', mol: 'Ca(OH)₂ + 2HCl → CaCl₂ + 2H₂O', full: 'Ca²⁺ + 2OH⁻ + 2H⁺ + 2Cl⁻ → Ca²⁺ + 2Cl⁻ + 2H₂O', short: 'H⁺ + OH⁻ → H₂O', hint: 'Реакция нейтрализации.' },
+  { reac: 'Mg(HCO₃)₂ + H₂SO₄ →', mol: 'Mg(HCO₃)₂ + H₂SO₄ → MgSO₄ + 2CO₂↑ + 2H₂O', full: 'Mg²⁺ + 2HCO₃⁻ + 2H⁺ + SO₄²⁻ → Mg²⁺ + SO₄²⁻ + 2CO₂↑ + 2H₂O', short: 'HCO₃⁻ + H⁺ → CO₂↑ + H₂O', hint: 'Выделяется бесцветный газ CO₂.' }
+];
+
+function renderTasks() {
+  const container = document.getElementById('task-container');
+  tasks.forEach((t, i) => {
+    const div = document.createElement('div');
+    div.className = 'task';
+    div.innerHTML = `
+      <div class="task-num">Задание ${i+1} из 30</div>
+      <div class="task-reagents">${t.reac}</div>
+      <div class="task-instruction">📌 Составьте молекулярное, полное и сокращённое ионное уравнения реакции.</div>
+      <div class="task-actions">
+        <button onclick="showHint(${i})">💡 Подсказка</button>
+        <button onclick="showCoeff(${i})">⚖️ Коэффициенты</button>
+        <button class="steel" onclick="showAnswer(${i})">👁 Показать ответ</button>
+      </div>
+      <div class="task-hint" id="hint${i}">${t.hint}</div>
+      <div class="task-coeff" id="coeff${i}">${t.mol.split('→')[0].trim()}</div>
+      <div class="task-answer" id="ans${i}">
+        <span class="eq">Мол.: ${t.mol}</span>
+        <span class="eq">Полн. ион.: ${t.full}</span>
+        <span class="eq">Сокр. ион.: ${t.short}</span>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+function showHint(i) {
+  const el = document.getElementById('hint'+i);
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+function showCoeff(i) {
+  const el = document.getElementById('coeff'+i);
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+function showAnswer(i) {
+  const el = document.getElementById('ans'+i);
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+
+// ===== ФЛЕШ-КАРТОЧКИ =====
+const flashCards = [
+  {q:'Электролит — это...', a:'Вещество, раствор которого проводит электрический ток (распадается на ионы).'},
+  {q:'Неэлектролит — это...', a:'Вещество, раствор которого не проводит ток (ионы не образуются).'},
+  {q:'Что такое электролитическая диссоциация?', a:'Распад вещества на ионы под действием молекул воды.'},
+  {q:'Как называются положительно заряженные ионы?', a:'Катионы (например, Na⁺, Mg²⁺, NH₄⁺).'},
+  {q:'Как называются отрицательно заряженные ионы?', a:'Анионы (например, Cl⁻, SO₄²⁻, NO₃⁻).'},
+  {q:'Какие ионы образуются при диссоциации NaCl?', a:'Na⁺ и Cl⁻.'},
+  {q:'Какие ионы образуются при диссоциации KOH?', a:'K⁺ и OH⁻.'},
+  {q:'Какие ионы образуются при диссоциации H₂SO₄?', a:'2H⁺ и SO₄²⁻.'},
+  {q:'Какие ионы образуются при диссоциации Na₂SO₄?', a:'2Na⁺ и SO₄²⁻.'},
+  {q:'Что такое сильные электролиты?', a:'Диссоциируют практически полностью (→).'},
+  {q:'Что такое слабые электролиты?', a:'Диссоциируют частично, обратимо (⇄).'},
+  {q:'Приведите пример сильного электролита.', a:'NaOH, HCl, NaCl, H₂SO₄ (любая растворимая соль, щёлочь, сильная кислота).'},
+  {q:'Приведите пример слабого электролита.', a:'H₂CO₃, NH₃·H₂O, CH₃COOH, H₂S.'},
+  {q:'Как диссоциируют кислоты?', a:'На катионы водорода H⁺ и анионы кислотного остатка.'},
+  {q:'Как диссоциируют основания?', a:'На катион металла (или NH₄⁺) и гидроксид-ионы OH⁻.'},
+  {q:'Как диссоциируют соли?', a:'На катион металла (или NH₄⁺) и анион кислотного остатка.'},
+  {q:'Что такое полное ионное уравнение?', a:'Уравнение, где сильные электролиты записаны в виде ионов, а слабые, осадки и газы — в молекулярном виде.'},
+  {q:'Что такое сокращённое ионное уравнение?', a:'Из полного убирают одинаковые ионы (зрителей) слева и справа.'},
+  {q:'Какие ионы называют "зрителями"?', a:'Ионы, которые присутствуют в обеих частях уравнения и не участвуют в реакции.'},
+  {q:'При каком условии РИО идёт до конца?', a:'Если образуется осадок ↓, газ ↑ или слабый электролит (например, вода).'},
+  {q:'Что образуется при взаимодействии CuSO₄ и NaOH?', a:'Cu(OH)₂↓ (осадок) и Na₂SO₄.'},
+  {q:'Что образуется при взаимодействии Na₂CO₃ и HCl?', a:'NaCl, CO₂↑ и H₂O.'},
+  {q:'Что образуется при взаимодействии NH₄Cl и NaOH?', a:'NaCl, NH₃↑ и H₂O.'},
+  {q:'Как записать диссоциацию кислой соли NaHCO₃?', a:'Na⁺ + HCO₃⁻ (не распадается дальше!).'},
+  {q:'Что образуется при взаимодействии Ca(HCO₃)₂ и Ca(OH)₂?', a:'2CaCO₃↓ + 2H₂O.'},
+  {q:'Что образуется при взаимодействии FeCl₃ и KHCO₃?', a:'Fe(OH)₃↓ + CO₂↑ + KCl (двойной гидролиз).'},
+  {q:'Почему BaSO₄ не реагирует с HCl?', a:'BaSO₄ нерастворим в кислотах.'},
+  {q:'Как выглядит сокращённое ионное для реакции нейтрализации?', a:'H⁺ + OH⁻ → H₂O.'},
+  {q:'Что образуется при взаимодействии AlCl₃ и NaOH (недостаток)?', a:'Al(OH)₃↓ + NaCl.'},
+  {q:'Что образуется при взаимодействии Na₂SO₃ и HBr?', a:'NaBr, SO₂↑ и H₂O.'}
+];
+
+let fcDeck = [...Array(flashCards.length).keys()];
+let fcPos = 0, fcKnow = 0, fcDk = 0, fcWrong = [];
+let fcFlipped = false;
+
+function fcRender() {
+  const idx = fcDeck[fcPos];
+  const card = flashCards[idx];
+  document.getElementById('fc-front-text').textContent = card.q;
+  document.getElementById('fc-back-text').textContent = card.a;
+  document.getElementById('fc-tag').textContent = `Вопрос ${fcPos+1}`;
+  document.getElementById('fc-counter').textContent = `Карточка ${fcPos+1} из ${fcDeck.length}`;
+  document.getElementById('fc-know').textContent = fcKnow;
+  document.getElementById('fc-dk').textContent = fcDk;
+  document.getElementById('fc-left').textContent = fcDeck.length - fcPos;
+  document.getElementById('fc-inner').classList.remove('flipped');
+  fcFlipped = false;
+  document.getElementById('fc-btns').style.display = 'none';
+}
+
+function fcFlip() {
+  const inner = document.getElementById('fc-inner');
+  fcFlipped = !fcFlipped;
+  inner.classList.toggle('flipped', fcFlipped);
+  if (fcFlipped) {
+    document.getElementById('fc-btns').style.display = 'flex';
+  } else {
+    document.getElementById('fc-btns').style.display = 'none';
+  }
+}
+
+function fcAnswer(know) {
+  if (know) fcKnow++; else { fcDk++; fcWrong.push(fcDeck[fcPos]); }
+  fcPos++;
+  if (fcPos >= fcDeck.length) {
+    document.getElementById('res-know').textContent = fcKnow;
+    document.getElementById('res-dk').textContent = fcDk;
+    document.getElementById('fc-inner').parentElement.style.display = 'none';
+    document.querySelector('.fc-flip-btn').style.display = 'none';
+    document.getElementById('fc-btns').style.display = 'none';
+    document.querySelector('.fc-keys').style.display = 'none';
+    document.getElementById('fc-counter').style.display = 'none';
+    document.querySelector('.fc-stats').style.display = 'none';
+    document.getElementById('fc-result').style.display = 'block';
+  } else {
+    fcRender();
+  }
+}
+
+function fcRestart(onlyWrong) {
+  fcKnow = 0; fcDk = 0;
+  fcDeck = onlyWrong && fcWrong.length ? [...fcWrong] : [...Array(flashCards.length).keys()];
+  fcWrong = []; fcPos = 0;
+  document.getElementById('fc-inner').parentElement.style.display = '';
+  document.querySelector('.fc-flip-btn').style.display = '';
+  document.querySelector('.fc-keys').style.display = '';
+  document.getElementById('fc-counter').style.display = '';
+  document.querySelector('.fc-stats').style.display = '';
+  document.getElementById('fc-result').style.display = 'none';
+  fcRender();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space') { e.preventDefault(); fcFlip(); }
+  if (e.code === 'ArrowRight' && fcFlipped) fcAnswer(true);
+  if (e.code === 'ArrowLeft' && fcFlipped) fcAnswer(false);
+});
+
+// ===== прогресс =====
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  document.getElementById('pbar').style.width = pct + '%';
+});
+
+// ===== инициализация =====
+renderTasks();
+fcRender();
+</script>
+</body>
+</html>
