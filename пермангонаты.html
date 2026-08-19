@@ -1,0 +1,2502 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ОВР и перманганаты — ЕГЭ Химия 2026–2027</title>
+    <style>
+        :root {
+            --p900: #4C0519;
+            --p800: #6B1226;
+            --p700: #881337;
+            --p600: #9F1239;
+            --p500: #BE123C;
+            --p400: #E11D48;
+            --p300: #FB7185;
+            --p200: #FECDD3;
+            --p100: #FFE4E6;
+            --p50:  #FFF1F2;
+            --ink: #1C1917;
+            --ink2: #3F3F46;
+            --ink3: #78716C;
+            --line: #F4C5CC;
+            --card: #FFFFFF;
+            --bg: #FDF6F0;
+            --white: #fff;
+            --green: #1D9E75;
+            --green-t: #E1F5EE;
+            --green-d: #085041;
+            --amber: #B46A00;
+            --amber-t: #FDF5E6;
+            --amber-d: #4A2B00;
+            --red: #A32D2D;
+            --red-t: #FCEBEB;
+            --red-d: #7A2020;
+            --r: 12px;
+            --r-sm: 8px;
+            --r-lg: 20px;
+            --shadow: 0 1px 3px rgba(136,19,55,.06), 0 4px 16px rgba(136,19,55,.06);
+            --shm: 0 4px 20px rgba(136,19,55,.18);
+            --font: 'Segoe UI', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', 'Courier New', monospace;
+            --text: var(--ink);
+            --text2: var(--ink2);
+            --text3: var(--ink3);
+            --accent: var(--p600);
+        }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+        html {
+            scroll-behavior: smooth
+        }
+        body {
+            padding-bottom: 56px;
+            font-family: var(--font);
+            background-color: var(--bg);
+            background-image:
+                radial-gradient(ellipse 340px 260px at 8% 18%, rgba(159,18,57,.055) 0%, transparent 70%),
+                radial-gradient(ellipse 280px 200px at 92% 72%, rgba(159,18,57,.04) 0%, transparent 70%);
+            color: var(--ink);
+            line-height: 1.6;
+            font-size: 15px;
+            position: relative
+        }
+        .prog-bar-wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--p100);
+            z-index: 999
+        }
+        .prog-bar-fill {
+            height: 3px;
+            background: linear-gradient(90deg, var(--p600), var(--p400));
+            width: 0;
+            transition: width .1s
+        }
+        .shell {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px 80px
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--p900) 0%, var(--p800) 55%, var(--p500) 100%);
+            padding: 56px 32px 48px;
+            margin: 0 -24px 48px;
+            position: relative;
+            overflow: hidden
+        }
+        .hero::after {
+            content: 'KMnO₄ · Mn⁺⁷ · MnO₄⁻ · MnO₂ · Mn²⁺ · MnO₄²⁻ · KMnO₄ · Mn⁺⁷ · MnO₄⁻ · MnO₂ · Mn²⁺ · MnO₄²⁻ · KMnO₄ · Mn⁺⁷ · MnO₄⁻ · MnO₂ · Mn²⁺ · MnO₄²⁻ · KMnO₄ · Mn⁺⁷ · MnO₄⁻ · MnO₂ · Mn²⁺ · MnO₄²⁻ · KMnO₄ · Mn⁺⁷ · MnO₄⁻ · MnO₂ · Mn²⁺ · MnO₄²⁻ · KMnO₄ · Mn⁺⁷ · MnO₄⁻ · MnO₂';
+            position: absolute;
+            inset: 0;
+            font-family: var(--mono);
+            font-size: 12px;
+            line-height: 2.8;
+            letter-spacing: .25em;
+            color: rgba(255,255,255,.09);
+            word-break: break-all;
+            padding: 20px 28px;
+            pointer-events: none;
+            overflow: hidden
+        }
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, .11);
+            border: 1px solid rgba(255, 255, 255, .2);
+            color: rgba(255, 255, 255, .82);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 12px;
+            font-family: var(--mono);
+            letter-spacing: .6px;
+            margin-bottom: 20px
+        }
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 800;
+            line-height: 1.06;
+            letter-spacing: -.03em;
+            color: #fff;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1
+        }
+        .hero h1 em {
+            color: var(--p200);
+            font-style: normal
+        }
+        .hero-sub {
+            font-size: 16px;
+            color: rgba(255, 255, 255, .75);
+            line-height: 1.7;
+            max-width: 560px;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1
+        }
+        .hero-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            position: relative;
+            z-index: 1
+        }
+        .hero-chip {
+            background: rgba(255, 255, 255, .13);
+            border: 1px solid rgba(255, 255, 255, .22);
+            color: rgba(255, 255, 255, .9);
+            padding: 5px 14px;
+            border-radius: 16px;
+            font-size: 12.5px;
+            font-weight: 500
+        }
+        .toc {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            padding: 22px 26px;
+            margin-bottom: 48px;
+            box-shadow: var(--shadow)
+        }
+        .toc-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--p600);
+            font-family: var(--mono);
+            margin-bottom: 14px
+        }
+        .toc ol {
+            padding-left: 20px
+        }
+        .toc li {
+            padding: 4px 0;
+            font-size: 14px
+        }
+        .toc a {
+            color: var(--ink2);
+            text-decoration: none;
+            transition: color .15s
+        }
+        .toc a:hover {
+            color: var(--p600)
+        }
+        .section {
+            margin-bottom: 56px
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--p200);
+            cursor: pointer;
+            user-select: none;
+            transition: background .15s;
+            border-radius: 10px;
+            padding: 6px 8px;
+            margin: -6px -8px
+        }
+        .section-header:hover {
+            background: var(--p100)
+        }
+        .section-header::after {
+            content: "▲";
+            font-size: 13px;
+            color: var(--p600);
+            margin-left: auto;
+            transition: transform .25s;
+            display: inline-block
+        }
+        .section-header.collapsed::after {
+            transform: rotate(180deg)
+        }
+        .acc-body {
+            overflow: hidden;
+            transition: max-height .35s ease, opacity .25s;
+            max-height: 9999px;
+            opacity: 1
+        }
+        .acc-body.collapsed {
+            max-height: 0 !important;
+            opacity: 0
+        }
+        .section-num {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--p900), var(--p500));
+            color: #fff;
+            font-family: var(--mono);
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 136, 176, .35)
+        }
+        .section-title {
+            font-size: clamp(18px, 2.5vw, 24px);
+            font-weight: 700;
+            color: var(--p900);
+            line-height: 1.2
+        }
+        h2.sub-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--p700);
+            margin: 28px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+        h2.sub-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--p500);
+            border-radius: 2px;
+            flex-shrink: 0
+        }
+        h3.mini-title {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 18px 0 8px
+        }
+        p.body {
+            font-size: 14.5px;
+            line-height: 1.75;
+            color: var(--ink2);
+            margin-bottom: 14px
+        }
+        p.body strong {
+            color: var(--ink)
+        }
+        .box {
+            border-radius: var(--r-sm);
+            padding: 14px 18px;
+            margin: 14px 0;
+            font-size: 14px;
+            line-height: 1.7
+        }
+        .box-title {
+            font-weight: 700;
+            font-size: 13.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 7px
+        }
+        .box-info {
+            background: var(--p100);
+            border-left: 4px solid var(--p500);
+            color: var(--p800)
+        }
+        .box-warn {
+            background: #FFF8E1;
+            border-left: 4px solid #F59E0B;
+            color: #78350F
+        }
+        .box-danger {
+            background: var(--red-t);
+            border-left: 4px solid var(--red);
+            color: var(--red-d)
+        }
+        .box-success {
+            background: var(--green-t);
+            border-left: 4px solid var(--green);
+            color: var(--green-d)
+        }
+        .box ul,
+        .box ol {
+            padding-left: 20px;
+            margin: 6px 0
+        }
+        .box li {
+            margin: 4px 0;
+            font-size: 13.5px
+        }
+        .eq-block {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--r-sm);
+            padding: 12px 18px;
+            margin: 10px 0;
+            box-shadow: var(--shadow)
+        }
+        .eq {
+            font-family: var(--mono);
+            font-size: 13.5px;
+            color: var(--p900);
+            line-height: 2.1;
+            display: block
+        }
+        .eq-hdr {
+            display: block;
+            background: linear-gradient(90deg, var(--p100), var(--p50));
+            border-left: 4px solid var(--p500);
+            border-radius: 0 6px 6px 0;
+            padding: 5px 12px;
+            margin: 10px 0 4px;
+            font-family: var(--font);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--p900);
+        }
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: var(--r);
+            border: 1px solid var(--line);
+            margin: 14px 0;
+            box-shadow: var(--shadow)
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            font-size: 13.5px
+        }
+        .table-wrap th {
+            background: linear-gradient(135deg, var(--p900), var(--p600));
+            color: #fff;
+            font-weight: 600;
+            padding: 10px 14px;
+            text-align: left;
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            font-family: var(--mono)
+        }
+        td {
+            padding: 9px 14px;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top
+        }
+        tr:last-child td {
+            border-bottom: none
+        }
+        tr:nth-child(even) td {
+            background: var(--p50)
+        }
+        tr:hover td {
+            background: var(--p100);
+            transition: background .15s
+        }
+        .chip {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 10.5px;
+            letter-spacing: .5px;
+            padding: 3px 9px;
+            border-radius: 5px;
+            font-weight: 600;
+            white-space: nowrap
+        }
+        .trap-box {
+            background: #fff5f5;
+            border: 2px solid #ef4444;
+            border-radius: var(--r-sm);
+            padding: 14px 18px;
+            margin: 14px 0
+        }
+        .trap-box .trap-hd {
+            color: #dc2626;
+            font-weight: 800;
+            font-size: 13.5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+        .trap-box ul {
+            margin: 0;
+            padding-left: 18px;
+            font-size: 13px;
+            line-height: 1.8
+        }
+        .must-memo {
+            background: var(--p100);
+            border: 2px solid var(--p600);
+            border-radius: var(--r-sm);
+            padding: 14px 18px;
+            margin: 14px 0
+        }
+        .must-memo .mm-hd {
+            color: var(--p900);
+            font-weight: 800;
+            font-size: 13.5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+        .must-memo ul {
+            margin: 0;
+            padding-left: 18px;
+            font-size: 13px;
+            line-height: 1.8
+        }
+        .scheme-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            background: var(--white);
+            border: 1.5px solid var(--p200);
+            border-radius: var(--r);
+            padding: 18px;
+            margin: 14px 0;
+            box-shadow: var(--shadow)
+        }
+        .scheme-cell {
+            border: 1.5px solid var(--p400);
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-family: var(--mono);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--p800);
+            background: var(--p50);
+            text-align: center;
+            white-space: nowrap
+        }
+        .scheme-arrow {
+            font-size: 20px;
+            color: var(--p500);
+            font-weight: 700
+        }
+        .scheme-plus {
+            font-size: 18px;
+            color: var(--ink3);
+            font-weight: 700
+        }
+        .env-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 14px 0
+        }
+        @media(max-width:600px) {
+            .env-grid {
+                grid-template-columns: 1fr
+            }
+        }
+        .env-card {
+            border-radius: var(--r-sm);
+            padding: 14px;
+            border: 1.5px solid
+        }
+        .env-water {
+            background: var(--p100);
+            border-color: var(--p600)
+        }
+        .env-acid {
+            background: #FFF1F0;
+            border-color: #ef4444
+        }
+        .env-base {
+            background: #E8F5E9;
+            border-color: #1D9E75
+        }
+        .env-title {
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 8px
+        }
+        .env-eq {
+            font-family: var(--mono);
+            font-size: 12.5px;
+            line-height: 1.9;
+            color: var(--p900)
+        }
+        .mcq-wrap {
+            margin: 24px 0 4px
+        }
+        .mcq-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--p900);
+            font-family: var(--mono);
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+        .mcq-title::before {
+            content: '';
+            display: block;
+            flex: 1;
+            height: 1px;
+            background: var(--line)
+        }
+        .mcq-block {
+            background: var(--bg);
+            border: 1.5px solid var(--line);
+            border-radius: var(--r-sm);
+            padding: 14px 16px;
+            margin-bottom: 10px
+        }
+        .mcq-q {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 10px;
+            line-height: 1.55
+        }
+        .mcq-opts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px;
+            margin-bottom: 8px
+        }
+        @media(max-width:520px) {
+            .mcq-opts {
+                grid-template-columns: 1fr
+            }
+        }
+        .mcq-opt {
+            background: var(--white);
+            border: 1.5px solid var(--line);
+            border-radius: var(--r-sm);
+            padding: 8px 11px;
+            font-size: 13px;
+            cursor: pointer;
+            text-align: left;
+            color: var(--ink2);
+            transition: all .15s;
+            line-height: 1.4;
+            font-family: var(--font)
+        }
+        .mcq-opt:hover {
+            border-color: var(--p400);
+            background: var(--p100);
+            color: var(--p700)
+        }
+        .mcq-fb {
+            font-size: 13px;
+            padding: 7px 10px;
+            border-radius: var(--r-sm);
+            display: none;
+            margin-top: 2px
+        }
+        .fc-section {
+            background: linear-gradient(135deg, var(--p900), var(--p600));
+            border-radius: var(--r-lg);
+            padding: 32px 28px;
+            margin: 48px 0;
+            color: #fff
+        }
+        .fc-header {
+            text-align: center;
+            margin-bottom: 24px
+        }
+        .fc-title {
+            font-size: clamp(18px, 3vw, 26px);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px
+        }
+        .fc-sub {
+            font-size: 14px;
+            color: rgba(255, 255, 255, .65);
+            line-height: 1.6
+        }
+        .fc-stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, .7);
+            font-family: var(--mono)
+        }
+        .fc-stats span {
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px
+        }
+        .fc-counter {
+            text-align: center;
+            font-family: var(--mono);
+            font-size: 12px;
+            color: rgba(255, 255, 255, .5);
+            margin-bottom: 14px
+        }
+        .fc-perspective {
+            perspective: 900px;
+            width: 100%;
+            max-width: 560px;
+            margin: 0 auto;
+            cursor: pointer
+        }
+        .fc-inner {
+            position: relative;
+            width: 100%;
+            transform-style: preserve-3d;
+            transition: transform .45s cubic-bezier(.4, 0, .2, 1);
+            min-height: 180px
+        }
+        .fc-inner.flipped {
+            transform: rotateY(180deg)
+        }
+        .fc-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            border-radius: var(--r);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 28px;
+            text-align: center;
+            min-height: 180px;
+            flex-direction: column;
+            gap: 8px
+        }
+        .fc-front {
+            background: rgba(255, 255, 255, .1);
+            border: 1.5px solid rgba(255, 255, 255, .2);
+            font-size: clamp(15px, 2.5vw, 19px);
+            font-family: var(--mono);
+            color: #fff;
+            line-height: 1.5
+        }
+        .fc-back {
+            background: var(--white);
+            transform: rotateY(180deg);
+            font-family: var(--mono);
+            font-size: clamp(13px, 2vw, 16px);
+            color: var(--p900);
+            line-height: 1.6
+        }
+        .fc-hint {
+            font-family: var(--font);
+            font-size: 12px;
+            color: var(--ink3);
+            margin-top: 6px;
+            font-style: italic
+        }
+        .fc-tag {
+            font-size: 10px;
+            font-family: var(--font);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .45);
+            margin-bottom: 4px
+        }
+        .fc-back-tag {
+            font-size: 10px;
+            font-family: var(--font);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--p600);
+            margin-bottom: 4px
+        }
+        .fc-flip-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, .15);
+            border: 1.5px solid rgba(255, 255, 255, .25);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--r-sm);
+            padding: 11px 26px;
+            cursor: pointer;
+            transition: background .2s;
+            margin: 18px auto;
+            width: fit-content
+        }
+        .fc-flip-btn:hover {
+            background: rgba(255, 255, 255, .25)
+        }
+        .fc-btn-row {
+            display: none;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 14px
+        }
+        .fc-btn-know {
+            background: #1D9E75;
+            color: #fff;
+            border: none;
+            border-radius: var(--r-sm);
+            padding: 11px 26px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            flex: 1;
+            max-width: 200px;
+            transition: background .15s
+        }
+        .fc-btn-know:hover {
+            background: #187F5E
+        }
+        .fc-btn-dontknow {
+            background: #C0392B;
+            color: #fff;
+            border: none;
+            border-radius: var(--r-sm);
+            padding: 11px 26px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            flex: 1;
+            max-width: 200px;
+            transition: background .15s
+        }
+        .fc-btn-dontknow:hover {
+            background: #A0311F
+        }
+        .fc-keys {
+            text-align: center;
+            font-size: 11.5px;
+            color: rgba(255, 255, 255, .35);
+            margin-top: 12px;
+            font-family: var(--mono)
+        }
+        .fc-result {
+            display: none;
+            text-align: center;
+            padding: 20px
+        }
+        .fc-result h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px
+        }
+        .fc-res-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap
+        }
+        .fc-res-card {
+            background: rgba(255, 255, 255, .1);
+            border-radius: var(--r-sm);
+            padding: 12px 22px;
+            min-width: 100px
+        }
+        .fc-res-num {
+            font-size: 28px;
+            font-weight: 700
+        }
+        .fc-res-lbl {
+            font-size: 11px;
+            color: rgba(255, 255, 255, .6);
+            font-family: var(--mono);
+            margin-top: 2px
+        }
+        .fc-restart-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+        .fc-restart-btn {
+            background: rgba(255, 255, 255, .15);
+            border: 1.5px solid rgba(255, 255, 255, .25);
+            color: #fff;
+            border-radius: var(--r-sm);
+            padding: 9px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .2s
+        }
+        .fc-restart-btn:hover {
+            background: rgba(255, 255, 255, .25)
+        }
+        .fc-restart-btn.primary {
+            background: var(--p600);
+            border-color: var(--p600)
+        }
+        #back-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--p600);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 4px 16px rgba(0, 136, 176, .35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity .2s, transform .2s;
+            opacity: 0;
+            pointer-events: none
+        }
+        #back-top.visible {
+            opacity: 1;
+            pointer-events: all
+        }
+        #back-top:hover {
+            transform: translateY(-2px)
+        }
+        .tag-кислая, .tag-izb {
+            background: #FEE2E2;
+            color: #991B1B;
+            border-radius: 4px;
+            padding: 1px 6px;
+            font-size: 10.5px;
+            font-weight: 700
+        }
+        .tag-нейтральная, .tag-ned {
+            background: #FEF3C7;
+            color: #92400E;
+            border-radius: 4px;
+            padding: 1px 6px;
+            font-size: 10.5px;
+            font-weight: 700
+        }
+        .tag-щелочная, .tag-щел {
+            background: #D1FAE5;
+            color: #065F46;
+            border-radius: 4px;
+            padding: 1px 6px;
+            font-size: 10.5px;
+            font-weight: 700
+        }
+        .double-hydro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin: 12px 0
+        }
+        @media(max-width:600px) {
+            .double-hydro-grid {
+                grid-template-columns: 1fr
+            }
+        }
+        .dh-card {
+            background: var(--white);
+            border: 1.5px solid var(--line);
+            border-radius: var(--r-sm);
+            padding: 12px;
+            box-shadow: var(--shadow)
+        }
+        .dh-cat {
+            font-weight: 700;
+            font-size: 12px;
+            color: var(--p700);
+            margin-bottom: 6px
+        }
+        .dh-eq {
+            font-family: var(--mono);
+            font-size: 11.5px;
+            color: var(--ink2);
+            line-height: 1.8
+        }
+        @media(max-width:540px) {
+            .shell {
+                padding: 0 14px 60px
+            }
+            .hero {
+                padding: 36px 18px 32px;
+                margin: 0 -14px 32px
+            }
+        }
+
+        /* ══ Цветовое кодирование сред ══ */
+        :root {
+            --acid: #DC2626; --acid-t: #FEF2F2; --acid-b: #FECACA;
+            --neut: #D97706; --neut-t: #FFFBEB; --neut-b: #FDE68A;
+            --alk:  #059669; --alk-t:  #F0FDF4; --alk-b:  #A7F3D0;
+        }
+        h2.sub-title.acid { border-left-color: var(--acid) !important; color: var(--acid) !important; }
+        h2.sub-title.neut { border-left-color: var(--neut) !important; color: var(--neut) !important; }
+        h2.sub-title.alk  { border-left-color: var(--alk)  !important; color: var(--alk)  !important; }
+        h2.sub-title.acid::before { background: var(--acid) !important; }
+        h2.sub-title.neut::before { background: var(--neut) !important; }
+        h2.sub-title.alk::before  { background: var(--alk)  !important; }
+
+        .eq-block.acid { border-left: 3px solid var(--acid); background: var(--acid-t); }
+        .eq-block.neut { border-left: 3px solid var(--neut); background: var(--neut-t); }
+        .eq-block.alk  { border-left: 3px solid var(--alk);  background: var(--alk-t);  }
+        .eq-block.acid .eq-hdr { color: var(--acid); }
+        .eq-block.neut .eq-hdr { color: var(--neut); }
+        .eq-block.alk  .eq-hdr { color: var(--alk);  }
+
+        /* ══ Схема-алгоритм выбора продукта Mn ══ */
+        .mn-tree {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+        .mn-tree-root {
+            background: linear-gradient(135deg, var(--p900), var(--p600));
+            color: #fff;
+            border-radius: var(--r);
+            padding: 12px 28px;
+            font-weight: 700;
+            font-size: 15px;
+            text-align: center;
+            box-shadow: var(--shm);
+        }
+        .mn-tree-branches {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            width: 100%;
+            margin-top: 0;
+            position: relative;
+        }
+        .mn-tree-branches::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: calc(16.66% + 6px);
+            right: calc(16.66% + 6px);
+            height: 2px;
+            background: var(--line);
+        }
+        .mn-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+        .mn-branch-line {
+            width: 2px;
+            height: 28px;
+            background: var(--line);
+        }
+        .mn-branch-env {
+            padding: 7px 16px;
+            border-radius: var(--r-sm);
+            font-weight: 700;
+            font-size: 13px;
+            text-align: center;
+            width: 100%;
+        }
+        .mn-branch-env.acid { background: var(--acid-t); color: var(--acid); border: 1.5px solid var(--acid-b); }
+        .mn-branch-env.neut { background: var(--neut-t); color: var(--neut); border: 1.5px solid var(--neut-b); }
+        .mn-branch-env.alk  { background: var(--alk-t);  color: var(--alk);  border: 1.5px solid var(--alk-b);  }
+        .mn-branch-arrow {
+            font-size: 18px;
+            color: var(--ink3);
+            line-height: 1.4;
+        }
+        .mn-branch-product {
+            border-radius: var(--r-sm);
+            padding: 10px 14px;
+            text-align: center;
+            width: 100%;
+            font-family: var(--mono);
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .mn-branch-product.acid { background: #FEE2E2; color: #991B1B; border: 1.5px solid var(--acid-b); }
+        .mn-branch-product.neut { background: #FEF3C7; color: #92400E; border: 1.5px solid var(--neut-b); }
+        .mn-branch-product.alk  { background: #D1FAE5; color: #065F46; border: 1.5px solid var(--alk-b);  }
+        .mn-branch-obs {
+            font-size: 11.5px;
+            color: var(--text3);
+            text-align: center;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        @media(max-width:560px) {
+            .mn-tree-branches { grid-template-columns: 1fr; }
+            .mn-tree-branches::before { display: none; }
+        }
+
+        /* ══ Ловушки ЕГЭ ══ */
+        .trap-list { display: flex; flex-direction: column; gap: 10px; margin: 14px 0; }
+        .trap-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            background: var(--card);
+            border: 1.5px solid var(--line);
+            border-radius: var(--r-sm);
+            padding: 12px 14px;
+            font-size: 13.5px;
+            line-height: 1.6;
+        }
+        .trap-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* стиль для степеней окисления */
+        .s-o {
+            font-family: var(--mono);
+            font-size: 0.85em;
+        }
+        .s-o sup {
+            font-size: 0.7em;
+        }
+        .s-o sub {
+            font-size: 0.7em;
+        }
+
+        /* ══ Цветовая визуализация перманганата ══ */
+        .color-vis {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+        @media(max-width:600px){.color-vis{grid-template-columns:1fr;}}
+        .cv-card {
+            border-radius: var(--r);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1.5px solid var(--line);
+        }
+        .cv-header {
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: .4px;
+            color: #fff;
+        }
+        .cv-before {
+            background: #7B2FBE;
+        }
+        .cv-after-acid { background: #6B7280; }
+        .cv-after-neutral { background: #92400E; }
+        .cv-after-alkali { background: #065F46; }
+        .cv-body {
+            padding: 14px 16px;
+            background: var(--card);
+        }
+        .cv-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 8px 0;
+        }
+        .cv-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,0,0,.08);
+            flex-shrink: 0;
+        }
+        .cv-swatch.violet { background: #7B2FBE; }
+        .cv-swatch.colorless { background: #E5E7EB; }
+        .cv-swatch.brown { background: #92400E; }
+        .cv-swatch.green { background: #059669; }
+        .cv-label {
+            font-size: 12px;
+            color: var(--text3);
+            line-height: 1.5;
+            margin-top: 4px;
+        }
+        .cv-label strong { color: var(--text); font-size: 13px; display: block; }
+        .cv-prod {
+            font-family: var(--mono);
+            font-size: 12px;
+            background: var(--bg);
+            border-radius: var(--r-sm);
+            padding: 6px 10px;
+            margin-top: 8px;
+            color: var(--ink2);
+        }
+
+        /* ══ МЭБ шаблоны ══ */
+        .meb-templates {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin: 16px 0;
+        }
+        @media(max-width:600px){.meb-templates{grid-template-columns:1fr;}}
+        .meb-tpl {
+            border-radius: var(--r-sm);
+            border: 1.5px solid var(--line);
+            overflow: hidden;
+        }
+        .meb-tpl-hdr {
+            background: linear-gradient(135deg, var(--p900), var(--p700));
+            color: #fff;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .5px;
+        }
+        .meb-tpl-body {
+            padding: 12px 14px;
+            background: var(--card);
+            font-family: var(--mono);
+            font-size: 12.5px;
+            line-height: 2;
+            color: var(--ink2);
+        }
+        .meb-ok { color: #DC2626; font-weight: 700; }
+        .meb-vos { color: #059669; font-weight: 700; }
+        .meb-e { background: rgba(136,19,55,.12); border-radius: 3px; padding: 0 3px; color: var(--p700); font-weight: 700; }
+        .meb-x { color: var(--amber); font-weight: 700; }
+
+        /* ══ Закрепление (ЕГЭ задания) ══ */
+        .zad-section { margin-bottom: 56px; }
+        .zad-hdr {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 2px solid var(--p200);
+            margin-bottom: 24px;
+        }
+        .zad-hdr-num {
+            width: 38px; height: 38px;
+            border-radius: 10px;
+            background: linear-gradient(135deg,var(--p900),var(--p500));
+            color: #fff;
+            font-family: var(--mono);
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(136,19,55,.35);
+            flex-shrink: 0;
+        }
+        .zad-hdr-title {
+            font-size: clamp(18px,2.5vw,24px);
+            font-weight: 700;
+            color: var(--p900);
+        }
+        .zad-card {
+            background: var(--card);
+            border: 1.5px solid var(--line);
+            border-radius: var(--r);
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+        .zad-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 12px;
+        }
+        .zad-chip {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-family: var(--mono);
+            letter-spacing: .3px;
+        }
+        .zad-chip.num { background: var(--p100); color: var(--p700); }
+        .zad-chip.med-acid { background: #FEE2E2; color: #991B1B; }
+        .zad-chip.med-neut { background: #FEF9C3; color: #854D0E; }
+        .zad-chip.med-alk { background: #DCFCE7; color: #166534; }
+        .zad-chip.year { background: var(--p100); color: var(--p700); }
+        .zad-q {
+            font-size: 14.5px;
+            line-height: 1.7;
+            color: var(--ink);
+            margin-bottom: 14px;
+        }
+        .zad-eq {
+            font-family: var(--mono);
+            font-size: 13.5px;
+            background: var(--bg);
+            border-radius: var(--r-sm);
+            padding: 10px 14px;
+            margin: 8px 0;
+            color: var(--ink2);
+        }
+        .zad-btns {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .hint-btn {
+            padding: 7px 16px;
+            border: 1.5px solid var(--p600);
+            background: var(--card);
+            color: var(--p600);
+            border-radius: var(--r-sm);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .15s;
+        }
+        .hint-btn:hover { background: var(--p100); }
+        .hint-btn.ans { background: var(--p600); color: #fff; border-color: var(--p600); }
+        .hint-btn.ans:hover { background: var(--p700); }
+        .zad-hint {
+            display: none;
+            background: #FFFBEB;
+            border: 1.5px solid #F59E0B;
+            border-radius: var(--r-sm);
+            padding: 12px 16px;
+            margin-top: 10px;
+            font-size: 13.5px;
+            line-height: 1.65;
+            color: var(--amber-d);
+        }
+        .zad-hint.open { display: block; }
+        .zad-ans {
+            display: none;
+            background: #F0FDF4;
+            border: 1.5px solid #059669;
+            border-radius: var(--r-sm);
+            padding: 14px 16px;
+            margin-top: 10px;
+            font-size: 13.5px;
+            line-height: 1.75;
+            color: #064E3B;
+        }
+        .zad-ans.open { display: block; }
+        .meb-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 4px 0;
+        }
+        .role-ok {
+            background: #FEE2E2;
+            color: #991B1B;
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .role-vos {
+            background: #DCFCE7;
+            color: #166534;
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+    <div class="shell">
+
+        <!-- HERO -->
+        <div class="hero">
+            <div class="hero-tag">ЕГЭ Химия 2026–2027 · Задания №30–31</div>
+            <h1>ОВР и перманганаты:<br><em>электронный баланс,<br>среды, продукты</em></h1>
+            <div class="hero-chips">
+                <span class="hero-chip">Степень окисления</span>
+                <span class="hero-chip">Окислители/восстановители</span>
+                <span class="hero-chip">Электронный баланс</span>
+                <span class="hero-chip">KMnO₄ в кислой среде</span>
+                <span class="hero-chip">KMnO₄ в нейтральной среде</span>
+                <span class="hero-chip">KMnO₄ в щелочной среде</span>
+                <span class="hero-chip">Сопропорционирование</span>
+                <span class="hero-chip">Манганаты</span>
+            </div>
+        </div>
+
+        <!-- ══ SECTION 1 ══ -->
+        <section class="section" id="s1">
+            <div class="section-header collapsed" onclick="toggleSection(this)">
+                <div class="section-num">1</div>
+                <h2 class="section-title">Основы ОВР: степени окисления, окислители и восстановители</h2>
+            </div>
+            <div class="acc-body collapsed">
+
+                <h2 class="sub-title">Что такое окислительно-восстановительная реакция?</h2>
+                <p class="body"><strong>Окислительно-восстановительные реакции (ОВР)</strong> — это реакции, в которых изменяются степени окисления атомов элементов, входящих в состав реагентов.</p>
+
+                <div class="box box-info">
+                    <div class="box-title">🧪 Степень окисления</div>
+                    <p><strong>Степень окисления</strong> — это условный заряд атома в соединении, вычисленный в предположении, что все связи являются ионными. Обозначается <span class="s-o">+<var>n</var></span> или <span class="s-o">−<var>n</var></span>.</p>
+                    <p style="margin-top:8px;">Правила определения степени окисления:</p>
+                    <ul>
+                        <li>В простых веществах (Na, O₂, Cl₂) степень окисления равна <strong>0</strong>.</li>
+                        <li>Степень окисления <strong>водорода</strong> в большинстве соединений +1 (исключение: гидриды металлов, например NaH, где H⁻).</li>
+                        <li>Степень окисления <strong>кислорода</strong> обычно −2 (исключение: пероксиды, где −1; OF₂, где +2).</li>
+                        <li>Сумма степеней окисления в молекуле равна <strong>0</strong>, в ионе — заряду иона.</li>
+                    </ul>
+                </div>
+
+                <h2 class="sub-title">Кто есть кто в ОВР</h2>
+                <div class="scheme-box">
+                    <div class="scheme-cell" style="background:#FFF1F0;border-color:#ef4444;">Окислитель</div>
+                    <div class="scheme-arrow">→</div>
+                    <div class="scheme-cell" style="background:#E8F5E9;border-color:#1D9E75;">Восстановитель</div>
+                </div>
+                <p class="body"><strong>Окислитель</strong> — вещество, содержащее атом, который <strong>принимает электроны</strong> и понижает свою степень окисления. Сам окислитель восстанавливается.</p>
+                <p class="body"><strong>Восстановитель</strong> — вещество, содержащее атом, который <strong>отдаёт электроны</strong> и повышает свою степень окисления. Сам восстановитель окисляется.</p>
+
+                <div class="must-memo">
+                    <div class="mm-hd">📌 Важнейшие окислители и восстановители (для ЕГЭ)</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;">
+                        <div>
+                            <div style="font-weight:700;color:var(--red);">Сильные окислители</div>
+                            <ul style="font-size:13px;line-height:1.8;padding-left:18px;">
+                                <li>F₂, Cl₂, Br₂</li>
+                                <li>O₂</li>
+                                <li>H₂SO₄(конц.) (S⁺⁶)</li>
+                                <li>HNO₃, нитраты (N⁺⁵)</li>
+                                <li>KMnO₄ (Mn⁺⁷)</li>
+                                <li>K₂Cr₂O₇, K₂CrO₄ (Cr⁺⁶)</li>
+                                <li>MnO₂ (Mn⁺⁴)</li>
+                                <li>KClO₃, KClO₄ (Cl⁺⁵, Cl⁺⁷)</li>
+                                <li>Fe³⁺ (в паре с сильными восст.)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div style="font-weight:700;color:var(--green);">Типичные восстановители</div>
+                            <ul style="font-size:13px;line-height:1.8;padding-left:18px;">
+                                <li>Металлы (Zn, Fe, Cu...)</li>
+                                <li>H₂S, сульфиды (S²⁻)</li>
+                                <li>HI, иодиды (I⁻)</li>
+                                <li>HBr, бромиды (Br⁻)</li>
+                                <li>HCl(конц.) (Cl⁻)</li>
+                                <li>NH₃, нитриды (N³⁻)</li>
+                                <li>PH₃, фосфиды (P³⁻)</li>
+                                <li>SiH₄, силициды (Si⁴⁻)</li>
+                                <li>SO₂, сульфиты (S⁴⁺)</li>
+                                <li>H₂O₂ (O⁻¹) — в паре с сильными окислителями</li>
+                                <li>Fe²⁺, Cr²⁺, Cu⁺</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box box-warn">
+                    <div class="box-title">⚠️ Важно</div>
+                    <p>Вещества, содержащие атомы в <strong>промежуточной</strong> степени окисления (например, S⁺⁴, N⁺³, O⁻¹), могут быть <strong>и окислителями, и восстановителями</strong> в зависимости от партнёра.</p>
+                    <ul>
+                        <li><strong>Только окислители:</strong> высшая степень окисления (S⁺⁶, N⁺⁵, Mn⁺⁷).</li>
+                        <li><strong>Только восстановители:</strong> низшая степень окисления (S²⁻, N³⁻, Cl⁻).</li>
+                    </ul>
+                </div>
+
+                <div class="mcq-wrap">
+                    <div class="mcq-title">✎ Проверь себя</div>
+                    <div class="mcq-block" data-correct="1">
+                        <div class="mcq-q">1. В реакции 2Na + Cl₂ → 2NaCl окислителем является:</div>
+                        <div class="mcq-opts">
+                            <button class="mcq-opt" onclick="mcqPick(this,0)">A) Na</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,1)">Б) Cl₂</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,2)">В) NaCl</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,3)">Г) нет окислителя</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                    <div class="mcq-block" data-correct="2">
+                        <div class="mcq-q">2. Какое вещество может быть только восстановителем?</div>
+                        <div class="mcq-opts">
+                            <button class="mcq-opt" onclick="mcqPick(this,0)">A) H₂SO₄</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,1)">Б) HNO₃</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,2)">В) Na₂S</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,3)">Г) KMnO₄</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ SECTION 4 ══ -->
+        <section class="section" id="s4">
+            <div class="section-header collapsed" onclick="toggleSection(this)">
+                <div class="section-num">4</div>
+                <h2 class="section-title">Метод электронного баланса (пошаговый алгоритм)</h2>
+            </div>
+            <div class="acc-body collapsed">
+
+                <h2 class="sub-title">Как расставить коэффициенты в ОВР</h2>
+                <p class="body">Рассмотрим алгоритм на примере реакции:</p>
+                <div class="eq-block">
+                    <span class="eq">PH₃ + KMnO₄ + H₂SO₄ → H₃PO₄ + MnSO₄ + K₂SO₄ + H₂O</span>
+                </div>
+
+                <div style="counter-reset:step;padding-left:8px;">
+                    <div style="margin-bottom:16px;counter-increment:step;">
+                        <div style="font-weight:700;color:var(--p700);font-size:15px;display:flex;align-items:center;gap:8px;"><span style="background:var(--p600);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;">1</span> Записать схему реакции</div>
+                        <div class="eq">PH₃ + KMnO₄ + H₂SO₄ → H₃PO₄ + MnSO₄ + K₂SO₄ + H₂O</div>
+                    </div>
+                    <div style="margin-bottom:16px;counter-increment:step;">
+                        <div style="font-weight:700;color:var(--p700);font-size:15px;display:flex;align-items:center;gap:8px;"><span style="background:var(--p600);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;">2</span> Определить элементы, которые меняют степень окисления</div>
+                        <div class="eq">P⁻³ → P⁺⁵ (повышение, отдаёт электроны)</div>
+                        <div class="eq">Mn⁺⁷ → Mn⁺² (понижение, принимает электроны)</div>
+                    </div>
+                    <div style="margin-bottom:16px;counter-increment:step;">
+                        <div style="font-weight:700;color:var(--p700);font-size:15px;display:flex;align-items:center;gap:8px;"><span style="background:var(--p600);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;">3</span> Составить полуреакции (соблюдая массу и заряд)</div>
+                        <div class="eq">P⁻³ − 8ē → P⁺⁵</div>
+                        <div class="eq">Mn⁺⁷ + 5ē → Mn⁺²</div>
+                    </div>
+                    <div style="margin-bottom:16px;counter-increment:step;">
+                        <div style="font-weight:700;color:var(--p700);font-size:15px;display:flex;align-items:center;gap:8px;"><span style="background:var(--p600);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;">4</span> Найти НОК (наименьшее общее кратное) электронов</div>
+                        <div class="eq">НОК(8,5) = 40</div>
+                        <div class="eq">Умножаем полуреакции: P⁻³ − 8ē → P⁺⁵ &nbsp;|×5|</div>
+                        <div class="eq">Mn⁺⁷ + 5ē → Mn⁺² &nbsp;|×8|</div>
+                    </div>
+                    <div style="margin-bottom:16px;counter-increment:step;">
+                        <div style="font-weight:700;color:var(--p700);font-size:15px;display:flex;align-items:center;gap:8px;"><span style="background:var(--p600);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;">5</span> Перенести коэффициенты в схему</div>
+                        <div class="eq">5PH₃ + 8KMnO₄ + H₂SO₄ → 5H₃PO₄ + 8MnSO₄ + K₂SO₄ + H₂O</div>
+                    </div>
+                    <div style="margin-bottom:16px;counter-increment:step;">
+                        <div style="font-weight:700;color:var(--p700);font-size:15px;display:flex;align-items:center;gap:8px;"><span style="background:var(--p600);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;">6</span> Уравнять остальные элементы (по балансу)</div>
+                        <div class="eq">5PH₃ + 8KMnO₄ + 12H₂SO₄ → 5H₃PO₄ + 8MnSO₄ + 4K₂SO₄ + 12H₂O</div>
+                    </div>
+                    <div style="margin-bottom:16px;counter-increment:step;">
+                        <div style="font-weight:700;color:var(--p700);font-size:15px;display:flex;align-items:center;gap:8px;"><span style="background:var(--p600);color:#fff;border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;">7</span> Проверить по кислороду</div>
+                        <div class="eq">Слева: 8·4 + 12·4 = 80; справа: 5·4 + 8·4 + 4·4 + 12 = 80. Всё верно.</div>
+                    </div>
+                </div>
+
+                <div class="box box-success">
+                    <div class="box-title">✅ Итог</div>
+                    <div class="eq">5PH₃ + 8KMnO₄ + 12H₂SO₄ → 5H₃PO₄ + 8MnSO₄ + 4K₂SO₄ + 12H₂O</div>
+                    <p>PH₃ (P⁻³) — восстановитель, KMnO₄ (Mn⁺⁷) — окислитель.</p>
+                </div>
+
+                <h2 class="sub-title">Шаблоны МЭБ для типовых задач</h2>
+                <p class="body">Запомни стандартные блоки электронного баланса для перманганата в каждой среде:</p>
+                <div class="meb-templates">
+                    <div class="meb-tpl">
+                        <div class="meb-tpl-hdr">Кислая среда — Mn⁺⁷ → Mn²⁺</div>
+                        <div class="meb-tpl-body">
+                            <span class="meb-ok">Mn⁺⁷</span> + <span class="meb-e">5ē</span> → <span class="meb-ok">Mn⁺²</span> &nbsp;<span class="meb-x">×2</span><br>
+                            <span class="meb-vos">_восстановитель_</span> − <span class="meb-e">nē</span> → … &nbsp;<span class="meb-x">×5</span><br>
+                            <span style="font-size:11px;color:var(--text3)">НОК на 5 и n; KMnO₄ коэф.=2</span>
+                        </div>
+                    </div>
+                    <div class="meb-tpl">
+                        <div class="meb-tpl-hdr">Нейтральная среда — Mn⁺⁷ → Mn⁺⁴</div>
+                        <div class="meb-tpl-body">
+                            <span class="meb-ok">Mn⁺⁷</span> + <span class="meb-e">3ē</span> → <span class="meb-ok">Mn⁺⁴</span> &nbsp;<span class="meb-x">×2</span><br>
+                            <span class="meb-vos">_восстановитель_</span> − <span class="meb-e">nē</span> → … &nbsp;<span class="meb-x">×3</span><br>
+                            <span style="font-size:11px;color:var(--text3)">НОК на 3 и n; продукт MnO₂↓</span>
+                        </div>
+                    </div>
+                    <div class="meb-tpl">
+                        <div class="meb-tpl-hdr">Щелочная среда — Mn⁺⁷ → Mn⁺⁶</div>
+                        <div class="meb-tpl-body">
+                            <span class="meb-ok">Mn⁺⁷</span> + <span class="meb-e">1ē</span> → <span class="meb-ok">Mn⁺⁶</span> &nbsp;<span class="meb-x">×n</span><br>
+                            <span class="meb-vos">_восстановитель_</span> − <span class="meb-e">nē</span> → … &nbsp;<span class="meb-x">×1</span><br>
+                            <span style="font-size:11px;color:var(--text3)">Продукт K₂MnO₄, зелёный</span>
+                        </div>
+                    </div>
+                    <div class="meb-tpl">
+                        <div class="meb-tpl-hdr">Типичная запись МЭБ — пример</div>
+                        <div class="meb-tpl-body">
+                            <span class="meb-ok">Mn⁺⁷</span> + 5ē → <span class="meb-ok">Mn⁺²</span> &nbsp;|×2<br>
+                            <span class="meb-vos">S⁻²</span> − 8ē → <span class="meb-vos">S⁰</span> &nbsp;|×?<br>
+                            <span style="font-size:11px;color:var(--text3)">НОК(5,8)=40 → ×8 и ×5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trap-box">
+                    <div class="trap-hd">⚠️ Важные нюансы для ЕГЭ</div>
+                    <ul>
+                        <li>В <strong>K₂Cr₂O₇</strong> два атома хрома: 2Cr⁺⁶ → 2Cr⁺³ (принимают 6ē).</li>
+                        <li>В <strong>H₂O₂</strong> два атома кислорода: 2O⁻¹ + 2ē → 2O⁻².</li>
+                        <li>В <strong>FeS₂</strong> два восстановителя: Fe⁺² и S⁻¹ — учитывать все электроны.</li>
+                        <li>При <strong>сопропорционировании</strong> продукт образуется за счёт и окисления, и восстановления (суммировать коэффициенты).</li>
+                    </ul>
+                </div>
+
+                <div class="mcq-wrap">
+                    <div class="mcq-title">✎ Проверь себя</div>
+                    <div class="mcq-block" data-correct="1">
+                        <div class="mcq-q">5. В полуреакции Cr₂O₇²⁻ → 2Cr³⁺ число принятых электронов:</div>
+                        <div class="mcq-opts">
+                            <button class="mcq-opt" onclick="mcqPick(this,0)">A) 3</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,1)">Б) 6</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,2)">В) 2</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,3)">Г) 1</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                    <div class="mcq-block" data-correct="0">
+                        <div class="mcq-q">6. В реакции FeS₂ + O₂ → Fe₂O₃ + SO₂ суммарное число электронов, отданных восстановителем (с учётом коэффициентов):</div>
+                        <div class="mcq-opts">
+                            <button class="mcq-opt" onclick="mcqPick(this,0)">A) 4 (Fe²⁺) + 10 (2S⁻¹) = 14</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,1)">Б) 2 + 4 = 6</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,2)">В) 1 + 2 = 3</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,3)">Г) 4 + 2 = 6</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ SECTION 5 ══ (основной, самый большой) -->
+        <section class="section" id="s5">
+            <div class="section-header collapsed" onclick="toggleSection(this)">
+                <div class="section-num">5</div>
+                <h2 class="section-title">ОВР с соединениями марганца: перманганаты в разных средах</h2>
+            </div>
+            <div class="acc-body collapsed">
+
+                <h2 class="sub-title">Перманганат калия — сильный окислитель</h2>
+                <p class="body"><strong>KMnO₄</strong> — тёмно-фиолетовые кристаллы, в растворе даёт яркий малиновый цвет. Сильный окислитель за счёт марганца в степени окисления <strong>+7</strong>.</p>
+
+                <div class="box box-info">
+                    <div class="box-title">🧪 Среда определяет продукты</div>
+                    <p>Восстановление Mn⁺⁷ зависит от <strong>кислотности среды</strong>:</p>
+                    <ul>
+                        <li><strong>Кислая среда:</strong> Mn⁺⁷ → Mn⁺² (соли Mn²⁺, раствор обесцвечивается)</li>
+                        <li><strong>Нейтральная среда:</strong> Mn⁺⁷ → Mn⁺⁴ (MnO₂↓ бурый осадок)</li>
+                        <li><strong>Сильнощелочная среда:</strong> Mn⁺⁷ → Mn⁺⁶ (MnO₄²⁻, зелёный раствор)</li>
+                    </ul>
+                </div>
+
+                <!-- Схема-алгоритм -->
+                <h2 class="sub-title">Алгоритм: какой продукт образуется?</h2>
+                <div class="mn-tree">
+                    <div class="mn-tree-root">KMnO₄ (Mn⁺⁷) → Какая среда?</div>
+                    <div style="width:2px;height:22px;background:var(--line);"></div>
+                    <div class="mn-tree-branches">
+                        <div class="mn-branch">
+                            <div class="mn-branch-line"></div>
+                            <div class="mn-branch-env acid">Кислая<br><small>H₂SO₄, HCl, HNO₃</small></div>
+                            <div class="mn-branch-arrow">↓</div>
+                            <div class="mn-branch-product acid">Mn²⁺<br>Mn⁺⁷ + 5ē → Mn⁺²</div>
+                            <div class="mn-branch-obs">Раствор обесцвечивается</div>
+                        </div>
+                        <div class="mn-branch">
+                            <div class="mn-branch-line"></div>
+                            <div class="mn-branch-env neut">Нейтральная<br><small>H₂O, без к-ты/щёлочи</small></div>
+                            <div class="mn-branch-arrow">↓</div>
+                            <div class="mn-branch-product neut">MnO₂↓<br>Mn⁺⁷ + 3ē → Mn⁺⁴</div>
+                            <div class="mn-branch-obs">Бурый осадок</div>
+                        </div>
+                        <div class="mn-branch">
+                            <div class="mn-branch-line"></div>
+                            <div class="mn-branch-env alk">Щелочная<br><small>NaOH, KOH</small></div>
+                            <div class="mn-branch-arrow">↓</div>
+                            <div class="mn-branch-product alk">MnO₄²⁻<br>Mn⁺⁷ + 1ē → Mn⁺⁶</div>
+                            <div class="mn-branch-obs">Раствор зеленеет</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Типичные ловушки ЕГЭ -->
+                <h2 class="sub-title">⚠️ Типичные ловушки ЕГЭ</h2>
+                <div class="trap-list">
+                    <div class="trap-item">
+                        <div class="trap-icon">🔴</div>
+                        <div><strong>NH₃ в кислой среде не окисляется KMnO₄.</strong> В кислой среде аммиак протонируется до NH₄⁺ и теряет восстановительные свойства. Реакция идёт только в нейтральной или щелочной среде.</div>
+                    </div>
+                    <div class="trap-item">
+                        <div class="trap-icon">🔴</div>
+                        <div><strong>HCl — одновременно кислота и восстановитель.</strong> В реакциях с KMnO₄ HCl создаёт кислую среду (H⁺) и сама окисляется (Cl⁻ → Cl₂). Нужно учитывать оба расхода HCl.</div>
+                    </div>
+                    <div class="trap-item">
+                        <div class="trap-icon">🔴</div>
+                        <div><strong>H₂O₂ — двойная роль.</strong> С более сильными окислителями (KMnO₄) H₂O₂ — восстановитель: H₂O₂ − 2ē → O₂. С более сильными восстановителями — окислитель: H₂O₂ + 2ē → 2OH⁻.</div>
+                    </div>
+                    <div class="trap-item">
+                        <div class="trap-icon">🔴</div>
+                        <div><strong>Сульфид → сера, не сульфат, в кислой среде.</strong> Na₂S в реакции с KMnO₄ даёт S↓ (жёлтая), а не SO₄²⁻. Исключение — если KMnO₄ в избытке и среда очень кислая.</div>
+                    </div>
+                    <div class="trap-item">
+                        <div class="trap-icon">🔴</div>
+                        <div><strong>Сопропорционирование:</strong> Mn⁺⁷ + Mn²⁺ → MnO₂↓. Если в задаче смешивают KMnO₄ и соль Mn²⁺ в нейтральной среде — оба дают Mn⁺⁴. Не перепутай с диспропорционированием.</div>
+                    </div>
+                </div>
+
+                <!-- Цветовая визуализация -->
+                <h2 class="sub-title">Цвет раствора KMnO₄ в разных средах</h2>
+                <p class="body">Исходный раствор <strong>KMnO₄ — фиолетовый (малиновый)</strong>. После реакции цвет меняется в зависимости от среды:</p>
+                <div class="color-vis">
+                    <div class="cv-card">
+                        <div class="cv-header cv-before">Исходный раствор</div>
+                        <div class="cv-body" style="text-align:center;padding:20px 16px;">
+                            <div class="cv-swatch violet" style="margin:0 auto 10px;width:60px;height:60px;"></div>
+                            <div style="font-weight:700;font-size:14px;color:#7B2FBE;">Фиолетовый</div>
+                            <div class="cv-label">KMnO₄, Mn⁺⁷</div>
+                        </div>
+                    </div>
+                    <div class="cv-card">
+                        <div class="cv-header cv-after-acid">Кислая среда (H₂SO₄)</div>
+                        <div class="cv-body">
+                            <div class="cv-arrow">
+                                <div style="text-align:center"><div class="cv-swatch violet" style="margin:0 auto 4px"></div><div style="font-size:11px;color:#7B2FBE">Фиолетовый</div></div>
+                                <div style="font-size:18px;color:var(--p400)">→</div>
+                                <div style="text-align:center"><div class="cv-swatch colorless" style="margin:0 auto 4px"></div><div style="font-size:11px;color:#6B7280">Бесцветный</div></div>
+                            </div>
+                            <div class="cv-label"><strong>Обесцвечивание</strong>Mn⁺⁷ → Mn²⁺ (соли)</div>
+                            <div class="cv-prod">Mn²⁺ — почти бесцветный ион<br>в слабокислом растворе</div>
+                        </div>
+                    </div>
+                    <div class="cv-card">
+                        <div class="cv-header cv-after-neutral">Нейтральная среда (H₂O)</div>
+                        <div class="cv-body">
+                            <div class="cv-arrow">
+                                <div style="text-align:center"><div class="cv-swatch violet" style="margin:0 auto 4px"></div><div style="font-size:11px;color:#7B2FBE">Фиолетовый</div></div>
+                                <div style="font-size:18px;color:var(--p400)">→</div>
+                                <div style="text-align:center"><div class="cv-swatch brown" style="margin:0 auto 4px"></div><div style="font-size:11px;color:#92400E">Бурый осадок</div></div>
+                            </div>
+                            <div class="cv-label"><strong>Бурый осадок MnO₂↓</strong>Mn⁺⁷ → Mn⁺⁴</div>
+                            <div class="cv-prod">MnO₂↓ — нерастворимый<br>бурый осадок</div>
+                        </div>
+                    </div>
+                    <div class="cv-card" style="grid-column:1/-1;max-width:calc(33.33% - 11px);margin-left:auto;margin-right:auto;">
+                        <div class="cv-header cv-after-alkali">Щелочная среда (KOH)</div>
+                        <div class="cv-body">
+                            <div class="cv-arrow">
+                                <div style="text-align:center"><div class="cv-swatch violet" style="margin:0 auto 4px"></div><div style="font-size:11px;color:#7B2FBE">Фиолетовый</div></div>
+                                <div style="font-size:18px;color:var(--p400)">→</div>
+                                <div style="text-align:center"><div class="cv-swatch green" style="margin:0 auto 4px"></div><div style="font-size:11px;color:#059669">Зелёный</div></div>
+                            </div>
+                            <div class="cv-label"><strong>Зелёный раствор</strong>Mn⁺⁷ → Mn⁺⁶ (манганат)</div>
+                            <div class="cv-prod">MnO₄²⁻ — зелёный ион<br>манганат-ион</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="sub-title">Продукты окисления восстановителей</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Восстановитель</th><th>Продукт окисления</th></tr></thead>
+                        <tbody>
+                            <tr><td>HCl⁻¹ (конц.)</td><td>Cl₂⁰↑</td></tr>
+                            <tr><td>HBr⁻¹, бромиды</td><td>Br₂⁰</td></tr>
+                            <tr><td>HI⁻¹, иодиды</td><td>I₂⁰</td></tr>
+                            <tr><td>H₂O₂⁻¹, пероксиды</td><td>O₂⁰↑</td></tr>
+                            <tr><td>H₂S²⁻, сульфиды</td><td>S⁰↓ (жёлтый осадок)</td></tr>
+                            <tr><td>NH₃, нитриды (N³⁻)</td><td>N₂⁰↑</td></tr>
+                            <tr><td>PH₃, фосфиды (P³⁻)</td><td>H₃PO₄ / соли фосфатов</td></tr>
+                            <tr><td>SiH₄, силициды (Si⁴⁻)</td><td>H₂SiO₃ / силикаты</td></tr>
+                            <tr><td>SO₂, сульфиты (S⁴⁺)</td><td>H₂SO₄ / сульфаты</td></tr>
+                            <tr><td>NO₂, нитриты (N³⁺)</td><td>HNO₃ / нитраты</td></tr>
+                            <tr><td>Fe²⁺ (соли, оксиды)</td><td>Fe³⁺ (соли, гидроксид)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 class="sub-title acid">Кислая среда (H₂SO₄, HNO₃, HCl)</h2>
+                <p class="body">В кислой среде перманганат восстанавливается до <strong>Mn²⁺</strong> (соли марганца(II)), раствор обесцвечивается.</p>
+
+                <div class="eq-block acid">
+                    <span class="eq-hdr">Примеры реакций в кислой среде</span>
+                    <span class="eq">8KMnO₄ + 5PH₃ + 12H₂SO₄ → 8MnSO₄ + 5H₃PO₄ + 4K₂SO₄ + 12H₂O</span>
+                    <span class="eq">8KMnO₄ + 5SiH₄ + 12H₂SO₄ → 8MnSO₄ + 5H₂SiO₃↓ + 4K₂SO₄ + 17H₂O</span>
+                    <span class="eq">2KMnO₄ + 5H₂S + 3H₂SO₄ → 2MnSO₄ + 5S↓ + K₂SO₄ + 8H₂O</span>
+                    <span class="eq">2KMnO₄ + 5H₂O₂ + 3H₂SO₄ → 2MnSO₄ + 5O₂↑ + K₂SO₄ + 8H₂O</span>
+                    <span class="eq">2KMnO₄ + 16HI → 2MnI₂ + 5I₂ + 2KI + 8H₂O</span>
+                    <span class="eq">2KMnO₄ + 5SO₂ + 2H₂O → 2MnSO₄ + K₂SO₄ + 2H₂SO₄</span>
+                    <span class="eq">2KMnO₄ + 5K₂SO₃ + 3H₂SO₄ → 2MnSO₄ + 6K₂SO₄ + 3H₂O</span>
+                    <span class="eq">2KMnO₄ + 10FeCl₂ + 18H₂SO₄ → 2MnSO₄ + 5Fe₂(SO₄)₃ + 20HCl + K₂SO₄ + 8H₂O</span>
+                </div>
+
+                <div class="box box-warn">
+                    <div class="box-title">⚠️ Важно</div>
+                    <ul>
+                        <li>При окислении сильных кислот-восстановителей (HCl, HI) дополнительное подкисление не требуется.</li>
+                        <li>Продукт окисления должен содержать тот же катион, что был у восстановителя (например, K₂SO₃ → K₂SO₄).</li>
+                        <li>Для Fe²⁺ в кислой среде образуется соль железа(III) той кислоты, которая использовалась для подкисления.</li>
+                    </ul>
+                </div>
+
+                <h2 class="sub-title neut">Нейтральная среда (H₂O)</h2>
+                <p class="body">В нейтральной (или слабощелочной) среде Mn⁺⁷ восстанавливается до <strong>MnO₂↓</strong> (бурый осадок).</p>
+
+                <div class="eq-block neut">
+                    <span class="eq-hdr">Примеры в нейтральной среде</span>
+                    <span class="eq">2KMnO₄ + 3H₂S → 2MnO₂↓ + 3S↓ + 2KOH + 2H₂O</span>
+                    <span class="eq">8KMnO₄ + 3Na₃P + 4H₂O → 8MnO₂↓ + 3Na₃PO₄ + 8KOH</span>
+                    <span class="eq">2KMnO₄ + 6NaBr + 4H₂O → 2MnO₂↓ + 3Br₂ + 2KOH + 6NaOH</span>
+                    <span class="eq">2KMnO₄ + 2NH₃ → 2MnO₂↓ + N₂↑ + 2KOH + 2H₂O</span>
+                    <span class="eq">2KMnO₄ + 3H₂O₂ → 2MnO₂↓ + 3O₂↑ + 2KOH + 2H₂O</span>
+                    <span class="eq">2KMnO₄ + 3MnSO₄ + 2H₂O → 5MnO₂↓ + K₂SO₄ + 2H₂SO₄</span>
+                </div>
+
+                <div class="box box-info">
+                    <div class="box-title">💡 Сопропорционирование</div>
+                    <p>В нейтральной среде перманганат может реагировать с солями Mn²⁺ (сопропорционирование):</p>
+                    <div class="eq">2KMnO₄ + 3MnSO₄ + 2H₂O → 5MnO₂↓ + K₂SO₄ + 2H₂SO₄</div>
+                    <p>Mn⁺⁷ + Mn⁺² → 2Mn⁺⁴ (MnO₂).</p>
+                </div>
+
+                <h2 class="sub-title alk">Сильнощелочная среда (KOH, NaOH)</h2>
+                <p class="body">В концентрированной щёлочи Mn⁺⁷ восстанавливается до <strong>MnO₄²⁻</strong> (манганат-ион, зелёный раствор).</p>
+
+                <div class="eq-block alk">
+                    <span class="eq-hdr">Примеры в щелочной среде</span>
+                    <span class="eq">8KMnO₄ + PH₃ + 11KOH → 8K₂MnO₄ + K₃PO₄ + 7H₂O</span>
+                    <span class="eq">2KMnO₄ + Na₂SO₃ + 2KOH → 2K₂MnO₄ + Na₂SO₄ + H₂O</span>
+                    <span class="eq">KMnO₄ + NO₂ + 2KOH → K₂MnO₄ + KNO₃ + H₂O</span>
+                    <span class="eq">KMnO₄ + Fe(NO₃)₂ + 3KOH → K₂MnO₄ + Fe(OH)₃↓ + 2KNO₃</span>
+                    <span class="eq">2NaMnO₄ + Na₂S → 2Na₂MnO₄ + S↓</span>
+                </div>
+
+                <div class="box box-warn">
+                    <div class="box-title">⚠️ Особенности</div>
+                    <ul>
+                        <li>При окислении бромидов, иодидов, сульфидов в щелочной среде щёлочь не нужна для уравнивания (она не входит в уравнение).</li>
+                        <li>Продукты окисления восстановителей те же, но в виде солей (K₃PO₄, Na₂SO₄ и др.).</li>
+                    </ul>
+                </div>
+
+                <h2 class="sub-title">Сводная таблица продуктов Mn</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Среда</th><th>Продукт восстановления Mn</th><th>Цвет/признак</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Кислая</strong> (H₂SO₄, HNO₃)</td><td>Mn²⁺ (соли)</td><td>обесцвечивание раствора</td></tr>
+                            <tr><td><strong>Нейтральная</strong> (H₂O)</td><td>MnO₂↓</td><td>бурый осадок</td></tr>
+                            <tr><td><strong>Щелочная</strong> (KOH, NaOH)</td><td>MnO₄²⁻ (манганат)</td><td>зелёный раствор</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mcq-wrap">
+                    <div class="mcq-title">✎ Проверь себя</div>
+                    <div class="mcq-block" data-correct="1">
+                        <div class="mcq-q">7. В кислой среде KMnO₄ восстанавливается до:</div>
+                        <div class="mcq-opts">
+                            <button class="mcq-opt" onclick="mcqPick(this,0)">A) MnO₂</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,1)">Б) Mn²⁺</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,2)">В) MnO₄²⁻</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,3)">Г) Mn</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                    <div class="mcq-block" data-correct="2">
+                        <div class="mcq-q">8. При окислении H₂S перманганатом в нейтральной среде образуется:</div>
+                        <div class="mcq-opts">
+                            <button class="mcq-opt" onclick="mcqPick(this,0)">A) H₂SO₄</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,1)">Б) SO₂</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,2)">В) S↓</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,3)">Г) S²⁻</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                    <div class="mcq-block" data-correct="0">
+                        <div class="mcq-q">9. Качественный признак реакции KMnO₄ с Na₂SO₃ в щелочной среде:</div>
+                        <div class="mcq-opts">
+                            <button class="mcq-opt" onclick="mcqPick(this,0)">A) фиолетовый → зелёный</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,1)">Б) фиолетовый → бурый осадок</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,2)">В) фиолетовый → бесцветный</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,3)">Г) фиолетовый → оранжевый</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ SECTION 6 ══ -->
+        <section class="section" id="s6">
+            <div class="section-header collapsed" onclick="toggleSection(this)">
+                <div class="section-num">6</div>
+                <h2 class="section-title">Другие соединения марганца: MnO₂, манганаты</h2>
+            </div>
+            <div class="acc-body collapsed">
+
+                <h2 class="sub-title">Окислительные свойства MnO₂ и манганатов</h2>
+                <p class="body">Не только Mn⁺⁷, но и Mn⁺⁴ (MnO₂) и Mn⁺⁶ (манганаты) могут быть окислителями.</p>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Окислитель</th><th>Среда</th><th>Продукт восстановления Mn</th></tr></thead>
+                        <tbody>
+                            <tr><td>KMnO₄ (Mn⁺⁷)</td><td>кислая</td><td>Mn²⁺</td></tr>
+                            <tr><td>KMnO₄ (Mn⁺⁷)</td><td>нейтральная</td><td>MnO₂</td></tr>
+                            <tr><td>KMnO₄ (Mn⁺⁷)</td><td>щелочная</td><td>MnO₄²⁻</td></tr>
+                            <tr><td>K₂MnO₄ (Mn⁺⁶)</td><td>кислая</td><td>Mn²⁺</td></tr>
+                            <tr><td>K₂MnO₄ (Mn⁺⁶)</td><td>нейтральная</td><td>MnO₂</td></tr>
+                            <tr><td>MnO₂ (Mn⁺⁴)</td><td>кислая</td><td>Mn²⁺</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="eq-block">
+                    <span class="eq-hdr">Примеры с MnO₂ и манганатами</span>
+                    <span class="eq">MnO₂ + 4HCl(конц.) → MnCl₂ + Cl₂↑ + 2H₂O</span>
+                    <span class="eq">MnO₂ + KNO₂ + H₂SO₄ → MnSO₄ + KNO₃ + H₂O</span>
+                    <span class="eq">K₂MnO₄ + 2KI + 2H₂O → MnO₂↓ + I₂ + 4KOH</span>
+                    <span class="eq">2KMnO₄ + 6KI + 4H₂O → 2MnO₂↓ + 3I₂ + 8KOH</span>
+                </div>
+
+                <h2 class="sub-title">Восстановительные свойства MnO₂ (окисление до манганатов)</h2>
+                <p class="body">В сильнощелочной среде MnO₂ может окисляться до манганатов (Mn⁺⁶).</p>
+                <div class="eq-block">
+                    <span class="eq-hdr">Окисление MnO₂ в щелочи</span>
+                    <span class="eq">MnO₂ + Cl₂ + 2KOH → K₂MnO₄ + 2KCl + H₂O</span>
+                    <span class="eq">2MnO₂ + O₂ + 4KOH → 2K₂MnO₄ + 2H₂O</span>
+                    <span class="eq">MnO₂ + KNO₃ + 2KOH → K₂MnO₄ + KNO₂ + H₂O</span>
+                    <span class="eq">3MnO₂ + KClO₃ + 6KOH → 3K₂MnO₄ + KCl + 3H₂O</span>
+                </div>
+
+                <div class="mcq-wrap">
+                    <div class="mcq-title">✎ Проверь себя</div>
+                    <div class="mcq-block" data-correct="1">
+                        <div class="mcq-q">10. При окислении MnO₂ в щелочной среде образуется:</div>
+                        <div class="mcq-opts">
+                            <button class="mcq-opt" onclick="mcqPick(this,0)">A) Mn²⁺</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,1)">Б) MnO₄²⁻</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,2)">В) Mn₂O₇</button>
+                            <button class="mcq-opt" onclick="mcqPick(this,3)">Г) MnO</button>
+                        </div>
+                        <div class="mcq-fb"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ══ FLASHCARDS ══ -->
+        <div class="fc-section" id="s7">
+            <div class="fc-header">
+                <div class="fc-title">🃏 50 флэш-карточек — ОВР и перманганаты</div>
+                <div class="fc-sub">Нажми на карточку чтобы перевернуть. Отмечай что знаешь, а что нет.</div>
+            </div>
+            <div class="fc-stats">
+                Знаю: <span id="fc-know">0</span> &nbsp;|&nbsp; Не знаю: <span id="fc-dk">0</span> &nbsp;|&nbsp; Осталось: <span id="fc-left">50</span>
+            </div>
+            <div class="fc-counter" id="fc-counter">Карточка 1 из 50</div>
+
+            <div class="fc-perspective" onclick="fcFlip()">
+                <div class="fc-inner" id="fc-inner">
+                    <div class="fc-face fc-front">
+                        <div class="fc-tag" id="fc-tag">ВОПРОС</div>
+                        <div id="fc-front-text"></div>
+                    </div>
+                    <div class="fc-face fc-back">
+                        <div class="fc-back-tag" id="fc-back-tag">ОТВЕТ</div>
+                        <div id="fc-back-text"></div>
+                        <div class="fc-hint" id="fc-hint"></div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="fc-flip-btn" onclick="fcFlip()">🔄 Перевернуть</button>
+            <div class="fc-btn-row" id="fc-btn-row">
+                <button class="fc-btn-know" onclick="fcAnswer(true)">✓ Знаю</button>
+                <button class="fc-btn-dontknow" onclick="fcAnswer(false)">✗ Не знаю</button>
+            </div>
+            <div class="fc-keys">пробел — перевернуть · ← не знаю · → знаю</div>
+
+            <div class="fc-result" id="fc-result">
+                <h3>Готово! 🎉</h3>
+                <div class="fc-res-row">
+                    <div class="fc-res-card"><div class="fc-res-num" id="res-know" style="color:#1D9E75">0</div><div class="fc-res-lbl">ЗНАЮ</div></div>
+                    <div class="fc-res-card"><div class="fc-res-num" id="res-dk" style="color:#C0392B">0</div><div class="fc-res-lbl">НЕ ЗНАЮ</div></div>
+                </div>
+                <div class="fc-restart-row">
+                    <button class="fc-restart-btn primary" onclick="fcRestart(false)">Сначала (все)</button>
+                    <button class="fc-restart-btn" onclick="fcRestart(true)">Только ошибки</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ ЗАКРЕПЛЕНИЕ — ЕГЭ задания с перманганатами ══ -->
+        <div class="zad-section" id="s8">
+            <div class="zad-hdr">
+                <div class="zad-hdr-num">8</div>
+                <div class="zad-hdr-title">Закрепление — ЕГЭ: задания с перманганатами (линия 29)</div>
+            </div>
+
+            <!-- №77957 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№77957</span>
+                </div>
+                <div class="zad-q">Составьте уравнение реакции между перманганатом натрия, нитритом натрия и серной кислотой. Запишите электронный баланс.</div>
+                <div class="zad-eq">NaMnO₄ + NaNO₂ + H₂SO₄ → ?</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    Кислая среда → Mn⁺⁷ принимает 5ē → Mn²⁺. Нитрит-ион NO₂⁻ содержит N⁺³, который окисляется до N⁺⁵ в нитрате (−2ē). НОК(5,2)=10 → ×2 для MnO₄⁻ и ×5 для NO₂⁻.
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">2NaMnO₄ + 5NaNO₂ + 3H₂SO₄ → 2MnSO₄ + 5NaNO₃ + Na₂SO₄ + 3H₂O</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 5ē → <span class="meb-ok">Mn⁺²</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">N⁺³</span> − 2ē → <span class="meb-vos">N⁺⁵</span> &nbsp;|×5&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- №63157 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№63157</span>
+                </div>
+                <div class="zad-q">Составьте уравнение реакции сульфита натрия с перманганатом калия в щелочной среде. Что наблюдается?</div>
+                <div class="zad-eq">Na₂SO₃ + KMnO₄ + KOH → ?</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    Щелочная среда → Mn⁺⁷ принимает 1ē → Mn⁺⁶ (K₂MnO₄, зелёный). Сера в SO₃²⁻ имеет с.о. S⁺⁴, окисляется до S⁺⁶ (сульфат), отдаёт 2ē. НОК(1,2)=2 → ×2 KMnO₄ и ×1 Na₂SO₃.
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">Na₂SO₃ + 2KMnO₄ + 2KOH → Na₂SO₄ + 2K₂MnO₄ + H₂O</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 1ē → <span class="meb-ok">Mn⁺⁶</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">S⁺⁴</span> − 2ē → <span class="meb-vos">S⁺⁶</span> &nbsp;|×1&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                    <div style="margin-top:8px;font-size:13px;">Наблюдение: фиолетовый → <strong>зелёный раствор</strong> (K₂MnO₄). Осадка и газа нет.</div>
+                </div>
+            </div>
+
+            <!-- №45971 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№45971</span>
+                </div>
+                <div class="zad-q">Напишите уравнение реакции аммиака с перманганатом калия (нейтральная среда). Какие продукты образуются?</div>
+                <div class="zad-eq">NH₃ + KMnO₄ → ?</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    Нейтральная среда → Mn⁺⁷ + 3ē → Mn⁺⁴ (MnO₂↓, бурый). Азот в NH₃ имеет с.о. N³⁻, окисляется до N₂⁰, отдаёт 3ē (на каждый N). Но 2NH₃ дают N₂ → суммарно 2 атома N отдают 2×3=6ē. НОК(3,6)=6 → ×2 KMnO₄, ×2 NH₃.
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">2NH₃ + 2KMnO₄ → N₂↑ + 2MnO₂↓ + 2KOH + 2H₂O</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 3ē → <span class="meb-ok">Mn⁺⁴</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">2N⁻³</span> − 6ē → <span class="meb-vos">N₂⁰</span> &nbsp;|×1&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                    <div style="margin-top:8px;font-size:13px;">Наблюдение: бурый осадок MnO₂↓ + газ N₂↑.</div>
+                </div>
+            </div>
+
+            <!-- №25361 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№25361</span>
+                </div>
+                <div class="zad-q">Напишите уравнение реакции концентрированной соляной кислоты с перманганатом калия. Какой газ выделяется?</div>
+                <div class="zad-eq">KMnO₄ + HCl(конц.) → ?</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    HCl сама является восстановителем (Cl⁻¹) и создаёт кислую среду. Cl⁻¹ окисляется до Cl₂⁰ (−1ē на каждый Cl). Mn⁺⁷ + 5ē → Mn²⁺. Для 2 KMnO₄ нужно 10ē → 10 атомов Cl → 5 Cl₂.
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">2KMnO₄ + 16HCl → 2KCl + 2MnCl₂ + 5Cl₂↑ + 8H₂O</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 5ē → <span class="meb-ok">Mn⁺²</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">2Cl⁻¹</span> − 2ē → <span class="meb-vos">Cl₂⁰</span> &nbsp;|×5&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                    <div style="margin-top:8px;font-size:13px;">Наблюдение: жёлто-зелёный газ Cl₂↑ с резким запахом.</div>
+                </div>
+            </div>
+
+            <!-- №25357 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№25357</span>
+                </div>
+                <div class="zad-q">Напишите уравнение реакции сульфита калия с перманганатом калия в присутствии KOH.</div>
+                <div class="zad-eq">KMnO₄ + K₂SO₃ + KOH → ?</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    Щелочная среда → Mn⁺⁷ + 1ē → Mn⁺⁶ (K₂MnO₄). S⁺⁴ в SO₃²⁻ → S⁺⁶ в SO₄²⁻, отдаёт 2ē. НОК(1,2)=2 → ×2 KMnO₄, ×1 K₂SO₃.
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">K₂SO₃ + 2KMnO₄ + 2KOH → K₂SO₄ + 2K₂MnO₄ + H₂O</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 1ē → <span class="meb-ok">Mn⁺⁶</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">S⁺⁴</span> − 2ē → <span class="meb-vos">S⁺⁶</span> &nbsp;|×1&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                    <div style="margin-top:8px;font-size:13px;">Наблюдение: фиолетовый → зелёный (K₂MnO₄). Газа и осадка нет.</div>
+                </div>
+            </div>
+
+            <!-- №25452 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№25452</span>
+                </div>
+                <div class="zad-q">Составьте уравнение реакции сульфида натрия с перманганатом натрия в воде. Сколько нерастворимых продуктов образуется?</div>
+                <div class="zad-eq">Na₂S + NaMnO₄ + H₂O → ?</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    Нейтральная среда → Mn⁺⁷ + 3ē → Mn⁺⁴ (MnO₂↓). S²⁻ → S⁰ (сера), −2ē. НОК(3,2)=6 → ×2 NaMnO₄ и ×3 Na₂S. В итоге два осадка: S↓ и MnO₂↓.
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">3Na₂S + 2NaMnO₄ + 4H₂O → 3S↓ + 2MnO₂↓ + 8NaOH</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 3ē → <span class="meb-ok">Mn⁺⁴</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">S⁻²</span> − 2ē → <span class="meb-vos">S⁰</span> &nbsp;|×3&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                    <div style="margin-top:8px;font-size:13px;">Два нерастворимых продукта: жёлтый S↓ и бурый MnO₂↓.</div>
+                </div>
+            </div>
+
+            <!-- №25421 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№25421</span>
+                </div>
+                <div class="zad-q">Напишите уравнение реакции иодида магния с перманганатом натрия в серной кислоте.</div>
+                <div class="zad-eq">MgI₂ + NaMnO₄ + H₂SO₄ → ?</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    Кислая среда → Mn⁺⁷ + 5ē → Mn²⁺. I⁻¹ → I₂⁰, −1ē на каждый I, 2I⁻ − 2ē → I₂. НОК(5,2)=10 → ×2 MnO₄⁻ и ×5 пар I⁻. Продукт: I₂ (простое вещество).
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">5MgI₂ + 2NaMnO₄ + 8H₂SO₄ → 5I₂ + 2MnSO₄ + 5MgSO₄ + Na₂SO₄ + 8H₂O</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 5ē → <span class="meb-ok">Mn⁺²</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">2I⁻¹</span> − 2ē → <span class="meb-vos">I₂⁰</span> &nbsp;|×5&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- №25312 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№25312</span>
+                </div>
+                <div class="zad-q">Составьте уравнение реакции пероксида водорода с перманганатом калия в серной кислоте. H₂O₂ выступает восстановителем.</div>
+                <div class="zad-eq">H₂O₂ + KMnO₄ + H₂SO₄ → ?</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    H₂O₂: кислород O⁻¹ → O₂⁰ (молекулярный кислород), 2O⁻¹ − 2ē → O₂. Mn⁺⁷ + 5ē → Mn²⁺. НОК(5,2)=10 → ×2 KMnO₄ и ×5 H₂O₂.
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">5H₂O₂ + 2KMnO₄ + 3H₂SO₄ → 5O₂↑ + 2MnSO₄ + K₂SO₄ + 8H₂O</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 5ē → <span class="meb-ok">Mn⁺²</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">2O⁻¹</span> − 2ē → <span class="meb-vos">O₂⁰</span> &nbsp;|×5&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                    <div style="margin-top:8px;font-size:13px;">Наблюдение: обесцвечивание раствора + выделение O₂↑ (газ).</div>
+                </div>
+            </div>
+
+            <!-- №77965 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№77965</span>
+                </div>
+                <div class="zad-q">Из перечня веществ: <strong>карбонат магния, бромид калия, серная кислота, перманганат калия, сульфид натрия, гидроксид калия</strong> — выберите вещество-окислитель и вещество-восстановитель, реакция между которыми в соответствующей среде протекает с образованием твёрдого при обычных условиях простого вещества и раствора трёх солей. Запишите уравнение одной из возможных ОВР с участием выбранных веществ. Составьте электронный баланс, укажите окислитель и восстановитель.</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    Твёрдое простое вещество — сера S↓ (жёлтая). Восстановитель — Na₂S (S²⁻). Окислитель — KMnO₄ (Mn⁺⁷). Среда — кислая (H₂SO₄). Три соли: MnSO₄, Na₂SO₄, K₂SO₄.
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">5Na₂S + 2KMnO₄ + 8H₂SO₄ → 5S↓ + 2MnSO₄ + 5Na₂SO₄ + K₂SO₄ + 8H₂O</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 5ē → <span class="meb-ok">Mn⁺²</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">S⁻²</span> − 2ē → <span class="meb-vos">S⁰</span> &nbsp;|×5&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                    <div style="margin-top:8px;font-size:13px;">Три соли: MnSO₄, Na₂SO₄, K₂SO₄. Простое вещество: S↓ (жёлтый осадок).</div>
+                </div>
+            </div>
+
+            <!-- №73509 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№73509</span>
+                </div>
+                <div class="zad-q">Из перечня веществ: <strong>сульфит натрия, соляная кислота, перманганат натрия, бром, гидросульфат калия, хлорид бария</strong> — выберите вещества, окислительно-восстановительная реакция между которыми приводит к образованию осадка и бесцветного раствора. Выделения газа в ходе реакции не наблюдается. Запишите уравнение одной из возможных ОВР. Составьте электронный баланс, укажите окислитель и восстановитель.</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    Осадок бурого цвета — MnO₂↓ (нейтральная среда, Mn⁺⁷ → Mn⁺⁴). Бесцветный раствор — нет цветных ионов. Восстановитель — Na₂SO₃ (S⁺⁴ → S⁺⁶, −2ē). Окислитель — NaMnO₄ (Mn⁺⁷ + 3ē → Mn⁺⁴). Среда — H₂O.
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">2NaMnO₄ + 3Na₂SO₃ + H₂O → 2MnO₂↓ + 3Na₂SO₄ + 2NaOH</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 3ē → <span class="meb-ok">Mn⁺⁴</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">S⁺⁴</span> − 2ē → <span class="meb-vos">S⁺⁶</span> &nbsp;|×3&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                    <div style="margin-top:8px;font-size:13px;">Осадок: бурый MnO₂↓. Газа нет. Раствор Na₂SO₄ + NaOH — бесцветный.</div>
+                </div>
+            </div>
+
+            <!-- №47416 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№47416</span>
+                </div>
+                <div class="zad-q">Из перечня веществ: <strong>оксид хрома(III), гидроксид магния, серная кислота, оксид меди(I), ацетат аммония, перманганат калия</strong> — выберите оксид и соль, между которыми может протекать ОВР в кислой среде. При протекании этой реакции цвет раствора изменяется, и в результате раствор окрашивается в голубой цвет. Запишите уравнение ОВР с участием выбранных веществ. Составьте электронный баланс, укажите окислитель и восстановитель.</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    Голубой цвет — ионы Cu²⁺ (CuSO₄). Оксид — Cu₂O (Cu⁺¹ → Cu²⁺, −1ē, 2Cu⁺¹ − 2ē). Соль — KMnO₄ (Mn⁺⁷ + 5ē → Mn²⁺). Среда — H₂SO₄. НОК(5,2)=10 → ×2 KMnO₄, ×5 Cu₂O.
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">5Cu₂O + 2KMnO₄ + 13H₂SO₄ → 10CuSO₄ + 2MnSO₄ + K₂SO₄ + 13H₂O</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 5ē → <span class="meb-ok">Mn⁺²</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">2Cu⁺¹</span> − 2ē → <span class="meb-vos">2Cu⁺²</span> &nbsp;|×5&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                    <div style="margin-top:8px;font-size:13px;">Раствор окрашивается в голубой цвет — образуется CuSO₄ (ионы Cu²⁺).</div>
+                </div>
+            </div>
+
+            <!-- №46302 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№46302</span>
+                </div>
+                <div class="zad-q">Из перечня веществ: <strong>гидрофосфат калия, сульфит кальция, перманганат калия, хлороводород, гидроксид железа(III), нитрат марганца(II)</strong> — выберите вещества, окислительно-восстановительная реакция между которыми сопровождается образованием осадка. Запишите уравнение одной из возможных ОВР. Составьте электронный баланс, укажите окислитель и восстановитель.</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    Сопропорционирование: Mn⁺⁷ (KMnO₄) + Mn⁺² (Mn(NO₃)₂) → оба дают Mn⁺⁴ (MnO₂↓). Mn⁺⁷ + 3ē → Mn⁺⁴ |×2; Mn⁺² − 2ē → Mn⁺⁴ |×3. Среда — нейтральная (H₂O).
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">3Mn(NO₃)₂ + 2KMnO₄ + 2H₂O → 5MnO₂↓ + 2KNO₃ + 4HNO₃</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 3ē → <span class="meb-ok">Mn⁺⁴</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">Mn⁺²</span> − 2ē → <span class="meb-vos">Mn⁺⁴</span> &nbsp;|×3&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                    <div style="margin-top:8px;font-size:13px;">Реакция сопропорционирования: Mn⁺⁷ и Mn⁺² встречаются — оба дают MnO₂↓ (бурый).</div>
+                </div>
+            </div>
+
+            <!-- №25382 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№25382</span>
+                </div>
+                <div class="zad-q">Из перечня веществ: <strong>перманганат натрия, нитрит натрия, гидроксид натрия, гидрокарбонат бария, серная кислота, гидрокарбонат магния</strong> — выберите вещества, между которыми протекает ОВР с образованием зелёного раствора. Образование осадка при этом не происходит. Запишите уравнение одной из возможных ОВР. Составьте электронный баланс, укажите окислитель и восстановитель.</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    Зелёный раствор — K₂MnO₄/Na₂MnO₄ (манганат, Mn⁺⁶). Щелочная среда → Mn⁺⁷ + 1ē → Mn⁺⁶. Восстановитель — NaNO₂ (N⁺³ − 2ē → N⁺⁵). НОК(1,2)=2 → ×2 NaMnO₄, ×1 NaNO₂. Щёлочь — NaOH.
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">NaNO₂ + 2NaMnO₄ + 2NaOH → NaNO₃ + 2Na₂MnO₄ + H₂O</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 1ē → <span class="meb-ok">Mn⁺⁶</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">N⁺³</span> − 2ē → <span class="meb-vos">N⁺⁵</span> &nbsp;|×1&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                    <div style="margin-top:8px;font-size:13px;">Зелёный раствор — Na₂MnO₄ (манганат натрия). Осадка и газа нет.</div>
+                </div>
+            </div>
+
+            <!-- №25343 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№25343</span>
+                </div>
+                <div class="zad-q">Из перечня веществ: <strong>нитрит калия, перманганат калия, серная кислота, гидроксид калия, нитрат аммония, сульфид железа(II)</strong> — выберите вещества, между которыми протекает ОВР с образованием зелёного раствора. В ходе реакции не выделяется газ и не образуется осадок. Запишите уравнение одной из возможных ОВР. Составьте электронный баланс, укажите окислитель и восстановитель.</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    Зелёный раствор — K₂MnO₄ (щелочная среда, Mn⁺⁷ + 1ē → Mn⁺⁶). Восстановитель — KNO₂ (N⁺³ − 2ē → N⁺⁵). НОК(1,2)=2 → ×2 KMnO₄, ×1 KNO₂. Щёлочь — KOH.
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">KNO₂ + 2KMnO₄ + 2KOH → KNO₃ + 2K₂MnO₄ + H₂O</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 1ē → <span class="meb-ok">Mn⁺⁶</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">N⁺³</span> − 2ē → <span class="meb-vos">N⁺⁵</span> &nbsp;|×1&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                    <div style="margin-top:8px;font-size:13px;">Зелёный раствор — K₂MnO₄. Газа и осадка нет.</div>
+                </div>
+            </div>
+
+            <!-- №25335 -->
+            <div class="zad-card">
+                <div class="zad-meta">
+                    <span class="zad-chip num">№25335</span>
+                </div>
+                <div class="zad-q">Из перечня веществ: <strong>сульфид железа(II), гидроксид калия, перманганат калия, серная кислота, нитрат калия, гидрокарбонат бария</strong> — выберите вещества, между которыми протекает ОВР с образованием бесцветного раствора. Выделения газа или образования осадка не наблюдается. Запишите уравнение одной из возможных ОВР. Составьте электронный баланс, укажите окислитель и восстановитель.</div>
+                <div class="zad-btns">
+                    <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+                </div>
+                <div class="zad-hint">
+                    Бесцветный раствор без осадка и газа — кислая среда, Mn²⁺ (обесцвечивание KMnO₄). Восстановитель — KNO₂ (N⁺³ − 2ē → N⁺⁵). Окислитель — KMnO₄ (Mn⁺⁷ + 5ē → Mn²⁺). НОК(5,2)=10 → ×2 KMnO₄, ×5 KNO₂.
+                </div>
+                <div class="zad-ans">
+                    <div class="zad-eq">2KMnO₄ + 5KNO₂ + 3H₂SO₄ → 2MnSO₄ + 5KNO₃ + K₂SO₄ + 3H₂O</div>
+                    <div class="meb-row">
+                        <div><span class="meb-ok">Mn⁺⁷</span> + 5ē → <span class="meb-ok">Mn⁺²</span> &nbsp;|×2&nbsp; <span class="role-ok">окислитель</span></div>
+                        <div><span class="meb-vos">N⁺³</span> − 2ē → <span class="meb-vos">N⁺⁵</span> &nbsp;|×5&nbsp; <span class="role-vos">восстановитель</span></div>
+                    </div>
+                    <div style="margin-top:8px;font-size:13px;">Раствор обесцвечивается (KMnO₄ фиолетовый → Mn²⁺ бесцветный). Газа и осадка нет.</div>
+                </div>
+            </div>
+
+        </div><!-- /zad-section -->
+
+        <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    </div><!-- /shell -->
+
+    <script>
+        // --- FlashCards ---
+        const FC_CARDS = [
+            // ── 1. Основы ОВР ──
+            { q: 'Что такое окислительно-восстановительная реакция?', a: 'Реакция, в которой изменяются степени окисления атомов элементов.', tag: 'Основы' },
+            { q: 'Что такое степень окисления?', a: 'Условный заряд атома в соединении, рассчитанный в предположении ионного характера связей.', tag: 'Основы' },
+            { q: 'Окислитель — это...', a: 'Вещество, атом которого принимает электроны и понижает степень окисления.', tag: 'Основы' },
+            { q: 'Восстановитель — это...', a: 'Вещество, атом которого отдаёт электроны и повышает степень окисления.', tag: 'Основы' },
+            { q: 'Какие вещества являются только окислителями? Примеры.', a: 'Вещества с элементами в высшей с.о.: KMnO₄ (Mn⁺⁷), K₂Cr₂O₇ (Cr⁺⁶), HNO₃, H₂SO₄(конц.), F₂.', tag: 'Основы' },
+            { q: 'Какие вещества являются только восстановителями? Примеры.', a: 'Вещества с элементами в низшей с.о.: Na₂S, HI, NH₃, PH₃, металлы, H₂.', tag: 'Основы' },
+            { q: 'Что такое диспропорционирование?', a: 'ОВР, в которой один и тот же элемент одновременно и окисляется, и восстанавливается.\nПример: Cl₂ + 2KOH → KCl + KClO + H₂O', tag: 'Основы' },
+            { q: 'Что такое сопропорционирование?', a: 'ОВР, в которой два атома одного элемента с разными с.о. дают один общий продукт.\nПример: 2KMnO₄ + 3MnSO₄ + 2H₂O → 5MnO₂↓ + K₂SO₄ + 2H₂SO₄', tag: 'Основы' },
+            // ── 2. Продукты окисления ──
+            { q: 'S²⁻ (сульфид) как восстановитель → какой продукт?', a: 'Элементарная сера S⁰ (жёлтый осадок).\nПолуреакция: S²⁻ − 2ē → S⁰', tag: 'Продукты' },
+            { q: 'Cl⁻ (хлорид) как восстановитель → какой продукт?', a: 'Молекулярный хлор Cl₂ (жёлто-зелёный газ).\nПолуреакция: 2Cl⁻ − 2ē → Cl₂⁰', tag: 'Продукты' },
+            { q: 'PH₃ (фосфин) как восстановитель → продукт в кислой / в щелочной?', a: 'Кислая среда → H₃PO₄ (P⁻³ − 8ē → P⁺⁵)\nЩелочная среда → соль: K₃PO₄, Na₃PO₄', tag: 'Продукты' },
+            { q: 'SO₃²⁻ (сульфит, S⁺⁴) как восстановитель → продукт?', a: 'Сульфат SO₄²⁻ (S⁺⁶).\nПолуреакция: S⁺⁴ − 2ē → S⁺⁶\nВ кислой — H₂SO₄, в нейтральной/щелочной — соль сульфата.', tag: 'Продукты' },
+            // ── 3. Цвета KMnO₄ ──
+            { q: 'Исходный цвет раствора KMnO₄?', a: 'Фиолетовый (малиновый). Mn⁺⁷.', tag: 'Цвета' },
+            { q: 'KMnO₄ в кислой среде → продукт и цвет раствора?', a: 'Mn²⁺ (соли марганца(II)). Раствор обесцвечивается.\nMn⁺⁷ + 5ē → Mn²⁺', tag: 'Цвета' },
+            { q: 'KMnO₄ в нейтральной среде → продукт и наблюдение?', a: 'MnO₂↓ — бурый нерастворимый осадок.\nMn⁺⁷ + 3ē → Mn⁺⁴', tag: 'Цвета' },
+            { q: 'KMnO₄ в щелочной среде → продукт и цвет раствора?', a: 'MnO₄²⁻ (манганат). Раствор зеленеет.\nMn⁺⁷ + 1ē → Mn⁺⁶', tag: 'Цвета' },
+            { q: 'Наблюдение: фиолетовый → бесцветный. Какая среда? Продукт?', a: 'Кислая среда (H₂SO₄, HNO₃). Продукт — Mn²⁺.', tag: 'Цвета' },
+            { q: 'Наблюдение: фиолетовый → бурый осадок. Какая среда? Продукт?', a: 'Нейтральная среда (H₂O). Продукт — MnO₂↓.', tag: 'Цвета' },
+            { q: 'Наблюдение: фиолетовый → зелёный раствор. Какая среда? Продукт?', a: 'Щелочная среда (KOH, NaOH). Продукт — MnO₄²⁻ (манганат).', tag: 'Цвета' },
+            // ── 4. Нюансы и типичные продукты ──
+            { q: 'При окислении сульфидов KMnO₄: что образуется? Признак?', a: 'S⁰↓ — жёлтый осадок серы. S²⁻ − 2ē → S⁰.', tag: 'Нюансы' },
+            { q: 'При окислении иодидов KMnO₄ в кислой среде: что образуется?', a: 'I₂ — молекулярный иод (раствор буреет). 2I⁻ − 2ē → I₂.', tag: 'Нюансы' },
+            { q: 'При окислении бромидов KMnO₄ в кислой среде: что образуется?', a: 'Br₂ — молекулярный бром (раствор оранжевеет). 2Br⁻ − 2ē → Br₂.', tag: 'Нюансы' },
+            { q: 'При окислении NH₃ перманганатом (нейтр. среда): что образуется?', a: 'N₂↑ — молекулярный азот. 2N⁻³ − 6ē → N₂⁰.', tag: 'Нюансы' },
+            { q: 'При окислении H₂O₂ перманганатом: что образуется?', a: 'O₂↑ — кислород. 2O⁻¹ − 2ē → O₂⁰. H₂O₂ выступает восстановителем.', tag: 'Нюансы' },
+            { q: 'Почему NH₃ не окисляется KMnO₄ в кислой среде?', a: 'В кислой среде NH₃ превращается в NH₄⁺ (аммоний), который не является восстановителем.', tag: 'Нюансы' },
+            // ── 5. Полуреакции — кислая среда ──
+            { q: 'KMnO₄ + H₂S + H₂SO₄ → ?', a: '2KMnO₄ + 5H₂S + 3H₂SO₄ → 2MnSO₄ + 5S↓ + K₂SO₄ + 8H₂O\nМЭБ: Mn⁺⁷+5ē→Mn²⁺ |×2\n      S²⁻−2ē→S⁰      |×5', tag: 'Кислая' },
+            { q: 'KMnO₄ + HCl(конц.) → ?', a: '2KMnO₄ + 16HCl → 2KCl + 2MnCl₂ + 5Cl₂↑ + 8H₂O\nМЭБ: Mn⁺⁷+5ē→Mn²⁺  |×2\n      2Cl⁻−2ē→Cl₂   |×5', tag: 'Кислая' },
+            { q: 'KMnO₄ + HBr → ?', a: '2KMnO₄ + 16HBr → 2MnBr₂ + 5Br₂ + 2KBr + 8H₂O\nМЭБ: Mn⁺⁷+5ē→Mn²⁺  |×2\n      2Br⁻−2ē→Br₂   |×5', tag: 'Кислая' },
+            { q: 'KMnO₄ + HI → ?', a: '2KMnO₄ + 16HI → 2MnI₂ + 5I₂ + 2KI + 8H₂O\nМЭБ: Mn⁺⁷+5ē→Mn²⁺ |×2\n      2I⁻−2ē→I₂     |×5', tag: 'Кислая' },
+            { q: 'KMnO₄ + SO₂ + H₂O → ?', a: '2KMnO₄ + 5SO₂ + 2H₂O → 2MnSO₄ + K₂SO₄ + 2H₂SO₄\nМЭБ: Mn⁺⁷+5ē→Mn²⁺ |×2\n      S⁺⁴−2ē→S⁺⁶    |×5', tag: 'Кислая' },
+            { q: 'KMnO₄ + H₂O₂ + H₂SO₄ → ?', a: '2KMnO₄ + 5H₂O₂ + 3H₂SO₄ → 2MnSO₄ + 5O₂↑ + K₂SO₄ + 8H₂O\nМЭБ: Mn⁺⁷+5ē→Mn²⁺  |×2\n      2O⁻¹−2ē→O₂     |×5', tag: 'Кислая' },
+            { q: 'KMnO₄ + KNO₂ + H₂SO₄ → ?', a: '2KMnO₄ + 5KNO₂ + 3H₂SO₄ → 2MnSO₄ + 5KNO₃ + K₂SO₄ + 3H₂O\nМЭБ: Mn⁺⁷+5ē→Mn²⁺ |×2\n      N⁺³−2ē→N⁺⁵    |×5', tag: 'Кислая' },
+            { q: 'KMnO₄ + Na₂S + H₂SO₄ → ? (образуется три соли)', a: '2KMnO₄ + 5Na₂S + 8H₂SO₄ → 2MnSO₄ + 5S↓ + 5Na₂SO₄ + K₂SO₄ + 8H₂O\nМЭБ: Mn⁺⁷+5ē→Mn²⁺ |×2\n      S²⁻−2ē→S⁰      |×5', tag: 'Кислая' },
+            { q: 'KMnO₄ + Cu₂O + H₂SO₄ → ? (раствор синеет)', a: '2KMnO₄ + 5Cu₂O + 13H₂SO₄ → 10CuSO₄ + 2MnSO₄ + K₂SO₄ + 13H₂O\nМЭБ: Mn⁺⁷+5ē→Mn²⁺    |×2\n      2Cu⁺¹−2ē→2Cu²⁺  |×5', tag: 'Кислая' },
+            // ── 6. Полуреакции — нейтральная среда ──
+            { q: 'KMnO₄ + H₂S (нейтр.) → ?', a: '2KMnO₄ + 3H₂S → 2MnO₂↓ + 3S↓ + 2KOH + 2H₂O\nМЭБ: Mn⁺⁷+3ē→Mn⁺⁴ |×2\n      S²⁻−2ē→S⁰      |×3', tag: 'Нейтральная' },
+            { q: 'KMnO₄ + NH₃ (нейтр.) → ?', a: '2KMnO₄ + 2NH₃ → 2MnO₂↓ + N₂↑ + 2KOH + 2H₂O\nМЭБ: Mn⁺⁷+3ē→Mn⁺⁴  |×2\n      2N⁻³−6ē→N₂⁰   |×1', tag: 'Нейтральная' },
+            { q: 'KMnO₄ + H₂O₂ (нейтр.) → ?', a: '2KMnO₄ + 3H₂O₂ → 2MnO₂↓ + 3O₂↑ + 2KOH + 2H₂O\nМЭБ: Mn⁺⁷+3ē→Mn⁺⁴ |×2\n      2O⁻¹−2ē→O₂    |×3', tag: 'Нейтральная' },
+            { q: 'KMnO₄ + Na₂SO₃ + H₂O → ? (нейтр.)', a: '2KMnO₄ + 3Na₂SO₃ + H₂O → 2MnO₂↓ + 3Na₂SO₄ + 2KOH\nМЭБ: Mn⁺⁷+3ē→Mn⁺⁴ |×2\n      S⁺⁴−2ē→S⁺⁶    |×3', tag: 'Нейтральная' },
+            { q: 'KMnO₄ + K₂S + H₂O → ? (нейтр.)', a: '2KMnO₄ + 3K₂S + 4H₂O → 2MnO₂↓ + 3S↓ + 8KOH\nМЭБ: Mn⁺⁷+3ē→Mn⁺⁴ |×2\n      S²⁻−2ē→S⁰      |×3', tag: 'Нейтральная' },
+            { q: 'KMnO₄ + NaBr + H₂O → ? (нейтр.)', a: '2KMnO₄ + 6NaBr + 4H₂O → 2MnO₂↓ + 3Br₂ + 2KOH + 6NaOH\nМЭБ: Mn⁺⁷+3ē→Mn⁺⁴ |×2\n      2Br⁻−2ē→Br₂    |×3', tag: 'Нейтральная' },
+            { q: 'KMnO₄ + Mn(NO₃)₂ + H₂O → ? (сопропорц.)', a: '2KMnO₄ + 3Mn(NO₃)₂ + 2H₂O → 5MnO₂↓ + 2KNO₃ + 4HNO₃\nМЭБ: Mn⁺⁷+3ē→Mn⁺⁴ |×2 (окислитель)\n      Mn²⁺−2ē→Mn⁺⁴  |×3 (восстановитель)', tag: 'Нейтральная' },
+            // ── 7. Полуреакции — щелочная среда ──
+            { q: 'KMnO₄ + Na₂SO₃ + KOH → ?', a: 'Na₂SO₃ + 2KMnO₄ + 2KOH → Na₂SO₄ + 2K₂MnO₄ + H₂O\nМЭБ: Mn⁺⁷+1ē→Mn⁺⁶ |×2\n      S⁺⁴−2ē→S⁺⁶    |×1', tag: 'Щелочная' },
+            { q: 'KMnO₄ + KNO₂ + KOH → ?', a: 'KNO₂ + 2KMnO₄ + 2KOH → KNO₃ + 2K₂MnO₄ + H₂O\nМЭБ: Mn⁺⁷+1ē→Mn⁺⁶ |×2\n      N⁺³−2ē→N⁺⁵    |×1', tag: 'Щелочная' },
+            { q: 'KMnO₄ + PH₃ + KOH → ?', a: '8KMnO₄ + PH₃ + 11KOH → 8K₂MnO₄ + K₃PO₄ + 7H₂O\nМЭБ: Mn⁺⁷+1ē→Mn⁺⁶ |×8\n      P⁻³−8ē→P⁺⁵    |×1', tag: 'Щелочная' },
+            { q: 'NaMnO₄ + NaNO₂ + NaOH → ?', a: 'NaNO₂ + 2NaMnO₄ + 2NaOH → NaNO₃ + 2Na₂MnO₄ + H₂O\nМЭБ: Mn⁺⁷+1ē→Mn⁺⁶ |×2\n      N⁺³−2ē→N⁺⁵    |×1', tag: 'Щелочная' },
+            { q: 'KMnO₄ + NO₂ + KOH → ?', a: 'KMnO₄ + NO₂ + 2KOH → K₂MnO₄ + KNO₃ + H₂O\nМЭБ: Mn⁺⁷+1ē→Mn⁺⁶ |×1\n      N⁺⁴−1ē→N⁺⁵    |×1', tag: 'Щелочная' },
+            { q: 'KMnO₄ + (NH₄)₂SO₃ + KOH → ?', a: '(NH₄)₂SO₃ + 2KMnO₄ + 2KOH → (NH₄)₂SO₄ + 2K₂MnO₄ + H₂O\nМЭБ: Mn⁺⁷+1ē→Mn⁺⁶ |×2\n      S⁺⁴−2ē→S⁺⁶    |×1', tag: 'Щелочная' },
+            { q: 'NaMnO₄ + Na₂S (щел.) → ?', a: '2NaMnO₄ + Na₂S → 2Na₂MnO₄ + S↓\nМЭБ: Mn⁺⁷+1ē→Mn⁺⁶ |×2\n      S²⁻−2ē→S⁰      |×1', tag: 'Щелочная' },
+            // ── 8. Другие соединения Mn ──
+            { q: 'MnO₂ + HCl(конц.) → ?', a: 'MnO₂ + 4HCl → MnCl₂ + Cl₂↑ + 2H₂O\nМЭБ: Mn⁺⁴+2ē→Mn²⁺ |×1\n      2Cl⁻−2ē→Cl₂   |×1', tag: 'Другие' },
+            { q: 'MnO₂ + Cl₂ + KOH → ? (MnO₂ — восстановитель)', a: 'MnO₂ + Cl₂ + 2KOH → K₂MnO₄ + 2KCl + H₂O\nМЭБ: Mn⁺⁴−2ē→Mn⁺⁶ |×1\n      Cl₂+2ē→2Cl⁻   |×1', tag: 'Другие' },
+        ];
+
+        let fcDeck = [...Array(FC_CARDS.length).keys()];
+        let fcPos = 0,
+            fcFlipped = false,
+            fcKnow = 0,
+            fcDk = 0,
+            fcDontKnowList = [];
+
+        function fcRender() {
+            const idx = fcDeck[fcPos];
+            const card = FC_CARDS[idx];
+            document.getElementById('fc-front-text').textContent = card.q;
+            document.getElementById('fc-back-text').textContent = '';
+            document.getElementById('fc-hint').textContent = '';
+            const tagEl = document.getElementById('fc-tag');
+            tagEl.textContent = card.tag || 'ВОПРОС';
+            tagEl.className = 'fc-tag tag-' + (card.tag || '').toLowerCase();
+            document.getElementById('fc-back-tag').textContent = 'ОТВЕТ';
+            document.getElementById('fc-counter').textContent = `Карточка ${fcPos+1} из ${fcDeck.length}`;
+            document.getElementById('fc-know').textContent = fcKnow;
+            document.getElementById('fc-dk').textContent = fcDk;
+            document.getElementById('fc-left').textContent = fcDeck.length - fcPos;
+            const inner = document.getElementById('fc-inner');
+            inner.classList.remove('flipped');
+            fcFlipped = false;
+            document.getElementById('fc-btn-row').style.display = 'none';
+        }
+
+        function fcFlip() {
+            const inner = document.getElementById('fc-inner');
+            fcFlipped = !fcFlipped;
+            inner.classList.toggle('flipped', fcFlipped);
+            if (fcFlipped) {
+                inner.addEventListener('transitionend', function onDone() {
+                    inner.removeEventListener('transitionend', onDone);
+                    if (!fcFlipped) return;
+                    const card = FC_CARDS[fcDeck[fcPos]];
+                    document.getElementById('fc-back-text').textContent = card.a;
+                    document.getElementById('fc-btn-row').style.display = 'flex';
+                });
+            } else {
+                document.getElementById('fc-back-text').textContent = '';
+                document.getElementById('fc-btn-row').style.display = 'none';
+            }
+        }
+
+        function fcAnswer(know) {
+            if (know) { fcKnow++; } else { fcDk++;
+                fcDontKnowList.push(fcDeck[fcPos]); }
+            fcPos++;
+            if (fcPos >= fcDeck.length) {
+                document.getElementById('res-know').textContent = fcKnow;
+                document.getElementById('res-dk').textContent = fcDk;
+                document.getElementById('fc-inner').parentElement.style.display = 'none';
+                document.querySelector('.fc-flip-btn').style.display = 'none';
+                document.getElementById('fc-btn-row').style.display = 'none';
+                document.querySelector('.fc-keys').style.display = 'none';
+                document.getElementById('fc-counter').style.display = 'none';
+                document.querySelector('.fc-stats').style.display = 'none';
+                document.getElementById('fc-result').style.display = 'block';
+            } else {
+                fcRender();
+            }
+        }
+
+        function fcRestart(onlyWrong) {
+            fcKnow = 0;
+            fcDk = 0;
+            fcDeck = onlyWrong && fcDontKnowList.length ? [...fcDontKnowList] : [...Array(FC_CARDS.length).keys()];
+            fcDontKnowList = [];
+            fcPos = 0;
+            document.getElementById('fc-inner').parentElement.style.display = '';
+            document.querySelector('.fc-flip-btn').style.display = '';
+            document.querySelector('.fc-keys').style.display = '';
+            document.getElementById('fc-counter').style.display = '';
+            document.querySelector('.fc-stats').style.display = '';
+            document.getElementById('fc-result').style.display = 'none';
+            fcRender();
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.code === 'Space') { e.preventDefault();
+                fcFlip(); }
+            if (e.code === 'ArrowRight' && fcFlipped) fcAnswer(true);
+            if (e.code === 'ArrowLeft' && fcFlipped) fcAnswer(false);
+        });
+
+        fcRender();
+
+        // --- Progress bar & back to top ---
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+            document.getElementById('pf').style.width = pct + '%';
+            document.getElementById('back-top').classList.toggle('visible', pct > 8);
+        });
+
+        // --- accordion ---
+        function toggleSection(hdr) {
+            hdr.classList.toggle('collapsed');
+            const body = hdr.nextElementSibling;
+            if (body.classList.contains('collapsed')) {
+                body.style.overflow = 'hidden';
+                body.style.maxHeight = body.scrollHeight + 'px';
+                body.style.opacity = '1';
+                body.classList.remove('collapsed');
+                setTimeout(() => { body.style.maxHeight = 'none';
+                    body.style.overflow = 'visible'; }, 380);
+            } else {
+                body.style.overflow = 'hidden';
+                body.style.maxHeight = body.scrollHeight + 'px';
+                requestAnimationFrame(() => {
+                    body.style.maxHeight = '0';
+                    body.style.opacity = '0';
+                });
+                body.classList.add('collapsed');
+            }
+        }
+
+        // --- Закрепление (ЕГЭ задания) ---
+        function toggleZad(btn, type) {
+            const card = btn.closest('.zad-card');
+            const el = card.querySelector('.zad-' + type);
+            const isOpen = el.classList.toggle('open');
+            btn.textContent = type === 'hint'
+                ? (isOpen ? '💡 Скрыть подсказку' : '💡 Подсказка')
+                : (isOpen ? 'Скрыть ответ' : 'Показать ответ');
+        }
+
+        // --- MCQ ---
+        function mcqPick(btn, idx) {
+            const block = btn.closest('.mcq-block');
+            if (block.dataset.done) return;
+            block.dataset.done = '1';
+            const correct = +block.dataset.correct;
+            const opts = block.querySelectorAll('.mcq-opt');
+            const fb = block.querySelector('.mcq-fb');
+            opts.forEach((o, i) => {
+                o.disabled = true;
+                if (i === correct) { o.style.background = '#d1fae5';
+                    o.style.borderColor = '#10b981';
+                    o.style.color = '#065f46'; } else if (i === idx && idx !== correct) { o.style.background =
+                        '#fee2e2';
+                    o.style.borderColor = '#ef4444';
+                    o.style.color = '#7f1d1d'; }
+            });
+            if (idx === correct) {
+                fb.style.display = 'block';
+                fb.style.background = '#d1fae5';
+                fb.style.color = '#065f46';
+                fb.textContent = '✓ Верно!';
+            } else {
+                fb.style.display = 'block';
+                fb.style.background = '#fee2e2';
+                fb.style.color = '#7f1d1d';
+                fb.textContent = '✗ Неверно. Правильный ответ выделен зелёным.';
+            }
+        }
+    </script>
+</body>
+</html>
