@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Скорость реакции — ЕГЭ Химия 2026–2027</title>
+<style>
+:root{
+    --p900:#0C3547;--p800:#155E75;--p700:#0E7490;--p600:#0891B2;
+    --p500:#06B6D4;--p400:#22D3EE;--p300:#67E8F9;--p200:#A5F3FC;
+    --p100:#CFFAFE;--p50:#ECFEFF;
+    --ink:#083344;--ink2:#164E63;--ink3:#5B9BB0;
+    --line:#BAE6FD;--card:#FFFFFF;--bg:#F0FDFF;--white:#fff;
+    --green:#1D9E75;--green-t:#E1F5EE;--green-d:#085041;
+    --amber:#B46A00;--amber-t:#FDF5E6;--amber-d:#4A2B00;
+    --red:#A32D2D;--red-t:#FCEBEB;--red-d:#7A2020;
+    --r:12px;--r-sm:8px;--r-lg:20px;
+    --shadow:0 1px 3px rgba(8,145,178,.07),0 4px 16px rgba(8,145,178,.07);
+    --shm:0 4px 20px rgba(8,145,178,.20);
+    --font:'Segoe UI',system-ui,sans-serif;
+    --mono:'JetBrains Mono','Courier New',monospace;
+    --accent:var(--p600);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);
+    line-height:1.6;font-size:15px;padding-bottom:60px}
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* ── Progress bar ── */
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;z-index:100;background:var(--p100)}
+.prog-bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--p600),var(--p400));transition:width .1s}
+
+/* ── Hero ── */
+.hero{
+    background:linear-gradient(135deg,#062B3A 0%,#0E7490 55%,#22D3EE 100%);
+    padding:52px 32px 44px;margin:0 -24px 44px;
+    position:relative;overflow:hidden}
+.hero::after{
+    content:'V·T↑ · C↑ · P↑ · S↑ · Kat · V·T↑ · C↑ · P↑ · S↑ · Kat · V·T↑ · C↑ · P↑ · S↑ · Kat · V·T↑ · C↑ · P↑ · S↑ · Kat · V·T↑ · C↑ · P↑ · S↑ · Kat · V·T↑ · C↑ · P↑';
+    position:absolute;inset:0;font-family:var(--mono);font-size:12px;
+    line-height:2.8;letter-spacing:.22em;color:rgba(255,255,255,.09);
+    word-break:break-all;padding:18px 26px;pointer-events:none;overflow:hidden}
+.hero-tag{
+    display:inline-block;padding:5px 14px;border-radius:20px;
+    background:rgba(255,255,255,.15);color:rgba(255,255,255,.85);
+    font-size:12px;font-weight:600;letter-spacing:.04em;margin-bottom:20px}
+.hero h1{font-size:clamp(22px,5vw,36px);font-weight:800;color:#fff;
+    line-height:1.2;margin-bottom:14px;text-wrap:balance;position:relative;z-index:1}
+.hero h1 em{color:var(--p300);font-style:normal}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;position:relative;z-index:1}
+.hero-chip{
+    padding:6px 14px;border-radius:20px;background:rgba(255,255,255,.13);
+    color:rgba(255,255,255,.88);font-size:12.5px;font-weight:600;
+    cursor:pointer;border:1.5px solid rgba(255,255,255,.2);transition:background .15s}
+.hero-chip:hover{background:rgba(255,255,255,.22)}
+.hero-badge{
+    display:inline-flex;align-items:center;gap:7px;
+    background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.25);
+    border-radius:10px;padding:8px 16px;margin-top:16px;
+    font-size:13px;color:#fff;font-weight:600;position:relative;z-index:1}
+.hero-badge span{background:var(--p400);color:var(--p900);
+    padding:2px 8px;border-radius:6px;font-size:11px;font-weight:800}
+
+/* ── Accordion sections ── */
+.section{
+    background:var(--card);border-radius:var(--r);
+    box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden}
+.section-header{
+    display:flex;align-items:center;gap:14px;padding:16px 20px;
+    cursor:pointer;user-select:none;transition:background .15s}
+.section-header:hover{background:var(--p50)}
+.section-num{
+    width:36px;height:36px;border-radius:10px;flex-shrink:0;
+    background:linear-gradient(135deg,var(--p900),var(--p500));
+    color:#fff;font-size:15px;font-weight:800;
+    display:flex;align-items:center;justify-content:center}
+.section-title{font-size:15px;font-weight:700;color:var(--ink);flex:1}
+.acc-arrow{font-size:12px;color:var(--ink3);transition:transform .25s;margin-left:auto}
+.section-header.open .acc-arrow{transform:rotate(180deg)}
+.acc-body{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.acc-body.open{max-height:9999px;padding:4px 20px 28px}
+
+/* ── Sub-titles ── */
+h2.sub-title{
+    font-size:16px;font-weight:700;color:var(--p700);
+    margin:24px 0 10px;display:flex;align-items:center;gap:8px}
+h2.sub-title::before{content:'';width:4px;height:20px;
+    background:var(--p500);border-radius:2px;flex-shrink:0}
+
+/* ── Text ── */
+p.body{color:var(--ink2);font-size:14.5px;margin-bottom:10px}
+ul.body-list{color:var(--ink2);font-size:14.5px;padding-left:20px;margin-bottom:10px}
+ul.body-list li{margin-bottom:4px}
+strong{font-weight:700}
+
+/* ── Info / warn boxes ── */
+.box{border-radius:var(--r-sm);padding:14px 16px;margin:14px 0;font-size:14px}
+.box-info{background:var(--p100);border-left:4px solid var(--p500)}
+.box-warn{background:#FFFBEB;border-left:4px solid #F59E0B}
+.box-green{background:var(--green-t);border-left:4px solid var(--green)}
+.box-title{font-weight:700;color:var(--p700);margin-bottom:6px;font-size:14.5px}
+.box-warn .box-title{color:#92400E}
+.box-green .box-title{color:var(--green-d)}
+
+/* ── Equation blocks ── */
+.eq-block{
+    background:var(--p50);border-left:3px solid var(--p400);
+    border-radius:0 var(--r-sm) var(--r-sm) 0;
+    padding:12px 14px;margin:12px 0}
+.eq-hdr{display:block;font-size:12px;font-weight:700;color:var(--p700);
+    letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px}
+.eq{display:block;font-family:var(--mono);font-size:13px;
+    color:var(--ink);padding:3px 0;line-height:1.7}
+.eq-note{display:block;font-size:12px;color:var(--ink3);margin-top:4px;font-style:italic}
+
+/* ── Rate table ── */
+.rate-table{width:100%;border-collapse:collapse;font-size:13px;margin:14px 0}
+.rate-table th{background:var(--p700);color:#fff;padding:8px 12px;text-align:left;font-weight:700}
+.rate-table td{padding:8px 12px;border-bottom:1px solid var(--line);color:var(--ink2)}
+.rate-table tr:nth-child(even) td{background:var(--p50)}
+.rate-table .spd{font-weight:700}
+.spd-1{color:#B45309}.spd-2{color:#0E7490}.spd-3{color:#15803D}.spd-4{color:#7C3AED}
+
+/* ── Vant-Hoff formula ── */
+.vhoff{
+    background:linear-gradient(135deg,var(--p900),var(--p700));
+    border-radius:var(--r);padding:20px 24px;margin:14px 0;text-align:center;color:#fff}
+.vhoff-formula{font-family:var(--mono);font-size:20px;font-weight:700;
+    color:var(--p300);margin-bottom:8px}
+.vhoff-legend{font-size:12.5px;color:rgba(255,255,255,.75);line-height:1.8}
+
+/* ── Catalyst grid ── */
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.cat-card{background:var(--p50);border:1.5px solid var(--line);
+    border-radius:var(--r-sm);padding:12px 14px}
+.cat-eq{font-family:var(--mono);font-size:12.5px;color:var(--ink);margin-bottom:5px}
+.cat-badge{display:inline-block;background:var(--p600);color:#fff;
+    font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px}
+@media(max-width:560px){.cat-grid{grid-template-columns:1fr}}
+
+/* ── Summary table ── */
+.sum-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0;overflow-x:auto;display:block}
+.sum-table th{background:var(--p800);color:#fff;padding:10px 14px;text-align:left;font-weight:700;white-space:nowrap}
+.sum-table td{padding:9px 14px;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}
+.sum-table tr:nth-child(even) td{background:var(--p50)}
+.arrow-up{color:var(--green);font-weight:700}
+.arrow-dn{color:var(--red);font-weight:700}
+
+/* ── Задания ── */
+.zad-section{padding:16px 0 4px}
+.zad-header{
+    display:flex;align-items:center;gap:10px;margin-bottom:16px;
+    padding:10px 14px;background:var(--p100);border-radius:var(--r-sm)}
+.zad-header-icon{font-size:18px}
+.zad-header-text{font-size:13px;font-weight:700;color:var(--p700)}
+.zad-header-sub{font-size:12px;color:var(--ink3)}
+.zad-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.zad-grid{grid-template-columns:1fr}}
+.zad-card{background:var(--card);border:1.5px solid var(--line);
+    border-radius:var(--r);padding:16px 18px}
+.zad-num{font-size:11px;font-weight:800;color:var(--p600);
+    letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
+.zad-q{font-size:13.5px;color:var(--ink);margin-bottom:10px;line-height:1.6}
+.zad-opts{list-style:none;font-size:13px;color:var(--ink2);margin-bottom:12px}
+.zad-opts li{padding:2px 0;display:flex;gap:6px}
+.zad-opts li::before{content:attr(data-n)'.';color:var(--ink3);min-width:16px;flex-shrink:0}
+.zad-btns{display:flex;gap:8px;flex-wrap:wrap}
+.hint-btn{padding:7px 15px;border-radius:var(--r-sm);font-size:13px;font-weight:600;
+    cursor:pointer;border:1.5px solid var(--p600);background:transparent;color:var(--p600);
+    transition:background .15s}
+.hint-btn:hover{background:var(--p100)}
+.zad-hint{display:none;margin-top:10px;background:#FFFBEB;
+    border:1.5px solid #F59E0B;border-radius:var(--r-sm);padding:10px 12px;
+    font-size:13px;color:var(--amber-d);line-height:1.6}
+.zad-hint.open{display:block}
+/* ── Ввод ответа ── */
+.zad-input-row{display:flex;gap:8px;margin-top:10px;align-items:center}
+.zad-input{
+    font-family:var(--mono);font-size:15px;font-weight:700;
+    width:100px;padding:7px 10px;border-radius:var(--r-sm);
+    border:1.5px solid var(--line);background:var(--p50);color:var(--ink);
+    letter-spacing:.15em;text-align:center;transition:border-color .15s}
+.zad-input:focus{outline:none;border-color:var(--p500)}
+.check-btn{padding:7px 16px;border-radius:var(--r-sm);font-size:13px;font-weight:700;
+    cursor:pointer;border:none;background:var(--p600);color:#fff;transition:background .15s}
+.check-btn:hover{background:var(--p700)}
+.zad-feedback{display:none;margin-top:8px;border-radius:var(--r-sm);
+    padding:10px 12px;font-size:13px;line-height:1.6}
+.zad-feedback.correct{display:block;background:var(--green-t);border:1.5px solid var(--green);color:var(--green-d)}
+.zad-feedback.wrong{display:block;background:var(--red-t);border:1.5px solid #F87171;color:var(--red-d)}
+.ans-digits{font-family:var(--mono);font-size:16px;font-weight:800;
+    color:var(--green);display:block;margin-bottom:4px}
+.ans-digits-wrong{font-family:var(--mono);font-size:14px;font-weight:800;
+    color:var(--red);display:block;margin-bottom:4px}
+
+/* ── Flashcards ── */
+.fc-section{
+    background:linear-gradient(135deg,var(--p900),var(--p700));
+    border-radius:var(--r);padding:24px 24px 28px;margin-bottom:14px}
+.fc-title{color:#fff;font-size:17px;font-weight:800;text-align:center;margin-bottom:4px}
+.fc-subtitle{color:rgba(255,255,255,.65);font-size:13px;text-align:center;margin-bottom:20px}
+.fc-stats{display:flex;justify-content:center;gap:24px;margin-bottom:14px;font-size:13px;color:rgba(255,255,255,.75)}
+.fc-stats b{color:#fff}
+.fc-counter{text-align:center;color:rgba(255,255,255,.55);font-size:12px;margin-bottom:10px;font-family:var(--mono)}
+.flip-card{perspective:1000px;height:200px;cursor:pointer;margin-bottom:16px}
+.fc-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-front,.fc-back{
+    position:absolute;inset:0;backface-visibility:hidden;
+    border-radius:var(--r);padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.fc-front{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.2)}
+.fc-back{background:rgba(255,255,255,.95);transform:rotateY(180deg);border:1.5px solid rgba(255,255,255,.3)}
+.fc-tag{font-size:10.5px;font-weight:800;letter-spacing:.07em;
+    padding:2px 8px;border-radius:10px;margin-bottom:10px;background:rgba(255,255,255,.2);color:rgba(255,255,255,.9)}
+.fc-back-tag{font-size:10.5px;font-weight:800;letter-spacing:.07em;
+    padding:2px 8px;border-radius:10px;margin-bottom:10px;background:var(--p100);color:var(--p700)}
+.fc-front-text{color:#fff;font-size:15px;font-weight:600;text-align:center;line-height:1.5}
+.fc-back-text{color:var(--ink);font-size:13.5px;text-align:center;line-height:1.7;max-height:140px;overflow-y:auto}
+.fc-hint{color:rgba(255,255,255,.5);font-size:12px;position:absolute;bottom:12px}
+.fc-flip-btn{
+    display:block;width:100%;padding:10px;border-radius:var(--r-sm);
+    background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.25);
+    font-size:14px;font-weight:600;cursor:pointer;margin-bottom:10px;transition:background .15s}
+.fc-flip-btn:hover{background:rgba(255,255,255,.25)}
+.fc-btn-row{display:none;gap:10px;margin-bottom:14px}
+.fc-btn-know,.fc-btn-dk{
+    flex:1;padding:10px;border-radius:var(--r-sm);font-size:14px;
+    font-weight:700;cursor:pointer;border:none;transition:opacity .15s}
+.fc-btn-know{background:var(--green);color:#fff}
+.fc-btn-dk{background:#E11D48;color:#fff}
+.fc-keys{text-align:center;font-size:11.5px;color:rgba(255,255,255,.45);margin-bottom:8px}
+.fc-result{display:none;text-align:center;padding:20px 0}
+.fc-result-title{color:#fff;font-size:18px;font-weight:800;margin-bottom:8px}
+.fc-result-stats{color:rgba(255,255,255,.75);font-size:14px;margin-bottom:16px}
+.fc-result-stats b{color:var(--p300)}
+.fc-restart-row{display:flex;gap:10px;justify-content:center}
+.fc-restart-btn{
+    padding:10px 22px;border-radius:var(--r-sm);font-size:14px;font-weight:700;
+    cursor:pointer;border:none;background:rgba(255,255,255,.15);color:#fff;transition:background .15s}
+.fc-restart-btn:hover{background:rgba(255,255,255,.25)}
+.fc-restart-btn.primary{background:var(--p400);color:var(--p900)}
+
+/* tag colors */
+.tag-Основы{background:rgba(255,255,255,.2);color:rgba(255,255,255,.9)}
+.tag-Природа{background:#FEE2E2;color:#991B1B}
+.tag-Температура{background:#FEF3C7;color:#92400E}
+.tag-Концентрация{background:#DCFCE7;color:#166534}
+.tag-Давление{background:#E0F2FE;color:#075985}
+.tag-Катализатор{background:#F3E8FF;color:#6B21A8}
+.tag-Поверхность{background:#FFF7ED;color:#9A3412}
+</style>
+</head>
+<body>
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+
+<div class="shell">
+<div class="hero">
+    <div class="hero-tag">ЕГЭ Химия 2026–2027 · Задание №18 · 1 балл</div>
+    <h1>Скорость<br><em>химической реакции</em></h1>
+    <div class="hero-badge">
+        <span>Задание 18</span>
+        Выбери все верные ответы · 2–4 правильных из 5
+    </div>
+    <div class="hero-chips">
+        <div class="hero-chip" onclick="openSection('s1')">Определение</div>
+        <div class="hero-chip" onclick="openSection('s2')">Природа реагентов</div>
+        <div class="hero-chip" onclick="openSection('s3')">Температура</div>
+        <div class="hero-chip" onclick="openSection('s4')">Концентрация</div>
+        <div class="hero-chip" onclick="openSection('s5')">Давление</div>
+        <div class="hero-chip" onclick="openSection('s6')">Катализатор</div>
+        <div class="hero-chip" onclick="openSection('s7')">Площадь поверхности</div>
+        <div class="hero-chip" onclick="openSection('s8')">Таблица</div>
+    </div>
+</div>
+
+<!-- ══════════ SECTION 1: Определение ══════════ -->
+<div class="section" id="s1">
+    <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-num">1</div>
+        <div class="section-title">Что такое скорость химической реакции</div>
+        <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+        <p class="body"><strong>Скорость гомогенной реакции</strong> — изменение концентрации одного из реагирующих или образующихся веществ в единицу времени.</p>
+
+        <div class="eq-block">
+            <span class="eq-hdr">Формула скорости</span>
+            <span class="eq">V = ±Δc / Δt &nbsp;&nbsp; [моль/(л·с)]</span>
+            <span class="eq-note">«+» — по продукту реакции; «−» — по реагенту</span>
+        </div>
+
+        <div class="box box-info">
+            <div class="box-title">Гомогенные и гетерогенные реакции</div>
+            <ul class="body-list">
+                <li><strong>Гомогенная</strong> — все вещества в одной фазе (р-р + р-р, г + г). Скорость зависит от концентрации и давления.</li>
+                <li><strong>Гетерогенная</strong> — вещества в разных фазах (тв + р-р, тв + г). Скорость дополнительно зависит от площади поверхности контакта.</li>
+            </ul>
+        </div>
+
+        <h2 class="sub-title">6 факторов, влияющих на скорость</h2>
+        <ul class="body-list">
+            <li><strong>Природа реагентов</strong> — тип связей, химическая активность</li>
+            <li><strong>Температура</strong> — правило Вант-Гоффа: каждые +10°С → скорость × γ (2–4)</li>
+            <li><strong>Концентрация</strong> — только для газов и растворов (не твёрдых!)</li>
+            <li><strong>Давление</strong> — только если есть <em>газообразные реагенты</em></li>
+            <li><strong>Катализатор / ингибитор</strong> — снижает или повышает энергию активации</li>
+            <li><strong>Площадь поверхности</strong> — только для гетерогенных реакций</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ══════════ SECTION 2: Природа реагентов ══════════ -->
+<div class="section" id="s2">
+    <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-num">2</div>
+        <div class="section-title">Природа реагирующих веществ</div>
+        <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+        <p class="body">Скорость определяется типом химических связей и <strong>химической активностью</strong> реагентов. Чем активнее реагент — тем быстрее реакция.</p>
+
+        <h2 class="sub-title">Скорость по агрегатному состоянию</h2>
+        <div style="overflow-x:auto">
+        <table class="rate-table">
+            <thead><tr><th>Тип реакции</th><th>Пример</th><th>Скорость</th></tr></thead>
+            <tbody>
+                <tr><td>тв + тв</td><td>Fe(тв) + S(тв) → FeS</td><td class="spd spd-1">Очень медленная</td></tr>
+                <tr><td>тв + г</td><td>3Fe(тв) + 2O₂(г) → Fe₃O₄</td><td class="spd spd-2">Медленная</td></tr>
+                <tr><td>тв + ж</td><td>Fe(тв) + HCl(р-р) → FeCl₂ + H₂</td><td class="spd spd-3">Быстрая</td></tr>
+                <tr><td>ж + ж</td><td>FeCl₂(р-р) + AgNO₃(р-р)</td><td class="spd spd-3">Очень быстрая</td></tr>
+                <tr><td>г + г</td><td>H₂(г) + F₂(г) → 2HF</td><td class="spd spd-4">Взрыв, мгновенная</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <h2 class="sub-title">Химическая активность</h2>
+        <div class="eq-block">
+            <span class="eq-hdr">Примеры</span>
+            <span class="eq">Na + H₂O → быстрее, чем Li + H₂O (Na активнее Li)</span>
+            <span class="eq">Zn + HCl → быстрее, чем Zn + CH₃COOH (HCl сильнее CH₃COOH)</span>
+        </div>
+
+        <div class="box box-warn">
+            <div class="box-title">⚠️ Ловушка ЕГЭ</div>
+            <p>Концентрация применима только к газам и растворам. <strong>Добавление/уменьшение количества твёрдого вещества</strong> не влияет на скорость реакции — только его измельчение (площадь поверхности).</p>
+        </div>
+
+        <!-- ЗАДАНИЯ -->
+        <div class="zad-section">
+            <div class="zad-header">
+                <div class="zad-header-icon">✏️</div>
+                <div>
+                    <div class="zad-header-text">Задание 18 — Природа реагентов</div>
+                    <div class="zad-header-sub">Линия 18 · 1 балл · от 2 до 4 правильных ответов</div>
+                </div>
+            </div>
+            <div class="zad-grid">
+                <div class="zad-card">
+                    <div class="zad-num">№27026</div>
+                    <div class="zad-q">Из предложенного перечня выберите все внешние воздействия, которые приводят к <strong>увеличению скорости</strong> реакции железа с серой.</div>
+                    <ul class="zad-opts">
+                        <li data-n="1">понижение давления в системе</li>
+                        <li data-n="2">понижение температуры</li>
+                        <li data-n="3">добавление сульфида железа(II)</li>
+                        <li data-n="4">увеличение степени измельчения железа</li>
+                        <li data-n="5">повышение температуры</li>
+                    </ul>
+                    <div class="zad-btns">
+                        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    </div>
+                    <div class="zad-hint">Fe и S — оба <strong>твёрдые</strong>. Концентрация и давление не влияют. Добавление FeS (продукта) тоже не влияет. Работают: температура и измельчение.</div>
+                    <div class="zad-input-row">
+                        <input class="zad-input" type="text" maxlength="5" placeholder="" oninput="this.value=this.value.replace(/[^1-5]/g,'')">
+                        <button class="check-btn" onclick="checkZad(this,'45','Повышение температуры (5) и увеличение степени измельчения железа (4) — единственные факторы для реакции тв+тв.')">Проверить</button>
+                    </div>
+                    <div class="zad-feedback"></div>
+                </div>
+                <div class="zad-card">
+                    <div class="zad-num">№27149</div>
+                    <div class="zad-q">Из предложенного перечня выберите все реакции, которые при одинаковых температуре и концентрации кислот протекают с <strong>меньшей скоростью</strong>, чем взаимодействие гранул цинка с соляной кислотой.</div>
+                    <ul class="zad-opts">
+                        <li data-n="1">гранулы магния + соляная кислота</li>
+                        <li data-n="2">гранулы цинка + уксусная кислота</li>
+                        <li data-n="3">порошок магния + серная кислота</li>
+                        <li data-n="4">р-р Ba(OH)₂ + соляная кислота</li>
+                        <li data-n="5">гранулы железа + раствор уксусной кислоты</li>
+                    </ul>
+                    <div class="zad-btns">
+                        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    </div>
+                    <div class="zad-hint">Zn + HCl — эталон. Ускорит: более активный металл (Mg &gt; Zn), меньшая форма (порошок), более сильная кислота. Замедлит: менее активный металл (Fe &lt; Zn), слабая кислота (CH₃COOH &lt; HCl).</div>
+                    <div class="zad-input-row">
+                        <input class="zad-input" type="text" maxlength="5" placeholder="" oninput="this.value=this.value.replace(/[^1-5]/g,\'\')">
+                        <button class="check-btn" onclick="checkZad(this,\'25\',\'Гранулы Zn + уксусная кислота (слабее HCl) и гранулы Fe + уксусная кислота (Fe менее активен, кислота слабее) — оба медленнее эталона.\')">Проверить</button>
+                    </div>
+                    <div class="zad-feedback"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════ SECTION 3: Температура ══════════ -->
+<div class="section" id="s3">
+    <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-num">3</div>
+        <div class="section-title">Температура. Правило Вант-Гоффа</div>
+        <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+        <p class="body"><strong>Правило Вант-Гоффа:</strong> при повышении температуры на каждые 10°С скорость большинства реакций увеличивается в 2–4 раза.</p>
+
+        <div class="vhoff">
+            <div class="vhoff-formula">V₂ = V₁ · γ^((T₂ − T₁)/10)</div>
+            <div class="vhoff-legend">
+                γ — температурный коэффициент (обычно 2–4) &nbsp;·&nbsp;
+                V₁ — скорость при T₁ &nbsp;·&nbsp; V₂ — скорость при T₂
+            </div>
+        </div>
+
+        <h2 class="sub-title">Примеры расчёта</h2>
+        <div class="eq-block">
+            <span class="eq-hdr">Пример 1 — повышение T на 30°С при γ = 2</span>
+            <span class="eq">V₂ = V₁ · 2^(30/10) = V₁ · 2³ = V₁ · 8</span>
+            <span class="eq-note">Скорость выросла в 8 раз</span>
+        </div>
+        <div class="eq-block">
+            <span class="eq-hdr">Пример 2 — найти γ: T₁=25°C, T₂=65°C, скорость выросла в 16 раз</span>
+            <span class="eq">16 = γ^((65−25)/10) = γ⁴ → γ = ⁴√16 = 2</span>
+        </div>
+
+        <div class="box box-warn">
+            <div class="box-title">⚠️ Важно</div>
+            <p>Температура влияет на скорость <strong>любой</strong> реакции — и гомогенной, и гетерогенной. Понижение температуры всегда замедляет реакцию. Катализатор <strong>не</strong> влияет на тепловой эффект реакции.</p>
+        </div>
+
+        <!-- ЗАДАНИЯ -->
+        <div class="zad-section">
+            <div class="zad-header">
+                <div class="zad-header-icon">✏️</div>
+                <div>
+                    <div class="zad-header-text">Задание 18 — Температура</div>
+                    <div class="zad-header-sub">Линия 18 · 1 балл · от 2 до 4 правильных ответов</div>
+                </div>
+            </div>
+            <div class="zad-grid">
+                <div class="zad-card">
+                    <div class="zad-num">№27059</div>
+                    <div class="zad-q">Из предложенного перечня выберите все факторы, которые приводят к <strong>увеличению скорости</strong> химической реакции магния с раствором серной кислоты.</div>
+                    <ul class="zad-opts">
+                        <li data-n="1">повышение температуры</li>
+                        <li data-n="2">понижение давления в системе</li>
+                        <li data-n="3">увеличение давления в системе</li>
+                        <li data-n="4">использование ингибитора</li>
+                        <li data-n="5">увеличение концентрации кислоты</li>
+                    </ul>
+                    <div class="zad-btns">
+                        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    </div>
+                    <div class="zad-hint">Mg(тв) + H₂SO₄(р-р) — тв + р-р. Реагенты не газы → давление не влияет. Ингибитор замедляет. Работают: температура и концентрация кислоты.</div>
+                    <div class="zad-input-row">
+                        <input class="zad-input" type="text" maxlength="5" placeholder="" oninput="this.value=this.value.replace(/[^1-5]/g,\'\')">
+                        <button class="check-btn" onclick="checkZad(this,\'15\',\'Повышение температуры (1) и увеличение концентрации H₂SO₄ (5). Давление не влияет — нет газообразных реагентов.\')">Проверить</button>
+                    </div>
+                    <div class="zad-feedback"></div>
+                </div>
+                <div class="zad-card">
+                    <div class="zad-num">№27095</div>
+                    <div class="zad-q">Из предложенного перечня выберите все факторы, которые приводят к <strong>увеличению скорости</strong> химической реакции между раствором гидроксида калия и цинком.</div>
+                    <ul class="zad-opts">
+                        <li data-n="1">использование индикатора</li>
+                        <li data-n="2">увеличение концентрации щёлочи</li>
+                        <li data-n="3">повышение давления в системе</li>
+                        <li data-n="4">повышение температуры</li>
+                        <li data-n="5">понижение температуры</li>
+                    </ul>
+                    <div class="zad-btns">
+                        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    </div>
+                    <div class="zad-hint">Zn(тв) + KOH(р-р) — тв + р-р. Газов нет → давление не влияет. Индикатор — химически инертный, не влияет. Работают: температура и концентрация щёлочи.</div>
+                    <div class="zad-input-row">
+                        <input class="zad-input" type="text" maxlength="5" placeholder="" oninput="this.value=this.value.replace(/[^1-5]/g,\'\')">
+                        <button class="check-btn" onclick="checkZad(this,\'24\',\'Увеличение концентрации KOH (2) и повышение температуры (4). Понижение температуры (5) замедляет.\')">Проверить</button>
+                    </div>
+                    <div class="zad-feedback"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════ SECTION 4: Концентрация ══════════ -->
+<div class="section" id="s4">
+    <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-num">4</div>
+        <div class="section-title">Концентрация реагирующих веществ</div>
+        <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+        <p class="body">С увеличением концентрации столкновения молекул происходят чаще → скорость реакции растёт.</p>
+
+        <div class="box box-warn">
+            <div class="box-title">⚠️ Главное правило</div>
+            <p>Концентрация применима <strong>только к газам и растворённым веществам</strong>. Изменение количества <strong>твёрдого вещества</strong> не влияет на скорость — его концентрация постоянна.</p>
+        </div>
+
+        <h2 class="sub-title">Разбавление и добавление воды</h2>
+        <p class="body">Добавление воды в раствор = <strong>разбавление = уменьшение концентрации</strong> → скорость уменьшается. Это типичная ловушка в задании 18.</p>
+
+        <div class="eq-block">
+            <span class="eq-hdr">Примеры: что влияет на концентрацию, что нет</span>
+            <span class="eq">CuSO₄(р-р) + Na₂S(р-р): увеличение C(CuSO₄) или C(Na₂S) → V↑</span>
+            <span class="eq">Fe(тв) + S(тв): добавление Fe или S → V не изменится</span>
+            <span class="eq">Zn(тв) + H₂SO₄(р-р): добавление воды → V↓ (разбавление)</span>
+        </div>
+
+        <!-- ЗАДАНИЯ -->
+        <div class="zad-section">
+            <div class="zad-header">
+                <div class="zad-header-icon">✏️</div>
+                <div>
+                    <div class="zad-header-text">Задание 18 — Концентрация</div>
+                    <div class="zad-header-sub">Линия 18 · 1 балл · от 2 до 4 правильных ответов</div>
+                </div>
+            </div>
+            <div class="zad-grid">
+                <div class="zad-card">
+                    <div class="zad-num">№27020</div>
+                    <div class="zad-q">Из предложенного перечня выберите все внешние воздействия, которые приводят к <strong>увеличению скорости</strong> реакции между растворами медного купороса и сульфида натрия.</div>
+                    <ul class="zad-opts">
+                        <li data-n="1">использование ингибитора</li>
+                        <li data-n="2">повышение давления в системе</li>
+                        <li data-n="3">увеличение концентрации сульфида натрия</li>
+                        <li data-n="4">увеличение концентрации сульфата меди(II)</li>
+                        <li data-n="5">понижение температуры</li>
+                    </ul>
+                    <div class="zad-btns">
+                        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    </div>
+                    <div class="zad-hint">CuSO₄(р-р) + Na₂S(р-р) — оба в растворе. Газов нет → давление не влияет. Ингибитор и понижение T замедляют. Концентрация обоих растворов влияет.</div>
+                    <div class="zad-input-row">
+                        <input class="zad-input" type="text" maxlength="5" placeholder="" oninput="this.value=this.value.replace(/[^1-5]/g,\'\')">
+                        <button class="check-btn" onclick="checkZad(this,\'34\',\'Увеличение C(Na₂S) (3) и C(CuSO₄) (4) увеличивают скорость. Оба реагента в растворе — концентрация применима к обоим.\')">Проверить</button>
+                    </div>
+                    <div class="zad-feedback"></div>
+                </div>
+                <div class="zad-card">
+                    <div class="zad-num">№27024</div>
+                    <div class="zad-q">Из предложенного перечня выберите все внешние воздействия, которые приводят к <strong>увеличению скорости</strong> реакции между растворами медного купороса и гидроксида натрия.</div>
+                    <ul class="zad-opts">
+                        <li data-n="1">понижение давления в системе</li>
+                        <li data-n="2">увеличение концентрации щёлочи</li>
+                        <li data-n="3">повышение давления в системе</li>
+                        <li data-n="4">увеличение концентрации купороса</li>
+                        <li data-n="5">понижение температуры</li>
+                    </ul>
+                    <div class="zad-btns">
+                        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    </div>
+                    <div class="zad-hint">CuSO₄(р-р) + NaOH(р-р) — р-р + р-р. Газов нет → давление не влияет ни в какую сторону. Температура понижается → замедление. Влияет только концентрация обоих.</div>
+                    <div class="zad-input-row">
+                        <input class="zad-input" type="text" maxlength="5" placeholder="" oninput="this.value=this.value.replace(/[^1-5]/g,\'\')">
+                        <button class="check-btn" onclick="checkZad(this,\'24\',\'Увеличение C(NaOH) (2) и C(CuSO₄) (4). Давление не влияет — реагенты в растворе, не газы.\')">Проверить</button>
+                    </div>
+                    <div class="zad-feedback"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════ SECTION 5: Давление ══════════ -->
+<div class="section" id="s5">
+    <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-num">5</div>
+        <div class="section-title">Давление</div>
+        <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+        <p class="body">При увеличении давления объём газа уменьшается → концентрация газа растёт → скорость реакции увеличивается.</p>
+
+        <div class="box box-warn">
+            <div class="box-title">⚠️ Ключевое условие</div>
+            <p>Давление влияет на скорость <strong>только тогда, когда в реакции есть газообразные реагенты</strong>. Если реагенты — только твёрдые и/или растворённые вещества, давление не влияет на скорость.</p>
+        </div>
+
+        <h2 class="sub-title">Алгоритм: влияет ли давление?</h2>
+        <div class="eq-block">
+            <span class="eq-hdr">Смотрим на реагенты (левую часть уравнения)</span>
+            <span class="eq">N₂(г) + 3H₂(г) → 2NH₃(г) &nbsp;✓ давление влияет (есть г-реагенты)</span>
+            <span class="eq">C(тв) + O₂(г) → CO₂(г) &nbsp;✓ давление влияет (O₂ — газ-реагент)</span>
+            <span class="eq">Fe(тв) + S(тв) → FeS &nbsp;✗ давление не влияет (нет газов)</span>
+            <span class="eq">CuSO₄(р-р) + Fe(тв) → Cu + FeSO₄ &nbsp;✗ нет газообразных реагентов</span>
+            <span class="eq-note">Газообразные ПРОДУКТЫ (↑) без газообразных реагентов — давление не влияет на скорость!</span>
+        </div>
+
+        <!-- ЗАДАНИЯ -->
+        <div class="zad-section">
+            <div class="zad-header">
+                <div class="zad-header-icon">✏️</div>
+                <div>
+                    <div class="zad-header-text">Задание 18 — Давление</div>
+                    <div class="zad-header-sub">Линия 18 · 1 балл · от 2 до 4 правильных ответов</div>
+                </div>
+            </div>
+            <div class="zad-grid">
+                <div class="zad-card">
+                    <div class="zad-num">№27018</div>
+                    <div class="zad-q">Из предложенного перечня выберите все внешние воздействия, которые приводят к <strong>увеличению скорости</strong> реакции азота с водородом.</div>
+                    <ul class="zad-opts">
+                        <li data-n="1">понижение температуры</li>
+                        <li data-n="2">повышение давления в системе</li>
+                        <li data-n="3">уменьшение концентрации водорода</li>
+                        <li data-n="4">увеличение концентрации азота</li>
+                        <li data-n="5">использование ингибитора</li>
+                    </ul>
+                    <div class="zad-btns">
+                        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    </div>
+                    <div class="zad-hint">N₂(г) + H₂(г) — оба газы. Давление и концентрация газов влияют. Уменьшение C(H₂) уменьшает скорость. Понижение T и ингибитор замедляют.</div>
+                    <div class="zad-input-row">
+                        <input class="zad-input" type="text" maxlength="5" placeholder="" oninput="this.value=this.value.replace(/[^1-5]/g,\'\')">
+                        <button class="check-btn" onclick="checkZad(this,\'24\',\'Повышение давления (2) — увеличивает C газов, и увеличение C(N₂) (4). Уменьшение C(H₂) (3) наоборот замедляет.\')">Проверить</button>
+                    </div>
+                    <div class="zad-feedback"></div>
+                </div>
+                <div class="zad-card">
+                    <div class="zad-num">№27041</div>
+                    <div class="zad-q">Из предложенного перечня выберите все внешние воздействия, которые приводят к <strong>увеличению скорости</strong> реакции: C(тв) + O₂(г) ⇌ CO₂(г)</div>
+                    <ul class="zad-opts">
+                        <li data-n="1">повышение давления в системе</li>
+                        <li data-n="2">понижение температуры</li>
+                        <li data-n="3">понижение давления в системе</li>
+                        <li data-n="4">измельчение углерода</li>
+                        <li data-n="5">уменьшение концентрации кислорода</li>
+                    </ul>
+                    <div class="zad-btns">
+                        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    </div>
+                    <div class="zad-hint">C(тв) + O₂(г) — гетерогенная реакция. O₂ — газ-реагент → давление влияет. C — твёрдый → измельчение увеличивает площадь. Понижение T и уменьшение C(O₂) замедляют.</div>
+                    <div class="zad-input-row">
+                        <input class="zad-input" type="text" maxlength="5" placeholder="" oninput="this.value=this.value.replace(/[^1-5]/g,\'\')">
+                        <button class="check-btn" onclick="checkZad(this,\'14\',\'Повышение давления (1) — увеличивает C(O₂), и измельчение углерода (4) — увеличивает площадь поверхности.\')">Проверить</button>
+                    </div>
+                    <div class="zad-feedback"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════ SECTION 6: Катализатор / ингибитор ══════════ -->
+<div class="section" id="s6">
+    <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-num">6</div>
+        <div class="section-title">Катализатор и ингибитор</div>
+        <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+        <p class="body"><strong>Катализатор</strong> — вещество, ускоряющее реакцию, но не расходующееся в ней. Снижает энергию активации, открывая «более лёгкий путь» для реакции.</p>
+        <p class="body"><strong>Ингибитор</strong> — замедляет реакцию. Применяется для защиты металлов от коррозии.</p>
+
+        <h2 class="sub-title">Каталитические реакции — запомнить!</h2>
+        <div class="cat-grid">
+            <div class="cat-card">
+                <div class="cat-eq">2SO₂ + O₂ → 2SO₃</div>
+                <span class="cat-badge">V₂O₅</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-eq">2KClO₃ → 2KCl + 3O₂</div>
+                <span class="cat-badge">MnO₂</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-eq">N₂ + 3H₂ → 2NH₃</div>
+                <span class="cat-badge">Fe</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-eq">4NH₃ + 5O₂ → 4NO + 6H₂O</div>
+                <span class="cat-badge">Pt</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-eq">2H₂O₂ → 2H₂O + O₂</div>
+                <span class="cat-badge">MnO₂</span>
+            </div>
+            <div class="cat-card">
+                <div class="cat-eq">CO + 2H₂ → CH₃OH</div>
+                <span class="cat-badge">ZnO, Cr₂O₃</span>
+            </div>
+        </div>
+
+        <div class="box box-warn">
+            <div class="box-title">⚠️ Важно</div>
+            <ul class="body-list">
+                <li>Катализатор подбирается <strong>индивидуально</strong> для каждой реакции.</li>
+                <li>Катализатор <strong>не смещает</strong> химическое равновесие, только ускоряет его достижение.</li>
+                <li>Ингибитор — в задании всегда уменьшает скорость, если вопрос про «что уменьшит».</li>
+            </ul>
+        </div>
+
+        <!-- ЗАДАНИЯ -->
+        <div class="zad-section">
+            <div class="zad-header">
+                <div class="zad-header-icon">✏️</div>
+                <div>
+                    <div class="zad-header-text">Задание 18 — Катализатор / ингибитор</div>
+                    <div class="zad-header-sub">Линия 18 · 1 балл · от 2 до 4 правильных ответов</div>
+                </div>
+            </div>
+            <div class="zad-grid">
+                <div class="zad-card">
+                    <div class="zad-num">№45258</div>
+                    <div class="zad-q">Из предложенного перечня выберите все внешние воздействия, которые оказывают влияние на <strong>скорость реакции</strong> оксида углерода(II) с водородом.</div>
+                    <ul class="zad-opts">
+                        <li data-n="1">понижение давления</li>
+                        <li data-n="2">понижение температуры</li>
+                        <li data-n="3">увеличение концентрации воды</li>
+                        <li data-n="4">увеличение концентрации H₂</li>
+                        <li data-n="5">использование катализатора</li>
+                    </ul>
+                    <div class="zad-btns">
+                        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    </div>
+                    <div class="zad-hint">CO(г) + H₂(г) — оба газы. Давление, концентрация, температура и катализатор — все влияют. Вопрос «влияет» (в любую сторону). H₂O — продукт, его концентрация не влияет на скорость прямой реакции.</div>
+                    <div class="zad-input-row">
+                        <input class="zad-input" type="text" maxlength="5" placeholder="" oninput="this.value=this.value.replace(/[^1-5]/g,\'\')">
+                        <button class="check-btn" onclick="checkZad(this,\'1245\',\'Понижение давления (1) уменьшает, понижение T (2) уменьшает, C(H₂) (4) увеличивает, катализатор (5) увеличивает. Все четыре ВЛИЯЮТ. Вода (3) — продукт, не реагент.\')">Проверить</button>
+                    </div>
+                    <div class="zad-feedback"></div>
+                </div>
+                <div class="zad-card">
+                    <div class="zad-num">№27055</div>
+                    <div class="zad-q">Из предложенного перечня выберите все факторы, которые приводят к <strong>уменьшению скорости</strong> химической реакции хлора с водородом.</div>
+                    <ul class="zad-opts">
+                        <li data-n="1">повышение давления в системе</li>
+                        <li data-n="2">увеличение концентрации водорода</li>
+                        <li data-n="3">использование катализатора</li>
+                        <li data-n="4">уменьшение концентрации хлора</li>
+                        <li data-n="5">понижение температуры</li>
+                    </ul>
+                    <div class="zad-btns">
+                        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    </div>
+                    <div class="zad-hint">Cl₂(г) + H₂(г) — г+г. Что замедляет? Уменьшение концентрации реагента и понижение температуры. Катализатор — ускоряет, не замедляет.</div>
+                    <div class="zad-input-row">
+                        <input class="zad-input" type="text" maxlength="5" placeholder="" oninput="this.value=this.value.replace(/[^1-5]/g,\'\')">
+                        <button class="check-btn" onclick="checkZad(this,\'45\',\'Уменьшение C(Cl₂) (4) уменьшает число столкновений. Понижение температуры (5) снижает энергию частиц. Катализатор (3) — ускоряет.\')">Проверить</button>
+                    </div>
+                    <div class="zad-feedback"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════ SECTION 7: Площадь поверхности ══════════ -->
+<div class="section" id="s7">
+    <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-num">7</div>
+        <div class="section-title">Площадь поверхности соприкосновения</div>
+        <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+        <p class="body">Скорость гетерогенных реакций зависит от площади раздела фаз. Чем больше площадь — тем больше число столкновений между реагентами.</p>
+
+        <div class="box box-warn">
+            <div class="box-title">⚠️ Ключевое условие</div>
+            <p>Площадь поверхности влияет <strong>только если в реакции участвует твёрдое вещество</strong> (гетерогенная реакция). Для реакций г+г или р-р+р-р этот фактор не применим.</p>
+        </div>
+
+        <h2 class="sub-title">Ряд форм металла по площади поверхности</h2>
+        <div class="eq-block">
+            <span class="eq-hdr">По возрастанию площади (= увеличению скорости)</span>
+            <span class="eq">слиток &lt; гранулы &lt; стружка &lt; порошок</span>
+            <span class="eq-note">Измельчение = увеличение площади поверхности = ускорение реакции</span>
+        </div>
+
+        <div class="eq-block">
+            <span class="eq-hdr">Когда площадь НЕ влияет (оба реагента — газы или растворы)</span>
+            <span class="eq">H₂(г) + Cl₂(г) → 2HCl(г) &nbsp;— г+г, площадь не применима</span>
+            <span class="eq">C₂H₄(г) + HCl(г) → C₂H₅Cl(г) &nbsp;— г+г, площадь не применима</span>
+            <span class="eq">CuSO₄(р-р) + NaOH(р-р) → &nbsp;— р-р+р-р, площадь не применима</span>
+        </div>
+
+        <!-- ЗАДАНИЯ -->
+        <div class="zad-section">
+            <div class="zad-header">
+                <div class="zad-header-icon">✏️</div>
+                <div>
+                    <div class="zad-header-text">Задание 18 — Площадь поверхности</div>
+                    <div class="zad-header-sub">Линия 18 · 1 балл · от 2 до 4 правильных ответов</div>
+                </div>
+            </div>
+            <div class="zad-grid">
+                <div class="zad-card">
+                    <div class="zad-num">№27033</div>
+                    <div class="zad-q">Из предложенного перечня выберите все внешние воздействия, которые приводят к <strong>увеличению скорости</strong> реакции железа с раствором серной кислоты.</div>
+                    <ul class="zad-opts">
+                        <li data-n="1">понижение температуры</li>
+                        <li data-n="2">увеличение концентрации кислоты</li>
+                        <li data-n="3">использование ингибитора</li>
+                        <li data-n="4">увеличение степени измельчения железа</li>
+                        <li data-n="5">повышение давления в системе</li>
+                    </ul>
+                    <div class="zad-btns">
+                        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    </div>
+                    <div class="zad-hint">Fe(тв) + H₂SO₄(р-р) — гетерогенная реакция. Fe — тв → измельчение влияет. H₂SO₄ — р-р → концентрация влияет. Газов нет → давление не влияет. Ингибитор и понижение T замедляют.</div>
+                    <div class="zad-input-row">
+                        <input class="zad-input" type="text" maxlength="5" placeholder="" oninput="this.value=this.value.replace(/[^1-5]/g,\'\')">
+                        <button class="check-btn" onclick="checkZad(this,\'24\',\'Увеличение C(H₂SO₄) (2) и измельчение Fe (4). Давление (5) не влияет — нет газообразных реагентов.\')">Проверить</button>
+                    </div>
+                    <div class="zad-feedback"></div>
+                </div>
+                <div class="zad-card">
+                    <div class="zad-num">№45054</div>
+                    <div class="zad-q">Из предложенного перечня выберите все пары веществ, скорость реакции между которыми <strong>не зависит</strong> от величины площади поверхности соприкосновения реагентов.</div>
+                    <ul class="zad-opts">
+                        <li data-n="1">сера и железо</li>
+                        <li data-n="2">кремний и кислород</li>
+                        <li data-n="3">водород и кислород</li>
+                        <li data-n="4">цинк и соляная кислота</li>
+                        <li data-n="5">этилен и хлороводород</li>
+                    </ul>
+                    <div class="zad-btns">
+                        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+                    </div>
+                    <div class="zad-hint">Площадь не влияет только когда НЕТ твёрдых реагентов. 1) S(тв)+Fe(тв) — тв, влияет. 2) Si(тв)+O₂(г) — тв, влияет. 3) H₂(г)+O₂(г) — оба газы, НЕ влияет. 4) Zn(тв)+HCl(р-р) — тв, влияет. 5) C₂H₄(г)+HCl(г) — газы, НЕ влияет.</div>
+                    <div class="zad-input-row">
+                        <input class="zad-input" type="text" maxlength="5" placeholder="" oninput="this.value=this.value.replace(/[^1-5]/g,\'\')">
+                        <button class="check-btn" onclick="checkZad(this,\'35\',\'H₂(г)+O₂(г) и C₂H₄(г)+HCl(г) — обе реакции без твёрдых реагентов, площадь поверхности не применима.\')">Проверить</button>
+                    </div>
+                    <div class="zad-feedback"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════ SECTION 8: Итоговая таблица ══════════ -->
+<div class="section" id="s8">
+    <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-num">8</div>
+        <div class="section-title">Итоговая таблица — все факторы</div>
+        <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+        <div style="overflow-x:auto">
+        <table class="sum-table">
+            <thead>
+                <tr>
+                    <th>Фактор</th>
+                    <th>Условие применения</th>
+                    <th>↑ увеличивает V</th>
+                    <th>↓ уменьшает V</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Температура</strong></td>
+                    <td>Любая реакция</td>
+                    <td class="arrow-up">T↑ (каждые +10°С → ×γ)</td>
+                    <td class="arrow-dn">T↓</td>
+                </tr>
+                <tr>
+                    <td><strong>Концентрация</strong></td>
+                    <td>Только газы и р-ры (не тв!)</td>
+                    <td class="arrow-up">C↑ реагентов</td>
+                    <td class="arrow-dn">C↓ реагентов, разбавление водой</td>
+                </tr>
+                <tr>
+                    <td><strong>Давление</strong></td>
+                    <td>Есть газообразные реагенты</td>
+                    <td class="arrow-up">P↑</td>
+                    <td class="arrow-dn">P↓</td>
+                </tr>
+                <tr>
+                    <td><strong>Катализатор</strong></td>
+                    <td>Специфичен для каждой реакции</td>
+                    <td class="arrow-up">Добавление катализатора</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><strong>Ингибитор</strong></td>
+                    <td>Любая реакция</td>
+                    <td>—</td>
+                    <td class="arrow-dn">Добавление ингибитора</td>
+                </tr>
+                <tr>
+                    <td><strong>Площадь поверхности</strong></td>
+                    <td>Есть твёрдый реагент (гетерогенная)</td>
+                    <td class="arrow-up">Измельчение (порошок &gt; гранулы)</td>
+                    <td class="arrow-dn">Укрупнение (слитки)</td>
+                </tr>
+                <tr>
+                    <td><strong>Природа реагентов</strong></td>
+                    <td>Сравнение разных реакций</td>
+                    <td class="arrow-up">Более активный металл / более сильная кислота</td>
+                    <td class="arrow-dn">Менее активный / более слабая кислота</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════ SECTION 9: Практика ══════════ -->
+<div class="section" id="s9">
+    <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-num">9</div>
+        <div class="section-title">Прорешать все 55 заданий онлайн</div>
+        <div class="acc-arrow">▼</div>
+    </div>
+    <div class="acc-body">
+        <p class="body">Все 55 заданий линии 18 по теме «Скорость химической реакции» — с автопроверкой и статистикой.</p>
+        <a href="https://neofamily.ru/himiya/variants/my/836178?uuid=9fed2993-2978-45c6-8bf1-8cddff1f8db6"
+           target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:10px;margin-top:10px;
+                  background:linear-gradient(135deg,var(--p800),var(--p500));
+                  color:#fff;text-decoration:none;font-weight:700;font-size:15px;
+                  padding:14px 24px;border-radius:var(--r);transition:opacity .15s"
+           onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+            <span style="font-size:20px">📝</span>
+            Перейти к 55 заданиям на Neofamily
+            <span style="font-size:13px;opacity:.75">↗</span>
+        </a>
+    </div>
+</div>
+
+</div><!-- /.shell -->
+
+<!-- ══════════ FLASHCARDS ══════════ -->
+<div class="shell" style="padding-top:0">
+<div class="fc-section" id="fc">
+    <div class="fc-title">🎴 Флэш-карточки — Скорость реакции</div>
+    <div class="fc-subtitle">Нажми на карточку, чтобы перевернуть</div>
+    <div class="fc-stats">
+        <span>Знаю: <b id="fc-know">0</b></span>
+        <span>|</span>
+        <span>Не знаю: <b id="fc-dk">0</b></span>
+        <span>|</span>
+        <span>Осталось: <b id="fc-left">25</b></span>
+    </div>
+    <div class="fc-counter" id="fc-counter">Карточка 1 из 25</div>
+    <div class="flip-card" onclick="fcFlip()">
+        <div class="fc-inner" id="fc-inner">
+            <div class="fc-front">
+                <div class="fc-tag" id="fc-tag">ВОПРОС</div>
+                <div class="fc-front-text" id="fc-front-text"></div>
+                <div class="fc-hint">Нажми, чтобы увидеть ответ</div>
+            </div>
+            <div class="fc-back">
+                <div class="fc-back-tag" id="fc-back-tag">ОТВЕТ</div>
+                <div class="fc-back-text" id="fc-back-text"></div>
+            </div>
+        </div>
+    </div>
+    <button class="fc-flip-btn" onclick="fcFlip()">🔄 Перевернуть</button>
+    <div class="fc-btn-row" id="fc-btn-row" style="display:flex">
+        <button class="fc-btn-know" onclick="fcAnswer(true)">✓ Знаю</button>
+        <button class="fc-btn-dk" onclick="fcAnswer(false)">✗ Не знаю</button>
+    </div>
+    <div class="fc-keys">← Не знаю &nbsp;·&nbsp; → Знаю &nbsp;·&nbsp; Пробел — перевернуть</div>
+    <div class="fc-result" id="fc-result">
+        <div class="fc-result-title">Раунд завершён! 🎉</div>
+        <div class="fc-result-stats">Знаю: <b id="res-know">0</b> &nbsp;·&nbsp; Не знаю: <b id="res-dk">0</b></div>
+        <div class="fc-restart-row">
+            <button class="fc-restart-btn primary" onclick="fcRestart(false)">Сначала (все)</button>
+            <button class="fc-restart-btn" onclick="fcRestart(true)">Только ошибки</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+/* ── Progress bar ── */
+window.addEventListener('scroll',()=>{
+    const s=document.documentElement;
+    document.getElementById('pf').style.width=
+        (s.scrollTop/(s.scrollHeight-s.clientHeight)*100)+'%'});
+
+/* ── Accordion ── */
+function toggleSection(hdr){
+    const body=hdr.nextElementSibling;
+    const isOpen=body.classList.contains('open');
+    body.classList.toggle('open',!isOpen);
+    hdr.classList.toggle('open',!isOpen);
+}
+function openSection(id){
+    const sec=document.getElementById(id);
+    if(!sec)return;
+    sec.scrollIntoView({behavior:'smooth',block:'start'});
+    const hdr=sec.querySelector('.section-header');
+    const body=sec.querySelector('.acc-body');
+    if(!body.classList.contains('open')){body.classList.add('open');hdr.classList.add('open')}
+}
+
+/* ── Задания ── */
+function toggleZad(btn,type){
+    const card=btn.closest('.zad-card');
+    const el=card.querySelector('.zad-'+type);
+    const isOpen=el.classList.toggle('open');
+    btn.textContent=isOpen?'💡 Скрыть':'💡 Подсказка';
+}
+function checkZad(btn,correct,explanation){
+    const card=btn.closest('.zad-card');
+    const input=card.querySelector('.zad-input');
+    const fb=card.querySelector('.zad-feedback');
+    const raw=input.value.trim();
+    const userDigits=[...new Set(raw.split('').filter(c=>/[1-5]/.test(c)))].sort().join('');
+    const correctDigits=[...new Set(correct.split(''))].sort().join('');
+    fb.classList.remove('correct','wrong');
+    if(userDigits===correctDigits){
+        fb.className='zad-feedback correct';
+        fb.innerHTML='<span style="font-weight:800;font-size:15px">✓ Правильно!</span> Ответ: <b style="font-family:var(--mono)">' + correct + '</b><br>' + explanation;
+    }else{
+        fb.className='zad-feedback wrong';
+        fb.innerHTML='<span style="font-weight:800;font-size:15px">✗ Неверно.</span> Твой ответ: <b style="font-family:var(--mono)">' + (userDigits||'—') + '</b> · Правильно: <b style="font-family:var(--mono)">' + correct + '</b><br>' + explanation;
+    }
+}
+
+/* ── Flashcards ── */
+const FC_CARDS=[
+    // Основы
+    {tag:'Основы',q:'Что такое скорость гомогенной реакции?',a:'Изменение концентрации одного из реагирующих или образующихся веществ в единицу времени.\nV = ±Δc / Δt [моль/(л·с)]'},
+    {tag:'Основы',q:'Перечислите 6 факторов скорости реакции',a:'1. Природа реагентов\n2. Температура\n3. Концентрация (только газы и р-ры)\n4. Давление (только если есть газ-реагент)\n5. Катализатор / ингибитор\n6. Площадь поверхности (только гетерогенные)'},
+    {tag:'Основы',q:'Чем гетерогенная реакция отличается от гомогенной?',a:'Гомогенная — все вещества в одной фазе (г+г, р-р+р-р).\nГетерогенная — вещества в разных фазах (тв+г, тв+р-р).\nДля гетерогенных дополнительно важна площадь поверхности.'},
+    {tag:'Основы',q:'Что такое энергия активации Eₐ?',a:'Минимальная энергия, которой должна обладать частица (молекула, ион, атом), чтобы произошла реакция.\nКатализатор снижает Eₐ → реакция идёт быстрее.'},
+    {tag:'Основы',q:'Добавление твёрдого вещества влияет на скорость реакции?',a:'НЕТ. Концентрация твёрдого вещества постоянна.\nВлияет только измельчение (площадь поверхности).\nПример: добавить кусок Fe в реакцию Fe+S → скорость не изменится.'},
+    // Природа реагентов
+    {tag:'Природа',q:'Расположи по возрастанию скорости: г+г, тв+тв, ж+ж, тв+г, тв+ж',a:'тв+тв < тв+г < тв+ж < ж+ж < г+г\n(от очень медленной до мгновенной/взрыв)'},
+    {tag:'Природа',q:'Почему Zn+HCl быстрее, чем Zn+CH₃COOH?',a:'HCl — сильная кислота (высокая степень диссоциации, много H⁺).\nCH₃COOH — слабая кислота (мало H⁺).\nЧем активнее кислота — тем больше ионов H⁺ — тем быстрее реакция.'},
+    {tag:'Природа',q:'Почему Na+H₂O быстрее, чем Li+H₂O?',a:'Na — более активный металл, чем Li (Na стоит ниже Li в ряду активности металлов).\nЧем активнее металл — тем быстрее реакция с водой.'},
+    {tag:'Природа',q:'Какие реакции протекают практически мгновенно?',a:'Реакции ионного обмена в растворах электролитов (ж+ж).\nПример: AgNO₃(р-р) + NaCl(р-р) → AgCl↓ + NaNO₃ — мгновенно.\nТакже: взаимодействие г+г при высокой активности (H₂+F₂ → взрыв).'},
+    // Температура
+    {tag:'Температура',q:'Сформулируй правило Вант-Гоффа',a:'При повышении температуры на каждые 10°С скорость большинства химических реакций увеличивается в 2–4 раза (коэффициент γ).'},
+    {tag:'Температура',q:'Формула правила Вант-Гоффа',a:'V₂ = V₁ · γ^((T₂ − T₁)/10)\nγ — температурный коэффициент (2–4)\nT₁, T₂ — начальная и конечная температура (°C)'},
+    {tag:'Температура',q:'γ = 2, температура выросла с 20°C до 60°C. Во сколько раз выросла скорость?',a:'V₂/V₁ = 2^((60−20)/10) = 2^4 = 16\nСкорость выросла в 16 раз.'},
+    {tag:'Температура',q:'Скорость выросла в 8 раз при повышении T с 10°C до 40°C. Найди γ.',a:'8 = γ^((40−10)/10) = γ³\nγ = ³√8 = 2'},
+    {tag:'Температура',q:'Температура влияет на скорость любой реакции или только гомогенной?',a:'На скорость ЛЮБОЙ реакции — и гомогенной, и гетерогенной.\nВ отличие от давления и концентрации, температура универсальный фактор.'},
+    // Концентрация
+    {tag:'Концентрация',q:'Для каких веществ применимо понятие концентрации в контексте скорости реакции?',a:'Только для ГАЗОВ и РАСТВОРЁННЫХ веществ.\nТвёрдые вещества — концентрация постоянна, не влияет на скорость.\nДобавление воды = разбавление = уменьшение концентрации = замедление.'},
+    {tag:'Концентрация',q:'Как изменится скорость Fe+S, если добавить ещё FeS (продукт)?',a:'Не изменится.\nFeS — твёрдое вещество (продукт), его добавление не меняет концентрацию реагентов. Скорость зависит от T, измельчения Fe и S.'},
+    {tag:'Концентрация',q:'Реакция: CuSO₄(р-р)+Na₂S(р-р). Добавили воду. Что произошло со скоростью?',a:'Скорость УМЕНЬШИЛАСЬ.\nДобавление воды = разбавление раствора = уменьшение концентрации CuSO₄ и Na₂S → скорость падает.'},
+    // Давление
+    {tag:'Давление',q:'При каком условии давление влияет на скорость реакции?',a:'Только если в реакции есть ГАЗООБРАЗНЫЕ РЕАГЕНТЫ.\nПример: N₂(г)+3H₂(г) — давление влияет.\nFe(тв)+S(тв) — давление НЕ влияет.\nCaCO₃(тв)+HCl(р-р) — давление НЕ влияет.'},
+    {tag:'Давление',q:'Реакция C(тв)+O₂(г)→CO₂(г). Повысили давление. Что с скоростью?',a:'Скорость УВЕЛИЧИТСЯ.\nO₂ — газообразный реагент. Повышение давления → уменьшение объёма → рост концентрации O₂ → рост скорости.'},
+    {tag:'Давление',q:'Реакция Zn(тв)+H₂SO₄(р-р)→ZnSO₄+H₂↑. Влияет ли давление на скорость?',a:'НЕТ.\nРеагенты — Zn(тв) и H₂SO₄(р-р). Ни один не является газом.\nH₂ — продукт (газ-стрелочка ↑), но его концентрация не влияет на скорость прямой реакции.'},
+    // Катализатор
+    {tag:'Катализатор',q:'Катализатор реакции 2SO₂+O₂→2SO₃?',a:'V₂O₅ (оксид ванадия(V))\nИспользуется в промышленном производстве серной кислоты (контактный способ).'},
+    {tag:'Катализатор',q:'Катализатор синтеза аммиака N₂+3H₂⇌2NH₃?',a:'Fe (железо)\nПроцесс Габера-Боша. Катализатор — губчатое железо с добавками Al₂O₃ и K₂O.'},
+    {tag:'Катализатор',q:'Катализаторы реакций: 2KClO₃→2KCl+3O₂ и 2H₂O₂→2H₂O+O₂',a:'Обе реакции: MnO₂ (диоксид марганца)\nТакже для H₂O₂: ферменты (каталаза в живых организмах).'},
+    // Площадь поверхности
+    {tag:'Поверхность',q:'Для каких реакций площадь поверхности влияет на скорость?',a:'Только для ГЕТЕРОГЕННЫХ реакций — когда есть ТВЁРДЫЙ реагент.\nПримеры: Fe(тв)+HCl(р-р), C(тв)+O₂(г), Zn(тв)+CuSO₄(р-р).\nДля г+г или р-р+р-р — площадь поверхности не влияет.'},
+    {tag:'Поверхность',q:'Ряд: слиток, порошок, гранулы, стружка. Расположи по возрастанию скорости реакции.',a:'слиток < гранулы ≈ стружка < порошок\nПорошок имеет наибольшую площадь поверхности → наибольшую скорость реакции с растворами и газами.'},
+];
+
+let fcDeck=[...Array(FC_CARDS.length).keys()],fcPos=0,fcFlipped=false,
+    fcKnow=0,fcDk=0,fcDontKnowList=[];
+
+function fcRender(){
+    const idx=fcDeck[fcPos];
+    const card=FC_CARDS[idx];
+    document.getElementById('fc-front-text').textContent=card.q;
+    document.getElementById('fc-back-text').textContent='';
+    const tagEl=document.getElementById('fc-tag');
+    tagEl.textContent=card.tag||'ВОПРОС';
+    tagEl.className='fc-tag tag-'+(card.tag||'');
+    document.getElementById('fc-back-tag').textContent='ОТВЕТ';
+    document.getElementById('fc-counter').textContent=`Карточка ${fcPos+1} из ${fcDeck.length}`;
+    document.getElementById('fc-know').textContent=fcKnow;
+    document.getElementById('fc-dk').textContent=fcDk;
+    document.getElementById('fc-left').textContent=fcDeck.length-fcPos;
+    const inner=document.getElementById('fc-inner');
+    inner.classList.remove('flipped');
+    fcFlipped=false;
+    document.getElementById('fc-btn-row').style.display='none';
+}
+function fcFlip(){
+    const inner=document.getElementById('fc-inner');
+    fcFlipped=!fcFlipped;
+    inner.classList.toggle('flipped',fcFlipped);
+    if(fcFlipped){
+        const idx=fcDeck[fcPos];
+        document.getElementById('fc-back-text').textContent=FC_CARDS[idx].a;
+        document.getElementById('fc-btn-row').style.display='flex';
+    }else{
+        document.getElementById('fc-btn-row').style.display='none';
+    }
+}
+function fcAnswer(know){
+    if(know){fcKnow++}else{fcDk++;fcDontKnowList.push(fcDeck[fcPos])}
+    fcPos++;
+    if(fcPos>=fcDeck.length){
+        document.getElementById('res-know').textContent=fcKnow;
+        document.getElementById('res-dk').textContent=fcDk;
+        document.getElementById('fc-inner').parentElement.style.display='none';
+        document.querySelector('.fc-flip-btn').style.display='none';
+        document.getElementById('fc-btn-row').style.display='none';
+        document.querySelector('.fc-keys').style.display='none';
+        document.getElementById('fc-counter').style.display='none';
+        document.querySelector('.fc-stats').style.display='none';
+        document.getElementById('fc-result').style.display='block';
+    }else{fcRender()}
+}
+function fcRestart(onlyWrong){
+    fcKnow=0;fcDk=0;
+    fcDeck=onlyWrong&&fcDontKnowList.length?[...fcDontKnowList]:[...Array(FC_CARDS.length).keys()];
+    fcDontKnowList=[];fcPos=0;
+    document.getElementById('fc-inner').parentElement.style.display='';
+    document.querySelector('.fc-flip-btn').style.display='';
+    document.querySelector('.fc-keys').style.display='';
+    document.getElementById('fc-counter').style.display='';
+    document.querySelector('.fc-stats').style.display='';
+    document.getElementById('fc-result').style.display='none';
+    fcRender();
+}
+document.addEventListener('keydown',e=>{
+    if(!document.getElementById('fc').getBoundingClientRect().height)return;
+    if(e.code==='Space'){e.preventDefault();fcFlip()}
+    if(fcFlipped){
+        if(e.code==='ArrowRight'){fcAnswer(true)}
+        if(e.code==='ArrowLeft'){fcAnswer(false)}
+    }
+});
+fcRender();
+</script>
+</body>
+</html>
