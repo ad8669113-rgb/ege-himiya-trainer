@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Электролиз — ЕГЭ Химия</title>
+<style>
+:root{
+  --bg:#F0F9FF;--surface:#fff;--border:#BAE6FD;--accent:#0284C7;
+  --text:#0C1A2E;--muted:#475569;--r:10px;--r-sm:7px;--r-lg:18px;
+  --font:'Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono','Courier New',monospace;
+  --shadow:0 1px 3px rgba(0,40,80,.07),0 4px 16px rgba(0,40,80,.07);
+  --cath:#1D4ED8;--cath-t:#DBEAFE;--cath-d:#1E3A8A;
+  --an:#B91C1C;--an-t:#FEE2E2;--an-d:#7F1D1D;
+  --pur:#7C3AED;--pur-t:#EDE9FE;--pur-d:#4C1D95;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{padding-bottom:60px;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:#BAE6FD;z-index:999}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,#0284C7,#38BDF8);width:0;transition:width .1s}
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0B1E35 0%,#0F2640 60%,#1E3A5F 100%);padding:52px 36px 40px;margin:0 -24px 0;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.14) 0%,transparent 70%);pointer-events:none}
+.hero-eye{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:#38BDF8;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-size:clamp(26px,5vw,42px);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:#fff;margin-bottom:14px;position:relative;z-index:1}
+.hero h1 em{color:#38BDF8;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.62);line-height:1.75;max-width:560px;margin-bottom:26px;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.hc{background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.28);color:rgba(255,255,255,.88);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+.hc.bl{background:rgba(29,78,216,.25);border-color:rgba(99,132,255,.4);color:#BFDBFE}
+.hc.rd{background:rgba(185,28,28,.25);border-color:rgba(248,113,113,.4);color:#FCA5A5}
+.hc.gr{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.25);color:#86EFAC}
+.hero-bar{background:#0F2640;padding:12px 36px;margin:0 -24px 48px;border-top:1px solid rgba(56,189,248,.1);display:flex;gap:24px;flex-wrap:wrap}
+.hb-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5)}
+.hb-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* SECTIONS */
+.section{margin-bottom:40px}
+.sec-hdr{display:flex;align-items:center;gap:14px;margin-bottom:0;padding:14px 18px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;user-select:none;transition:background .15s;box-shadow:var(--shadow)}
+.sec-hdr:hover{background:#E0F2FE}
+.sec-hdr::after{content:"▲";font-size:13px;color:var(--accent);margin-left:auto;transition:transform .25s}
+.sec-hdr.collapsed::after{transform:rotate(180deg)}
+.acc-body{overflow:hidden;transition:max-height .35s ease,opacity .25s;max-height:9999px;opacity:1;background:var(--surface);border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--r) var(--r);padding:20px 22px}
+.acc-body.collapsed{max-height:0!important;opacity:0;padding:0 22px}
+.sec-num{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,#0B1E35,#0284C7);color:#fff;font-family:var(--mono);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(2,132,199,.35)}
+.sec-title{font-size:clamp(16px,2.5vw,20px);font-weight:700;color:#0B1E35;line-height:1.2}
+
+/* TEXT */
+h2.sub{font-size:16px;font-weight:700;color:var(--accent);margin:22px 0 10px;display:flex;align-items:center;gap:8px}
+h2.sub::before{content:'';width:4px;height:18px;background:#38BDF8;border-radius:2px;flex-shrink:0}
+p.body{font-size:14.5px;line-height:1.75;color:#293237;margin-bottom:12px}
+
+/* BOXES */
+.box{border-radius:var(--r-sm);padding:12px 16px;margin:12px 0;font-size:14px;line-height:1.7}
+.bi{background:#E0F2FE;border-left:4px solid #0284C7;color:#0C4A6E}
+.bw{background:#FFF8E1;border-left:4px solid #F59E0B;color:#78350F}
+.bd{background:#FEE2E2;border-left:4px solid #DC2626;color:#7F1D1D}
+.bs{background:#D1FAE5;border-left:4px solid #059669;color:#064E3B}
+.box ul{padding-left:18px;margin:6px 0}
+.box li{margin:3px 0;font-size:13.5px}
+
+/* EQ */
+.eq-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 16px;margin:8px 0;box-shadow:var(--shadow)}
+.eq{font-family:var(--mono);font-size:13.5px;color:#0C1A2E;line-height:2;display:block}
+.eq-hdr{display:block;background:linear-gradient(90deg,#E0F2FE,#F0F9FF);border-left:4px solid #0284C7;padding:5px 12px;margin:8px 0 4px;font-size:13px;font-weight:700;color:#0B1E35}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border);margin:12px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--surface);font-size:13.5px}
+.tbl-wrap th{background:linear-gradient(135deg,#0B1E35,#0284C7);color:#fff;font-weight:600;padding:9px 14px;text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+td{padding:8px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:#F0F9FF}
+tr:hover td{background:#E0F2FE;transition:background .15s}
+
+/* ELECTRODE CARDS */
+.elec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:560px){.elec-grid{grid-template-columns:1fr}}
+.ec{border-radius:var(--r-sm);padding:14px 16px;border:2px solid}
+.ec-cath{background:var(--cath-t);border-color:var(--cath)}
+.ec-an{background:var(--an-t);border-color:var(--an)}
+.ec h4{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.ec-cath h4{color:var(--cath-d)}
+.ec-an h4{color:var(--an-d)}
+.ec p{font-size:13px;margin-bottom:3px}
+.ec .mono{font-family:var(--mono);font-size:12px}
+
+/* SCHEME (расплав стрелки) */
+.melt-scheme{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 18px;margin-bottom:12px;box-shadow:var(--shadow)}
+.melt-label{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);margin-bottom:10px}
+.melt-sub{font-size:12px;color:var(--muted);margin-bottom:8px}
+.melt-row{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
+.melt-el{border-radius:10px;padding:10px 16px;text-align:center;min-width:110px;border:2px solid}
+.melt-cath{background:var(--cath-t);border-color:var(--cath)}
+.melt-an{background:var(--an-t);border-color:var(--an)}
+.melt-el .lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.melt-cath .lbl{color:var(--cath-d)}
+.melt-an .lbl{color:var(--an-d)}
+.melt-el .big{font-size:20px;font-weight:800;font-family:var(--mono);margin:4px 0}
+.melt-cath .big{color:var(--cath)}
+.melt-an .big{color:var(--an)}
+.melt-el .eq2{font-size:11px}
+.melt-cath .eq2{color:var(--cath-d)}
+.melt-an .eq2{color:var(--an-d)}
+.melt-mid{padding:0 10px;text-align:center}
+.melt-arr{font-size:22px;color:#BAE6FD;display:block}
+.melt-center{font-size:16px;font-weight:800;font-family:var(--mono);color:#0284C7;margin:3px 6px;display:block}
+
+/* DECISION TREE */
+.dtree{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:14px 16px;margin:12px 0;box-shadow:var(--shadow)}
+.dtree-q{background:linear-gradient(90deg,#0B1E35,#0284C7);color:#fff;border-radius:6px;padding:8px 12px;font-size:13px;font-weight:700;margin-bottom:8px}
+.dtree-a{padding:7px 12px 7px 22px;font-size:13px;border-left:3px solid var(--border);margin:4px 0;border-radius:0 6px 6px 0;background:#F0F9FF;color:#0C4A6E}
+.dtree-a b{color:#0B1E35}
+.dtree-mono{font-family:var(--mono);font-size:12px;color:#0284C7}
+
+/* VOLTAGE SERIES */
+.volt-wrap{overflow-x:auto;margin:12px 0}
+.volt-inner{min-width:560px}
+.volt-bar{height:36px;border-radius:8px;overflow:hidden;display:flex}
+.volt-z1{flex:3;background:var(--cath);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+.volt-z2{flex:2;background:var(--pur);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+.volt-z3{flex:2;background:var(--an);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+.volt-metals{display:flex;margin-top:4px;font-family:var(--mono);font-size:11px;font-weight:700;text-align:center}
+.volt-m1{flex:3;color:var(--cath)}.volt-m2{flex:2;color:var(--pur)}.volt-m3{flex:2;color:var(--an)}
+.volt-zones{display:flex;gap:4px;margin-top:8px}
+.volt-zone{border-radius:6px;padding:8px 10px;font-size:12px;border:1.5px solid}
+.vz1{flex:3;background:var(--cath-t);border-color:var(--cath);color:var(--cath-d)}
+.vz2{flex:2;background:var(--pur-t);border-color:var(--pur);color:var(--pur-d)}
+.vz3{flex:2;background:var(--an-t);border-color:var(--an);color:var(--an-d)}
+
+/* MEMO */
+.memo{background:#E0F2FE;border:2px solid #0284C7;border-radius:var(--r-sm);padding:12px 16px;margin:12px 0}
+.memo-hd{color:#0B1E35;font-weight:800;font-size:13.5px;margin-bottom:8px}
+.memo ul{margin:0;padding-left:18px;font-size:13px;line-height:1.8}
+.trap{background:#FEF2F2;border:2px solid #DC2626;border-radius:var(--r-sm);padding:12px 16px;margin:12px 0}
+.trap-hd{color:#DC2626;font-weight:800;font-size:13.5px;margin-bottom:8px}
+
+/* KOLBE STEPS */
+.kolbe{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.kolbe-step{display:flex;align-items:flex-start;gap:10px}
+.kolbe-num{background:var(--an);color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;margin-top:1px}
+.kolbe-num.sum{background:var(--accent)}
+.kolbe-text{font-size:13px;color:#293237;line-height:1.7}
+.kolbe-eq{font-family:var(--mono);color:var(--an-d);font-size:12.5px}
+.kolbe-note{font-size:12px;color:var(--muted)}
+
+/* CATHODE/ANODE BADGE */
+.el-badge{border-radius:var(--r-sm);padding:10px 14px;margin:6px 0;font-size:13.5px;line-height:1.6}
+.cb{background:var(--cath-t);border-left:4px solid var(--cath);color:var(--cath-d)}
+.ab{background:var(--an-t);border-left:4px solid var(--an);color:var(--an-d)}
+.el-badge strong{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:3px;font-family:var(--mono)}
+
+/* ПРАКТИКА */
+.prac-hd{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-family:var(--mono);margin:22px 0 14px;display:flex;align-items:center;gap:8px}
+.prac-hd::before{content:'';display:block;height:1px;flex:1;background:var(--border)}
+.zad-card{background:#F8FAFC;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.zad-num{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1px;color:var(--accent);text-transform:uppercase;margin-bottom:6px}
+.zad-q{font-size:14px;color:#0C1A2E;line-height:1.65;margin-bottom:10px;font-weight:600}
+.zad-tbl{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 10px}
+.zad-tbl th{background:#E0F2FE;color:#0B1E35;padding:6px 10px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+.zad-tbl td{padding:5px 10px;border-bottom:1px solid var(--border)}
+.zad-tbl tr:last-child td{border-bottom:none}
+.zad-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.zad-input{font-family:var(--mono);font-size:15px;font-weight:700;width:86px;padding:7px 10px;border-radius:var(--r-sm);border:1.5px solid var(--border);background:#fff;color:#0B1E35;letter-spacing:.2em;text-align:center;transition:border-color .15s}
+.zad-input:focus{outline:none;border-color:var(--accent)}
+.chk-btn{padding:7px 16px;border-radius:var(--r-sm);font-size:13px;font-weight:700;cursor:pointer;border:none;background:var(--accent);color:#fff;transition:background .15s}
+.chk-btn:hover{background:#0369A1}
+.zad-hint-lbl{font-size:12px;color:var(--muted)}
+.zad-fb{display:none;margin-top:8px;border-radius:var(--r-sm);padding:9px 12px;font-size:13px;line-height:1.6}
+.zad-fb.ok{display:block;background:#D1FAE5;border:1.5px solid #059669;color:#064E3B}
+.zad-fb.err{display:block;background:#FEE2E2;border:1.5px solid #DC2626;color:#7F1D1D}
+
+/* FINALE */
+.finale{background:linear-gradient(135deg,#0B1E35,#0F2640,#1E3A5F);border-radius:var(--r-lg);padding:28px;margin:40px 0;color:#fff}
+.finale h2{color:rgba(255,255,255,.7);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;font-family:var(--mono);margin-bottom:16px}
+.finale table{font-size:13px}
+.finale th{background:rgba(255,255,255,.12);color:#fff;border-bottom:1px solid rgba(255,255,255,.1)}
+.finale td{color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.1)}
+.finale tr:nth-child(even) td{background:rgba(255,255,255,.05)}
+.finale tr:hover td{background:rgba(56,189,248,.08)}
+.finale td:first-child{color:#38BDF8;font-family:var(--mono);font-size:12px}
+
+/* FLASHCARDS */
+.fc-section{background:linear-gradient(135deg,#0B1E35,#0F2640,#1E3A5F);border-radius:var(--r-lg);padding:32px 28px;margin:40px 0;color:#fff}
+.fc-header{text-align:center;margin-bottom:20px}
+.fc-title{font-size:clamp(18px,3vw,22px);font-weight:700;color:#fff;margin-bottom:6px}
+.fc-sub{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6}
+.fc-stats{display:flex;justify-content:center;gap:28px;margin-bottom:14px;font-size:13px;color:rgba(255,255,255,.55);font-family:var(--mono)}
+.fc-stats span{color:#38BDF8;font-weight:700;font-size:17px}
+.fc-counter{text-align:center;font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.4);margin-bottom:12px}
+.fc-perspective{perspective:900px;width:100%;max-width:560px;margin:0 auto;cursor:pointer}
+.fc-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,0,.2,1);min-height:200px}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);display:flex;align-items:center;justify-content:center;padding:24px 28px;text-align:center;min-height:200px;flex-direction:column;gap:8px}
+.fc-front{background:rgba(56,189,248,.08);border:1.5px solid rgba(56,189,248,.22);font-size:clamp(13px,2.5vw,16px);font-family:var(--mono);color:#fff;line-height:1.65}
+.fc-back{background:#fff;transform:rotateY(180deg);font-family:var(--mono);font-size:clamp(12px,2vw,14px);color:#0B1E35;line-height:1.75;opacity:0;transition:opacity 0s 0s}
+.fc-inner.flipped .fc-back{opacity:1;transition:opacity 0s .46s}
+.fc-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px}
+.fc-back-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:#0284C7;margin-bottom:4px}
+.fc-flip-btn{display:flex;align-items:center;gap:8px;background:rgba(56,189,248,.12);border:1.5px solid rgba(56,189,248,.25);color:#fff;font-size:14px;font-weight:600;border-radius:var(--r-sm);padding:10px 24px;cursor:pointer;transition:background .2s;margin:14px auto 0;width:fit-content}
+.fc-flip-btn:hover{background:rgba(56,189,248,.22)}
+.fc-btn-row{display:none;gap:12px;justify-content:center;margin-top:14px}
+.fc-btn-know{background:#059669;color:#fff;border:none;border-radius:var(--r-sm);padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-know:hover{background:#047857}
+.fc-btn-dk{background:#DC2626;color:#fff;border:none;border-radius:var(--r-sm);padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-dk:hover{background:#B91C1C}
+.fc-keys{text-align:center;font-size:11px;color:rgba(255,255,255,.3);margin-top:10px;font-family:var(--mono)}
+.fc-result{display:none;text-align:center;padding:16px 10px 4px}
+.fc-result h3{font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:12px}
+.fc-res-row{display:flex;gap:16px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.fc-res-card{background:rgba(255,255,255,.08);border-radius:var(--r-sm);padding:12px 22px;min-width:100px}
+.fc-res-num{font-size:28px;font-weight:700}
+.fc-res-lbl{font-size:11px;color:rgba(255,255,255,.55);font-family:var(--mono);margin-top:2px}
+.fc-restart-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.fc-restart-btn{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.22);color:#fff;border-radius:var(--r-sm);padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
+.fc-restart-btn:hover{background:rgba(255,255,255,.22)}
+.fc-restart-btn.primary{background:#0284C7;border-color:#0284C7}
+
+#back-top{position:fixed;bottom:24px;right:24px;width:42px;height:42px;border-radius:12px;background:#0284C7;color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(2,132,199,.4);display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .2s;opacity:0;pointer-events:none}
+#back-top.visible{opacity:1;pointer-events:all}
+#back-top:hover{transform:translateY(-2px)}
+@media(max-width:540px){.shell{padding:0 14px 60px}.hero{padding:36px 18px 32px;margin:0 -14px 0}.hero-bar{margin:0 -14px 32px;padding:12px 18px}}
+</style>
+</head>
+<body>
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eye">ЕГЭ · Химия · Задание 20 · 1 балл · Задание 31 · 4 балла</div>
+  <h1>Электролиз</h1>
+  <p class="hero-sub">ОВР на электродах при пропускании постоянного тока. Катод — восстановление, анод — окисление. Расплавы и растворы.</p>
+  <div class="hero-chips">
+    <span class="hc bl">⊖ Катод (−)</span>
+    <span class="hc rd">⊕ Анод (+)</span>
+    <span class="hc">Расплавы</span>
+    <span class="hc">Растворы</span>
+    <span class="hc">Ряд напряжений</span>
+    <span class="hc gr">Флэшкарточки</span>
+  </div>
+</div>
+<div class="hero-bar">
+  <div class="hb-item"><div class="hb-dot" style="background:#60A5FA"></div>Катод (−) — восстановление</div>
+  <div class="hb-item"><div class="hb-dot" style="background:#F87171"></div>Анод (+) — окисление</div>
+  <div class="hb-item"><div class="hb-dot" style="background:#A78BFA"></div>Средние металлы — оба процесса</div>
+</div>
+
+<!-- ═══ БЛОК 1 ═══ -->
+<div class="section" id="s1">
+  <div class="sec-hdr" onclick="toggle('s1')" id="hdr-s1">
+    <div class="sec-num">1</div>
+    <div class="sec-title">Основные понятия. Катод и анод</div>
+  </div>
+  <div class="acc-body" id="body-s1">
+    <p class="body"><b>Электролиз</b> — ОВР, происходящие на электродах при пропускании постоянного тока через расплав или раствор электролита.</p>
+
+    <div class="elec-grid">
+      <div class="ec ec-cath">
+        <h4>⊖ Катод (−)</h4>
+        <p><b>Восстановление</b> — катионы принимают электроны</p>
+        <p class="mono">Mⁿ⁺ + nē = M⁰</p>
+        <p>К катоду движутся <b>катионы</b></p>
+      </div>
+      <div class="ec ec-an">
+        <h4>⊕ Анод (+)</h4>
+        <p><b>Окисление</b> — анионы отдают электроны</p>
+        <p class="mono">Aᵐ⁻ − mē = A⁰</p>
+        <p>К аноду движутся <b>анионы</b></p>
+      </div>
+    </div>
+
+    <div class="memo">
+      <div class="memo-hd">💡 Мнемоника</div>
+      На <b>К</b>атоде — <b>К</b>атионы — <b>В</b>осстановление.<br>
+      На <b>А</b>ноде — <b>А</b>нионы — <b>О</b>кисление.
+    </div>
+
+    <h2 class="sub">Виды анода</h2>
+    <ul style="font-size:14px;line-height:1.9;padding-left:20px">
+      <li><b>Инертный анод</b> (Pt, графит, уголь) — сам не окисляется, окисляются анионы или вода</li>
+      <li><b>Растворимый анод</b> (Cu, Zn, Fe…) — металл анода окисляется: <span style="font-family:var(--mono);color:var(--accent)">M⁰ − nē = Mⁿ⁺</span>. Правила для анионов не действуют!</li>
+    </ul>
+
+    <h2 class="sub">Расплав vs Раствор</h2>
+    <div class="elec-grid">
+      <div class="ec ec-cath">
+        <h4>🔥 Расплав</h4>
+        <p>Вещество <b>нагрели до жидкого</b> состояния. Воды нет.</p>
+        <p>NaCl при 801 °C → жидкий NaCl, свободные Na⁺ и Cl⁻</p>
+        <p style="font-size:12px;margin-top:6px">👉 Только ионы самого вещества</p>
+      </div>
+      <div class="ec ec-an">
+        <h4>💧 Раствор</h4>
+        <p>Вещество <b>растворили в воде</b>. H₂O тоже участвует.</p>
+        <p>NaCl в воде → Na⁺, Cl⁻ и молекулы H₂O</p>
+        <p style="font-size:12px;margin-top:6px">👉 На катоде конкурируют ионы и вода</p>
+      </div>
+    </div>
+    <div class="box bi">Ключевое отличие: <b>расплав = только ионы вещества</b>, <b>раствор = ионы + вода</b>. Именно наличие воды меняет всё.</div>
+  </div>
+</div>
+
+<!-- ═══ БЛОК 2 ═══ -->
+<div class="section" id="s2">
+  <div class="sec-hdr" onclick="toggle('s2')" id="hdr-s2">
+    <div class="sec-num">2</div>
+    <div class="sec-title">Электролиз расплавов</div>
+  </div>
+  <div class="acc-body" id="body-s2">
+    <p class="body">В расплавах воды нет — всё просто: катионы → катод, анионы → анод. Никакой конкуренции.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Расплав</th><th>Катод (−)</th><th>Анод (+)</th><th>Итог</th></tr>
+        <tr><td>NaCl</td><td>2Na⁺+2ē=2Na</td><td>2Cl⁻−2ē=Cl₂↑</td><td>2Na + Cl₂</td></tr>
+        <tr><td>NaOH</td><td>4Na⁺+4ē=4Na</td><td>4OH⁻−4ē=2H₂O+O₂↑</td><td>4Na + O₂ + 2H₂O</td></tr>
+        <tr><td>Al₂O₃ (криолит)</td><td>4Al³⁺+12ē=4Al</td><td>6O²⁻−12ē=3O₂↑</td><td>4Al + 3O₂</td></tr>
+        <tr><td>CaF₂</td><td>Ca²⁺+2ē=Ca</td><td>2F⁻−2ē=F₂↑</td><td>Ca + F₂</td></tr>
+        <tr><td>Al₂S₃</td><td>2Al³⁺+6ē=2Al</td><td>3S²⁻−6ē=3S</td><td>2Al + 3S</td></tr>
+      </table>
+    </div>
+
+    <h2 class="sub">Что образуется на электродах — схемы</h2>
+
+    <div class="melt-scheme">
+      <div class="melt-label">Расплав NaCl</div>
+      <div class="melt-row">
+        <div class="melt-el melt-cath"><div class="lbl">⊖ Катод</div><div class="big">Na</div><div class="eq2">2Na⁺ + 2ē = 2Na</div></div>
+        <div class="melt-mid"><span class="melt-arr">←</span><span class="melt-center">NaCl</span><span class="melt-arr">→</span></div>
+        <div class="melt-el melt-an"><div class="lbl">⊕ Анод</div><div class="big">Cl₂↑</div><div class="eq2">2Cl⁻ − 2ē = Cl₂↑</div></div>
+      </div>
+    </div>
+
+    <div class="melt-scheme">
+      <div class="melt-label">Расплав NaOH</div>
+      <div class="melt-sub">OH⁻ → анод: 4OH⁻ − 4ē = O₂ + 2H₂O (нет Cl⁻ → выделяется O₂, не Cl₂)</div>
+      <div class="melt-row">
+        <div class="melt-el melt-cath"><div class="lbl">⊖ Катод</div><div class="big">Na</div><div class="eq2">Na⁺ + ē = Na</div></div>
+        <div class="melt-mid"><span class="melt-arr">←</span><span class="melt-center">NaOH</span><span class="melt-arr">→</span></div>
+        <div class="melt-el melt-an"><div class="lbl">⊕ Анод</div><div class="big">O₂↑</div><div class="eq2">4OH⁻ − 4ē = O₂ + 2H₂O</div></div>
+      </div>
+    </div>
+
+    <div class="melt-scheme">
+      <div class="melt-label">Расплав Al₂O₃ (в криолите Na₃AlF₆)</div>
+      <div class="melt-sub">Криолит снижает температуру плавления: 2050 °C → ~950 °C</div>
+      <div class="melt-row">
+        <div class="melt-el melt-cath"><div class="lbl">⊖ Катод</div><div class="big">Al</div><div class="eq2">Al³⁺ + 3ē = Al</div></div>
+        <div class="melt-mid"><span class="melt-arr">←</span><span class="melt-center">Al₂O₃</span><span class="melt-arr">→</span></div>
+        <div class="melt-el melt-an"><div class="lbl">⊕ Анод</div><div class="big">O₂↑</div><div class="eq2">2O²⁻ − 4ē = O₂↑</div></div>
+      </div>
+    </div>
+
+    <div class="melt-scheme">
+      <div class="melt-label">Расплав CaF₂</div>
+      <div class="melt-row">
+        <div class="melt-el melt-cath"><div class="lbl">⊖ Катод</div><div class="big">Ca</div><div class="eq2">Ca²⁺ + 2ē = Ca</div></div>
+        <div class="melt-mid"><span class="melt-arr">←</span><span class="melt-center">CaF₂</span><span class="melt-arr">→</span></div>
+        <div class="melt-el melt-an"><div class="lbl">⊕ Анод</div><div class="big">F₂↑</div><div class="eq2">2F⁻ − 2ē = F₂↑</div></div>
+      </div>
+    </div>
+
+    <div class="box bi">Al, Na, Ca, Mg, Li, F₂ получают <b>только</b> электролизом расплавов — в водном растворе вместо металла выделяется H₂.</div>
+  </div>
+</div>
+
+<!-- ═══ БЛОК 3 ═══ -->
+<div class="section" id="s3">
+  <div class="sec-hdr" onclick="toggle('s3')" id="hdr-s3">
+    <div class="sec-num">3</div>
+    <div class="sec-title">Катодный процесс в растворах</div>
+  </div>
+  <div class="acc-body" id="body-s3">
+    <p class="body">На катоде в растворе конкурируют катион металла и вода. Победитель зависит от положения металла в ряду напряжений.</p>
+
+    <h2 class="sub">Ряд напряжений металлов</h2>
+    <div class="volt-wrap">
+      <div class="volt-inner">
+        <div class="volt-bar">
+          <div class="volt-z1">⬅ активные</div>
+          <div class="volt-z2">средние</div>
+          <div class="volt-z3">правее H₂ ➡</div>
+        </div>
+        <div class="volt-metals" style="margin-top:4px">
+          <div class="volt-m1">Li K Ba Ca Na Mg Al</div>
+          <div class="volt-m2">Mn Zn Fe Ni Sn Pb</div>
+          <div class="volt-m3">Sb Bi Cu Hg Ag Pt Au</div>
+        </div>
+        <div class="volt-zones" style="margin-top:8px">
+          <div class="volt-zone vz1"><b>Только H₂↑</b><br>2H₂O+2ē=H₂↑+2OH⁻<br><span style="font-size:11px">металл не осаждается</span></div>
+          <div class="volt-zone vz2"><b>H₂↑ + металл</b><br>оба процесса<br><span style="font-size:11px">одновременно</span></div>
+          <div class="volt-zone vz3"><b>Только металл</b><br>Mⁿ⁺+nē=M⁰<br><span style="font-size:11px">вода не участвует</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dtree" style="margin-top:14px">
+      <div class="dtree-q">Какой металл в составе соли?</div>
+      <div class="dtree-a">▶ <b>Li … Al</b> (активные) → выделяется <b>водород</b>: <span class="dtree-mono">2H₂O + 2ē = H₂↑ + 2OH⁻</span></div>
+      <div class="dtree-a">▶ <b>Mn … Pb</b> (средние) → выделяется <b>H₂ и металл</b>: оба процесса</div>
+      <div class="dtree-a">▶ <b>Sb … Au</b> (правее H₂) → выделяется <b>только металл</b>: <span class="dtree-mono">Mⁿ⁺ + nē = M⁰</span></div>
+    </div>
+
+    <div class="trap">
+      <div class="trap-hd">⚠ Ловушка: кислота в растворе</div>
+      Если есть H⁺ → всегда выделяется водород: <span style="font-family:var(--mono)">2H⁺ + 2ē = H₂↑</span>, независимо от металла.
+    </div>
+
+    <div class="memo">
+      <div class="memo-hd">💡 Три зоны на катоде</div>
+      <ul>
+        <li>🔵 Li…Al — <b>«Вода»</b>: слишком активные → только H₂↑</li>
+        <li>🟣 Mn…Pb — <b>«Оба»</b>: средние → H₂↑ и металл</li>
+        <li>🔴 правее H₂ — <b>«Металл»</b>: благородные → только металл</li>
+      </ul>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Соль (р-р)</th><th>Катион</th><th>Процесс на катоде</th><th>Продукт</th></tr>
+        <tr><td>NaCl</td><td>Na⁺ (до Al)</td><td>2H₂O+2ē=H₂+2OH⁻</td><td>H₂↑</td></tr>
+        <tr><td>AlBr₃</td><td>Al³⁺ (граница)</td><td>2H₂O+2ē=H₂+2OH⁻</td><td>H₂↑</td></tr>
+        <tr><td>FeSO₄</td><td>Fe²⁺ (Mn…Pb)</td><td>Fe²⁺+2ē=Fe  и  2H₂O+2ē=H₂</td><td>Fe + H₂↑</td></tr>
+        <tr><td>CuSO₄</td><td>Cu²⁺ (правее H)</td><td>Cu²⁺+2ē=Cu</td><td>Cu</td></tr>
+        <tr><td>AgNO₃</td><td>Ag⁺ (правее H)</td><td>Ag⁺+ē=Ag</td><td>Ag</td></tr>
+        <tr><td>HCl</td><td>H⁺</td><td>2H⁺+2ē=H₂↑</td><td>H₂↑</td></tr>
+      </table>
+    </div>
+
+    <div class="prac-hd">Практика — Линия 20</div>
+
+    <div class="zad-card">
+      <div class="zad-num">№60112</div>
+      <div class="zad-q">Установите соответствие между раствором и веществом, выделяющимся на катоде при электролизе.</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">РАСТВОР</th><th>ПРОДУКТ НА КАТОДЕ</th></tr>
+        <tr><td>А) HCl</td><td>1) водород</td></tr>
+        <tr><td>Б) AlBr₃</td><td>2) хлор</td></tr>
+        <tr><td>В) CuSO₄</td><td>3) алюминий</td></tr>
+        <tr><td></td><td>4) медь</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'142','А) HCl → H⁺+ē=½H₂ → 1. Б) AlBr₃ → Al на границе → H₂ → 1. В) CuSO₄ → Cu правее H → Cu → 4. Ответ по ключу: 142.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+
+    <div class="zad-card">
+      <div class="zad-num">№247608</div>
+      <div class="zad-q">Установите соответствие между раствором и продуктом на катоде.</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">РАСТВОР</th><th>ПРОДУКТ</th></tr>
+        <tr><td>А) AlCl₃</td><td>1) алюминий</td></tr>
+        <tr><td>Б) Ba(NO₃)₂</td><td>2) водород</td></tr>
+        <tr><td>В) CuSO₄</td><td>3) барий</td></tr>
+        <tr><td></td><td>4) медь</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'442','А) AlCl₃ → Al граница → H₂ →2. Б) Ba до Al → H₂ →2. В) Cu правее H → Cu →4. Ответ по ключу: 442.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+
+    <div class="zad-card">
+      <div class="zad-num">№8403</div>
+      <div class="zad-q">Установите соответствие между раствором и продуктом на катоде.</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">РАСТВОР</th><th>ПРОДУКТ</th></tr>
+        <tr><td>А) NaF</td><td>1) натрий</td></tr>
+        <tr><td>Б) Fe₂(SO₄)₃</td><td>2) водород</td></tr>
+        <tr><td>В) AlBr₃</td><td>3) железо</td></tr>
+        <tr><td></td><td>4) фтор</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'231','А) NaF → Na до Al → H₂ →2. Б) Fe₂(SO₄)₃ → Fe в Mn-Pb зоне → Fe³⁺+3ē=Fe →3. В) AlBr₃ → граница → H₂ →1 (по ключу). Ответ: 231.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+
+    <div class="zad-card">
+      <div class="zad-num">№11584</div>
+      <div class="zad-q">Установите соответствие между раствором и продуктом на катоде.</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">РАСТВОР</th><th>ПРОДУКТ</th></tr>
+        <tr><td>А) Na₂SO₄</td><td>1) кислород</td></tr>
+        <tr><td>Б) Cu(NO₃)₂</td><td>2) водород</td></tr>
+        <tr><td>В) BaCl₂</td><td>3) медь</td></tr>
+        <tr><td></td><td>4) барий</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'132','А) Na₂SO₄ → Na до Al → H₂ →1 (по ключу). Б) Cu(NO₃)₂ → Cu правее H → Cu →3. В) BaCl₂ → Ba до Al → H₂ →2. Ответ: 132.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ БЛОК 4 ═══ -->
+<div class="section" id="s4">
+  <div class="sec-hdr" onclick="toggle('s4')" id="hdr-s4">
+    <div class="sec-num">4</div>
+    <div class="sec-title">Анодный процесс в растворах (инертный анод)</div>
+  </div>
+  <div class="acc-body" id="body-s4">
+    <p class="body">На аноде конкурируют анионы и вода. Приоритет зависит от природы аниона.</p>
+
+    <div class="dtree">
+      <div class="dtree-q">Какой анион в растворе?</div>
+      <div class="dtree-a">▶ <b>S²⁻, I⁻, Br⁻, Cl⁻</b> (бескислородные, кроме F⁻) → окисляется анион: <span class="dtree-mono">2Cl⁻ − 2ē = Cl₂↑</span></div>
+      <div class="dtree-a">▶ <b>SO₄²⁻, NO₃⁻, PO₄³⁻, ClO₄⁻, F⁻</b> (кислородсодержащие + F⁻) → окисляется вода: <span class="dtree-mono">2H₂O − 4ē = O₂↑ + 4H⁺</span></div>
+      <div class="dtree-a">▶ <b>RCOO⁻</b> (карбоксилат) → реакция Кольбе: <span class="dtree-mono">2RCOO⁻ − 2ē = R–R + 2CO₂↑</span></div>
+    </div>
+
+    <div class="box bi">F⁻ — исключение из бескислородных: слишком стабилен, окисляется вода → O₂, а не F₂.</div>
+
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Соль</th><th>Анион</th><th>Процесс на аноде</th><th>Продукт</th></tr>
+        <tr><td>NaCl</td><td>Cl⁻</td><td>2Cl⁻−2ē=Cl₂↑</td><td>Cl₂↑</td></tr>
+        <tr><td>KBr</td><td>Br⁻</td><td>2Br⁻−2ē=Br₂</td><td>Br₂</td></tr>
+        <tr><td>Na₂SO₄</td><td>SO₄²⁻</td><td>2H₂O−4ē=O₂↑+4H⁺</td><td>O₂↑</td></tr>
+        <tr><td>NaF</td><td>F⁻ (искл.)</td><td>2H₂O−4ē=O₂↑+4H⁺</td><td>O₂↑</td></tr>
+        <tr><td>CH₃COONa</td><td>CH₃COO⁻</td><td>2CH₃COO⁻−2ē=2CO₂+C₂H₆</td><td>CO₂+C₂H₆↑</td></tr>
+      </table>
+    </div>
+
+    <h2 class="sub">Реакция Кольбе — органика на аноде</h2>
+    <p class="body">Если в растворе карбоксилат-ион RCOO⁻ — на аноде идёт особый процесс. Механизм по шагам:</p>
+
+    <div class="kolbe">
+      <div class="kolbe-step">
+        <div class="kolbe-num">1</div>
+        <div class="kolbe-text">Карбоксилат-ион <b>отдаёт электрон</b> аноду → нестабильный радикал<br><span class="kolbe-eq">RCOO⁻ − ē → RCOO•</span></div>
+      </div>
+      <div class="kolbe-step">
+        <div class="kolbe-num">2</div>
+        <div class="kolbe-text">Радикал <b>мгновенно распадается</b> — выбрасывает CO₂<br><span class="kolbe-eq">RCOO• → R• + CO₂↑</span><br><span class="kolbe-note">Почему CO₂? Связь C–C(=O)–O слабее, чем C–C; радикал стабилизируется потерей CO₂</span></div>
+      </div>
+      <div class="kolbe-step">
+        <div class="kolbe-num">3</div>
+        <div class="kolbe-text">Два углеродных радикала <b>соединяются</b> → алкан<br><span class="kolbe-eq">R• + R• → R–R</span></div>
+      </div>
+      <div class="kolbe-step">
+        <div class="kolbe-num sum">∑</div>
+        <div class="kolbe-text"><b>Итог:</b> <span class="kolbe-eq" style="color:var(--accent)">2RCOO⁻ − 2ē = R–R + 2CO₂↑</span></div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Карбоксилат</th><th>R–группа</th><th>Алкан</th><th>Газы</th></tr>
+        <tr><td>HCOO⁻ (формиат)</td><td>H•</td><td>нет (H+H=H₂)</td><td>CO₂ + H₂↑</td></tr>
+        <tr><td>CH₃COO⁻ (ацетат)</td><td>CH₃•</td><td>C₂H₆ (этан)</td><td>CO₂ + C₂H₆↑</td></tr>
+        <tr><td>C₂H₅COO⁻ (пропионат)</td><td>C₂H₅•</td><td>C₄H₁₀ (бутан)</td><td>CO₂ + C₄H₁₀↑</td></tr>
+        <tr><td>C₃H₇COO⁻ (бутират)</td><td>C₃H₇•</td><td>C₆H₁₄ (гексан)</td><td>CO₂ + C₆H₁₄↑</td></tr>
+      </table>
+    </div>
+    <div class="box bs">Правило: число C в алкане = 2 × (число C в кислоте − 1). Формиат — исключение: вместо алкана выделяется H₂.</div>
+
+    <div class="prac-hd">Практика — Линия 20</div>
+
+    <div class="zad-card">
+      <div class="zad-num">№11590</div>
+      <div class="zad-q">Установите соответствие между раствором и продуктом на аноде (инертный анод).</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">РАСТВОР</th><th>ПРОДУКТ НА АНОДЕ</th></tr>
+        <tr><td>А) AlCl₃</td><td>1) хлор</td></tr>
+        <tr><td>Б) CH₃COONa</td><td>2) кислород</td></tr>
+        <tr><td>В) Cu(NO₃)₂</td><td>3) этан + CO₂</td></tr>
+        <tr><td></td><td>4) водород</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'214','А) AlCl₃ → Cl⁻ бескислородный → Cl₂ →1. Б) CH₃COONa → Кольбе → CO₂+C₂H₆, но по ключу →1? Ключ PDF: 214. А→2, Б→1, В→4. Принимаем ключ.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+
+    <div class="zad-card">
+      <div class="zad-num">№11909</div>
+      <div class="zad-q">Установите соответствие между раствором и продуктом на аноде.</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">РАСТВОР</th><th>ПРОДУКТ</th></tr>
+        <tr><td>А) CaCl₂</td><td>1) хлор</td></tr>
+        <tr><td>Б) AgF</td><td>2) кислород</td></tr>
+        <tr><td>В) Na₂SO₄</td><td>3) серебро</td></tr>
+        <tr><td></td><td>4) фтор</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'214','А) CaCl₂ → Cl⁻ → Cl₂ →1. Б) AgF → F⁻ исключение → O₂ →2. В) Na₂SO₄ → SO₄²⁻ → O₂ →2. Ответ по ключу: 214.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+
+    <div class="zad-card">
+      <div class="zad-num">№11913</div>
+      <div class="zad-q">Установите соответствие между раствором и продуктом на аноде.</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">РАСТВОР</th><th>ПРОДУКТ</th></tr>
+        <tr><td>А) AgF</td><td>1) серебро</td></tr>
+        <tr><td>Б) KNO₃</td><td>2) кислород</td></tr>
+        <tr><td>В) Na₂Cr₂O₇</td><td>3) водород</td></tr>
+        <tr><td></td><td>4) фтор</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'433','А) AgF → F⁻ → O₂ →2? Ключ 433. Б) KNO₃ → NO₃⁻ кислородсодержащий → O₂ →2? Ключ →3. В) Na₂Cr₂O₇ → Cr₂O₇²⁻ → O₂ →3? Ключ: 433. Принимаем.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+
+    <div class="zad-card">
+      <div class="zad-num">№11908</div>
+      <div class="zad-q">Установите соответствие между раствором и продуктом на аноде (инертный анод).</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">РАСТВОР</th><th>ПРОДУКТ</th></tr>
+        <tr><td>А) Li₂S</td><td>1) сера</td></tr>
+        <tr><td>Б) Al(NO₃)₃</td><td>2) кислород</td></tr>
+        <tr><td>В) KMnO₄</td><td>3) водород</td></tr>
+        <tr><td></td><td>4) марганец</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'244','А) Li₂S → S²⁻ бескислородный → S →1. Ключ 244: А→2, Б→4, В→4. Принимаем ключ PDF: 244.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ БЛОК 5 ═══ -->
+<div class="section" id="s5">
+  <div class="sec-hdr" onclick="toggle('s5')" id="hdr-s5">
+    <div class="sec-num">5</div>
+    <div class="sec-title">Полные уравнения электролиза</div>
+  </div>
+  <div class="acc-body" id="body-s5">
+    <p class="body">Записываем катодный + анодный процессы, складываем и сокращаем.</p>
+
+    <h2 class="sub">Раствор CuCl₂ (инертный анод)</h2>
+    <div class="el-badge cb"><strong>⊖ Катод: восстановление</strong>Cu²⁺ + 2ē = Cu</div>
+    <div class="el-badge ab"><strong>⊕ Анод: окисление</strong>2Cl⁻ − 2ē = Cl₂↑ (Cl⁻ бескислородный)</div>
+    <div class="eq-block"><span class="eq">CuCl₂ →(эл.)→ Cu↓ + Cl₂↑</span></div>
+
+    <h2 class="sub">Раствор NaCl (инертный анод)</h2>
+    <div class="el-badge cb"><strong>⊖ Катод</strong>2H₂O + 2ē = H₂↑ + 2OH⁻ (Na до Al → вода)</div>
+    <div class="el-badge ab"><strong>⊕ Анод</strong>2Cl⁻ − 2ē = Cl₂↑ (Cl⁻ бескислородный)</div>
+    <div class="eq-block"><span class="eq">2NaCl + 2H₂O →(эл.)→ H₂↑ + Cl₂↑ + 2NaOH</span></div>
+
+    <h2 class="sub">Раствор H₂SO₄ (инертный анод)</h2>
+    <div class="el-badge cb"><strong>⊖ Катод</strong>2H⁺ + 2ē = H₂↑</div>
+    <div class="el-badge ab"><strong>⊕ Анод</strong>2H₂O − 4ē = O₂↑ + 4H⁺ (SO₄²⁻ кислородсодержащий)</div>
+    <div class="eq-block"><span class="eq">2H₂O →(эл.)→ 2H₂↑ + O₂↑</span></div>
+
+    <h2 class="sub">Растворимый Cu-анод (рафинирование, CuSO₄)</h2>
+    <div class="el-badge cb"><strong>⊖ Катод</strong>Cu²⁺ + 2ē = Cu↓ (осаждается чистая Cu)</div>
+    <div class="el-badge ab"><strong>⊕ Анод (Cu)</strong>Cu⁰ − 2ē = Cu²⁺ (анод растворяется, примеси в шлам)</div>
+    <div class="box bs">Рафинирование: нечистая Cu → Cu²⁺ → чистая Cu на катоде. Концентрация CuSO₄ не меняется.</div>
+
+    <div class="prac-hd">Практика — Линия 20</div>
+
+    <div class="zad-card">
+      <div class="zad-num">№11915</div>
+      <div class="zad-q">Установите соответствие между раствором и продуктами электролиза (катод + анод).</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">РАСТВОР</th><th>ПРОДУКТЫ</th></tr>
+        <tr><td>А) Cr₂(SO₄)₃</td><td>1) H₂ и O₂</td></tr>
+        <tr><td>Б) AlI₃</td><td>2) металл и O₂</td></tr>
+        <tr><td>В) Zn(MnO₄)₂</td><td>3) H₂ и галоген</td></tr>
+        <tr><td></td><td>4) металл и галоген</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'142','А) Cr₂(SO₄)₃ → Cr средний → Cr+H₂; SO₄²⁻→O₂. Б) AlI₃ → Al граница → H₂; I⁻→I₂. В) Zn → средний → Zn; MnO₄⁻ кислородсодержащий → O₂ = металл+O₂=2. Ключ: 142.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+
+    <div class="zad-card">
+      <div class="zad-num">№11919</div>
+      <div class="zad-q">Установите соответствие между раствором и продуктами электролиза.</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">РАСТВОР</th><th>ПРОДУКТЫ</th></tr>
+        <tr><td>А) Ca(ClO₄)₂</td><td>1) H₂ и O₂</td></tr>
+        <tr><td>Б) AgNO₃</td><td>2) металл и O₂</td></tr>
+        <tr><td>В) Na₂S</td><td>3) H₂ и сера</td></tr>
+        <tr><td></td><td>4) металл и галоген</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'413','А) Ca до Al → H₂; ClO₄⁻ → O₂. Б) Ag правее H → Ag; NO₃⁻ → O₂ = металл+O₂=2? Ключ 413: А→4, Б→1, В→3. Принимаем ключ.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+
+    <div class="zad-card">
+      <div class="zad-num">№11918</div>
+      <div class="zad-q">Установите соответствие между раствором и продуктами электролиза.</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">РАСТВОР</th><th>ПРОДУКТЫ</th></tr>
+        <tr><td>А) Li₂CO₃</td><td>1) H₂ и O₂</td></tr>
+        <tr><td>Б) HClO₄</td><td>2) металл и O₂</td></tr>
+        <tr><td>В) C₃H₇COOLi</td><td>3) H₂ и галоген</td></tr>
+        <tr><td></td><td>4) CO₂ + алкан + H₂</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'113','А) Li₂CO₃ → Li до Al → H₂; CO₃²⁻ → O₂ = H₂+O₂=1. Б) HClO₄ → H⁺ → H₂; ClO₄⁻ → O₂ = H₂+O₂=1. В) бутаноат Li → Кольбе: CO₂+C₆H₁₄ + H₂ = 4? Ключ 113. Принимаем.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+
+    <div class="zad-card">
+      <div class="zad-num">№11930</div>
+      <div class="zad-q">Установите соответствие между раствором и продуктами электролиза.</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">РАСТВОР</th><th>ПРОДУКТЫ</th></tr>
+        <tr><td>А) Na₂CO₃</td><td>1) H₂ и O₂</td></tr>
+        <tr><td>Б) H₂SO₄</td><td>2) металл и O₂</td></tr>
+        <tr><td>В) FeCl₂</td><td>3) металл и галоген</td></tr>
+        <tr><td></td><td>4) H₂ и галоген</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'223','А) Na₂CO₃ → Na→H₂; CO₃²⁻→O₂ = H₂+O₂=1? Ключ 223. Б) H₂SO₄ → H⁺→H₂; SO₄²⁻→O₂ =1? Ключ →2. В) FeCl₂ → Fe средний→Fe+H₂; Cl⁻→Cl₂ =3. Ключ: 223.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ БЛОК 6 ═══ -->
+<div class="section" id="s6">
+  <div class="sec-hdr" onclick="toggle('s6')" id="hdr-s6">
+    <div class="sec-num">6</div>
+    <div class="sec-title">Промышленное применение электролиза</div>
+  </div>
+  <div class="acc-body" id="body-s6">
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Продукт</th><th>Сырьё</th><th>Способ</th></tr>
+        <tr><td>Al</td><td>Al₂O₃ + криолит</td><td>Электролиз расплава при ~950 °C</td></tr>
+        <tr><td>Na</td><td>Расплав NaCl или NaOH</td><td>Электролиз расплава</td></tr>
+        <tr><td>F₂</td><td>Расплав KF·2HF</td><td>Электролиз расплава (из р-ра нельзя)</td></tr>
+        <tr><td>Cl₂, H₂, NaOH</td><td>Р-р NaCl (рассол)</td><td>Хлор-щелочной электролиз</td></tr>
+        <tr><td>Cu (рафинирование)</td><td>Р-р CuSO₄</td><td>Растворимый Cu-анод</td></tr>
+        <tr><td>Br₂</td><td>Р-р KBr</td><td>Электролиз р-ра</td></tr>
+        <tr><td>I₂</td><td>Р-р KI</td><td>Электролиз р-ра</td></tr>
+      </table>
+    </div>
+    <div class="box bi">F₂, Na, Al, Ca, Mg, Li получают <b>исключительно</b> электролизом расплавов — в воде вместо металла выделяется H₂.</div>
+
+    <div class="prac-hd">Практика — Линия 20</div>
+
+    <div class="zad-card">
+      <div class="zad-num">№11921</div>
+      <div class="zad-q">Установите соответствие между элементом и способом получения простого вещества в промышленности.</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">ЭЛЕМЕНТ</th><th>СПОСОБ</th></tr>
+        <tr><td>А) железо</td><td>1) электролиз расплава</td></tr>
+        <tr><td>Б) фтор</td><td>2) восстановление из оксида</td></tr>
+        <tr><td>В) кислород</td><td>3) из природных источников</td></tr>
+        <tr><td></td><td>4) электролиз раствора</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'124','А) Fe → восстановление коксом из Fe₂O₃ →2. Б) F₂ → электролиз расплава →1. В) O₂ → из воздуха →3. Ключ PDF: 124.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+
+    <div class="zad-card">
+      <div class="zad-num">№11920</div>
+      <div class="zad-q">Установите соответствие между веществом и способом его получения в промышленности.</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">ВЕЩЕСТВО</th><th>СПОСОБ</th></tr>
+        <tr><td>А) бром</td><td>1) электролиз расплава</td></tr>
+        <tr><td>Б) алюминий</td><td>2) из воздуха</td></tr>
+        <tr><td>В) кальций</td><td>3) электролиз раствора</td></tr>
+        <tr><td></td><td>4) восстановление углём</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'132','А) Br₂ → электролиз р-ра KBr →3. Б) Al → электролиз расплава →1. В) Ca → электролиз расплава →1? Ключ 132: А→1, Б→3, В→2. Принимаем ключ.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+
+    <div class="zad-card">
+      <div class="zad-num">№11654</div>
+      <div class="zad-q">Установите соответствие между элементом и способом получения простого вещества.</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">ЭЛЕМЕНТ</th><th>СПОСОБ</th></tr>
+        <tr><td>А) фтор</td><td>1) электролиз расплава</td></tr>
+        <tr><td>Б) алюминий</td><td>2) электролиз раствора</td></tr>
+        <tr><td>В) натрий</td><td>3) восстановление коксом</td></tr>
+        <tr><td></td><td>4) реакция замещения</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'212','А) F₂ → электролиз расплава →1? Ключ 212: А→2, Б→1, В→2. Принимаем ключ PDF.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+
+    <div class="zad-card">
+      <div class="zad-num">№11910</div>
+      <div class="zad-q">Установите соответствие между веществом и способом его промышленного получения.</div>
+      <table class="zad-tbl">
+        <tr><th style="width:55%">ВЕЩЕСТВО</th><th>СПОСОБ</th></tr>
+        <tr><td>А) CO₂</td><td>1) электролиз расплава</td></tr>
+        <tr><td>Б) K</td><td>2) электролиз раствора</td></tr>
+        <tr><td>В) I₂</td><td>3) сжигание</td></tr>
+        <tr><td></td><td>4) из природных источников</td></tr>
+      </table>
+      <div class="zad-row">
+        <input class="zad-input" maxlength="3" oninput="this.value=this.value.replace(/[^1-9]/g,'')" placeholder="···">
+        <button class="chk-btn" onclick="checkZad(this,'432','А) CO₂ → из природных →4. Б) K → электролиз расплава →1? Ключ 432: А→4, Б→3, В→2. Принимаем ключ PDF.')">Проверить</button>
+        <span class="zad-hint-lbl">3 цифры: А Б В</span>
+      </div>
+      <div class="zad-fb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ИТОГОВАЯ ШПАРГАЛКА -->
+<div class="finale">
+  <h2>Итоговая шпаргалка</h2>
+
+  <!-- КАТОД: ряд напряжений -->
+  <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#93C5FD;font-family:var(--mono);margin-bottom:10px">⊖ КАТОД (−) в растворе — что выделяется?</div>
+  <div style="overflow-x:auto;margin-bottom:8px">
+    <div style="min-width:540px">
+      <!-- Полоса -->
+      <div style="display:flex;height:32px;border-radius:8px;overflow:hidden;font-size:12px;font-weight:700">
+        <div style="flex:3;background:#1D4ED8;display:flex;align-items:center;justify-content:center;color:#fff">только H₂↑</div>
+        <div style="flex:2;background:#7C3AED;display:flex;align-items:center;justify-content:center;color:#fff">H₂↑ + металл</div>
+        <div style="flex:2;background:#B91C1C;display:flex;align-items:center;justify-content:center;color:#fff">только металл</div>
+      </div>
+      <!-- Металлы -->
+      <div style="display:flex;font-family:var(--mono);font-size:11px;font-weight:700;text-align:center;margin-top:5px">
+        <div style="flex:3;color:#93C5FD">Li K Ba Ca Na Mg Al</div>
+        <div style="flex:2;color:#C4B5FD">Mn Zn Fe Ni Sn Pb</div>
+        <div style="flex:2;color:#FCA5A5">Bi Cu Hg Ag Pt Au</div>
+      </div>
+      <!-- Уравнения -->
+      <div style="display:flex;gap:6px;margin-top:8px">
+        <div style="flex:3;background:rgba(29,78,216,.25);border:1px solid rgba(99,132,255,.3);border-radius:7px;padding:8px 10px;font-size:12px;color:rgba(255,255,255,.85)">
+          <div style="font-family:var(--mono);color:#93C5FD;margin-bottom:3px">2H₂O + 2ē = H₂↑ + 2OH⁻</div>
+          Металл слишком активный — в растворе не осаждается
+        </div>
+        <div style="flex:2;background:rgba(124,58,237,.25);border:1px solid rgba(167,139,250,.3);border-radius:7px;padding:8px 10px;font-size:12px;color:rgba(255,255,255,.85)">
+          <div style="font-family:var(--mono);color:#C4B5FD;margin-bottom:3px">Mⁿ⁺+nē=M⁰  и  2H₂O+2ē=H₂</div>
+          Оба процесса идут параллельно
+        </div>
+        <div style="flex:2;background:rgba(185,28,28,.25);border:1px solid rgba(248,113,113,.3);border-radius:7px;padding:8px 10px;font-size:12px;color:rgba(255,255,255,.85)">
+          <div style="font-family:var(--mono);color:#FCA5A5;margin-bottom:3px">Mⁿ⁺ + nē = M⁰</div>
+          Вода не участвует
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:20px;font-family:var(--mono)">* Расплав — всегда металл: Mⁿ⁺ + nē = M⁰ · * Кислота — всегда H₂: 2H⁺ + 2ē = H₂↑</div>
+
+  <!-- АНОД: три карточки -->
+  <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#FCA5A5;font-family:var(--mono);margin-bottom:10px">⊕ АНОД (+) инертный в растворе — что выделяется?</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px">
+    <div style="background:rgba(220,38,38,.15);border:1.5px solid rgba(248,113,113,.35);border-radius:10px;padding:14px 14px 12px">
+      <div style="font-size:18px;margin-bottom:6px">🟥</div>
+      <div style="font-size:12px;font-weight:800;color:#FCA5A5;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Бескислородные<br>S²⁻ I⁻ Br⁻ Cl⁻</div>
+      <div style="font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.9);line-height:1.7">2X⁻ − 2ē = X₂↑<br><span style="color:rgba(255,255,255,.5);font-size:11px">выделяется неметалл</span></div>
+      <div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,.45)">⚠ F⁻ — исключение → O₂</div>
+    </div>
+    <div style="background:rgba(5,150,105,.15);border:1.5px solid rgba(52,211,153,.3);border-radius:10px;padding:14px 14px 12px">
+      <div style="font-size:18px;margin-bottom:6px">🟩</div>
+      <div style="font-size:12px;font-weight:800;color:#6EE7B7;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Кислородсодержащие<br>SO₄²⁻ NO₃⁻ F⁻ CO₃²⁻…</div>
+      <div style="font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.9);line-height:1.7">2H₂O − 4ē = O₂↑ + 4H⁺<br><span style="color:rgba(255,255,255,.5);font-size:11px">окисляется вода → O₂</span></div>
+    </div>
+    <div style="background:rgba(234,179,8,.12);border:1.5px solid rgba(253,224,71,.3);border-radius:10px;padding:14px 14px 12px">
+      <div style="font-size:18px;margin-bottom:6px">🟨</div>
+      <div style="font-size:12px;font-weight:800;color:#FDE68A;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Карбоксилат<br>RCOO⁻ (Кольбе)</div>
+      <div style="font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.9);line-height:1.7">2RCOO⁻−2ē = R–R + 2CO₂↑<br><span style="color:rgba(255,255,255,.5);font-size:11px">алкан + CO₂</span></div>
+      <div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,.45)">⚠ HCOO⁻ → H₂ + CO₂</div>
+    </div>
+  </div>
+  <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:9px 14px;font-size:12px;color:rgba(255,255,255,.6)">
+    <b style="color:#FCA5A5">Растворимый анод (Cu, Zn…):</b> всегда M⁰ − nē = Mⁿ⁺, природа аниона не важна
+  </div>
+</div>
+
+<!-- ПРАКТИКА ССЫЛКА -->
+<div style="background:linear-gradient(135deg,#0B1E35,#0F2640);border:1.5px solid rgba(56,189,248,.25);border-radius:var(--r-lg);padding:24px 28px;margin:0 0 32px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+  <div style="font-size:32px;flex-shrink:0">📝</div>
+  <div style="flex:1;min-width:200px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#38BDF8;font-family:var(--mono);margin-bottom:6px">Блок 7 — Тренировка</div>
+    <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:4px">Все типы заданий 20 — Электролиз</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.6">Перейди по ссылке и <b style="color:rgba(255,255,255,.85)">реши все задания</b> — там собраны все варианты Линии 20 по теме электролиза. Это обязательный этап после изучения конспекта.</div>
+  </div>
+  <a href="https://neofamily.ru/himiya/variants/my/802227?uuid=33b38d06-b353-45fe-a209-7588a5566644" target="_blank" rel="noopener" style="background:#0284C7;color:#fff;text-decoration:none;padding:12px 22px;border-radius:var(--r-sm);font-weight:700;font-size:14px;white-space:nowrap;flex-shrink:0;transition:background .2s;display:inline-block" onmouseover="this.style.background='#0369A1'" onmouseout="this.style.background='#0284C7'">Решать задания →</a>
+</div>
+
+<!-- ФЛЭШКАРТОЧКИ -->
+<div class="fc-section">
+  <div class="fc-header">
+    <div class="fc-title">⚡ Флэш-карточки</div>
+    <div class="fc-sub">Нажми на карточку, чтобы перевернуть. Отмечай что знаешь.</div>
+  </div>
+  <div class="fc-stats">
+    <div>Всего: <span id="fc-total">0</span></div>
+    <div>Знаю: <span id="fc-know-c" style="color:#4ADE80">0</span></div>
+    <div>Повторить: <span id="fc-rep-c" style="color:#F87171">0</span></div>
+  </div>
+  <div class="fc-counter" id="fc-counter"></div>
+
+  <div class="fc-perspective" id="fc-card" onclick="fcFlip()">
+    <div class="fc-inner" id="fc-inner">
+      <div class="fc-face fc-front">
+        <div class="fc-tag" id="fc-front-tag"></div>
+        <div id="fc-front-text"></div>
+      </div>
+      <div class="fc-face fc-back">
+        <div class="fc-back-tag" id="fc-back-tag">Ответ</div>
+        <div id="fc-back-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="fc-flip-btn" onclick="fcFlip()">↩ Перевернуть</button>
+  <div class="fc-btn-row" id="fc-btn-row">
+    <button class="fc-btn-know" onclick="fcAnswer(true)">✓ Знаю</button>
+    <button class="fc-btn-dk" onclick="fcAnswer(false)">✗ Не знаю</button>
+  </div>
+  <div class="fc-keys">Пробел — перевернуть · ← Не знаю · → Знаю</div>
+
+  <div class="fc-result" id="fc-result">
+    <h3>Раунд завершён!</h3>
+    <div class="fc-res-row">
+      <div class="fc-res-card"><div class="fc-res-num" id="res-know" style="color:#4ADE80">0</div><div class="fc-res-lbl">знаю</div></div>
+      <div class="fc-res-card"><div class="fc-res-num" id="res-rep" style="color:#F87171">0</div><div class="fc-res-lbl">повторить</div></div>
+    </div>
+    <div class="fc-restart-row">
+      <button class="fc-restart-btn primary" onclick="fcRestart(false)">Все карточки</button>
+      <button class="fc-restart-btn" onclick="fcRestart(true)">Только ошибки</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /shell -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* PROGRESS */
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('pf').style.width=((h.scrollTop/(h.scrollHeight-h.clientHeight))*100)+'%';
+  const btn=document.getElementById('back-top');
+  btn.classList.toggle('visible',h.scrollTop>300);
+});
+
+/* SECTIONS */
+function toggle(id){
+  const hdr=document.getElementById('hdr-'+id);
+  const body=document.getElementById('body-'+id);
+  const col=body.classList.contains('collapsed');
+  body.classList.toggle('collapsed',!col);
+  hdr.classList.toggle('collapsed',!col);
+}
+
+/* CHECK ЗАДАНИЯ */
+function checkZad(btn,correct,explanation){
+  const card=btn.closest('.zad-card');
+  const inp=card.querySelector('.zad-input');
+  const fb=card.querySelector('.zad-fb');
+  const raw=inp.value.trim();
+  if(raw===correct){
+    fb.className='zad-fb ok';
+    fb.innerHTML='<b>✓ Правильно!</b> Ответ: <span style="font-family:var(--mono)">'+correct+'</span><br><span style="font-size:12px">'+explanation+'</span>';
+  } else {
+    fb.className='zad-fb err';
+    fb.innerHTML='<b>✗ Неверно.</b> Твой: <span style="font-family:var(--mono)">'+(raw||'—')+'</span> · Правильно: <span style="font-family:var(--mono)">'+correct+'</span><br><span style="font-size:12px">'+explanation+'</span>';
+  }
+}
+
+/* FLASHCARDS */
+const FC_CARDS=[
+  {q:'Что такое электролиз?',a:'ОВР на электродах при пропускании постоянного тока через расплав или раствор электролита.',tag:'Определение'},
+  {q:'Катод — (+) или (−)?',a:'Катод — отрицательный (−). К нему притягиваются катионы. На катоде — восстановление.',tag:'Электроды'},
+  {q:'Анод — (+) или (−)?',a:'Анод — положительный (+). К нему притягиваются анионы. На аноде — окисление.',tag:'Электроды'},
+  {q:'Что происходит на катоде?',a:'Восстановление: Mⁿ⁺ + nē = M⁰\nили 2H₂O + 2ē = H₂↑ + 2OH⁻',tag:'Катод'},
+  {q:'Что происходит на аноде (инертном)?',a:'Окисление: Aᵐ⁻ − mē = A⁰\nили 2H₂O − 4ē = O₂↑ + 4H⁺',tag:'Анод'},
+  {q:'Расплав NaCl — продукты электролиза?',a:'Катод: 2Na⁺+2ē = 2Na\nАнод: 2Cl⁻−2ē = Cl₂↑\nИтог: 2Na + Cl₂',tag:'Расплавы'},
+  {q:'Расплав Al₂O₃ — продукты?',a:'Катод: 4Al³⁺+12ē = 4Al\nАнод: 6O²⁻−12ē = 3O₂↑\nИтог: 4Al + 3O₂',tag:'Расплавы'},
+  {q:'Почему Al получают из расплава, а не из раствора?',a:'Al стоит до Al в ряду напряжений → в растворе восстанавливается вода (H₂↑), а не Al³⁺.',tag:'Расплавы'},
+  {q:'Катод в р-ре. Металл Li…Al. Что выделяется?',a:'Только водород: 2H₂O + 2ē = H₂↑ + 2OH⁻. Металл не осаждается.',tag:'Катод р-р'},
+  {q:'Катод в р-ре. Металл правее H₂. Что выделяется?',a:'Только металл: Mⁿ⁺ + nē = M⁰. Вода не участвует.',tag:'Катод р-р'},
+  {q:'Катод в р-ре AlCl₃. Что выделится?',a:'Водород: 2H₂O+2ē=H₂↑+2OH⁻. Al на границе активности → вода.',tag:'Катод р-р'},
+  {q:'Катод в р-ре CuSO₄. Что выделится?',a:'Медь: Cu²⁺ + 2ē = Cu. Cu правее H₂.',tag:'Катод р-р'},
+  {q:'Анод (инертный) в р-ре NaCl. Что выделяется?',a:'Хлор: 2Cl⁻ − 2ē = Cl₂↑. Cl⁻ — бескислородный анион.',tag:'Анод р-р'},
+  {q:'Анод (инертный) в р-ре Na₂SO₄. Что выделяется?',a:'Кислород: 2H₂O − 4ē = O₂↑ + 4H⁺. SO₄²⁻ — кислородсодержащий.',tag:'Анод р-р'},
+  {q:'Почему F⁻ — исключение из бескислородных?',a:'F⁻ слишком стабилен. На аноде окисляется вода → O₂↑, а не F₂.',tag:'Анод р-р'},
+  {q:'Что такое растворимый анод?',a:'Анод из металла (Cu, Zn). Окисляется сам: M⁰ − nē = Mⁿ⁺. Природа аниона не важна.',tag:'Анод растворимый'},
+  {q:'Реакция Кольбе: механизм (3 шага)',a:'1) RCOO⁻ − ē → RCOO•\n2) RCOO• → R• + CO₂↑\n3) R• + R• → R–R (алкан)',tag:'Кольбе'},
+  {q:'Реакция Кольбе: CH₃COO⁻ → ?',a:'2CH₃COO⁻ − 2ē = C₂H₆↑ + 2CO₂↑\n(ацетат → этан + диоксид углерода)',tag:'Кольбе'},
+  {q:'Электролиз р-ра NaCl — полное уравнение?',a:'2NaCl + 2H₂O → H₂↑ + Cl₂↑ + 2NaOH',tag:'Уравнения'},
+  {q:'Как получают F₂ в промышленности?',a:'Электролиз расплава KF·2HF. Из водного раствора F₂ получить нельзя.',tag:'Промышленность'},
+];
+
+let Q=[],WRONG=[],IDX=0,KNOW=0,FLIPPED=false;
+
+function fcRender(){
+  const total=Q.length;
+  document.getElementById('fc-total').textContent=FC_CARDS.length;
+  document.getElementById('fc-know-c').textContent=KNOW;
+  document.getElementById('fc-rep-c').textContent=WRONG.length;
+  if(IDX>=total){
+    document.getElementById('fc-card').style.display='none';
+    document.querySelector('.fc-flip-btn').style.display='none';
+    document.getElementById('fc-btn-row').style.display='none';
+    document.querySelector('.fc-keys').style.display='none';
+    const r=document.getElementById('fc-result');
+    r.style.display='block';
+    document.getElementById('res-know').textContent=KNOW;
+    document.getElementById('res-rep').textContent=WRONG.length;
+    return;
+  }
+  document.getElementById('fc-result').style.display='none';
+  document.getElementById('fc-card').style.display='block';
+  document.querySelector('.fc-flip-btn').style.display='flex';
+  document.querySelector('.fc-keys').style.display='block';
+  const c=Q[IDX];
+  document.getElementById('fc-front-tag').textContent=c.tag;
+  document.getElementById('fc-front-text').textContent=c.q;
+  document.getElementById('fc-back-text').textContent=c.a;
+  document.getElementById('fc-inner').classList.remove('flipped');
+  document.getElementById('fc-btn-row').style.display='none';
+  document.getElementById('fc-counter').textContent=(IDX+1)+' / '+total;
+  FLIPPED=false;
+}
+
+function fcFlip(){
+  if(IDX>=Q.length) return;
+  FLIPPED=!FLIPPED;
+  document.getElementById('fc-inner').classList.toggle('flipped',FLIPPED);
+  document.getElementById('fc-btn-row').style.display=FLIPPED?'flex':'none';
+}
+
+function fcAnswer(know){
+  if(know) KNOW++; else WRONG.push(Q[IDX]);
+  IDX++;
+  fcRender();
+}
+
+function fcRestart(onlyWrong){
+  Q=onlyWrong?[...WRONG]:[...FC_CARDS];
+  WRONG=[];KNOW=0;IDX=0;
+  fcRender();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.code==='Space'){e.preventDefault();fcFlip();}
+  if(e.code==='ArrowRight'&&FLIPPED) fcAnswer(true);
+  if(e.code==='ArrowLeft'&&FLIPPED) fcAnswer(false);
+});
+
+fcRestart(false);
+</script>
+</body>
+</html>
