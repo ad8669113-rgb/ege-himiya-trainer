@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ОВР с соединениями хрома(VI) — ЕГЭ Химия</title>
+<style>
+:root{
+  --bg:#F0F9FF;--surface:#fff;--border:#BAE6FD;--accent:#0284C7;
+  --text:#0C1A2E;--muted:#475569;--r:10px;--r-sm:7px;--r-lg:18px;
+  --font:'Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono','Courier New',monospace;
+  --shadow:0 1px 3px rgba(0,40,80,.07),0 4px 16px rgba(0,40,80,.07);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{padding-bottom:60px;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:#BAE6FD;z-index:999}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,#0284C7,#38BDF8);width:0;transition:width .1s}
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0B1E35 0%,#0F2640 60%,#1E3A5F 100%);padding:52px 36px 40px;margin:0 -24px 0;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.14) 0%,transparent 70%);pointer-events:none}
+.hero-eye{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:#38BDF8;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-size:clamp(26px,5vw,42px);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:#fff;margin-bottom:14px;position:relative;z-index:1}
+.hero h1 em{color:#38BDF8;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.62);line-height:1.75;max-width:560px;margin-bottom:26px;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.hc{background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.28);color:rgba(255,255,255,.88);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+.hc.or{background:rgba(251,146,60,.1);border-color:rgba(251,146,60,.3);color:#FCA86B}
+.hc.gr{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.25);color:#86EFAC}
+.hero-bar{background:#0F2640;padding:12px 36px;margin:0 -24px 48px;border-top:1px solid rgba(56,189,248,.1);display:flex;gap:24px;flex-wrap:wrap}
+.hb-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5)}
+.hb-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* TOC */
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px 26px;margin-bottom:48px;box-shadow:var(--shadow)}
+.toc-ttl{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-family:var(--mono);margin-bottom:14px}
+.toc ol{padding-left:20px}
+.toc li{padding:4px 0;font-size:14px}
+.toc a{color:var(--muted);text-decoration:none;transition:color .15s}
+.toc a:hover{color:var(--accent)}
+
+/* SECTIONS */
+.section{margin-bottom:52px}
+.sec-hdr{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding:8px 10px;border-bottom:2px solid #BAE6FD;cursor:pointer;user-select:none;border-radius:10px;transition:background .15s}
+.sec-hdr:hover{background:#E0F2FE}
+.sec-hdr::after{content:"▲";font-size:13px;color:var(--accent);margin-left:auto;transition:transform .25s}
+.sec-hdr.collapsed::after{transform:rotate(180deg)}
+.acc-body{overflow:hidden;transition:max-height .35s ease,opacity .25s;max-height:9999px;opacity:1}
+.acc-body.collapsed{max-height:0!important;opacity:0}
+.sec-num{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,#0B1E35,#0284C7);color:#fff;font-family:var(--mono);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(2,132,199,.35)}
+.sec-title{font-size:clamp(17px,2.5vw,22px);font-weight:700;color:#0B1E35;line-height:1.2}
+
+h2.sub{font-size:17px;font-weight:700;color:var(--accent);margin:26px 0 12px;display:flex;align-items:center;gap:8px}
+h2.sub::before{content:'';width:4px;height:20px;background:#38BDF8;border-radius:2px;flex-shrink:0}
+p.body{font-size:14.5px;line-height:1.75;color:#293237;margin-bottom:14px}
+p.body strong{color:var(--text)}
+
+/* BOXES */
+.box{border-radius:var(--r-sm);padding:14px 18px;margin:14px 0;font-size:14px;line-height:1.7}
+.box-ttl{font-weight:700;font-size:13.5px;margin-bottom:8px}
+.bi{background:#E0F2FE;border-left:4px solid #0284C7;color:#0C4A6E}
+.bw{background:#FFF8E1;border-left:4px solid #F59E0B;color:#78350F}
+.bd{background:#FEE2E2;border-left:4px solid #DC2626;color:#7F1D1D}
+.bs{background:#D1FAE5;border-left:4px solid #059669;color:#064E3B}
+.box ul{padding-left:20px;margin:6px 0}
+.box li{margin:4px 0;font-size:13.5px}
+
+/* EQ */
+.eq-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 18px;margin:10px 0;box-shadow:var(--shadow)}
+.eq{font-family:var(--mono);font-size:13.5px;color:#0C1A2E;line-height:2.1;display:block}
+.eq-hdr{display:block;background:linear-gradient(90deg,#E0F2FE,#F0F9FF);border-left:4px solid #0284C7;padding:5px 12px;margin:10px 0 4px;font-size:13px;font-weight:700;color:#0B1E35}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border);margin:14px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--surface);font-size:13.5px}
+.tbl-wrap th{background:linear-gradient(135deg,#0B1E35,#0284C7);color:#fff;font-weight:600;padding:10px 14px;text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+td{padding:9px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:#F0F9FF}
+tr:hover td{background:#E0F2FE;transition:background .15s}
+
+/* CARDS GRID */
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:600px){.cards3{grid-template-columns:1fr}}
+.crd{border-radius:var(--r-sm);padding:14px;border:1.5px solid}
+
+/* ENV GRID */
+.env-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:600px){.env-grid{grid-template-columns:1fr}}
+.env{border-radius:var(--r-sm);padding:14px;border:1.5px solid}
+.env-ttl{font-weight:700;font-size:13px;margin-bottom:8px}
+.env-eq{font-family:var(--mono);font-size:12.5px;line-height:1.9}
+
+/* SCHEME */
+.scheme{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:18px;margin:14px 0;box-shadow:var(--shadow)}
+.sc{border:1.5px solid #0284C7;border-radius:8px;padding:8px 14px;font-family:var(--mono);font-size:13px;font-weight:700;color:#0C4A6E;background:#E0F2FE;text-align:center;white-space:nowrap}
+.sc.pk{border-color:#DB2777;background:#FCE7F3;color:#831843}
+.sc.gr{border-color:#059669;background:#D1FAE5;color:#064E3B}
+.sc.pu{border-color:#7C3AED;background:#EDE9FE;color:#4C1D95}
+.sa{font-size:20px;color:#0284C7;font-weight:700}
+.sp{font-size:18px;color:#64748B;font-weight:700}
+
+/* MEMO / TRAP */
+.memo{background:#E0F2FE;border:2px solid #0284C7;border-radius:var(--r-sm);padding:14px 18px;margin:14px 0}
+.memo-hd{color:#0B1E35;font-weight:800;font-size:13.5px;margin-bottom:10px}
+.memo ul{margin:0;padding-left:18px;font-size:13px;line-height:1.8}
+.trap{background:#FEF2F2;border:2px solid #DC2626;border-radius:var(--r-sm);padding:14px 18px;margin:14px 0}
+.trap-hd{color:#DC2626;font-weight:800;font-size:13.5px;margin-bottom:10px}
+.trap ul{margin:0;padding-left:18px;font-size:13px;line-height:1.8}
+
+/* PRACTICE */
+.prac{background:var(--surface);border:1.5px solid #BAE6FD;border-radius:var(--r);padding:20px;margin:24px 0;box-shadow:var(--shadow)}
+.prac-ttl{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-family:var(--mono);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.prac-ttl::before{content:'';display:block;height:1px;flex:1;background:var(--border)}
+.hr-card{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:var(--r-sm);padding:14px 16px;margin-bottom:12px}
+.hr-title{font-size:12.5px;font-weight:700;color:#475569;margin-bottom:8px}
+.hr-q{font-family:var(--mono);font-size:13px;color:#0C1A2E;line-height:2;margin-bottom:8px}
+.btn-ans{padding:6px 14px;background:#0284C7;color:#fff;border:none;border-radius:var(--r-sm);font-size:12px;font-weight:600;cursor:pointer;transition:background .15s}
+.btn-ans:hover{background:#0369A1}
+.ans-box{display:none;margin-top:10px;padding:10px 14px;background:linear-gradient(135deg,#D1FAE5,#A7F3D0);border-radius:var(--r-sm);font-family:var(--mono);font-size:13px;color:#064E3B;line-height:2}
+.ans-box.vis{display:block}
+
+/* MCQ */
+.mcq-wrap{margin:24px 0 4px}
+.mcq-ttl{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#0B1E35;font-family:var(--mono);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.mcq-ttl::before{content:'';display:block;flex:1;height:1px;background:var(--border)}
+.mcq-block{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:14px 16px;margin-bottom:10px}
+.mcq-q{font-size:14px;font-weight:600;color:var(--text);margin-bottom:10px;line-height:1.55}
+.mcq-opts{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px}
+@media(max-width:520px){.mcq-opts{grid-template-columns:1fr}}
+.mcq-opt{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:8px 11px;font-size:13px;cursor:pointer;text-align:left;color:#293237;transition:all .15s;line-height:1.4;font-family:var(--font)}
+.mcq-opt:hover{border-color:#38BDF8;background:#E0F2FE;color:#0284C7}
+.mcq-fb{font-size:13px;padding:7px 10px;border-radius:var(--r-sm);display:none;margin-top:2px}
+
+/* FLASHCARDS */
+.fc-section{background:linear-gradient(135deg,#0B1E35,#0F2640,#1E3A5F);border-radius:var(--r-lg);padding:32px 28px;margin:48px 0;color:#fff}
+.fc-header{text-align:center;margin-bottom:24px}
+.fc-title{font-size:clamp(18px,3vw,24px);font-weight:700;color:#fff;margin-bottom:6px}
+.fc-sub{font-size:14px;color:rgba(255,255,255,.6);line-height:1.6}
+.fc-stats{display:flex;justify-content:center;gap:24px;margin-bottom:14px;font-size:13px;color:rgba(255,255,255,.6);font-family:var(--mono)}
+.fc-stats span{color:#38BDF8;font-weight:700;font-size:16px}
+.fc-counter{text-align:center;font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.45);margin-bottom:14px}
+.fc-perspective{perspective:900px;width:100%;max-width:560px;margin:0 auto;cursor:pointer}
+.fc-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,0,.2,1);min-height:200px}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);display:flex;align-items:center;justify-content:center;padding:24px 28px;text-align:center;min-height:200px;flex-direction:column;gap:8px}
+.fc-front{background:rgba(56,189,248,.08);border:1.5px solid rgba(56,189,248,.22);font-size:clamp(13px,2.5vw,16px);font-family:var(--mono);color:#fff;line-height:1.65}
+.fc-back{background:#fff;transform:rotateY(180deg);font-family:var(--mono);font-size:clamp(12px,2vw,14.5px);color:#0B1E35;line-height:1.75;opacity:0;transition:opacity 0s 0s}
+.fc-inner.flipped .fc-back{opacity:1;transition:opacity 0s .22s}
+.fc-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px}
+.fc-back-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:#0284C7;margin-bottom:4px}
+.fc-flip-btn{display:flex;align-items:center;gap:8px;background:rgba(56,189,248,.12);border:1.5px solid rgba(56,189,248,.25);color:#fff;font-size:14px;font-weight:600;border-radius:var(--r-sm);padding:10px 24px;cursor:pointer;transition:background .2s;margin:14px auto 0;width:fit-content}
+.fc-flip-btn:hover{background:rgba(56,189,248,.22)}
+.fc-btn-row{display:none;gap:12px;justify-content:center;margin-top:14px}
+.fc-btn-know{background:#059669;color:#fff;border:none;border-radius:var(--r-sm);padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-know:hover{background:#047857}
+.fc-btn-dk{background:#DC2626;color:#fff;border:none;border-radius:var(--r-sm);padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-dk:hover{background:#B91C1C}
+.fc-keys{text-align:center;font-size:11px;color:rgba(255,255,255,.3);margin-top:10px;font-family:var(--mono)}
+.fc-result{display:none;text-align:center;padding:16px 10px 4px}
+.fc-result h3{font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:12px}
+.fc-res-row{display:flex;gap:16px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.fc-res-card{background:rgba(255,255,255,.08);border-radius:var(--r-sm);padding:12px 22px;min-width:100px}
+.fc-res-num{font-size:28px;font-weight:700}
+.fc-res-lbl{font-size:11px;color:rgba(255,255,255,.55);font-family:var(--mono);margin-top:2px}
+.fc-restart-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.fc-restart-btn{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.22);color:#fff;border-radius:var(--r-sm);padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
+.fc-restart-btn:hover{background:rgba(255,255,255,.22)}
+.fc-restart-btn.primary{background:#0284C7;border-color:#0284C7}
+
+/* ЗАКРЕПЛЕНИЕ */
+.zad-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:18px 20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.zad-num{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:1px;color:var(--accent);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.zad-list{font-size:13.5px;color:#293237;margin-bottom:10px;line-height:1.6}
+.zad-q{font-size:14px;color:#0C1A2E;line-height:1.7;margin-bottom:14px}
+.zad-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.hint-btn{padding:7px 16px;border:1.5px solid #0284C7;background:var(--surface);color:#0284C7;border-radius:var(--r-sm);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
+.hint-btn:hover{background:#E0F2FE}
+.hint-btn.ans{background:#0284C7;color:#fff;border-color:#0284C7}
+.hint-btn.ans:hover{background:#0369A1}
+.zad-hint{display:none;background:#FFFBEB;border:1.5px solid #F59E0B;border-radius:var(--r-sm);padding:12px 16px;margin-bottom:10px;font-size:13.5px;color:#78350F;line-height:1.7}
+.zad-hint.open{display:block}
+.zad-hint-ttl{font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#B45309;font-family:var(--mono);margin-bottom:6px}
+.zad-ans{display:none;background:#F0FDF4;border:1.5px solid #059669;border-radius:var(--r-sm);padding:14px 16px;margin-bottom:4px}
+.zad-ans.open{display:block}
+.zad-ans-ttl{font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#047857;font-family:var(--mono);margin-bottom:10px}
+.zad-eq{font-family:var(--mono);font-size:13.5px;color:#0B1E35;line-height:1.8;background:#fff;border-radius:6px;padding:10px 14px;margin-bottom:10px;border:1px solid #A7F3D0;word-break:break-word}
+.zad-meb{background:#E0F2FE;border-radius:6px;padding:10px 14px;margin-bottom:10px;font-family:var(--mono);font-size:13px;color:#0B1E35}
+.meb-row{display:flex;justify-content:space-between;align-items:center;padding:2px 0;border-bottom:1px solid #BAE6FD}
+.meb-row:last-child{border-bottom:none}
+.meb-half{flex:1}
+.meb-k{color:#0284C7;font-weight:700;font-size:14px;min-width:40px;text-align:right}
+.zad-roles{display:flex;gap:10px;flex-wrap:wrap}
+.role-ok{background:#FEE2E2;color:#991B1B;font-family:var(--mono);font-size:12px;padding:5px 12px;border-radius:16px;font-weight:600}
+.role-vos{background:#DCFCE7;color:#166534;font-family:var(--mono);font-size:12px;padding:5px 12px;border-radius:16px;font-weight:600}
+#back-top{position:fixed;bottom:24px;right:24px;width:42px;height:42px;border-radius:12px;background:#0284C7;color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(2,132,199,.4);display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .2s;opacity:0;pointer-events:none}
+#back-top.visible{opacity:1;pointer-events:all}
+#back-top:hover{transform:translateY(-2px)}
+@media(max-width:540px){.shell{padding:0 14px 60px}.hero{padding:36px 18px 32px;margin:0 -14px 0}.hero-bar{margin:0 -14px 32px;padding:12px 18px}}
+</style>
+</head>
+<body>
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eye">ЕГЭ · Химия · Задание №19</div>
+  <h1>ОВР с соединениями<br><em>хрома(VI)</em></h1>
+  <p class="hero-sub">Дихроматы, хроматы, оксид хрома — механизм окисления, зависимость от среды, полуреакции и метод электронного баланса.</p>
+  <div class="hero-chips">
+    <span class="hc">K₂Cr₂O₇</span>
+    <span class="hc">K₂CrO₄</span>
+    <span class="hc">CrO₃</span>
+    <span class="hc or">Cr⁺⁶ → Cr⁺³</span>
+    <span class="hc">3 среды</span>
+    <span class="hc">МЭБ</span>
+    <span class="hc gr">Флэшкарточки</span>
+  </div>
+</div>
+<div class="hero-bar">
+  <div class="hb-item"><div class="hb-dot" style="background:#FB923C"></div>K₂Cr₂O₇ — оранжевый</div>
+  <div class="hb-item"><div class="hb-dot" style="background:#FACC15"></div>K₂CrO₄ — жёлтый</div>
+  <div class="hb-item"><div class="hb-dot" style="background:#4ADE80"></div>Cr³⁺ — зелёный / серо-фиолетовый</div>
+</div>
+
+
+<!-- S1 -->
+<section class="section" id="s1">
+  <div class="sec-hdr collapsed" onclick="toggleSec(this)">
+    <div class="sec-num">1</div>
+    <h2 class="sec-title">Что такое ОВР</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <p class="body"><strong>Окислительно-восстановительные реакции (ОВР)</strong> — реакции, при которых меняется степень окисления элементов.</p>
+    <p class="body">Любая ОВР состоит из двух полуреакций:</p>
+    <div class="scheme">
+      <div class="sc pk">Окислитель</div><div class="sp">+</div>
+      <div class="sc">Восстановитель</div><div class="sa">=</div>
+      <div class="sc gr">Продукт восстановления</div><div class="sp">+</div>
+      <div class="sc pu">Продукт окисления</div>
+    </div>
+    <div class="box bi">
+      <div class="box-ttl">В нашей теме — окислитель</div>
+      Соединения хрома(VI): <strong>K₂Cr₂O₇, K₂CrO₄, CrO₃</strong>. Принимают электроны и восстанавливаются до Cr(III).
+    </div>
+    <p class="body">Коэффициенты расставляются <strong>методом электронного баланса (МЭБ)</strong>. Ключевое: в дихромат-анионе <strong>два</strong> атома хрома → при восстановлении принимается сразу <strong>6 электронов</strong>.</p>
+    <div class="eq-block">
+      <span class="eq-hdr">Полуреакция восстановления Cr(VI) — запомни по средам!</span>
+      <span class="eq">Кислая:&nbsp;&nbsp;&nbsp; Cr₂O₇²⁻ + 14H⁺ + 6e⁻ → 2Cr³⁺ + 7H₂O</span>
+      <span class="eq">Нейтр.:&nbsp;&nbsp; Cr₂O₇²⁻ + 7H₂O + 6e⁻ → 2Cr(OH)₃↓ + 8OH⁻</span>
+      <span class="eq">Щелочная: CrO₄²⁻ + 4H₂O + 3e⁻ → [Cr(OH)₆]³⁻ + 2OH⁻</span>
+    </div>
+  </div>
+</section>
+
+<!-- S2 -->
+<section class="section" id="s2">
+  <div class="sec-hdr collapsed" onclick="toggleSec(this)">
+    <div class="sec-num">2</div>
+    <h2 class="sec-title">Соединения хрома(VI) и равновесие хромат ⇌ дихромат</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="cards3">
+      <div class="crd" style="background:#FFF7ED;border-color:#EA580C">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#EA580C;margin-bottom:6px;font-family:var(--mono)">Дихромат калия</div>
+        <div style="font-size:20px;font-weight:700;font-family:var(--mono);color:#0C1A2E;margin-bottom:8px">K₂Cr₂O₇</div>
+        <div style="font-size:13px;color:#78350F;line-height:1.6">🟠 Оранжевые кристаллы<br>Растворим в воде<br>Устойчив в <strong>кислой</strong> среде</div>
+      </div>
+      <div class="crd" style="background:#FEFCE8;border-color:#CA8A04">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#CA8A04;margin-bottom:6px;font-family:var(--mono)">Хромат калия</div>
+        <div style="font-size:20px;font-weight:700;font-family:var(--mono);color:#0C1A2E;margin-bottom:8px">K₂CrO₄</div>
+        <div style="font-size:13px;color:#713F12;line-height:1.6">🟡 Жёлтые кристаллы<br>Растворим в воде<br>Устойчив в <strong>щелочной</strong> среде</div>
+      </div>
+      <div class="crd" style="background:#FEE2E2;border-color:#DC2626">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#DC2626;margin-bottom:6px;font-family:var(--mono)">Оксид хрома(VI)</div>
+        <div style="font-size:20px;font-weight:700;font-family:var(--mono);color:#0C1A2E;margin-bottom:8px">CrO₃</div>
+        <div style="font-size:13px;color:#7F1D1D;line-height:1.6">🔴 Тёмно-красные кристаллы<br>Хорошо растворим в воде<br>Очень сильный окислитель</div>
+      </div>
+    </div>
+
+    <h2 class="sub">Равновесие хромат ⇌ дихромат</h2>
+    <p class="body"><strong style="color:#7C3AED">Хроматы</strong> устойчивы в щелочной среде, <strong style="color:#EA580C">дихроматы</strong> — в кислой. Переход при изменении pH:</p>
+    <div class="eq-block">
+      <span class="eq-hdr" style="border-left-color:#EA580C">Добавление кислоты → дихромат (оранжевый)</span>
+      <span class="eq" style="color:#EA580C">2K₂CrO₄ + H₂SO₄ → K₂Cr₂O₇ + K₂SO₄ + H₂O</span>
+      <span class="eq-hdr" style="border-left-color:#7C3AED;background:linear-gradient(90deg,#EDE9FE,#F5F3FF)">Добавление щёлочи → хромат (жёлтый)</span>
+      <span class="eq" style="color:#7C3AED">K₂Cr₂O₇ + 2KOH → 2K₂CrO₄ + H₂O</span>
+    </div>
+    <div class="box bw">
+      <div class="box-ttl">Качественный признак равновесия</div>
+      Кислота + жёлтый K₂CrO₄ → раствор становится <strong>оранжевым</strong>. Щёлочь + оранжевый K₂Cr₂O₇ → <strong>жёлтым</strong>.
+    </div>
+  </div>
+</section>
+
+<!-- S3 -->
+<section class="section" id="s3">
+  <div class="sec-hdr collapsed" onclick="toggleSec(this)">
+    <div class="sec-num">3</div>
+    <h2 class="sec-title">Продукт восстановления зависит от среды</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <p class="body">Продукты восстановления хрома(VI) — <strong>всегда</strong> соединения хрома(III). Конкретный продукт определяет среда:</p>
+    <div class="env-grid">
+      <div class="env" style="background:#FFF7ED;border-color:#EA580C">
+        <div class="env-ttl" style="color:#EA580C">🔴 Кислая среда<br><small style="font-weight:400;font-size:11px">H₂SO₄, HCl и др.</small></div>
+        <div class="env-eq" style="color:#7C2D12">Продукт: <strong>Cr³⁺</strong> (соли)<br>Cr₂(SO₄)₃, CrCl₃<br><br>Цвет раствора:<br><strong>зелёный</strong> или<br><strong>серо-фиолетовый</strong></div>
+      </div>
+      <div class="env" style="background:#ECFDF5;border-color:#059669">
+        <div class="env-ttl" style="color:#059669">🟢 Нейтральная<br><small style="font-weight:400;font-size:11px">H₂O</small></div>
+        <div class="env-eq" style="color:#064E3B">Продукт: <strong>Cr(OH)₃↓</strong><br>зелёный осадок<br><br>На практике:<br>K[Cr(OH)₄]<br>светло-зелёный р-р</div>
+      </div>
+      <div class="env" style="background:#EDE9FE;border-color:#7C3AED">
+        <div class="env-ttl" style="color:#7C3AED">🟣 Щелочная<br><small style="font-weight:400;font-size:11px">NaOH, KOH</small></div>
+        <div class="env-eq" style="color:#4C1D95">Продукт: <strong>K₃[Cr(OH)₆]</strong><br>гексагидроксохромат<br><br>Цвет:<br><strong>изумрудно-зелёный</strong></div>
+      </div>
+    </div>
+    <div class="memo">
+      <div class="memo-hd">📌 Главное правило</div>
+      <ul>
+        <li>Кислая → <strong>Cr³⁺</strong> (соли, зелёный/серо-фиолетовый)</li>
+        <li>Нейтральная → <strong>Cr(OH)₃↓</strong> (зелёный осадок)</li>
+        <li>Слабощелочная → <strong>K[Cr(OH)₄]</strong> (тетрагидроксохромат)</li>
+        <li>Сильнощелочная → <strong>K₃[Cr(OH)₆]</strong> (гексагидроксохромат, изумрудно-зелёный)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- S4 -->
+<section class="section" id="s4">
+  <div class="sec-hdr collapsed" onclick="toggleSec(this)">
+    <div class="sec-num">4</div>
+    <h2 class="sec-title">Таблица восстановителей хрома(VI)</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <p class="body">Соединения хрома(VI) окисляют <strong>всех</strong> типичных восстановителей:</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Восстановитель</th><th>Продукт окисления</th><th>Признак реакции</th></tr></thead>
+        <tbody>
+          <tr><td>HCl (конц.), Cl⁻</td><td style="color:#059669;font-weight:700;font-family:var(--mono)">Cl₂↑</td><td>Жёлто-зелёный газ, резкий запах</td></tr>
+          <tr><td>HBr, бромиды NaBr</td><td style="font-weight:700;font-family:var(--mono)">Br₂</td><td>Побурение раствора</td></tr>
+          <tr><td>HI, иодиды NaI</td><td style="font-weight:700;font-family:var(--mono)">I₂</td><td>Бурое окрашивание</td></tr>
+          <tr><td>H₂O₂, пероксиды Na₂O₂</td><td style="font-weight:700;font-family:var(--mono)">O₂↑</td><td>Газ без цвета и запаха</td></tr>
+          <tr><td>H₂S, сульфиды Na₂S, NaHS</td><td style="color:#CA8A04;font-weight:700;font-family:var(--mono)">S↓</td><td>Жёлтый осадок</td></tr>
+          <tr><td>NH₃, нитриды Na₃N</td><td style="font-weight:700;font-family:var(--mono)">N₂↑</td><td>Выделение газа</td></tr>
+          <tr><td>PH₃, фосфиды Na₃P</td><td style="font-weight:700;font-family:var(--mono)">H₃PO₄ / Na₃PO₄</td><td>Зависит от среды</td></tr>
+          <tr><td>SiH₄, силициды Na₄Si</td><td style="font-weight:700;font-family:var(--mono)">H₂SiO₃↓ / Na₂SiO₃</td><td>Осадок кремниевой кислоты</td></tr>
+          <tr><td>SO₂, сульфиты Na₂SO₃, NaHSO₃</td><td style="font-weight:700;font-family:var(--mono)">H₂SO₄ / Na₂SO₄</td><td>Изменение цвета раствора</td></tr>
+          <tr><td>Fe²⁺ (FeO, FeSO₄, Fe(OH)₂)</td><td style="color:#DC2626;font-weight:700;font-family:var(--mono)">Fe³⁺</td><td>Бурый раствор или осадок</td></tr>
+          <tr><td>NO₂, нитриты NaNO₂</td><td style="font-weight:700;font-family:var(--mono)">HNO₃ / NaNO₃</td><td>Изменение цвета</td></tr>
+          <tr><td>Zn, Al и другие металлы</td><td style="font-weight:700;font-family:var(--mono)">ZnSO₄, Al₂(SO₄)₃</td><td>Растворение металла + цвет</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box bw">
+      <div class="box-ttl">⚠ Хлорид-ион — особый случай</div>
+      Cl⁻ окисляется только конц. HCl. С растворами NaCl реакция идёт плохо. Br⁻ и I⁻ окисляются как в кислотах, так и в растворах солей.
+    </div>
+    <div class="box bi"><div class="box-ttl">F⁻ не окисляется!</div>Фторид-анион соединениями хрома(VI) не окисляется.</div>
+  </div>
+</section>
+
+<!-- S5 КИСЛАЯ -->
+<section class="section" id="s5">
+  <div class="sec-hdr collapsed" onclick="toggleSec(this)">
+    <div class="sec-num">5</div>
+    <h2 class="sec-title">ОВР в кислой среде</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <p class="body">В кислой среде дихромат восстанавливается до <strong>солей хрома(III)</strong>. Признак: <span style="color:#EA580C">оранжевый</span> → <span style="color:#059669">зелёный</span> или серо-фиолетовый.</p>
+    <div class="eq-block">
+      <span class="eq-hdr">С хлорид-ионом (HCl конц.)</span>
+      <span class="eq">K₂Cr₂O₇ + 14HCl → 2CrCl₃ + 3Cl₂↑ + 2KCl + 7H₂O</span>
+      <span class="eq">2CrO₃ + 12HCl(конц.) → 2CrCl₃ + 3Cl₂↑ + 6H₂O</span>
+    </div>
+    <div class="eq-block">
+      <span class="eq-hdr">С бромид- и иодид-ионами</span>
+      <span class="eq">K₂Cr₂O₇ + 6KBr + 7H₂SO₄ → Cr₂(SO₄)₃ + 3Br₂ + 4K₂SO₄ + 7H₂O</span>
+      <span class="eq">K₂Cr₂O₇ + 14HI → 2CrI₃ + 3I₂ + 2KI + 7H₂O</span>
+    </div>
+    <div class="eq-block">
+      <span class="eq-hdr">С пероксидом водорода</span>
+      <span class="eq">K₂Cr₂O₇ + 3H₂O₂ + 4H₂SO₄ → Cr₂(SO₄)₃ + 3O₂↑ + K₂SO₄ + 7H₂O</span>
+    </div>
+    <div class="eq-block">
+      <span class="eq-hdr">С сероводородом и сульфидами</span>
+      <span class="eq">K₂Cr₂O₇ + 3H₂S + 4H₂SO₄ → Cr₂(SO₄)₃ + 3S↓ + K₂SO₄ + 7H₂O</span>
+      <span class="eq">K₂Cr₂O₇ + 6NaHS + 11H₂SO₄ → 2Cr₂(SO₄)₃ + 6S↓ + 2K₂SO₄ + 3Na₂SO₄ + 14H₂O</span>
+    </div>
+    <div class="eq-block">
+      <span class="eq-hdr">С нитритами, сульфитами, фосфином</span>
+      <span class="eq">K₂Cr₂O₇ + 3NaNO₂ + 4H₂SO₄ → Cr₂(SO₄)₃ + 3NaNO₃ + K₂SO₄ + 4H₂O</span>
+      <span class="eq">K₂Cr₂O₇ + 3K₂SO₃ + 4H₂SO₄ → Cr₂(SO₄)₃ + 4K₂SO₄ + 4H₂O</span>
+      <span class="eq">Na₂Cr₂O₇ + 3SO₂ + H₂SO₄ → Cr₂(SO₄)₃ + Na₂SO₄ + H₂O</span>
+      <span class="eq">4K₂Cr₂O₇ + 3PH₃ + 16H₂SO₄ → 4Cr₂(SO₄)₃ + 3H₃PO₄ + 4K₂SO₄ + 16H₂O</span>
+    </div>
+
+    <div class="prac">
+      <div class="prac-ttl">✎ Практика — кислая среда</div>
+
+      <div class="hr-card">
+        <div class="hr-title">Реакция 1 &nbsp;·&nbsp; K₂Cr₂O₇ + HCl(конц.) →</div>
+        <button class="btn-ans" onclick="showAns(this)">Показать ответ</button>
+        <div class="ans-box">Восст.: Cr₂O₇²⁻ + 14H⁺ + <b>6</b>e⁻ → 2Cr³⁺ + 7H₂O &nbsp;(×1)<br>Окисл.: 2Cl⁻ → Cl₂ + <b>2</b>e⁻ &nbsp;(×3)<br>────────────────────────────<br>K₂Cr₂O₇ + 14HCl → 2CrCl₃ + 3Cl₂↑ + 2KCl + 7H₂O</div>
+      </div>
+
+      <div class="hr-card">
+        <div class="hr-title">Реакция 2 &nbsp;·&nbsp; K₂Cr₂O₇ + KBr + H₂SO₄ →</div>
+        <button class="btn-ans" onclick="showAns(this)">Показать ответ</button>
+        <div class="ans-box">Восст.: Cr₂O₇²⁻ + 14H⁺ + <b>6</b>e⁻ → 2Cr³⁺ + 7H₂O &nbsp;(×1)<br>Окисл.: 2Br⁻ → Br₂ + <b>2</b>e⁻ &nbsp;(×3)<br>────────────────────────────<br>K₂Cr₂O₇ + 6KBr + 7H₂SO₄ → Cr₂(SO₄)₃ + 3Br₂ + 4K₂SO₄ + 7H₂O</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S6 НЕЙТРАЛЬНАЯ -->
+<section class="section" id="s6">
+  <div class="sec-hdr collapsed" onclick="toggleSec(this)">
+    <div class="sec-num">6</div>
+    <h2 class="sec-title">ОВР в нейтральной среде</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <p class="body">В нейтральной среде хроматы восстанавливаются до <strong>Cr(OH)₃↓</strong> — зелёный осадок. На практике зачастую образуется светло-зелёный раствор тетрагидроксохромата K[Cr(OH)₄].</p>
+    <div class="eq-block">
+      <span class="eq-hdr">С нитритом натрия — нейтральная</span>
+      <span class="eq">K₂Cr₂O₇ + 3NaNO₂ + 4H₂O → 2Cr(OH)₃↓ + 3NaNO₃ + 2KOH</span>
+    </div>
+    <div class="eq-block">
+      <span class="eq-hdr">С сульфидом калия — нейтральная</span>
+      <span class="eq">3K₂S + K₂Cr₂O₇ + 7H₂O → 3S↓ + 2Cr(OH)₃↓ + 8KOH</span>
+    </div>
+    <div class="eq-block">
+      <span class="eq-hdr">Образование тетрагидроксохромата (слабощелочная)</span>
+      <span class="eq">Cr(OH)₃ + KOH(нед.) → K[Cr(OH)₄]</span>
+      <span class="eq">K₂Cr₂O₇ + 3NaNO₂ + 4H₂O → 2K[Cr(OH)₄] + 3NaNO₃</span>
+    </div>
+    <div class="box bi">
+      <div class="box-ttl">Важно: нейтральная среда на практике</div>
+      Cr(OH)₃ — амфотерный гидроксид. Растворяется в щёлочи, образующейся по ходу реакции → образуется K[Cr(OH)₄]. При смысле задания "смотри на продукт" — указывай осадок или раствор в зависимости от условия.
+    </div>
+
+    <div class="prac">
+      <div class="prac-ttl">✎ Практика — нейтральная среда</div>
+
+      <div class="hr-card">
+        <div class="hr-title">Реакция 1 &nbsp;·&nbsp; K₂Cr₂O₇ + NaNO₂ + H₂O → Cr(OH)₃↓</div>
+        <button class="btn-ans" onclick="showAns(this)">Показать ответ</button>
+        <div class="ans-box">Восст.: Cr₂O₇²⁻ + 7H₂O + <b>6</b>e⁻ → 2Cr(OH)₃↓ + 4OH⁻ &nbsp;(×1)<br>Окисл.: NO₂⁻ + H₂O → NO₃⁻ + <b>2</b>e⁻ + 2H⁺ &nbsp;(×3)<br>────────────────────────────<br>K₂Cr₂O₇ + 3NaNO₂ + 4H₂O → 2Cr(OH)₃↓ + 3NaNO₃ + 2KOH</div>
+      </div>
+
+      <div class="hr-card">
+        <div class="hr-title">Реакция 2 &nbsp;·&nbsp; K₂S + K₂Cr₂O₇ + H₂O → Cr(OH)₃↓ + S↓</div>
+        <button class="btn-ans" onclick="showAns(this)">Показать ответ</button>
+        <div class="ans-box">Восст.: Cr₂O₇²⁻ + 7H₂O + <b>6</b>e⁻ → 2Cr(OH)₃↓ + 8OH⁻ &nbsp;(×1)<br>Окисл.: S²⁻ → S↓ + <b>2</b>e⁻ &nbsp;(×3)<br>────────────────────────────<br>3K₂S + K₂Cr₂O₇ + 7H₂O → 3S↓ + 2Cr(OH)₃↓ + 8KOH</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S7 СОПРОПОРЦИОНИРОВАНИЕ -->
+<section class="section" id="s7">
+  <div class="sec-hdr collapsed" onclick="toggleSec(this)">
+    <div class="sec-num">7</div>
+    <h2 class="sec-title">Реакции сопропорционирования</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <p class="body">Соединения хрома(VI) реагируют с солями хрома(II): оба приходят к Cr³⁺.</p>
+    <div class="eq-block">
+      <span class="eq-hdr">Cr²⁺ + Cr⁶⁺ → 2 Cr³⁺</span>
+      <span class="eq">6CrSO₄ + K₂Cr₂O₇ + 7H₂SO₄ → 4Cr₂(SO₄)₃ + K₂SO₄ + 7H₂O</span>
+      <span class="eq">K₂Cr₂O₇ + 6FeSO₄ + 7H₂SO₄ → Cr₂(SO₄)₃ + 3Fe₂(SO₄)₃ + K₂SO₄ + 7H₂O</span>
+      <span class="eq">K₂Cr₂O₇ + 6FeO + 13H₂SO₄ → Cr₂(SO₄)₃ + 3Fe₂(SO₄)₃ + K₂SO₄ + 13H₂O</span>
+      <span class="eq">(NH₄)₂Cr₂O₇ + 3Zn + 7H₂SO₄ → Cr₂(SO₄)₃ + 3ZnSO₄ + (NH₄)₂SO₄ + 7H₂O</span>
+    </div>
+    <div class="box bi">
+      <div class="box-ttl">Признак реакций сопропорционирования</div>
+      Изменение цвета раствора с оранжевого на зелёный. При растворении твёрдых веществ — исчезновение твёрдой фазы + изменение цвета.
+    </div>
+  </div>
+</section>
+
+<!-- S8 ЛОВУШКИ -->
+<section class="section" id="s8">
+  <div class="sec-hdr collapsed" onclick="toggleSec(this)">
+    <div class="sec-num">8</div>
+    <h2 class="sec-title">Ловушки ЕГЭ</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <div class="trap">
+      <div class="trap-hd">⛔ Типичные ошибки</div>
+      <ul>
+        <li><strong>В Cr₂O₇²⁻ — два атома Cr</strong>: МЭБ принимает 6e⁻, не 3!</li>
+        <li><strong>F⁻ не окисляется</strong> соединениями хрома(VI).</li>
+        <li><strong>Соли аммония не окисляются</strong> хроматами/дихроматами.</li>
+        <li><strong>Cl⁻ окисляется только конц. HCl</strong>, с NaCl реакция не идёт.</li>
+        <li><strong>Среда определяет продукт</strong>: не пиши Cr³⁺ в щелочной и Cr(OH)₃ в кислой.</li>
+        <li><strong>Нейтральная среда</strong>: Cr(OH)₃↓ или K[Cr(OH)₄] — смотри на смысл задания.</li>
+        <li><strong>Нерастворимые соединения</strong> нельзя окислить в нейтральной среде — только в кислой.</li>
+      </ul>
+    </div>
+    <div class="memo">
+      <div class="memo-hd">📌 Цвета — запомни</div>
+      <ul>
+        <li>K₂Cr₂O₇ — оранжевый раствор → после реакции: зелёный (Cr³⁺)</li>
+        <li>K₂CrO₄ — жёлтый → после реакции (щёлочь): изумрудно-зелёный</li>
+        <li>Cl₂ — жёлто-зелёный газ с резким запахом</li>
+        <li>Br₂ — коричневый (бромная вода)</li>
+        <li>S↓ — жёлтый осадок</li>
+        <li>O₂ — бесцветный газ без запаха</li>
+        <li>Cr(OH)₃↓ — зелёный осадок</li>
+        <li>K₃[Cr(OH)₆] — изумрудно-зелёный раствор</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ЗАКРЕПЛЕНИЕ -->
+<section class="section" id="zak">
+  <div class="sec-hdr collapsed" onclick="toggleSec(this)">
+    <div class="sec-num" style="background:linear-gradient(135deg,#7C3AED,#0284C7)">✎</div>
+    <h2 class="sec-title">Закрепление — задания ЕГЭ, линия 29 (соединения хрома)</h2>
+  </div>
+  <div class="acc-body collapsed">
+    <p class="body">Реальные задания ЕГЭ с хроматами и дихроматами. Прочитай условие, найди нужные вещества, составь уравнение. Подсказка и ответ открываются по кнопке.</p>
+
+    <!-- Задание 1 (PDF) -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №77964</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> хромат натрия, сульфид натрия, серная кислота, гидрокарбонат магния, оксид марганца(IV), нитрит натрия.</div>
+      <div class="zad-q">Выберите окислитель и восстановитель, реакция между которыми протекает с образованием <strong>трёх солей</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Три соли → нужны три разных катиона или аниона в продуктах. Хромат — окислитель (Cr⁺⁶). В кислой среде хромат переходит в дихромат и восстанавливается до Cr³⁺. Нитрит — восстановитель (N⁺³ → N⁺⁵). Среда — H₂SO₄.
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">2Na₂CrO₄ + 3NaNO₂ + 5H₂SO₄ → Cr₂(SO₄)₃ + 3NaNO₃ + 2Na₂SO₄ + 5H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">Cr⁺⁶ + 3ē → Cr⁺³</span><span class="meb-k">| 2</span></div>
+          <div class="meb-row"><span class="meb-half">N⁺³ − 2ē → N⁺⁵</span><span class="meb-k">| 3</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: Na₂CrO₄ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: NaNO₂ (N⁺³)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 2 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №45737</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> йодид магния, гидроксид железа(II), пероксид водорода, хромат калия, нитрат марганца(II), серная кислота.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми даёт <strong>простое вещество и раствор трёх солей</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Простое вещество — I₂. Хромат — окислитель (Cr⁺⁶→Cr⁺³). Иодид — восстановитель (2I⁻→I₂+2e⁻). Три соли: Cr₂(SO₄)₃, K₂SO₄, MgSO₄. Среда кислая (H₂SO₄).
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">3MgI₂ + 2K₂CrO₄ + 8H₂SO₄ → Cr₂(SO₄)₃ + 2K₂SO₄ + 3MgSO₄ + 3I₂ + 8H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">Cr⁺⁶ + 3ē → Cr⁺³</span><span class="meb-k">| 2</span></div>
+          <div class="meb-row"><span class="meb-half">2I⁻ − 2ē → I₂⁰</span><span class="meb-k">| 3</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: K₂CrO₄ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: MgI₂ (I⁻)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 3 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №44697</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> хромат натрия, серная кислота, силикат калия, гидрокарбонат магния, оксид фосфора(V), нитрит натрия.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми в кислой среде даёт <strong>соли</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Хромат — окислитель (Cr⁺⁶→Cr⁺³), нитрит — восстановитель (N⁺³→N⁺⁵). Среда кислая (H₂SO₄). Три соли: Cr₂(SO₄)₃, NaNO₃, Na₂SO₄.
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">2Na₂CrO₄ + 3NaNO₂ + 5H₂SO₄ → Cr₂(SO₄)₃ + 3NaNO₃ + 2Na₂SO₄ + 5H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">Cr⁺⁶ + 3ē → Cr⁺³</span><span class="meb-k">| 2</span></div>
+          <div class="meb-row"><span class="meb-half">N⁺³ − 2ē → N⁺⁵</span><span class="meb-k">| 3</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: Na₂CrO₄ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: NaNO₂ (N⁺³)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 4 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №77961</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> гидроксид железа(III), сероводород, нитрат серебра(I), дихромат натрия, серная кислота, гидроксид калия.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми даёт <strong>простое вещество и две соли</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Простое вещество — S↓. Дихромат — окислитель (2Cr⁺⁶→2Cr⁺³, +6e⁻). H₂S — восстановитель (S⁻²→S⁰). Среда кислая (H₂SO₄).
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">Na₂Cr₂O₇ + 3H₂S + 4H₂SO₄ → Cr₂(SO₄)₃ + 3S↓ + Na₂SO₄ + 7H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">S⁻² − 2ē → S⁰</span><span class="meb-k">| 3</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: Na₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: H₂S (S⁻²)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 5 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №47367</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> сульфит калия, дихромат калия, серная кислота, гидроксид хрома(III), нитрат цинка, сульфат кальция.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми даёт <strong>две соли с одинаковым анионом</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Два сульфата: Cr₂(SO₄)₃ и K₂SO₄. Дихромат — окислитель (Cr⁺⁶→Cr⁺³). Сульфит — восстановитель (S⁺⁴→S⁺⁶). Среда кислая (H₂SO₄).
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">K₂Cr₂O₇ + 3K₂SO₃ + 4H₂SO₄ → Cr₂(SO₄)₃ + 4K₂SO₄ + 4H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">S⁺⁴ − 2ē → S⁺⁶</span><span class="meb-k">| 3</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: K₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: K₂SO₃ (S⁺⁴)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 6 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №247608</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> сульфат алюминия, хлор, гидроксид калия, гидрокарбонат натрия, хлорид хрома(III), дихромат аммония.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми даёт <strong>жёлтый раствор</strong> (без газа и осадка). Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Жёлтый раствор — хромат K₂CrO₄. Здесь Cr³⁺ <em>окисляется</em> до Cr⁶⁺! Cl₂ — окислитель (Cl⁰→Cl⁻). CrCl₃ — восстановитель (Cr⁺³→Cr⁺⁶). Среда щелочная (KOH).
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">2CrCl₃ + 3Cl₂ + 16KOH → 2K₂CrO₄ + 12KCl + 8H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">Cl₂⁰ + 2ē → 2Cl⁻</span><span class="meb-k">| 3</span></div>
+          <div class="meb-row"><span class="meb-half">Cr⁺³ − 3ē → Cr⁺⁶</span><span class="meb-k">| 2</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: Cl₂ (Cl⁰)</span><span class="role-vos">Восстановитель: CrCl₃ (Cr⁺³)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 7 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №25433</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> дихромат калия, серная кислота, нитрат натрия, сульфид калия, гидрокарбонат натрия, гидросульфат калия.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми даёт <strong>простое вещество и две соли</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Простое вещество — S↓. Дихромат — окислитель (Cr⁺⁶→Cr⁺³). Сульфид — восстановитель (S²⁻→S⁰). Среда кислая (H₂SO₄).
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">3K₂S + K₂Cr₂O₇ + 7H₂SO₄ → 3S↓ + Cr₂(SO₄)₃ + 4K₂SO₄ + 7H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">S²⁻ − 2ē → S⁰</span><span class="meb-k">| 3</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: K₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: K₂S (S²⁻)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 8 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №25387</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> сероводород, карбонат аммония, сульфат железа(II), дихромат калия, серная кислота, хлорид натрия.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми даёт <strong>три соли</strong> (без газа и осадка). Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Три соли: Cr₂(SO₄)₃ + Fe₂(SO₄)₃ + K₂SO₄. Дихромат — окислитель. FeSO₄ — восстановитель (Fe²⁺→Fe³⁺). Нужно 6 молекул FeSO₄ на 1 Cr₂O₇²⁻.
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">6FeSO₄ + K₂Cr₂O₇ + 7H₂SO₄ → 3Fe₂(SO₄)₃ + Cr₂(SO₄)₃ + K₂SO₄ + 7H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">Fe²⁺ − ē → Fe³⁺</span><span class="meb-k">| 6</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: K₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: FeSO₄ (Fe²⁺)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 9 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №25365</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> нитрит натрия, сероводород, нитрат серебра(I), дихромат натрия, оксид марганца(IV), серная кислота.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми даёт <strong>две соли и простое вещество</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Простое вещество — S↓. Дихромат Na — окислитель. H₂S — восстановитель. Среда кислая (H₂SO₄). Продукты: Cr₂(SO₄)₃, Na₂SO₄, S↓.
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">3H₂S + Na₂Cr₂O₇ + 4H₂SO₄ → 3S↓ + Cr₂(SO₄)₃ + Na₂SO₄ + 7H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">S⁻² − 2ē → S⁰</span><span class="meb-k">| 3</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: Na₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: H₂S (S⁻²)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 10 -->
+    <div class="zad-card" style="border-color:#0284C7">
+      <div class="zad-num">Задание №70346 <span style="color:#0284C7;font-size:11px;font-family:var(--mono);background:#E0F2FE;padding:2px 8px;border-radius:10px;margin-left:8px">ЕГЭ 2024/2026</span></div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> силикат калия, нитрит натрия, дихромат натрия, серная кислота, бромид натрия, ацетат аммония.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми даёт <strong>простое вещество и две соли</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Простое вещество — Br₂. Дихромат — окислитель. Бромид — восстановитель (2Br⁻→Br₂+2e⁻). Среда кислая (H₂SO₄).
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">Na₂Cr₂O₇ + 6NaBr + 7H₂SO₄ → Cr₂(SO₄)₃ + 3Br₂ + 4Na₂SO₄ + 7H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">2Br⁻ − 2ē → Br₂⁰</span><span class="meb-k">| 3</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: Na₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: NaBr (Br⁻)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 11 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №28559</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> карбонат аммония, серная кислота, сульфат хрома(II), дихромат калия, хлорид натрия, сероводород.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми даёт <strong>две соли без газа и осадка</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Сопропорционирование: Cr²⁺ и Cr⁶⁺ → оба дают Cr³⁺. Дихромат — окислитель (Cr⁺⁶→Cr⁺³). CrSO₄ — восстановитель (Cr²⁺→Cr³⁺, −1e⁻). Нужно 6 молекул CrSO₄.
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">6CrSO₄ + K₂Cr₂O₇ + 7H₂SO₄ → 4Cr₂(SO₄)₃ + K₂SO₄ + 7H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">Cr⁺² − ē → Cr⁺³</span><span class="meb-k">| 6</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: K₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: CrSO₄ (Cr²⁺)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 12 -->
+    <div class="zad-card" style="border-color:#0284C7">
+      <div class="zad-num">Задание №25331 <span style="color:#0284C7;font-size:11px;font-family:var(--mono);background:#E0F2FE;padding:2px 8px;border-radius:10px;margin-left:8px">ЕГЭ 2024/2026</span></div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> силикат натрия, нитрит калия, дихромат калия, серная кислота, йодид калия, ацетат аммония.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми даёт <strong>простое вещество и две соли</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Простое вещество — I₂. Дихромат — окислитель. KI — восстановитель (2I⁻→I₂+2e⁻). Среда кислая (H₂SO₄).
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">K₂Cr₂O₇ + 6KI + 7H₂SO₄ → Cr₂(SO₄)₃ + 4K₂SO₄ + 3I₂ + 7H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">2I⁻ − 2ē → I₂⁰</span><span class="meb-k">| 3</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: K₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: KI (I⁻)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 13 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №24665</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> фосфин, гидроксид натрия, серная кислота, дихромат калия, хлорид меди(II), аммиак.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми выделяет <strong>бесцветный газ без запаха</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Бесцветный газ без запаха — N₂. NH₃ — восстановитель (N⁻³→N₂⁰). Дихромат — окислитель (Cr⁺⁶→Cr⁺³). Среда кислая (H₂SO₄).
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">2NH₃ + K₂Cr₂O₇ + 4H₂SO₄ → Cr₂(SO₄)₃ + K₂SO₄ + N₂↑ + 7H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2N⁻³ − 6ē → N₂⁰</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: K₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: NH₃ (N⁻³)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 14 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №24633</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> ацетат магния, сероводород, сульфат меди(II), хлорид хрома(III), оксид углерода(IV), дихромат калия.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми даёт <strong>жёлтое простое вещество и серо-зелёный осадок</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Жёлтое простое — S↓, зелёный осадок — Cr(OH)₃↓. Нейтральная или слабокислая среда. Дихромат восстанавливается до Cr(OH)₃ (нейтральная).
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">K₂Cr₂O₇ + 3H₂S + H₂O → 2Cr(OH)₃↓ + 3S↓ + 2KOH</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">S⁻² − 2ē → S⁰</span><span class="meb-k">| 3</span></div>
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: K₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: H₂S (S⁻²)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 15 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №16806</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> нитрат цинка, сульфид лития, соляная кислота, пероксид водорода, дихромат калия, гидроксид алюминия.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми сопровождается <strong>изменением цвета и выделением газа</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Цвет меняется: оранжевый→зелёный. Газ — O₂↑. H₂O₂ — восстановитель (O⁻¹→O₂⁰). Дихромат — окислитель. Среда кислая (HCl).
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">K₂Cr₂O₇ + 3H₂O₂ + 8HCl → 2CrCl₃ + 3O₂↑ + 2KCl + 7H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">2O⁻¹ − 2ē → O₂⁰</span><span class="meb-k">| 3</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: K₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: H₂O₂ (O⁻¹)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 16 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №16787</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> сернистый газ, гидроксид калия, серная кислота, йодид натрия, дихромат калия, дигидрофосфат аммония.</div>
+      <div class="zad-q">Выберите вещества, в реакции между которыми число принятых электронов <strong>в 3 раза больше числа отданных</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Баланс коэффициентов: принято 6e⁻ (Cr⁺⁶→Cr⁺³, коэф. 1), отдано 2e⁻ (S⁺⁴→S⁺⁶, коэф. 3) → 6=3×2 ✓. SO₂ — восстановитель. Среда кислая (H₂SO₄).
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">K₂Cr₂O₇ + 3SO₂ + H₂SO₄ → K₂SO₄ + Cr₂(SO₄)₃ + H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">S⁺⁴ − 2ē → S⁺⁶</span><span class="meb-k">| 3</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: K₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: SO₂ (S⁺⁴)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 17 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №16746</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> бром, нитрат бария, сульфат аммония, соляная кислота, дихромат калия, гидроксид калия.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми выделяет <strong>жёлто-зелёный газ</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Жёлто-зелёный газ — Cl₂↑. Дихромат — окислитель (Cr⁺⁶→Cr⁺³). HCl конц. — восстановитель (Cl⁻→Cl₂). 14HCl: 6 идут на баланс, 8 нужны для растворения хромата.
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">K₂Cr₂O₇ + 14HCl → 2KCl + 2CrCl₃ + 3Cl₂↑ + 7H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">2Cl⁻ − 2ē → Cl₂⁰</span><span class="meb-k">| 3</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: K₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: HCl (Cl⁻)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 18 -->
+    <div class="zad-card">
+      <div class="zad-num">Задание №65406</div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> серная кислота, ацетат натрия, железо, дихромат калия, сероводород, бромид калия.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми даёт <strong>простое вещество без выделения газа</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Простое вещество без газа — Br₂ (жидкость в растворе). KBr — восстановитель (2Br⁻→Br₂+2e⁻). Дихромат — окислитель. Среда кислая (H₂SO₄).
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">6KBr + K₂Cr₂O₇ + 7H₂SO₄ → 3Br₂ + Cr₂(SO₄)₃ + 4K₂SO₄ + 7H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">2Br⁻ − 2ē → Br₂⁰</span><span class="meb-k">| 3</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: K₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: KBr (Br⁻)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 19 -->
+    <div class="zad-card" style="border-color:#0284C7">
+      <div class="zad-num">Задание №25476 <span style="color:#0284C7;font-size:11px;font-family:var(--mono);background:#E0F2FE;padding:2px 8px;border-radius:10px;margin-left:8px">ЕГЭ 2024</span></div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> фтороводород, карбонат аммония, сульфат железа(II), дихромат калия, серная кислота, аммиак.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми даёт <strong>три соли</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Три соли: Fe₂(SO₄)₃, Cr₂(SO₄)₃, K₂SO₄. Дихромат — окислитель. FeSO₄ — восстановитель (Fe²⁺→Fe³⁺). Нужно 6 FeSO₄.
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">6FeSO₄ + K₂Cr₂O₇ + 7H₂SO₄ → 3Fe₂(SO₄)₃ + Cr₂(SO₄)₃ + K₂SO₄ + 7H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">Fe²⁺ − ē → Fe³⁺</span><span class="meb-k">| 6</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: K₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: FeSO₄ (Fe²⁺)</span></div>
+      </div>
+    </div>
+
+    <!-- Задание 20 -->
+    <div class="zad-card" style="border-color:#0284C7">
+      <div class="zad-num">Задание №25341 <span style="color:#0284C7;font-size:11px;font-family:var(--mono);background:#E0F2FE;padding:2px 8px;border-radius:10px;margin-left:8px">ЕГЭ 2024</span></div>
+      <div class="zad-list"><strong>Перечень веществ:</strong> силикат калия, нитрит натрия, дихромат натрия, серная кислота, бромид натрия, ацетат аммония.</div>
+      <div class="zad-q">Выберите вещества, реакция между которыми даёт <strong>простое вещество и две соли</strong>. Составьте уравнение и электронный баланс.</div>
+      <div class="zad-btns">
+        <button class="hint-btn" onclick="toggleZad(this,'hint')">💡 Подсказка</button>
+        <button class="hint-btn ans" onclick="toggleZad(this,'ans')">Показать ответ</button>
+      </div>
+      <div class="zad-hint">
+        <div class="zad-hint-ttl">Подсказка</div>
+        Простое вещество — Br₂. Дихромат Na — окислитель. NaBr — восстановитель (2Br⁻→Br₂+2e⁻). Среда кислая (H₂SO₄). Продукты: Cr₂(SO₄)₃, Na₂SO₄.
+      </div>
+      <div class="zad-ans">
+        <div class="zad-ans-ttl">Ответ</div>
+        <div class="zad-eq">6NaBr + Na₂Cr₂O₇ + 7H₂SO₄ → 3Br₂ + Cr₂(SO₄)₃ + 4Na₂SO₄ + 7H₂O</div>
+        <div class="zad-meb">
+          <div class="meb-row"><span class="meb-half">2Cr⁺⁶ + 6ē → 2Cr⁺³</span><span class="meb-k">| 1</span></div>
+          <div class="meb-row"><span class="meb-half">2Br⁻ − 2ē → Br₂⁰</span><span class="meb-k">| 3</span></div>
+        </div>
+        <div class="zad-roles"><span class="role-ok">Окислитель: Na₂Cr₂O₇ (Cr⁺⁶)</span><span class="role-vos">Восстановитель: NaBr (Br⁻)</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FLASHCARDS -->
+<div class="fc-section" id="fc">
+  <div class="fc-header">
+    <div class="fc-title">Флэшкарточки — реакции по средам</div>
+    <div class="fc-sub">Что образуется при восстановлении хрома(VI) в разных условиях?<br>Пробел — перевернуть · ← не знаю · → знаю</div>
+  </div>
+  <div class="fc-stats">Знаю: <span id="fc-know">0</span> &nbsp;|&nbsp; Не знаю: <span id="fc-dk">0</span> &nbsp;|&nbsp; Осталось: <span id="fc-left">0</span></div>
+  <div class="fc-counter" id="fc-counter">Карточка 1 из 1</div>
+  <div class="fc-perspective" onclick="fcFlip()">
+    <div class="fc-inner" id="fc-inner">
+      <div class="fc-face fc-front">
+        <div class="fc-tag" id="fc-tag"></div>
+        <div id="fc-front-text"></div>
+      </div>
+      <div class="fc-face fc-back">
+        <div class="fc-back-tag" id="fc-back-tag"></div>
+        <div id="fc-back-text"></div>
+      </div>
+    </div>
+  </div>
+  <button class="fc-flip-btn" onclick="fcFlip()">↩ Перевернуть</button>
+  <div class="fc-btn-row" id="fc-btn-row">
+    <button class="fc-btn-know" onclick="fcAnswer(true)">✓ Знаю</button>
+    <button class="fc-btn-dk" onclick="fcAnswer(false)">✗ Не знаю</button>
+  </div>
+  <div class="fc-keys">пробел — перевернуть · ← не знаю · → знаю</div>
+  <div class="fc-result" id="fc-result">
+    <h3>Готово!</h3>
+    <div class="fc-res-row">
+      <div class="fc-res-card"><div class="fc-res-num" id="res-know" style="color:#4ADE80">0</div><div class="fc-res-lbl">ЗНАЮ</div></div>
+      <div class="fc-res-card"><div class="fc-res-num" id="res-dk" style="color:#F87171">0</div><div class="fc-res-lbl">НЕ ЗНАЮ</div></div>
+    </div>
+    <div class="fc-restart-row">
+      <button class="fc-restart-btn primary" onclick="fcRestart(false)">Сначала (все)</button>
+      <button class="fc-restart-btn" onclick="fcRestart(true)">Только ошибки</button>
+    </div>
+  </div>
+</div>
+
+</div>
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+function toggleSec(hdr){hdr.classList.toggle('collapsed');hdr.nextElementSibling.classList.toggle('collapsed');}
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  document.getElementById('pf').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';
+  document.getElementById('back-top').classList.toggle('visible',d.scrollTop>400);
+});
+function toggleZad(btn,type){
+  const card=btn.closest('.zad-card');
+  const el=card.querySelector('.zad-'+type);
+  const isOpen=el.classList.toggle('open');
+  btn.textContent=type==='hint'
+    ?(isOpen?'💡 Скрыть подсказку':'💡 Подсказка')
+    :(isOpen?'Скрыть ответ':'Показать ответ');
+}
+function showAns(btn){
+  const b=btn.nextElementSibling;
+  b.classList.toggle('vis');
+  btn.textContent=b.classList.contains('vis')?'Скрыть ответ':'Показать ответ';
+}
+const MCQ_OK=['Верно! В кислой среде — соли Cr³⁺.','Верно! 2 атома Cr × 3e⁻ = 6e⁻.','Верно! F⁻ не окисляется хроматами.','Верно! K₂CrO₄ — жёлтый раствор.','Верно! В изб. KOH → K₃[Cr(OH)₆].'];
+const MCQ_NO=['Неверно. Cr(OH)₃ — нейтральная среда.','Неверно. Дихромат содержит 2 Cr → 6e⁻.','Неверно. F⁻ единственный, кто не окисляется.','Неверно. Оранжевый — это K₂Cr₂O₇.','Неверно. K[Cr(OH)₄] — при нед. KOH.'];
+function mcqPick(btn,idx){
+  const block=btn.closest('.mcq-block');
+  if(block.dataset.answered) return;
+  block.dataset.answered='1';
+  const correct=+block.dataset.correct;
+  const qi=Array.from(document.querySelectorAll('.mcq-block')).indexOf(block);
+  const fb=block.querySelector('.mcq-fb');
+  block.querySelectorAll('.mcq-opt').forEach((o,i)=>{
+    o.style.pointerEvents='none';
+    if(i===correct) o.style.cssText+='border-color:#059669;background:#D1FAE5;color:#064E3B;font-weight:700';
+    else if(i===idx&&idx!==correct) o.style.cssText+='border-color:#DC2626;background:#FEE2E2;color:#7F1D1D';
+  });
+  fb.style.display='block';
+  if(idx===correct){fb.style.cssText='display:block;background:#D1FAE5;color:#064E3B;padding:7px 10px;border-radius:6px;font-size:13px;margin-top:4px';fb.textContent='✓ '+MCQ_OK[qi];}
+  else{fb.style.cssText='display:block;background:#FEE2E2;color:#7F1D1D;padding:7px 10px;border-radius:6px;font-size:13px;margin-top:4px';fb.textContent='✗ '+MCQ_NO[qi];}
+}
+
+const FC=[
+  {t:'Кислая среда',q:'K₂Cr₂O₇ + HCl(конц.) →\n\nКакой продукт хрома?\nКакой признак?',a:'2CrCl₃ (зелёный) + 3Cl₂↑ + 2KCl + 7H₂O\n\nПризнак: раствор зеленеет,\nжёлто-зелёный газ Cl₂ с резким запахом'},
+  {t:'Кислая среда',q:'K₂Cr₂O₇ + KBr + H₂SO₄ →\n\nКакой продукт хрома? Брома?',a:'Cr₂(SO₄)₃ (зелёный) + 3Br₂ (коричневый)\n\nK₂Cr₂O₇ + 6KBr + 7H₂SO₄ →\nCr₂(SO₄)₃ + 3Br₂ + 4K₂SO₄ + 7H₂O'},
+  {t:'Кислая среда',q:'K₂Cr₂O₇ + HI →\n\nКакой продукт хрома? Иода?',a:'2CrI₃ (зелёный) + 3I₂ (бурый)\n\nK₂Cr₂O₇ + 14HI →\n2CrI₃ + 3I₂ + 2KI + 7H₂O'},
+  {t:'Кислая среда',q:'K₂Cr₂O₇ + H₂S + H₂SO₄ →\n\nКакой продукт серы?',a:'S↓ (жёлтый осадок) + Cr₂(SO₄)₃\n\nK₂Cr₂O₇ + 3H₂S + 4H₂SO₄ →\nCr₂(SO₄)₃ + 3S↓ + K₂SO₄ + 7H₂O'},
+  {t:'Кислая среда',q:'K₂Cr₂O₇ + H₂O₂ + H₂SO₄ →\n\nКакой продукт кислорода?',a:'O₂↑ (бесцветный, без запаха) + Cr₂(SO₄)₃\n\nK₂Cr₂O₇ + 3H₂O₂ + 4H₂SO₄ →\nCr₂(SO₄)₃ + 3O₂↑ + K₂SO₄ + 7H₂O'},
+  {t:'Кислая среда',q:'K₂Cr₂O₇ + FeSO₄ + H₂SO₄ →\n\nКакой продукт железа?',a:'Fe₂(SO₄)₃ (бурый р-р) + Cr₂(SO₄)₃\n\nK₂Cr₂O₇ + 6FeSO₄ + 7H₂SO₄ →\nCr₂(SO₄)₃ + 3Fe₂(SO₄)₃ + K₂SO₄ + 7H₂O'},
+  {t:'Кислая среда',q:'K₂Cr₂O₇ + NaNO₂ + H₂SO₄ →\n\nКакой продукт азота?',a:'NaNO₃ (нитрат) + Cr₂(SO₄)₃\n\nK₂Cr₂O₇ + 3NaNO₂ + 4H₂SO₄ →\nCr₂(SO₄)₃ + 3NaNO₃ + K₂SO₄ + 4H₂O'},
+  {t:'Кислая среда',q:'K₂Cr₂O₇ + K₂SO₃ + H₂SO₄ →\n\nКакой продукт серы?',a:'K₂SO₄ (сульфат) + Cr₂(SO₄)₃\n\nK₂Cr₂O₇ + 3K₂SO₃ + 4H₂SO₄ →\nCr₂(SO₄)₃ + 4K₂SO₄ + 4H₂O'},
+  {t:'Нейтральная среда',q:'K₂Cr₂O₇ + NaNO₂ + H₂O →\n\nЧто образуется из хрома?\nЦвет?',a:'Cr(OH)₃↓ — зелёный осадок\n\nK₂Cr₂O₇ + 3NaNO₂ + 4H₂O →\n2Cr(OH)₃↓ + 3NaNO₃ + 2KOH'},
+  {t:'Нейтральная среда',q:'3K₂S + K₂Cr₂O₇ + H₂O →\n\nЧто из хрома? Что из серы?',a:'Cr(OH)₃↓ (зелёный осадок) + S↓ (жёлтый)\n\n3K₂S + K₂Cr₂O₇ + 7H₂O →\n3S↓ + 2Cr(OH)₃↓ + 8KOH'},
+  {t:'Нейтральная среда',q:'Что образуется вместо Cr(OH)₃\nна практике? Почему?',a:'K[Cr(OH)₄] — тетрагидроксохромат(III)\n\nCr(OH)₃ — амфотерный, растворяется\nв щёлочи, образующейся в реакции:\nCr(OH)₃ + KOH(нед.) → K[Cr(OH)₄]'},
+  {t:'Нейтральная среда',q:'K₂Cr₂O₇ + NaNO₂ + H₂O →\n\nЗапиши с продуктом K[Cr(OH)₄]',a:'K₂Cr₂O₇ + 3NaNO₂ + 4H₂O →\n2K[Cr(OH)₄] + 3NaNO₃\n\nПризнак: светло-зелёный р-р\n(осадка нет)'},
+  {t:'Щелочная среда',q:'3K₂S + K₂Cr₂O₇ + H₂O → (изб. KOH)\n\nЧто из хрома?',a:'K₃[Cr(OH)₆] — гексагидроксохромат(III)\nИзумрудно-зелёный раствор\n\n3K₂S + K₂Cr₂O₇ + 7H₂O →\n3S↓ + 2K₃[Cr(OH)₆] + 2KOH'},
+  {t:'Щелочная среда',q:'K₂CrO₄ + Na₂S + KOH + H₂O →\n\nЧто образуется?',a:'K₃[Cr(OH)₆] + S↓ + NaOH\n\n2K₂CrO₄ + 3Na₂S + 2KOH + 8H₂O →\n2K₃[Cr(OH)₆] + 3S↓ + 6NaOH'},
+  {t:'Щелочная среда',q:'Cr(OH)₃ + KOH —\nнед. vs изб. KOH?',a:'Нед. KOH: Cr(OH)₃ + KOH → K[Cr(OH)₄]\n(светло-зелёный р-р)\n\nИзб. KOH: Cr(OH)₃ + 3KOH → K₃[Cr(OH)₆]\n(изумрудно-зелёный р-р)'},
+  {t:'Равновесие',q:'K₂CrO₄ + H₂SO₄ →\n\nЧто образуется? Цвет?',a:'K₂Cr₂O₇ (оранжевый) + K₂SO₄ + H₂O\n\n2K₂CrO₄ + H₂SO₄ → K₂Cr₂O₇ + K₂SO₄ + H₂O\nЖёлтый → оранжевый'},
+  {t:'Равновесие',q:'K₂Cr₂O₇ + KOH →\n\nЧто образуется? Цвет?',a:'K₂CrO₄ (жёлтый) + H₂O\n\nK₂Cr₂O₇ + 2KOH → 2K₂CrO₄ + H₂O\nОранжевый → жёлтый'},
+  {t:'Сопропорционирование',q:'CrSO₄ + K₂Cr₂O₇ + H₂SO₄ →\n\nCr²⁺ + Cr⁶⁺ → ?',a:'Cr₂(SO₄)₃ (оба Cr до +3)\n\n6CrSO₄ + K₂Cr₂O₇ + 7H₂SO₄ →\n4Cr₂(SO₄)₃ + K₂SO₄ + 7H₂O'},
+  {t:'Сопропорционирование',q:'K₂Cr₂O₇ + FeSO₄ + H₂SO₄ →\n\nFe²⁺ + Cr⁶⁺ → ?',a:'Cr₂(SO₄)₃ + Fe₂(SO₄)₃\n\nK₂Cr₂O₇ + 6FeSO₄ + 7H₂SO₄ →\nCr₂(SO₄)₃ + 3Fe₂(SO₄)₃ + K₂SO₄ + 7H₂O'},
+  {t:'Качественные признаки',q:'Реакция K₂Cr₂O₇ в кислой среде прошла.\nКак это видно визуально?',a:'🟠 Оранжевый → 🟢 Зелёный раствор\n\nДоп. признаки:\n• Cl₂ — резкий запах\n• Br₂/I₂ — побурение\n• S↓ — жёлтый осадок\n• O₂ — газ без запаха'},
+  {t:'Качественные признаки',q:'Реакция K₂CrO₄ в щелочной среде прошла.\nКак это видно?',a:'🟡 Жёлтый → 💚 Изумрудно-зелёный\n\nОбразуется K₃[Cr(OH)₆]'},
+  {t:'Качественные признаки',q:'К2Cr₂O₇ + K₂S + H₂O (нейтральная).\nДвойной качественный признак?',a:'1) Жёлтый осадок S↓\n2) Зелёный осадок Cr(OH)₃↓\n   или светло-зелёный р-р K[Cr(OH)₄]\n3) Оранжевый цвет исчезает'},
+];
+
+let fcDeck=[...FC],fcIndex=0,fcKnow=0,fcDontKnow=0,fcFlipped=false;
+let fcProgress=0,fcErrors=[];
+const fcSeen=new Set();
+let fcTotal=FC.length;
+
+function fcUpdate(){
+  if(fcIndex>=fcDeck.length) return;
+  const c=fcDeck[fcIndex];
+  document.getElementById('fc-know').textContent=fcKnow;
+  document.getElementById('fc-dk').textContent=fcDontKnow;
+  document.getElementById('fc-left').textContent=fcDeck.length-fcIndex;
+  document.getElementById('fc-counter').textContent=`Карточка ${Math.min(fcProgress+1,fcTotal)} из ${fcTotal}`;
+  document.getElementById('fc-tag').textContent=c.t;
+  document.getElementById('fc-back-tag').textContent=c.t;
+  document.getElementById('fc-front-text').innerHTML=c.q.replace(/\n/g,'<br>');
+  document.getElementById('fc-back-text').innerHTML=c.a.replace(/\n/g,'<br>');
+  document.getElementById('fc-inner').classList.remove('flipped');
+  document.getElementById('fc-btn-row').style.display='none';
+  fcFlipped=false;
+}
+function fcFlip(){
+  document.getElementById('fc-inner').classList.toggle('flipped');
+  fcFlipped=!fcFlipped;
+  document.getElementById('fc-btn-row').style.display=fcFlipped?'flex':'none';
+}
+function fcAnswer(know){
+  if(fcIndex>=fcDeck.length) return;
+  const card=fcDeck[fcIndex];
+  if(!fcSeen.has(card)){fcSeen.add(card);fcProgress++;}
+  if(know){fcKnow++;}
+  else{fcDontKnow++;fcDeck.push(card);if(!fcErrors.includes(card))fcErrors.push(card);}
+  fcIndex++;
+  if(fcIndex>=fcDeck.length){
+    document.querySelector('.fc-perspective').style.display='none';
+    document.querySelector('.fc-flip-btn').style.display='none';
+    document.getElementById('fc-btn-row').style.display='none';
+    document.querySelector('.fc-keys').style.display='none';
+    document.getElementById('fc-counter').style.display='none';
+    fcFlipped=false;
+    document.getElementById('fc-result').style.display='block';
+    document.getElementById('res-know').textContent=fcKnow;
+    document.getElementById('res-dk').textContent=fcDontKnow;
+  } else {fcUpdate();}
+  document.getElementById('fc-know').textContent=fcKnow;
+  document.getElementById('fc-dk').textContent=fcDontKnow;
+  document.getElementById('fc-left').textContent=Math.max(0,fcDeck.length-fcIndex);
+}
+function fcRestart(errorsOnly){
+  fcDeck=errorsOnly&&fcErrors.length>0?[...fcErrors]:[...FC];
+  fcTotal=fcDeck.length;
+  fcErrors=[];fcIndex=0;fcKnow=0;fcDontKnow=0;fcProgress=0;fcSeen.clear();
+  document.querySelector('.fc-perspective').style.display='';
+  document.querySelector('.fc-flip-btn').style.display='';
+  document.querySelector('.fc-keys').style.display='';
+  document.getElementById('fc-counter').style.display='';
+  document.getElementById('fc-result').style.display='none';
+  fcUpdate();
+}
+document.addEventListener('keydown',e=>{
+  if(fcIndex>=fcDeck.length) return;
+  if(e.code==='Space'){e.preventDefault();fcFlip();}
+  if(e.code==='ArrowRight'&&fcFlipped) fcAnswer(true);
+  if(e.code==='ArrowLeft'&&fcFlipped) fcAnswer(false);
+});
+fcUpdate();
+</script>
+</body>
+</html>
