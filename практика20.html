@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Линия 20 — Электролиз</title>
+<style>
+:root{--bg:#F0F9FF;--card:#fff;--border:#BAE6FD;--accent:#0284C7;--text:#0F172A;--muted:#64748B;--hero:#0C1B33;--green:#16A34A;--red:#DC2626;--gbg:#F0FDF4;--rbg:#FEF2F2;--amber:#D97706}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+.hero{background:var(--hero);color:#fff;padding:16px 20px 12px;text-align:center;flex-shrink:0}
+.hero-title{font-size:clamp(14px,3.5vw,21px);font-weight:700}
+.hero-sub{font-size:11px;color:#93C5FD;margin-top:2px}
+.timer-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
+.timer{font-size:24px;font-weight:700;font-family:'Courier New',monospace;color:#7DD3FC;letter-spacing:3px}
+.stats-row{display:flex;justify-content:center;gap:16px;margin-top:6px;font-size:12px;color:#93C5FD;flex-wrap:wrap}
+.stat{display:flex;align-items:center;gap:5px}
+.sdot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0}
+.pct{font-weight:800;color:#FCD34D;font-size:14px}
+.prog-wrap{height:4px;background:#1E3A5F;margin-top:8px;border-radius:2px}
+.prog-bar{height:100%;background:linear-gradient(90deg,var(--accent),#38BDF8);width:0%;transition:width .4s;border-radius:2px}
+/* MAIN AREA */
+.main-area{flex:1;display:flex;flex-direction:column;align-items:center;padding:16px 14px 30px;max-width:860px;margin:0 auto;width:100%}
+/* MODE LABEL */
+.mode-label{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 10px;border-radius:10px;margin-bottom:10px;align-self:flex-start}
+.mode-label.main-lbl{background:#EFF6FF;color:var(--accent)}
+.mode-label.retry-lbl{background:#FEF3C7;color:var(--amber)}
+/* NAV */
+.nav-row{display:flex;align-items:center;gap:14px;margin-bottom:10px;width:100%;justify-content:center}
+.nav-btn{background:var(--accent);color:#fff;border:none;border-radius:50%;width:38px;height:38px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0;line-height:1}
+.nav-btn:hover{background:#0369A1}
+.nav-btn:disabled{background:#CBD5E1;cursor:not-allowed}
+.counter{font-size:14px;font-weight:700;color:var(--muted);min-width:90px;text-align:center}
+/* DOTS */
+.dots-row{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin-bottom:12px;max-width:540px}
+.dot-item{width:10px;height:10px;border-radius:50%;background:#CBD5E1;cursor:pointer;transition:background .2s,transform .2s;flex-shrink:0}
+.dot-item.active{transform:scale(1.35)}
+.dot-item.main-active{background:var(--accent)}
+.dot-item.retry-active{background:var(--amber)}
+.dot-item.ok{background:var(--green)}
+.dot-item.err{background:var(--red)}
+/* CARD */
+.card-viewport{width:100%;overflow:hidden}
+.cards-track{display:flex;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.task-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:20px;flex:0 0 100%;transition:border-color .3s}
+.task-card.ok-card{border-color:var(--green)}
+.task-card.err-card{border-color:var(--red)}
+.task-hdr{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.task-num{background:linear-gradient(135deg,var(--accent),#0369A1);color:#fff;border-radius:7px;padding:3px 10px;font-size:11.5px;font-weight:700;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.task-num.retry-num{background:linear-gradient(135deg,var(--amber),#B45309)}
+.task-q{font-size:13px;color:var(--muted);line-height:1.5}
+.mtable{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}
+.mtable th{padding:6px 10px;text-align:left;background:#EFF6FF;font-size:11.5px;font-weight:700;color:var(--accent);border:1px solid var(--border)}
+.mtable td{padding:6px 10px;vertical-align:top;border:1px solid var(--border);line-height:1.55}
+.mtable .lc{width:36%;font-weight:600;background:#FAFBFF}
+.inp-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+.inp-g{display:flex;align-items:center;gap:6px}
+.inp-lbl{font-size:13px;font-weight:700;min-width:20px}
+.minp{width:42px;height:38px;text-align:center;font-size:18px;font-weight:700;border:2px solid var(--border);border-radius:8px;background:#fff;color:var(--text);outline:none;font-family:'Courier New',monospace;transition:border-color .2s,background .2s}
+.minp:focus{border-color:var(--accent)}
+.minp.ok{border-color:var(--green);background:var(--gbg);color:var(--green)}
+.minp.err{border-color:var(--red);background:var(--rbg);color:var(--red)}
+.minp:disabled{opacity:.9}
+.chk-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
+.chk-btn:hover:not(:disabled){background:#0369A1}
+.chk-btn:disabled{background:#CBD5E1;cursor:not-allowed}
+.badge{font-size:12px;font-weight:700;padding:4px 11px;border-radius:10px;display:none}
+.badge.ok{background:var(--gbg);color:var(--green);display:inline-block}
+.badge.err{background:var(--rbg);color:var(--red);display:inline-block}
+/* RESULTS PANEL */
+.results-panel{display:none;flex-direction:column;align-items:center;width:100%;padding:10px 0}
+.results-panel.show{display:flex}
+.res-card{background:var(--card);border-radius:16px;padding:28px 24px;width:100%;max-width:500px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.07)}
+.res-pct{font-size:56px;font-weight:800;line-height:1;margin:10px 0 4px}
+.res-pct.p100{color:var(--green)}
+.res-pct.phigh{color:#0284C7}
+.res-pct.plow{color:var(--red)}
+.res-label{font-size:14px;color:var(--muted);margin-bottom:18px}
+.res-detail{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.7}
+.res-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.res-btn{border:none;border-radius:10px;padding:11px 22px;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s}
+.res-btn.retry{background:#FEF3C7;color:var(--amber)}
+.res-btn.retry:hover{background:#FDE68A}
+.res-btn.again{background:#EFF6FF;color:var(--accent)}
+.res-btn.again:hover{background:#DBEAFE}
+.res-btn.finish{background:var(--gbg);color:var(--green)}
+/* ═══ ОКСИДЫ ═══ */
+.ox-section{max-width:860px;margin:0 auto;padding:10px 14px 50px;width:100%}
+.ox-divider{display:flex;align-items:center;gap:12px;margin:24px 0 18px}
+.ox-divider-line{flex:1;height:2px;background:linear-gradient(90deg,var(--accent),transparent)}
+.ox-divider-title{font-size:20px;font-weight:800;color:var(--hero);white-space:nowrap}
+.ox-block{margin-bottom:28px}
+.ox-block-hdr{display:flex;align-items:center;gap:10px;margin-bottom:12px;cursor:pointer;user-select:none}
+.ox-block-num{background:var(--accent);color:#fff;border-radius:50%;width:28px;height:28px;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ox-block-title{font-size:16px;font-weight:800;color:var(--hero)}
+.ox-block-toggle{margin-left:auto;font-size:18px;color:var(--muted);transition:transform .25s}
+.ox-block-toggle.open{transform:rotate(180deg)}
+.ox-block-body{display:none}
+.ox-block-body.open{display:block}
+/* template */
+.ox-tpl{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:1.5px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.ox-tpl-lbl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:7px}
+.ox-tpl-formula{font-size:clamp(13px,2.5vw,15px);font-weight:700;color:var(--hero);line-height:1.8;margin-bottom:8px}
+.ox-tpl-formula .hia{color:var(--accent)}
+.ox-tpl-formula .hib{color:#DC2626}
+.ox-tpl-formula .hic{color:var(--green)}
+.ox-tpl-formula .hip{color:#7C3AED}
+.ox-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.ox-pill{background:#fff;border:1px solid var(--border);border-radius:6px;padding:3px 9px;font-size:11.5px;font-family:'Courier New',monospace}
+.ox-note{font-size:11.5px;color:var(--muted);line-height:1.6;border-top:1px solid var(--border);padding-top:8px;margin-top:8px}
+/* practice */
+.ox-practice-lbl{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:12px 0 8px;display:flex;align-items:center;gap:8px}
+.ox-practice-lbl::before,.ox-practice-lbl::after{content:'';flex:1;height:1px;background:var(--border)}
+/* reaction */
+.ox-rxn{background:var(--card);border:1.5px solid var(--border);border-radius:11px;padding:12px 14px;margin-bottom:8px;transition:border-color .2s}
+.ox-rxn.ox-revealed{border-color:#A7F3D0}
+.ox-rxn-num{font-size:10px;font-weight:700;color:var(--muted);margin-bottom:5px}
+.ox-rxn-eq{font-size:clamp(13px,2.3vw,15px);font-family:'Courier New',monospace;font-weight:600;display:flex;align-items:center;flex-wrap:wrap;gap:3px}
+.ox-rxn-arrow{color:var(--accent);margin:0 4px;font-size:16px}
+.ox-rxn-right{display:none;color:var(--green);font-weight:700}
+.ox-rxn-right.show{display:inline}
+.ox-rxn-ph{color:#CBD5E1;font-style:italic;font-size:12px}
+.ox-rxn-ph.hide{display:none}
+.ox-rxn-btns{display:flex;gap:7px;margin-top:9px;flex-wrap:wrap}
+.ox-btn-hint{background:#FFFBEB;color:#D97706;border:1.5px solid #FDE68A;border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:700;cursor:pointer}
+.ox-btn-hint:hover{background:#FDE68A}
+.ox-btn-ans{background:#EFF6FF;color:var(--accent);border:1.5px solid var(--border);border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:700;cursor:pointer}
+.ox-btn-ans:hover{background:#DBEAFE}
+.ox-btn-ans.done{background:var(--gbg);color:var(--green);border-color:#A7F3D0}
+.ox-rxn-hint{display:none;margin-top:7px;font-size:11.5px;color:#92400E;background:#FFFBEB;border-radius:6px;padding:6px 10px;border-left:3px solid #FCD34D;line-height:1.5}
+.ox-rxn-hint.show{display:block}
+.ox-cond{font-size:9px;font-weight:700;color:#7C3AED;background:#F5F3FF;border-radius:3px;padding:1px 4px;margin-left:2px;vertical-align:super}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-title">Линия 20 — Электролиз</div>
+  <div class="hero-sub">Задания ЕГЭ · установите соответствие · 36 заданий</div>
+  <div class="timer-row"><div class="timer" id="tmr">00:00</div></div>
+  <div class="stats-row">
+    <div class="stat"><span class="sdot" style="background:#4ADE80"></span><span id="sOk">0</span>&nbsp;верно</div>
+    <div class="stat"><span class="sdot" style="background:#F87171"></span><span id="sErr">0</span>&nbsp;ошибок</div>
+    <div class="stat"><span class="sdot" style="background:#FCD34D"></span><span id="sLeft">36</span>&nbsp;осталось</div>
+    <div class="stat"><span class="pct" id="sPct">0%</span></div>
+  </div>
+  <div class="prog-wrap"><div class="prog-bar" id="pgbar"></div></div>
+</div>
+
+<div class="main-area">
+  <div class="mode-label main-lbl" id="modeLbl">Основной прогон</div>
+  <div class="nav-row">
+    <button class="nav-btn" id="prev" onclick="navigate(-1)">‹</button>
+    <span class="counter" id="counter">1 / 36</span>
+    <button class="nav-btn" id="next" onclick="navigate(1)">›</button>
+  </div>
+  <div class="dots-row" id="dots"></div>
+  <div class="card-viewport"><div class="cards-track" id="track"></div></div>
+
+  <!-- RESULTS shown after each round -->
+  <div class="results-panel" id="results">
+    <div class="res-card">
+      <div class="res-pct" id="resPct">0%</div>
+      <div class="res-label" id="resLabel">выполнено верно</div>
+      <div class="res-detail" id="resDetail"></div>
+      <div class="res-btns" id="resBtns"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const T=[
+{id:"74509",lh:"Название вещества",rh:"Уравнение анодного процесса",q:"электролиз водного раствора — <b>анод</b>",L:["А) сульфат натрия","Б) фторид цинка","В) гидроксид калия"],R:["1) 2H₂O − 4ē → 4H⁺ + O₂","2) 4OH⁻ − 4ē → O₂ + 2H₂O","3) 2H₂O + 2ē → H₂ + 2OH⁻","4) 2F⁻ − 2ē → F₂"],ans:"112"},
+{id:"74330",lh:"Формула соли",rh:"Уравнение катодного процесса",q:"электролиз водного раствора — <b>катод</b>",L:["А) AlCl₃","Б) Ba(NO₃)₂","В) CuSO₄"],R:["1) 2H₂O − 4ē → 4H⁺ + O₂","2) Cu²⁺ + 2ē → Cu⁰","3) Al³⁺ + 3ē → Al⁰","4) 2H₂O + 2ē → H₂ + 2OH⁻"],ans:"442"},
+{id:"60112",lh:"Формула вещества",rh:"Уравнение катодного процесса",q:"электролиз водного раствора — <b>катод</b>",L:["А) HCl","Б) AlBr₃","В) CuSO₄"],R:["1) 2H⁺ + 2ē → H₂⁰","2) Cu²⁺ + 2ē → Cu⁰","3) Al³⁺ + 3ē → Al⁰","4) 2H₂O + 2ē → H₂ + 2OH⁻"],ans:"142"},
+{id:"50946",lh:"Формула вещества",rh:"Уравнение катодного процесса",q:"электролиз водного раствора — <b>катод</b>",L:["А) KCl","Б) AgNO₃","В) AlCl₃"],R:["1) 2H₂O + 2ē → H₂ + 2OH⁻","2) Ag⁺ + ē → Ag⁰","3) Al³⁺ + 3ē → Al⁰","4) 2H₂O − 4ē → 4H⁺ + O₂"],ans:"121"},
+{id:"45090",lh:"Формула соли",rh:"Уравнение катодного процесса",q:"электролиз водного раствора — <b>катод</b>",L:["А) Al(ClO₄)₃","Б) KBr","В) MgBr₂"],R:["1) 2H₂O + 2ē → H₂ + 2OH⁻","2) 2H⁺ + 2ē → H₂⁰","3) Al³⁺ + 3ē → Al⁰","4) 2H₂O − 4ē → 4H⁺ + O₂","5) 2Br⁻ − 2ē → Br₂⁰"],ans:"111"},
+{id:"247608",lh:"Вещество",rh:"Процесс на катоде",q:"электролиз водного раствора на инертном <b>катоде</b>",L:["А) Ba(BrO₃)₂","Б) AlI₃","В) (CH₃COO)₂Ca"],R:["1) 2H₂O − 4ē → O₂ + 4H⁺","2) 2CH₃COO⁻ − 2ē → C₂H₆ + 2CO₂","3) 2H₂O + 2ē → H₂ + 2OH⁻","4) Ca²⁺ + 2ē → Ca","5) Ba²⁺ + 2ē → Ba"],ans:"333"},
+{id:"24971",lh:"Формула соли",rh:"Процесс на аноде",q:"электролиз водного раствора на инертном <b>аноде</b>",L:["А) CuSO₄","Б) K₂SO₄","В) HCl"],R:["1) 2H₂O + 2ē → H₂ + 2OH⁻","2) 2HSO₄⁻ − 2ē → 2H⁺ + S₂O₈²⁻","3) 2Cl⁻ − 2ē → Cl₂","4) 2H₂O − 4ē → O₂ + 4H⁺","5) Cu²⁺ + 2ē → Cu⁰"],ans:"443"},
+{id:"12020",lh:"Соль",rh:"Процесс на аноде",q:"электролиз водного раствора — <b>анод</b>",L:["А) CaCl₂","Б) NaF","В) Li₂CO₃"],R:["1) 2Cl⁻ − 2ē → Cl₂","2) 2F⁻ − 2ē → F₂","3) 2H₂O − 4ē → O₂ + 4H⁺","4) CO₃²⁻ − 2ē → CO₂ + O","5) 2H₂O + 2ē → H₂ + 2OH⁻"],ans:"133"},
+{id:"12019",lh:"Вещество",rh:"Процесс на катоде",q:"электролиз водного раствора на инертном <b>катоде</b>",L:["А) KCl","Б) Na₂HPO₄","В) CuCl₂"],R:["1) 2H₂O − 4ē → O₂ + 4H⁺","2) Na⁺ + ē → Na","3) K⁺ + ē → K","4) 2H₂O + 2ē → H₂ + 2OH⁻","5) Cu²⁺ + 2ē → Cu"],ans:"445"},
+{id:"12018",lh:"Формула соли",rh:"Процесс на аноде",q:"электролиз водного раствора на инертном <b>аноде</b>",L:["А) LiBr","Б) Cu(ClO₄)₂","В) Zn(NO₃)₂"],R:["1) 2H₂O + 2ē → H₂ + 2OH⁻","2) 2Br⁻ − 2ē → Br₂","3) 2NO₃⁻ − 2ē → 2NO₂ + O₂","4) 2H₂O − 4ē → O₂ + 4H⁺","5) ClO₃⁻ + H₂O − 2ē → ClO₄⁻ + 2H⁺"],ans:"244"},
+{id:"12017",lh:"Вещество",rh:"Продукты электролиза",q:"продукты на инертных электродах при электролизе водного раствора",L:["А) KI","Б) Na₂S","В) AgF"],R:["1) H₂, I₂","2) Ag, F₂","3) H₂, O₂","4) H₂, S","5) Ag, O₂"],ans:"145"},
+{id:"12016",lh:"Соль",rh:"Продукт на катоде",q:"электролиз водного раствора с инертными электродами — <b>катод</b>",L:["А) Na₂CO₃","Б) Ca(MnO₄)₂","В) LiH₂PO₄"],R:["1) H₂","2) Na","3) Ca","4) O₂","5) Li"],ans:"111"},
+{id:"12012",lh:"Формула соли",rh:"Продукт на графитовом аноде",q:"электролиз водного раствора — графитовый <b>анод</b>",L:["А) KF","Б) Ba(NO₃)₂","В) FeSO₄"],R:["1) F₂","2) Fe","3) NO₂, O₂","4) H₂","5) O₂","6) SO₃, O₂"],ans:"555"},
+{id:"12013",lh:"Формула вещества",rh:"Продукты электролиза",q:"продукты на инертных электродах при электролизе водного раствора",L:["А) H₂SO₄","Б) NaF","В) CH₃COOH"],R:["1) O₂, H₂","2) Na, F₂","3) C₂H₆, CO₂, H₂","4) SO₂, O₂, H₂","5) CO₂, O₂, H₂O"],ans:"113"},
+{id:"12006",lh:"Вещество",rh:"Продукты электролиза",q:"продукты при электролизе водного раствора",L:["А) BaI₂","Б) K₂CO₃","В) FeBr₃"],R:["1) H₂, I₂","2) H₂, Br₂, Fe","3) H₂, O₂","4) H₂, Br₂"],ans:"132"},
+{id:"12005",lh:"Формула соли",rh:"Продукт на катоде",q:"электролиз водного раствора — <b>катод</b>",L:["А) ZnCl₂","Б) Mg(NO₃)₂","В) Al₂(SO₄)₃"],R:["1) O₂","2) Zn","3) H₂, Zn","4) Al","5) H₂"],ans:"355"},
+{id:"12000",lh:"Формула вещества",rh:"Продукты электролиза",q:"продукты при электролизе водного раствора на инертных электродах",L:["А) LiI","Б) Na₂SiO₃","В) (CH₃COO)₂Pb"],R:["1) CO₂, H₂","2) Na, O₂","3) H₂, O₂","4) Pb, H₂, CO₂, C₂H₆","5) H₂, I₂"],ans:"534"},
+{id:"11997",lh:"Формула соли",rh:"Процесс на катоде",q:"электролиз водного раствора — <b>катод</b>",L:["А) CuCr₂O₇","Б) Ca(ClO₄)₂","В) C₁₇H₃₅COONa"],R:["1) 2H₂O − 4ē → O₂ + 4H⁺","2) 2Cl⁻ − 2ē → Cl₂","3) 2H₂O + 2ē → H₂ + 2OH⁻","4) Cu²⁺ + 2ē → Cu"],ans:"433"},
+{id:"11992",lh:"Вещество",rh:"Процесс на катоде",q:"электролиз водного раствора с инертными электродами — <b>катод</b>",L:["А) Na₂Cr₂O₇","Б) (CH₃COO)₂Cu","В) MgSO₄"],R:["1) Cu²⁺ + 2ē → Cu","2) 2H₂O + 2ē → H₂ + 2OH⁻","3) 2Cr₂O₇²⁻ − 2ē → 4CrO₃ + O₂","4) 2H₂O − 4ē → O₂ + 4H⁺"],ans:"212"},
+{id:"11989",lh:"Формула соли",rh:"Процесс на аноде",q:"электролиз водного раствора — <b>анод</b>",L:["А) (CH₃COO)₂Ca","Б) AuCl₃","В) AgNO₃"],R:["1) 2H₂O + 2ē → H₂ + 2OH⁻","2) 2H₂O − 4ē → O₂ + 4H⁺","3) 2Cl⁻ − 2ē → Cl₂","4) 2Br⁻ − 2ē → Br₂","5) Ca²⁺ + 2ē → Ca","6) 2CH₃COO⁻ − 2ē → C₂H₆ + 2CO₂"],ans:"632"},
+{id:"11956",lh:"Формула вещества",rh:"Продукты электролиза",q:"продукты на инертных электродах при электролизе водного раствора",L:["А) CH₃COONa","Б) Hg(ClO₃)₂","В) KI"],R:["1) Cl₂, O₂, H₂","2) H₂, I₂","3) Hg, O₂","4) CO₂, H₂, C₂H₆"],ans:"432"},
+{id:"11954",lh:"Название вещества",rh:"Продукт(ы) на катоде",q:"электролиз водного раствора на инертных электродах — <b>катод</b>",L:["А) LiF","Б) C₃H₇COONa","В) Co(NO₃)₂"],R:["1) Li","2) H₂","3) Co, H₂","4) Co","5) CO₂, C₆H₁₄","6) Na"],ans:"223"},
+{id:"11951",lh:"Формула соли",rh:"Продукты на аноде",q:"электролиз водного раствора на инертных электродах — <b>анод</b>",L:["А) Na₂SO₄","Б) CH₃COOK","В) CaCl₂"],R:["1) O₂","2) S, O₂","3) CO₂","4) Cl₂","5) CO₂, CH₄","6) CO₂, C₂H₆"],ans:"164"},
+{id:"11949",lh:"Название вещества",rh:"Получение электролизом",q:"возможный способ получения с помощью электролиза",L:["А) Al","Б) CO₂","В) I₂"],R:["1) водный р-р AlBr₃","2) водный р-р AlI₃","3) водный р-р C₂H₅COOH","4) водный р-р Na₂CO₃","5) водный р-р NaHCO₃","6) раствор Al₂O₃ в расплаве криолита"],ans:"632"},
+{id:"11946",lh:"Формула соли",rh:"Продукты электролиза",q:"продукты при электролизе на инертных электродах",L:["А) CH₃COONa (р-р)","Б) CaCl₂ (распл.)","В) KMnO₄ (р-р)"],R:["1) CH₄, CO₂, H₂","2) H₂, Cl₂","3) O₂, H₂","4) C₂H₆, CO₂, H₂","5) K, MnO₂","6) Ca, Cl₂"],ans:"463"},
+{id:"11941",lh:"Название вещества",rh:"Получение электролизом",q:"возможный способ получения путём электролиза",L:["А) кислород","Б) бром","В) калий"],R:["1) расплава KCl","2) водного р-ра NaI","3) водного р-ра KBr","4) водного р-ра AgF"],ans:"431"},
+{id:"11930",lh:"Формула вещества",rh:"Продукты электролиза",q:"продукты электролиза на инертных электродах",L:["А) CH₃COONa (р-р)","Б) MnBr₂ (р-р)","В) KF (распл.)"],R:["1) C₂H₆, CO₂, H₂","2) Mn, H₂, Br₂","3) K, F₂","4) H₂, O₂"],ans:"123"},
+{id:"11929",lh:"Формула вещества",rh:"Получение электролизом",q:"возможный способ получения с помощью электролиза",L:["А) Al","Б) S","В) F₂"],R:["1) раствора оксида в расплаве криолита","2) водного р-ра фторида калия","3) расплава сульфида бария","4) расплава фторида магния"],ans:"134"},
+{id:"11921",lh:"Название вещества",rh:"Получение электролизом",q:"электролитический способ получения",L:["А) железо","Б) фтор","В) кислород"],R:["1) FeCl₃ (распл.)","2) KF (распл.)","3) Na₂S (р-р)","4) NaF (р-р)"],ans:"124"},
+{id:"11920",lh:"Название вещества",rh:"Получение электролизом",q:"электролитический способ получения",L:["А) бром","Б) алюминий","В) кальций"],R:["1) AlBr₃ (р-р)","2) CaCl₂ (распл.)","3) раствор Al₂O₃ в расплаве криолита","4) KF (распл.)"],ans:"132"},
+{id:"11911",lh:"Название вещества",rh:"Получение электролизом",q:"электролитический способ получения",L:["А) серебро","Б) сера","В) натрий"],R:["1) NaNO₃ (р-р)","2) K₂S (р-р)","3) NaCl (распл.)","4) AgClO₄ (р-р)"],ans:"423"},
+{id:"11654",lh:"Название вещества",rh:"Получение электролизом",q:"возможный способ получения путём электролиза",L:["А) фтор","Б) алюминий","В) натрий"],R:["1) раствор Al₂O₃ в расплаве криолита","2) NaF (распл.)","3) AlCl₃ (р-р)","4) NaF (р-р)"],ans:"212"},
+{id:"8071",lh:"Название вещества",rh:"Получение электролизом",q:"возможный способ получения путём электролиза",L:["А) F₂","Б) K","В) Al"],R:["1) водный р-р KF","2) водный р-р AlCl₃","3) расплав Al₂O₃ в криолите","4) расплав KF"],ans:"443"},
+{id:"24969",lh:"Вещество",rh:"Получение электролизом",q:"возможный способ получения путём электролиза",L:["А) натрий","Б) этан","В) фтор"],R:["1) расплава хлорида натрия","2) раствора ацетата натрия","3) раствора хлорида натрия","4) расплава фторида калия"],ans:"124"},
+{id:"59026",lh:"Название вещества",rh:"Получение электролизом",q:"наиболее оптимальный способ получения электролизом в лабораторных условиях",L:["А) кислород","Б) хлор","В) серебро"],R:["1) раствора ацетата серебра(I)","2) раствора сульфата лития","3) расплава бромида калия","4) раствора хлорида бария"],ans:"241"},
+{id:"74262",lh:"Название вещества",rh:"Получение электролизом",q:"возможный способ получения путём электролиза",L:["А) хлор","Б) гидроксид калия","В) водород"],R:["1) водного р-р CuCl₂","2) расплава KF","3) водного р-ра KNO₃","4) расплава Al₂S₃"],ans:"133"}
+];
+
+/* ============ STATE ============ */
+let secs=0,timerInv=null;
+let mode='main'; // 'main' | 'retry'
+let curIdx=0;
+
+// main round
+const TOTAL=T.length;
+let mainChecked=0,mainOk=0;
+const mainDots=[];
+const mainInputRefs=[];
+// which tasks have errors (ids)
+let errIds=new Set();
+
+// retry round
+let retryTasks=[];
+let retryChecked=0,retryOk=0;
+const retryDots=[];
+const retryInputRefs=[];
+
+/* ============ TIMER / STATS ============ */
+function startTimer(){
+  timerInv=setInterval(()=>{
+    secs++;
+    const m=String(Math.floor(secs/60)).padStart(2,'0');
+    const s=String(secs%60).padStart(2,'0');
+    document.getElementById('tmr').textContent=m+':'+s;
+  },1000);
+}
+
+function updateStats(){
+  const ok=mode==='main'?mainOk:(TOTAL-errIds.size+retryOk);
+  const checked=mode==='main'?mainChecked:(mainChecked); // header always shows main progress
+  const pct=Math.round(mainChecked/TOTAL*100);
+  document.getElementById('sOk').textContent=mainOk;
+  document.getElementById('sErr').textContent=errIds.size;
+  document.getElementById('sLeft').textContent=TOTAL-mainChecked;
+  document.getElementById('sPct').textContent=pct+'%';
+  document.getElementById('pgbar').style.width=pct+'%';
+}
+
+/* ============ CAROUSEL NAV ============ */
+function goTo(idx,dots,inputRefs,total){
+  curIdx=idx;
+  document.getElementById('track').style.transform=`translateX(-${curIdx*100}%)`;
+  document.getElementById('counter').textContent=`${curIdx+1} / ${total}`;
+  document.getElementById('prev').disabled=curIdx===0;
+  document.getElementById('next').disabled=curIdx===total-1;
+  dots.forEach((d,i)=>{
+    d.classList.remove('main-active','retry-active');
+    d.classList.toggle('active',i===curIdx);
+    if(i===curIdx)d.classList.add(mode==='main'?'main-active':'retry-active');
+  });
+  const inps=inputRefs[curIdx];
+  if(inps){const f=inps.find(i=>!i.disabled&&!i.value);if(f)setTimeout(()=>f.focus(),350);}
+}
+function navigate(dir){
+  const dots=mode==='main'?mainDots:retryDots;
+  const refs=mode==='main'?mainInputRefs:retryInputRefs;
+  const total=mode==='main'?TOTAL:retryTasks.length;
+  goTo(curIdx+dir<0?0:curIdx+dir>=total?total-1:curIdx+dir,dots,refs,total);
+}
+
+/* ============ BUILD CARD ============ */
+function buildCard(task,idx,isRetry){
+  const dots=isRetry?retryDots:mainDots;
+  const inputRefs=isRetry?retryInputRefs:mainInputRefs;
+  const total=isRetry?retryTasks.length:TOTAL;
+
+  const card=document.createElement('div');
+  card.className='task-card';
+
+  card.innerHTML=`<div class="task-hdr">
+    <span class="task-num${isRetry?' retry-num':''}">№${task.id}</span>
+    <span class="task-q">Установите соответствие — ${task.q}</span>
+  </div>`;
+
+  const tbl=document.createElement('table');
+  tbl.className='mtable';
+  tbl.innerHTML=`<tr><th>${task.lh}</th><th>${task.rh}</th></tr>`;
+  const rows=Math.max(task.L.length,task.R.length);
+  for(let i=0;i<rows;i++){
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td class="lc">${task.L[i]||''}</td><td>${task.R[i]||''}</td>`;
+    tbl.appendChild(tr);
+  }
+  card.appendChild(tbl);
+
+  const row=document.createElement('div');row.className='inp-row';
+  const lbls=['А','Б','В'];
+  const inputs=[];
+  lbls.forEach((l,i)=>{
+    const g=document.createElement('div');g.className='inp-g';
+    const inp=document.createElement('input');
+    inp.type='text';inp.className='minp';inp.maxLength=1;inp.placeholder='';
+    inp.addEventListener('input',e=>{
+      e.target.value=e.target.value.replace(/[^0-9]/g,'').slice(-1);
+      if(e.target.value&&i<2)inputs[i+1].focus();
+    });
+    inp.addEventListener('keydown',e=>{
+      if(e.key==='Enter')btn.click();
+      if(e.key==='Backspace'&&!e.target.value&&i>0)inputs[i-1].focus();
+    });
+    inputs.push(inp);
+    g.innerHTML=`<span class="inp-lbl">${l}:</span>`;
+    g.appendChild(inp);row.appendChild(g);
+  });
+  inputRefs[idx]=inputs;
+
+  const btn=document.createElement('button');
+  btn.className='chk-btn';btn.textContent='Проверить';
+  const badge=document.createElement('span');badge.className='badge';
+
+  btn.onclick=()=>{
+    const ua=inputs.map(i=>i.value).join('');
+    if(ua.length<3){inputs.find(i=>!i.value)?.focus();return;}
+    const ans=task.ans;
+    let allOk=true;
+    inputs.forEach((inp,i)=>{
+      inp.classList.remove('ok','err');
+      inp.classList.add(inp.value===ans[i]?'ok':'err');
+      if(inp.value!==ans[i])allOk=false;
+    });
+
+    if(allOk){
+      inputs.forEach(i=>i.disabled=true);btn.disabled=true;
+      card.classList.add('ok-card');
+      badge.className='badge ok';badge.textContent='✓ Верно';badge.style.display='inline-block';
+      dots[idx].classList.remove('active','main-active','retry-active');dots[idx].classList.add('ok');
+      if(isRetry){
+        retryChecked++;retryOk++;
+        errIds.delete(task.id);
+        if(retryChecked===retryTasks.length){setTimeout(showResults,700);}
+        else if(curIdx<retryTasks.length-1){setTimeout(()=>navigate(1),900);}
+      } else {
+        mainChecked++;mainOk++;
+        errIds.delete(task.id);
+        updateStats();
+        if(mainChecked===TOTAL){setTimeout(showResults,700);}
+        else if(curIdx<TOTAL-1){setTimeout(()=>navigate(1),900);}
+      }
+    } else {
+      badge.className='badge err';badge.style.display='inline-block';
+      if(isRetry){
+        badge.textContent='✗ Ошибка — попробуй ещё';
+        setTimeout(()=>{
+          inputs.forEach((inp,i)=>{if(inp.value!==ans[i]){inp.classList.remove('err');inp.value='';}});
+          badge.style.display='none';
+          inputs.find(i=>!i.disabled&&!i.value)?.focus();
+        },1600);
+      } else {
+        badge.textContent='✗ Ошибка';
+        inputs.forEach(i=>i.disabled=true);btn.disabled=true;
+        card.classList.add('err-card');
+        dots[idx].classList.remove('active','main-active','retry-active');dots[idx].classList.add('err');
+        errIds.add(task.id);
+        mainChecked++;
+        updateStats();
+        if(mainChecked===TOTAL){setTimeout(showResults,700);}
+        else if(curIdx<TOTAL-1){setTimeout(()=>navigate(1),900);}
+      }
+    }
+  };
+  row.appendChild(btn);row.appendChild(badge);
+  card.appendChild(row);
+  return card;
+}
+
+/* ============ RESULTS PANEL ============ */
+function showResults(){
+  // hide carousel controls
+  document.getElementById('prev').style.visibility='hidden';
+  document.getElementById('next').style.visibility='hidden';
+  document.getElementById('counter').style.visibility='hidden';
+  document.getElementById('dots').style.display='none';
+  document.getElementById('track').parentElement.style.display='none';
+
+  const correct=TOTAL-errIds.size;
+  const pct=Math.round(correct/TOTAL*100);
+
+  const pctEl=document.getElementById('resPct');
+  pctEl.textContent=pct+'%';
+  pctEl.className='res-pct '+(pct===100?'p100':pct>=70?'phigh':'plow');
+
+  document.getElementById('resLabel').textContent='заданий выполнено верно';
+
+  const m=String(Math.floor(secs/60)).padStart(2,'0');
+  const s=String(secs%60).padStart(2,'0');
+  document.getElementById('resDetail').innerHTML=
+    `Верно: <b>${correct} из ${TOTAL}</b>${errIds.size>0?` · Ошибок: <b>${errIds.size}</b>`:''}<br>Время: <b>${m}:${s}</b>`;
+
+  const btns=document.getElementById('resBtns');
+  btns.innerHTML='';
+
+  if(errIds.size>0){
+    const rb=document.createElement('button');
+    rb.className='res-btn retry';
+    rb.textContent=`⟳ Отработать ошибки (${errIds.size})`;
+    rb.onclick=startRetry;
+    btns.appendChild(rb);
+  }
+
+  const ag=document.createElement('button');
+  ag.className='res-btn again';
+  ag.textContent='↺ Пройти заново';
+  ag.onclick=resetAll;
+  btns.appendChild(ag);
+
+  if(pct===100){
+    clearInterval(timerInv);
+    const fin=document.createElement('button');
+    fin.className='res-btn finish';
+    fin.textContent='✓ Отлично! 100%';
+    fin.disabled=true;
+    btns.prepend(fin);
+  }
+
+  document.getElementById('results').classList.add('show');
+  document.getElementById('results').scrollIntoView({behavior:'smooth'});
+}
+
+/* ============ RETRY ============ */
+function startRetry(){
+  document.getElementById('results').classList.remove('show');
+  retryTasks=T.filter(t=>errIds.has(t.id));
+  retryChecked=0;retryOk=0;
+  retryDots.length=0;retryInputRefs.length=0;
+  mode='retry';curIdx=0;
+
+  // rebuild track
+  const track=document.getElementById('track');
+  track.innerHTML='';
+  const dotsEl=document.getElementById('dots');
+  dotsEl.innerHTML='';
+  // clear old main dots array (keep refs for display only)
+  mainDots.length=0;
+
+  retryTasks.forEach((t,i)=>{
+    track.appendChild(buildCard(t,i,true));
+    const d=document.createElement('div');
+    d.className='dot-item'+(i===0?' active retry-active':'');
+    d.title=`№${t.id}`;d.onclick=()=>goTo(i,retryDots,retryInputRefs,retryTasks.length);
+    dotsEl.appendChild(d);retryDots.push(d);
+  });
+
+  document.getElementById('modeLbl').textContent='Отработка ошибок';
+  document.getElementById('modeLbl').className='mode-label retry-lbl';
+  document.getElementById('prev').style.visibility='';
+  document.getElementById('next').style.visibility='';
+  document.getElementById('counter').style.visibility='';
+  document.getElementById('dots').style.display='';
+  document.getElementById('track').parentElement.style.display='';
+
+  goTo(0,retryDots,retryInputRefs,retryTasks.length);
+}
+
+/* ============ RESET ============ */
+function resetAll(){
+  document.getElementById('results').classList.remove('show');
+  secs=0;document.getElementById('tmr').textContent='00:00';
+  clearInterval(timerInv);
+  mode='main';curIdx=0;mainChecked=0;mainOk=0;errIds=new Set();
+  mainDots.length=0;mainInputRefs.length=0;
+
+  const track=document.getElementById('track');track.innerHTML='';
+  const dotsEl=document.getElementById('dots');dotsEl.innerHTML='';
+
+  T.forEach((t,i)=>{
+    track.appendChild(buildCard(t,i,false));
+    const d=document.createElement('div');
+    d.className='dot-item'+(i===0?' active main-active':'');
+    d.title=`№${t.id}`;d.onclick=()=>goTo(i,mainDots,mainInputRefs,TOTAL);
+    dotsEl.appendChild(d);mainDots.push(d);
+  });
+
+  document.getElementById('modeLbl').textContent='Основной прогон';
+  document.getElementById('modeLbl').className='mode-label main-lbl';
+  document.getElementById('prev').style.visibility='';
+  document.getElementById('next').style.visibility='';
+  document.getElementById('counter').style.visibility='';
+  document.getElementById('dots').style.display='';
+  document.getElementById('track').parentElement.style.display='';
+
+  updateStats();
+  goTo(0,mainDots,mainInputRefs,TOTAL);
+  startTimer();
+}
+
+/* ============ INIT ============ */
+document.addEventListener('DOMContentLoaded',()=>{
+  const track=document.getElementById('track');
+  const dotsEl=document.getElementById('dots');
+  T.forEach((t,i)=>{
+    track.appendChild(buildCard(t,i,false));
+    const d=document.createElement('div');
+    d.className='dot-item'+(i===0?' active main-active':'');
+    d.title=`№${t.id}`;d.onclick=()=>goTo(i,mainDots,mainInputRefs,TOTAL);
+    dotsEl.appendChild(d);mainDots.push(d);
+  });
+  goTo(0,mainDots,mainInputRefs,TOTAL);
+  updateStats();
+  startTimer();
+});
+
+document.addEventListener('keydown',e=>{
+  if(document.activeElement?.tagName==='INPUT')return;
+  if(e.key==='ArrowRight')navigate(1);
+  if(e.key==='ArrowLeft')navigate(-1);
+});
+</script>
+
+<!-- ═══════════════════ ОСНОВНЫЕ ОКСИДЫ ═══════════════════ -->
+<div class="ox-section">
+  <div class="ox-divider">
+    <div class="ox-divider-line"></div>
+    <div class="ox-divider-title">Основные оксиды — теория + практика</div>
+    <div class="ox-divider-line" style="background:linear-gradient(90deg,transparent,var(--accent))"></div>
+  </div>
+  <div id="ox-blocks"></div>
+</div>
+
+<script>
+/* ══════════ ОКСИДЫ DATA ══════════ */
+const OX = [
+  {
+    title:"Основный оксид + Вода",
+    tpl:`<span class="hia">Осн. оксид</span> (ЩМ, ЩЗМ) + H₂O → <span class="hic">Щёлочь</span>`,
+    pills:["Li₂O + H₂O → 2LiOH","Na₂O + H₂O → 2NaOH","CaO + H₂O → Ca(OH)₂","BaO + H₂O → Ba(OH)₂"],
+    note:"⚠️ Только оксиды ЩМ (Li,Na,K,Rb,Cs) и ЩЗМ (Ca,Sr,Ba). MgO, FeO, CuO — не реагируют.<br>📐 Для ЩМ: коэф. 2 перед основанием. Для ЩЗМ: коэффициентов нет.",
+    rxns:[
+      {l:"Li₂O + H₂O",r:"2LiOH",h:"ЩМ оксид + H₂O → щёлочь. 2 атома Li → коэффициент 2 перед LiOH."},
+      {l:"Na₂O + H₂O",r:"2NaOH",h:"Na₂O: 2 атома Na → коэф. 2 перед NaOH."},
+      {l:"K₂O + H₂O",r:"2KOH",h:"K₂O — оксид щелочного металла. Аналогично Na₂O."},
+      {l:"Rb₂O + H₂O",r:"2RbOH",h:"Рубидий — ЩМ. 2Rb → коэф. 2 перед RbOH."},
+      {l:"Cs₂O + H₂O",r:"2CsOH",h:"Цезий — ЩМ. 2Cs → коэф. 2 перед CsOH."},
+      {l:"CaO + H₂O",r:"Ca(OH)₂",h:"Ca — ЩЗМ, валентность II. Продукт Ca(OH)₂ без коэффициентов."},
+      {l:"SrO + H₂O",r:"Sr(OH)₂",h:"Sr — ЩЗМ. Аналогично CaO."},
+      {l:"BaO + H₂O",r:"Ba(OH)₂",h:"Ba — ЩЗМ. Аналогично CaO."},
+      {l:"Na₂O₂ + H₂O",r:"2NaOH + O₂↑",h:"Перекись Na₂O₂ — диспропорционирование. 2Na₂O₂ + 2H₂O → 4NaOH + O₂↑ (сокр. в 2 раза)."},
+    ]
+  },
+  {
+    title:"Основный оксид + Кислотный оксид",
+    tpl:`<span class="hia">Осн. оксид</span> + <span class="hib">Кислотный оксид</span> → <span class="hic">Соль</span>`,
+    pills:["CaO + CO₂ → CaCO₃","K₂O + SO₂ → K₂SO₃","Na₂O + SO₃ → Na₂SO₄","K₂O + N₂O₅ → 2KNO₃"],
+    note:"📐 Соль = катион металла + кислотный остаток кислоты, которой соответствует оксид:<br>SO₂→сульфит, SO₃→сульфат, CO₂→карбонат, SiO₂→силикат, N₂O₅→нитрат, P₂O₅→фосфат.",
+    rxns:[
+      {l:"CaO + CO₂",r:"CaCO₃",h:"CO₂ → H₂CO₃ → карбонат. Ca²⁺ + CO₃²⁻ → CaCO₃."},
+      {l:"K₂O + SO₂",r:"K₂SO₃",h:"SO₂ → H₂SO₃ → сульфит. 2K⁺ + SO₃²⁻ → K₂SO₃."},
+      {l:"Na₂O + SO₃",r:"Na₂SO₄",h:"SO₃ → H₂SO₄ → сульфат. 2Na⁺ + SO₄²⁻ → Na₂SO₄."},
+      {l:"MgO + CO₂",r:"MgCO₃",h:"CO₂ → карбонат. Mg²⁺ + CO₃²⁻ → MgCO₃."},
+      {l:"K₂O + N₂O₅",r:"2KNO₃",h:"N₂O₅ → HNO₃ → нитрат. 2KNO₃ (коэффициент 2, т.к. N₂O₅ содержит 2N)."},
+      {l:"CaO + SiO₂ →(t°)",r:"CaSiO₃",h:"SiO₂ — кислотный оксид → силикат. Реакция при сплавлении."},
+      {l:"BaO + SO₃",r:"BaSO₄",h:"SO₃ → сульфат. Ba²⁺ + SO₄²⁻ → BaSO₄."},
+      {l:"Na₂O + Br₂O₅",r:"2NaBrO₃",h:"Br₂O₅ → HBrO₃ → бромат. 2Na⁺ + BrO₃⁻ → NaBrO₃ (коэф. 2)."},
+      {l:"Na₂O + Br₂O₇",r:"2NaBrO₄",h:"Br₂O₇ → HBrO₄ → пербромат. Аналогично Br₂O₅."},
+      {l:"CaO + CrO₃",r:"CaCrO₄",h:"CrO₃ → H₂CrO₄ → хромат. Ca²⁺ + CrO₄²⁻ → CaCrO₄."},
+    ]
+  },
+  {
+    title:"Основный оксид + Амфотерный оксид (сплавление)",
+    tpl:`<span class="hia">Осн. оксид</span> (ЩМ/ЩЗМ/Mg) + <span class="hip">Амф. оксид</span> <span class="ox-cond">t°</span>→ <span class="hic">Соль MeO₂ⁿ⁻</span>`,
+    pills:["Na₂O + ZnO → Na₂ZnO₂","Na₂O + Al₂O₃ → 2NaAlO₂","CaO + ZnO → CaZnO₂","CaO + Al₂O₃ → Ca(AlO₂)₂"],
+    note:"📐 Остатки: ZnO₂²⁻ (цинкат), AlO₂⁻ (метаалюминат), BeO₂²⁻ (бериллат), FeO₂⁻ (метаферрит), CrO₂⁻ (метахромит).<br>⚠️ Только при сплавлении t°, в растворе не идёт.",
+    rxns:[
+      {l:"Na₂O + ZnO →(t°)",r:"Na₂ZnO₂",h:"ZnO — амфотерный. ZnO₂²⁻ — цинкат. 2Na⁺ + ZnO₂²⁻ → Na₂ZnO₂."},
+      {l:"Na₂O + Al₂O₃ →(t°)",r:"2NaAlO₂",h:"Al₂O₃ — амфотерный. AlO₂⁻ — метаалюминат. Коэф. 2 (из-за Al₂)."},
+      {l:"CaO + ZnO →(t°)",r:"CaZnO₂",h:"ZnO₂²⁻. Ca²⁺ + ZnO₂²⁻ → CaZnO₂."},
+      {l:"CaO + Al₂O₃ →(t°)",r:"Ca(AlO₂)₂",h:"AlO₂⁻. Ca²⁺ + 2AlO₂⁻ → Ca(AlO₂)₂."},
+      {l:"K₂O + ZnO →(t°)",r:"K₂ZnO₂",h:"ZnO₂²⁻. 2K⁺ + ZnO₂²⁻ → K₂ZnO₂."},
+      {l:"BaO + Al₂O₃ →(t°)",r:"Ba(AlO₂)₂",h:"AlO₂⁻. Ba²⁺ + 2AlO₂⁻ → Ba(AlO₂)₂."},
+      {l:"Li₂O + Al₂O₃ →(t°)",r:"2LiAlO₂",h:"AlO₂⁻. Li₂O + Al₂O₃ → 2LiAlO₂."},
+      {l:"Na₂O + Fe₂O₃ →(t°)",r:"2NaFeO₂",h:"Fe₂O₃ — амфотерный. FeO₂⁻ — метаферрит. Коэф. 2."},
+      {l:"CaO + Cr₂O₃ →(t°)",r:"Ca(CrO₂)₂",h:"Cr₂O₃ — амфотерный. CrO₂⁻ — метахромит. Ca²⁺ + 2CrO₂⁻ → Ca(CrO₂)₂."},
+      {l:"Na₂O + BeO →(t°)",r:"Na₂BeO₂",h:"BeO — амфотерный. BeO₂²⁻ — бериллат. 2Na⁺ + BeO₂²⁻ → Na₂BeO₂."},
+    ]
+  },
+  {
+    title:"Основный оксид + Кислота",
+    tpl:`<span class="hia">Осн. оксид</span> + <span class="hib">Кислота</span> → <span class="hic">Соль + H₂O</span>`,
+    pills:["Na₂O + 2HCl → 2NaCl + H₂O","CaO + H₂SO₄ → CaSO₄ + H₂O","FeO + 2HBr → FeBr₂ + H₂O","CuO + 2HCl → CuCl₂ + H₂O"],
+    note:"⚠️ Все основные оксиды реагируют с кислотами.<br>⚠️ Fe₃O₄ + 8HBr → FeBr₂ + 2FeBr₃ + 4H₂O (двойной оксид → смесь солей).<br>⚠️ FeO + HNO₃(конц.) → ОВР (Fe²⁺→Fe³⁺); Cu₂O + H₂SO₄(конц.) → ОВР (Cu⁺→Cu²⁺).",
+    rxns:[
+      {l:"Na₂O + 2HCl",r:"2NaCl + H₂O",h:"Na⁺ + Cl⁻ → NaCl. Коэф. 2 перед HCl и NaCl."},
+      {l:"CaO + H₂SO₄",r:"CaSO₄ + H₂O",h:"Ca²⁺ + SO₄²⁻ → CaSO₄. Коэффициентов нет."},
+      {l:"FeO + 2HBr",r:"FeBr₂ + H₂O",h:"Fe²⁺ + 2Br⁻ → FeBr₂. Коэф. 2 перед HBr."},
+      {l:"CuO + 2HCl",r:"CuCl₂ + H₂O",h:"Cu²⁺ + 2Cl⁻ → CuCl₂. Коэф. 2 перед HCl."},
+      {l:"Fe₂O₃ + 3H₂SO₄",r:"Fe₂(SO₄)₃ + 3H₂O",h:"Fe³⁺ + SO₄²⁻ → Fe₂(SO₄)₃. Коэф. 3 перед H₂SO₄."},
+      {l:"MgO + 2HNO₃",r:"Mg(NO₃)₂ + H₂O",h:"Mg²⁺ + 2NO₃⁻ → Mg(NO₃)₂. Коэф. 2 перед HNO₃."},
+      {l:"CuO + 2CH₃COOH",r:"(CH₃COO)₂Cu + H₂O",h:"Cu²⁺ + 2CH₃COO⁻ → ацетат меди."},
+      {l:"Ag₂O + 2HNO₃",r:"2AgNO₃ + H₂O",h:"Ag⁺ + NO₃⁻ → AgNO₃. Коэф. 2 перед AgNO₃."},
+      {l:"K₂O + 2HNO₃",r:"2KNO₃ + H₂O",h:"K⁺ + NO₃⁻ → KNO₃. Коэф. 2."},
+      {l:"BaO + H₂SO₄",r:"BaSO₄↓ + H₂O",h:"Ba²⁺ + SO₄²⁻ → BaSO₄↓ (осадок! нерастворим)."},
+    ]
+  },
+  {
+    title:"Основный оксид + Амфотерный гидроксид (сплавление)",
+    tpl:`<span class="hia">Осн. оксид</span> (ЩМ/ЩЗМ/Mg) + <span class="hip">Амф. гидроксид</span> <span class="ox-cond">t°</span>→ <span class="hic">Соль + H₂O</span>`,
+    pills:["K₂O + Zn(OH)₂ → K₂ZnO₂ + H₂O","K₂O + 2Al(OH)₃ → 2KAlO₂ + 3H₂O","BaO + Zn(OH)₂ → BaZnO₂ + H₂O"],
+    note:"📐 Те же соли MeO₂ⁿ⁻ что и с амфотерными оксидами, но + H₂O.<br>📐 Молей H₂O = (число OH-групп у амф. гидроксида) × коэффициент перед ним.",
+    rxns:[
+      {l:"K₂O + Zn(OH)₂ →(t°)",r:"K₂ZnO₂ + H₂O",h:"ZnO₂²⁻ — цинкат. Zn(OH)₂ даёт 1 H₂O."},
+      {l:"K₂O + 2Al(OH)₃ →(t°)",r:"2KAlO₂ + 3H₂O",h:"AlO₂⁻. 2Al(OH)₃ → 3H₂O (6 OH-групп / 2 = 3H₂O)."},
+      {l:"BaO + Zn(OH)₂ →(t°)",r:"BaZnO₂ + H₂O",h:"ZnO₂²⁻. Ba²⁺ + ZnO₂²⁻ → BaZnO₂ + H₂O."},
+      {l:"BaO + 2Al(OH)₃ →(t°)",r:"Ba(AlO₂)₂ + 3H₂O",h:"AlO₂⁻. 2Al(OH)₃ → 3H₂O."},
+      {l:"Na₂O + 2Al(OH)₃ →(t°)",r:"2NaAlO₂ + 3H₂O",h:"AlO₂⁻. Na₂O + 2Al(OH)₃ → 2NaAlO₂ + 3H₂O."},
+      {l:"Na₂O + Zn(OH)₂ →(t°)",r:"Na₂ZnO₂ + H₂O",h:"ZnO₂²⁻. Na₂O + Zn(OH)₂ → Na₂ZnO₂ + H₂O."},
+      {l:"CaO + Zn(OH)₂ →(t°)",r:"CaZnO₂ + H₂O",h:"ZnO₂²⁻. Ca²⁺ + ZnO₂²⁻ → CaZnO₂ + H₂O."},
+      {l:"CaO + 2Al(OH)₃ →(t°)",r:"Ca(AlO₂)₂ + 3H₂O",h:"AlO₂⁻. Ca²⁺ + 2AlO₂⁻ → Ca(AlO₂)₂. 3H₂O."},
+      {l:"K₂O + Be(OH)₂ →(t°)",r:"K₂BeO₂ + H₂O",h:"BeO₂²⁻ — бериллат. Be(OH)₂ → 1 H₂O."},
+      {l:"Na₂O + 2Cr(OH)₃ →(t°)",r:"2NaCrO₂ + 3H₂O",h:"CrO₂⁻ — метахромит. 2Cr(OH)₃ → 3H₂O."},
+    ]
+  },
+  {
+    title:"Особые реакции основных оксидов",
+    tpl:`Оксиды металлов <b>после Cu</b> в ряду напряжений <span class="ox-cond">t°</span>→ <span class="hic">Металл + O₂</span>`,
+    pills:["2HgO → 2Hg + O₂","2Ag₂O → 4Ag + O₂"],
+    note:"⚠️ Разлагаются: HgO, Ag₂O (металлы после Cu). CuO — не разлагается.<br>⚠️ Fe₃O₄ = FeO·Fe₂O₃ (двойной оксид) — при реакции с кислотами даёт смесь Fe²⁺ и Fe³⁺ солей.<br>⚠️ FeO с HNO₃(конц.) — ОВР: Fe²⁺→Fe³⁺, N⁺⁵→N⁺⁴ (NO₂).",
+    rxns:[
+      {l:"2HgO →(t°)",r:"2Hg + O₂↑",h:"Hg стоит после Cu в ряду напряжений → оксид разлагается при нагревании."},
+      {l:"2Ag₂O →(t°)",r:"4Ag + O₂↑",h:"Ag стоит после Cu → оксид разлагается. 2Ag₂O → 4Ag + O₂."},
+      {l:"Fe₃O₄ + 8HCl",r:"FeCl₂ + 2FeCl₃ + 4H₂O",h:"Fe₃O₄ = FeO·Fe₂O₃ → 1 FeCl₂ + 2 FeCl₃ + 4 H₂O."},
+      {l:"Fe₃O₄ + 8HBr",r:"FeBr₂ + 2FeBr₃ + 4H₂O",h:"Аналогично HCl. HBr — неокислитель, Fe²⁺ сохраняется."},
+      {l:"SiO₂ + Na₂CO₃ →(t°)",r:"Na₂SiO₃ + CO₂↑",h:"SiO₂ нелетучий кислотный оксид вытесняет летучий CO₂ из карбоната."},
+      {l:"SiO₂ + CaCO₃ →(t°)",r:"CaSiO₃ + CO₂↑",h:"SiO₂ вытесняет CO₂ из CaCO₃ при сплавлении (промышленность)."},
+      {l:"SiO₂ + Na₂SO₃ →(t°)",r:"Na₂SiO₃ + SO₂↑",h:"SiO₂ нелетучий → вытесняет летучий SO₂ из сульфита."},
+      {l:"SiO₂ + 4HF(газ)",r:"SiF₄ + 2H₂O",h:"Особое: SiO₂ реагирует с HF (травление стекла). SiO₂ + 4HF → SiF₄ + 2H₂O."},
+    ]
+  }
+];
+
+/* ══════════ RENDER ОКСИДЫ ══════════ */
+function renderOxBlocks(){
+  const container=document.getElementById('ox-blocks');
+  if(!container)return;
+  OX.forEach((block,bi)=>{
+    const wrap=document.createElement('div');
+    wrap.className='ox-block';
+
+    const body=document.createElement('div');
+    body.className='ox-block-body'+(bi===0?' open':'');
+
+    const togSpan=document.createElement('div');
+    togSpan.className='ox-block-toggle'+(bi===0?' open':'');
+    togSpan.textContent='▼';
+
+    const hdr=document.createElement('div');
+    hdr.className='ox-block-hdr';
+    const numEl=document.createElement('div');
+    numEl.className='ox-block-num';numEl.textContent=bi+1;
+    const ttlEl=document.createElement('div');
+    ttlEl.className='ox-block-title';ttlEl.textContent=block.title;
+    hdr.appendChild(numEl);hdr.appendChild(ttlEl);hdr.appendChild(togSpan);
+    hdr.onclick=()=>{body.classList.toggle('open');togSpan.classList.toggle('open');};
+
+    // template
+    const tpl=document.createElement('div');
+    tpl.className='ox-tpl';
+    const pills=block.pills.map(p=>`<span class="ox-pill">${p}</span>`).join('');
+    tpl.innerHTML=`<div class="ox-tpl-lbl">Шаблон</div>
+      <div class="ox-tpl-formula">${block.tpl}</div>
+      <div class="ox-pills">${pills}</div>
+      <div class="ox-note">${block.note}</div>`;
+    body.appendChild(tpl);
+
+    // practice
+    const pLbl=document.createElement('div');
+    pLbl.className='ox-practice-lbl';
+    pLbl.textContent='Практика — допиши продукты и коэффициенты';
+    body.appendChild(pLbl);
+
+    block.rxns.forEach((rxn,ri)=>{
+      const id=`ox_${bi}_${ri}`;
+      const div=document.createElement('div');
+      div.className='ox-rxn';div.id='oxrxn_'+id;
+      div.innerHTML=`<div class="ox-rxn-num">${ri+1} из ${block.rxns.length}</div>
+        <div class="ox-rxn-eq">
+          <span>${rxn.l}</span>
+          <span class="ox-rxn-arrow">→</span>
+          <span class="ox-rxn-right" id="oxr_${id}">${rxn.r}</span>
+          <span class="ox-rxn-ph" id="oxph_${id}">? ? ?</span>
+        </div>
+        <div class="ox-rxn-btns">
+          <button class="ox-btn-hint" onclick="oxHint('${id}')">💡 Подсказка</button>
+          <button class="ox-btn-ans" id="oxbtn_${id}" onclick="oxAns('${id}')">✓ Показать ответ</button>
+        </div>
+        <div class="ox-rxn-hint" id="oxhint_${id}">${rxn.h}</div>`;
+      body.appendChild(div);
+    });
+
+    wrap.appendChild(hdr);
+    wrap.appendChild(body);
+    container.appendChild(wrap);
+  });
+}
+document.addEventListener('DOMContentLoaded', renderOxBlocks);
+
+function oxHint(id){document.getElementById('oxhint_'+id).classList.toggle('show');}
+function oxAns(id){
+  document.getElementById('oxr_'+id).classList.add('show');
+  document.getElementById('oxph_'+id).classList.add('hide');
+  const btn=document.getElementById('oxbtn_'+id);
+  btn.classList.add('done');btn.textContent='✓ Показано';btn.disabled=true;
+  document.getElementById('oxrxn_'+id).classList.add('ox-revealed');
+}
+</script>
+</body>
+</html>
