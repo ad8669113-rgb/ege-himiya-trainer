@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Гидролиз и pH — ЕГЭ</title>
+<style>
+:root{
+  --p900:#2D1B69;--p800:#3D2785;--p700:#4E35A0;
+  --p600:#6248C4;--p500:#7B61DB;--p400:#9B84E8;
+  --p300:#BDB2F3;--p200:#DBD5F8;--p100:#F0EEFF;--p50:#F8F7FF;
+  --ink:#1C1B29;--ink2:#3E3C5A;--ink3:#8A88A8;
+  --line:#E2E5EC;--bg:#F6F5FC;--white:#fff;
+  --green:#1D9E75;--green-t:#E1F5EE;--green-d:#085041;
+  --amber:#BA7517;--amber-t:#FAEEDA;--amber-d:#633806;
+  --red:#A32D2D;--red-t:#FCEBEB;--red-d:#7A2020;
+  --r:12px;--r-sm:8px;--r-lg:20px;
+  --shadow:0 1px 3px rgba(20,21,26,.06),0 4px 16px rgba(20,21,26,.06);
+  --shm:0 4px 20px rgba(60,40,160,.12);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+  --h1:#062030;--h2:#0C6B8E;--h3:#0891B2;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px}
+
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:var(--p100);z-index:999}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;transition:width .1s}
+
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--h1) 0%,#0A4D6A 45%,var(--h2) 75%,var(--h3) 100%);padding:48px 32px 40px;margin:0 -24px 40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;bottom:-30%;left:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(8,145,178,.18) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;top:-20%;right:5%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);border-radius:20px;padding:4px 14px;font-size:12px;font-family:var(--mono);letter-spacing:.6px;margin-bottom:16px}
+.hero h1{font-size:clamp(28px,5vw,46px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#fff;margin-bottom:12px;position:relative;z-index:1;text-wrap:balance}
+.hero h1 em{color:#67E8F9;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.68);line-height:1.7;max-width:540px;margin-bottom:22px;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.hero-chip{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.17);color:rgba(255,255,255,.88);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+
+/* SECTIONS */
+.section{margin-bottom:44px}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--p200)}
+.section-title{font-size:clamp(16px,2.5vw,21px);font-weight:700;color:var(--p800);line-height:1.2;text-wrap:balance}
+.section-pill{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.8px;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+
+h3.sub{font-size:15px;font-weight:700;color:var(--p700);margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+h3.sub::before{content:'';width:3px;height:16px;background:var(--h2);border-radius:2px;flex-shrink:0}
+
+/* BOXES */
+.box{border-radius:var(--r-sm);padding:12px 16px;margin:10px 0;font-size:14px;line-height:1.7}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:var(--amber-t);border-left:4px solid var(--amber);color:var(--amber-d)}
+.box-danger{background:var(--red-t);border-left:4px solid var(--red);color:var(--red-d)}
+.box-success{background:var(--green-t);border-left:4px solid var(--green);color:var(--green-d)}
+.box-title{font-weight:700;font-size:12px;margin-bottom:5px;text-transform:uppercase;letter-spacing:.6px}
+.box ul,.box ol{padding-left:18px;margin:4px 0}
+.box li{margin:3px 0;font-size:13px}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);margin:12px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:13px}
+th{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-weight:600;padding:9px 12px;text-align:left;font-size:11.5px;letter-spacing:.3px}
+td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.55}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--p50)}
+td code{font-family:var(--mono);font-size:12px;background:var(--p100);padding:1px 4px;border-radius:3px;color:var(--p800)}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+@media(max-width:680px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* SALT TYPE CARDS */
+.salt-card{border-radius:var(--r);padding:16px;border:1.5px solid;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px}
+.sc-neutral{background:#F0FDF4;border-color:#4ADE80}
+.sc-alk{background:#EFF6FF;border-color:#60A5FA}
+.sc-acid{background:#FEF2F2;border-color:#F87171}
+.sc-both{background:#FAF5FF;border-color:#C084FC}
+.sc-irr{background:#FFF7ED;border-color:#FB923C}
+.salt-tag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;padding:2px 8px;border-radius:100px;width:fit-content}
+.tag-n{background:#DCFCE7;color:#166534}
+.tag-a{background:#DBEAFE;color:#1E40AF}
+.tag-c{background:#FEE2E2;color:#991B1B}
+.tag-b{background:#F3E8FF;color:#6B21A8}
+.tag-i{background:#FFEDD5;color:#9A3412}
+.sc-title{font-weight:700;font-size:13.5px;line-height:1.3}
+.sc-body{font-size:12.5px;line-height:1.6;color:var(--ink2)}
+.sc-eq{font-family:var(--mono);font-size:11.5px;color:var(--ink3);margin-top:2px;word-break:break-word}
+.sc-ph{font-weight:700;font-size:12px;margin-top:2px}
+.ph-n{color:#166534}.ph-a{color:#1E40AF}.ph-c{color:#991B1B}.ph-7{color:#166534}
+
+/* pH SCALE */
+.ph-scale{margin:14px 0;border-radius:var(--r-sm);overflow:hidden;box-shadow:var(--shadow)}
+.ph-bar{height:36px;background:linear-gradient(to right,#9b1a1a,#d04020,#e07030,#c0a020,#80b030,#30a060,#1888a0,#1048b0,#180868);display:flex;align-items:center;position:relative}
+.ph-num{position:absolute;color:rgba(255,255,255,.9);font-family:var(--mono);font-size:9.5px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.7);transform:translateX(-50%);top:50%;margin-top:-6px}
+.ph-zones{display:flex}
+.ph-zone{flex:1;text-align:center;padding:5px 4px;font-size:11px;font-weight:700;border-right:1px solid var(--line)}
+.ph-zone:last-child{border-right:none}
+.ph-acid{background:#FEE2E2;color:#991B1B}
+.ph-neut{background:#DCFCE7;color:#166534}
+.ph-alk{background:#DBEAFE;color:#1E40AF}
+
+/* ALGO */
+.algo{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.algo-step{display:flex;gap:10px;align-items:flex-start}
+.algo-n{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-family:var(--mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.algo-text{font-size:13.5px;line-height:1.65;color:var(--ink2)}
+.algo-text strong{color:var(--ink)}
+
+/* INLINE NOTE */
+.note{background:linear-gradient(135deg,var(--p100),var(--p50));border:1.5px solid var(--p300);border-radius:var(--r);padding:14px 18px;margin:14px 0}
+.note-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--p600);margin-bottom:6px;font-weight:700}
+.note ul{padding-left:16px}
+.note li{font-size:13px;color:var(--p800);padding:2px 0}
+
+/* ── TRAINER ── */
+#tr-wrap{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--shadow);margin-bottom:24px}
+.tr-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid var(--p200)}
+.tr-title{font-size:18px;font-weight:700;color:var(--p800)}
+.tr-stats{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.ts-item{display:flex;align-items:baseline;gap:4px;font-size:13px;color:var(--ink3)}
+.ts-num{font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
+.ts-num.green{color:var(--green)}
+.ts-num.red{color:var(--red)}
+.ts-num.amber{color:var(--amber)}
+.ts-num.gray{color:var(--ink3)}
+.tr-prog-wrap{margin-bottom:16px}
+.tr-prog-lbl{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3);margin-bottom:4px;font-family:var(--mono)}
+.tr-prog-track{height:6px;background:var(--p100);border-radius:100px;overflow:hidden}
+.tr-prog-fill{height:100%;background:linear-gradient(90deg,var(--h2),var(--green));transition:width .3s}
+.tr-card{background:var(--bg);border:1.5px solid var(--p200);border-radius:var(--r);padding:20px;margin-bottom:14px;min-height:120px}
+.tr-dir-tag{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 11px;border-radius:100px;margin-bottom:10px}
+.tag-asc{background:#DBEAFE;color:#1E40AF}
+.tag-desc{background:#FDE8D8;color:#9A3412}
+.tr-subs{display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin:4px 0}
+.tr-sub{display:flex;align-items:baseline;gap:6px;font-size:14px}
+.tr-sub-n{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--ink3);min-width:18px;flex-shrink:0}
+.tr-sub-f{font-family:var(--mono);font-weight:600;color:var(--ink)}
+.tr-question{font-size:13px;color:var(--ink3);margin-top:8px;font-style:italic}
+.tr-input-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0}
+.tr-input{padding:9px 14px;font-size:22px;font-family:var(--mono);border:2px solid var(--line);border-radius:var(--r-sm);background:var(--bg);color:var(--ink);outline:none;transition:border-color .2s;max-width:140px;width:100%;letter-spacing:.14em;text-align:center;font-weight:700}
+.tr-input:focus{border-color:var(--h2)}
+.tr-input.ok{border-color:var(--green);background:var(--green-t)}
+.tr-input.err{border-color:var(--red);background:var(--red-t)}
+.tr-input:read-only{opacity:.7}
+.tr-btn{padding:9px 22px;border:none;border-radius:var(--r-sm);font-size:14px;font-weight:700;cursor:pointer;background:var(--p600);color:#fff;transition:background .15s,transform .1s}
+.tr-btn:hover{background:var(--p700);transform:translateY(-1px)}
+.tr-btn:disabled{opacity:.45;cursor:default;transform:none}
+.tr-btn-ok{background:var(--green)}
+.tr-btn-ok:hover{background:var(--green-d)}
+.tr-feedback{font-size:14px;font-weight:600;min-height:20px;margin:2px 0 8px}
+.tr-feedback.ok{color:var(--green)}
+.tr-feedback.err{color:var(--red)}
+.tr-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap}
+.tr-nav-btns{display:flex;gap:6px}
+.tr-nav-btns button{min-width:40px;height:40px;border-radius:50%;font-size:17px;background:var(--white);border:1.5px solid var(--line);color:var(--ink);cursor:pointer;transition:background .15s;display:flex;align-items:center;justify-content:center}
+.tr-nav-btns button:hover:not(:disabled){background:var(--p100)}
+.tr-nav-btns button:disabled{opacity:.3;cursor:default}
+.tr-penalty{background:var(--red-t);border:1px solid var(--red);border-radius:var(--r-sm);padding:4px 11px;font-size:12px;color:var(--red-d);font-weight:600;display:none}
+.tr-penalty.show{display:inline-block}
+.tr-result{background:var(--white);border-radius:var(--r);padding:28px;text-align:center;box-shadow:var(--shm);border:1px solid var(--line);display:none}
+.tr-result .gr{font-size:28px;margin-bottom:4px}
+.tr-result .pct{font-size:44px;font-weight:900;color:var(--p700)}
+.tr-result .rs{display:flex;justify-content:center;gap:24px;margin:12px 0 20px;flex-wrap:wrap}
+.tr-result .rn{font-size:24px;font-weight:800}
+.tr-result .rl{font-size:12px;color:var(--ink3)}
+.tr-result .ra{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.err-badge{background:var(--red-t);border:2px solid var(--red);border-radius:var(--r);padding:10px 16px;margin-bottom:14px;display:none;align-items:center;gap:12px;flex-wrap:wrap;font-weight:700;color:var(--red-d)}
+.err-badge.show{display:flex}
+
+#btt{position:fixed;bottom:24px;right:24px;width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(8,107,142,.35);display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .2s;opacity:0;pointer-events:none}
+#btt.vis{opacity:1;pointer-events:all}
+#btt:hover{transform:translateY(-2px)}
+.fade-in{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.fade-in.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:540px){
+  .shell{padding:0 14px 60px}
+  .hero{padding:32px 16px 28px;margin:0 -14px 28px}
+  .tr-subs{grid-template-columns:1fr}
+  .tr-input{max-width:100%}
+}
+</style>
+</head>
+<body>
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">ЕГЭ Химия · Линия 21 · 1 балл</div>
+  <h1>Гидролиз<br><em>и pH растворов</em></h1>
+  <p class="hero-sub">Электролиты, среда растворов, 4 типа гидролиза солей — от базы до уверенного ответа в задании 21.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Электролиты</span>
+    <span class="hero-chip">Шкала pH</span>
+    <span class="hero-chip">4 типа гидролиза</span>
+    <span class="hero-chip">41 задание ЕГЭ</span>
+  </div>
+</div>
+
+<!-- БЛОК 1: ЭЛЕКТРОЛИТЫ -->
+<div class="section fade-in">
+  <div class="section-header">
+    <span class="section-pill">ОСНОВЫ</span>
+    <span class="section-title">Электролиты и диссоциация</span>
+  </div>
+
+  <div class="box box-info">
+    <div class="box-title">Определение</div>
+    <strong>Электролитическая диссоциация</strong> — распад вещества на ионы при растворении или расплавлении. <strong>Электролиты</strong> — вещества, растворы которых проводят ток. <strong>Неэлектролиты</strong> — не проводят (большинство органических, CO, N₂O, NO, SiO₂).
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Категория</th><th>Сильные электролиты (α ≈ 1)</th><th>Слабые электролиты (α ≪ 1)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Кислоты</strong></td>
+          <td>H₂SO₄, HNO₃, HCl, HBr, HI, HClO₃, HClO₄, HBrO₃, HBrO₄, HIO₃, HMnO₄, H₂CrO₄, H₂Cr₂O₇</td>
+          <td>H₂SO₃, H₂S, HNO₂, HF, H₃PO₄, H₃PO₃, H₂CO₃, H₂SiO₃, HClO, HBrO, карбоновые кислоты</td>
+        </tr>
+        <tr>
+          <td><strong>Основания</strong></td>
+          <td>Щёлочи: LiOH, NaOH, KOH, RbOH, CsOH, Ca(OH)₂, Sr(OH)₂, Ba(OH)₂</td>
+          <td>Все нерастворимые основания, амфотерные гидроксиды, NH₃·H₂O</td>
+        </tr>
+        <tr>
+          <td><strong>Соли</strong></td>
+          <td>Растворимые соли (→ ионное уравнение пишется в виде ионов)</td>
+          <td>Нерастворимые и малорастворимые соли (⇌)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">Важно для ионных уравнений</div>
+    В ионных уравнениях на ионы расписываются <strong>только сильные электролиты</strong>. Слабые электролиты, осадки и газы остаются в молекулярном виде.
+  </div>
+</div>
+
+<!-- БЛОК 2: СРЕДА И pH -->
+<div class="section fade-in">
+  <div class="section-header">
+    <span class="section-pill">СРЕДА</span>
+    <span class="section-title">Среда растворов и pH</span>
+  </div>
+
+  <p style="font-size:14px;margin-bottom:12px"><strong>pH</strong> — водородный показатель: <strong>pH = −log₁₀C(H⁺)</strong>. Количественная мера кислотности раствора.</p>
+
+  <!-- pH scale visual -->
+  <div class="ph-scale">
+    <div class="ph-bar">
+      <span class="ph-num" style="left:6.7%">1</span>
+      <span class="ph-num" style="left:20%">3</span>
+      <span class="ph-num" style="left:40%">6</span>
+      <span class="ph-num" style="left:50%">7</span>
+      <span class="ph-num" style="left:60%">8</span>
+      <span class="ph-num" style="left:80%">11</span>
+      <span class="ph-num" style="left:93.3%">13</span>
+    </div>
+    <div class="ph-zones">
+      <div class="ph-zone ph-acid" style="flex:7">Кислая &nbsp;pH &lt; 7</div>
+      <div class="ph-zone ph-neut" style="flex:1">7</div>
+      <div class="ph-zone ph-alk" style="flex:7">Щелочная &nbsp;pH &gt; 7</div>
+    </div>
+  </div>
+
+  <h3 class="sub">Индикаторы</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Индикатор</th>
+          <th style="background:#B91C1C">Кислая (pH &lt; 7)</th>
+          <th style="background:#6B7280">Нейтральная (pH = 7)</th>
+          <th style="background:#1D4ED8">Щелочная (pH &gt; 7)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Лакмус</strong><br><span style="font-size:11px;color:var(--ink3);font-style:italic">🍗 KFC: <b style="color:#B91C1C">К</b>расный — <b style="color:#6B21A8">Ф</b>иолетовый — си<b style="color:#1D4ED8">С</b>ний</span></td>
+          <td style="color:#B91C1C;font-weight:700">красная</td>
+          <td style="color:#6B21A8;font-weight:700">фиолетовая</td>
+          <td style="color:#1D4ED8;font-weight:700">синяя</td>
+        </tr>
+        <tr>
+          <td><strong>Фенолфталеин</strong><br><span style="font-size:11px;color:var(--ink3);font-style:italic">🫐 Фенолфталеиновый — в щелочах малиновый</span></td>
+          <td>бесцветная</td>
+          <td>бесцветная</td>
+          <td style="color:#BE185D;font-weight:700">малиновая</td>
+        </tr>
+        <tr>
+          <td><strong>Метилоранж</strong><br><span style="font-size:11px;color:var(--ink3);font-style:italic">🍰 КОРЖ: <b style="color:#B91C1C">К</b>расный — <b style="color:#D97706">О</b>ранжевый — <b style="color:#D97706">Ж</b>ёлтый</span></td>
+          <td style="color:#B91C1C;font-weight:700">красная</td>
+          <td style="color:#D97706;font-weight:700">оранжевая</td>
+          <td style="color:#D97706;font-weight:700">жёлтая</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">Ловушка ЕГЭ — фенолфталеин</div>
+    Фенолфталеин <strong>не различает кислую и нейтральную среды</strong> — в обоих случаях бесцветный. Лакмус и метилоранж — универсальные (определяют все три среды).
+  </div>
+
+  <h3 class="sub">Диапазоны pH по типу вещества</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>pH</th><th>Среда</th><th>Типичные вещества</th></tr></thead>
+      <tbody>
+        <tr><td><code>&lt;1</code></td><td style="color:#B91C1C;font-weight:700">Сильнокислая</td><td>Сильные кислоты (H₂SO₄, HCl, HNO₃), гидросульфаты</td></tr>
+        <tr><td><code>3–6</code></td><td style="color:#B91C1C">Слабокислая</td><td>Слабые кислоты; соли, гидролизующиеся по катиону</td></tr>
+        <tr><td><code>= 7</code></td><td style="color:#166534;font-weight:700">Нейтральная</td><td>Вода; соли сильной кислоты + сильного основания; соли слабой кислоты + слабого основания (гидролиз по катиону и аниону одновременно, среды компенсируют друг друга)</td></tr>
+        <tr><td><code>8–11</code></td><td style="color:#1D4ED8">Слабощелочная</td><td>Соли, гидролизующиеся по аниону; NH₃·H₂O</td></tr>
+        <tr><td><code>&gt;12</code></td><td style="color:#1D4ED8;font-weight:700">Сильнощелочная</td><td>Щёлочи (NaOH, KOH, Ca(OH)₂, Ba(OH)₂)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- БЛОК 3: ГИДРОЛИЗ СОЛЕЙ -->
+<div class="section fade-in">
+  <div class="section-header">
+    <span class="section-pill">ГЛАВНОЕ</span>
+    <span class="section-title">Гидролиз солей</span>
+  </div>
+
+  <div class="box box-info">
+    <div class="box-title">Определение</div>
+    <strong>Гидролиз</strong> — реакция ионного обмена соли с водой, приводящая к образованию <strong>слабого электролита</strong> и изменению среды раствора. Идёт ступенчато, никогда не до конца (кроме необратимого гидролиза).
+  </div>
+
+  <h3 class="sub">4 типа солей по гидролизу</h3>
+  <div class="grid-2">
+    <!-- Тип 1 -->
+    <div class="salt-card sc-neutral">
+      <span class="salt-tag tag-n">Тип 1 · Гидролиза нет</span>
+      <div class="sc-title">Сильная кислота + Сильное основание</div>
+      <div class="sc-body">Соль не гидролизуется. Оба иона слабых электролитов не образуются.</div>
+      <div class="sc-eq">NaCl, KNO₃, CaCl₂, BaBr₂, Na₂SO₄</div>
+      <div class="sc-ph ph-7">pH = 7 · нейтральная</div>
+    </div>
+    <!-- Тип 2 -->
+    <div class="salt-card sc-alk">
+      <span class="salt-tag tag-a">Тип 2 · Гидролиз по аниону</span>
+      <div class="sc-title">Слабая кислота + Сильное основание</div>
+      <div class="sc-body">Анион взаимодействует с водой: A⁻ + HOH ⇌ HA + OH⁻<br>Образуется слабая кислота и OH⁻.</div>
+      <div class="sc-eq">Na₂CO₃, CH₃COONa, K₂S, KF, NaHCO₃, K₃PO₄</div>
+      <div class="sc-ph ph-a">pH &gt; 7 · щелочная</div>
+    </div>
+    <!-- Тип 3 -->
+    <div class="salt-card sc-acid">
+      <span class="salt-tag tag-c">Тип 3 · Гидролиз по катиону</span>
+      <div class="sc-title">Сильная кислота + Слабое основание</div>
+      <div class="sc-body">Катион взаимодействует с водой: M²⁺ + HOH ⇌ MOH⁺ + H⁺<br>Образуется слабое основание и H⁺.</div>
+      <div class="sc-eq">CuSO₄, FeCl₃, AlCl₃, ZnSO₄, NH₄Cl, MgSO₄</div>
+      <div class="sc-ph ph-c">pH &lt; 7 · кислая</div>
+    </div>
+    <!-- Тип 4 -->
+    <div class="salt-card sc-both">
+      <span class="salt-tag tag-b">Тип 4 · По катиону и аниону</span>
+      <div class="sc-title">Слабая кислота + Слабое основание</div>
+      <div class="sc-body">Гидролизуется и катион, и анион. Среда определяется соотношением сил. Часто — <strong>необратимый</strong> гидролиз.</div>
+      <div class="sc-eq">CH₃COONH₄, (NH₄)₂CO₃, Al₂S₃, Cr₂S₃</div>
+      <div class="sc-ph ph-7">pH ≈ 7 · близко к нейтральной</div>
+    </div>
+  </div>
+
+  <!-- Необратимый гидролиз -->
+  <div class="salt-card sc-irr" style="margin-top:12px">
+    <span class="salt-tag tag-i">Особый случай · Необратимый гидролиз</span>
+    <div class="sc-title">Слабая летучая кислота + Слабое нерастворимое основание (знаки «?» и «−» в таблице растворимости)</div>
+    <div class="sc-body">Гидролиз идёт <strong>до конца</strong>. Такие соли не существуют в растворе — сразу разлагаются.</div>
+    <div class="sc-eq">Al₂S₃ + 6H₂O → 2Al(OH)₃↓ + 3H₂S↑&nbsp;&nbsp;|&nbsp;&nbsp;Cr₂S₃, Al₂(CO₃)₃ и др.</div>
+  </div>
+
+  <h3 class="sub">Правило: чем слабее — тем сильнее гидролиз</h3>
+  <p style="font-size:14px;margin-bottom:8px">Чем слабее электролит, тем сильнее гидролизуется соль по соответствующему иону. Пример: Na₂S гидролизуется сильнее, чем NaF (H₂S слабее HF).</p>
+</div>
+
+<!-- БЛОК 4: КИСЛЫЕ СОЛИ + АЛГОРИТМ -->
+<div class="section fade-in">
+  <div class="section-header">
+    <span class="section-pill">АЛГОРИТМ</span>
+    <span class="section-title">Как определить среду — алгоритм ЕГЭ</span>
+  </div>
+
+  <div class="algo">
+    <div class="algo-step">
+      <div class="algo-n">1</div>
+      <div class="algo-text"><strong>Написать формулу</strong>, если дано название вещества.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">2</div>
+      <div class="algo-text"><strong>Проверить растворимость</strong> по таблице. Нерастворимые соли — гидролиза нет.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">3</div>
+      <div class="algo-text"><strong>Определить кислоту и основание</strong>, из которых образована соль.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">4</div>
+      <div class="algo-text"><strong>Оценить силу:</strong> щёлочи (сильные) = LiOH, NaOH, KOH, RbOH, CsOH, Ca(OH)₂, Sr(OH)₂, Ba(OH)₂; сильные кислоты = H₂SO₄, HNO₃, HCl, HBr, HI, HClO₃, HClO₄, HBrO₄, HIO₃, HMnO₄.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">5</div>
+      <div class="algo-text"><strong>Применить тип:</strong> слабая кислота → pH &gt; 7; слабое основание → pH &lt; 7; оба слабые → pH ≈ 7; оба сильные → pH = 7.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">6</div>
+      <div class="algo-text"><strong>Сравнить pH:</strong> сильная кислота &lt; слабая кислота &lt; соль (гидр. по катиону) &lt; нейтральная соль ≈ 7 &lt; соль (гидр. по аниону) &lt; щёлочь.</div>
+    </div>
+  </div>
+
+  <h3 class="sub">Кислые соли слабых кислот — особый случай</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Кислая соль</th><th>Преобладает</th><th>Среда</th></tr></thead>
+      <tbody>
+        <tr><td><code>NaHS, NaHCO₃, Na₂HPO₄</code></td><td>Гидролиз по аниону (анион очень слабой кислоты)</td><td style="color:#1D4ED8;font-weight:700">Щелочная</td></tr>
+        <tr><td><code>NaHSO₃, NaH₂PO₄</code></td><td>Диссоциация кислого аниона (кислота средней силы)</td><td style="color:#B91C1C;font-weight:700">Кислая</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <div class="note-label">Запомни для ЕГЭ</div>
+    <ul>
+      <li><strong>KHCO₃, NaHCO₃</strong> — щелочная среда (H₂CO₃ очень слабая)</li>
+      <li><strong>NaHS, NaHCO₃, Na₂HPO₄</strong> — щелочная</li>
+      <li>Гидросульфаты (<strong>NaHSO₄</strong>) — кислая (диссоциируют как кислота!)</li>
+      <li>Соли с катионом <strong>NH₄⁺</strong> всегда кислят раствор</li>
+      <li><strong>Cs⁺, Rb⁺, Ba²⁺, Sr²⁺, Ca²⁺</strong> — катионы сильных оснований, гидролиза нет</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ТРЕНАЖЁР ЕГЭ -->
+<div class="section fade-in" id="trainer-section">
+  <div class="section-header">
+    <span class="section-pill">ПРАКТИКА</span>
+    <span class="section-title">Тренажёр ЕГЭ — Линия 21 · 41 задание</span>
+  </div>
+
+  <div class="box box-info" style="margin-bottom:12px">
+    <strong>Формат задания:</strong> дано 4 вещества — определи среду каждого раствора и расставь номера в порядке возрастания или убывания pH. Введи ответ — 4 цифры подряд (например: <code>4321</code>). При ошибке — +1 задание в конец.
+  </div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+    <div style="flex:1;min-width:220px;background:#DBEAFE;border:1.5px solid #60A5FA;border-radius:var(--r-sm);padding:12px 14px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#1E40AF;margin-bottom:6px">▲ Возрастание pH</div>
+      <div style="font-size:22px;font-weight:900;font-family:var(--mono);color:#1E3A8A;letter-spacing:.06em">КНЩ</div>
+      <div style="font-size:13px;color:#1E40AF;margin-top:4px"><b>К</b>ислая → <b>Н</b>ейтральная → <b>Щ</b>елочная</div>
+      <div style="font-size:12px;color:#3B82F6;margin-top:4px">pH растёт слева направо</div>
+    </div>
+    <div style="flex:1;min-width:220px;background:#FDE8D8;border:1.5px solid #FB923C;border-radius:var(--r-sm);padding:12px 14px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#9A3412;margin-bottom:6px">▼ Убывание pH</div>
+      <div style="font-size:22px;font-weight:900;font-family:var(--mono);color:#7C2D12;letter-spacing:.06em">ЩНК</div>
+      <div style="font-size:13px;color:#9A3412;margin-top:4px"><b>Щ</b>елочная → <b>Н</b>ейтральная → <b>К</b>ислая</div>
+      <div style="font-size:12px;color:#F97316;margin-top:4px">pH убывает слева направо</div>
+    </div>
+  </div>
+
+  <div id="err-badge" class="err-badge">
+    ⚠ Работа над ошибками: <span id="err-count">0</span> заданий
+  </div>
+
+  <div id="tr-wrap">
+    <div class="tr-header">
+      <span class="tr-title">Тренажёр pH</span>
+      <div class="tr-stats">
+        <div class="ts-item"><span id="t-ok" class="ts-num green">0</span> верно</div>
+        <div class="ts-item"><span id="t-err" class="ts-num red">0</span> ошибок</div>
+        <div class="ts-item"><span id="t-time" class="ts-num amber">0:00</span></div>
+      </div>
+    </div>
+
+    <div class="tr-prog-wrap">
+      <div class="tr-prog-lbl">
+        <span id="t-pos-label">Задание 1 из 41</span>
+        <span id="t-pct-label">0%</span>
+      </div>
+      <div class="tr-prog-track"><div class="tr-prog-fill" id="t-progress" style="width:0%"></div></div>
+    </div>
+
+    <div id="t-card" class="tr-card">
+      <div id="t-dir-tag" class="tr-dir-tag tag-asc">▲ Порядок возрастания pH</div>
+      <div id="t-subs" class="tr-subs"></div>
+      <div class="tr-question">Запишите номера веществ в указанном порядке pH</div>
+    </div>
+
+    <div class="tr-input-row">
+      <input type="text" id="t-input" class="tr-input" maxlength="4" placeholder=""autocomplete="off">
+      <button id="t-check-btn" class="tr-btn" onclick="trCheck()">Проверить</button>
+      <span id="t-penalty" class="tr-penalty">+1 задание</span>
+    </div>
+    <div id="t-feedback" class="tr-feedback"></div>
+
+    <div class="tr-nav" id="t-nav">
+      <div class="tr-nav-btns">
+        <button id="t-prev" onclick="trPrev()" disabled title="Назад">←</button>
+        <button id="t-next" onclick="trNext()" disabled title="Вперёд">→</button>
+      </div>
+      <span style="font-size:12px;color:var(--ink3)">Enter — проверить / следующее</span>
+    </div>
+
+    <div id="t-result" class="tr-result">
+      <div class="gr" id="t-grade">🎉</div>
+      <div class="pct" id="t-pct-big">0%</div>
+      <div style="font-size:14px;color:var(--ink3);margin-bottom:12px">из 41 задания ЕГЭ</div>
+      <div class="rs">
+        <div><div class="rn" id="r-ok" style="color:var(--green)">0</div><div class="rl">верных</div></div>
+        <div><div class="rn" id="r-err" style="color:var(--red)">0</div><div class="rl">ошибок</div></div>
+        <div><div class="rn" id="r-time" style="color:var(--amber)">0:00</div><div class="rl">времени</div></div>
+      </div>
+      <div class="ra">
+        <button class="tr-btn" onclick="trRetry()">Пройти заново</button>
+        <button id="t-retry-errors-btn" class="tr-btn tr-btn-ok" style="display:none" onclick="trRetryErrors()">Работа над ошибками</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /shell -->
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────
+const RAW = [
+  {id:1,  s:['CH₃COOK','SrCl₂','FeCl₂','HNO₃'], dir:'asc', ans:'4321'},
+  {id:2,  s:['KHCO₃','Ba(NO₃)₂','ZnSO₄','HClO₃'], dir:'asc', ans:'4321'},
+  {id:3,  s:['H₂SO₄','Na₂S','AlCl₃','CaCl₂'], dir:'asc', ans:'1342'},
+  {id:4,  s:['Na₂CO₃','BaBr₂','KOH','FeCl₃'], dir:'asc', ans:'4213'},
+  {id:5,  s:['HBr','Cu(NO₃)₂','Na₂SO₄','KHCO₃'], dir:'asc', ans:'1234'},
+  {id:6,  s:['Na₂SO₄','Fe(NO₃)₂','K₂SO₃','HClO₃'], dir:'asc', ans:'4213'},
+  {id:7,  s:['H₂SO₄','Al(NO₃)₃','KOH','K₂CO₃'], dir:'asc', ans:'1243'},
+  {id:8,  s:['(CH₃COO)₂Ca','HNO₃','NH₄ClO₄','LiOH'], dir:'asc', ans:'2314'},
+  {id:9,  s:['K₂SO₃','ZnSO₄','Ba(NO₃)₂','Ca(OH)₂'], dir:'asc', ans:'2314'},
+  {id:10, s:['KCl','CrCl₂','HI','K₂S'], dir:'asc', ans:'3214'},
+  {id:11, s:['KF','LiNO₃','(NH₄)₂SO₄','H₂SO₄'], dir:'desc', ans:'1234'},
+  {id:12, s:['FeCl₂','HNO₃','K₃PO₄','LiOH'], dir:'asc', ans:'2134'},
+  {id:13, s:['NaClO₄','FeCl₃','HClO₄','KHCO₃'], dir:'asc', ans:'3214'},
+  {id:14, s:['Na₂CO₃','ZnCl₂','K₂SO₄','HBr'], dir:'desc', ans:'1324'},
+  {id:15, s:['CuSO₄','NaOH','K₂SO₃','Ca(NO₃)₂'], dir:'asc', ans:'1432'},
+  {id:16, s:['KNO₂','LiOH','ZnSO₄','Ba(NO₃)₂'], dir:'asc', ans:'3412'},
+  {id:17, s:['Ba(OH)₂','CuSO₄','KHCO₃','K₂SO₄'], dir:'asc', ans:'2431'},
+  {id:18, s:['KHCO₃','HBr','Cu(NO₃)₂','Na₂SO₄'], dir:'asc', ans:'2341'},
+  {id:19, s:['Ca(NO₃)₂','LiNO₂','CsOH','CuSO₄'], dir:'asc', ans:'4123'},
+  {id:20, s:['Na₂S','LiOH','KI','Al₂(SO₄)₃'], dir:'asc', ans:'4312'},
+  {id:21, s:['Na₂CO₃','HNO₃','NaCl','ZnSO₄'], dir:'asc', ans:'2431'},
+  {id:22, s:['CH₃COONa','Mg(NO₃)₂','BaCl₂','H₂SO₄'], dir:'asc', ans:'4231'},
+  {id:23, s:['K₃PO₄','Ba(OH)₂','NH₄Cl','Na₂SO₄'], dir:'asc', ans:'3412'},
+  {id:24, s:['NaClO₄','Ba(OH)₂','FeCl₃','K₂SO₃'], dir:'asc', ans:'3142'},
+  {id:25, s:['Na₂CO₃','KOH','Cr₂(SO₄)₃','KNO₃'], dir:'desc', ans:'2143'},
+  {id:26, s:['KClO','Ba(OH)₂','Ca(NO₃)₂','NH₄Cl'], dir:'asc', ans:'4312'},
+  {id:27, s:['K₂SO₄','Ba(OH)₂','(CH₃COO)₂Ba','MgSO₄'], dir:'asc', ans:'4132'},
+  {id:28, s:['CsNO₃','AlCl₃','H₂SO₄','NaHCO₃'], dir:'desc', ans:'4123'},
+  {id:29, s:['CsOH','LiI','Fe(NO₃)₂','Na₃PO₄'], dir:'desc', ans:'1423'},
+  {id:30, s:['NaHCO₃','Sr(OH)₂','Ca(NO₃)₂','ZnI₂'], dir:'asc', ans:'4312'},
+  {id:31, s:['HNO₃','MgSO₄','RbCl','NaOH'], dir:'desc', ans:'4321'},
+  {id:32, s:['H₂SO₄','Ba(NO₃)₂','K₂S','NH₄I'], dir:'asc', ans:'1423'},
+  {id:33, s:['KHCO₃','H₂SO₄','BaCl₂','Sr(OH)₂'], dir:'asc', ans:'2314'},
+  {id:34, s:['AlBr₃','HNO₃','Cs₂SO₄','NaHCO₃'], dir:'desc', ans:'4312'},
+  {id:35, s:['ZnI₂','Ca(NO₃)₂','KHCO₃','Ba(OH)₂'], dir:'asc', ans:'1234'},
+  {id:36, s:['Al(NO₃)₃','HClO₄','NaClO₃','K₂CO₃'], dir:'asc', ans:'2134'},
+  {id:37, s:['SrCl₂','NaHCO₃','KOH','(NH₄)₂SO₄'], dir:'asc', ans:'4123'},
+  {id:38, s:['KClO₃','K₂SO₃','HCl','FeCl₂'], dir:'asc', ans:'3412'},
+  {id:39, s:['Хлорид кальция','Хлорид алюминия','Гидроксид калия','Карбонат натрия'], dir:'asc', ans:'2143'},
+  {id:40, s:['Al(NO₃)₃','BaCl₂','KHCO₃','KOH'], dir:'asc', ans:'1234'},
+  {id:41, s:['HBrO₄','FeCl₃','K₂CO₃','Ba(OH)₂'], dir:'asc', ans:'1234'},
+];
+
+// ─── STATE ──────────────────────────────────────────────
+let queue=[], pos=0, correct=0, errors=0;
+let answered=new Set(), wrongIds=new Set();
+let timerSec=0, timerInt=null, isFinished=false, baseTotal=RAW.length;
+
+function shuffle(a){
+  const b=[...a];
+  for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}
+  return b;
+}
+function fmtTime(s){return Math.floor(s/60)+':'+(s%60<10?'0':'')+(s%60)}
+function norm(v){return v.trim().replace(/\s+/g,'').toLowerCase()}
+
+// ─── INIT ────────────────────────────────────────────────
+function trInit(){
+  queue=shuffle([...RAW]);
+  pos=0;correct=0;errors=0;
+  answered=new Set();wrongIds=new Set();
+  timerSec=0;isFinished=false;baseTotal=RAW.length;
+  clearInterval(timerInt);
+  timerInt=setInterval(()=>{timerSec++;document.getElementById('t-time').textContent=fmtTime(timerSec);},1000);
+  document.getElementById('t-result').style.display='none';
+  document.getElementById('t-card').style.display='block';
+  document.querySelector('.tr-input-row').style.display='flex';
+  document.getElementById('t-nav').style.display='flex';
+  document.getElementById('err-badge').classList.remove('show');
+  trRender();
+}
+
+// ─── RENDER ──────────────────────────────────────────────
+function trRender(){
+  const t=queue[pos];
+  // dir tag
+  const dirTag=document.getElementById('t-dir-tag');
+  if(t.dir==='asc'){
+    dirTag.className='tr-dir-tag tag-asc';
+    dirTag.textContent='▲ Порядок возрастания pH';
+  } else {
+    dirTag.className='tr-dir-tag tag-desc';
+    dirTag.textContent='▼ Порядок убывания pH';
+  }
+  // substances
+  const subsEl=document.getElementById('t-subs');
+  subsEl.innerHTML='';
+  t.s.forEach((sub,i)=>{
+    const div=document.createElement('div');
+    div.className='tr-sub';
+    div.innerHTML=`<span class="tr-sub-n">${i+1})</span><span class="tr-sub-f">${sub}</span>`;
+    subsEl.appendChild(div);
+  });
+  // progress
+  const done=answered.size, total=queue.length;
+  const pct=Math.round(done/total*100);
+  document.getElementById('t-progress').style.width=pct+'%';
+  document.getElementById('t-pos-label').textContent=`Задание ${pos+1} из ${total}`;
+  document.getElementById('t-pct-label').textContent=pct+'%';
+  document.getElementById('t-ok').textContent=correct;
+  document.getElementById('t-prev').disabled=pos===0;
+  document.getElementById('t-next').disabled=!answered.has(pos);
+  // restore answered state
+  const inp=document.getElementById('t-input');
+  const fb=document.getElementById('t-feedback');
+  const pen=document.getElementById('t-penalty');
+  pen.classList.remove('show');
+  if(answered.has(pos)){
+    inp.readOnly=true;
+    document.getElementById('t-check-btn').disabled=true;
+    document.getElementById('t-next').disabled=false;
+    if(t._wasWrong===false){
+      inp.className='tr-input ok';
+      fb.className='tr-feedback ok';fb.textContent='✓ Верно!';
+    } else {
+      inp.className='tr-input err';
+      fb.className='tr-feedback err';fb.textContent=`✗ Неверно. Правильный ответ: ${t.ans}`;
+    }
+  } else {
+    inp.value='';inp.className='tr-input';inp.readOnly=false;
+    fb.className='tr-feedback';fb.textContent='';
+    document.getElementById('t-check-btn').disabled=false;
+    document.getElementById('t-next').disabled=true;
+  }
+}
+
+// ─── CHECK ───────────────────────────────────────────────
+function trCheck(){
+  if(answered.has(pos))return;
+  const t=queue[pos];
+  const raw=document.getElementById('t-input').value;
+  const val=norm(raw), ans=norm(t.ans);
+  const inp=document.getElementById('t-input');
+  const fb=document.getElementById('t-feedback');
+  answered.add(pos);
+  if(val===ans){
+    correct++;
+    t._wasWrong=false;
+    inp.className='tr-input ok';inp.readOnly=true;
+    fb.className='tr-feedback ok';fb.textContent='✓ Верно!';
+    document.getElementById('t-ok').textContent=correct;
+    document.getElementById('t-check-btn').disabled=true;
+    document.getElementById('t-next').disabled=false;
+  } else {
+    errors++;
+    t._wasWrong=true;
+    wrongIds.add(t.id);
+    inp.className='tr-input err';inp.readOnly=true;
+    fb.className='tr-feedback err';
+    fb.textContent=`✗ Неверно. Правильный ответ: ${t.ans}`;
+    document.getElementById('t-err').textContent=errors;
+    document.getElementById('t-check-btn').disabled=true;
+    document.getElementById('t-next').disabled=false;
+    document.getElementById('t-penalty').classList.add('show');
+    queue.push({...t, _wasWrong:undefined});
+    document.getElementById('t-pos-label').textContent=`Задание ${pos+1} из ${queue.length}`;
+  }
+  // progress update
+  const done=answered.size, total=queue.length;
+  const pct=Math.round(done/total*100);
+  document.getElementById('t-progress').style.width=pct+'%';
+  document.getElementById('t-pct-label').textContent=pct+'%';
+  // check done
+  if(pos===queue.length-1 && answered.size>=queue.length){
+    setTimeout(trShowResult,800);
+  }
+}
+
+function trNext(){
+  if(pos<queue.length-1){pos++;trRender();}
+  else if(answered.size>=queue.length){trShowResult();}
+}
+function trPrev(){if(pos>0){pos--;trRender();}}
+
+document.getElementById('t-input').addEventListener('keydown',e=>{
+  if(e.key==='Enter'){
+    if(!answered.has(pos))trCheck();
+    else trNext();
+  }
+});
+
+// ─── RESULT ──────────────────────────────────────────────
+function trShowResult(){
+  if(isFinished)return;
+  clearInterval(timerInt);isFinished=true;
+  const pct=Math.round(correct/baseTotal*100);
+  document.getElementById('t-card').style.display='none';
+  document.querySelector('.tr-input-row').style.display='none';
+  document.getElementById('t-nav').style.display='none';
+  const res=document.getElementById('t-result');res.style.display='block';
+  document.getElementById('t-grade').textContent=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'👍':'💪';
+  document.getElementById('t-pct-big').textContent=pct+'%';
+  document.getElementById('r-ok').textContent=correct;
+  document.getElementById('r-err').textContent=errors;
+  document.getElementById('r-time').textContent=fmtTime(timerSec);
+  const errBtn=document.getElementById('t-retry-errors-btn');
+  if(wrongIds.size>0){errBtn.style.display='';errBtn.textContent=`Работа над ошибками (${wrongIds.size})`;}
+  else errBtn.style.display='none';
+}
+
+function trRetry(){trInit();}
+
+function trRetryErrors(){
+  if(wrongIds.size===0)return;
+  const errTasks=RAW.filter(t=>wrongIds.has(t.id));
+  baseTotal=errTasks.length;
+  queue=shuffle(errTasks);
+  pos=0;correct=0;errors=0;
+  answered=new Set();wrongIds=new Set();
+  timerSec=0;isFinished=false;
+  clearInterval(timerInt);
+  timerInt=setInterval(()=>{timerSec++;document.getElementById('t-time').textContent=fmtTime(timerSec);},1000);
+  document.getElementById('t-result').style.display='none';
+  document.getElementById('t-card').style.display='block';
+  document.querySelector('.tr-input-row').style.display='flex';
+  document.getElementById('t-nav').style.display='flex';
+  document.getElementById('err-badge').classList.add('show');
+  document.getElementById('err-count').textContent=queue.length;
+  trRender();
+}
+
+// ─── SCROLL PROGRESS & BACK-TO-TOP ───────────────────────
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('pf').style.width=(h>0?window.scrollY/h*100:0)+'%';
+  document.getElementById('btt').classList.toggle('vis',window.scrollY>300);
+});
+
+// ─── FADE IN ─────────────────────────────────────────────
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')});},{threshold:0.07});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+trInit();
+</script>
+</body>
+</html>
