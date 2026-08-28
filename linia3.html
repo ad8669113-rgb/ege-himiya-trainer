@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Степень окисления — ОГЭ/ЕГЭ 2026–2027</title>
+<style>
+:root{
+  --p900:#2D1B69;--p800:#3D2785;--p700:#4E35A0;
+  --p600:#6248C4;--p500:#7B61DB;--p400:#9B84E8;
+  --p300:#BDB2F3;--p200:#DBD5F8;--p100:#F0EEFF;--p50:#F8F7FF;
+  --ink:#1C1B29;--ink2:#3E3C5A;--ink3:#8A88A8;
+  --line:#E2E5EC;--card:#FFFFFF;--bg:#F6F5FC;--white:#fff;
+  --green:#1D9E75;--green-t:#E1F5EE;--green-d:#085041;
+  --amber:#BA7517;--amber-t:#FAEEDA;--amber-d:#633806;
+  --red:#A32D2D;--red-t:#FCEBEB;--red-d:#7A2020;
+  --r:12px;--r-sm:8px;--r-lg:20px;
+  --shadow:0 1px 3px rgba(20,21,26,.06),0 4px 16px rgba(20,21,26,.06);
+  --shm:0 4px 20px rgba(60,40,160,.12);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px}
+
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:var(--p100);z-index:999}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--p600),var(--p400));width:0;transition:width .1s}
+
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+.hero{background:linear-gradient(135deg,#2D1B69 0%,#4E35A0 55%,#7B61DB 100%);padding:48px 32px 40px;margin:0 -24px 40px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(155,132,232,.15) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.82);border-radius:20px;padding:4px 14px;font-size:12px;font-family:var(--mono);letter-spacing:.6px;margin-bottom:16px}
+.hero h1{font-size:clamp(26px,5vw,44px);font-weight:800;line-height:1.06;letter-spacing:-.03em;color:#fff;margin-bottom:12px;position:relative;z-index:1}
+.hero h1 em{color:var(--p300);font-style:normal}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.7);line-height:1.7;max-width:560px;margin-bottom:22px;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.hero-chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.9);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+
+.section{margin-bottom:48px}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--p200)}
+.section-num{width:36px;height:36px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;font-family:var(--mono);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+.section-title{font-size:clamp(17px,2.5vw,22px);font-weight:700;color:var(--p800);line-height:1.2}
+
+h2.sub-title{font-size:16px;font-weight:700;color:var(--p700);margin:22px 0 10px;display:flex;align-items:center;gap:8px}
+h2.sub-title::before{content:'';width:4px;height:18px;background:var(--p500);border-radius:2px;flex-shrink:0}
+
+.box{border-radius:var(--r-sm);padding:12px 16px;margin:12px 0;font-size:14px;line-height:1.7}
+.box-title{font-weight:700;font-size:13px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:var(--amber-t);border-left:4px solid var(--amber);color:var(--amber-d)}
+.box-danger{background:var(--red-t);border-left:4px solid var(--red);color:var(--red-d)}
+.box-success{background:var(--green-t);border-left:4px solid var(--green);color:var(--green-d)}
+.box ul,.box ol{padding-left:18px;margin:4px 0}
+.box li{margin:3px 0;font-size:13px}
+
+.eq-block{background:var(--white);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 16px;margin:8px 0;box-shadow:var(--shadow)}
+.eq{font-family:var(--mono);font-size:13px;color:var(--p900);line-height:2;display:block}
+
+.table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);margin:12px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:13px}
+th{background:linear-gradient(135deg,var(--p800),var(--p600));color:#fff;font-weight:600;padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+td{padding:7px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--p50)}
+.tr-w td{background:#FFF8EC!important}
+.tr-s td{background:#F0FBF6!important}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+@media(max-width:700px){.grid-2,.grid-3{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow)}
+.card-title{font-weight:700;font-size:13.5px;color:var(--p700);margin-bottom:6px}
+.card-body{font-size:13px;color:var(--ink2);line-height:1.6}
+
+.algo{margin:10px 0}
+.algo-step{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+.algo-n{width:24px;height:24px;border-radius:6px;background:var(--p600);color:#fff;font-family:var(--mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.algo-text{font-size:13.5px;line-height:1.6;color:var(--ink2)}
+.algo-text strong{color:var(--ink)}
+
+.remember{background:linear-gradient(135deg,var(--p100),var(--p50));border:1.5px solid var(--p300);border-radius:var(--r);padding:14px 18px;margin-top:18px}
+.remember-title{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--p600);margin-bottom:8px;font-weight:700}
+.remember ul{padding-left:16px}
+.remember li{font-size:13px;color:var(--p800);padding:2px 0}
+
+.hr{height:1px;background:var(--line);margin:18px 0}
+
+/* INLINE TASKS */
+.inline-task{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);margin-bottom:8px;overflow:hidden}
+.it-q{display:flex;align-items:flex-start;gap:10px;padding:10px 12px}
+.it-num{min-width:22px;height:22px;background:var(--p100);color:var(--p700);border-radius:5px;font-family:var(--mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.it-text{flex:1;font-size:13.5px;font-family:var(--mono);color:var(--ink);line-height:1.5}
+.it-input-wrap{display:flex;gap:8px;align-items:flex-start;padding:0 12px 8px}
+.it-input{flex:1;font-family:var(--mono);font-size:13px;padding:7px 10px;border:1.5px solid var(--line);border-radius:var(--r-sm);background:var(--white);color:var(--ink);resize:none;min-height:36px;overflow:hidden;transition:border-color .2s}
+.it-input:focus{outline:none;border-color:var(--p400)}
+.it-input.correct{border-color:var(--green);background:var(--green-t)}
+.it-input.wrong{border-color:var(--red);background:var(--red-t)}
+.it-check-btn{flex-shrink:0;background:var(--p600);color:#fff;border:none;border-radius:var(--r-sm);padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);transition:background .15s}
+.it-check-btn:hover{background:var(--p700)}
+.it-feedback{display:none;padding:0 12px 6px;font-size:12px;font-family:var(--font);line-height:1.5}
+.it-feedback.show{display:block}
+.it-feedback.ok{color:var(--green-d);font-weight:500}
+.it-feedback.miss{color:var(--red-d);font-weight:500}
+.answer-box{display:none;background:linear-gradient(135deg,var(--green-t),#F0FBF6);border-top:1px solid #B6E8D3;padding:8px 12px;font-family:var(--mono);font-size:12.5px;color:var(--green-d);line-height:1.8}
+.answer-box.open{display:block}
+.ans-lbl{font-family:var(--font);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);margin-bottom:3px}
+.ans-note{font-family:var(--font);font-size:11.5px;color:var(--green-d);margin-top:4px;opacity:.85;font-style:italic}
+.reveal-all-btn{display:inline-flex;align-items:center;gap:6px;background:var(--p600);color:#fff;border:none;border-radius:var(--r-sm);padding:7px 14px;font-size:12.5px;font-weight:600;cursor:pointer;transition:background .15s;margin-bottom:12px}
+.reveal-all-btn:hover{background:var(--p700)}
+.reveal-all-btn.all-open{background:var(--green)}
+
+/* ══ ТРЕНАЖЁР ══ */
+#trainer-wrap{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--shadow);margin-bottom:24px}
+.tr-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid var(--p200)}
+.tr-title{font-size:18px;font-weight:700;color:var(--p800)}
+.tr-stats{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.ts-item{display:flex;align-items:baseline;gap:4px;font-size:13px}
+.ts-num{font-size:18px;font-weight:800}
+.ts-num.green{color:var(--green)}
+.ts-num.red{color:var(--red)}
+.ts-num.gray{color:var(--ink3)}
+.ts-num.amber{color:var(--amber)}
+.tr-progress-wrap{margin-bottom:16px}
+.tr-progress-label{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3);margin-bottom:4px;font-family:var(--mono)}
+.tr-progress-track{height:6px;background:var(--p100);border-radius:100px;overflow:hidden}
+.tr-progress-fill{height:100%;background:linear-gradient(90deg,var(--p500),var(--green));transition:width .3s ease}
+.tr-card{background:var(--bg);border:1.5px solid var(--p200);border-radius:var(--r);padding:20px;margin-bottom:14px;min-height:100px;display:flex;flex-direction:column;justify-content:center}
+.tr-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.tr-badge-ion{background:#EDE9FE;color:#7C3AED}
+.tr-badge-bracket{background:var(--green-t);color:var(--green-d)}
+.tr-badge-simple{background:var(--amber-t);color:var(--amber-d)}
+.tr-badge-acid{background:#FEF3C7;color:#92400E}
+.tr-badge-ammonium{background:#DBEAFE;color:#1E40AF}
+.tr-formula{font-family:var(--mono);font-size:26px;font-weight:700;background:var(--p100);padding:10px 18px;border-radius:var(--r-sm);display:inline-block;margin-bottom:6px;letter-spacing:.04em;color:var(--p900)}
+.tr-formula .hl{color:var(--amber);border-bottom:2.5px solid var(--amber);padding-bottom:1px}
+.tr-hint{font-size:12px;color:var(--ink3);margin-top:4px;font-style:italic}
+.tr-input-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.tr-input{padding:9px 14px;font-size:18px;font-family:var(--mono);border:2px solid var(--line);border-radius:var(--r-sm);background:var(--bg);color:var(--ink);outline:none;transition:border-color .2s;max-width:160px;width:100%}
+.tr-input:focus{border-color:var(--p500)}
+.tr-input.ok{border-color:var(--green);background:var(--green-t)}
+.tr-input.err{border-color:var(--red);background:var(--red-t)}
+.tr-input:read-only{opacity:.7}
+.tr-btn{padding:9px 22px;border:none;border-radius:var(--r-sm);font-size:14px;font-weight:700;cursor:pointer;background:var(--p600);color:#fff;transition:background .15s,transform .1s}
+.tr-btn:hover{background:var(--p700);transform:translateY(-1px)}
+.tr-btn:disabled{opacity:.5;cursor:default;transform:none}
+.tr-btn-green{background:var(--green)}
+.tr-btn-green:hover{background:var(--green-d)}
+.tr-feedback{font-size:14px;font-weight:600;min-height:20px;margin:2px 0 8px}
+.tr-feedback.ok{color:var(--green)}
+.tr-feedback.err{color:var(--red)}
+.tr-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap}
+.tr-nav-btns{display:flex;gap:6px}
+.tr-nav-btns button{min-width:40px;height:40px;border-radius:50%;font-size:17px;background:var(--white);border:1.5px solid var(--line);color:var(--ink);cursor:pointer;transition:background .15s;display:flex;align-items:center;justify-content:center}
+.tr-nav-btns button:hover:not(:disabled){background:var(--p100)}
+.tr-nav-btns button:disabled{opacity:.3;cursor:default}
+.tr-penalty-badge{background:var(--red-t);border:1px solid var(--red);border-radius:var(--r-sm);padding:4px 10px;font-size:12px;color:var(--red-d);font-weight:600;display:none}
+.tr-penalty-badge.show{display:inline-block}
+.tr-result{background:var(--white);border-radius:var(--r);padding:28px;text-align:center;box-shadow:var(--shm);border:1px solid var(--line);display:none}
+.tr-result .grade{font-size:28px;margin-bottom:4px}
+.tr-result .pct{font-size:44px;font-weight:900;color:var(--p700)}
+.tr-result .res-stats{display:flex;justify-content:center;gap:24px;margin:12px 0 20px;flex-wrap:wrap}
+.tr-result .res-num{font-size:24px;font-weight:800}
+.tr-result .res-lbl{font-size:12px;color:var(--ink3)}
+.tr-result .res-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.err-mode-badge{background:var(--red-t);border:2px solid var(--red);border-radius:var(--r);padding:10px 16px;margin-bottom:14px;display:none;align-items:center;gap:12px;flex-wrap:wrap;font-weight:700;color:var(--red-d)}
+.err-mode-badge.show{display:flex}
+
+#back-top{position:fixed;bottom:24px;right:24px;width:40px;height:40px;border-radius:10px;background:var(--p600);color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(62,42,180,.35);display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .2s;opacity:0;pointer-events:none}
+#back-top.visible{opacity:1;pointer-events:all}
+#back-top:hover{transform:translateY(-2px)}
+
+.fade-in{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:540px){
+  .shell{padding:0 14px 60px}
+  .hero{padding:32px 16px 28px;margin:0 -14px 28px}
+  .tr-input{max-width:100%}
+  .tr-nav{flex-direction:column;align-items:stretch}
+  .tr-nav-btns{justify-content:center}
+}
+</style>
+</head>
+<body>
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+<div class="shell">
+
+<div class="hero">
+  <div class="hero-tag">Химия ОГЭ/ЕГЭ 2026–2027 · С нуля до уверенного результата</div>
+  <h1>Степень<br><em>окисления</em></h1>
+  <p class="hero-sub">Компактный конспект + тренажёр 110 заданий с разбором ошибок.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Теория по блокам</span>
+    <span class="hero-chip">110 заданий</span>
+    <span class="hero-chip">Работа над ошибками</span>
+    <span class="hero-chip">Таймер</span>
+  </div>
+</div>
+
+<!-- ═══ РАЗДЕЛ 1: ЧТО ТАКОЕ СО ═══ -->
+<section class="section fade-in" id="s1">
+  <div class="section-header"><div class="section-num">1</div><h2 class="section-title">Что такое степень окисления?</h2></div>
+
+  <div class="box box-info"><div class="box-title">💡 Определение</div>
+    <strong>Степень окисления (с.о.)</strong> — условный заряд атома, который он получил бы, если бы все электроны в соединении перешли к более электроотрицательному атому. Слово «условный» важно: это инструмент расчётов, а не реальный заряд.
+  </div>
+
+  <div class="grid-3">
+    <div class="card"><div class="card-title" style="color:var(--red)">➕ Положительная</div><div class="card-body">Атом отдал электроны<br>Na<sup>+1</sup>, Ca<sup>+2</sup>, Al<sup>+3</sup></div></div>
+    <div class="card"><div class="card-title" style="color:var(--p600)">➖ Отрицательная</div><div class="card-body">Атом принял электроны<br>O<sup>−2</sup>, Cl<sup>−1</sup>, N<sup>−3</sup></div></div>
+    <div class="card"><div class="card-title" style="color:var(--green-d)">0️⃣ Нулевая</div><div class="card-body">Простые вещества<br>Na⁰, Fe⁰, O₂⁰, Cl₂⁰</div></div>
+  </div>
+
+  <div class="box box-success"><div class="box-title">🔑 Главное правило</div>
+    <strong>Сумма всех с.о. в нейтральной молекуле = 0</strong><br>
+    <strong>Сумма с.о. в ионе = заряду иона</strong>
+    <div class="eq-block" style="margin-top:8px">
+      <span class="eq">H₂O: 2·(+1)+(−2) = 0 ✓ &nbsp;&nbsp; SO₄²⁻: x+4·(−2) = −2</span>
+    </div>
+  </div>
+
+  <div class="box box-warn" style="font-size:13px"><div class="box-title">⚠ Запись</div>
+    Знак ставится ПЕРЕД цифрой: <strong>+2</strong>, <strong>−1</strong> — правильно; 2+, 1− — неправильно.
+  </div>
+
+  <div class="box box-info" style="background:var(--p50)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания — что такое с.о.</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq1')">👁 Показать ответы</button>
+    <div id="mq1">
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">1</div><div class="it-text">Чему равна сумма с.о. в H₂O? H = +1, O = −2.</div></div>
+      <div class="it-input-wrap"><textarea class="it-input" rows="1" placeholder="Ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea><button class="it-check-btn" onclick="checkInput(this)">✓</button></div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>2·(+1)+(−2) = +2−2 = 0. Молекула нейтральна.</div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">2</div><div class="it-text">С.о. = 0 у какого типа веществ? Приведи 2 примера.</div></div>
+      <div class="it-input-wrap"><textarea class="it-input" rows="1" placeholder="Ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea><button class="it-check-btn" onclick="checkInput(this)">✓</button></div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>В простых веществах с.о. всегда = 0. Примеры: Fe⁰ (железо), Cl₂⁰ (хлор).</div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ РАЗДЕЛ 2: ПОСТОЯННАЯ СО ═══ -->
+<section class="section fade-in" id="s2">
+  <div class="section-header"><div class="section-num">2</div><h2 class="section-title">Постоянная степень окисления</h2></div>
+
+  <div class="box box-warn" style="font-size:13px;padding:8px 14px">📓 Переписать и заучить</div>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th>Элемент</th><th>С.О.</th><th>Примеры</th><th>Правило</th></tr></thead>
+    <tbody>
+      <tr class="tr-s"><td><strong>F (фтор)</strong></td><td><strong>−1</strong></td><td>HF, NaF, CaF₂</td><td>Самый электроотрицательный — всегда −1</td></tr>
+      <tr><td><strong>O (кислород)</strong></td><td><strong>−2</strong> (обычно)</td><td>H₂O, CO₂, CaO</td><td>Исключения: пероксиды (−1), OF₂ (+2)</td></tr>
+      <tr><td><strong>H (водород)</strong></td><td><strong>+1</strong> (обычно)</td><td>HCl, H₂O, H₂SO₄</td><td>Исключение: гидриды металлов (−1)</td></tr>
+      <tr class="tr-s"><td><strong>Na, K, Li, Cs, Rb</strong></td><td><strong>+1</strong></td><td>NaCl, KOH, Li₂O</td><td>Щелочные металлы → всегда +1</td></tr>
+      <tr class="tr-s"><td><strong>Ca, Mg, Ba, Sr, Be</strong></td><td><strong>+2</strong></td><td>CaO, MgCl₂, BaSO₄</td><td>Щёлочноземельные → всегда +2</td></tr>
+      <tr class="tr-s"><td><strong>Al</strong></td><td><strong>+3</strong></td><td>Al₂O₃, AlCl₃</td><td>Всегда +3</td></tr>
+      <tr><td><strong>Zn</strong></td><td><strong>+2</strong></td><td>ZnO, ZnSO₄</td><td>Всегда +2</td></tr>
+      <tr><td><strong>Ag</strong></td><td><strong>+1</strong></td><td>AgCl, AgNO₃</td><td>Всегда +1</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="grid-2">
+    <div class="box box-danger"><div class="box-title">⚠ Кислород — исключения</div>
+      <ul><li><strong>Пероксиды</strong> (H₂O₂, Na₂O₂, BaO₂): O = <strong>−1</strong></li>
+      <li><strong>OF₂</strong>: O = <strong>+2</strong> (фтор «жаднее»)</li></ul>
+    </div>
+    <div class="box box-danger"><div class="box-title">⚠ Водород — исключение</div>
+      <ul><li><strong>Гидриды металлов</strong> (NaH, CaH₂, LiH): H = <strong>−1</strong></li></ul>
+    </div>
+  </div>
+
+  <div class="box box-success"><div class="box-title">🔍 Алгоритм поиска неизвестной с.о.</div>
+    <div class="algo">
+      <div class="algo-step"><div class="algo-n">1</div><div class="algo-text">Расставь известные с.о. из таблицы</div></div>
+      <div class="algo-step"><div class="algo-n">2</div><div class="algo-text">Неизвестное = <strong>x</strong></div></div>
+      <div class="algo-step"><div class="algo-n">3</div><div class="algo-text">Составь уравнение: сумма = 0 (молекула) или = заряду (ион)</div></div>
+      <div class="algo-step"><div class="algo-n">4</div><div class="algo-text">Реши уравнение</div></div>
+    </div>
+    <div class="eq-block" style="margin-top:8px"><span class="eq">NaCl: Na=+1 → (+1)+x=0 → x=−1 ✓</span></div>
+  </div>
+
+  <div class="box box-info" style="background:var(--p50)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания — постоянная с.о.</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq2')">👁 Показать ответы</button>
+    <div id="mq2">
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">1</div><div class="it-text">Найди с.о. Cl в KCl. K = +1.</div></div>
+      <div class="it-input-wrap"><textarea class="it-input" rows="1" placeholder="Ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea><button class="it-check-btn" onclick="checkInput(this)">✓</button></div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>(+1)+x=0 → x=−1. Cl = −1.</div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">2</div><div class="it-text">Найди с.о. H в NaH. Это исключение!</div></div>
+      <div class="it-input-wrap"><textarea class="it-input" rows="1" placeholder="Ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea><button class="it-check-btn" onclick="checkInput(this)">✓</button></div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>NaH — гидрид. Na=+1 → (+1)+x=0 → x=−1. H=−1 (исключение из правила!).</div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ РАЗДЕЛ 3: ПЕРЕМЕННАЯ СО ═══ -->
+<section class="section fade-in" id="s3">
+  <div class="section-header"><div class="section-num">3</div><h2 class="section-title">Переменная степень окисления</h2></div>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th>Элемент</th><th>Возможные с.о.</th><th>Ключевые примеры</th></tr></thead>
+    <tbody>
+      <tr class="tr-w"><td><strong>Fe (железо)</strong></td><td><strong>+2, +3</strong></td><td>FeO (+2), Fe₂O₃ (+3)</td></tr>
+      <tr class="tr-w"><td><strong>Cu (медь)</strong></td><td><strong>+1, +2</strong></td><td>Cu₂O (+1), CuO (+2)</td></tr>
+      <tr class="tr-w"><td><strong>Mn (марганец)</strong></td><td><strong>+2, +4, +6, +7</strong></td><td>MnO (+2), MnO₂ (+4), KMnO₄ (+7)</td></tr>
+      <tr class="tr-w"><td><strong>Cr (хром)</strong></td><td><strong>+2, +3, +6</strong></td><td>CrO (+2), Cr₂O₃ (+3), CrO₃ (+6)</td></tr>
+      <tr><td><strong>N (азот)</strong></td><td>от <strong>−3</strong> до <strong>+5</strong></td><td>NH₃ (−3), NO (+2), NO₂ (+4), HNO₃ (+5)</td></tr>
+      <tr><td><strong>S (сера)</strong></td><td><strong>−2, +4, +6</strong></td><td>H₂S (−2), SO₂ (+4), H₂SO₄ (+6)</td></tr>
+      <tr><td><strong>Cl (хлор)</strong></td><td><strong>−1, +1, +3, +5, +7</strong></td><td>HCl (−1), HClO (+1), HClO₄ (+7)</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="grid-2">
+    <div class="box box-info"><div class="box-title">🔍 Пример: FeO</div>
+      O=−2 → x+(−2)=0 → <strong>Fe = +2</strong>
+    </div>
+    <div class="box box-info"><div class="box-title">🔍 Пример: Fe₂O₃</div>
+      O=−2 → 2x+3·(−2)=0 → 2x=6 → <strong>Fe = +3</strong>
+    </div>
+  </div>
+
+  <div class="box box-info" style="background:var(--p50)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания — переменная с.о.</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq3')">👁 Показать ответы</button>
+    <div id="mq3">
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">1</div><div class="it-text">Найди с.о. Fe в FeCl₂. Cl = −1.</div></div>
+      <div class="it-input-wrap"><textarea class="it-input" rows="1" placeholder="Ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea><button class="it-check-btn" onclick="checkInput(this)">✓</button></div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>x+2·(−1)=0 → x=+2. Fe = +2 (хлорид железа(II)).</div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">2</div><div class="it-text">Найди с.о. Mn в KMnO₄. K=+1, O=−2.</div></div>
+      <div class="it-input-wrap"><textarea class="it-input" rows="1" placeholder="Ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea><button class="it-check-btn" onclick="checkInput(this)">✓</button></div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>(+1)+x+4·(−2)=0 → 1+x−8=0 → x=+7. Mn = +7.</div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ РАЗДЕЛ 4: ВЫСШАЯ И НИЗШАЯ ═══ -->
+<section class="section fade-in" id="s4">
+  <div class="section-header"><div class="section-num">4</div><h2 class="section-title">Высшая и низшая с.о.</h2></div>
+
+  <div class="box box-warn" style="font-size:13px;padding:8px 14px">📓 Переписать и заучить</div>
+
+  <div class="grid-2">
+    <div class="box box-success"><div class="box-title">📌 Высшая с.о.</div>
+      <strong>= номер группы</strong><br>
+      <span style="font-size:12.5px">Исключения: F (нет +), O (макс. +2), Cu (макс. +2)</span>
+    </div>
+    <div class="box box-info"><div class="box-title">📌 Низшая с.о.</div>
+      <strong>Металлы: = 0</strong><br>
+      <strong>Неметаллы: = номер группы − 8</strong>
+    </div>
+  </div>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th>Элемент</th><th>Группа</th><th>Высшая с.о.</th><th>Низшая с.о.</th></tr></thead>
+    <tbody>
+      <tr><td>N</td><td>V</td><td>+5 (HNO₃)</td><td>−3 (NH₃) = 5−8</td></tr>
+      <tr><td>S</td><td>VI</td><td>+6 (H₂SO₄)</td><td>−2 (H₂S) = 6−8</td></tr>
+      <tr><td>Cl</td><td>VII</td><td>+7 (HClO₄)</td><td>−1 (HCl) = 7−8</td></tr>
+      <tr><td>C</td><td>IV</td><td>+4 (CO₂)</td><td>−4 (CH₄) = 4−8</td></tr>
+      <tr><td>P</td><td>V</td><td>+5 (H₃PO₄)</td><td>−3 (PH₃) = 5−8</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="box box-info" style="background:var(--p50)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания — высшая/низшая с.о.</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq4')">👁 Показать ответы</button>
+    <div id="mq4">
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">1</div><div class="it-text">Какова высшая с.о. серы S (VI группа)?</div></div>
+      <div class="it-input-wrap"><textarea class="it-input" rows="1" placeholder="Ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea><button class="it-check-btn" onclick="checkInput(this)">✓</button></div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>Высшая = номер группы = +6. Пример: H₂SO₄ (S = +6).</div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">2</div><div class="it-text">Какова низшая с.о. азота N (V группа)?</div></div>
+      <div class="it-input-wrap"><textarea class="it-input" rows="1" placeholder="Ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea><button class="it-check-btn" onclick="checkInput(this)">✓</button></div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>Низшая = 5−8 = −3. Пример: NH₃ (N = −3). Диапазон N: от −3 до +5!</div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ РАЗДЕЛ 5: АЛГОРИТМ ═══ -->
+<section class="section fade-in" id="s5">
+  <div class="section-header"><div class="section-num">5</div><h2 class="section-title">Как определять с.о. — пошагово</h2></div>
+
+  <div class="box box-success"><div class="box-title">📋 5 шагов</div>
+    <div class="algo">
+      <div class="algo-step"><div class="algo-n">1</div><div class="algo-text"><strong>Расставь постоянные с.о.</strong> — F, O, H, щелочные, Al, Zn, Ag</div></div>
+      <div class="algo-step"><div class="algo-n">2</div><div class="algo-text"><strong>Обозначь неизвестное = x</strong>, учти количество атомов</div></div>
+      <div class="algo-step"><div class="algo-n">3</div><div class="algo-text"><strong>Уравнение:</strong> молекула → сумма = 0; ион → сумма = заряду</div></div>
+      <div class="algo-step"><div class="algo-n">4</div><div class="algo-text"><strong>Реши</strong> уравнение → найди x</div></div>
+      <div class="algo-step"><div class="algo-n">5</div><div class="algo-text"><strong>Проверь:</strong> с.о. металла ≥ 0; не превышает номер группы</div></div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">Разборы примеров</h2>
+  <div class="grid-2">
+    <div class="box box-info"><div class="box-title">🔍 H₂SO₄</div>
+      H=+1, O=−2, S=x<br>2·(+1)+x+4·(−2)=0<br>2+x−8=0 → <strong>S = +6</strong>
+    </div>
+    <div class="box box-info"><div class="box-title">🔍 KMnO₄</div>
+      K=+1, O=−2, Mn=x<br>(+1)+x+4·(−2)=0<br>1+x−8=0 → <strong>Mn = +7</strong>
+    </div>
+    <div class="box box-danger"><div class="box-title">⚠ Na₂O₂ (пероксид!)</div>
+      Na=+1, O=x<br>2·(+1)+2·x=0<br>2+2x=0 → <strong>O = −1</strong> (не −2!)
+    </div>
+    <div class="box box-info"><div class="box-title">🔍 HPO₃²⁻ (ион!)</div>
+      H=+1, O=−2, P=x<br>(+1)+x+3·(−2) = <strong>−2</strong><br>1+x−6=−2 → <strong>P = +3</strong>
+    </div>
+  </div>
+
+  <div class="remember"><div class="remember-title">✅ Итог — ключевые правила</div><ul>
+    <li>Начинай с <strong>постоянных</strong> (O, H, щелочные металлы, Al)</li>
+    <li>В молекуле сумма = <strong>0</strong>; в ионе сумма = <strong>заряду</strong></li>
+    <li>Умножай с.о. на <strong>количество атомов</strong></li>
+    <li>В пероксидах O = <strong>−1</strong>, в гидридах H = <strong>−1</strong></li>
+  </ul></div>
+</section>
+
+<!-- ═══ РАЗДЕЛ 6: ТАБЛИЦА ХАРАКТЕРНЫХ СО ═══ -->
+<section class="section fade-in" id="s6">
+  <div class="section-header"><div class="section-num">6</div><h2 class="section-title">Характерные с.о. элементов</h2></div>
+
+  <div class="box box-warn" style="font-size:13px;text-align:center;padding:10px 16px">📓 Перепиши и заучи — это основа всей темы!</div>
+
+  <div class="table-wrap" style="overflow-x:auto">
+    <table style="border-collapse:collapse;font-size:13px;min-width:680px;width:100%">
+      <thead>
+  <tr style="background:var(--p50)">
+    <th style="width:34px;padding:6px 2px;border:1px solid #ddd;text-align:center;background:#e8e4f8;color:#7b1fa2">−4</th>
+    <th style="width:34px;padding:6px 2px;border:1px solid #ddd;text-align:center;background:#e8e4f8;color:#7b1fa2">−3</th>
+    <th style="width:34px;padding:6px 2px;border:1px solid #ddd;text-align:center;background:#e8e4f8;color:#7b1fa2">−2</th>
+    <th style="width:34px;padding:6px 2px;border:1px solid #ddd;text-align:center;background:#e8e4f8;color:#7b1fa2">−1</th>
+    <th style="width:44px;padding:6px 4px;border:1px solid #ddd;text-align:center;background:#f5f5f5;color:#333;font-weight:700">0</th>
+    <th style="width:34px;padding:6px 2px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32">+1</th>
+    <th style="width:34px;padding:6px 2px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32">+2</th>
+    <th style="width:34px;padding:6px 2px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32">+3</th>
+    <th style="width:34px;padding:6px 2px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828">+4</th>
+    <th style="width:34px;padding:6px 2px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828">+5</th>
+    <th style="width:34px;padding:6px 2px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828">+6</th>
+    <th style="width:34px;padding:6px 2px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828">+7</th>
+    <th style="padding:6px 8px;border:1px solid #ddd;text-align:left;color:#555;font-size:11px">Аналоги</th>
+  </tr>
+</thead>
+      <tbody>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8e4f8;color:#7b1fa2;font-weight:700">-1</td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#f5f5f5;font-weight:800;font-size:13.5px">H</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+1</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555"></td></tr>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#f5f5f5;font-weight:800;font-size:13.5px">Li</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+1</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555">Na, K, Rb, Cs, Ag</td></tr>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#f5f5f5;font-weight:800;font-size:13.5px">Be</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+2</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555">Mg, Ca, Sr, Ba, Zn</td></tr>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8e4f8;color:#7b1fa2;font-weight:700">-3</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#f5f5f5;font-weight:800;font-size:13.5px">N</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+1</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+2</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+3</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828;font-weight:700">+4</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828;font-weight:700">+5</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555"></td></tr>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8e4f8;color:#7b1fa2;font-weight:700">-2</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8e4f8;color:#7b1fa2;font-weight:700">-1</td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#f5f5f5;font-weight:800;font-size:13.5px">O</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+1</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+2</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555"></td></tr>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8e4f8;color:#7b1fa2;font-weight:700">-1</td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#f5f5f5;font-weight:800;font-size:13.5px">F</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555"></td></tr>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#f5f5f5;font-weight:800;font-size:13.5px">Al</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+3</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555">Ga, In</td></tr>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8e4f8;color:#7b1fa2;font-weight:700">-4</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#f5f5f5;font-weight:800;font-size:13.5px">C</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+2</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828;font-weight:700">+4</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555">Si</td></tr>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8e4f8;color:#7b1fa2;font-weight:700">-3</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#f5f5f5;font-weight:800;font-size:13.5px">P</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+3</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828;font-weight:700">+5</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555"></td></tr>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8e4f8;color:#7b1fa2;font-weight:700">-2</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#f5f5f5;font-weight:800;font-size:13.5px">S</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828;font-weight:700">+4</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828;font-weight:700">+6</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555">Se, Te</td></tr>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8e4f8;color:#7b1fa2;font-weight:700">-1</td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#f5f5f5;font-weight:800;font-size:13.5px">Cl</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+1</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+3</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828;font-weight:700">+5</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828;font-weight:700">+7</td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555">Br, I</td></tr>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#ffe0b2;font-weight:800;font-size:13.5px">Cr</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+2</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+3</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828;font-weight:700">+6</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555"></td></tr>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#ffe0b2;font-weight:800;font-size:13.5px">Fe</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+2</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+3</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555"></td></tr>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#ffe0b2;font-weight:800;font-size:13.5px">Mn</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+2</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828;font-weight:700">+4</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828;font-weight:700">+6</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#fce4ec;color:#c62828;font-weight:700">+7</td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555"></td></tr>
+<tr><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 6px;border:1px solid #ddd;text-align:center;background:#ffe0b2;font-weight:800;font-size:13.5px">Cu</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+1</td><td style="padding:5px 4px;border:1px solid #ddd;text-align:center;background:#e8f5e9;color:#2e7d32;font-weight:700">+2</td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 4px;border:1px solid #ddd;background:#fafafa"></td><td style="padding:5px 8px;border:1px solid #ddd;font-size:11px;color:#555"></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════
+     ТРЕНАЖЁР — 110 ЗАДАНИЙ
+════════════════════════════════ -->
+<section class="section fade-in" id="s7">
+  <div class="section-header"><div class="section-num">7</div><h2 class="section-title">Тренажёр — 110 заданий на с.о.</h2></div>
+
+  <div id="trainer-wrap">
+    <!-- Stats bar -->
+    <div class="tr-header">
+      <div class="tr-title">Определи степень окисления</div>
+      <div class="tr-stats">
+        <div class="ts-item"><span class="ts-num green" id="t-ok">0</span> верно</div>
+        <div class="ts-item"><span class="ts-num red" id="t-err">0</span> ошибок</div>
+        <div class="ts-item"><span class="ts-num amber" id="t-time">00:00</span></div>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="tr-progress-wrap">
+      <div class="tr-progress-label">
+        <span id="t-pos-label">Задание 1 из 110</span>
+        <span id="t-pct-label">0%</span>
+      </div>
+      <div class="tr-progress-track"><div class="tr-progress-fill" id="t-progress" style="width:0%"></div></div>
+    </div>
+
+    <!-- Error mode badge -->
+    <div class="err-mode-badge" id="t-err-badge">
+      ⚠ Режим работы над ошибками — <span id="t-err-count">0</span> заданий
+    </div>
+
+    <!-- Card -->
+    <div class="tr-card" id="t-card">
+      <div id="t-badge-wrap"></div>
+      <div class="tr-formula" id="t-formula"></div>
+      <div class="tr-hint" id="t-hint"></div>
+    </div>
+
+    <!-- Input -->
+    <div class="tr-input-row" id="t-input-row">
+      <input type="text" class="tr-input" id="t-input" placeholder="+2 / -1 / 0" autocomplete="off" />
+      <button class="tr-btn" id="t-check-btn" onclick="trCheck()">Проверить</button>
+      <span class="tr-penalty-badge" id="t-penalty">+1 к очереди</span>
+    </div>
+    <div class="tr-feedback" id="t-feedback"></div>
+
+    <!-- Nav -->
+    <div class="tr-nav" id="t-nav">
+      <div class="tr-nav-btns">
+        <button onclick="trPrev()" id="t-prev" title="Назад">←</button>
+        <button onclick="trNext()" id="t-next" title="Вперёд">→</button>
+      </div>
+      <span style="font-size:13px;color:var(--ink3)" id="t-nav-hint">Введи ответ и нажми Проверить</span>
+    </div>
+
+    <!-- Result screen -->
+    <div class="tr-result" id="t-result">
+      <div class="grade" id="t-grade">🎉</div>
+      <div class="pct" id="t-pct-big">0%</div>
+      <div class="res-stats">
+        <div><div class="res-num" id="r-ok" style="color:var(--green)">0</div><div class="res-lbl">Верно</div></div>
+        <div><div class="res-num" id="r-err" style="color:var(--red)">0</div><div class="res-lbl">Ошибок</div></div>
+        <div><div class="res-num" id="r-time">00:00</div><div class="res-lbl">Время</div></div>
+      </div>
+      <div class="res-actions">
+        <button class="tr-btn" onclick="trRetry()">Повторить всё</button>
+        <button class="tr-btn tr-btn-green" id="t-retry-errors-btn" onclick="trRetryErrors()" style="display:none">Работа над ошибками</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /shell -->
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// INLINE TASKS — check & reveal
+// ═══════════════════════════════════════════════════════════
+function checkInput(btn){
+  const wrap=btn.closest('.inline-task');
+  const ans=wrap.querySelector('.answer-box');
+  if(ans){ans.classList.add('open');btn.disabled=true}
+}
+function toggleGroup(btn,gid){
+  const g=document.getElementById(gid);
+  if(!g)return;
+  const boxes=g.querySelectorAll('.answer-box');
+  const open=btn.classList.contains('all-open');
+  boxes.forEach(b=>b.classList.toggle('open',!open));
+  btn.classList.toggle('all-open',!open);
+  btn.textContent=open?'👁 Показать ответы':'🙈 Скрыть ответы';
+}
+
+// ═══════════════════════════════════════════════════════════
+// ТРЕНАЖЁР — 110 заданий
+// ═══════════════════════════════════════════════════════════
+const RAW_TASKS = [
+  {id:1001,ask:'<span class="hl">Fe</span>',hint:'железо — простое вещество',ans:'0',badge:'simple'},
+  {id:1002,ask:'<span class="hl">Cu</span>',hint:'медь — простое вещество',ans:'0',badge:'simple'},
+  {id:1003,ask:'<span class="hl">Zn</span>',hint:'цинк — простое вещество',ans:'0',badge:'simple'},
+  {id:1004,ask:'<span class="hl">Al</span>',hint:'алюминий — простое вещество',ans:'0',badge:'simple'},
+  {id:1005,ask:'<span class="hl">S</span>₈',hint:'сера — простое вещество (S₈)',ans:'0',badge:'simple'},
+  {id:1006,ask:'<span class="hl">O</span>₂',hint:'кислород — простое вещество',ans:'0',badge:'simple'},
+  {id:1007,ask:'<span class="hl">N</span>₂',hint:'азот — простое вещество',ans:'0',badge:'simple'},
+  {id:1008,ask:'<span class="hl">Cl</span>₂',hint:'хлор — простое вещество',ans:'0',badge:'simple'},
+  {id:1009,ask:'<span class="hl">H</span>₂',hint:'водород — простое вещество',ans:'0',badge:'simple'},
+  {id:1010,ask:'<span class="hl">Na</span>',hint:'натрий — простое вещество',ans:'0',badge:'simple'},
+  {id:1011,ask:'<span class="hl">Mg</span>',hint:'магний — простое вещество',ans:'0',badge:'simple'},
+  {id:1012,ask:'<span class="hl">C</span>',hint:'углерод — простое вещество',ans:'0',badge:'simple'},
+  {id:1013,ask:'<span class="hl">Ca</span>',hint:'кальций — простое вещество',ans:'0',badge:'simple'},
+  {id:1014,ask:'<span class="hl">P</span>₄',hint:'фосфор — простое вещество (P₄)',ans:'0',badge:'simple'},
+  {id:1015,ask:'<span class="hl">I</span>₂',hint:'иод — простое вещество',ans:'0',badge:'simple'},
+  {id:1016,ask:'<span class="hl">K</span>',hint:'калий — простое вещество',ans:'0',badge:'simple'},
+  {id:1017,ask:'<span class="hl">Br</span>₂',hint:'бром — простое вещество',ans:'0',badge:'simple'},
+  {id:1018,ask:'<span class="hl">Ag</span>',hint:'серебро — простое вещество',ans:'0',badge:'simple'},
+  {id:1019,ask:'<span class="hl">Au</span>',hint:'золото — простое вещество',ans:'0',badge:'simple'},
+  {id:1020,ask:'<span class="hl">Pt</span>',hint:'платина — простое вещество',ans:'0',badge:'simple'},
+  {id:1021,ask:'Na₂<span class="hl">S</span>O₄',hint:'S в сульфате натрия',ans:'+6'},
+  {id:1022,ask:'K<span class="hl">Mn</span>O₄',hint:'Mn в перманганате калия',ans:'+7'},
+  {id:1023,ask:'<span class="hl">Cr</span>₂O₃',hint:'Cr в оксиде хрома(III)',ans:'+3'},
+  {id:1024,ask:'H<span class="hl">N</span>O₃',hint:'N в азотной кислоте',ans:'+5'},
+  {id:1025,ask:'<span class="hl">Fe</span>₂O₃',hint:'Fe в оксиде железа(III)',ans:'+3'},
+  {id:1026,ask:'K₂<span class="hl">Cr</span>₂O₇',hint:'Cr в дихромате калия',ans:'+6'},
+  {id:1027,ask:'<span class="hl">Mn</span>O₂',hint:'Mn в диоксиде марганца',ans:'+4'},
+  {id:1028,ask:'H₂<span class="hl">S</span>',hint:'S в сероводороде',ans:'-2'},
+  {id:1029,ask:'<span class="hl">N</span>H₃',hint:'N в аммиаке',ans:'-3'},
+  {id:1030,ask:'<span class="hl">C</span>O₂',hint:'C в углекислом газе',ans:'+4'},
+  {id:1031,ask:'H<span class="hl">N</span>O₂',hint:'N в азотистой кислоте',ans:'+3'},
+  {id:1032,ask:'Na₂<span class="hl">S</span>O₃',hint:'S в сульфите натрия',ans:'+4'},
+  {id:1033,ask:'<span class="hl">S</span>O₂',hint:'S в диоксиде серы',ans:'+4'},
+  {id:1034,ask:'<span class="hl">C</span>H₄',hint:'C в метане',ans:'-4'},
+  {id:1035,ask:'<span class="hl">N</span>O₂',hint:'N в диоксиде азота',ans:'+4'},
+  {id:1036,ask:'<span class="hl">N</span>₂O',hint:'N в оксиде азота(I)',ans:'+1'},
+  {id:1037,ask:'H<span class="hl">Cl</span>O₄',hint:'Cl в хлорной кислоте',ans:'+7'},
+  {id:1038,ask:'Na<span class="hl">Cl</span>O₃',hint:'Cl в хлорате натрия',ans:'+5'},
+  {id:1039,ask:'H<span class="hl">Cl</span>O',hint:'Cl в хлорноватистой кислоте',ans:'+1'},
+  {id:1040,ask:'H₂<span class="hl">O</span>₂',hint:'O в пероксиде водорода',ans:'-1'},
+  {id:1041,ask:'Na₂<span class="hl">O</span>₂',hint:'O в пероксиде натрия',ans:'-1'},
+  {id:1042,ask:'<span class="hl">N</span>₂O₃',hint:'N в оксиде азота(III)',ans:'+3'},
+  {id:1043,ask:'Ca₃(<span class="hl">P</span>O₄)₂',hint:'P в ортофосфате кальция',ans:'+5',badge:'bracket'},
+  {id:1044,ask:'K₂<span class="hl">Mn</span>O₄',hint:'Mn в манганате калия',ans:'+6'},
+  {id:1045,ask:'<span class="hl">P</span>H₃',hint:'P в фосфине',ans:'-3'},
+  {id:1046,ask:'<span class="hl">N</span>₂H₄',hint:'N в гидразине',ans:'-2'},
+  {id:1047,ask:'H₃<span class="hl">P</span>O₃',hint:'P в фосфористой кислоте',ans:'+3'},
+  {id:1048,ask:'<span class="hl">O</span>F₂',hint:'O в дифториде кислорода',ans:'+2'},
+  {id:1049,ask:'<span class="hl">Fe</span>O',hint:'Fe в оксиде железа(II)',ans:'+2'},
+  {id:1050,ask:'Na<span class="hl">Cl</span>O₂',hint:'Cl в хлорите натрия',ans:'+3'},
+  {id:1051,ask:'<span class="hl">S</span>O₄²⁻',hint:'S в сульфат-ионе',ans:'+6',badge:'ion'},
+  {id:1052,ask:'<span class="hl">N</span>O₃⁻',hint:'N в нитрат-ионе',ans:'+5',badge:'ion'},
+  {id:1053,ask:'<span class="hl">P</span>O₄³⁻',hint:'P в фосфат-ионе',ans:'+5',badge:'ion'},
+  {id:1054,ask:'<span class="hl">C</span>O₃²⁻',hint:'C в карбонат-ионе',ans:'+4',badge:'ion'},
+  {id:1055,ask:'<span class="hl">Mn</span>O₄⁻',hint:'Mn в перманганат-ионе',ans:'+7',badge:'ion'},
+  {id:1056,ask:'<span class="hl">Cr</span>₂O₇²⁻',hint:'Cr в дихромат-ионе',ans:'+6',badge:'ion'},
+  {id:1057,ask:'<span class="hl">Cr</span>O₄²⁻',hint:'Cr в хромат-ионе',ans:'+6',badge:'ion'},
+  {id:1058,ask:'<span class="hl">Cl</span>O₃⁻',hint:'Cl в хлорат-ионе',ans:'+5',badge:'ion'},
+  {id:1059,ask:'<span class="hl">N</span>O₂⁻',hint:'N в нитрит-ионе',ans:'+3',badge:'ion'},
+  {id:1060,ask:'<span class="hl">S</span>O₃²⁻',hint:'S в сульфит-ионе',ans:'+4',badge:'ion'},
+  {id:1061,ask:'<span class="hl">N</span>H₄⁺',hint:'N в катионе аммония',ans:'-3',badge:'ion'},
+  {id:1062,ask:'<span class="hl">Mn</span>O₄²⁻',hint:'Mn в манганат-ионе',ans:'+6',badge:'ion'},
+  {id:1063,ask:'<span class="hl">I</span>O₃⁻',hint:'I в иодат-ионе',ans:'+5',badge:'ion'},
+  {id:1064,ask:'H<span class="hl">P</span>O₄²⁻',hint:'P в гидрофосфат-ионе',ans:'+5',badge:'ion'},
+  {id:1065,ask:'<span class="hl">Cl</span>O⁻',hint:'Cl в гипохлорит-ионе',ans:'+1',badge:'ion'},
+  {id:1066,ask:'Al₂(<span class="hl">C</span>O₃)₃',hint:'C в карбонате алюминия',ans:'+4',badge:'bracket'},
+  {id:1067,ask:'Fe₂(<span class="hl">S</span>O₄)₃',hint:'S в сульфате железа(III)',ans:'+6',badge:'bracket'},
+  {id:1068,ask:'Cu(<span class="hl">N</span>O₃)₂',hint:'N в нитрате меди(II)',ans:'+5',badge:'bracket'},
+  {id:1069,ask:'Ca(H<span class="hl">C</span>O₃)₂',hint:'C в гидрокарбонате кальция',ans:'+4',badge:'bracket'},
+  {id:1070,ask:'<span class="hl">Fe</span>(OH)₃',hint:'Fe в гидроксиде железа(III)',ans:'+3',badge:'bracket'},
+  {id:1071,ask:'<span class="hl">Cr</span>(OH)₃',hint:'Cr в гидроксиде хрома(III)',ans:'+3',badge:'bracket'},
+  {id:1072,ask:'Ba(<span class="hl">Mn</span>O₄)₂',hint:'Mn в перманганате бария',ans:'+7',badge:'bracket'},
+  {id:1073,ask:'K<span class="hl">Al</span>(SO₄)₂',hint:'Al в квасцах',ans:'+3',badge:'bracket'},
+  {id:1074,ask:'NH₄H<span class="hl">C</span>O₃',hint:'C в гидрокарбонате аммония',ans:'+4',badge:'bracket'},
+  {id:1075,ask:'Mg₃(<span class="hl">P</span>O₄)₂',hint:'P в фосфате магния',ans:'+5',badge:'bracket'},
+  {id:1076,ask:'NaH<span class="hl">C</span>O₃',hint:'C в гидрокарбонате натрия',ans:'+4',badge:'acid'},
+  {id:1077,ask:'KH<span class="hl">C</span>O₃',hint:'C в гидрокарбонате калия',ans:'+4',badge:'acid'},
+  {id:1078,ask:'NaH<span class="hl">S</span>O₄',hint:'S в гидросульфате натрия',ans:'+6',badge:'acid'},
+  {id:1079,ask:'KH<span class="hl">S</span>O₄',hint:'S в гидросульфате калия',ans:'+6',badge:'acid'},
+  {id:1080,ask:'NaH₂<span class="hl">P</span>O₄',hint:'P в дигидрофосфате натрия',ans:'+5',badge:'acid'},
+  {id:1081,ask:'Na₂H<span class="hl">P</span>O₄',hint:'P в гидрофосфате натрия',ans:'+5',badge:'acid'},
+  {id:1082,ask:'KH₂<span class="hl">P</span>O₄',hint:'P в дигидрофосфате калия',ans:'+5',badge:'acid'},
+  {id:1083,ask:'NaH<span class="hl">S</span>',hint:'S в гидросульфиде натрия',ans:'-2',badge:'acid'},
+  {id:1084,ask:'KH<span class="hl">S</span>',hint:'S в гидросульфиде калия',ans:'-2',badge:'acid'},
+  {id:1085,ask:'NH₄H<span class="hl">C</span>O₃',hint:'C в гидрокарбонате аммония',ans:'+4',badge:'acid'},
+  {id:1086,ask:'<span class="hl">N</span>H₄Cl',hint:'N в хлориде аммония',ans:'-3',badge:'ammonium'},
+  {id:1087,ask:'(<span class="hl">N</span>H₄)₂SO₄',hint:'N в сульфате аммония',ans:'-3',badge:'ammonium'},
+  {id:1088,ask:'(<span class="hl">N</span>H₄)₂CO₃',hint:'N в карбонате аммония',ans:'-3',badge:'ammonium'},
+  {id:1089,ask:'(<span class="hl">N</span>H₄)₂HPO₄',hint:'N в гидрофосфате аммония',ans:'-3',badge:'ammonium'},
+  {id:1090,ask:'<span class="hl">N</span>H₄H₂PO₄',hint:'N в дигидрофосфате аммония',ans:'-3',badge:'ammonium'},
+  {id:1091,ask:'<span class="hl">N</span>H₄HSO₄',hint:'N в гидросульфате аммония',ans:'-3',badge:'ammonium'},
+  {id:1092,ask:'(<span class="hl">N</span>H₄)₂Cr₂O₇',hint:'N в дихромате аммония',ans:'-3',badge:'ammonium'},
+  {id:1093,ask:'H<span class="hl">C</span>O₃⁻',hint:'C в гидрокарбонат-ионе',ans:'+4',badge:'ion'},
+  {id:1094,ask:'H<span class="hl">S</span>O₄⁻',hint:'S в гидросульфат-ионе',ans:'+6',badge:'ion'},
+  {id:1095,ask:'H<span class="hl">S</span>O₃⁻',hint:'S в гидросульфит-ионе',ans:'+4',badge:'ion'},
+  {id:1096,ask:'H₂<span class="hl">P</span>O₄⁻',hint:'P в дигидрофосфат-ионе',ans:'+5',badge:'ion'},
+  {id:1097,ask:'H<span class="hl">P</span>O₄²⁻',hint:'P в гидрофосфат-ионе',ans:'+5',badge:'ion'},
+  {id:1098,ask:'H<span class="hl">S</span>⁻',hint:'S в гидросульфид-ионе',ans:'-2',badge:'ion'},
+  {id:1099,ask:'(NH₄)₂<span class="hl">S</span>O₄',hint:'S в сульфате аммония',ans:'+6',badge:'ammonium'},
+  {id:1100,ask:'(NH₄)₂<span class="hl">C</span>O₃',hint:'C в карбонате аммония',ans:'+4',badge:'ammonium'},
+  {id:1101,ask:'<span class="hl">N</span>H₄NO₃',hint:'N в NH₄⁺ (нитрат аммония)',ans:'-3',badge:'ammonium'},
+  {id:1102,ask:'NH₄<span class="hl">N</span>O₃',hint:'N в NO₃⁻ (нитрат аммония)',ans:'+5',badge:'ammonium'},
+  {id:1103,ask:'(NH₄)₂H<span class="hl">P</span>O₄',hint:'P в гидрофосфате аммония',ans:'+5',badge:'ammonium'},
+  {id:1104,ask:'<span class="hl">N</span>H₄H₂PO₄',hint:'N в дигидрофосфате аммония',ans:'-3',badge:'ammonium'},
+  {id:1105,ask:'NH₄<span class="hl">N</span>O₂',hint:'N в NO₂⁻ (нитрит аммония)',ans:'+3',badge:'ammonium'},
+  {id:1106,ask:'<span class="hl">N</span>H₄NO₂',hint:'N в NH₄⁺ (нитрит аммония)',ans:'-3',badge:'ammonium'},
+  {id:1107,ask:'(NH₄)₂<span class="hl">Cr</span>₂O₇',hint:'Cr в дихромате аммония',ans:'+6',badge:'ammonium'},
+  {id:1108,ask:'<span class="hl">N</span>H₄HS',hint:'N в гидросульфиде аммония',ans:'-3',badge:'ammonium'},
+  {id:1109,ask:'NH₄<span class="hl">H</span>S',hint:'S в HS⁻ (гидросульфид аммония)',ans:'-2',badge:'ammonium'},
+  {id:1110,ask:'<span class="hl">N</span>H₄NO₃',hint:'N в NH₄⁺ (нитрат аммония)',ans:'-3',badge:'ammonium'}
+];
+
+const BADGE_LABELS = {ion:'ион',bracket:'( )',simple:'простое',acid:'кислая соль',ammonium:'аммоний'};
+const BADGE_CLASSES = {ion:'tr-badge-ion',bracket:'tr-badge-bracket',simple:'tr-badge-simple',acid:'tr-badge-acid',ammonium:'tr-badge-ammonium'};
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+// State
+let queue=[];         // current queue
+let pos=0;
+let correct=0;
+let errors=0;
+let answered=new Set();  // pos indices that have been answered
+let wrongIds=new Set();
+let timerSec=0;
+let timerInt=null;
+let isErrorMode=false;
+let isFinished=false;
+let baseTotal=RAW_TASKS.length; // base for % calc (changes in error mode)
+
+function trInit(){
+  queue=shuffle([...RAW_TASKS]);
+  pos=0;correct=0;errors=0;
+  answered=new Set();wrongIds=new Set();
+  timerSec=0;isErrorMode=false;isFinished=false;baseTotal=RAW_TASKS.length;
+  clearInterval(timerInt);
+  timerInt=setInterval(()=>{
+    timerSec++;
+    document.getElementById('t-time').textContent=fmtTime(timerSec);
+  },1000);
+  document.getElementById('t-result').style.display='none';
+  document.getElementById('t-card').style.display='flex';
+  document.getElementById('t-input-row').style.display='flex';
+  document.getElementById('t-nav').style.display='flex';
+  document.getElementById('t-err-badge').classList.remove('show');
+  trRender();
+}
+
+function fmtTime(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+
+function trRender(){
+  const t=queue[pos];
+  // badge
+  const bw=document.getElementById('t-badge-wrap');
+  bw.innerHTML='';
+  if(t.badge&&BADGE_LABELS[t.badge]){
+    const b=document.createElement('span');
+    b.className='tr-badge '+(BADGE_CLASSES[t.badge]||'');
+    b.textContent=BADGE_LABELS[t.badge];
+    bw.appendChild(b);
+  }
+  document.getElementById('t-formula').innerHTML=t.ask;
+  document.getElementById('t-hint').textContent=t.hint||'';
+  // input
+  const inp=document.getElementById('t-input');
+  inp.value='';inp.className='tr-input';inp.readOnly=false;
+  document.getElementById('t-check-btn').disabled=false;
+  document.getElementById('t-feedback').textContent='';
+  document.getElementById('t-feedback').className='tr-feedback';
+  document.getElementById('t-penalty').classList.remove('show');
+  // progress
+  const done=answered.size;
+  const total=queue.length;
+  const pct=Math.round(done/total*100);
+  document.getElementById('t-progress').style.width=pct+'%';
+  document.getElementById('t-pos-label').textContent=`Задание ${pos+1} из ${total}`;
+  document.getElementById('t-pct-label').textContent=pct+'%';
+  // stats
+  document.getElementById('t-ok').textContent=correct;
+  document.getElementById('t-err').textContent=errors;
+  // nav
+  document.getElementById('t-prev').disabled=pos===0;
+  document.getElementById('t-next').disabled=!answered.has(pos);
+  // if already answered
+  if(answered.has(pos)){
+    const wasWrong=t._wasWrong;
+    inp.value=t.ans;
+    inp.className='tr-input '+(wasWrong?'err':'ok');
+    inp.readOnly=true;
+    document.getElementById('t-check-btn').disabled=true;
+    document.getElementById('t-feedback').className='tr-feedback '+(wasWrong?'err':'ok');
+    document.getElementById('t-feedback').textContent=wasWrong?`✗ Было неверно. Правильный ответ: ${t.ans}`:`✓ Верно!`;
+    document.getElementById('t-next').disabled=pos===queue.length-1;
+  }
+}
+
+function normalizeAns(v){
+  return v.trim().replace('−','-').replace('–','-').replace('—','-').replace(',','.').toLowerCase();
+}
+
+function trCheck(){
+  if(answered.has(pos))return;
+  const t=queue[pos];
+  const raw=document.getElementById('t-input').value;
+  const val=normalizeAns(raw);
+  const correct_ans=normalizeAns(t.ans);
+  const inp=document.getElementById('t-input');
+  const fb=document.getElementById('t-feedback');
+  answered.add(pos);
+  if(val===correct_ans){
+    correct++;
+    t._wasWrong=false;
+    inp.className='tr-input ok';inp.readOnly=true;
+    fb.className='tr-feedback ok';fb.textContent='✓ Верно!';
+    document.getElementById('t-check-btn').disabled=true;
+    document.getElementById('t-next').disabled=false;
+    document.getElementById('t-ok').textContent=correct;
+  } else {
+    errors++;
+    t._wasWrong=true;
+    wrongIds.add(t.id);
+    inp.className='tr-input err';inp.readOnly=true;
+    fb.className='tr-feedback err';
+    fb.textContent=`✗ Неверно. Правильный ответ: ${t.ans}`;
+    document.getElementById('t-check-btn').disabled=true;
+    document.getElementById('t-next').disabled=false;
+    document.getElementById('t-err').textContent=errors;
+    document.getElementById('t-penalty').classList.add('show');
+    // add penalty — push copy to end of queue
+    const copy={...t,_wasWrong:undefined};
+    queue.push(copy);
+    // update total label
+    document.getElementById('t-pos-label').textContent=`Задание ${pos+1} из ${queue.length}`;
+  }
+  // check if all done
+  if(pos===queue.length-1 && answered.size>=queue.length){
+    setTimeout(trShowResult,800);
+  }
+}
+
+function trNext(){
+  if(pos<queue.length-1){pos++;trRender();}
+  else if(answered.size>=queue.length){trShowResult();}
+}
+function trPrev(){if(pos>0){pos--;trRender();}}
+
+document.getElementById('t-input').addEventListener('keydown',e=>{
+  if(e.key==='Enter'){
+    if(!answered.has(pos))trCheck();
+    else trNext();
+  }
+});
+
+function trShowResult(){
+  if(isFinished)return;
+  clearInterval(timerInt);
+  isFinished=true;
+  const total=baseTotal;
+  const pct=Math.round(correct/total*100);
+  document.getElementById('t-card').style.display='none';
+  document.getElementById('t-input-row').style.display='none';
+  document.getElementById('t-nav').style.display='none';
+  const res=document.getElementById('t-result');
+  res.style.display='block';
+  document.getElementById('t-grade').textContent=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'👍':'💪';
+  document.getElementById('t-pct-big').textContent=pct+'%';
+  document.getElementById('r-ok').textContent=correct;
+  document.getElementById('r-err').textContent=errors;
+  document.getElementById('r-time').textContent=fmtTime(timerSec);
+  const errBtn=document.getElementById('t-retry-errors-btn');
+  if(wrongIds.size>0){errBtn.style.display='';errBtn.textContent=`Работа над ошибками (${wrongIds.size})`;}
+  else errBtn.style.display='none';
+}
+
+function trRetry(){trInit();}
+
+function trRetryErrors(){
+  if(wrongIds.size===0)return;
+  const errTasks=RAW_TASKS.filter(t=>wrongIds.has(t.id));
+  baseTotal=errTasks.length;
+  queue=shuffle(errTasks);
+  pos=0;correct=0;errors=0;
+  answered=new Set();wrongIds=new Set();
+  timerSec=0;isErrorMode=true;isFinished=false;
+  clearInterval(timerInt);
+  timerInt=setInterval(()=>{timerSec++;document.getElementById('t-time').textContent=fmtTime(timerSec);},1000);
+  document.getElementById('t-result').style.display='none';
+  document.getElementById('t-card').style.display='flex';
+  document.getElementById('t-input-row').style.display='flex';
+  document.getElementById('t-nav').style.display='flex';
+  const badge=document.getElementById('t-err-badge');
+  badge.classList.add('show');
+  document.getElementById('t-err-count').textContent=queue.length;
+  trRender();
+}
+
+// ═══════════════════════════════════════════════════════════
+// PROGRESS BAR
+// ═══════════════════════════════════════════════════════════
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  const pct=h>0?window.scrollY/h*100:0;
+  document.getElementById('pf').style.width=pct+'%';
+  const bt=document.getElementById('back-top');
+  bt.classList.toggle('visible',window.scrollY>300);
+});
+
+// ═══════════════════════════════════════════════════════════
+// FADE IN
+// ═══════════════════════════════════════════════════════════
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.07});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+// Init trainer
+trInit();
+</script>
+</body>
+</html>
