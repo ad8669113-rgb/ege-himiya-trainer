@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Оксиды · Осадки · Газы · Растворы — ЕГЭ Химия</title>
+    <style>
+        /* ═══════════════════════════════════
+           DESIGN TOKENS (полностью сохранены)
+        ═══════════════════════════════════ */
+        :root {
+            --p900: #2D1B69;
+            --p800: #3D2785;
+            --p700: #4E35A0;
+            --p600: #6248C4;
+            --p500: #7B61DB;
+            --p400: #9B84E8;
+            --p300: #BDB2F3;
+            --p200: #DBD5F8;
+            --p100: #F0EEFF;
+            --p50: #F8F7FF;
+            --ink: #1C1B29;
+            --ink2: #3E3C5A;
+            --ink3: #8A88A8;
+            --line: #E2E5EC;
+            --card: #FFFFFF;
+            --bg: #F6F5FC;
+            --white: #fff;
+            --green: #1D9E75;
+            --green-t: #E1F5EE;
+            --green-d: #085041;
+            --amber: #BA7517;
+            --amber-t: #FAEEDA;
+            --amber-d: #633806;
+            --red: #A32D2D;
+            --red-t: #FCEBEB;
+            --red-d: #7A2020;
+            --r: 12px;
+            --r-sm: 8px;
+            --r-lg: 20px;
+            --shadow: 0 1px 3px rgba(20, 21, 26, .06), 0 4px 16px rgba(20, 21, 26, .06);
+            --shm: 0 4px 20px rgba(60, 40, 160, .12);
+            --font: 'Segoe UI', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', 'Courier New', monospace;
+        }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        .shell {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+        .hero {
+            background: linear-gradient(135deg, #2D1B69 0%, #4E35A0 55%, #7B61DB 100%);
+            padding: 48px 28px 40px;
+            margin: 0 -24px 40px;
+            border-radius: 0 0 var(--r-lg) var(--r-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(155, 132, 232, .15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, .11);
+            border: 1px solid rgba(255, 255, 255, .2);
+            color: rgba(255, 255, 255, .82);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 12px;
+            font-family: var(--mono);
+            letter-spacing: .6px;
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-size: clamp(26px, 4.5vw, 44px);
+            font-weight: 800;
+            line-height: 1.06;
+            letter-spacing: -.03em;
+            color: #fff;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 em {
+            color: var(--p300);
+            font-style: normal;
+        }
+        .hero-sub {
+            font-size: 15px;
+            color: rgba(255, 255, 255, .7);
+            line-height: 1.7;
+            max-width: 600px;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-chip {
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .18);
+            color: rgba(255, 255, 255, .9);
+            padding: 5px 14px;
+            border-radius: 16px;
+            font-size: 12.5px;
+            font-weight: 500;
+        }
+        .toc {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            padding: 20px 24px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+        }
+        .toc-title {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--p600);
+            font-family: var(--mono);
+            margin-bottom: 12px;
+        }
+        .toc ol {
+            padding-left: 20px;
+        }
+        .toc li {
+            padding: 3px 0;
+            font-size: 14px;
+        }
+        .toc a {
+            color: var(--ink2);
+            text-decoration: none;
+            transition: color .15s;
+        }
+        .toc a:hover {
+            color: var(--p600);
+        }
+        .section {
+            margin-bottom: 48px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--p200);
+        }
+        .section-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--p700), var(--p500));
+            color: #fff;
+            font-family: var(--mono);
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .section-title {
+            font-size: clamp(18px, 2.5vw, 24px);
+            font-weight: 700;
+            color: var(--p800);
+            line-height: 1.2;
+        }
+        h2.sub-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--p700);
+            margin: 24px 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        h2.sub-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--p500);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        p.body {
+            font-size: 14.5px;
+            line-height: 1.75;
+            color: var(--ink2);
+            margin-bottom: 12px;
+        }
+        p.body strong {
+            color: var(--ink);
+        }
+        .box {
+            border-radius: var(--r-sm);
+            padding: 14px 18px;
+            margin: 14px 0;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .box-title {
+            font-weight: 700;
+            font-size: 13.5px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .box-info {
+            background: var(--p100);
+            border-left: 4px solid var(--p500);
+            color: var(--p800);
+        }
+        .box-warn {
+            background: var(--amber-t);
+            border-left: 4px solid var(--amber);
+            color: var(--amber-d);
+        }
+        .box-danger {
+            background: var(--red-t);
+            border-left: 4px solid var(--red);
+            color: var(--red-d);
+        }
+        .box-success {
+            background: var(--green-t);
+            border-left: 4px solid var(--green);
+            color: var(--green-d);
+        }
+        .box ul,
+        .box ol {
+            padding-left: 20px;
+            margin: 6px 0;
+        }
+        .box li {
+            margin: 4px 0;
+            font-size: 13.5px;
+        }
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: var(--r);
+            border: 1px solid var(--line);
+            margin: 12px 0;
+            box-shadow: var(--shadow);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            font-size: 13px;
+        }
+        th {
+            background: linear-gradient(135deg, var(--p800), var(--p600));
+            color: #fff;
+            font-weight: 600;
+            padding: 9px 12px;
+            text-align: left;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            font-family: var(--mono);
+        }
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:nth-child(even) td {
+            background: var(--p50);
+        }
+        tr:hover td {
+            background: var(--p100);
+            transition: background .15s;
+        }
+        .chip {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 10.5px;
+            letter-spacing: .5px;
+            padding: 2px 9px;
+            border-radius: 5px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .chip-p {
+            background: var(--p100);
+            color: var(--p700);
+        }
+        .chip-g {
+            background: var(--green-t);
+            color: var(--green-d);
+        }
+        .chip-a {
+            background: var(--amber-t);
+            color: var(--amber-d);
+        }
+        .chip-r {
+            background: var(--red-t);
+            color: var(--red-d);
+        }
+        .color-swatch {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, .12);
+            vertical-align: middle;
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+        .ref-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 12px 0;
+        }
+        .ref-card {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--r-sm);
+            padding: 10px 14px;
+            box-shadow: var(--shadow);
+            transition: border-color .2s;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .ref-card:hover {
+            border-color: var(--p300);
+        }
+        .ref-card .formula {
+            font-family: var(--mono);
+            font-weight: 700;
+            color: var(--p700);
+            font-size: 14px;
+            min-width: 60px;
+        }
+        .ref-card .desc {
+            color: var(--ink2);
+            font-size: 12.5px;
+            line-height: 1.4;
+        }
+        .ref-card .swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, .1);
+            flex-shrink: 0;
+        }
+        .ref-group-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--p800);
+            margin: 18px 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ref-group-title::before {
+            content: '';
+            width: 4px;
+            height: 18px;
+            background: var(--p500);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        /* ── FLASH CARDS ── */
+        .fc-section {
+            background: linear-gradient(135deg, #1E1255, #4E35A0);
+            border-radius: var(--r-lg);
+            padding: 30px 24px;
+            margin: 32px 0;
+            color: #fff;
+        }
+        .fc-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .fc-title {
+            font-size: clamp(18px, 3vw, 26px);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .fc-sub {
+            font-size: 14px;
+            color: rgba(255, 255, 255, .65);
+            line-height: 1.6;
+        }
+        .fc-stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, .7);
+            font-family: var(--mono);
+        }
+        .fc-stats span {
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .fc-counter {
+            text-align: center;
+            font-family: var(--mono);
+            font-size: 12px;
+            color: rgba(255, 255, 255, .5);
+            margin-bottom: 12px;
+        }
+        .fc-perspective {
+            perspective: 900px;
+            width: 100%;
+            max-width: 560px;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+        .fc-inner {
+            position: relative;
+            width: 100%;
+            transform-style: preserve-3d;
+            transition: transform .45s cubic-bezier(.4, 0, .2, 1);
+            min-height: 170px;
+        }
+        .fc-inner.flipped {
+            transform: rotateY(180deg);
+        }
+        .fc-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            border-radius: var(--r);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 22px 26px;
+            text-align: center;
+            min-height: 170px;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .fc-front {
+            background: rgba(255, 255, 255, .1);
+            border: 1.5px solid rgba(255, 255, 255, .2);
+            font-size: clamp(15px, 2.5vw, 19px);
+            font-family: var(--mono);
+            color: #fff;
+            line-height: 1.5;
+        }
+        .fc-back {
+            background: var(--white);
+            transform: rotateY(180deg);
+            font-family: var(--mono);
+            font-size: clamp(13px, 2vw, 16px);
+            color: var(--green-d);
+            line-height: 1.6;
+        }
+        .fc-hint {
+            font-family: var(--font);
+            font-size: 12px;
+            color: var(--ink3);
+            margin-top: 6px;
+            font-style: italic;
+        }
+        .fc-tag {
+            font-size: 10px;
+            font-family: var(--font);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .45);
+            margin-bottom: 2px;
+        }
+        .fc-back-tag {
+            font-size: 10px;
+            font-family: var(--font);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 2px;
+        }
+        .fc-flip-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, .15);
+            border: 1.5px solid rgba(255, 255, 255, .25);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--r-sm);
+            padding: 10px 24px;
+            cursor: pointer;
+            transition: background .2s;
+            margin: 14px auto 0;
+            width: fit-content;
+        }
+        .fc-flip-btn:hover {
+            background: rgba(255, 255, 255, .25);
+        }
+        .fc-btn-row {
+            display: none;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 12px;
+        }
+        .fc-btn-know {
+            background: #1D9E75;
+            color: #fff;
+            border: none;
+            border-radius: var(--r-sm);
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            flex: 1;
+            max-width: 180px;
+            transition: background .15s;
+        }
+        .fc-btn-know:hover {
+            background: #187F5E;
+        }
+        .fc-btn-dontknow {
+            background: #C0392B;
+            color: #fff;
+            border: none;
+            border-radius: var(--r-sm);
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            flex: 1;
+            max-width: 180px;
+            transition: background .15s;
+        }
+        .fc-btn-dontknow:hover {
+            background: #A0311F;
+        }
+        .fc-keys {
+            text-align: center;
+            font-size: 11px;
+            color: rgba(255, 255, 255, .35);
+            margin-top: 10px;
+            font-family: var(--mono);
+        }
+        .fc-result {
+            display: none;
+            text-align: center;
+            padding: 16px 0;
+        }
+        .fc-result h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .fc-res-row {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .fc-res-card {
+            background: rgba(255, 255, 255, .1);
+            border-radius: var(--r-sm);
+            padding: 10px 20px;
+            min-width: 80px;
+        }
+        .fc-res-num {
+            font-size: 26px;
+            font-weight: 700;
+        }
+        .fc-res-lbl {
+            font-size: 11px;
+            color: rgba(255, 255, 255, .6);
+            font-family: var(--mono);
+            margin-top: 2px;
+        }
+        .fc-restart-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .fc-restart-btn {
+            background: rgba(255, 255, 255, .15);
+            border: 1.5px solid rgba(255, 255, 255, .25);
+            color: #fff;
+            border-radius: var(--r-sm);
+            padding: 8px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .2s;
+        }
+        .fc-restart-btn:hover {
+            background: rgba(255, 255, 255, .25);
+        }
+        .fc-restart-btn.primary {
+            background: var(--green);
+            border-color: var(--green);
+        }
+        .fc-empty {
+            display: none;
+            text-align: center;
+            color: rgba(255, 255, 255, .6);
+            padding: 16px;
+        }
+        .fc-sr-badge {
+            font-size: 10px;
+            font-family: var(--mono);
+            padding: 2px 7px;
+            border-radius: 4px;
+            margin-top: 6px;
+            display: inline-block;
+            background: rgba(255, 255, 255, .12);
+            color: rgba(255, 255, 255, .6);
+        }
+        /* ── PRACTICE TRAINER ── */
+        .pt-trainer {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: var(--r-lg);
+            padding: 22px 24px;
+            box-shadow: var(--shadow);
+            margin-top: 8px;
+        }
+        .pt-stats {
+            background: linear-gradient(135deg, var(--p700), var(--p500));
+            color: #fff;
+            border-radius: var(--r);
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 16px rgba(62, 42, 180, .3);
+        }
+        .pt-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 50px;
+        }
+        .pt-stat-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, .7);
+            font-family: var(--mono);
+        }
+        .pt-stat-val {
+            font-size: 17px;
+            font-weight: 800;
+            font-family: var(--mono);
+            color: #fff;
+        }
+        .pt-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .pt-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--p800);
+        }
+        .pt-block-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--p100);
+            border: 1px solid var(--p300);
+            color: var(--p700);
+            border-radius: 20px;
+            padding: 2px 12px;
+            font-size: 11.5px;
+            font-weight: 700;
+            font-family: var(--mono);
+            margin-bottom: 8px;
+        }
+        .pt-card {
+            background: var(--bg);
+            border: 1.5px solid var(--line);
+            border-radius: var(--r);
+            padding: 18px 20px;
+            margin: 10px 0;
+        }
+        .pt-eq {
+            font-family: var(--mono);
+            font-size: clamp(16px, 2.5vw, 22px);
+            color: var(--p900);
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 4px;
+        }
+        .pt-reveal-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--p600);
+            color: #fff;
+            border: none;
+            border-radius: var(--r-sm);
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .15s;
+            margin-top: 10px;
+        }
+        .pt-reveal-btn:hover {
+            background: var(--p700);
+        }
+        .pt-answer {
+            display: none;
+            background: linear-gradient(135deg, var(--green-t), #F0FBF6);
+            border: 1.5px solid #B6E8D3;
+            border-radius: var(--r-sm);
+            padding: 12px 16px;
+            margin-top: 10px;
+        }
+        .pt-answer.open {
+            display: block;
+        }
+        .pt-ans-label {
+            font-family: var(--font);
+            font-size: 10.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 4px;
+        }
+        .pt-ans-eq {
+            font-family: var(--mono);
+            font-size: 14px;
+            color: var(--green-d);
+            line-height: 1.9;
+            white-space: pre-line;
+        }
+        .pt-ans-note {
+            font-family: var(--font);
+            font-size: 12px;
+            color: var(--green-d);
+            margin-top: 6px;
+            opacity: .85;
+            font-style: italic;
+        }
+        .pt-rating {
+            display: none;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .pt-rating.open {
+            display: flex;
+        }
+        .pt-btn-know {
+            flex: 1;
+            max-width: 160px;
+            background: var(--green);
+            color: #fff;
+            border: none;
+            border-radius: var(--r-sm);
+            padding: 9px 18px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .15s;
+        }
+        .pt-btn-know:hover {
+            background: #187F5E;
+        }
+        .pt-btn-dontknow {
+            flex: 1;
+            max-width: 160px;
+            background: var(--red);
+            color: #fff;
+            border: none;
+            border-radius: var(--r-sm);
+            padding: 9px 18px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .15s;
+        }
+        .pt-btn-dontknow:hover {
+            background: var(--red-d);
+        }
+        .pt-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+        .pt-nav-btn {
+            background: var(--p100);
+            border: 1px solid var(--p200);
+            color: var(--p700);
+            border-radius: var(--r-sm);
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .15s;
+        }
+        .pt-nav-btn:hover {
+            background: var(--p200);
+        }
+        .pt-progress-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+        .pt-progress-num {
+            font-family: var(--mono);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--p700);
+        }
+        .pt-progress-bar {
+            width: 140px;
+            height: 5px;
+            background: var(--line);
+            border-radius: 3px;
+        }
+        .pt-progress-fill {
+            height: 5px;
+            background: var(--p500);
+            border-radius: 3px;
+            transition: width .3s;
+        }
+        .pt-feedback {
+            border-radius: var(--r-sm);
+            padding: 10px 14px;
+            font-size: 13.5px;
+            display: none;
+            margin-top: 8px;
+        }
+        .pt-feedback.good {
+            display: block;
+            background: var(--green-t);
+            color: var(--green-d);
+            border-left: 4px solid var(--green);
+        }
+        .pt-feedback.bad {
+            display: block;
+            background: var(--red-t);
+            color: var(--red-d);
+            border-left: 4px solid var(--red);
+        }
+        .pt-repeat-notice {
+            background: var(--amber-t);
+            border: 1px solid var(--amber);
+            border-radius: var(--r-sm);
+            padding: 9px 14px;
+            font-size: 13px;
+            color: var(--ink2);
+            margin-bottom: 10px;
+        }
+        .pt-res-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 12px 0;
+        }
+        .pt-res-card {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: var(--r-sm);
+            padding: 12px;
+            text-align: center;
+        }
+        .pt-res-card .rval {
+            font-size: 26px;
+            font-weight: 800;
+            font-family: var(--mono);
+            color: var(--p700);
+        }
+        .pt-res-card .rlbl {
+            font-size: 10px;
+            color: var(--ink3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+        .pt-res-card.good .rval {
+            color: var(--green-d);
+        }
+        .pt-res-card.bad .rval {
+            color: var(--red-d);
+        }
+        .pt-res-head {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--p700);
+            margin-bottom: 2px;
+        }
+        .pt-res-sub {
+            font-size: 13px;
+            color: var(--ink3);
+            margin-bottom: 12px;
+        }
+        .pt-weak-tag {
+            display: inline-block;
+            background: var(--red-t);
+            color: var(--red-d);
+            border-radius: 999px;
+            padding: 3px 12px;
+            font-size: 12px;
+            margin: 3px;
+            font-weight: 600;
+        }
+        .pt-nav-btn.small {
+            font-size: 11px;
+            padding: 5px 10px;
+        }
+        @media(max-width:600px) {
+            .pt-trainer {
+                padding: 14px 12px;
+            }
+            .pt-eq {
+                font-size: 15px;
+            }
+        }
+        #back-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--p600);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 4px 16px rgba(62, 42, 180, .35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity .2s, transform .2s;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 99;
+        }
+        #back-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        #back-top:hover {
+            transform: translateY(-2px);
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity .5s ease, transform .5s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media(max-width:540px) {
+            .shell {
+                padding: 0 12px 60px;
+            }
+            .hero {
+                padding: 30px 16px 28px;
+                margin: 0 -12px 28px;
+            }
+            .fc-section {
+                padding: 20px 14px;
+            }
+            .ref-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media print {
+            #back-top {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="shell">
+
+        <!-- HERO -->
+        <div class="hero">
+            <div class="hero-tag">ЕГЭ Химия 2026–2027</div>
+            <h1>Оксиды · Осадки · Газы · <em>Растворы</em></h1>
+            <p class="hero-sub">Цвета, запахи, растворимость — всё для задания 8 и не только. + 55 флэш-карточек и 50 реакций для практики.</p>
+            <div class="hero-chips">
+                <span class="hero-chip">Цвета осадков</span>
+                <span class="hero-chip">Газы и их запахи</span>
+                <span class="hero-chip">Жидкости и растворы</span>
+                <span class="hero-chip">55 флэш-карточек</span>
+                <span class="hero-chip">Практикум 50 реакций</span>
+            </div>
+        </div>
+
+        <!-- TOC -->
+        <nav class="toc fade-in">
+            <div class="toc-title">Содержание</div>
+            <ol>
+                <li><a href="#ref">📋 Справочник: осадки, газы, жидкости, растворы</a></li>
+                <li><a href="#fc">🃏 55 флэш-карточек</a></li>
+                <li><a href="#practice">📝 Большой практикум — 50 реакций</a></li>
+            </ol>
+        </nav>
+
+        <!-- ═══════════════════ REFERENCE ═══════════════════ -->
+        <section class="section fade-in" id="ref">
+            <div class="section-header">
+                <div class="section-num">1</div>
+                <h2 class="section-title">📋 Справочник: осадки, газы, жидкости, растворы</h2>
+            </div>
+            <p class="body">Всё, что нужно <strong>заучить наизусть</strong> для ЕГЭ: цвета осадков, растворимость, запахи газов, окраска растворов.</p>
+
+            <!-- ОСАДКИ -->
+            <h2 class="sub-title">Осадки (цвета &amp; растворимость)</h2>
+            <div class="ref-grid">
+                <div class="ref-card"><span class="formula">CuS</span><span class="swatch" style="background:#1a1a1a"></span><span class="desc">чёрный, нерастворим в кислотах</span></div>
+                <div class="ref-card"><span class="formula">FeS</span><span class="swatch" style="background:#2d2d2d"></span><span class="desc">чёрный, растворим в сильных кислотах</span></div>
+                <div class="ref-card"><span class="formula">PbS</span><span class="swatch" style="background:#1a1a1a"></span><span class="desc">чёрный, нерастворим в кислотах</span></div>
+                <div class="ref-card"><span class="formula">Ag₂S</span><span class="swatch" style="background:#1a1a1a"></span><span class="desc">чёрный, нерастворим в кислотах</span></div>
+                <div class="ref-card"><span class="formula">Ag₂O</span><span class="swatch" style="background:#5d3a1a"></span><span class="desc">тёмно-бурый</span></div>
+                <div class="ref-card"><span class="formula">Fe₃O₄</span><span class="swatch" style="background:#1a1a1a"></span><span class="desc">чёрный (железная окалина)</span></div>
+                <div class="ref-card"><span class="formula">FeO</span><span class="swatch" style="background:#1a1a1a"></span><span class="desc">чёрный</span></div>
+                <div class="ref-card"><span class="formula">CuO</span><span class="swatch" style="background:#1a1a1a"></span><span class="desc">чёрный</span></div>
+                <div class="ref-card"><span class="formula">Fe₂O₃</span><span class="swatch" style="background:#8b4513"></span><span class="desc">красно-коричневый</span></div>
+                <div class="ref-card"><span class="formula">Fe(OH)₃</span><span class="swatch" style="background:#8b5a2b"></span><span class="desc">бурый</span></div>
+                <div class="ref-card"><span class="formula">Fe(OH)₂</span><span class="swatch" style="background:#b0c4b0"></span><span class="desc">бледно-зелёный</span></div>
+                <div class="ref-card"><span class="formula">Cu(OH)₂</span><span class="swatch" style="background:#4a90d9"></span><span class="desc">голубой</span></div>
+                <div class="ref-card"><span class="formula">AgBr</span><span class="swatch" style="background:#d4c9a8"></span><span class="desc">бледно-жёлтый, нерастворим в кислотах</span></div>
+                <div class="ref-card"><span class="formula">AgI</span><span class="swatch" style="background:#f5d742"></span><span class="desc">ярко-жёлтый, нерастворим в кислотах</span></div>
+                <div class="ref-card"><span class="formula">PbI₂</span><span class="swatch" style="background:#f5d742"></span><span class="desc">ярко-жёлтый</span></div>
+                <div class="ref-card"><span class="formula">Ag₃PO₄</span><span class="swatch" style="background:#f5d742"></span><span class="desc">жёлтый</span></div>
+                <div class="ref-card"><span class="formula">BaSO₄</span><span class="swatch" style="background:#f5f5f5;border-color:#ccc"></span><span class="desc">белый, нерастворим в кислотах</span></div>
+                <div class="ref-card"><span class="formula">AgCl</span><span class="swatch" style="background:#f5f5f5;border-color:#ccc"></span><span class="desc">белый творожистый, нерастворим в кислотах</span></div>
+                <div class="ref-card"><span class="formula">Zn(OH)₂</span><span class="swatch" style="background:#f5f5f5;border-color:#ccc"></span><span class="desc">белый, растворим в избытке щёлочи</span></div>
+                <div class="ref-card"><span class="formula">Al(OH)₃</span><span class="swatch" style="background:#f5f5f5;border-color:#ccc"></span><span class="desc">белый, растворим в избытке щёлочи</span></div>
+                <div class="ref-card"><span class="formula">H₂SiO₃</span><span class="swatch" style="background:#f0f0f0;border-color:#ccc"></span><span class="desc">белый студенистый</span></div>
+                <div class="ref-card"><span class="formula">Cu₂O</span><span class="swatch" style="background:#c0392b"></span><span class="desc">красный (кирпично-красный)</span></div>
+                <div class="ref-card"><span class="formula">MnO₂</span><span class="swatch" style="background:#4a3728"></span><span class="desc">черно-коричневый</span></div>
+                <div class="ref-card"><span class="formula">Cr(OH)₂</span><span class="swatch" style="background:#f5d742"></span><span class="desc">жёлтый</span></div>
+                <div class="ref-card"><span class="formula">Cr(OH)₃</span><span class="swatch" style="background:#2e7d32"></span><span class="desc">зелёный</span></div>
+                <div class="ref-card"><span class="formula">BaSO₃</span><span class="swatch" style="background:#f5f5f5;border-color:#ccc"></span><span class="desc">белый, растворим в кислотах</span></div>
+                <div class="ref-card"><span class="formula">BaCO₃</span><span class="swatch" style="background:#f5f5f5;border-color:#ccc"></span><span class="desc">белый, растворим в кислотах</span></div>
+                <div class="ref-card"><span class="formula">CaCO₃</span><span class="swatch" style="background:#f5f5f5;border-color:#ccc"></span><span class="desc">белый, растворим в кислотах</span></div>
+                <div class="ref-card"><span class="formula">Mg(OH)₂</span><span class="swatch" style="background:#f5f5f5;border-color:#ccc"></span><span class="desc">белый, нерастворим в щелочах</span></div>
+                <div class="ref-card"><span class="formula">ZnCO₃</span><span class="swatch" style="background:#f5f5f5;border-color:#ccc"></span><span class="desc">белый</span></div>
+                <div class="ref-card"><span class="formula">AlPO₄</span><span class="swatch" style="background:#f5f5f5;border-color:#ccc"></span><span class="desc">белый</span></div>
+                <div class="ref-card"><span class="formula">CuCl</span><span class="swatch" style="background:#f5f5f5;border-color:#ccc"></span><span class="desc">белый</span></div>
+            </div>
+
+            <!-- ГАЗЫ -->
+            <h2 class="sub-title" style="margin-top:24px">Газы (цвет, запах, свойства)</h2>
+            <div class="ref-grid">
+                <div class="ref-card"><span class="formula">SO₂</span><span class="desc">бесцветный, резкий запах горелой спички</span></div>
+                <div class="ref-card"><span class="formula">NH₃</span><span class="desc">бесцветный, резкий запах</span></div>
+                <div class="ref-card"><span class="formula">H₂S</span><span class="desc">бесцветный, запах тухлых яиц</span></div>
+                <div class="ref-card"><span class="formula">CO₂</span><span class="desc">бесцветный, без запаха</span></div>
+                <div class="ref-card"><span class="formula">NO</span><span class="desc">бесцветный, без запаха (буреет на воздухе)</span></div>
+                <div class="ref-card"><span class="formula">NO₂</span><span class="swatch" style="background:#8b5a2b"></span><span class="desc">бурый, резкий запах</span></div>
+                <div class="ref-card"><span class="formula">N₂O</span><span class="desc">бесцветный, сладковатый запах («веселящий»)</span></div>
+                <div class="ref-card"><span class="formula">Cl₂</span><span class="swatch" style="background:#7a8a3a"></span><span class="desc">жёлто-зелёный, резкий удушливый</span></div>
+                <div class="ref-card"><span class="formula">O₃</span><span class="swatch" style="background:#4a7a9a"></span><span class="desc">голубой, резкий запах</span></div>
+                <div class="ref-card"><span class="formula">CO</span><span class="desc">бесцветный, без запаха (угарный газ, ядовит)</span></div>
+                <div class="ref-card"><span class="formula">COCl₂</span><span class="desc">бесцветный, запах прелого сена (фосген)</span></div>
+                <div class="ref-card"><span class="formula">N₂</span><span class="desc">бесцветный, без запаха</span></div>
+                <div class="ref-card"><span class="formula">H₂</span><span class="desc">бесцветный, без запаха</span></div>
+                <div class="ref-card"><span class="formula">O₂</span><span class="desc">бесцветный, без запаха</span></div>
+                <div class="ref-card"><span class="formula">HCl</span><span class="desc">бесцветный, резкий запах</span></div>
+                <div class="ref-card"><span class="formula">HF</span><span class="desc">бесцветный, резкий запах</span></div>
+            </div>
+
+            <!-- ЖИДКОСТИ и РАСТВОРЫ -->
+            <h2 class="sub-title" style="margin-top:24px">Жидкости и растворы (цвета)</h2>
+            <div class="ref-grid">
+                <div class="ref-card"><span class="formula">Br₂(ж)</span><span class="swatch" style="background:#6b2e0a"></span><span class="desc">бурая жидкость</span></div>
+                <div class="ref-card"><span class="formula">K₂CrO₄(р-р)</span><span class="swatch" style="background:#f5d742"></span><span class="desc">жёлтый раствор</span></div>
+                <div class="ref-card"><span class="formula">K₂Cr₂O₇(р-р)</span><span class="swatch" style="background:#e67e22"></span><span class="desc">оранжевый раствор</span></div>
+                <div class="ref-card"><span class="formula">Mn₂O₇(ж)</span><span class="swatch" style="background:#2e7d32"></span><span class="desc">зелёная маслянистая жидкость</span></div>
+                <div class="ref-card"><span class="formula">CuCl₂(р-р)</span><span class="swatch" style="background:#4a90d9"></span><span class="desc">голубой/сине-зелёный раствор</span></div>
+            </div>
+
+            <div class="box box-warn" style="margin-top:12px">
+                <div class="box-title">⚠️ Ловушки ЕГЭ (дополненные)</div>
+                <ul>
+                    <li><strong>CuO</strong> — чёрный, а <strong>Cu₂O</strong> — красный (кирпично-красный).</li>
+                    <li><strong>FeO</strong> — чёрный, <strong>Fe₂O₃</strong> — красно-коричневый, <strong>Fe₃O₄</strong> — чёрный.</li>
+                    <li><strong>Fe(OH)₂</strong> — бледно-зелёный, <strong>Fe(OH)₃</strong> — бурый.</li>
+                    <li><strong>Cr(OH)₂</strong> — жёлтый, <strong>Cr(OH)₃</strong> — зелёный.</li>
+                    <li><strong>NO</strong> — бесцветный, но моментально буреет на воздухе: 2NO + O₂ → 2NO₂.</li>
+                    <li><strong>AgCl</strong> — белый творожистый, <strong>AgBr</strong> — бледно-жёлтый, <strong>AgI</strong> — ярко-жёлтый.</li>
+                    <li><strong>BaSO₄</strong> и <strong>AgCl</strong> — нерастворимы в кислотах.</li>
+                    <li><strong>Br₂</strong> — бурая жидкость (не газ!).</li>
+                    <li><strong>K₂CrO₄</strong> — жёлтый раствор, <strong>K₂Cr₂O₇</strong> — оранжевый раствор.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ═══════════════════ FLASHCARDS (55) ═══════════════════ -->
+        <section class="section fade-in" id="fc">
+            <div class="section-header">
+                <div class="section-num">2</div>
+                <h2 class="section-title">🃏 55 флэш-карточек</h2>
+            </div>
+
+            <!-- Данные карточек (55 шт.) -->
+            <div style="display:none">
+                <!-- ОСАДКИ (32) -->
+                <span class="fc-data" data-q="CuS — цвет и растворимость?" data-a="Чёрный, нерастворим в кислотах." data-hint="Сульфид меди(II)."></span>
+                <span class="fc-data" data-q="FeS — растворимость в кислотах?" data-a="Растворим в сильных кислотах." data-hint="FeS + 2HCl → FeCl₂ + H₂S↑"></span>
+                <span class="fc-data" data-q="PbS — цвет и растворимость?" data-a="Чёрный, нерастворим в кислотах." data-hint="Сульфид свинца(II)."></span>
+                <span class="fc-data" data-q="Ag₂S — цвет?" data-a="Чёрный." data-hint="Сульфид серебра(I)."></span>
+                <span class="fc-data" data-q="Ag₂O — цвет?" data-a="Тёмно-бурый." data-hint="Образуется при разложении AgOH."></span>
+                <span class="fc-data" data-q="Fe₃O₄ — цвет и название?" data-a="Чёрный. Железная окалина (FeO·Fe₂O₃)."></span>
+                <span class="fc-data" data-q="FeO — цвет?" data-a="Чёрный."></span>
+                <span class="fc-data" data-q="CuO — цвет?" data-a="Чёрный. (Не путай с Cu₂O!)"></span>
+                <span class="fc-data" data-q="Fe₂O₃ — цвет?" data-a="Красно-коричневый."></span>
+                <span class="fc-data" data-q="Fe(OH)₃ — цвет?" data-a="Бурый."></span>
+                <span class="fc-data" data-q="Fe(OH)₂ — цвет?" data-a="Бледно-зелёный." data-hint="Гидроксид железа(II)."></span>
+                <span class="fc-data" data-q="Cu(OH)₂ — цвет?" data-a="Голубой."></span>
+                <span class="fc-data" data-q="AgBr — цвет и растворимость?" data-a="Бледно-жёлтый, нерастворим в кислотах."></span>
+                <span class="fc-data" data-q="AgI — цвет и растворимость?" data-a="Ярко-жёлтый, нерастворим в кислотах."></span>
+                <span class="fc-data" data-q="PbI₂ — цвет?" data-a="Ярко-жёлтый."></span>
+                <span class="fc-data" data-q="Ag₃PO₄ — цвет?" data-a="Жёлтый."></span>
+                <span class="fc-data" data-q="BaSO₄ — цвет и растворимость?" data-a="Белый, нерастворим в кислотах."></span>
+                <span class="fc-data" data-q="AgCl — цвет и растворимость?" data-a="Белый творожистый, нерастворим в кислотах."></span>
+                <span class="fc-data" data-q="Zn(OH)₂ — свойство?" data-a="Растворим в избытке щёлочи (амфотерный)."></span>
+                <span class="fc-data" data-q="Al(OH)₃ — свойство?" data-a="Растворим в избытке щёлочи (амфотерный)."></span>
+                <span class="fc-data" data-q="H₂SiO₃ — цвет и консистенция?" data-a="Белый студенистый осадок."></span>
+                <span class="fc-data" data-q="Cu₂O — цвет?" data-a="Красный (кирпично-красный)."></span>
+                <span class="fc-data" data-q="MnO₂ — цвет?" data-a="Черно-коричневый."></span>
+                <span class="fc-data" data-q="Cr(OH)₂ — цвет?" data-a="Жёлтый." data-hint="Гидроксид хрома(II)."></span>
+                <span class="fc-data" data-q="Cr(OH)₃ — цвет?" data-a="Зелёный." data-hint="Гидроксид хрома(III)."></span>
+                <span class="fc-data" data-q="BaSO₃ — цвет и растворимость?" data-a="Белый, растворим в кислотах."></span>
+                <span class="fc-data" data-q="BaCO₃ — цвет и растворимость?" data-a="Белый, растворим в кислотах."></span>
+                <span class="fc-data" data-q="CaCO₃ — цвет и растворимость?" data-a="Белый, растворим в кислотах."></span>
+                <span class="fc-data" data-q="Mg(OH)₂ — цвет и растворимость?" data-a="Белый, нерастворим в щелочах."></span>
+                <span class="fc-data" data-q="ZnCO₃ — цвет?" data-a="Белый."></span>
+                <span class="fc-data" data-q="AlPO₄ — цвет?" data-a="Белый."></span>
+                <span class="fc-data" data-q="CuCl — цвет?" data-a="Белый."></span>
+
+                <!-- ГАЗЫ (18) -->
+                <span class="fc-data" data-q="SO₂ — цвет и запах?" data-a="Бесцветный, резкий запах горелой спички."></span>
+                <span class="fc-data" data-q="NH₃ — цвет и запах?" data-a="Бесцветный, резкий запах."></span>
+                <span class="fc-data" data-q="H₂S — цвет и запах?" data-a="Бесцветный, запах тухлых яиц."></span>
+                <span class="fc-data" data-q="CO₂ — цвет и запах?" data-a="Бесцветный, без запаха."></span>
+                <span class="fc-data" data-q="NO — цвет и что происходит на воздухе?" data-a="Бесцветный, без запаха. Буреет: 2NO+O₂→2NO₂."></span>
+                <span class="fc-data" data-q="NO₂ — цвет и запах?" data-a="Бурый, резкий запах."></span>
+                <span class="fc-data" data-q="N₂O — цвет, запах, название?" data-a="Бесцветный, сладковатый. Веселящий газ."></span>
+                <span class="fc-data" data-q="Cl₂ — цвет и запах?" data-a="Жёлто-зелёный, резкий удушливый."></span>
+                <span class="fc-data" data-q="O₃ — цвет и запах?" data-a="Голубой, резкий запах."></span>
+                <span class="fc-data" data-q="CO — цвет, запах, опасность?" data-a="Бесцветный, без запаха. Угарный газ — ядовит!"></span>
+                <span class="fc-data" data-q="COCl₂ — цвет, запах, название?" data-a="Бесцветный, запах прелого сена. Фосген."></span>
+                <span class="fc-data" data-q="N₂ — цвет и запах?" data-a="Бесцветный, без запаха."></span>
+                <span class="fc-data" data-q="H₂ — цвет и запах?" data-a="Бесцветный, без запаха."></span>
+                <span class="fc-data" data-q="O₂ — цвет и запах?" data-a="Бесцветный, без запаха."></span>
+                <span class="fc-data" data-q="HCl — цвет и запах?" data-a="Бесцветный, резкий запах."></span>
+                <span class="fc-data" data-q="HF — цвет и запах?" data-a="Бесцветный, резкий запах."></span>
+                <span class="fc-data" data-q="Какой газ имеет запах горелой спички?" data-a="SO₂ (сернистый газ)."></span>
+                <span class="fc-data" data-q="Какой газ имеет запах тухлых яиц?" data-a="H₂S (сероводород)."></span>
+
+                <!-- ЖИДКОСТИ и РАСТВОРЫ (5) -->
+                <span class="fc-data" data-q="Br₂(ж) — цвет?" data-a="Бурая жидкость." data-hint="Бром — единственная неметалл-жидкость при н.у."></span>
+                <span class="fc-data" data-q="K₂CrO₄(р-р) — цвет?" data-a="Жёлтый раствор." data-hint="Хромат калия."></span>
+                <span class="fc-data" data-q="K₂Cr₂O₇(р-р) — цвет?" data-a="Оранжевый раствор." data-hint="Дихромат калия."></span>
+                <span class="fc-data" data-q="Mn₂O₇(ж) — цвет?" data-a="Зелёная маслянистая жидкость." data-hint="Оксид марганца(VII)."></span>
+                <span class="fc-data" data-q="CuCl₂(р-р) — цвет?" data-a="Голубой (сине-зелёный) раствор."></span>
+            </div>
+
+            <!-- Виджет флэш-карточек (идентичен предыдущему) -->
+            <div class="fc-section">
+                <div class="fc-header">
+                    <div class="fc-title">🃏 Осадки, газы, жидкости — флэш-карточки</div>
+                    <div class="fc-sub">Нажми на карточку или Space, чтобы перевернуть.<br>→ Знаю &nbsp;&nbsp; ← Не знаю</div>
+                </div>
+                <div id="fc-empty" class="fc-empty">Нет карточек. Обновите страницу.</div>
+                <div id="fc-card-area">
+                    <div class="fc-stats">
+                        <div>✅ Знаю: <span id="fc-known">0</span></div>
+                        <div>❌ Не знаю: <span id="fc-unknown">0</span></div>
+                    </div>
+                    <div class="fc-counter" id="fc-counter">1 / 55</div>
+                    <div class="fc-perspective" onclick="flipCard()">
+                        <div class="fc-inner" id="fc-inner">
+                            <div class="fc-face fc-front">
+                                <div class="fc-tag">ВОПРОС</div>
+                                <div id="fc-front">Загрузка…</div>
+                            </div>
+                            <div class="fc-face fc-back">
+                                <div class="fc-back-tag">ОТВЕТ</div>
+                                <div id="fc-back">Загрузка…</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="fc-flip-btn" id="fc-flip-btn" onclick="flipCard()">🔄 Перевернуть</button>
+                    <div class="fc-btn-row" id="fc-btn-row" style="display:none">
+                        <button class="fc-btn-know" onclick="markKnown()">✅ Знаю →</button>
+                        <button class="fc-btn-dontknow" onclick="markUnknown()">❌ Не знаю ←</button>
+                    </div>
+                    <div class="fc-keys">Space — перевернуть &nbsp;·&nbsp; → знаю &nbsp;·&nbsp; ← не знаю</div>
+                </div>
+                <div id="fc-result" class="fc-result">
+                    <h3>🎉 Раунд завершён!</h3>
+                    <div class="fc-res-row">
+                        <div class="fc-res-card"><div class="fc-res-num fc-res-known" style="color:#1D9E75">0</div><div class="fc-res-lbl">ЗНАЮ</div></div>
+                        <div class="fc-res-card"><div class="fc-res-num fc-res-unknown" style="color:#C0392B">0</div><div class="fc-res-lbl">НЕ ЗНАЮ</div></div>
+                    </div>
+                    <div class="fc-restart-row">
+                        <button class="fc-restart-btn" onclick="repeatUnknown()">🔁 Повторить незнакомые</button>
+                        <button class="fc-restart-btn primary" onclick="restartAll()">▶ Все карточки заново</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════ PRACTICE 50 REACTIONS ═══════════════════ -->
+        <section class="section fade-in" id="practice">
+            <div class="section-header">
+                <div class="section-num">3</div>
+                <h2 class="section-title">📝 Большой практикум — 50 реакций</h2>
+            </div>
+
+            <div class="pt-trainer" id="pt-trainer">
+                <div class="pt-top" id="pt-top-free">
+                    <div class="pt-title">📝 Практикум: допиши реакцию</div>
+                    <div style="display:flex;gap:8px;align-items:center">
+                        <div style="font-family:var(--mono);font-size:12px;color:var(--ink3);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 11px" id="pt-count-free">1 / 50</div>
+                        <button class="pt-reveal-btn" style="margin-top:0;padding:7px 16px;font-size:13px" onclick="PT_startTest()">▶ Начать тест</button>
+                    </div>
+                </div>
+                <div class="pt-stats" id="pt-stats" style="display:none">
+                    <div class="pt-stat"><span class="pt-stat-label">Время</span><span class="pt-stat-val" id="pt-timer">00:00</span></div>
+                    <div class="pt-stat"><span class="pt-stat-label">Выполнено</span><span class="pt-stat-val" id="pt-done">0 / 50</span></div>
+                    <div class="pt-stat"><span class="pt-stat-label">Знал</span><span class="pt-stat-val" style="color:#6ee7b7" id="pt-correct-cnt">0</span></div>
+                    <div class="pt-stat"><span class="pt-stat-label">Не знал</span><span class="pt-stat-val" style="color:#fca5a5" id="pt-wrong-cnt">0</span></div>
+                    <button class="pt-nav-btn small" style="margin-left:auto;" onclick="PT_endTest()">✕ Завершить</button>
+                </div>
+                <div id="pt-question-area">
+                    <div class="pt-block-tag" id="pt-block-tag">Блок А</div>
+                    <div class="pt-card">
+                        <div style="font-size:11px;font-family:var(--mono);color:var(--ink3);margin-bottom:4px" id="pt-task-lbl">Реакция 1 из 50</div>
+                        <div class="pt-eq" id="pt-eq">SO₃ + H₂O →</div>
+                        <div style="font-size:12px;color:var(--ink3);margin-top:4px;font-style:italic">Допиши правую часть и расставь коэффициенты, затем проверь себя</div>
+                        <button class="pt-reveal-btn" id="pt-reveal-btn" onclick="PT_reveal()">▶ Показать ответ</button>
+                        <div class="pt-answer" id="pt-answer">
+                            <div class="pt-ans-label">Ответ</div>
+                            <div class="pt-ans-eq" id="pt-ans-eq"></div>
+                            <div class="pt-ans-note" id="pt-ans-note"></div>
+                        </div>
+                        <div class="pt-rating" id="pt-rating">
+                            <button class="pt-btn-dontknow" onclick="PT_mark(false)">✗ Не знал</button>
+                            <button class="pt-btn-know" onclick="PT_mark(true)">✓ Знал</button>
+                        </div>
+                    </div>
+                    <div id="pt-repeat-notice" class="pt-repeat-notice" style="display:none"></div>
+                    <div class="pt-feedback" id="pt-feedback"></div>
+                    <div class="pt-nav" id="pt-nav">
+                        <button class="pt-nav-btn" onclick="PT_prev()">← Назад</button>
+                        <div class="pt-progress-wrap">
+                            <div class="pt-progress-num" id="pt-progress-num">1 / 50</div>
+                            <div class="pt-progress-bar"><div class="pt-progress-fill" id="pt-progress-fill" style="width:2%"></div></div>
+                        </div>
+                        <button class="pt-nav-btn" onclick="PT_next()">Вперёд →</button>
+                    </div>
+                </div>
+                <div id="pt-results" style="display:none"></div>
+            </div>
+        </section>
+
+    </div><!-- /shell -->
+
+    <button id="back-top" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+    <script>
+        /* ══ FADE IN ══ */
+        (function() {
+            var io = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting) { e.target.classList.add('visible');
+                        io.unobserve(e.target); }
+                });
+            }, { threshold: .08 });
+            document.querySelectorAll('.fade-in').forEach(function(el) { io.observe(el); });
+        })();
+
+        /* ══ BACK TO TOP ══ */
+        window.addEventListener('scroll', function() {
+            var s = document.documentElement.scrollTop || document.body.scrollTop;
+            var bt = document.getElementById('back-top');
+            bt.classList.toggle('visible', s > 300);
+        });
+
+        /* ══ FLASHCARDS ══ */
+        var deck = [],
+            cur = 0,
+            flipped = false,
+            known = [],
+            unknown = [];
+        var _sr = {};
+        try { _sr = JSON.parse(localStorage.getItem('fc_sr_oxides2') || '{}'); } catch (x) {}
+
+        function _srSave() { try { localStorage.setItem('fc_sr_oxides2', JSON.stringify(_sr)); } catch (x) {} }
+
+        function _srKey(q) { return q.slice(0, 40); }
+
+        function _srGet(q) { return _sr[_srKey(q)] || { n: 1, ef: 2.5, due: 0 }; }
+
+        function _srUpd(q, ok) {
+            var k = _srKey(q),
+                c = _srGet(q);
+            if (ok) { c.n = Math.max(1, Math.round(c.n * c.ef));
+                c.ef = Math.max(1.3, c.ef + 0.1); } else { c.n = 1;
+                c.ef = Math.max(1.3, c.ef - 0.2); }
+            c.due = Date.now() + c.n * 86400000;
+            _sr[k] = c;
+            _srSave();
+        }
+
+        function _srBadge(q) {
+            var c = _srGet(q),
+                d = Math.round((c.due - Date.now()) / 86400000);
+            if (c.n <= 1) return '🆕 новая';
+            return d < 0 ? ('⏰ просрочена ' + (-d) + 'д') : ('📅 через ' + d + 'д');
+        }
+
+        function shuffle(arr) {
+            for (var i = arr.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1));
+                var t = arr[i];
+                arr[i] = arr[j];
+                arr[j] = t; }
+        }
+
+        function buildDeck() {
+            deck = Array.from(document.querySelectorAll('.fc-data')).map(function(el) {
+                return { q: el.dataset.q, a: el.dataset.a, hint: el.dataset.hint || '' };
+            });
+            shuffle(deck);
+            known = [];
+            unknown = [];
+            cur = 0;
+            flipped = false;
+            document.getElementById('fc-result').style.display = 'none';
+            renderCard();
+        }
+
+        function renderCard() {
+            if (deck.length === 0) { document.getElementById('fc-empty').style.display = 'block';
+                document.getElementById('fc-card-area').style.display = 'none'; return; }
+            document.getElementById('fc-empty').style.display = 'none';
+            document.getElementById('fc-card-area').style.display = 'block';
+            var card = deck[cur];
+            document.getElementById('fc-front').innerHTML = card.q;
+            document.getElementById('fc-back').innerHTML = card.a + (card.hint ? '<div class="fc-hint">' + card.hint +
+                '</div>' : '') + '<div class="fc-sr-badge">' + _srBadge(card.q) + '</div>';
+            document.getElementById('fc-inner').classList.remove('flipped');
+            flipped = false;
+            document.getElementById('fc-counter').textContent = (cur + 1) + ' / ' + deck.length;
+            document.getElementById('fc-known').textContent = known.length;
+            document.getElementById('fc-unknown').textContent = unknown.length;
+            document.getElementById('fc-btn-row').style.display = 'none';
+            document.getElementById('fc-flip-btn').style.display = 'flex';
+        }
+
+        function flipCard() {
+            document.getElementById('fc-inner').classList.toggle('flipped');
+            flipped = !flipped;
+            if (flipped) { document.getElementById('fc-btn-row').style.display = 'flex';
+                document.getElementById('fc-flip-btn').style.display = 'none'; }
+        }
+
+        function markKnown() { _srUpd(deck[cur].q, true);
+            known.push(deck[cur]);
+            cur++;
+            if (cur >= deck.length) { showResult(); return; }
+            flipped = false;
+            renderCard(); }
+
+        function markUnknown() { _srUpd(deck[cur].q, false);
+            unknown.push(deck[cur]);
+            cur++;
+            if (cur >= deck.length) { showResult(); return; }
+            flipped = false;
+            renderCard(); }
+
+        function showResult() {
+            document.getElementById('fc-card-area').style.display = 'none';
+            var res = document.getElementById('fc-result');
+            res.style.display = 'block';
+            res.querySelector('.fc-res-known').textContent = known.length;
+            res.querySelector('.fc-res-unknown').textContent = unknown.length;
+        }
+
+        function repeatUnknown() { deck = unknown.slice();
+            shuffle(deck);
+            known = [];
+            unknown = [];
+            cur = 0;
+            flipped = false;
+            document.getElementById('fc-result').style.display = 'none';
+            renderCard(); }
+
+        function restartAll() { buildDeck(); }
+
+        document.addEventListener('keydown', function(e) {
+            if (document.activeElement.tagName === 'TEXTAREA' || document.activeElement.tagName === 'INPUT') return;
+            if (e.key === ' ') { e.preventDefault(); if (!flipped) flipCard(); }
+            if (e.key === 'ArrowRight' && flipped) markKnown();
+            if (e.key === 'ArrowLeft' && flipped) markUnknown();
+        });
+
+        /* ══ PRACTICE TRAINER (50 reactions) — код полностью сохранён ══ */
+        var PT_TASKS = [
+            { n: 1, block: 'А', btitle: 'Кислотные оксиды + H₂O', q: 'SO₃ + H₂O →',
+            a: 'SO₃ + H₂O → H₂SO₄', note: 'Основа контактного производства H₂SO₄.' },
+            { n: 2, block: 'А', btitle: 'Кислотные оксиды + H₂O', q: 'SO₂ + H₂O →',
+                a: 'SO₂ + H₂O ⇄ H₂SO₃', note: 'H₂SO₃ — слабая неустойчивая кислота.' },
+            { n: 3, block: 'А', btitle: 'Кислотные оксиды + H₂O', q: 'CO₂ + H₂O →',
+                a: 'CO₂ + H₂O ⇄ H₂CO₃', note: 'H₂CO₃ — угольная кислота, неустойчива.' },
+            { n: 4, block: 'А', btitle: 'Кислотные оксиды + H₂O', q: 'P₂O₅ + H₂O →',
+                a: 'P₂O₅ + 3H₂O → 2H₃PO₄', note: 'P₂O₅ — мощный осушитель.' },
+            { n: 5, block: 'А', btitle: 'Кислотные оксиды + H₂O', q: 'N₂O₅ + H₂O →',
+                a: 'N₂O₅ + H₂O → 2HNO₃', note: 'Ангидрид азотной кислоты.' },
+            { n: 6, block: 'А', btitle: 'Кислотные оксиды + H₂O', q: 'N₂O₃ + H₂O →',
+                a: 'N₂O₃ + H₂O → 2HNO₂', note: 'Азотистая кислота неустойчива.' },
+            { n: 7, block: 'А', btitle: 'Кислотные оксиды + H₂O', q: 'NO₂ + H₂O → (н.у.)',
+                a: '2NO₂ + H₂O → HNO₂ + HNO₃\n(при нагревании: 3NO₂ + H₂O →(t°) 2HNO₃ + NO↑)',
+                note: 'Диспропорционирование N⁺⁴ → N⁺³ + N⁺⁵.' },
+            { n: 8, block: 'А', btitle: 'Кислотные оксиды + H₂O', q: 'SiO₂ + H₂O → (идёт?)',
+                a: 'SiO₂ + H₂O ↛ — реакция НЕ идёт!', note: 'H₂SiO₃ нерастворима → реакция невозможна.' },
+            { n: 9, block: 'Б', btitle: 'Кислотные оксиды + оксиды', q: 'CaO + CO₂ →',
+                a: 'CaO + CO₂ → CaCO₃', note: 'Основный + кислотный оксид = соль.' },
+            { n: 10, block: 'Б', btitle: 'Кислотные оксиды + оксиды', q: 'Na₂O + SiO₂ →(t°)',
+                a: 'Na₂O + SiO₂ →(t°) Na₂SiO₃', note: 'Жидкое стекло — силикат натрия.' },
+            { n: 11, block: 'Б', btitle: 'Кислотные оксиды + оксиды', q: 'K₂O + P₂O₅ →',
+                a: '3K₂O + P₂O₅ → 2K₃PO₄', note: 'Ортофосфат калия.' },
+            { n: 12, block: 'Б', btitle: 'Кислотные оксиды + оксиды', q: 'Na₂O + NO₂ →',
+                a: 'Na₂O + 2NO₂ → NaNO₂ + NaNO₃', note: 'Диспропорционирование NO₂.' },
+            { n: 13, block: 'Б', btitle: 'Кислотные оксиды + щёлочи', q: 'NaOH + SO₂ →',
+                a: '2NaOH + SO₂ → Na₂SO₃ + H₂O\n(изб. SO₂: NaOH + SO₂ → NaHSO₃)',
+            note: 'Средняя соль при 2:1, кислая при 1:1.' },
+            { n: 14, block: 'Б', btitle: 'Кислотные оксиды + щёлочи', q: 'NaOH + CO₂ → (норма и избыток)',
+                a: '2NaOH + CO₂ → Na₂CO₃ + H₂O\nNaOH + CO₂(изб.) → NaHCO₃',
+            note: '2:1 → средняя, 1:1 → кислая.' },
+            { n: 15, block: 'Б', btitle: 'Кислотные оксиды + щёлочи', q: 'KOH(изб.) + P₂O₅ →',
+                a: '6KOH + P₂O₅ → 2K₃PO₄ + 3H₂O', note: 'Кислотный оксид + щёлочь = соль + вода.' },
+            { n: 16, block: 'Б', btitle: 'Кислотные оксиды + соли', q: 'SiO₂ + CaCO₃ →(t°)',
+                a: 'SiO₂ + CaCO₃ →(t°) CaSiO₃ + CO₂↑', note: 'Нелетучий SiO₂ вытесняет CO₂.' },
+            { n: 17, block: 'Б', btitle: 'Кислотные оксиды + соли', q: 'Na₂SiO₃(р-р) + CO₂ + H₂O →',
+                a: 'Na₂SiO₃(р-р) + CO₂ + H₂O → Na₂CO₃ + H₂SiO₃↓', note: 'H₂CO₃ сильнее H₂SiO₃.' },
+            { n: 18, block: 'Б', btitle: 'Кислотные оксиды + HF', q: 'SiO₂ + HF →',
+                a: 'SiO₂ + 4HF → SiF₄ + 2H₂O', note: 'Травление стекла — единственное исключение.' },
+            { n: 19, block: 'В', btitle: 'Основные оксиды + H₂O', q: 'CaO + H₂O →',
+                a: 'CaO + H₂O → Ca(OH)₂', note: 'Гашение извести.' },
+            { n: 20, block: 'В', btitle: 'Основные оксиды + H₂O', q: 'Na₂O + H₂O →',
+                a: 'Na₂O + H₂O → 2NaOH', note: 'Бурная экзотермическая реакция.' },
+            { n: 21, block: 'В', btitle: 'Основные оксиды + кислоты', q: 'CaO + H₂SO₄ →',
+                a: 'CaO + H₂SO₄ → CaSO₄ + H₂O', note: 'Основный оксид + кислота = соль + вода.' },
+            { n: 22, block: 'В', btitle: 'Основные оксиды + кислоты', q: 'CuO + HCl →',
+                a: 'CuO + 2HCl → CuCl₂ + H₂O', note: 'CuO чёрный → раствор CuCl₂ голубой.' },
+            { n: 23, block: 'В', btitle: 'Основные оксиды + кислоты', q: 'Fe₃O₄ + HCl →',
+                a: 'Fe₃O₄ + 8HCl → FeCl₂ + 2FeCl₃ + 4H₂O', note: 'Fe₃O₄ = FeO·Fe₂O₃ → смесь солей.' },
+            { n: 24, block: 'В', btitle: 'Основные оксиды + HNO₃(конц.)', q: 'FeO + HNO₃(конц.) →',
+                a: 'FeO + 4HNO₃(конц.) → Fe(NO₃)₃ + NO₂↑ + 2H₂O', note: 'ОВР: Fe²⁺ → Fe³⁺, N⁺⁵ → N⁺⁴.' },
+            { n: 25, block: 'В', btitle: 'Основные оксиды + H₂SO₄(конц.)', q: 'Cu₂O + H₂SO₄(конц.) →',
+                a: 'Cu₂O + 3H₂SO₄(конц.) → 2CuSO₄ + SO₂↑ + 3H₂O', note: 'Cu⁺ → Cu²⁺, S⁺⁶ → S⁺⁴.' },
+            { n: 26, block: 'В', btitle: 'Основные оксиды + амфотерные', q: 'Na₂O + Al₂O₃ →(t°)',
+                a: 'Na₂O + Al₂O₃ →(t°) 2NaAlO₂', note: 'Метаалюминат натрия.' },
+            { n: 27, block: 'В', btitle: 'Основные оксиды + амфотерные', q: 'CaO + ZnO →(t°)',
+                a: 'CaO + ZnO →(t°) CaZnO₂', note: 'Цинкат кальция.' },
+            { n: 28, block: 'В', btitle: 'Термическое разложение', q: 'HgO →(t°)',
+                a: '2HgO →(t°) 2Hg + O₂↑', note: 'Оксиды после Cu разлагаются.' },
+            { n: 29, block: 'Г', btitle: 'Амфотерные оксиды + кислоты', q: 'ZnO + HCl →',
+                a: 'ZnO + 2HCl → ZnCl₂ + H₂O', note: 'С кислотой — как основный.' },
+            { n: 30, block: 'Г', btitle: 'Амфотерные оксиды + кислоты', q: 'Al₂O₃ + H₂SO₄ →',
+                a: 'Al₂O₃ + 3H₂SO₄ → Al₂(SO₄)₃ + 3H₂O', note: 'Сульфат алюминия.' },
+            { n: 31, block: 'Г', btitle: 'Амфотерные оксиды + щёлочь (р-р)', q: 'ZnO + NaOH(р-р) + H₂O →',
+                a: 'ZnO + 2NaOH(р-р) + H₂O → Na₂[Zn(OH)₄]', note: 'Гидроксокомплекс — тетрагидроксоцинкат.' },
+            { n: 32, block: 'Г', btitle: 'Амфотерные оксиды + щёлочь (расплав)', q: 'ZnO + NaOH(расплав) →(t°)',
+                a: 'ZnO + 2NaOH →(t°) Na₂ZnO₂ + H₂O', note: 'Средняя соль — цинкат натрия.' },
+            { n: 33, block: 'Г', btitle: 'Амфотерные оксиды + щёлочь (р-р)', q: 'Al₂O₃ + KOH(р-р) + H₂O →',
+                a: 'Al₂O₃ + 2KOH(р-р) + 3H₂O → 2K[Al(OH)₄]', note: 'Тетрагидроксоалюминат калия.' },
+            { n: 34, block: 'Г', btitle: 'Амфотерные оксиды + щёлочь (расплав)', q: 'Al₂O₃ + KOH(расплав) →(t°)',
+                a: 'Al₂O₃ + 2KOH →(t°) 2KAlO₂ + H₂O', note: 'Метаалюминат калия.' },
+            { n: 35, block: 'Г', btitle: 'Амфотерные оксиды + щёлочь', q: 'Fe₂O₃ + NaOH →(t°, расплав)',
+                a: 'Fe₂O₃ + 2NaOH →(t°) 2NaFeO₂ + H₂O', note: 'Fe₂O₃ НЕ реагирует с р-ром NaOH!' },
+            { n: 36, block: 'Г', btitle: 'Амфотерные оксиды + щёлочь', q: 'Cr₂O₃ + NaOH →(t°, расплав)',
+                a: 'Cr₂O₃ + 2NaOH →(t°) 2NaCrO₂ + H₂O', note: 'Метахромит натрия.' },
+            { n: 37, block: 'Г', btitle: 'Амфотерные оксиды + кислотные', q: 'Al₂O₃ + SO₃ →',
+                a: 'Al₂O₃ + 3SO₃ → Al₂(SO₄)₃', note: 'С сильными кислотными оксидами.' },
+            { n: 38, block: 'Г', btitle: 'Амфотерные оксиды + карбонаты', q: 'ZnO + Na₂CO₃ →(t°)',
+                a: 'ZnO + Na₂CO₃ →(t°) Na₂ZnO₂ + CO₂↑', note: 'Вытеснение CO₂ при сплавлении.' },
+            { n: 39, block: 'Д', btitle: 'Окисление кислородом', q: 'SO₂ + O₂ →(кат., t°)',
+                a: '2SO₂ + O₂ ⇄(V₂O₅, 450°C) 2SO₃', note: 'Ключевая стадия производства H₂SO₄.' },
+            { n: 40, block: 'Д', btitle: 'Окисление кислородом', q: 'NO + O₂ →',
+                a: '2NO + O₂ → 2NO₂', note: 'NO моментально буреет на воздухе.' },
+            { n: 41, block: 'Д', btitle: 'Окисление кислородом', q: 'FeO + O₂ →(t°)',
+                a: '4FeO + O₂ →(t°) 2Fe₂O₃', note: 'Fe²⁺ → Fe³⁺.' },
+            { n: 42, block: 'Д', btitle: 'Окисление кислородом', q: 'Cu₂O + O₂ →(t°)',
+                a: '2Cu₂O + O₂ →(t°) 4CuO', note: 'Cu⁺ → Cu²⁺, красный → чёрный.' },
+            { n: 43, block: 'Д', btitle: 'Восстановление CO', q: 'Fe₂O₃ + CO →(t°)',
+                a: 'Fe₂O₃ + 3CO →(t°) 2Fe + 3CO₂', note: 'Доменный процесс.' },
+            { n: 44, block: 'Д', btitle: 'Реакции с C', q: 'CO₂ + C →(t°)',
+                a: 'CO₂ + C →(t°) 2CO', note: 'Сопропорционирование: C⁰ + C⁴⁺ → 2C²⁺.' },
+            { n: 45, block: 'Д', btitle: 'Восстановление C', q: 'ZnO + C →(t°)',
+                a: 'ZnO + C →(t°) Zn + CO', note: 'Восстановление цинка коксом.' },
+            { n: 46, block: 'Д', btitle: 'Реакции с Mg', q: 'Mg + SiO₂ →(t°) (недостаток Mg)',
+                a: '2Mg + SiO₂ →(t°) 2MgO + Si', note: 'Mg — сильный восстановитель.' },
+            { n: 47, block: 'Д', btitle: 'Разложение гидроксидов', q: 'Al(OH)₃ →(t°)',
+                a: '2Al(OH)₃ →(t°) Al₂O₃ + 3H₂O', note: 'Получение амфотерных оксидов.' },
+            { n: 48, block: 'Д', btitle: 'Разложение нитратов', q: 'Cu(NO₃)₂ →(t°)',
+                a: '2Cu(NO₃)₂ →(t°) 2CuO + 4NO₂↑ + O₂↑', note: 'Нитраты средней активности → оксид + NO₂ + O₂.' },
+            { n: 49, block: 'Д', btitle: 'Синтез метанола', q: 'CO + H₂ →(кат., t°, p)',
+                a: 'CO + 2H₂ →(кат., t°, p) CH₃OH', note: 'Промышленный синтез метанола.' },
+            { n: 50, block: 'Д', btitle: 'Металл + NO₂', q: 'Cu + NO₂ →(t°)',
+                a: '4Cu + 2NO₂ →(t°) 4CuO + N₂', note: 'Cu⁰→Cu²⁺, N⁺⁴→N⁰.' }
+        ];
+
+        var PT_cur = 0,
+            PT_mode = 'free',
+            PT_revealed = false;
+        var PT_correct = [],
+            PT_wrong = [],
+            PT_repeatQueue = [],
+            PT_repeatPos = 0,
+            PT_repeatCorrectPass = [];
+        var PT_elapsed = 0,
+            PT_timerInterval = null,
+            PT_repeatCompleted = false;
+
+        function PT_timerStart() {
+            clearInterval(PT_timerInterval);
+            PT_timerInterval = setInterval(function() {
+                PT_elapsed++;
+                var m = Math.floor(PT_elapsed / 60),
+                    s = PT_elapsed % 60;
+                var el = document.getElementById('pt-timer');
+                if (el) el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+            }, 1000);
+        }
+
+        function PT_timerStop() { clearInterval(PT_timerInterval); }
+
+        function PT_render() {
+            var task = PT_TASKS[PT_cur];
+            PT_revealed = false;
+            var blockColors = { 'А': '#4E35A0', 'Б': '#1D9E75', 'В': '#BA7517', 'Г': '#A32D2D', 'Д': '#1a5276' };
+            var btag = document.getElementById('pt-block-tag');
+            if (btag) { btag.textContent = 'Блок ' + task.block + ' · ' + task.btitle;
+                btag.style.background = blockColors[task.block] || 'var(--p100)';
+                btag.style.color = '#fff';
+                btag.style.borderColor = 'transparent'; }
+            var lbl = document.getElementById('pt-task-lbl');
+            if (lbl) lbl.textContent = 'Реакция ' + task.n + ' из ' + PT_TASKS.length;
+            var eq = document.getElementById('pt-eq');
+            if (eq) eq.textContent = task.q;
+            var ans = document.getElementById('pt-answer');
+            if (ans) ans.classList.remove('open');
+            var rb = document.getElementById('pt-reveal-btn');
+            if (rb) { rb.textContent = '▶ Показать ответ';
+                rb.style.display = 'inline-flex'; }
+            var rating = document.getElementById('pt-rating');
+            if (rating) rating.classList.remove('open');
+            var fb = document.getElementById('pt-feedback');
+            if (fb) { fb.className = 'pt-feedback';
+                fb.textContent = ''; }
+            var pn = document.getElementById('pt-progress-num');
+            if (pn) pn.textContent = (PT_cur + 1) + ' / ' + PT_TASKS.length;
+            var pf = document.getElementById('pt-progress-fill');
+            if (pf) pf.style.width = ((PT_cur + 1) / PT_TASKS.length * 100) + '%';
+            var cf = document.getElementById('pt-count-free');
+            if (cf) cf.textContent = (PT_cur + 1) + ' / ' + PT_TASKS.length;
+        }
+
+        function PT_reveal() {
+            if (PT_revealed) return;
+            PT_revealed = true;
+            var task = PT_TASKS[PT_cur];
+            var ans = document.getElementById('pt-answer');
+            if (ans) ans.classList.add('open');
+            document.getElementById('pt-ans-eq').textContent = task.a;
+            document.getElementById('pt-ans-note').textContent = task.note;
+            var rb = document.getElementById('pt-reveal-btn');
+            if (rb) rb.style.display = 'none';
+            if (PT_mode !== 'free') {
+                var rating = document.getElementById('pt-rating');
+                if (rating) rating.classList.add('open');
+            }
+        }
+
+        function PT_mark(knew) {
+            if (PT_mode === 'test') { if (knew) PT_correct.push(PT_cur);
+                else PT_wrong.push(PT_cur); } else if (PT_mode === 'repeat') { if (knew) PT_repeatCorrectPass.push(PT_cur); }
+            PT_updateStats();
+            var rating = document.getElementById('pt-rating');
+            if (rating) rating.classList.remove('open');
+            var fb = document.getElementById('pt-feedback');
+            if (fb) {
+                if (knew) { fb.className = 'pt-feedback good';
+                    fb.textContent = '✓ Отлично! Идём дальше.'; } else { fb.className = 'pt-feedback bad';
+                    fb.textContent = '✗ Запомни эту реакцию — она попадёт в повторение.'; }
+            }
+            setTimeout(function() { PT_nextAuto(); }, 800);
+        }
+
+        function PT_nextAuto() {
+            if (PT_mode === 'test') PT_testNext();
+            else if (PT_mode === 'repeat') PT_repeatNext();
+        }
+
+        function PT_updateStats() {
+            var done = PT_correct.length + PT_wrong.length;
+            var dc = document.getElementById('pt-done');
+            if (dc) dc.textContent = done + ' / ' + PT_TASKS.length;
+            var cc = document.getElementById('pt-correct-cnt');
+            if (cc) cc.textContent = PT_correct.length;
+            var wc = document.getElementById('pt-wrong-cnt');
+            if (wc) wc.textContent = PT_wrong.length;
+        }
+
+        function PT_startTest() {
+            PT_mode = 'test';
+            PT_elapsed = 0;
+            PT_correct = [];
+            PT_wrong = [];
+            PT_repeatCompleted = false;
+            PT_cur = 0;
+            document.getElementById('pt-top-free').style.display = 'none';
+            document.getElementById('pt-stats').style.display = 'flex';
+            document.getElementById('pt-nav').style.display = 'none';
+            var rn = document.getElementById('pt-repeat-notice');
+            if (rn) rn.style.display = 'none';
+            document.getElementById('pt-results').style.display = 'none';
+            document.getElementById('pt-question-area').style.display = 'block';
+            PT_timerStart();
+            PT_updateStats();
+            PT_render();
+        }
+
+        function PT_testNext() {
+            var nextIdx = PT_cur + 1;
+            if (nextIdx >= PT_TASKS.length) {
+                PT_timerStop();
+                if (PT_wrong.length > 0) PT_startRepeat();
+                else PT_showResults();
+                return;
+            }
+            PT_cur = nextIdx;
+            PT_render();
+        }
+
+        function PT_endTest() { PT_timerStop();
+            PT_showResults(); }
+
+        function PT_startRepeat() {
+            PT_mode = 'repeat';
+            PT_repeatQueue = PT_wrong.slice();
+            PT_repeatPos = 0;
+            PT_repeatCorrectPass = [];
+            PT_cur = PT_repeatQueue[0];
+            var rn = document.getElementById('pt-repeat-notice');
+            if (rn) { rn.style.display = 'block';
+                rn.textContent = 'Повторение ошибок: ' + PT_repeatQueue.length + ' реакци' + (PT_repeatQueue.length === 1 ?
+                    'я' : 'й') + '. Ответь правильно, чтобы убрать из повторения.'; }
+            var timer = document.getElementById('pt-timer');
+            if (timer) timer.textContent = 'Повтор';
+            document.getElementById('pt-results').style.display = 'none';
+            document.getElementById('pt-question-area').style.display = 'block';
+            PT_render();
+        }
+
+        function PT_repeatNext() {
+            PT_repeatPos++;
+            if (PT_repeatPos >= PT_repeatQueue.length) {
+                PT_repeatQueue = PT_repeatQueue.filter(function(i) { return PT_repeatCorrectPass.indexOf(i) === -1; });
+                PT_repeatCorrectPass = [];
+                if (PT_repeatQueue.length === 0) { PT_repeatCompleted = true;
+                    PT_showResults(); return; }
+                PT_repeatPos = 0;
+                var rn = document.getElementById('pt-repeat-notice');
+                if (rn) rn.textContent = 'Повторение ошибок: ' + PT_repeatQueue.length + ' осталось.';
+            }
+            PT_cur = PT_repeatQueue[PT_repeatPos];
+            PT_render();
+        }
+
+        function PT_showResults() {
+            PT_mode = 'results';
+            PT_timerStop();
+            var total = PT_TASKS.length,
+                correctCount = PT_correct.length,
+                wrongCount = PT_wrong.length;
+            var pct = Math.round(correctCount / total * 100);
+            var m = Math.floor(PT_elapsed / 60),
+                s = PT_elapsed % 60;
+            var timeStr = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+            var grade = pct >= 90 ? 'Отлично! 🎉' : pct >= 70 ? 'Хорошо! 👍' : pct >= 50 ? 'Неплохо, но нужно подтянуть 📚' :
+                'Нужно повторить всё ещё раз 💪';
+            var weakBlocks = {};
+            PT_wrong.forEach(function(i) { var b = PT_TASKS[i].block;
+                weakBlocks[b] = (weakBlocks[b] || 0) + 1; });
+            var weakHTML = '';
+            if (Object.keys(weakBlocks).length > 0) {
+                weakHTML = '<div style="margin-top:12px"><div style="font-weight:700;color:var(--ink2);font-size:13px;margin-bottom:4px">Блоки для повторения:</div>';
+                Object.keys(weakBlocks).forEach(function(b) { weakHTML += '<span class="pt-weak-tag">Блок ' + b +
+                        ' — ' + weakBlocks[b] + ' ош.</span>'; });
+                weakHTML += '</div>';
+            }
+            var repeatBtn = '';
+            if (PT_wrong.length > 0 && !PT_repeatCompleted) {
+                repeatBtn = '<button class="pt-reveal-btn" onclick="PT_startRepeat()" style="margin-top:12px;width:100%;justify-content:center">↻ Повторить ошибки (' +
+                    PT_wrong.length + ')</button>';
+            } else if (PT_repeatCompleted) {
+                repeatBtn = '<div style="margin-top:10px;color:var(--green-d);font-weight:700;font-size:13px">✓ Все ошибки исправлены в режиме повторения!</div>';
+            }
+            document.getElementById('pt-question-area').style.display = 'none';
+            document.getElementById('pt-stats').style.display = 'none';
+            var res = document.getElementById('pt-results');
+            res.style.display = 'block';
+            res.innerHTML =
+                '<div class="pt-res-head">' + grade + '</div>' +
+                '<div class="pt-res-sub">Время: ' + timeStr + ' · ' + total + ' реакций</div>' +
+                '<div class="pt-res-grid">' +
+                '<div class="pt-res-card good"><div class="rval">' + correctCount + '</div><div class="rlbl">Знал</div></div>' +
+                '<div class="pt-res-card bad"><div class="rval">' + wrongCount + '</div><div class="rlbl">Не знал</div></div>' +
+                '<div class="pt-res-card"><div class="rval">' + pct + '%</div><div class="rlbl">Результат</div></div>' +
+                '<div class="pt-res-card"><div class="rval">' + total + '</div><div class="rlbl">Реакций</div></div>' +
+                '</div>' +
+                weakHTML + repeatBtn +
+                '<button class="pt-nav-btn" onclick="PT_returnFree()" style="margin-top:10px;width:100%">← Вернуться к просмотру</button>';
+        }
+
+        function PT_returnFree() {
+            PT_mode = 'free';
+            PT_cur = 0;
+            PT_timerStop();
+            document.getElementById('pt-results').style.display = 'none';
+            document.getElementById('pt-question-area').style.display = 'block';
+            document.getElementById('pt-stats').style.display = 'none';
+            document.getElementById('pt-top-free').style.display = 'flex';
+            document.getElementById('pt-nav').style.display = 'flex';
+            var rn = document.getElementById('pt-repeat-notice');
+            if (rn) rn.style.display = 'none';
+            PT_render();
+        }
+
+        function PT_prev() { if (PT_mode !== 'free') return;
+            PT_cur = (PT_cur - 1 + PT_TASKS.length) % PT_TASKS.length;
+            PT_render(); }
+
+        function PT_next() { if (PT_mode !== 'free') return;
+            PT_cur = (PT_cur + 1) % PT_TASKS.length;
+            PT_render(); }
+
+        document.addEventListener('DOMContentLoaded', function() { PT_render(); });
+        if (document.readyState !== 'loading') { PT_render(); }
+
+        /* ══ INIT FLASHCARDS ══ */
+        window.addEventListener('DOMContentLoaded', function() { buildDeck(); });
+        if (document.readyState !== 'loading') { buildDeck(); }
+    </script>
+
+</body>
+</html>
