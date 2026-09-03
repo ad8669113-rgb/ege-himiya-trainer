@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Химическое равновесие — ЕГЭ</title>
+<style>
+:root{
+  --p900:#2D1B69;--p800:#3D2785;--p700:#4E35A0;
+  --p600:#6248C4;--p500:#7B61DB;--p400:#9B84E8;
+  --p300:#BDB2F3;--p200:#DBD5F8;--p100:#F0EEFF;--p50:#F8F7FF;
+  --ink:#1C1B29;--ink2:#3E3C5A;--ink3:#8A88A8;
+  --line:#E2E5EC;--bg:#F6F5FC;--white:#fff;
+  --green:#1D9E75;--green-t:#E1F5EE;--green-d:#085041;
+  --amber:#BA7517;--amber-t:#FAEEDA;--amber-d:#633806;
+  --red:#A32D2D;--red-t:#FCEBEB;--red-d:#7A2020;
+  --r:12px;--r-sm:8px;--r-lg:20px;
+  --shadow:0 1px 3px rgba(20,21,26,.06),0 4px 16px rgba(20,21,26,.06);
+  --shm:0 4px 20px rgba(60,40,160,.12);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+  --h1:#052E16;--h2:#166534;--h3:#16A34A;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px}
+
+/* ── TOPBAR ── */
+#topbar{position:fixed;top:12px;right:16px;z-index:999;display:flex;align-items:center;gap:4px;background:rgba(22,101,52,.13);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(22,101,52,.22);border-radius:999px;padding:5px 10px 5px 6px;box-shadow:0 4px 16px rgba(22,101,52,.18);transition:opacity .2s}
+#topbar:hover{opacity:1}
+.tb-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;border-radius:50%;font-size:15px;color:var(--ink3);cursor:pointer;transition:.12s;flex-shrink:0}
+.tb-btn:hover{background:rgba(22,101,52,.12);color:var(--h2)}
+.tb-sep{width:1px;height:16px;background:rgba(22,101,52,.15);margin:0 2px;flex-shrink:0}
+.tb-prog-wrap{width:52px;height:2px;background:rgba(22,101,52,.15);border-radius:1px;flex-shrink:0}
+.tb-prog-fill{height:2px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;border-radius:1px;transition:width .1s}
+.tb-label{font-family:var(--mono);font-size:10px;color:var(--ink3);padding:0 4px;white-space:nowrap}
+
+/* ── SIDE MENU ── */
+#menu-overlay{display:none;position:fixed;inset:0;background:rgba(5,46,22,.3);z-index:1000}
+#menu-overlay.open{display:block}
+#menu-panel{position:fixed;top:0;left:0;width:300px;height:100vh;background:#fff;border-right:1px solid var(--line);overflow-y:auto;padding:20px;z-index:1001;box-shadow:4px 0 20px rgba(22,101,52,.12);transform:translateX(-100%);transition:transform .3s ease}
+#menu-panel.open{transform:none}
+.mp-title{font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:1.5px;text-transform:uppercase;padding:10px 12px 4px;font-family:var(--mono)}
+.mp-item{padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--ink2);display:flex;gap:10px;align-items:center;margin-bottom:1px;transition:.1s;text-decoration:none}
+.mp-item:hover{background:#F0FDF4;color:var(--h2)}
+.mp-close{background:none;border:none;font-size:20px;color:var(--ink3);cursor:pointer;padding:4px;float:right;margin-bottom:8px}
+
+/* ── PROG BAR ── */
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(22,101,52,.1);z-index:998}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;transition:width .1s}
+
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--h1) 0%,#0F4C26 40%,var(--h2) 72%,var(--h3) 100%);padding:48px 32px 40px;margin:0 -24px 40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;bottom:-30%;left:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(22,163,74,.18) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;top:-20%;right:5%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);border-radius:20px;padding:4px 14px;font-size:12px;font-family:var(--mono);letter-spacing:.6px;margin-bottom:16px}
+.hero h1{font-size:clamp(28px,5vw,46px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#fff;margin-bottom:12px;position:relative;z-index:1;text-wrap:balance}
+.hero h1 em{color:#86EFAC;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.68);line-height:1.7;max-width:540px;margin-bottom:22px;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.hero-chip{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.17);color:rgba(255,255,255,.88);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+
+/* SECTIONS */
+.section{margin-bottom:44px}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--p200)}
+.section-title{font-size:clamp(16px,2.5vw,21px);font-weight:700;color:var(--p800);line-height:1.2;text-wrap:balance}
+.section-pill{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.8px;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+
+h3.sub{font-size:15px;font-weight:700;color:var(--p700);margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+h3.sub::before{content:'';width:3px;height:16px;background:var(--h2);border-radius:2px;flex-shrink:0}
+
+/* BOXES */
+.box{border-radius:var(--r-sm);padding:12px 16px;margin:10px 0;font-size:14px;line-height:1.7}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:var(--amber-t);border-left:4px solid var(--amber);color:var(--amber-d)}
+.box-danger{background:var(--red-t);border-left:4px solid var(--red);color:var(--red-d)}
+.box-success{background:var(--green-t);border-left:4px solid var(--green);color:var(--green-d)}
+.box-green{background:#F0FDF4;border-left:4px solid var(--h3);color:var(--h1)}
+.box-title{font-weight:700;font-size:12px;margin-bottom:5px;text-transform:uppercase;letter-spacing:.6px}
+.box ul,.box ol{padding-left:18px;margin:4px 0}
+.box li{margin:3px 0;font-size:13px}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);margin:12px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:13px}
+th{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-weight:600;padding:9px 12px;text-align:left;font-size:11.5px;letter-spacing:.3px}
+td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.55}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:#F0FDF4}
+td code,th code{font-family:var(--mono);font-size:12px;background:var(--p100);padding:1px 4px;border-radius:3px;color:var(--p800)}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+@media(max-width:680px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* FACTOR CARDS */
+.factor-card{border-radius:var(--r);padding:16px;border:1.5px solid;box-shadow:var(--shadow)}
+.fc-temp{background:#FFF7ED;border-color:#FB923C}
+.fc-pres{background:#EFF6FF;border-color:#60A5FA}
+.fc-conc{background:#F0FDF4;border-color:#4ADE80}
+.fc-cat{background:#FAF5FF;border-color:#C084FC}
+.fc-title{font-weight:800;font-size:14px;margin-bottom:6px}
+.fc-body{font-size:13px;line-height:1.65;color:var(--ink2)}
+.fc-tag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;padding:2px 8px;border-radius:100px;margin-bottom:6px}
+.tag-t{background:#FFEDD5;color:#9A3412}
+.tag-p{background:#DBEAFE;color:#1E40AF}
+.tag-c{background:#DCFCE7;color:#166534}
+.tag-k{background:#F3E8FF;color:#6B21A8}
+
+/* ALGO */
+.algo{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.algo-step{display:flex;gap:10px;align-items:flex-start}
+.algo-n{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-family:var(--mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.algo-text{font-size:13.5px;line-height:1.65;color:var(--ink2)}
+.algo-text strong{color:var(--ink)}
+
+/* NOTE */
+.note{background:linear-gradient(135deg,var(--p100),var(--p50));border:1.5px solid var(--p300);border-radius:var(--r);padding:14px 18px;margin:14px 0}
+.note-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--p600);margin-bottom:6px;font-weight:700}
+.note ul{padding-left:16px}
+.note li{font-size:13px;color:var(--p800);padding:2px 0}
+
+/* MISTAKE / HACK CARDS */
+.cards-row{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.mistake-card{background:var(--red-t);border:1.5px solid #F87171;border-radius:var(--r-sm);padding:12px 16px;font-size:13.5px}
+.mistake-card strong{color:var(--red-d)}
+.hack-card{background:#F0FDF4;border:1.5px solid #4ADE80;border-radius:var(--r-sm);padding:12px 16px;font-size:13.5px}
+.hack-card strong{color:var(--h1)}
+
+/* EGE FORMAT */
+.ege-demo{background:var(--white);border:1.5px solid var(--line);border-radius:var(--r);padding:20px;margin:12px 0;box-shadow:var(--shadow)}
+.ege-eq{font-family:var(--mono);font-size:15px;font-weight:700;text-align:center;padding:12px;background:#F0FDF4;border-radius:8px;margin-bottom:14px;color:var(--h1)}
+.ege-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.ege-cols{grid-template-columns:1fr}}
+.ege-col-title{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;font-family:var(--mono)}
+.ege-row{display:flex;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid var(--line);font-size:13px}
+.ege-row:last-child{border-bottom:none}
+.ege-letter{font-family:var(--mono);font-weight:700;color:var(--h2);min-width:20px}
+.ege-opt{font-size:12px;padding:4px 0;color:var(--ink2)}
+.ege-opt span{font-family:var(--mono);font-weight:700;color:var(--p700);margin-right:4px}
+
+/* SVG GRAPH */
+.graph-wrap{background:var(--white);border:1.5px solid var(--line);border-radius:var(--r);padding:16px;margin:12px 0;overflow:hidden;box-shadow:var(--shadow)}
+
+/* ── TRAINER ── */
+#tr-wrap{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--shadow);margin-bottom:24px}
+.tr-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid var(--p200)}
+.tr-title{font-size:18px;font-weight:700;color:var(--p800)}
+.tr-stats{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.ts-item{display:flex;align-items:baseline;gap:4px;font-size:13px;color:var(--ink3)}
+.ts-num{font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
+.ts-num.green{color:var(--green)}
+.ts-num.red{color:var(--red)}
+.ts-num.amber{color:var(--amber)}
+.tr-prog-wrap{margin-bottom:16px}
+.tr-prog-lbl{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3);margin-bottom:4px;font-family:var(--mono)}
+.tr-prog-track{height:6px;background:var(--p100);border-radius:100px;overflow:hidden}
+.tr-prog-fill{height:100%;background:linear-gradient(90deg,var(--h2),var(--green));transition:width .3s}
+.tr-card{background:var(--bg);border:1.5px solid var(--p200);border-radius:var(--r);padding:20px;margin-bottom:14px}
+.tr-eq{font-family:var(--mono);font-size:14px;font-weight:700;text-align:center;padding:12px;background:#F0FDF4;border-radius:8px;margin-bottom:14px;color:var(--h1);word-break:break-word;line-height:1.5}
+.tr-match{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+@media(max-width:580px){.tr-match{grid-template-columns:1fr}}
+.tr-col-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--ink3);margin-bottom:5px;font-family:var(--mono)}
+.tr-effect-row{display:flex;gap:6px;align-items:flex-start;padding:4px 0;font-size:13px;border-bottom:1px solid var(--line)}
+.tr-effect-row:last-child{border-bottom:none}
+.tr-el{font-family:var(--mono);font-weight:700;color:var(--h2);flex-shrink:0;min-width:18px}
+.tr-ef{color:var(--ink2);line-height:1.4}
+.tr-dir-row{padding:4px 0;font-size:12.5px;color:var(--ink2);border-bottom:1px solid var(--line);display:flex;gap:6px}
+.tr-dir-row:last-child{border-bottom:none}
+.tr-dir-n{font-family:var(--mono);font-weight:700;color:var(--p600);flex-shrink:0;min-width:16px}
+.tr-input-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0}
+.tr-input{padding:9px 14px;font-size:22px;font-family:var(--mono);border:2px solid var(--line);border-radius:var(--r-sm);background:var(--bg);color:var(--ink);outline:none;transition:border-color .2s;max-width:140px;width:100%;letter-spacing:.14em;text-align:center;font-weight:700}
+.tr-input:focus{border-color:var(--h2)}
+.tr-input.ok{border-color:var(--green);background:var(--green-t)}
+.tr-input.err{border-color:var(--red);background:var(--red-t)}
+.tr-input:read-only{opacity:.7}
+.tr-btn{padding:9px 22px;border:none;border-radius:var(--r-sm);font-size:14px;font-weight:700;cursor:pointer;background:var(--p600);color:#fff;transition:background .15s,transform .1s}
+.tr-btn:hover{background:var(--p700);transform:translateY(-1px)}
+.tr-btn:disabled{opacity:.45;cursor:default;transform:none}
+.tr-btn-ok{background:var(--green)}
+.tr-btn-ok:hover{background:var(--green-d)}
+.tr-feedback{font-size:14px;font-weight:600;min-height:20px;margin:2px 0 8px}
+.tr-feedback.ok{color:var(--green)}
+.tr-feedback.err{color:var(--red)}
+.tr-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap}
+.tr-nav-btns{display:flex;gap:6px}
+.tr-nav-btns button{min-width:40px;height:40px;border-radius:50%;font-size:17px;background:var(--white);border:1.5px solid var(--line);color:var(--ink);cursor:pointer;transition:background .15s;display:flex;align-items:center;justify-content:center}
+.tr-nav-btns button:hover:not(:disabled){background:var(--p100)}
+.tr-nav-btns button:disabled{opacity:.3;cursor:default}
+.tr-penalty{background:var(--red-t);border:1px solid var(--red);border-radius:var(--r-sm);padding:4px 11px;font-size:12px;color:var(--red-d);font-weight:600;display:none}
+.tr-penalty.show{display:inline-block}
+.tr-result{background:var(--white);border-radius:var(--r);padding:28px;text-align:center;box-shadow:var(--shm);border:1px solid var(--line);display:none}
+.tr-result .gr{font-size:28px;margin-bottom:4px}
+.tr-result .pct{font-size:44px;font-weight:900;color:var(--p700)}
+.tr-result .rs{display:flex;justify-content:center;gap:24px;margin:12px 0 20px;flex-wrap:wrap}
+.tr-result .rn{font-size:24px;font-weight:800}
+.tr-result .rl{font-size:12px;color:var(--ink3)}
+.tr-result .ra{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.err-badge{background:var(--red-t);border:2px solid var(--red);border-radius:var(--r);padding:10px 16px;margin-bottom:14px;display:none;align-items:center;gap:12px;flex-wrap:wrap;font-weight:700;color:var(--red-d)}
+.err-badge.show{display:flex}
+
+#btt{position:fixed;bottom:24px;right:24px;width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(22,101,52,.35);display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .2s;opacity:0;pointer-events:none}
+#btt.vis{opacity:1;pointer-events:all}
+#btt:hover{transform:translateY(-2px)}
+.fade-in{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.fade-in.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:540px){
+  .shell{padding:0 14px 60px}
+  .hero{padding:32px 16px 28px;margin:0 -14px 28px}
+  .tr-input{max-width:100%}
+}
+
+/* PERIODIC TABLE */
+.pt-ru{border-collapse:collapse;font-size:11px;white-space:nowrap}
+.pt-ru th,.pt-ru td{padding:0;border:1px solid #c4b5fd}
+.pt-corner{background:var(--p700);color:#fff;font-size:11px;font-weight:700;text-align:center;padding:4px;min-width:32px;writing-mode:vertical-rl;text-orientation:mixed}
+.pt-ru thead th{background:var(--p600);color:#fff;font-weight:700;text-align:center;padding:3px 6px;font-size:12px}
+.pt-viii{background:var(--p500)!important}
+.pt-noble-hdr{background:#4b5563!important}
+.pt-period{background:var(--p100);color:var(--p800);font-weight:800;font-size:13px;text-align:center;padding:2px 5px;min-width:24px}
+.el6{min-width:54px;max-width:54px;height:56px;text-align:center;padding:2px;vertical-align:top;cursor:default;transition:transform .15s,box-shadow .15s;position:relative}
+.el6:hover{transform:scale(1.18);box-shadow:0 4px 16px #0004;z-index:20}
+.el6 .el-num{display:block;font-size:8px;font-weight:700;opacity:.7;line-height:1.1;text-align:left;padding-left:2px}
+.el6 .el-mass{display:block;font-size:8px;opacity:.65;line-height:1;text-align:right;padding-right:2px}
+.el6 .el-sym{display:block;font-size:17px;font-weight:800;line-height:1.1}
+.el6 .el-name{display:block;font-size:7.5px;opacity:.85;line-height:1.1}
+.el-blank6{background:#f8fafc;min-width:54px}
+.pt-f-label{background:#f5d840;color:#92400e;font-size:10px;font-weight:700;text-align:center;padding:4px 6px;min-width:70px;border:1px solid #7a4208}
+.pt-legend6{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.pt-leg-item6{padding:3px 10px;border-radius:5px;font-size:11px;font-weight:700}
+/* SOLUBILITY TABLE */
+.sol-table{border-collapse:collapse;font-size:12px;white-space:nowrap}
+.sol-table th,.sol-table td{border:1px solid #d1d5db;padding:4px 7px;text-align:center;transition:background .15s,color .15s}
+.sol-table thead th{background:var(--p700);color:#fff;font-weight:700;cursor:pointer;user-select:none}
+.sol-table thead th:first-child{cursor:default}
+.sol-table thead th.sol-col-active{background:#f59e0b!important;color:#1c1917!important}
+.sol-table tbody th{background:var(--p100);font-weight:700;color:var(--p800);text-align:right;padding-right:10px;position:sticky;left:0;cursor:pointer;user-select:none}
+.sol-table tbody th.sol-row-active{background:#f59e0b!important;color:#1c1917!important}
+.sol-col-hl{background:#fef3c7!important}
+.sol-row-hl{background:#fef3c7!important}
+.sol-intersect{background:#f97316!important;color:#fff!important;font-weight:900!important;outline:3px solid #ea580c;outline-offset:-2px;position:relative;z-index:2}
+.sol-P{background:#dcfce7;color:#166534;font-weight:600}
+.sol-H{background:#fee2e2;color:#991b1b;font-weight:600}
+.sol-M{background:#fef9c3;color:#854d0e;font-weight:600}
+.sol-D{background:#f3f4f6;color:#6b7280}
+.sol-Q{background:#f8fafc;color:#94a3b8;font-style:italic}
+.sol-E{background:#f8fafc}
+.sol-legend{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;margin-top:10px}
+.sol-leg{padding:4px 12px;border-radius:6px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+
+<!-- TOPBAR -->
+<div id="topbar">
+  <button class="tb-btn" onclick="openMenu()" title="Разделы">☰</button>
+  <div class="tb-sep"></div>
+  <div class="tb-prog-wrap"><div class="tb-prog-fill" id="tb-pf"></div></div>
+  <span class="tb-label" id="tb-lbl">0%</span>
+  <div class="tb-sep"></div>
+  <button class="tb-btn" onclick="document.documentElement.requestFullscreen?.()" title="Полный экран">⛶</button>
+  <button class="tb-btn" onclick="togglePS()" title="Таблица Менделеева (T)">⚗️</button>
+  <button class="tb-btn" onclick="toggleRS()" title="Таблица растворимости (R)">🧪</button>
+  <button class="tb-btn" onclick="document.getElementById('trainer-section').scrollIntoView({behavior:'smooth'})" title="К тренажёру">📝</button>
+</div>
+
+<!-- SIDE MENU -->
+<div id="menu-overlay" onclick="closeMenu()"></div>
+<div id="menu-panel">
+  <button class="mp-close" onclick="closeMenu()">✕</button>
+  <div style="clear:both;margin-bottom:8px"></div>
+  <div class="mp-title">Разделы</div>
+  <a class="mp-item" href="#s-def" onclick="closeMenu()">📖 Что такое равновесие</a>
+  <a class="mp-item" href="#s-le" onclick="closeMenu()">⚖️ Принцип Ле Шателье</a>
+  <a class="mp-item" href="#s-factors" onclick="closeMenu()">🔥 3 фактора смещения</a>
+  <a class="mp-item" href="#s-ions" onclick="closeMenu()">⚗️ Ионы в растворе (усложнение)</a>
+  <a class="mp-item" href="#s-format" onclick="closeMenu()">📋 Формат задания ЕГЭ</a>
+  <a class="mp-item" href="#s-algo" onclick="closeMenu()">🧭 Алгоритм решения</a>
+  <a class="mp-item" href="#s-mistakes" onclick="closeMenu()">⚠️ Типичные ошибки</a>
+  <a class="mp-item" href="#s-hacks" onclick="closeMenu()">💡 Лайфхаки</a>
+  <a class="mp-item" href="#trainer-section" onclick="closeMenu()">🎯 Тренажёр (40 задач)</a>
+</div>
+
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">ЕГЭ Химия · Линия 22 · 2 балла</div>
+  <h1>Химическое<br><em>равновесие</em></h1>
+  <p class="hero-sub">Принцип Ле Шателье, 3 фактора смещения, соответствие «воздействие → направление» — от базы до чёткого алгоритма для задания 22.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Принцип Ле Шателье</span>
+    <span class="hero-chip">Температура · Давление · Концентрация</span>
+    <span class="hero-chip">40 заданий ЕГЭ</span>
+    <span class="hero-chip">2 балла</span>
+  </div>
+</div>
+
+<!-- БЛОК 1: ОПРЕДЕЛЕНИЕ -->
+<div class="section fade-in" id="s-def">
+  <div class="section-header">
+    <span class="section-pill">ОСНОВЫ</span>
+    <span class="section-title">Что такое химическое равновесие</span>
+  </div>
+
+  <div class="box box-green">
+    <div class="box-title">Определение</div>
+    <strong>Обратимые реакции</strong> — реакции, протекающие одновременно в прямом и обратном направлении (знак ⇌).<br>
+    <strong>Химическое равновесие</strong> — состояние обратимой реакции, при котором скорость прямой реакции равна скорости обратной. Концентрации всех веществ при этом <strong>не изменяются</strong>.
+  </div>
+
+  <!-- График равновесия SVG -->
+  <div class="graph-wrap">
+    <p style="font-size:12px;color:var(--ink3);margin-bottom:8px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.5px">График скоростей реакций</p>
+    <svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;display:block">
+      <defs>
+        <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0,8 3,0 6" fill="#64748b"/>
+        </marker>
+      </defs>
+      <!-- axes -->
+      <line x1="50" y1="170" x2="530" y2="170" stroke="#64748b" stroke-width="1.5" marker-end="url(#ah)"/>
+      <line x1="50" y1="170" x2="50" y2="20" stroke="#64748b" stroke-width="1.5" marker-end="url(#ah)"/>
+      <text x="535" y="174" font-size="12" fill="#64748b" font-family="sans-serif">t</text>
+      <text x="36" y="16" font-size="11" fill="#64748b" font-family="sans-serif">V</text>
+      <!-- equilibrium vertical line -->
+      <line x1="290" y1="30" x2="290" y2="170" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="292" y="26" font-size="11" fill="#166534" font-family="sans-serif" font-weight="bold">Равновесие</text>
+      <!-- forward reaction curve (starts high, drops) -->
+      <path d="M55,35 C100,35 160,40 200,65 C230,84 260,95 290,105 L530,105" fill="none" stroke="#DC2626" stroke-width="2.5"/>
+      <!-- reverse reaction curve (starts low, rises) -->
+      <path d="M55,160 C100,158 160,148 210,132 C245,120 270,112 290,105 L530,105" fill="none" stroke="#2563EB" stroke-width="2.5"/>
+      <!-- labels -->
+      <text x="120" y="52" font-size="12" fill="#DC2626" font-family="sans-serif" font-weight="600">Скорость прямой</text>
+      <text x="120" y="155" font-size="12" fill="#2563EB" font-family="sans-serif" font-weight="600">Скорость обратной</text>
+      <text x="310" y="100" font-size="11" fill="#166534" font-family="sans-serif">V₁ = V₂</text>
+    </svg>
+  </div>
+
+  <div class="box box-info">
+    <div class="box-title">Равновесные концентрации</div>
+    Концентрации веществ в момент установления равновесия называются <strong>равновесными концентрациями</strong>. Они остаются постоянными, пока не изменится внешнее воздействие.
+  </div>
+</div>
+
+<!-- БЛОК 2: ЛЕ ШАТЕЛЬЕ -->
+<div class="section fade-in" id="s-le">
+  <div class="section-header">
+    <span class="section-pill">ЗАКОН</span>
+    <span class="section-title">Принцип Ле Шателье</span>
+  </div>
+
+  <div class="box box-green" style="font-size:15px;line-height:1.8">
+    <div class="box-title">Принцип Ле Шателье</div>
+    Если на равновесную систему оказывается внешнее воздействие, равновесие <strong>смещается в сторону той реакции (прямой или обратной), которая ослабляет это воздействие</strong>.
+  </div>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin:12px 0">
+    <div style="flex:1;min-width:200px;background:#FFF7ED;border:1.5px solid #FB923C;border-radius:var(--r-sm);padding:12px 14px;text-align:center">
+      <div style="font-size:11px;font-weight:700;color:#9A3412;margin-bottom:4px;text-transform:uppercase;letter-spacing:.6px">Факторы смещения</div>
+      <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:6px">
+        <span style="background:#FFEDD5;border-radius:6px;padding:6px 12px;font-weight:700;color:#9A3412;font-size:13px">🌡 Температура</span>
+        <span style="background:#DBEAFE;border-radius:6px;padding:6px 12px;font-weight:700;color:#1E40AF;font-size:13px">🔽 Давление</span>
+        <span style="background:#DCFCE7;border-radius:6px;padding:6px 12px;font-weight:700;color:#166534;font-size:13px">⚗️ Концентрация</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- БЛОК 3: 3 ФАКТОРА -->
+<div class="section fade-in" id="s-factors">
+  <div class="section-header">
+    <span class="section-pill">ГЛАВНОЕ</span>
+    <span class="section-title">3 фактора смещения равновесия</span>
+  </div>
+
+  <!-- ТЕМПЕРАТУРА -->
+  <h3 class="sub">Фактор 1 — Температура</h3>
+  <div class="grid-2">
+    <div class="factor-card fc-temp" style="text-align:center">
+      <span class="fc-tag tag-t">T↑ Повышение температуры</span>
+      <div style="font-size:38px;font-weight:900;font-family:var(--mono);color:#9A3412;margin:8px 0;letter-spacing:-.02em">→ <span style="color:#DC2626">−Q</span></div>
+      <div class="fc-body">Равновесие смещается в сторону, где стоит <strong style="color:#DC2626">минус Q</strong> (реакция поглощает тепло)</div>
+    </div>
+    <div class="factor-card fc-temp" style="text-align:center">
+      <span class="fc-tag tag-t">T↓ Понижение температуры</span>
+      <div style="font-size:38px;font-weight:900;font-family:var(--mono);color:#9A3412;margin:8px 0;letter-spacing:-.02em">→ <span style="color:#166534">+Q</span></div>
+      <div class="fc-body">Равновесие смещается в сторону, где стоит <strong style="color:#166534">плюс Q</strong> (реакция выделяет тепло)</div>
+    </div>
+  </div>
+
+  <div class="box box-warn" style="margin-top:6px">
+    <div class="box-title">Правило знака — запомни раз и навсегда</div>
+    <strong>T↑ → −Q &nbsp;|&nbsp; T↓ → +Q</strong><br>
+    Смотришь на уравнение — находишь Q со знаком. Повысили T — равновесие идёт к той стороне, где <code>−Q</code>. Понизили — к той, где <code>+Q</code>.
+  </div>
+
+  <!-- ПРИМЕР ТЕМПЕРАТУРА SVG -->
+  <div class="graph-wrap">
+    <p style="font-size:12px;color:var(--ink3);margin-bottom:8px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.5px">N₂ + 3H₂ ⇌ 2NH₃ + Q — пример с температурой</p>
+    <svg viewBox="0 0 560 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;display:block">
+      <!-- background lanes -->
+      <rect x="10" y="5" width="260" height="80" rx="8" fill="#FEF2F2" stroke="#F87171" stroke-width="1"/>
+      <rect x="290" y="5" width="260" height="80" rx="8" fill="#DBEAFE" stroke="#60A5FA" stroke-width="1"/>
+      <!-- left: T up -->
+      <text x="20" y="24" font-size="12" fill="#DC2626" font-weight="bold" font-family="sans-serif">T↑ Повышение температуры</text>
+      <text x="20" y="44" font-size="11.5" fill="#7F1D1D" font-family="sans-serif">→ Равновесие в сторону эндо</text>
+      <text x="20" y="62" font-size="11.5" fill="#7F1D1D" font-family="sans-serif">→ т.е. в сторону ОБРАТНОЙ реакции</text>
+      <text x="20" y="78" font-size="10.5" fill="#991B1B" font-family="sans-serif" font-style="italic">NH₃ распадается, выход аммиака ↓</text>
+      <!-- right: T down -->
+      <text x="300" y="24" font-size="12" fill="#1D4ED8" font-weight="bold" font-family="sans-serif">T↓ Понижение температуры</text>
+      <text x="300" y="44" font-size="11.5" fill="#1E3A8A" font-family="sans-serif">→ Равновесие в сторону экзо</text>
+      <text x="300" y="62" font-size="11.5" fill="#1E3A8A" font-family="sans-serif">→ т.е. в сторону ПРЯМОЙ реакции</text>
+      <text x="300" y="78" font-size="10.5" fill="#1E40AF" font-family="sans-serif" font-style="italic">NH₃ образуется, выход аммиака ↑</text>
+    </svg>
+  </div>
+
+  <!-- ДАВЛЕНИЕ -->
+  <h3 class="sub">Фактор 2 — Давление (объём)</h3>
+  <div class="grid-2">
+    <div class="factor-card fc-pres">
+      <span class="fc-tag tag-p">p↑ Повышение давления</span>
+      <div class="fc-title" style="color:#1E40AF">→ сторона меньшего числа молей газа</div>
+      <div class="fc-body">Система уменьшает объём — выгодна реакция, где <strong>меньше молей газа</strong>.</div>
+    </div>
+    <div class="factor-card fc-pres">
+      <span class="fc-tag tag-p">p↓ Понижение давления</span>
+      <div class="fc-title" style="color:#1E40AF">→ сторона большего числа молей газа</div>
+      <div class="fc-body">Система увеличивает объём — выгодна реакция, где <strong>больше молей газа</strong>.</div>
+    </div>
+  </div>
+
+  <!-- Объяснение молей газа -->
+  <div class="box box-info" style="margin-bottom:8px">
+    <div class="box-title">Что такое «моли газа»</div>
+    <strong>Моли газа = коэффициенты перед формулами газов в уравнении.</strong> Если перед формулой нет коэффициента — считается как 1. Твёрдые (тв) и жидкие (ж) вещества <strong>не считаются</strong> — они не создают давления.
+  </div>
+
+  <!-- Диаграмма подсчёта молей -->
+  <div class="graph-wrap">
+    <p style="font-size:12px;color:var(--ink3);margin-bottom:10px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.5px">Как считать коэффициенты газов</p>
+    <svg viewBox="0 0 560 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;display:block">
+      <rect x="10" y="5" width="535" height="120" rx="8" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1"/>
+      <!-- equation -->
+      <text x="280" y="32" font-size="17" fill="#1E3A8A" font-weight="900" font-family="monospace" text-anchor="middle">N₂(г) + 3H₂(г)  ⇌  2NH₃(г)</text>
+      <!-- arrows to coefficients -->
+      <text x="72" y="52" font-size="10" fill="#DC2626" font-family="sans-serif" text-anchor="middle">коэф. = 1</text>
+      <line x1="72" y1="55" x2="72" y2="65" stroke="#DC2626" stroke-width="1.5" marker-end="url(#ah2)"/>
+      <text x="148" y="52" font-size="10" fill="#DC2626" font-family="sans-serif" text-anchor="middle">коэф. = 3</text>
+      <line x1="148" y1="55" x2="148" y2="65" stroke="#DC2626" stroke-width="1.5"/>
+      <text x="420" y="52" font-size="10" fill="#166534" font-family="sans-serif" text-anchor="middle">коэф. = 2</text>
+      <line x1="420" y1="55" x2="420" y2="65" stroke="#166534" stroke-width="1.5"/>
+      <!-- mol counts -->
+      <rect x="30" y="68" width="170" height="30" rx="6" fill="#FEE2E2" stroke="#F87171" stroke-width="1.5"/>
+      <text x="115" y="88" font-size="13" fill="#991B1B" font-weight="700" font-family="sans-serif" text-anchor="middle">Слева: 1 + 3 = 4 моля</text>
+      <rect x="350" y="68" width="150" height="30" rx="6" fill="#DCFCE7" stroke="#4ADE80" stroke-width="1.5"/>
+      <text x="425" y="88" font-size="13" fill="#166534" font-weight="700" font-family="sans-serif" text-anchor="middle">Справа: 2 моля</text>
+      <!-- conclusion -->
+      <text x="280" y="115" font-size="11.5" fill="#1E40AF" font-family="sans-serif" text-anchor="middle" font-weight="600">4 > 2 → при p↑ равновесие вправо (прямая реакция), при p↓ — влево (обратная)</text>
+    </svg>
+  </div>
+
+  <div class="box box-info">
+    <div class="box-title">Когда давление НЕ влияет</div>
+    <ul>
+      <li>Число молей газа <strong>одинаково</strong> слева и справа (равновесие практически не смещается)</li>
+      <li>Реакция протекает <strong>без участия газов</strong> (твёрдые и жидкие вещества)</li>
+      <li>Добавление <strong>катализатора</strong> — не смещает равновесие никогда</li>
+    </ul>
+  </div>
+
+  <!-- КОНЦЕНТРАЦИЯ -->
+  <h3 class="sub">Фактор 3 — Концентрация</h3>
+  <div class="grid-2">
+    <div class="factor-card fc-conc" style="text-align:center">
+      <span class="fc-tag tag-c">C↑ Увеличение концентрации</span>
+      <div style="font-size:22px;font-weight:900;margin:8px 0;color:#166534">равновесие уходит <span style="font-size:26px">↗ ОТ</span> него</div>
+      <div class="fc-body">Система «избавляется» от добавленного — смещается туда, где это вещество <strong>расходуется</strong>.</div>
+    </div>
+    <div class="factor-card fc-conc" style="text-align:center">
+      <span class="fc-tag tag-c">C↓ Уменьшение концентрации</span>
+      <div style="font-size:22px;font-weight:900;margin:8px 0;color:#166534">равновесие идёт <span style="font-size:26px">↙ К</span> нему</div>
+      <div class="fc-body">Система «восполняет» убыль — смещается туда, где это вещество <strong>образуется</strong>.</div>
+    </div>
+  </div>
+
+  <!-- Пример концентрация -->
+  <div class="ege-demo" style="margin-top:10px">
+    <p style="font-size:12px;color:var(--ink3);margin-bottom:8px;font-family:var(--mono)">ПРИМЕР — N₂(г) + 3H₂(г) ⇌ 2NH₃(г)</p>
+    <div class="table-wrap" style="margin:0">
+      <table>
+        <thead><tr><th>Воздействие</th><th>Логика</th><th>Направление</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Добавили <strong>N₂</strong> — C(N₂)↑</td>
+            <td>N₂ — слева, равновесие уходит <strong>ОТ</strong> N₂ → вправо</td>
+            <td style="color:#166534;font-weight:700">→ прямая (1)</td>
+          </tr>
+          <tr>
+            <td>Добавили <strong>NH₃</strong> — C(NH₃)↑</td>
+            <td>NH₃ — справа, равновесие уходит <strong>ОТ</strong> NH₃ → влево</td>
+            <td style="color:#DC2626;font-weight:700">→ обратная (2)</td>
+          </tr>
+          <tr>
+            <td>Убрали <strong>NH₃</strong> — C(NH₃)↓</td>
+            <td>NH₃ — справа, равновесие идёт <strong>К</strong> NH₃ → вправо</td>
+            <td style="color:#166534;font-weight:700">→ прямая (1)</td>
+          </tr>
+          <tr>
+            <td>Убрали <strong>H₂</strong> — C(H₂)↓</td>
+            <td>H₂ — слева, равновесие идёт <strong>К</strong> H₂ → влево</td>
+            <td style="color:#DC2626;font-weight:700">→ обратная (2)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="box box-warn" style="margin-top:10px">
+    <div class="box-title">Хитрость — добавление твёрдого вещества</div>
+    Если добавляют <strong>твёрдое вещество</strong> (напр. FeS, CaCO₃, KOH) — оно растворяется и поставляет ионы в раствор. Определи, <em>какой ион появился</em>, и дальше применяй то же правило: ион — реагент или продукт? ОТ него или К нему?
+  </div>
+
+  <!-- КАТАЛИЗАТОР И ДР. -->
+  <h3 class="sub">Что НЕ влияет на равновесие</h3>
+  <div style="background:linear-gradient(135deg,#FEF9C3,#FEF3C7);border:2.5px solid #F59E0B;border-radius:var(--r);padding:18px 20px;margin:10px 0">
+    <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#92400E;margin-bottom:10px;font-family:var(--mono)">⚠ ЗАПОМНИ — эти воздействия всегда ответ «3»</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+      <span style="background:#fff;border:2px solid #F59E0B;border-radius:8px;padding:6px 14px;font-weight:800;font-size:14px;color:#92400E">Катализатор</span>
+      <span style="background:#fff;border:2px solid #F59E0B;border-radius:8px;padding:6px 14px;font-weight:800;font-size:14px;color:#92400E">Ингибитор</span>
+      <span style="background:#fff;border:2px solid #F59E0B;border-radius:8px;padding:6px 14px;font-weight:800;font-size:14px;color:#92400E">Индикатор</span>
+      <span style="background:#fff;border:2px solid #F59E0B;border-radius:8px;padding:6px 14px;font-weight:800;font-size:14px;color:#92400E">Инертный газ (при постоянном объёме)</span>
+    </div>
+    <div style="font-size:13.5px;color:#78350F;line-height:1.7">
+      Катализатор и ингибитор <strong>меняют скорость</strong> обеих реакций одинаково — равновесие наступает быстрее или медленнее, но <strong>в той же точке</strong>. Индикатор лишь показывает среду и не участвует в реакции.<br>
+      <strong style="font-size:14px">→ Если в задании встречаешь одно из этих слов — выбирай вариант <span style="background:#FEF3C7;border:1.5px solid #F59E0B;border-radius:5px;padding:1px 7px">3 — «практически не смещается»</span></strong>
+    </div>
+  </div>
+
+  <!-- Сводная таблица -->
+  <h3 class="sub">Сводная таблица факторов</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Воздействие</th><th>Направление смещения</th><th>Почему</th></tr></thead>
+      <tbody>
+        <tr><td>T↑</td><td style="color:#1D4ED8;font-weight:700">→ эндотермическая (–Q)</td><td>Поглощает тепло, гасит нагрев</td></tr>
+        <tr><td>T↓</td><td style="color:#DC2626;font-weight:700">→ экзотермическая (+Q)</td><td>Выделяет тепло, компенсирует охлаждение</td></tr>
+        <tr><td>p↑</td><td style="font-weight:700">→ меньше молей газа</td><td>Уменьшает давление</td></tr>
+        <tr><td>p↓</td><td style="font-weight:700">→ больше молей газа</td><td>Увеличивает давление</td></tr>
+        <tr><td>C реагента ↑</td><td style="color:#166534;font-weight:700">→ прямая</td><td>Расходует добавленное вещество</td></tr>
+        <tr><td>C продукта ↑</td><td style="color:#166534;font-weight:700">→ обратная</td><td>Расходует добавленное вещество</td></tr>
+        <tr><td>Катализатор</td><td style="color:#6B7280;font-weight:700">практически не смещает</td><td>Ускоряет и прямую, и обратную одинаково</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- БЛОК 3.5: ИОНЫ В РАСТВОРЕ — УСЛОЖНЁННЫЙ ТИП -->
+<div class="section fade-in" id="s-ions">
+  <div class="section-header">
+    <span class="section-pill" style="background:var(--h3);color:#fff">УСЛОЖНЕНИЕ</span>
+    <span class="section-title">Ионы в растворе — усложнённый вариант задания 22</span>
+  </div>
+
+  <div class="box box-info" style="margin-bottom:14px">
+    <strong>Что это такое?</strong> В некоторых заданиях ЕГЭ реакция протекает в растворе, и в уравнении вместо молекул стоят <strong>ионы</strong> (например, Ag⁺, Cl⁻, Fe³⁺). Принцип Ле Шателье работает точно так же — равновесие смещается ОТ вещества, чью концентрацию увеличили.
+  </div>
+
+  <h3 class="sub">Что важно понять про ионы</h3>
+  <div class="grid-2" style="gap:12px;margin-bottom:14px">
+    <div style="background:#F0FDF4;border:2px solid #16A34A;border-radius:var(--r);padding:14px 16px">
+      <div style="font-weight:800;color:#166534;font-size:13px;margin-bottom:8px">Как образуются ионы?</div>
+      <div style="font-size:13px;color:var(--ink2);line-height:1.7">
+        При добавлении <strong>соли, кислоты или основания</strong> в раствор они диссоциируют на ионы.<br>
+        <span style="font-family:var(--mono);font-size:12px">NaCl → Na⁺ + Cl⁻</span><br>
+        <span style="font-family:var(--mono);font-size:12px">AgNO₃ → Ag⁺ + NO₃⁻</span><br>
+        Для задания важно знать: <em>какой именно ион участвует в равновесии?</em>
+      </div>
+    </div>
+    <div style="background:#FFF7ED;border:2px solid #F59E0B;border-radius:var(--r);padding:14px 16px">
+      <div style="font-weight:800;color:#92400E;font-size:13px;margin-bottom:8px">Правило концентрации ионов</div>
+      <div style="font-size:13px;color:var(--ink2);line-height:1.7">
+        Работает так же, как с молекулами:<br>
+        • C(иона)↑ — равновесие уходит <strong>ОТ</strong> этого иона<br>
+        • C(иона)↓ — равновесие идёт <strong>К</strong> этому иону<br>
+        Найди ион в левой или правой части уравнения → определи направление.
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sub">Разбор типичного задания с ионами</h3>
+  <div class="ege-demo" style="margin-bottom:14px">
+    <p style="font-size:12px;color:var(--ink3);margin-bottom:8px;font-family:var(--mono)">ПРИМЕР — равновесие в растворе</p>
+    <div class="ege-eq">AgCl(тв) ⇌ Ag⁺(р-р) + Cl⁻(р-р) − Q</div>
+    <div class="table-wrap" style="margin-top:10px">
+      <table>
+        <thead><tr><th>Воздействие</th><th>Что происходит?</th><th>Направление</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Добавили <strong>AgNO₃</strong> (тв)</td>
+            <td>AgNO₃ диссоциирует → появились ионы <strong>Ag⁺</strong>. Ag⁺ стоит справа → C(Ag⁺)↑ → ОТ него</td>
+            <td style="color:#DC2626;font-weight:700">↑ обратная (2)</td>
+          </tr>
+          <tr>
+            <td>Добавили <strong>KCl</strong> (тв)</td>
+            <td>KCl диссоциирует → появились ионы <strong>Cl⁻</strong>. Cl⁻ стоит справа → C(Cl⁻)↑ → ОТ него</td>
+            <td style="color:#DC2626;font-weight:700">↑ обратная (2)</td>
+          </tr>
+          <tr>
+            <td>Добавили <strong>HCl</strong> (г)</td>
+            <td>HCl → H⁺ + Cl⁻ → снова C(Cl⁻)↑ → ОТ Cl⁻</td>
+            <td style="color:#DC2626;font-weight:700">↑ обратная (2)</td>
+          </tr>
+          <tr>
+            <td>Понизили температуру</td>
+            <td>Реакция −Q → при T↓ равновесие идёт к +Q, значит к прямой (растворение)</td>
+            <td style="color:#166534;font-weight:700">↑ прямая (1)</td>
+          </tr>
+          <tr>
+            <td>Добавили <strong>AgCl</strong> (тв)</td>
+            <td>Твёрдое вещество — концентрация твёрдого в Kравн не учитывается</td>
+            <td style="color:#6B7280;font-weight:700">практически не смещается (3)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- СВЯЗЫВАНИЕ ИОНА -->
+  <h3 class="sub">Особый случай — связывание иона (добавление щёлочи или кислоты)</h3>
+  <div class="box box-info" style="margin-bottom:12px">
+    <strong>Идея:</strong> иногда добавленное вещество <em>не даёт нужный ион напрямую</em>, а, наоборот, <strong>связывает</strong> (убирает) один из ионов равновесия. Это тоже смещает равновесие — в сторону убранного иона (принцип «К нему»).
+  </div>
+
+  <div style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border:2px solid #16A34A;border-radius:var(--r);padding:16px 18px;margin-bottom:14px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#166534;margin-bottom:10px;font-family:var(--mono)">💡 ГЛАВНЫЙ ПРИМЕР — щёлочь + H⁺</div>
+    <div style="font-size:14px;font-weight:800;color:#14532D;font-family:var(--mono);margin-bottom:10px;text-align:center">
+      CH₃COO⁻(р-р) + H⁺(р-р) ⇌ CH₃COOH(р-р) + Q
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Воздействие</th><th>Что происходит с ионами?</th><th>Направление</th></tr></thead>
+        <tbody>
+          <tr style="background:#FEF9C3">
+            <td><strong>Добавили NaOH</strong> (щёлочь)</td>
+            <td>NaOH → Na⁺ + <strong>OH⁻</strong>. Теперь OH⁻ встречает H⁺ из уравнения:<br>
+            <span style="font-family:var(--mono);font-size:12px;color:#166534;font-weight:700">OH⁻ + H⁺ → H₂O</span><br>
+            Вода — <strong>неэлектролит</strong>, она выходит из равновесия. C(H⁺) резко падает. Равновесие идёт <strong>К</strong> H⁺ → влево → обратная</td>
+            <td style="color:#DC2626;font-weight:700">↑ обратная (2)</td>
+          </tr>
+          <tr>
+            <td><strong>Добавили HCl</strong> (кислота)</td>
+            <td>HCl → H⁺ + Cl⁻. H⁺ стоит <strong>слева</strong> в уравнении → C(H⁺)↑ → ОТ него → вправо → прямая</td>
+            <td style="color:#166534;font-weight:700">↑ прямая (1)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:12px;border-top:1px solid #86EFAC;padding-top:12px">
+      <div style="font-size:13px;font-weight:800;color:#14532D;font-family:var(--mono);margin-bottom:8px;text-align:center">
+        Zn(OH)₂(тв) ⇌ Zn²⁺(р-р) + 2OH⁻(р-р) − Q
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Воздействие</th><th>Что происходит с ионами?</th><th>Направление</th></tr></thead>
+          <tbody>
+            <tr style="background:#FEF9C3">
+              <td><strong>Добавили HCl</strong> (кислота)</td>
+              <td>HCl → H⁺ + Cl⁻. Теперь H⁺ встречает OH⁻ из уравнения:<br>
+              <span style="font-family:var(--mono);font-size:12px;color:#166534;font-weight:700">H⁺ + OH⁻ → H₂O</span><br>
+              Вода — <strong>неэлектролит</strong>, уходит из равновесия. C(OH⁻) резко падает. Равновесие идёт <strong>К</strong> OH⁻ → вправо → прямая (растворение осадка)</td>
+              <td style="color:#166534;font-weight:700">↑ прямая (1)</td>
+            </tr>
+            <tr>
+              <td><strong>Добавили NaOH</strong> (щёлочь)</td>
+              <td>NaOH → Na⁺ + OH⁻. OH⁻ стоит <strong>справа</strong> → C(OH⁻)↑ → ОТ него → влево → обратная (осадок образуется)</td>
+              <td style="color:#DC2626;font-weight:700">↑ обратная (2)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:13px;color:#166534;line-height:1.7">
+      <strong>Запомни:</strong> H₂O, CO₂ (газ), осадки — это <em>неэлектролиты или слаборастворимые вещества</em>, они <strong>«уходят» из равновесия</strong>. Если реагент связывает ион в такое вещество — C(иона) падает → равновесие идёт <strong>К</strong> этому иону.
+    </div>
+  </div>
+
+  <div style="background:linear-gradient(135deg,#FFF7ED,#FEF3C7);border:2px solid #F59E0B;border-radius:var(--r);padding:14px 18px;margin-bottom:14px">
+    <div style="font-size:12px;font-weight:700;color:#92400E;margin-bottom:8px;font-family:var(--mono)">ЕЩЁ ПРИМЕРЫ СВЯЗЫВАНИЯ ИОНОВ</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Добавили</th><th>Какой ион связывают</th><th>Во что?</th><th>Результат</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>NaOH, KOH (щёлочь)</td>
+            <td>H⁺</td>
+            <td>H₂O — неэлектролит</td>
+            <td>C(H⁺)↓ → равновесие К H⁺</td>
+          </tr>
+          <tr>
+            <td>HCl, HNO₃ (кислота)</td>
+            <td>OH⁻</td>
+            <td>H₂O — неэлектролит</td>
+            <td>C(OH⁻)↓ → равновесие К OH⁻</td>
+          </tr>
+          <tr>
+            <td>Na₂CO₃, NaHCO₃</td>
+            <td>H⁺</td>
+            <td>CO₂ + H₂O (газ + вода)</td>
+            <td>C(H⁺)↓ → равновесие К H⁺</td>
+          </tr>
+          <tr>
+            <td>AgNO₃ (если есть Cl⁻)</td>
+            <td>Cl⁻</td>
+            <td>AgCl↓ — осадок</td>
+            <td>C(Cl⁻)↓ → равновесие К Cl⁻</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:2px solid #3B82F6;border-radius:var(--r);padding:16px 18px;margin-bottom:14px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#1D4ED8;margin-bottom:10px;font-family:var(--mono)">⚡ АЛГОРИТМ ДЛЯ ЗАДАНИЙ С ИОНАМИ</div>
+    <ol style="margin:0;padding-left:18px;font-size:13.5px;color:var(--ink2);line-height:2">
+      <li>Смотри на уравнение: реагенты (слева) и продукты (справа)</li>
+      <li>Воздействие — добавили соль/кислоту/основание? → диссоциируй её на ионы</li>
+      <li>Найди нужный ион в уравнении — он слева или справа?</li>
+      <li><strong>Вариант А — ион увеличился:</strong> C(иона)↑ → равновесие идёт <strong>ОТ</strong> него</li>
+      <li><strong>Вариант Б — ион связывается:</strong> добавленное вещество реагирует с ионом из уравнения → образуется H₂O, CO₂, осадок → C(иона)↓ → равновесие идёт <strong>К</strong> нему<br>
+        <span style="font-size:12px;color:#6B7280;font-style:italic">Пример: добавили NaOH → OH⁻ + H⁺ → H₂O → C(H⁺) падает → равновесие к H⁺</span>
+      </li>
+      <li>Если в уравнении иона нет и связывания нет — влияния нет → <strong>3</strong></li>
+      <li>Если добавляют <strong>твёрдое вещество</strong> из уравнения (напр. AgCl(тв)) — концентрация твёрдого постоянна → <strong>3</strong></li>
+    </ol>
+  </div>
+
+  <div style="background:linear-gradient(135deg,#FEF2F2,#FEE2E2);border:2.5px solid #DC2626;border-radius:var(--r);padding:14px 18px;margin-bottom:14px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#991B1B;margin-bottom:10px;font-family:var(--mono)">🚫 НЕРАСТВОРИМЫЕ ВЕЩЕСТВА — РАВНОВЕСИЕ НЕ СМЕЩАЕТСЯ</div>
+    <div style="font-size:13.5px;color:var(--ink2);line-height:1.8;margin-bottom:10px">
+      Если добавляют <strong>нерастворимый гидроксид или нерастворимую соль</strong> — они <em>не диссоциируют</em>, ионов в раствор не поступает. Концентрация ионов в системе не меняется → равновесие <strong>практически не смещается → ответ 3</strong>.
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Добавили</th><th>Растворяется?</th><th>Ионы в раствор?</th><th>Ответ</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Fe(OH)₃ (нерастворимый гидроксид)</td>
+            <td style="color:#DC2626;font-weight:700">Нет (Н)</td>
+            <td>Нет</td>
+            <td style="font-weight:700">3</td>
+          </tr>
+          <tr>
+            <td>BaSO₄ (нерастворимая соль)</td>
+            <td style="color:#DC2626;font-weight:700">Нет (Н)</td>
+            <td>Нет</td>
+            <td style="font-weight:700">3</td>
+          </tr>
+          <tr>
+            <td>AgCl (нерастворимая соль)</td>
+            <td style="color:#DC2626;font-weight:700">Нет (Н)</td>
+            <td>Нет</td>
+            <td style="font-weight:700">3</td>
+          </tr>
+          <tr>
+            <td>NaCl (растворимая соль)</td>
+            <td style="color:#166534;font-weight:700">Да (Р)</td>
+            <td>Na⁺ и Cl⁻ — смотри, есть ли они в уравнении</td>
+            <td style="font-weight:700">1, 2 или 3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:10px;font-size:13px;color:#991B1B;font-weight:700">
+      → Перед ответом всегда проверяй растворимость по таблице (🧪 кнопка в тулбаре). Н = не растворяется = ответ 3.
+    </div>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">Частые ловушки с ионами</div>
+    <ul style="margin:4px 0;padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.9">
+      <li><strong>Добавили соль с «посторонним» ионом:</strong> например NaNO₃ добавили к AgCl ⇌ Ag⁺ + Cl⁻. Na⁺ и NO₃⁻ не участвуют в равновесии → ответ 3</li>
+      <li><strong>Добавили кислоту, но её анион не в уравнении:</strong> H₂SO₄ добавили, а в уравнении нет SO₄²⁻ → 3</li>
+      <li><strong>Твёрдое вещество в уравнении:</strong> добавление AgCl(тв) в реакцию AgCl(тв) ⇌ ... — твёрдые не меняют концентрацию → 3</li>
+      <li><strong>Не путай:</strong> добавление KCl и добавление HCl оба дают Cl⁻ → одинаково обратная реакция</li>
+    </ul>
+  </div>
+</div>
+
+<!-- БЛОК 4: ФОРМАТ ЕГЭ -->
+<div class="section fade-in" id="s-format">
+  <div class="section-header">
+    <span class="section-pill">ФОРМАТ</span>
+    <span class="section-title">Формат задания 22 ЕГЭ</span>
+  </div>
+
+  <div class="box box-info" style="margin-bottom:14px">
+    <strong>Задание даёт:</strong> уравнение обратимой реакции + таблицу из 4 воздействий (А, Б, В, Г) и 3 направлений (1, 2, 3). Нужно установить соответствие. Ответ — 4 цифры подряд, например: <code>2322</code>.
+  </div>
+
+  <div class="ege-demo">
+    <p style="font-size:12px;color:var(--ink3);margin-bottom:8px;font-family:var(--mono)">ПРИМЕР ЗАДАНИЯ</p>
+    <div class="ege-eq">N₂(г) + 3H₂(г) ⇌ 2NH₃(г) + Q</div>
+    <div class="ege-cols">
+      <div>
+        <div class="ege-col-title">Воздействие на систему</div>
+        <div class="ege-row"><span class="ege-letter">А)</span> повышение давления</div>
+        <div class="ege-row"><span class="ege-letter">Б)</span> добавление катализатора</div>
+        <div class="ege-row"><span class="ege-letter">В)</span> повышение температуры</div>
+        <div class="ege-row"><span class="ege-letter">Г)</span> увеличение концентрации аммиака</div>
+      </div>
+      <div>
+        <div class="ege-col-title">Направление смещения</div>
+        <div class="ege-opt"><span>1)</span> в сторону прямой реакции</div>
+        <div class="ege-opt"><span>2)</span> в сторону обратной реакции</div>
+        <div class="ege-opt"><span>3)</span> практически не смещается</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;padding:10px;background:#F0FDF4;border-radius:8px;font-size:13px">
+      <strong>Разбор:</strong> А) p↑ → слева 4 моля, справа 2 → прямая → <code>1</code>. Б) Катализатор → <code>3</code>. В) T↑, реакция экзо → обратная → <code>2</code>. Г) NH₃ — продукт, C↑ → обратная → <code>2</code>. <strong>Ответ: 1322</strong>
+    </div>
+  </div>
+</div>
+
+<!-- БЛОК 5: АЛГОРИТМ -->
+<div class="section fade-in" id="s-algo">
+  <div class="section-header">
+    <span class="section-pill">АЛГОРИТМ</span>
+    <span class="section-title">Алгоритм решения задания 22</span>
+  </div>
+
+  <div class="algo">
+    <div class="algo-step">
+      <div class="algo-n">1</div>
+      <div class="algo-text"><strong>Прочти уравнение реакции</strong> и определи: экзо (+Q) или эндо (–Q), число молей газов слева и справа, что реагенты, что продукты.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">2</div>
+      <div class="algo-text"><strong>Для каждого воздействия (А, Б, В, Г)</strong> применяй принцип Ле Шателье отдельно.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">3</div>
+      <div class="algo-text"><strong>Температура:</strong> T↑ → эндо; T↓ → экзо. Если реакция с Q (экзо), то T↑ → обратная.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">4</div>
+      <div class="algo-text"><strong>Давление:</strong> подсчитай молей газа слева и справа. p↑ → сторона с меньшим числом молей. Если молей одинаково → «3». Если нет газов вообще → «3».</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">5</div>
+      <div class="algo-text"><strong>Концентрация:</strong> если добавляют твёрдое/растворимое вещество — определи, ионы чего появятся в растворе. Увеличение реагента → прямая, продукта → обратная. Добавление вещества, реагирующего с участником — уменьшает его концентрацию.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">6</div>
+      <div class="algo-text"><strong>Катализатор</strong> — всегда «3» (практически не смещает).</div>
+    </div>
+  </div>
+</div>
+
+<!-- БЛОК 6: ОШИБКИ -->
+<div class="section fade-in" id="s-mistakes">
+  <div class="section-header">
+    <span class="section-pill">ОШИБКИ</span>
+    <span class="section-title">Типичные ошибки учеников</span>
+  </div>
+
+  <div class="cards-row">
+    <div class="mistake-card">
+      <strong>❌ Ошибка 1: Катализатор смещает равновесие</strong><br>
+      Многие пишут «1» (прямая) для катализатора. Правильно: катализатор ускоряет обе реакции одинаково → <strong>«3» — не смещает</strong>.
+    </div>
+    <div class="mistake-card">
+      <strong>❌ Ошибка 2: Путаница знака Q и направления при T</strong><br>
+      Если реакция экзотермическая (+Q) и повышают T — равновесие идёт <strong>влево (обратная = 2)</strong>, а не вправо. Запомни: система «противится» — убирает тепло → эндо.
+    </div>
+    <div class="mistake-card">
+      <strong>❌ Ошибка 3: Давление при одинаковом числе молей газа</strong><br>
+      Если слева 2 моля газа и справа 2 моля → при любом изменении давления равновесие <strong>не смещается → «3»</strong>.
+    </div>
+    <div class="mistake-card">
+      <strong>❌ Ошибка 4: Твёрдые вещества и давление</strong><br>
+      Твёрдые вещества не учитываются при подсчёте молей газа и не реагируют на давление. CaCO₃(тв) ⇌ CaO(тв) + CO₂(г): слева 0 молей газа, справа 1.
+    </div>
+    <div class="mistake-card">
+      <strong>❌ Ошибка 5: Добавление продукта → прямая</strong><br>
+      Если добавляют продукт (напр. NH₃ в N₂+3H₂⇌2NH₃) — равновесие идёт <strong>влево (обратная)</strong>, чтобы убрать избыток.
+    </div>
+    <div class="mistake-card">
+      <strong>❌ Ошибка 6: Путаница «разбавление водой»</strong><br>
+      При разбавлении водой концентрации всех веществ уменьшаются. Равновесие смещается в сторону <strong>большего числа молей</strong> растворённых частиц.
+    </div>
+  </div>
+</div>
+
+<!-- БЛОК 7: ЛАЙФХАКИ -->
+<div class="section fade-in" id="s-hacks">
+  <div class="section-header">
+    <span class="section-pill">ЛАЙФХАКИ</span>
+    <span class="section-title">Лайфхаки для быстрого запоминания</span>
+  </div>
+
+  <div class="cards-row">
+    <div class="hack-card">
+      <strong>💡 Лайфхак «ПРОТИВОДЕЙСТВИЕ»</strong><br>
+      Система всегда <em>противодействует</em> воздействию. Нагреваешь → система охлаждает (эндо). Сжимаешь → система расширяется (больше молей). Добавляешь → система убирает. Один принцип — на все случаи.
+    </div>
+    <div class="hack-card">
+      <strong>💡 Лайфхак для давления: «Считай молей слева и справа»</strong><br>
+      Запиши числа молей газов: N₂(1) + 3H₂(3) ⇌ 2NH₃(2) → слева 4, справа 2. Больше слева → при p↑ равновесие вправо (прямая). Больше справа → при p↑ влево. Одинаково → «3».
+    </div>
+    <div class="hack-card">
+      <strong>💡 Лайфхак для температуры: «ТЕПЛЫЙ→ЭНДО»</strong><br>
+      Т <strong>е</strong>плеет → <strong>э</strong>ндо (поглощает тепло). Т <strong>х</strong>олодает → э<strong>кзо</strong> (выделяет тепло). Слова начинаются на одну букву: Т-теплеет = Э-эндо, Т-холодает = Э-экзо.
+    </div>
+    <div class="hack-card">
+      <strong>💡 Лайфхак «Катализатор = 3»</strong><br>
+      Катализатор это как «турбо» — ускоряет и ту, и другую реакцию. Равновесие наступает быстрее, но <strong>в той же точке</strong>. Всегда ответ «3».
+    </div>
+    <div class="hack-card">
+      <strong>💡 Лайфхак для ионных реакций (в растворе)</strong><br>
+      Если добавляют твёрдое вещество — оно растворяется и поставляет ионы. Определи, какой ион появляется: реагент → прямая, продукт → обратная. Если добавляют щёлочь к реакции с H⁺ в продуктах → OH⁻ + H⁺ → H⁺ убывает → прямая.
+    </div>
+  </div>
+
+  <div class="note">
+    <div class="note-label">Запомни для ЕГЭ</div>
+    <ul>
+      <li><strong>Катализатор</strong> → всегда «3» (практически не смещает)</li>
+      <li>Реакция <strong>без газов</strong> → давление не влияет → «3»</li>
+      <li>Молей газа <strong>одинаково</strong> → давление → «3»</li>
+      <li>Знак <strong>+Q</strong> при реакции = экзотермическая прямая</li>
+      <li>Знак <strong>−Q</strong> при реакции = эндотермическая прямая</li>
+      <li>Добавление <strong>твёрдой щёлочи</strong> в р-р с H⁺ → H⁺ убывает → прямая</li>
+      <li>Добавление <strong>кислоты</strong> в р-р с H⁺ как продуктом → обратная</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ТРЕНАЖЁР -->
+<div class="section fade-in" id="trainer-section">
+  <div class="section-header">
+    <span class="section-pill">ПРАКТИКА</span>
+    <span class="section-title">Тренажёр ЕГЭ — Линия 22 · 40 заданий</span>
+  </div>
+
+  <div class="box box-info" style="margin-bottom:14px">
+    <strong>Формат:</strong> дано уравнение реакции и 4 воздействия (А, Б, В, Г). Установите соответствие с направлениями: <code>1</code> — прямая, <code>2</code> — обратная, <code>3</code> — не смещается. Введи 4 цифры подряд (например: <code>2322</code>). При ошибке — +1 задание в конец.
+  </div>
+
+  <div id="err-badge" class="err-badge">
+    ⚠ Работа над ошибками: <span id="err-count">0</span> заданий
+  </div>
+
+  <div id="tr-wrap">
+    <div class="tr-header">
+      <span class="tr-title">Тренажёр — Равновесие</span>
+      <div class="tr-stats">
+        <div class="ts-item"><span id="t-ok" class="ts-num green">0</span> верно</div>
+        <div class="ts-item"><span id="t-err" class="ts-num red">0</span> ошибок</div>
+        <div class="ts-item"><span id="t-time" class="ts-num amber">0:00</span></div>
+      </div>
+    </div>
+
+    <div class="tr-prog-wrap">
+      <div class="tr-prog-lbl">
+        <span id="t-pos-label">Задание 1 из 40</span>
+        <span id="t-pct-label">0%</span>
+      </div>
+      <div class="tr-prog-track"><div class="tr-prog-fill" id="t-progress" style="width:0%"></div></div>
+    </div>
+
+    <div id="t-card" class="tr-card">
+      <div id="t-eq" class="tr-eq"></div>
+      <div class="tr-match">
+        <div>
+          <div class="tr-col-title">Воздействие на систему</div>
+          <div id="t-effects"></div>
+        </div>
+        <div>
+          <div class="tr-col-title">Направление смещения</div>
+          <div class="tr-dir-row"><span class="tr-dir-n">1)</span> в сторону прямой реакции</div>
+          <div class="tr-dir-row"><span class="tr-dir-n">2)</span> в сторону обратной реакции</div>
+          <div class="tr-dir-row"><span class="tr-dir-n">3)</span> практически не смещается</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tr-input-row">
+      <input type="text" id="t-input" class="tr-input" maxlength="4" placeholder="" autocomplete="off">
+      <button id="t-check-btn" class="tr-btn" onclick="trCheck()">Проверить</button>
+      <span id="t-penalty" class="tr-penalty">+1 задание</span>
+    </div>
+    <div id="t-feedback" class="tr-feedback"></div>
+
+    <div class="tr-nav" id="t-nav">
+      <div class="tr-nav-btns">
+        <button id="t-prev" onclick="trPrev()" disabled title="Назад">←</button>
+        <button id="t-next" onclick="trNext()" disabled title="Вперёд">→</button>
+      </div>
+      <span style="font-size:12px;color:var(--ink3)">Enter — проверить / следующее</span>
+    </div>
+
+    <div id="t-result" class="tr-result">
+      <div class="gr" id="t-grade">🎉</div>
+      <div class="pct" id="t-pct-big">0%</div>
+      <div style="font-size:14px;color:var(--ink3);margin-bottom:12px">из 40 заданий ЕГЭ</div>
+      <div class="rs">
+        <div><div class="rn" id="r-ok" style="color:var(--green)">0</div><div class="rl">верных</div></div>
+        <div><div class="rn" id="r-err" style="color:var(--red)">0</div><div class="rl">ошибок</div></div>
+        <div><div class="rn" id="r-time" style="color:var(--amber)">0:00</div><div class="rl">времени</div></div>
+      </div>
+      <div class="ra">
+        <button class="tr-btn" onclick="trRetry()">Пройти заново</button>
+        <button id="t-retry-errors-btn" class="tr-btn tr-btn-ok" style="display:none" onclick="trRetryErrors()">Работа над ошибками</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /shell -->
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────
+const RAW = [
+  {id:1,  eq:'4HNO₃(ж) ⇌ 4NO₂(г) + 2H₂O(ж) + O₂(г) − Q',
+   fx:['повышение давления','добавление катализатора','понижение температуры','увеличение концентрации кислорода'], ans:'2322'},
+  {id:2,  eq:'Br₂(г) + H₂(г) ⇌ 2HBr(г) + Q',
+   fx:['снижение давления','добавление катализатора','повышение температуры','уменьшение концентрации водорода'], ans:'3322'},
+  {id:3,  eq:'2HBr(г) ⇌ Br₂(г) + H₂(г) − Q',
+   fx:['понижение температуры','добавление катализатора','повышение давления','увеличение концентрации водорода'], ans:'2332'},
+  {id:4,  eq:'2NH₃(г) ⇌ N₂(г) + 3H₂(г) − Q',
+   fx:['понижение температуры','добавление катализатора','повышение давления','увеличение концентрации водорода'], ans:'2322'},
+  {id:5,  eq:'C(тв) + 2H₂(г) ⇌ CH₄(г) + Q',
+   fx:['уменьшение концентрации водорода','добавление катализатора','повышение давления','снижение температуры'], ans:'2311'},
+  {id:6,  eq:'C₂H₄(г) + H₂(г) ⇌ C₂H₆(г) + Q',
+   fx:['увеличение концентрации водорода','повышение температуры','снижение давления','добавление катализатора'], ans:'1223'},
+  {id:7,  eq:'C(тв) + 2H₂(г) ⇌ CH₄(г) + Q',
+   fx:['увеличение концентрации водорода','повышение температуры','снижение давления','добавление катализатора'], ans:'1223'},
+  {id:8,  eq:'SO₂(г) + Cl₂(г) ⇌ SO₂Cl₂(г) + Q',
+   fx:['снижение давления','добавление катализатора','повышение температуры','уменьшение концентрации хлора'], ans:'2322'},
+  {id:9,  eq:'N₂(г) + 3H₂(г) ⇌ 2NH₃(г) + Q',
+   fx:['уменьшение концентрации водорода','добавление катализатора','повышение давления','снижение температуры'], ans:'2311'},
+  {id:10, eq:'При понижении температуры — какая реакция смещается в сторону прямой?',
+   fx:['NO(г) + NO₂(г) ⇌ N₂O₃(г) + Q','C₄H₁₀(г) ⇌ C₄H₆(г) + 2H₂(г) − Q','HF(р-р) ⇌ H⁺(р-р) + F⁻(р-р) − Q','ClF(г) + F₂(г) ⇌ ClF₃(г) + Q'], ans:'1221'},
+  {id:11, eq:'При понижении давления — направление смещения (А,Б,В,Г)?',
+   fx:['C₂H₂(г) + H₂(г) ⇌ C₂H₄(г)','AlCl₃(р-р)+H₂O(ж)⇌Al(OH)Cl₂(р-р)+HCl(р-р)','C₄H₈(г)+H₂O(г)⇌C₄H₉OH(г)','2SO₂(г)+O₂(г)⇌2SO₃(г)'], ans:'2322'},
+  {id:12, eq:'При понижении давления — направление смещения (А,Б,В,Г)?',
+   fx:['2NO₂(г) ⇌ 2NO(г) + O₂(г)','C₂H₆(г) ⇌ C₂H₄(г) + H₂(г)','CaCO₃(тв) ⇌ CaO(тв) + CO₂(г)','N₂(г) + O₂(г) ⇌ 2NO(г)'], ans:'1113'},
+  {id:13, eq:'При понижении давления — направление смещения (А,Б,В,Г)?',
+   fx:['S(тв)+O₂(г)⇌SO₂(г)','C₂H₂(г)+2H₂(г)⇌C₂H₆(г)','SnCl₂(р-р)+H₂O(ж)⇌Sn(OH)Cl(р-р)+HCl(р-р)','C₂H₂(г)+H₂O(г)⇌C₂H₅OH(г)'], ans:'3232'},
+  {id:14, eq:'При понижении давления — направление смещения (А,Б,В,Г)?',
+   fx:['C₂H₅OH(г)⇌C₂H₄(г)+H₂O(г)','2CO(г)+O₂(г)⇌2CO₂(г)+Q','KNO₂(р-р)+H₂O(ж)⇌KOH(р-р)+HNO₂(р-р)','C₂H₄(г)+H₂(г)⇌C₂H₆(г)+Q'], ans:'1232'},
+  {id:15, eq:'При уменьшении концентрации H₂ — направление смещения (А,Б,В,Г)?',
+   fx:['C₂H₂(г)+2H₂(г)⇌C₂H₆(г)+Q','H₂O(г)+NO(г)⇌NO₂(г)+H₂(г)−Q','2NH₃(г)⇌N₂(г)+3H₂(г)+Q','H₂(г)+Br₂(г)⇌2HBr(г)'], ans:'1221'},
+  {id:16, eq:'При повышении давления — направление смещения (А,Б,В,Г)?',
+   fx:['N₂(г)+3H₂(г)⇌2NH₃(г)','2H₂(г)+O₂(г)⇌2H₂O(г)','H₂(г)+Cl₂(г)⇌2HCl(г)','SO₂(г)+Cl₂(г)⇌SO₂Cl₂(г)'], ans:'1131'},
+  {id:17, eq:'При увеличении концентрации H₂ — направление смещения (А,Б,В,Г)?',
+   fx:['H₂(г)+S(тв)⇌H₂S(г)+Q','H₂O(г)+NO(г)⇌NO₂(г)+H₂(г)−Q','C₂H₂(г)+H₂(г)⇌C₂H₄(г)+Q','N₂(г)+3H₂(г)⇌2NH₃(г)+Q'], ans:'1211'},
+  {id:18, eq:'При повышении давления — направление смещения (А,Б,В,Г)?',
+   fx:['CaCO₃(тв)⇌CaO(тв)+CO₂(г)','C₂H₄(г)+H₂(г)⇌C₂H₆(г)','N₂(г)+O₂(г)⇌2NO(г)','2NO(г)+O₂(г)⇌2NO₂(г)'], ans:'2131'},
+  {id:19, eq:'При повышении давления — направление смещения (А,Б,В,Г)?',
+   fx:['C₂H₂(г)+2H₂(г)⇌C₂H₆(г)','2NO(г)+Cl₂(г)⇌2NOCl(г)','C₂H₅OH(г)⇌C₂H₄(г)+H₂O(г)','ZnCl₂(р-р)+H₂O(ж)⇌Zn(OH)Cl(р-р)+HCl(р-р)'], ans:'1123'},
+  {id:20, eq:'H₂O(ж) + Zn²⁺(р-р) ⇌ ZnOH⁺(р-р) + H⁺(р-р) − Q',
+   fx:['добавление кислоты','повышение давления','добавление твёрдой щёлочи','повышение температуры'], ans:'2311'},
+  {id:21, eq:'CO₂(г) + H₂O(ж) ⇌ H⁺(р-р) + HCO₃⁻(р-р) + Q',
+   fx:['добавление соляной кислоты','повышение давления','добавление твёрдого NH₄HCO₃','повышение температуры'], ans:'2122'},
+  {id:22, eq:'H⁺(р-р) + ClO⁻(р-р) ⇌ HClO(р-р) + Q',
+   fx:['добавление серной кислоты','добавление твёрдого KClO','повышение температуры','понижение давления'], ans:'1123'},
+  {id:23, eq:'NH₃(г) + H₂O(ж) ⇌ NH₄⁺(р-р) + OH⁻(р-р) + Q',
+   fx:['добавление твёрдой щёлочи','добавление твёрдого NH₄Cl','повышение температуры','повышение давления'], ans:'2221'},
+  {id:24, eq:'H₂O(ж) + Al³⁺(р-р) ⇌ AlOH²⁺(р-р) + H⁺(р-р) − Q',
+   fx:['добавление твёрдой щёлочи','добавление кислоты','повышение температуры','понижение давления'], ans:'1213'},
+  {id:25, eq:'H⁺(р-р) + NO₂⁻(р-р) ⇌ HNO₂(р-р) + Q',
+   fx:['добавление твёрдой щёлочи','добавление твёрдого KNO₂','повышение температуры','понижение давления'], ans:'2123'},
+  {id:26, eq:'HClO(р-р) ⇌ H⁺(р-р) + ClO⁻(р-р) − Q',
+   fx:['добавление серной кислоты','добавление твёрдого NaClO','повышение температуры','понижение давления'], ans:'2213'},
+  {id:27, eq:'Pb²⁺(р-р) + 2I⁻(р-р) ⇌ PbI₂(тв) + Q',
+   fx:['добавление твёрдого LiI','повышение давления','понижение температуры','добавление твёрдого Pb(NO₃)₂'], ans:'1311'},
+  {id:28, eq:'H⁺(р-р) + PO₄³⁻(р-р) ⇌ HPO₄²⁻(р-р) + Q',
+   fx:['добавление твёрдого K₃PO₄','добавление соляной кислоты','добавление твёрдого KOH','понижение температуры'], ans:'1121'},
+  {id:29, eq:'HPO₄²⁻(р-р) ⇌ H⁺(р-р) + PO₄³⁻(р-р) − Q',
+   fx:['добавление твёрдого K₃PO₄','добавление соляной кислоты','добавление твёрдого KOH','повышение температуры'], ans:'2211'},
+  {id:30, eq:'HCOOH(р-р) ⇌ HCOO⁻(р-р) + H⁺(р-р) − Q',
+   fx:['добавление твёрдого KOH','добавление твёрдого HCOOK','повышение давления','добавление соляной кислоты'], ans:'1232'},
+  {id:31, eq:'H₂S(р-р) ⇌ H⁺(р-р) + HS⁻(р-р) − Q',
+   fx:['добавление твёрдой щёлочи','добавление твёрдого KHS','понижение давления','понижение температуры'], ans:'1232'},
+  {id:32, eq:'[Zn(OH)₄]²⁻(р-р) ⇌ Zn²⁺(р-р) + 4OH⁻(р-р) − Q',
+   fx:['увеличение концентрации ионов цинка','добавление кислоты','пропускание сероводорода','добавление твёрдой щёлочи'], ans:'2112'},
+  {id:33, eq:'H₂O(ж) + S²⁻(р-р) ⇌ OH⁻(р-р) + HS⁻(р-р) − Q',
+   fx:['повышение температуры','разбавление раствора водой','добавление твёрдой щёлочи','понижение давления'], ans:'1123'},
+  {id:34, eq:'FeS(тв) + 2H⁺(р-р) ⇌ Fe²⁺(р-р) + H₂S(г) + Q',
+   fx:['повышение температуры','добавление хлорной кислоты','добавление твёрдого FeCl₂','повышение давления'], ans:'2122'},
+  {id:35, eq:'CaSO₄(тв) ⇌ Ca²⁺(р-р) + SO₄²⁻(р-р) − Q',
+   fx:['повышение температуры','добавление твёрдого CaCl₂','добавление твёрдого CaSO₄','добавление твёрдого MgSO₄'], ans:'1232'},
+  {id:36, eq:'CH₃NH₂(р-р) + H₂O(ж) ⇌ CH₃NH₃⁺(р-р) + OH⁻(р-р) − Q',
+   fx:['добавление раствора HNO₃','добавление твёрдой щёлочи','понижение температуры','повышение давления'], ans:'1223'},
+  {id:37, eq:'Mg²⁺(р-р) + SO₃²⁻(р-р) ⇌ MgSO₃(тв) + Q',
+   fx:['повышение давления','добавление твёрдого MgCl₂','добавление твёрдого Na₂SO₃','повышение температуры'], ans:'3112'},
+  {id:38, eq:'HNO₂(р-р) ⇌ H⁺(р-р) + NO₂⁻(р-р) − Q',
+   fx:['добавление твёрдой щёлочи','добавление твёрдого KNO₂','повышение температуры','понижение давления'], ans:'1213'},
+  {id:39, eq:'CaSO₄(тв) ⇌ Ca²⁺(р-р) + SO₄²⁻(р-р) − Q',
+   fx:['повышение давления','добавление твёрдого MgSO₄','добавление твёрдого CaCl₂','повышение температуры'], ans:'3221'},
+  {id:40, eq:'AgCl(тв) ⇌ Ag⁺(р-р) + Cl⁻(р-р) − Q',
+   fx:['понижение давления','добавление твёрдого KCl','добавление твёрдого AgNO₃','повышение температуры'], ans:'3221'},
+];
+
+// ─── STATE ───────────────────────────────────────────────
+let queue=[],pos=0,correct=0,errors=0;
+let answered=new Set(),wrongIds=new Set(),userAnswers={};
+let timerSec=0,timerInt=null,isFinished=false,baseTotal=RAW.length;
+
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function fmtTime(s){return Math.floor(s/60)+':'+(s%60<10?'0':'')+(s%60)}
+function norm(v){return v.trim().replace(/\s+/g,'').toLowerCase()}
+
+// ─── INIT ────────────────────────────────────────────────
+function trInit(){
+  queue=shuffle([...RAW]);
+  pos=0;correct=0;errors=0;
+  answered=new Set();wrongIds=new Set();userAnswers={};
+  timerSec=0;isFinished=false;baseTotal=RAW.length;
+  clearInterval(timerInt);
+  timerInt=setInterval(()=>{timerSec++;document.getElementById('t-time').textContent=fmtTime(timerSec);},1000);
+  document.getElementById('t-result').style.display='none';
+  document.getElementById('t-card').style.display='block';
+  document.querySelector('.tr-input-row').style.display='flex';
+  document.getElementById('t-nav').style.display='flex';
+  document.getElementById('err-badge').classList.remove('show');
+  document.getElementById('t-ok').textContent=0;
+  document.getElementById('t-err').textContent=0;
+  trRender();
+}
+
+// ─── RENDER ──────────────────────────────────────────────
+function trRender(){
+  const t=queue[pos];
+  document.getElementById('t-eq').textContent=t.eq;
+  const ef=document.getElementById('t-effects');
+  ef.innerHTML='';
+  const letters=['А','Б','В','Г'];
+  t.fx.forEach((f,i)=>{
+    const d=document.createElement('div');
+    d.className='tr-effect-row';
+    d.innerHTML=`<span class="tr-el">${letters[i]})</span><span class="tr-ef">${f}</span>`;
+    ef.appendChild(d);
+  });
+  const done=answered.size,total=queue.length;
+  const pct=Math.round(done/total*100);
+  document.getElementById('t-progress').style.width=pct+'%';
+  document.getElementById('t-pos-label').textContent=`Задание ${pos+1} из ${total}`;
+  document.getElementById('t-pct-label').textContent=pct+'%';
+  document.getElementById('t-ok').textContent=correct;
+  document.getElementById('t-prev').disabled=pos===0;
+  const inp=document.getElementById('t-input');
+  const fb=document.getElementById('t-feedback');
+  const pen=document.getElementById('t-penalty');
+  pen.classList.remove('show');
+  if(answered.has(pos)){
+    inp.value=userAnswers[pos]??'';
+    inp.readOnly=true;
+    document.getElementById('t-check-btn').disabled=true;
+    document.getElementById('t-next').disabled=false;
+    if(t._wasWrong===false){
+      inp.className='tr-input ok';
+      fb.className='tr-feedback ok';fb.textContent='✓ Верно!';
+    } else {
+      inp.className='tr-input err';
+      fb.className='tr-feedback err';fb.textContent=`✗ Неверно. Правильный ответ: ${t.ans}`;
+    }
+  } else {
+    inp.value='';inp.className='tr-input';inp.readOnly=false;
+    fb.className='tr-feedback';fb.textContent='';
+    document.getElementById('t-check-btn').disabled=false;
+    document.getElementById('t-next').disabled=true;
+  }
+}
+
+// ─── CHECK ───────────────────────────────────────────────
+function trCheck(){
+  if(answered.has(pos))return;
+  const t=queue[pos];
+  const raw=document.getElementById('t-input').value;
+  const val=norm(raw),ans=norm(t.ans);
+  const inp=document.getElementById('t-input');
+  const fb=document.getElementById('t-feedback');
+  answered.add(pos);
+  userAnswers[pos]=raw;
+  if(val===ans){
+    correct++;t._wasWrong=false;
+    inp.className='tr-input ok';inp.readOnly=true;
+    fb.className='tr-feedback ok';fb.textContent='✓ Верно!';
+    document.getElementById('t-ok').textContent=correct;
+    document.getElementById('t-check-btn').disabled=true;
+    document.getElementById('t-next').disabled=false;
+  } else {
+    errors++;t._wasWrong=true;
+    wrongIds.add(t.id);
+    inp.className='tr-input err';inp.readOnly=true;
+    fb.className='tr-feedback err';
+    fb.textContent=`✗ Неверно. Правильный ответ: ${t.ans}`;
+    document.getElementById('t-err').textContent=errors;
+    document.getElementById('t-check-btn').disabled=true;
+    document.getElementById('t-next').disabled=false;
+    document.getElementById('t-penalty').classList.add('show');
+    queue.push({...t,_wasWrong:undefined});
+    document.getElementById('t-pos-label').textContent=`Задание ${pos+1} из ${queue.length}`;
+  }
+  const done=answered.size,total=queue.length;
+  const pct=Math.round(done/total*100);
+  document.getElementById('t-progress').style.width=pct+'%';
+  document.getElementById('t-pct-label').textContent=pct+'%';
+  if(pos===queue.length-1&&answered.size>=queue.length){setTimeout(trShowResult,800);}
+}
+
+function trNext(){
+  if(pos<queue.length-1){pos++;trRender();}
+  else if(answered.size>=queue.length){trShowResult();}
+}
+function trPrev(){if(pos>0){pos--;trRender();}}
+
+document.getElementById('t-input').addEventListener('keydown',e=>{
+  if(e.key==='Enter'){if(!answered.has(pos))trCheck();else trNext();}
+});
+
+// ─── RESULT ──────────────────────────────────────────────
+function trShowResult(){
+  if(isFinished)return;
+  clearInterval(timerInt);isFinished=true;
+  const pct=Math.round(correct/baseTotal*100);
+  document.getElementById('t-card').style.display='none';
+  document.querySelector('.tr-input-row').style.display='none';
+  document.getElementById('t-nav').style.display='none';
+  const res=document.getElementById('t-result');res.style.display='block';
+  document.getElementById('t-grade').textContent=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'👍':'💪';
+  document.getElementById('t-pct-big').textContent=pct+'%';
+  document.getElementById('r-ok').textContent=correct;
+  document.getElementById('r-err').textContent=errors;
+  document.getElementById('r-time').textContent=fmtTime(timerSec);
+  const errBtn=document.getElementById('t-retry-errors-btn');
+  if(wrongIds.size>0){errBtn.style.display='';errBtn.textContent=`Работа над ошибками (${wrongIds.size})`;}
+  else errBtn.style.display='none';
+}
+
+function trRetry(){trInit();}
+
+function trRetryErrors(){
+  if(wrongIds.size===0)return;
+  const errTasks=RAW.filter(t=>wrongIds.has(t.id));
+  baseTotal=errTasks.length;
+  queue=shuffle(errTasks);
+  pos=0;correct=0;errors=0;
+  answered=new Set();wrongIds=new Set();userAnswers={};
+  timerSec=0;isFinished=false;
+  clearInterval(timerInt);
+  timerInt=setInterval(()=>{timerSec++;document.getElementById('t-time').textContent=fmtTime(timerSec);},1000);
+  document.getElementById('t-result').style.display='none';
+  document.getElementById('t-card').style.display='block';
+  document.querySelector('.tr-input-row').style.display='flex';
+  document.getElementById('t-nav').style.display='flex';
+  document.getElementById('err-badge').classList.add('show');
+  document.getElementById('err-count').textContent=queue.length;
+  document.getElementById('t-ok').textContent=0;
+  document.getElementById('t-err').textContent=0;
+  trRender();
+}
+
+// ─── TOPBAR & MENU ───────────────────────────────────────
+function openMenu(){document.getElementById('menu-overlay').classList.add('open');document.getElementById('menu-panel').classList.add('open');}
+function closeMenu(){document.getElementById('menu-overlay').classList.remove('open');document.getElementById('menu-panel').classList.remove('open');}
+
+// ─── SCROLL ──────────────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  const pct=h>0?window.scrollY/h*100:0;
+  document.getElementById('pf').style.width=pct+'%';
+  document.getElementById('tb-pf').style.width=pct+'%';
+  document.getElementById('tb-lbl').textContent=Math.round(pct)+'%';
+  document.getElementById('btt').classList.toggle('vis',window.scrollY>300);
+});
+
+// ─── FADE IN ─────────────────────────────────────────────
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')});},{threshold:0.07});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+trInit();
+
+// ─── TABLES ──────────────────────────────────────────────
+function togglePS(){const o=document.getElementById('ps-overlay');const shown=o.style.display==='flex';o.style.display=shown?'none':'flex';}
+function toggleRS(){const o=document.getElementById('rs-overlay');const shown=o.style.display==='flex';o.style.display=shown?'none':'flex';}
+document.addEventListener('keydown',e=>{
+  if(e.key.toLowerCase()==='t'&&!e.target.matches('input,textarea')){e.preventDefault();togglePS();}
+  if(e.key.toLowerCase()==='r'&&!e.target.matches('input,textarea')){e.preventDefault();toggleRS();}
+  if(e.key==='Escape'){
+    if(document.getElementById('ps-overlay').style.display==='flex')togglePS();
+    if(document.getElementById('rs-overlay').style.display==='flex')toggleRS();
+  }
+});
+// solubility table highlight
+(function(){
+  let activeCol=-1, activeRow=-1;
+  function redraw(t){
+    t.querySelectorAll('.sol-col-active,.sol-row-active,.sol-col-hl,.sol-row-hl,.sol-intersect')
+      .forEach(x=>x.classList.remove('sol-col-active','sol-row-active','sol-col-hl','sol-row-hl','sol-intersect'));
+    const rows=t.querySelectorAll('tbody tr');
+    if(activeCol>0){
+      const hdr=t.querySelector('thead tr:last-child th:nth-child('+(activeCol+1)+')');
+      if(hdr)hdr.classList.add('sol-col-active');
+      rows.forEach(r=>{const c=r.cells[activeCol];if(c)c.classList.add('sol-col-hl');});
+    }
+    if(activeRow>=0){
+      const rw=rows[activeRow];
+      if(rw){rw.cells[0].classList.add('sol-row-active');
+        Array.from(rw.cells).slice(1).forEach(c=>c.classList.add('sol-row-hl'));}
+    }
+    if(activeCol>0&&activeRow>=0){
+      const rw=rows[activeRow];
+      if(rw){const c=rw.cells[activeCol];if(c){c.classList.remove('sol-col-hl','sol-row-hl');c.classList.add('sol-intersect');}}
+    }
+  }
+  document.addEventListener('click',e=>{
+    const t=e.target.closest('.sol-table');if(!t)return;
+    const th=e.target.closest('th');if(!th)return;
+    const ci=th.cellIndex;
+    if(th.parentElement.parentElement.tagName==='THEAD'&&ci>0){
+      activeCol=(activeCol===ci)?-1:ci;
+    } else if(th.parentElement.parentElement.tagName==='TBODY'){
+      const ri=Array.from(t.querySelectorAll('tbody tr')).indexOf(th.parentElement);
+      activeRow=(activeRow===ri)?-1:ri;
+    }
+    redraw(t);
+  });
+})();
+</script>
+
+<!-- PERIODIC TABLE OVERLAY -->
+<div id="ps-overlay" onclick="if(event.target===this)togglePS()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:16px;padding:20px 24px;max-width:98vw;max-height:92vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div style="font-size:16px;font-weight:800;color:var(--h2)">⚛️ Периодическая система Д.И. Менделеева</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span style="font-size:11px;color:#999;font-family:monospace">T или Esc — закрыть</span>
+        <button onclick="togglePS()" style="background:#f0f0f0;border:none;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:14px;font-weight:700">✕</button>
+      </div>
+    </div>
+    <div class="pt-legend6" style="margin-bottom:10px">
+      <span class="pt-leg-item6" style="background:#8B7ED8;color:#2D1B69">s-элементы</span>
+      <span class="pt-leg-item6" style="background:#6EC9A4;color:#064C30">p-элементы</span>
+      <span class="pt-leg-item6" style="background:#7EC4F0;color:#0A2860">d-элементы</span>
+      <span class="pt-leg-item6" style="background:#F0C840;color:#5A2E04">f-элементы</span>
+    </div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table class="pt-ru">
+    <thead><tr><th rowspan="2" class="pt-corner">Пе&shy;ри&shy;од</th><th colspan="7">Группы</th><th colspan="3">VIII</th><th rowspan="2" class="pt-noble-hdr">0</th></tr>
+    <tr><th>I</th><th>II</th><th>III</th><th>IV</th><th>V</th><th>VI</th><th>VII</th><th class="pt-viii">A</th><th class="pt-viii">B</th><th class="pt-viii">C</th></tr></thead>
+    <tbody>
+    <tr><td class="pt-period">1</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">1</span><span class="el-mass">1,008</span><span class="el-sym">H</span><span class="el-name">Водород</span></td><td colspan="5" class="el-blank6"></td><td class="el6" style="background:#f1f5f9;color:#6b7280;font-style:italic"><span class="el-sym" style="font-size:13px">(H)</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">2</span><span class="el-mass">4,00</span><span class="el-sym">He</span><span class="el-name">Гелий</span></td></tr>
+    <tr><td class="pt-period">2</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">3</span><span class="el-mass">6,94</span><span class="el-sym">Li</span><span class="el-name">Литий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">4</span><span class="el-mass">9,01</span><span class="el-sym">Be</span><span class="el-name">Бериллий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">5</span><span class="el-mass">10,81</span><span class="el-sym">B</span><span class="el-name">Бор</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">6</span><span class="el-mass">12,01</span><span class="el-sym">C</span><span class="el-name">Углерод</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">7</span><span class="el-mass">14,00</span><span class="el-sym">N</span><span class="el-name">Азот</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">8</span><span class="el-mass">16,00</span><span class="el-sym">O</span><span class="el-name">Кислород</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">9</span><span class="el-mass">19,00</span><span class="el-sym">F</span><span class="el-name">Фтор</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">10</span><span class="el-mass">20,18</span><span class="el-sym">Ne</span><span class="el-name">Неон</span></td></tr>
+    <tr><td class="pt-period">3</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">11</span><span class="el-mass">22,99</span><span class="el-sym">Na</span><span class="el-name">Натрий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">12</span><span class="el-mass">24,31</span><span class="el-sym">Mg</span><span class="el-name">Магний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">13</span><span class="el-mass">26,98</span><span class="el-sym">Al</span><span class="el-name">Алюминий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">14</span><span class="el-mass">28,09</span><span class="el-sym">Si</span><span class="el-name">Кремний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">15</span><span class="el-mass">30,97</span><span class="el-sym">P</span><span class="el-name">Фосфор</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">16</span><span class="el-mass">32,06</span><span class="el-sym">S</span><span class="el-name">Сера</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">17</span><span class="el-mass">35,45</span><span class="el-sym">Cl</span><span class="el-name">Хлор</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">18</span><span class="el-mass">39,95</span><span class="el-sym">Ar</span><span class="el-name">Аргон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">4</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">19</span><span class="el-mass">39,10</span><span class="el-sym">K</span><span class="el-name">Калий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">20</span><span class="el-mass">40,08</span><span class="el-sym">Ca</span><span class="el-name">Кальций</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">21</span><span class="el-mass">44,96</span><span class="el-sym">Sc</span><span class="el-name">Скандий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">22</span><span class="el-mass">47,90</span><span class="el-sym">Ti</span><span class="el-name">Титан</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">23</span><span class="el-mass">50,94</span><span class="el-sym">V</span><span class="el-name">Ванадий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">24</span><span class="el-mass">52,00</span><span class="el-sym">Cr</span><span class="el-name">Хром</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">25</span><span class="el-mass">54,94</span><span class="el-sym">Mn</span><span class="el-name">Марганец</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">26</span><span class="el-mass">55,85</span><span class="el-sym">Fe</span><span class="el-name">Железо</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">27</span><span class="el-mass">58,93</span><span class="el-sym">Co</span><span class="el-name">Кобальт</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">28</span><span class="el-mass">58,69</span><span class="el-sym">Ni</span><span class="el-name">Никель</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">29</span><span class="el-mass">63,55</span><span class="el-sym">Cu</span><span class="el-name">Медь</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">30</span><span class="el-mass">65,39</span><span class="el-sym">Zn</span><span class="el-name">Цинк</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">31</span><span class="el-mass">69,72</span><span class="el-sym">Ga</span><span class="el-name">Галлий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">32</span><span class="el-mass">72,59</span><span class="el-sym">Ge</span><span class="el-name">Германий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">33</span><span class="el-mass">74,92</span><span class="el-sym">As</span><span class="el-name">Мышьяк</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">34</span><span class="el-mass">78,96</span><span class="el-sym">Se</span><span class="el-name">Селен</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">35</span><span class="el-mass">79,90</span><span class="el-sym">Br</span><span class="el-name">Бром</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">36</span><span class="el-mass">83,80</span><span class="el-sym">Kr</span><span class="el-name">Криптон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">5</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">37</span><span class="el-mass">85,47</span><span class="el-sym">Rb</span><span class="el-name">Рубидий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">38</span><span class="el-mass">87,62</span><span class="el-sym">Sr</span><span class="el-name">Стронций</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">39</span><span class="el-mass">88,91</span><span class="el-sym">Y</span><span class="el-name">Иттрий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">40</span><span class="el-mass">91,22</span><span class="el-sym">Zr</span><span class="el-name">Цирконий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">41</span><span class="el-mass">92,91</span><span class="el-sym">Nb</span><span class="el-name">Ниобий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">42</span><span class="el-mass">95,94</span><span class="el-sym">Mo</span><span class="el-name">Молибден</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">43</span><span class="el-mass">98,91</span><span class="el-sym">Tc</span><span class="el-name">Технеций</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">44</span><span class="el-mass">101,07</span><span class="el-sym">Ru</span><span class="el-name">Рутений</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">45</span><span class="el-mass">102,91</span><span class="el-sym">Rh</span><span class="el-name">Родий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">46</span><span class="el-mass">106,42</span><span class="el-sym">Pd</span><span class="el-name">Палладий</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">47</span><span class="el-mass">107,87</span><span class="el-sym">Ag</span><span class="el-name">Серебро</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">48</span><span class="el-mass">112,41</span><span class="el-sym">Cd</span><span class="el-name">Кадмий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">49</span><span class="el-mass">114,82</span><span class="el-sym">In</span><span class="el-name">Индий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">50</span><span class="el-mass">118,69</span><span class="el-sym">Sn</span><span class="el-name">Олово</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">51</span><span class="el-mass">121,75</span><span class="el-sym">Sb</span><span class="el-name">Сурьма</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">52</span><span class="el-mass">127,60</span><span class="el-sym">Te</span><span class="el-name">Теллур</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">53</span><span class="el-mass">126,90</span><span class="el-sym">I</span><span class="el-name">Иод</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">54</span><span class="el-mass">131,29</span><span class="el-sym">Xe</span><span class="el-name">Ксенон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">6</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">55</span><span class="el-mass">132,91</span><span class="el-sym">Cs</span><span class="el-name">Цезий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">56</span><span class="el-mass">137,33</span><span class="el-sym">Ba</span><span class="el-name">Барий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04;opacity:.85"><span class="el-num">57</span><span class="el-mass">138,91</span><span class="el-sym">La</span><span class="el-name">Лантан*</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">72</span><span class="el-mass">178,49</span><span class="el-sym">Hf</span><span class="el-name">Гафний</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">73</span><span class="el-mass">180,95</span><span class="el-sym">Ta</span><span class="el-name">Тантал</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">74</span><span class="el-mass">183,85</span><span class="el-sym">W</span><span class="el-name">Вольфрам</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">75</span><span class="el-mass">186,21</span><span class="el-sym">Re</span><span class="el-name">Рений</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">76</span><span class="el-mass">190,2</span><span class="el-sym">Os</span><span class="el-name">Осмий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">77</span><span class="el-mass">192,22</span><span class="el-sym">Ir</span><span class="el-name">Иридий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">78</span><span class="el-mass">195,08</span><span class="el-sym">Pt</span><span class="el-name">Платина</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">79</span><span class="el-mass">196,97</span><span class="el-sym">Au</span><span class="el-name">Золото</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">80</span><span class="el-mass">200,59</span><span class="el-sym">Hg</span><span class="el-name">Ртуть</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">81</span><span class="el-mass">204,38</span><span class="el-sym">Tl</span><span class="el-name">Таллий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">82</span><span class="el-mass">207,2</span><span class="el-sym">Pb</span><span class="el-name">Свинец</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">83</span><span class="el-mass">208,98</span><span class="el-sym">Bi</span><span class="el-name">Висмут</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">84</span><span class="el-mass">[209]</span><span class="el-sym">Po</span><span class="el-name">Полоний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">85</span><span class="el-mass">[210]</span><span class="el-sym">At</span><span class="el-name">Астат</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">86</span><span class="el-mass">[222]</span><span class="el-sym">Rn</span><span class="el-name">Радон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">7</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">87</span><span class="el-mass">[223]</span><span class="el-sym">Fr</span><span class="el-name">Франций</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">88</span><span class="el-mass">226</span><span class="el-sym">Ra</span><span class="el-name">Радий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04;opacity:.85"><span class="el-num">89</span><span class="el-mass">[227]</span><span class="el-sym">Ac</span><span class="el-name">Актиний**</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">104</span><span class="el-mass">[261]</span><span class="el-sym">Rf</span><span class="el-name">Резерф.</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">105</span><span class="el-mass">[262]</span><span class="el-sym">Db</span><span class="el-name">Дубний</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">106</span><span class="el-mass">[266]</span><span class="el-sym">Sg</span><span class="el-name">Сиборг.</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">107</span><span class="el-mass">[264]</span><span class="el-sym">Bh</span><span class="el-name">Борий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">108</span><span class="el-mass">[269]</span><span class="el-sym">Hs</span><span class="el-name">Хассий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">109</span><span class="el-mass">[268]</span><span class="el-sym">Mt</span><span class="el-name">Мейтн.</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">110</span><span class="el-mass">[271]</span><span class="el-sym">Ds</span><span class="el-name">Дармш.</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">111</span><span class="el-mass">[280]</span><span class="el-sym">Rg</span><span class="el-name">Рентг.</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">112</span><span class="el-mass">[285]</span><span class="el-sym">Cn</span><span class="el-name">Копер.</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">113</span><span class="el-mass">[286]</span><span class="el-sym">Nh</span><span class="el-name">Нихоний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">114</span><span class="el-mass">[289]</span><span class="el-sym">Fl</span><span class="el-name">Флеровий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">115</span><span class="el-mass">[293]</span><span class="el-sym">Mc</span><span class="el-name">Московий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">116</span><span class="el-mass">[293]</span><span class="el-sym">Lv</span><span class="el-name">Ливерм.</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">117</span><span class="el-mass">[294]</span><span class="el-sym">Ts</span><span class="el-name">Теннесин</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">118</span><span class="el-mass">[294]</span><span class="el-sym">Og</span><span class="el-name">Оганесон</span></td></tr>
+    </tbody></table>
+    <div style="margin-top:4px;overflow-x:auto"><table class="pt-ru" style="margin-left:0"><tbody>
+    <tr><td class="pt-f-label">*Лантаноиды<br>Период 6</td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">58</span><span class="el-mass">140,12</span><span class="el-sym">Ce</span><span class="el-name">Церий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">59</span><span class="el-mass">140,91</span><span class="el-sym">Pr</span><span class="el-name">Празеодим</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">60</span><span class="el-mass">144,24</span><span class="el-sym">Nd</span><span class="el-name">Неодим</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">61</span><span class="el-mass">[145]</span><span class="el-sym">Pm</span><span class="el-name">Прометий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">62</span><span class="el-mass">150,36</span><span class="el-sym">Sm</span><span class="el-name">Самарий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">63</span><span class="el-mass">151,97</span><span class="el-sym">Eu</span><span class="el-name">Европий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">64</span><span class="el-mass">157,25</span><span class="el-sym">Gd</span><span class="el-name">Гадолиний</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">65</span><span class="el-mass">158,93</span><span class="el-sym">Tb</span><span class="el-name">Тербий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">66</span><span class="el-mass">162,50</span><span class="el-sym">Dy</span><span class="el-name">Диспрозий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">67</span><span class="el-mass">164,93</span><span class="el-sym">Ho</span><span class="el-name">Гольмий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">68</span><span class="el-mass">167,26</span><span class="el-sym">Er</span><span class="el-name">Эрбий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">69</span><span class="el-mass">168,93</span><span class="el-sym">Tm</span><span class="el-name">Тулий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">70</span><span class="el-mass">173,04</span><span class="el-sym">Yb</span><span class="el-name">Иттербий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">71</span><span class="el-mass">174,97</span><span class="el-sym">Lu</span><span class="el-name">Лютеций</span></td></tr>
+    <tr><td class="pt-f-label">**Актиноиды<br>Период 7</td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">90</span><span class="el-mass">232,04</span><span class="el-sym">Th</span><span class="el-name">Торий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">91</span><span class="el-mass">231,04</span><span class="el-sym">Pa</span><span class="el-name">Протакт.</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">92</span><span class="el-mass">238,03</span><span class="el-sym">U</span><span class="el-name">Уран</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">93</span><span class="el-mass">[237]</span><span class="el-sym">Np</span><span class="el-name">Нептуний</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">94</span><span class="el-mass">[244]</span><span class="el-sym">Pu</span><span class="el-name">Плутоний</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">95</span><span class="el-mass">[243]</span><span class="el-sym">Am</span><span class="el-name">Америций</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">96</span><span class="el-mass">[247]</span><span class="el-sym">Cm</span><span class="el-name">Кюрий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">97</span><span class="el-mass">[247]</span><span class="el-sym">Bk</span><span class="el-name">Берклий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">98</span><span class="el-mass">[251]</span><span class="el-sym">Cf</span><span class="el-name">Калиф.</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">99</span><span class="el-mass">[252]</span><span class="el-sym">Es</span><span class="el-name">Эйнштейн.</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">100</span><span class="el-mass">[257]</span><span class="el-sym">Fm</span><span class="el-name">Фермий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">101</span><span class="el-mass">[258]</span><span class="el-sym">Md</span><span class="el-name">Менделевий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">102</span><span class="el-mass">[259]</span><span class="el-sym">No</span><span class="el-name">Нобелий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">103</span><span class="el-mass">[262]</span><span class="el-sym">Lr</span><span class="el-name">Лоуренсий</span></td></tr>
+    </tbody></table></div></div>
+  </div>
+</div>
+
+<!-- SOLUBILITY TABLE OVERLAY -->
+<div id="rs-overlay" onclick="if(event.target===this)toggleRS()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;border-radius:16px;padding:18px 22px;max-width:98vw;max-height:93vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <div style="font-size:15px;font-weight:800;color:var(--h2)">🧪 Таблица растворимости кислот, солей и оснований</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span style="font-size:11px;color:#999;font-family:monospace">R или Esc — закрыть</span>
+        <button onclick="toggleRS()" style="background:#f0f0f0;border:none;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:14px;font-weight:700">✕</button>
+      </div>
+    </div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+    <table class="sol-table">
+<thead><tr><th style="min-width:90px"></th><th>H⁺</th><th>Li⁺</th><th>K⁺</th><th>Na⁺</th><th>NH₄⁺</th><th>Ba²⁺</th><th>Ca²⁺</th><th>Mg²⁺</th><th>Sr²⁺</th><th>Al³⁺</th><th>Cr³⁺</th><th>Fe²⁺</th><th>Fe³⁺</th><th>Mn²⁺</th><th>Zn²⁺</th><th>Ag⁺</th><th>Hg²⁺</th><th>Pb²⁺</th><th>Sn²⁺</th><th>Cu²⁺</th></tr></thead>
+<tbody>
+<tr><th>OH⁻</th><td class="sol-E"></td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>F⁻</th><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>Cl⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>Br⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>I⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-Q">?</td></tr>
+<tr><th>S²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-D">–</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>HS⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>SO₃²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>HSO₃⁻</th><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>SO₄²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>HSO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-D">–</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>NO₃⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td></tr>
+<tr><th>NO₂⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-M">M</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>PO₄³⁻</th><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>HPO₄²⁻</th><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-Q">?</td></tr>
+<tr><th>H₂PO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-D">–</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>CO₃²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-H">H</td></tr>
+<tr><th>HCO₃⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>CH₃COO⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td></tr>
+<tr><th>SiO₃²⁻</th><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>MnO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>Cr₂O₇²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-Q">?</td><td class="sol-P">P</td></tr>
+<tr><th>CrO₄²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>ClO₃⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td></tr>
+<tr><th>ClO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td></tr>
+</tbody>
+</table>
+    </div>
+    <div class="sol-legend" style="margin-top:10px">
+  <span class="sol-leg sol-P">Р — растворяется (&gt;1 г/100 г H₂O)</span>
+  <span class="sol-leg sol-M">М — мало растворяется (0,1–1 г)</span>
+  <span class="sol-leg sol-H">Н — не растворяется (&lt;0,01 г)</span>
+  <span class="sol-leg sol-D">– — разлагается в воде</span>
+  <span class="sol-leg sol-Q">? — нет достоверных данных</span>
+</div>
+    <div style="margin-top:12px;padding:10px 14px;background:linear-gradient(90deg,#fef2f2,#f5d840,#fef9c3);border-radius:8px;border:1px solid #7a4208">
+      <div style="font-size:11px;font-weight:800;color:#92400e;margin-bottom:5px">⚡ РЯД АКТИВНОСТИ / ЭЛЕКТРОХИМИЧЕСКИЙ РЯД НАПРЯЖЕНИЙ</div>
+      <div style="font-size:11px;line-height:1.8;font-family:monospace">
+        <span style="color:#dc2626;font-weight:700">Li Cs Rb K Ba Sr Ca Na Mg Sc Be Ti Hf Al Zr V Mn Cr Zn Fe Cd Co Ni Mo Sn W Pb</span>
+        &nbsp;<b style="font-size:14px;color:#111;padding:0 4px">H</b>&nbsp;
+        <span style="color:#059669;font-weight:700">Ge Sb Bi Cu Re Hg Ag Pd Pt Au</span>
+      </div>
+      <div style="font-size:9px;color:#92400e;margin-top:2px">← активность металлов уменьшается →</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
