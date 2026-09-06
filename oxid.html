@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Оксиды — ЕГЭ Химия 2026–2027</title>
+<style>
+/* ══════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════ */
+:root{
+  --p900:#2D1B69;--p800:#3D2785;--p700:#4E35A0;
+  --p600:#6248C4;--p500:#7B61DB;--p400:#9B84E8;
+  --p300:#BDB2F3;--p200:#DBD5F8;--p100:#F0EEFF;--p50:#F8F7FF;
+  --ink:#1C1B29;--ink2:#3E3C5A;--ink3:#8A88A8;
+  --line:#E2E5EC;--card:#FFFFFF;--bg:#F6F5FC;--white:#fff;
+  --green:#1D9E75;--green-t:#E1F5EE;--green-d:#085041;
+  --amber:#BA7517;--amber-t:#FAEEDA;--amber-d:#633806;
+  --red:#A32D2D;--red-t:#FCEBEB;--red-d:#7A2020;
+  --r:12px;--r-sm:8px;--r-lg:20px;
+  --shadow:0 1px 3px rgba(20,21,26,.06),0 4px 16px rgba(20,21,26,.06);
+  --shm:0 4px 20px rgba(60,40,160,.12);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px}
+
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:var(--p100);z-index:999}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--p600),var(--p400));width:0;transition:width .1s}
+
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+.hero{background:linear-gradient(135deg,#2D1B69 0%,#4E35A0 55%,#7B61DB 100%);padding:56px 32px 48px;margin:0 -24px 48px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(155,132,232,.15) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.82);border-radius:20px;padding:4px 14px;font-size:12px;font-family:var(--mono);letter-spacing:.6px;margin-bottom:20px}
+.hero h1{font-size:clamp(28px,5vw,48px);font-weight:800;line-height:1.06;letter-spacing:-.03em;color:#fff;margin-bottom:14px;position:relative;z-index:1}
+.hero h1 em{color:var(--p300);font-style:normal}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.7);line-height:1.7;max-width:560px;margin-bottom:28px;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.hero-chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.9);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+
+.toc{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:22px 26px;margin-bottom:48px;box-shadow:var(--shadow)}
+.toc-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p600);font-family:var(--mono);margin-bottom:14px}
+.toc ol{padding-left:20px}
+.toc li{padding:4px 0;font-size:14px}
+.toc a{color:var(--ink2);text-decoration:none;transition:color .15s}
+.toc a:hover{color:var(--p600)}
+
+.section{margin-bottom:56px}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--p200)}
+.section-num{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;font-family:var(--mono);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+.section-title{font-size:clamp(18px,2.5vw,24px);font-weight:700;color:var(--p800);line-height:1.2}
+
+h2.sub-title{font-size:17px;font-weight:700;color:var(--p700);margin:28px 0 12px;display:flex;align-items:center;gap:8px}
+h2.sub-title::before{content:'';width:4px;height:20px;background:var(--p500);border-radius:2px;flex-shrink:0}
+h3.mini-title{font-size:14.5px;font-weight:600;color:var(--ink);margin:18px 0 8px}
+p.body{font-size:14.5px;line-height:1.75;color:var(--ink2);margin-bottom:14px}
+p.body strong{color:var(--ink)}
+
+.box{border-radius:var(--r-sm);padding:14px 18px;margin:14px 0;font-size:14px;line-height:1.7}
+.box-title{font-weight:700;font-size:13.5px;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:var(--amber-t);border-left:4px solid var(--amber);color:var(--amber-d)}
+.box-danger{background:var(--red-t);border-left:4px solid var(--red);color:var(--red-d)}
+.box-success{background:var(--green-t);border-left:4px solid var(--green);color:var(--green-d)}
+.box ul,.box ol{padding-left:20px;margin:6px 0}
+.box li{margin:4px 0;font-size:13.5px}
+
+.eq-block{background:var(--white);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 18px;margin:10px 0;box-shadow:var(--shadow)}
+.zachet-block{background:linear-gradient(135deg,#FFF1F2,#FFE4E6);border:2px solid #F87171;border-radius:var(--r-lg);padding:24px 28px;margin-bottom:40px;box-shadow:0 2px 12px rgba(239,68,68,.12)}
+.zachet-header{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.zachet-icon{font-size:24px}
+.zachet-title{font-size:18px;font-weight:800;color:#991B1B;letter-spacing:-.2px}
+.zachet-badge{background:#EF4444;color:#fff;font-size:11px;font-weight:700;border-radius:999px;padding:3px 12px;font-family:var(--mono)}
+.zachet-list{padding-left:22px;margin:0;display:flex;flex-direction:column;gap:10px}
+.zachet-list li{font-size:15px;color:#7F1D1D;line-height:1.5;padding:8px 12px;background:rgba(255,255,255,.6);border-radius:8px;border-left:3px solid #F87171}
+.zachet-list li strong{color:#991B1B}
+.eq{font-family:var(--mono);font-size:13.5px;color:var(--p900);line-height:2.1;display:block}
+.eq .cond{color:var(--ink3);font-size:11.5px}
+.eq-schema{background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border-left:4px solid #F59E0B;border-radius:0 6px 6px 0;padding:6px 12px;margin:2px 0;display:block;font-weight:700;color:#78350F}
+.memorize-tag{display:inline-block;background:#F59E0B;color:#fff;font-size:10px;font-weight:800;letter-spacing:.5px;border-radius:4px;padding:1px 7px;margin-left:8px;vertical-align:middle;font-family:sans-serif}
+table td.td-trivial{background:#FFFBEB;font-weight:700;color:#92400E}
+table td.td-memorize{font-size:11px;color:#B45309;font-style:italic;padding-top:0!important}
+.eq .we{color:var(--red);font-weight:700}
+
+.table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);margin:14px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:13.5px}
+th{background:linear-gradient(135deg,var(--p800),var(--p600));color:#fff;font-weight:600;padding:10px 14px;text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--p50)}
+tr:hover td{background:var(--p100);transition:background .15s}
+.tr-w td{background:#FFF8EC!important}
+.tr-d td{background:#FCEBEB!important}
+.tr-s td{background:#F0FBF6!important}
+
+.chip{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.5px;padding:3px 9px;border-radius:5px;font-weight:600;white-space:nowrap}
+.chip-p{background:var(--p100);color:var(--p700)}
+.chip-g{background:var(--green-t);color:var(--green-d)}
+.chip-a{background:var(--amber-t);color:var(--amber-d)}
+.chip-r{background:var(--red-t);color:var(--red-d)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+@media(max-width:700px){.grid-2,.grid-3{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow);transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:var(--p300);box-shadow:var(--shm)}
+.card-title{font-weight:700;font-size:14px;color:var(--p700);margin-bottom:8px}
+.card-body{font-size:13.5px;color:var(--ink2);line-height:1.65}
+
+.algo{margin:14px 0}
+.algo-step{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.algo-n{width:26px;height:26px;border-radius:7px;background:var(--p600);color:#fff;font-family:var(--mono);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.algo-text{font-size:14px;line-height:1.65;color:var(--ink2)}
+.algo-text strong{color:var(--ink)}
+
+.remember{background:linear-gradient(135deg,var(--p100),var(--p50));border:1.5px solid var(--p300);border-radius:var(--r);padding:16px 20px;margin-top:24px}
+.remember-title{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--p600);margin-bottom:10px;font-weight:700}
+.remember ul{padding-left:18px}
+.remember li{font-size:13.5px;color:var(--p800);padding:3px 0}
+
+.hr{height:1px;background:var(--line);margin:22px 0}
+
+/* PRACTICE */
+.practice-section{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 28px;margin-bottom:24px;box-shadow:var(--shadow)}
+.practice-title{font-size:16px;font-weight:700;color:var(--p800);display:flex;align-items:center;margin-bottom:14px}
+.practice-num{min-width:30px;height:30px;background:var(--p600);color:#fff;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-right:10px;flex-shrink:0}
+
+.task-item{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);margin-bottom:8px;overflow:hidden;transition:border-color .2s}
+.task-item:hover{border-color:var(--p300)}
+.task-q{display:flex;align-items:flex-start;gap:11px;padding:11px 14px}
+.task-n{min-width:24px;height:24px;background:var(--p100);color:var(--p700);border-radius:6px;font-family:var(--mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.task-text{flex:1;font-size:13.5px;color:var(--ink);line-height:1.6}
+.task-hint{font-size:11.5px;color:var(--ink3);font-family:var(--font)}
+
+.reveal-btn{background:none;border:none;color:var(--p600);font-size:12.5px;font-weight:600;cursor:pointer;padding:0 14px 10px;font-family:var(--font);letter-spacing:.3px;transition:color .15s;display:block;text-align:left}
+.reveal-btn:hover{color:var(--p800)}
+.reveal-btn.open{color:var(--green)}
+
+.answer-box{display:none;background:linear-gradient(135deg,var(--green-t),#F0FBF6);border-top:1px solid #B6E8D3;padding:10px 14px 13px;font-family:var(--mono);font-size:13px;color:var(--green-d);line-height:1.9}
+.answer-box.open{display:block}
+.answer-label{font-family:var(--font);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);margin-bottom:4px}
+.ans-note{font-family:var(--font);font-size:12px;color:var(--green-d);margin-top:6px;opacity:.85;font-style:italic}
+
+.reveal-all-btn{display:inline-flex;align-items:center;gap:7px;background:var(--p600);color:#fff;border:none;border-radius:var(--r-sm);padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s;margin-bottom:16px}
+.reveal-all-btn:hover{background:var(--p700)}
+.reveal-all-btn.all-open{background:var(--green)}
+
+/* INLINE TASKS (no input fields) */
+.inline-tasks{display:flex;flex-direction:column;gap:8px}
+.inline-task{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;transition:border-color .2s}
+.inline-task:hover{border-color:var(--p300)}
+.it-q{display:flex;align-items:flex-start;gap:11px;padding:11px 14px}
+.it-num{min-width:24px;height:24px;background:var(--p100);color:var(--p700);border-radius:6px;font-family:var(--mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.it-text{flex:1;font-size:13.5px;color:var(--ink);line-height:1.6;font-family:var(--mono)}
+.it-hint{font-size:11.5px;color:var(--ink3);font-family:var(--font);margin-top:4px}
+
+/* BACK TOP */
+#back-top{position:fixed;bottom:24px;right:24px;width:42px;height:42px;border-radius:12px;background:var(--p600);color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(62,42,180,.35);display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .2s;opacity:0;pointer-events:none}
+#back-top.visible{opacity:1;pointer-events:all}
+#back-top:hover{transform:translateY(-2px)}
+
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:540px){.shell{padding:0 14px 60px}.hero{padding:36px 18px 32px;margin:0 -14px 32px}.practice-section{padding:16px 18px}}
+@media print{.prog-bar-wrap,#back-top{display:none}}
+
+/* FLASH CARDS */
+.fc-section{background:linear-gradient(135deg,#1E1255,#4E35A0);border-radius:var(--r-lg);padding:32px 28px;margin:48px 0;color:#fff}
+.fc-header{text-align:center;margin-bottom:24px}
+.fc-title{font-size:clamp(18px,3vw,26px);font-weight:700;color:#fff;margin-bottom:6px}
+.fc-sub{font-size:14px;color:rgba(255,255,255,.65);line-height:1.6}
+.fc-stats{display:flex;justify-content:center;gap:24px;margin-bottom:16px;font-size:13px;color:rgba(255,255,255,.7);font-family:var(--mono)}
+.fc-stats span{color:#fff;font-weight:700;font-size:16px}
+.fc-counter{text-align:center;font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.5);margin-bottom:14px}
+.fc-perspective{perspective:900px;width:100%;max-width:560px;margin:0 auto;cursor:pointer}
+.fc-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,0,.2,1);min-height:180px}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);display:flex;align-items:center;justify-content:center;padding:24px 28px;text-align:center;min-height:180px;flex-direction:column;gap:8px}
+.fc-front{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);font-size:clamp(15px,2.5vw,19px);font-family:var(--mono);color:#fff;line-height:1.5}
+.fc-back{background:var(--white);transform:rotateY(180deg);font-family:var(--mono);font-size:clamp(13px,2vw,16px);color:var(--green-d);line-height:1.6}
+.fc-hint{font-family:var(--font);font-size:12px;color:var(--ink3);margin-top:6px;font-style:italic}
+.fc-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:4px}
+.fc-back-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+.fc-flip-btn{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:14px;font-weight:600;border-radius:var(--r-sm);padding:11px 26px;cursor:pointer;transition:background .2s;margin:18px auto;width:fit-content}
+.fc-flip-btn:hover{background:rgba(255,255,255,.25)}
+.fc-btn-row{display:none;gap:12px;justify-content:center;margin-top:14px}
+.fc-btn-know{background:#1D9E75;color:#fff;border:none;border-radius:var(--r-sm);padding:11px 26px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-know:hover{background:#187F5E}
+.fc-btn-dontknow{background:#C0392B;color:#fff;border:none;border-radius:var(--r-sm);padding:11px 26px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-dontknow:hover{background:#A0311F}
+.fc-keys{text-align:center;font-size:11.5px;color:rgba(255,255,255,.35);margin-top:12px;font-family:var(--mono)}
+.fc-result{display:none;text-align:center;padding:20px}
+.fc-result h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:12px}
+.fc-res-row{display:flex;gap:16px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.fc-res-card{background:rgba(255,255,255,.1);border-radius:var(--r-sm);padding:12px 22px;min-width:100px}
+.fc-res-num{font-size:28px;font-weight:700}
+.fc-res-lbl{font-size:11px;color:rgba(255,255,255,.6);font-family:var(--mono);margin-top:2px}
+.fc-restart-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.fc-restart-btn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;border-radius:var(--r-sm);padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
+.fc-restart-btn:hover{background:rgba(255,255,255,.25)}
+.fc-restart-btn.primary{background:var(--green);border-color:var(--green)}
+.fc-empty{display:none;text-align:center;color:rgba(255,255,255,.6);padding:20px}
+.fc-sr-badge{font-size:10px;font-family:var(--mono);padding:2px 7px;border-radius:4px;margin-top:6px;display:inline-block;background:rgba(255,255,255,.12);color:rgba(255,255,255,.6)}
+
+/* PRACTICE TRAINER */
+.pt-trainer{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 28px;box-shadow:var(--shadow)}
+.pt-stats{background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;border-radius:var(--r);padding:10px 18px;display:flex;align-items:center;gap:20px;margin-bottom:16px;flex-wrap:wrap;box-shadow:0 4px 16px rgba(62,42,180,.3)}
+.pt-stat{display:flex;flex-direction:column;align-items:center;min-width:56px}
+.pt-stat-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.7);font-family:var(--mono)}
+.pt-stat-val{font-size:18px;font-weight:800;font-family:var(--mono);color:#fff}
+.pt-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.pt-title{font-size:16px;font-weight:800;color:var(--p800)}
+.pt-block-tag{display:inline-flex;align-items:center;gap:6px;background:var(--p100);border:1px solid var(--p300);color:var(--p700);border-radius:20px;padding:3px 12px;font-size:11.5px;font-weight:700;font-family:var(--mono);margin-bottom:10px}
+.pt-card{background:var(--bg);border:1.5px solid var(--line);border-radius:var(--r);padding:20px 22px;margin:14px 0}
+.pt-eq{font-family:var(--mono);font-size:clamp(16px,2.5vw,22px);color:var(--p900);font-weight:600;line-height:1.5;margin-bottom:4px}
+.pt-reveal-btn{display:inline-flex;align-items:center;gap:8px;background:var(--p600);color:#fff;border:none;border-radius:var(--r-sm);padding:11px 22px;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s;margin-top:12px}
+.pt-reveal-btn:hover{background:var(--p700)}
+.pt-answer{display:none;background:linear-gradient(135deg,var(--green-t),#F0FBF6);border:1.5px solid #B6E8D3;border-radius:var(--r-sm);padding:14px 18px;margin-top:12px}
+.pt-answer.open{display:block}
+.pt-ans-label{font-family:var(--font);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);margin-bottom:6px}
+.pt-ans-eq{font-family:var(--mono);font-size:14px;color:var(--green-d);line-height:1.9;white-space:pre-line}
+.pt-ans-note{font-family:var(--font);font-size:12px;color:var(--green-d);margin-top:7px;opacity:.85;font-style:italic}
+.pt-rating{display:none;gap:10px;margin-top:14px;flex-wrap:wrap}
+.pt-rating.open{display:flex}
+.pt-btn-know{flex:1;max-width:180px;background:var(--green);color:#fff;border:none;border-radius:var(--r-sm);padding:10px 20px;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s}
+.pt-btn-know:hover{background:#187F5E}
+.pt-btn-dontknow{flex:1;max-width:180px;background:var(--red);color:#fff;border:none;border-radius:var(--r-sm);padding:10px 20px;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s}
+.pt-btn-dontknow:hover{background:var(--red-d)}
+.pt-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap}
+.pt-nav-btn{background:var(--p100);border:1px solid var(--p200);color:var(--p700);border-radius:var(--r-sm);padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s}
+.pt-nav-btn:hover{background:var(--p200)}
+.pt-progress-wrap{display:flex;flex-direction:column;align-items:center;gap:4px}
+.pt-progress-num{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--p700)}
+.pt-progress-bar{width:160px;height:5px;background:var(--line);border-radius:3px}
+.pt-progress-fill{height:5px;background:var(--p500);border-radius:3px;transition:width .3s}
+.pt-feedback{border-radius:var(--r-sm);padding:11px 14px;font-size:13.5px;display:none;margin-top:10px}
+.pt-feedback.good{display:block;background:var(--green-t);color:var(--green-d);border-left:4px solid var(--green)}
+.pt-feedback.bad{display:block;background:var(--red-t);color:var(--red-d);border-left:4px solid var(--red)}
+.pt-repeat-notice{background:var(--amber-t);border:1px solid var(--amber);border-radius:var(--r-sm);padding:10px 14px;font-size:13px;color:var(--ink2);margin-bottom:10px}
+.pt-res-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.pt-res-card{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px;text-align:center}
+.pt-res-card .rval{font-size:28px;font-weight:800;font-family:var(--mono);color:var(--p700)}
+.pt-res-card .rlbl{font-size:10px;color:var(--ink3);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.pt-res-card.good .rval{color:var(--green-d)}
+.pt-res-card.bad .rval{color:var(--red-d)}
+.pt-res-head{font-size:20px;font-weight:800;color:var(--p700);margin-bottom:4px}
+.pt-res-sub{font-size:13px;color:var(--ink3);margin-bottom:14px}
+.pt-weak-tag{display:inline-block;background:var(--red-t);color:var(--red-d);border-radius:999px;padding:4px 12px;font-size:12px;margin:3px;font-weight:600}
+@media(max-width:600px){.pt-trainer{padding:16px 14px}.pt-eq{font-size:15px}}
+
+/* WHITEBOARD */
+#wb.wb-open{display:flex!important}
+.wbs{width:1px;height:26px;background:#e0ddf8;flex-shrink:0;margin:0 2px}
+.wb-tool{background:#fff;border:1.5px solid #e0ddf8;color:#444;border-radius:6px;width:30px;height:28px;cursor:pointer;font-size:15px;transition:.15s;flex-shrink:0;line-height:1}
+.wb-tool:hover,.wb-tool.on{background:#ede9fe;border-color:#7c3aed;color:#5b21b6}
+.wb-col{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:.15s;flex-shrink:0}
+.wb-col:hover,.wb-col.on{border-color:#7c3aed;transform:scale(1.2)}
+.wb-sz{background:#fff;border:1.5px solid #e0ddf8;color:#444;border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:10px;font-weight:700;transition:.15s;flex-shrink:0;font-family:sans-serif}
+.wb-sz:hover,.wb-sz.on{background:#ede9fe;border-color:#7c3aed}
+#wb-canvas.pen-cur{cursor:crosshair}
+
+
+/* ── EGE8 TRAINER v2 ── */
+.ege8-trainer{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 28px;box-shadow:var(--shadow)}
+.ege8-stats{background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;border-radius:var(--r-md);padding:12px 18px;display:flex;gap:18px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+.ege8-stat{display:flex;flex-direction:column;align-items:center;min-width:52px}
+.ege8-stat-label{font-size:9px;opacity:.75;text-transform:uppercase;letter-spacing:1px}
+.ege8-stat-val{font-family:var(--mono);font-size:20px;font-weight:800;line-height:1.2}
+.ege8-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.ege8-card{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-md);padding:18px 20px;margin-bottom:14px}
+.ege8-task-meta{font-size:11px;font-family:var(--mono);color:var(--ink3);margin-bottom:12px}
+.ege8-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.ege8-col-head{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--ink2);margin-bottom:10px}
+.ege8-item{display:flex;gap:6px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.4}
+.ege8-item:last-child{border-bottom:none}
+.ege8-item-key{font-weight:800;font-family:var(--mono);color:var(--p700);min-width:22px;flex-shrink:0}
+.ege8-item-val{color:var(--ink1)}
+.ege8-answer-bar{display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+.ege8-answer-slots{display:flex;gap:6px}
+.ege8-slot{display:flex;flex-direction:column;align-items:center;gap:3px}
+.ege8-slot-letter{font-size:10px;font-weight:700;color:var(--ink3);font-family:var(--mono)}
+.ege8-slot-input{width:38px;height:38px;border:2px solid var(--line);border-radius:8px;text-align:center;font-family:var(--mono);font-size:18px;font-weight:800;color:var(--ink1);background:var(--white);outline:none;transition:border-color .15s}
+.ege8-slot-input:focus{border-color:var(--p500)}
+.ege8-slot-input.correct{border-color:var(--green);background:var(--green-t);color:var(--green-d)}
+.ege8-slot-input.wrong{border-color:var(--red);background:var(--red-t);color:var(--red-d)}
+.ege8-check-btn{display:inline-flex;align-items:center;gap:6px;background:var(--p600);color:#fff;border:none;border-radius:var(--r-sm);padding:10px 20px;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s;height:40px}
+.ege8-check-btn:hover{background:var(--p700)}
+.ege8-sol-btn{display:inline-flex;align-items:center;gap:6px;background:transparent;color:var(--ink2);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 16px;font-size:13px;font-weight:600;cursor:pointer;height:40px;transition:all .15s}
+.ege8-sol-btn:hover{border-color:var(--p400);color:var(--p700)}
+.ege8-feedback{border-radius:var(--r-sm);padding:10px 14px;font-size:13px;display:none;margin-top:10px}
+.ege8-feedback.show{display:block}
+.ege8-feedback.good{background:var(--green-t);color:var(--green-d);border-left:4px solid var(--green)}
+.ege8-feedback.bad{background:var(--red-t);color:var(--red-d);border-left:4px solid var(--red)}
+.ege8-solution{background:var(--p50);border:1px solid var(--p200);border-radius:var(--r-sm);padding:12px 16px;font-size:13px;color:var(--p900);display:none;margin-top:10px;font-family:var(--mono);font-weight:700;letter-spacing:1px}
+.ege8-solution.show{display:block}
+.ege8-rating{display:none;gap:10px;margin-top:12px}
+.ege8-rating.open{display:flex}
+.ege8-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:6px}
+.ege8-progress-bar{flex:1;height:6px;background:var(--line);border-radius:999px;overflow:hidden}
+.ege8-progress-fill{height:100%;background:linear-gradient(90deg,var(--p500),var(--p300));border-radius:999px;transition:width .4s}
+.ege8-repeat-notice{background:var(--amber-t);border:1px solid var(--amber);border-radius:var(--r-sm);padding:10px 14px;font-size:13px;color:var(--ink2);margin-bottom:12px}
+.ege8-res-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.ege8-res-card{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px;text-align:center}
+.ege8-res-card .rval{font-size:28px;font-weight:800;font-family:var(--mono);color:var(--p700)}
+.ege8-res-card .rlbl{font-size:10px;color:var(--ink3);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.ege8-res-card.good .rval{color:var(--green-d)}
+.ege8-res-card.bad .rval{color:var(--red-d)}
+.ege8-res-head{font-size:20px;font-weight:800;color:var(--p700);margin-bottom:4px}
+.ege8-res-sub{font-size:13px;color:var(--ink3);margin-bottom:14px}
+@media(max-width:600px){.ege8-cols{grid-template-columns:1fr}.ege8-col-head{margin-top:10px}}
+
+</style>
+</head>
+<body>
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">ЕГЭ Химия 2026–2027 · Задания №7–9, 23–24</div>
+  <h1>Оксиды: <em>свойства</em><br>и способы получения</h1>
+  <p class="hero-sub">Теория с заданиями сразу после каждого блока + 50 флэш-карточек по ловушкам ЕГЭ + большой практикум на 50 заданий.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Классификация оксидов</span>
+    <span class="hero-chip">Кислотные оксиды</span>
+    <span class="hero-chip">Основные оксиды</span>
+    <span class="hero-chip">Амфотерные оксиды</span>
+    <span class="hero-chip">50 флэш-карточек</span>
+    <span class="hero-chip">Практикум 50 заданий</span>
+  </div>
+</div>
+
+<!-- TOC -->
+<nav class="toc fade-in">
+  <div class="toc-title">Содержание</div>
+  <ol>
+    <li><a href="#s1">Определение и классификация оксидов</a></li>
+    <li><a href="#s2">Физические свойства оксидов</a></li>
+    <li><a href="#s3">Свойства кислотных оксидов</a></li>
+    <li><a href="#s4">Свойства основных оксидов</a></li>
+    <li><a href="#s5">Свойства амфотерных оксидов</a></li>
+    <li><a href="#s6">Свойства несолеобразующих оксидов</a></li>
+    <li><a href="#s7">Реакции с простыми веществами. Способы получения</a></li>
+    <li><a href="#s8">🃏 Флэш-карточки — ловушки ЕГЭ (50 карточек)</a></li>
+    <li><a href="#s9">📝 Большой практикум — 50 заданий</a></li>
+    <li><a href="#s10">🎯 Задание 8 ЕГЭ — сопоставление <span style="background:#EF4444;color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:1px 7px;margin-left:4px;font-family:sans-serif">2 балла</span></a></li>
+  </ol>
+</nav>
+
+<!-- ═══════════════════ ЗАЧЁТ ═══════════════════ -->
+<div class="zachet-block fade-in" id="zachet">
+  <div class="zachet-header">
+    <span class="zachet-icon">❗</span>
+    <span class="zachet-title">Вопросы к зачёту — «Оксиды»</span>
+    <span class="zachet-badge">20 вопросов</span>
+  </div>
+  <ol class="zachet-list">
+    <li>Что такое оксид? Дайте определение.</li>
+    <li>Какие виды оксидов существуют по химическим свойствам?</li>
+    <li>Что такое основные оксиды? Приведите примеры.</li>
+    <li>Что такое кислотные оксиды? Приведите примеры.</li>
+    <li>Что такое амфотерные оксиды? Приведите примеры.</li>
+    <li>Что такое несолеобразующие оксиды? Приведите примеры.</li>
+    <li>С какими веществами реагируют основные оксиды?</li>
+    <li>С какими веществами реагируют кислотные оксиды?</li>
+    <li>С какими веществами реагируют амфотерные оксиды?</li>
+    <li>Какие основные оксиды реагируют с водой? Приведите примеры.</li>
+    <li>Какие оксиды не реагируют с водой? Приведите примеры.</li>
+    <li>Какие продукты образуются при взаимодействии амфотерных оксидов с <strong>растворами</strong> щелочей?</li>
+    <li>Какие продукты образуются при взаимодействии амфотерных <strong>металлов</strong> с растворами щелочей?</li>
+    <li>Какие продукты образуются при взаимодействии амфотерных оксидов с <strong>расплавами</strong> щелочей?</li>
+    <li>Какие продукты образуются при взаимодействии амфотерных <strong>металлов</strong> с расплавами щелочей?</li>
+    <li>Какие продукты образуются при взаимодействии основных оксидов с кислотами?</li>
+    <li>Какие продукты образуются при взаимодействии кислотных оксидов со щелочами?</li>
+    <li>Какие продукты образуются при взаимодействии основных оксидов с кислотными оксидами?</li>
+    <li>Какие существуют способы получения оксидов? Приведите примеры реакций.</li>
+    <li>Как по химическим свойствам определить тип оксида?</li>
+  </ol>
+</div>
+
+<!-- ═══════════════════ SECTION 1 ═══════════════════ -->
+<section class="section fade-in" id="s1">
+  <div class="section-header"><div class="section-num">1</div><h2 class="section-title">Определение и классификация оксидов</h2></div>
+
+  <p class="body"><strong>Оксиды</strong> — сложные вещества, состоящие из двух химических элементов, один из которых — кислород в степени окисления <strong>−2</strong>.</p>
+
+  <h2 class="sub-title">1.1 Общая классификация</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Тип</th><th>Определение</th><th>Примеры</th></tr></thead>
+    <tbody>
+      <tr class="tr-d"><td><strong>Несолеобразующие</strong></td><td>Не реагируют ни с кислотами, ни со щелочами</td><td>CO, N₂O, NO, SiO</td></tr>
+      <tr class="tr-s"><td><strong>Основные</strong></td><td>Оксиды металлов со с.о. +1, +2 (кроме амфотерных)</td><td>Na₂O, CaO, FeO, CuO</td></tr>
+      <tr><td><strong>Кислотные</strong></td><td>Все оксиды неметаллов (кроме несолеобразующих) + оксиды металлов с с.о. ≥+5</td><td>SO₃, CO₂, P₂O₅, CrO₃, Mn₂O₇</td></tr>
+      <tr class="tr-w"><td><strong>Амфотерные</strong></td><td>Оксиды металлов со с.о. +3, +4, а также ZnO, BeO, SnO, PbO</td><td>Al₂O₃, ZnO, Cr₂O₃, Fe₂O₃</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 class="sub-title">1.2 Оксиды металлов по степени окисления</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>С.О. металла</th><th>Оксид металла</th><th>Оксид неметалла</th></tr></thead>
+    <tbody>
+      <tr class="tr-s"><td>+1, +2</td><td>Me₂O и MeO → <span class="chip chip-g">основные</span><br>BeO, ZnO, SnO, PbO → <span class="chip chip-a">амфотерные</span></td><td>CO, N₂O, NO, SiO → <span class="chip chip-r">несолеобразующие</span></td></tr>
+      <tr class="tr-w"><td>+3, +4</td><td>Me₂O₃, MeO₂ → <span class="chip chip-a">амфотерные</span></td><td>Все оксиды неметаллов, кроме несолеобразующих → <span class="chip chip-p">кислотные</span></td></tr>
+      <tr class="tr-d"><td>+5, +6, +7</td><td>Me₂O₅, MeO₃, Me₂O₇ → <span class="chip chip-p">кислотные</span></td><td></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="box box-warn" style="margin-top:16px">
+    <div class="box-title">⚠️ Запомни амфотерные оксиды с с.о. +2</div>
+    <strong>ZnO, BeO, SnO, PbO</strong> — исключения: несмотря на с.о. +2, они <strong>амфотерные</strong>, а не основные!
+  </div>
+
+  <!-- INLINE ЗАДАНИЯ -->
+  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания на закрепление — блок 1</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq1')">👁 Показать все ответы</button>
+    <div id="mq1" class="inline-tasks">
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">1</div><div class="it-text">К какому типу относится оксид: ZnO?</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>Амфотерный оксид.<div class="ans-note">ZnO — исключение: с.о. +2, но амфотерный (как BeO, SnO, PbO).</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">2</div><div class="it-text">Назовите несолеобразующие оксиды. Чем SiO отличается от SiO₂?</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>CO, N₂O, NO, SiO — несолеобразующие оксиды. SiO (с.о. Si = +2) — несолеобразующий, а SiO₂ (с.о. Si = +4) — кислотный оксид (кварц, кремнезём).<div class="ans-note">SiO практически не встречается в заданиях ЕГЭ, но по классификации — несолеобразующий.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">3</div><div class="it-text">К какому типу относятся оксиды: CrO₃, Mn₂O₇?</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>Кислотные оксиды — оксиды металлов с с.о. выше +5 (Cr: +6, Mn: +7).<div class="ans-note">Правило: с.о. металла ≥ +5 → кислотный оксид.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">4</div><div class="it-text">Являются ли CO₂ и SiO₂ кислотными оксидами? Обоснуй.</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>Да, оба кислотные — оксиды неметаллов (C и Si), не являются несолеобразующими.<div class="ans-note">Все оксиды неметаллов кислотные, кроме CO, N₂O, NO, SiO.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="remember"><div class="remember-title">✅ Запомнить</div><ul>
+    <li>Несолеобразующие: <strong>CO, N₂O, NO, SiO</strong> — не дают соли ни с кислотами, ни со щелочами.</li>
+    <li>ZnO, BeO, SnO, PbO — амфотерные, хотя металл в с.о. +2.</li>
+    <li>С.о. металла +5, +6, +7 → кислотный оксид (CrO₃, Mn₂O₇, V₂O₅).</li>
+    <li>Fe₂O₃, Cr₂O₃, Al₂O₃ — амфотерные (с.о. +3).</li>
+  </ul></div>
+</section>
+
+<!-- ═══════════════════ SECTION 2 ═══════════════════ -->
+<section class="section fade-in" id="s2">
+  <div class="section-header"><div class="section-num">2</div><h2 class="section-title">Физические свойства оксидов</h2></div>
+
+  <h2 class="sub-title">2.1 Агрегатное состояние при н.у.</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Газы</th><th>Жидкости</th><th>Твёрдые</th></tr></thead>
+    <tbody>
+      <tr><td>CO, CO₂, SO₂, N₂O, NO, NO₂</td><td>H₂O, SO₃ (ст.у.), Mn₂O₇ (зелёная!)</td><td>Оксиды неметаллов: B₂O₃, P₂O₅, SiO₂<br>Все оксиды металлов, кроме Mn₂O₇</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 class="sub-title">2.2 Цвет оксидов</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0">
+
+    <!-- Бесцветные -->
+    <div style="background:#fff;border:1px solid #E2E5EC;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(20,21,26,.06)">
+      <div style="height:52px;background:linear-gradient(135deg,#e8e8f0,#f5f5fa);display:flex;align-items:center;justify-content:center;border-bottom:1px solid #E2E5EC">
+        <span style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#8A88A8">БЕСЦВЕТНЫЕ / ГАЗЫ</span>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="background:#f0eeff;color:#4E35A0;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">CO</span>
+          <span style="background:#f0eeff;color:#4E35A0;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">CO₂</span>
+          <span style="background:#f0eeff;color:#4E35A0;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">SO₂</span>
+          <span style="background:#f0eeff;color:#4E35A0;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">N₂O</span>
+          <span style="background:#fff3cd;color:#856404;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">NO ⚠️</span>
+          <span style="background:#f0eeff;color:#4E35A0;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">H₂O</span>
+          <span style="background:#f0eeff;color:#4E35A0;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">SO₃</span>
+        </div>
+        <div style="font-size:11px;color:#8A88A8;margin-top:8px;font-style:italic">⚠️ NO буреет на воздухе: 2NO + O₂ → 2NO₂</div>
+      </div>
+    </div>
+
+    <!-- Белые -->
+    <div style="background:#fff;border:1px solid #E2E5EC;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(20,21,26,.06)">
+      <div style="height:52px;background:linear-gradient(135deg,#f8f8f8,#ffffff);border:1px solid #ddd;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #E2E5EC">
+        <span style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#555">⬜ БЕЛЫЕ</span>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="background:#f5f5f5;color:#333;border:1px solid #ddd;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">B₂O₃</span>
+          <span style="background:#f5f5f5;color:#333;border:1px solid #ddd;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">P₂O₅</span>
+          <span style="background:#f5f5f5;color:#333;border:1px solid #ddd;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">SiO₂</span>
+          <span style="background:#f5f5f5;color:#333;border:1px solid #ddd;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">Na₂O</span>
+          <span style="background:#f5f5f5;color:#333;border:1px solid #ddd;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">CaO</span>
+          <span style="background:#f5f5f5;color:#333;border:1px solid #ddd;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">MgO</span>
+          <span style="background:#f5f5f5;color:#333;border:1px solid #ddd;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">Al₂O₃</span>
+          <span style="background:#f5f5f5;color:#333;border:1px solid #ddd;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">ZnO</span>
+          <span style="background:#f5f5f5;color:#333;border:1px solid #ddd;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">BeO</span>
+        </div>
+        <div style="font-size:11px;color:#8A88A8;margin-top:8px;font-style:italic">Большинство оксидов ЩМ и ЩЗМ белые</div>
+      </div>
+    </div>
+
+    <!-- Чёрные -->
+    <div style="background:#fff;border:1px solid #E2E5EC;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(20,21,26,.06)">
+      <div style="height:52px;background:linear-gradient(135deg,#2c2c2c,#1a1a1a);display:flex;align-items:center;justify-content:center;border-bottom:1px solid #E2E5EC">
+        <span style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#ccc">⬛ ЧЁРНЫЕ</span>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="background:#2c2c2c;color:#fff;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">MnO</span>
+          <span style="background:#2c2c2c;color:#fff;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">FeO</span>
+          <span style="background:#2c2c2c;color:#fff;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">Fe₃O₄</span>
+          <span style="background:#2c2c2c;color:#fff;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">CuO</span>
+          <span style="background:#2c2c2c;color:#fff;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">Ag₂O</span>
+        </div>
+        <div style="font-size:11px;color:#8A88A8;margin-top:8px;font-style:italic">Оксиды переходных металлов часто чёрные</div>
+      </div>
+    </div>
+
+    <!-- Красные -->
+    <div style="background:#fff;border:1px solid #E2E5EC;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(20,21,26,.06)">
+      <div style="height:52px;background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:center;justify-content:center;border-bottom:1px solid #E2E5EC">
+        <span style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff">🟥 КРАСНЫЕ</span>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="background:#fdecea;color:#c0392b;border:1px solid #e74c3c;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">Cu₂O</span>
+          <span style="background:#fdecea;color:#c0392b;border:1px solid #e74c3c;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">CrO₃</span>
+        </div>
+        <div style="font-size:11px;color:#8A88A8;margin-top:8px;font-style:italic">Cu₂O — кирпично-красный; CrO₃ — тёмно-красный</div>
+      </div>
+    </div>
+
+    <!-- Бурые -->
+    <div style="background:#fff;border:1px solid #E2E5EC;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(20,21,26,.06)">
+      <div style="height:52px;background:linear-gradient(135deg,#8B4513,#b7770d);display:flex;align-items:center;justify-content:center;border-bottom:1px solid #E2E5EC">
+        <span style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff">🟫 БУРЫЕ</span>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="background:#faeeda;color:#7a4900;border:1px solid #b7770d;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">NO₂</span>
+          <span style="background:#faeeda;color:#7a4900;border:1px solid #b7770d;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">Fe₂O₃</span>
+          <span style="background:#faeeda;color:#7a4900;border:1px solid #b7770d;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">MnO₂</span>
+        </div>
+        <div style="font-size:11px;color:#8A88A8;margin-top:8px;font-style:italic">NO₂ — «лисий хвост»; Fe₂O₃ — цвет ржавчины</div>
+      </div>
+    </div>
+
+    <!-- Зелёные -->
+    <div style="background:#fff;border:1px solid #E2E5EC;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(20,21,26,.06)">
+      <div style="height:52px;background:linear-gradient(135deg,#1d6f42,#27ae60);display:flex;align-items:center;justify-content:center;border-bottom:1px solid #E2E5EC">
+        <span style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff">🟩 ЗЕЛЁНЫЕ</span>
+      </div>
+      <div style="padding:12px 14px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <span style="background:#e1f5ee;color:#085041;border:1px solid #1d9e75;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">Cr₂O₃</span>
+          <span style="background:#e1f5ee;color:#085041;border:1px solid #1d9e75;border-radius:6px;padding:3px 8px;font-family:monospace;font-size:12.5px;font-weight:600">Mn₂O₇</span>
+        </div>
+        <div style="font-size:11px;color:#8A88A8;margin-top:8px;font-style:italic">Cr₂O₃ — порошок; Mn₂O₇ — маслянистая жидкость!</div>
+      </div>
+    </div>
+
+  </div>
+  <div style="background:#fff;border:1px solid #E2E5EC;border-radius:12px;padding:14px 18px;margin-top:4px;box-shadow:0 1px 3px rgba(20,21,26,.06)">
+    <div style="font-size:12px;font-weight:700;color:#4E35A0;margin-bottom:10px;letter-spacing:.5px">🎨 ЧАСТО ПУТАЮТ НА ЕГЭ</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <div style="display:flex;align-items:center;gap:8px;background:#fdecea;border-radius:8px;padding:6px 12px">
+        <span style="width:14px;height:14px;border-radius:3px;background:#c0392b;display:inline-block;flex-shrink:0"></span>
+        <span style="font-family:monospace;font-size:13px;font-weight:700;color:#7a2020">Cu₂O</span>
+        <span style="font-size:12px;color:#7a2020">красный</span>
+      </div>
+      <span style="align-self:center;color:#aaa;font-size:18px">≠</span>
+      <div style="display:flex;align-items:center;gap:8px;background:#222;border-radius:8px;padding:6px 12px">
+        <span style="width:14px;height:14px;border-radius:3px;background:#111;border:1px solid #555;display:inline-block;flex-shrink:0"></span>
+        <span style="font-family:monospace;font-size:13px;font-weight:700;color:#fff">CuO</span>
+        <span style="font-size:12px;color:#ccc">чёрный</span>
+      </div>
+      <span style="align-self:center;color:#aaa;font-size:18px">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      <div style="display:flex;align-items:center;gap:8px;background:#faeeda;border-radius:8px;padding:6px 12px">
+        <span style="width:14px;height:14px;border-radius:3px;background:#b7770d;display:inline-block;flex-shrink:0"></span>
+        <span style="font-family:monospace;font-size:13px;font-weight:700;color:#633806">Fe₂O₃</span>
+        <span style="font-size:12px;color:#633806">бурый</span>
+      </div>
+      <span style="align-self:center;color:#aaa;font-size:18px">≠</span>
+      <div style="display:flex;align-items:center;gap:8px;background:#222;border-radius:8px;padding:6px 12px">
+        <span style="width:14px;height:14px;border-radius:3px;background:#111;border:1px solid #555;display:inline-block;flex-shrink:0"></span>
+        <span style="font-family:monospace;font-size:13px;font-weight:700;color:#fff">FeO</span>
+        <span style="font-size:12px;color:#ccc">чёрный</span>
+      </div>
+      <span style="align-self:center;color:#aaa;font-size:18px">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      <div style="display:flex;align-items:center;gap:8px;background:#f0eeff;border-radius:8px;padding:6px 12px">
+        <span style="width:14px;height:14px;border-radius:3px;background:linear-gradient(135deg,#e8e8f0,#c8c8d8);border:1px solid #bbb;display:inline-block;flex-shrink:0"></span>
+        <span style="font-family:monospace;font-size:13px;font-weight:700;color:#4E35A0">NO</span>
+        <span style="font-size:12px;color:#4E35A0">бесцв. → буреет!</span>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">2.3 Тривиальные названия</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Формула</th><th>Тривиальное название</th></tr></thead>
+    <tbody>
+      <tr><td>CaO</td><td class="td-trivial">Негашёная известь <span class="memorize-tag">заучить наизусть</span></td></tr>
+      <tr><td>Fe₃O₄</td><td class="td-trivial">Железная окалина (FeO·Fe₂O₃) <span class="memorize-tag">заучить наизусть</span></td></tr>
+      <tr><td>Al₂O₃</td><td class="td-trivial">Глинозём, корунд <span class="memorize-tag">заучить наизусть</span></td></tr>
+      <tr><td>CO</td><td class="td-trivial">Угарный газ <span class="memorize-tag">заучить наизусть</span></td></tr>
+      <tr><td>CO₂</td><td class="td-trivial">Углекислый газ <span class="memorize-tag">заучить наизусть</span></td></tr>
+      <tr><td>N₂O</td><td class="td-trivial">Веселящий газ (сладковатый запах) <span class="memorize-tag">заучить наизусть</span></td></tr>
+      <tr><td>NO₂</td><td class="td-trivial">Бурый газ, лисий хвост <span class="memorize-tag">заучить наизусть</span></td></tr>
+      <tr><td>SO₂</td><td class="td-trivial">Сернистый газ, сернистый ангидрид <span class="memorize-tag">заучить наизусть</span></td></tr>
+      <tr><td>SO₃</td><td class="td-trivial">Серный ангидрид <span class="memorize-tag">заучить наизусть</span></td></tr>
+      <tr><td>SiO₂</td><td class="td-trivial">Кварц, кремнезём, песок <span class="memorize-tag">заучить наизусть</span></td></tr>
+      <tr><td>Mn₂O₇</td><td class="td-trivial">Зелёная маслянистая жидкость (!) <span class="memorize-tag">заучить наизусть</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания на закрепление — блок 2</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq2')">👁 Показать все ответы</button>
+    <div id="mq2" class="inline-tasks">
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">1</div><div class="it-text">Какой оксид металла является жидкостью при н.у.?</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>Mn₂O₇ — оксид марганца(VII), зелёная жидкость.<div class="ans-note">Единственный оксид металла — жидкость при н.у.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">2</div><div class="it-text">Какого цвета NO₂ и NO? Что происходит с NO на воздухе?</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>NO₂ — бурый газ. NO — бесцветный, но быстро буреет на воздухе: 2NO + O₂ → 2NO₂.<div class="ans-note">Буление — типичная ловушка ЕГЭ.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">3</div><div class="it-text">CuO и Cu₂O — оба чёрные или разного цвета?</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>CuO — чёрный; Cu₂O — красный (кирпично-красный).<div class="ans-note">Различать по цвету обязательно для ЕГЭ.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 3 ═══════════════════ -->
+<section class="section fade-in" id="s3">
+  <div class="section-header"><div class="section-num">3</div><h2 class="section-title">Химические свойства кислотных оксидов</h2></div>
+
+  <p class="body">Кислотные оксиды реагируют с основаниями и основными оксидами с образованием солей. Им соответствуют кислородсодержащие кислоты.</p>
+
+  <h2 class="sub-title">3.1 С водой</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">Кислотный оксид + H₂O = кислота <span class="cond">(кроме SiO₂ — не реагирует!)</span></span>
+    <span class="eq">CO₂ + H₂O ⇄ H₂CO₃ <span class="cond">(неустойчивая, разлагается)</span></span>
+    <span class="eq">SO₂ + H₂O ⇄ H₂SO₃ <span class="cond">(неустойчивая)</span></span>
+    <span class="eq">SO₃ + H₂O → H₂SO₄</span>
+    <span class="eq">N₂O₃ + H₂O → 2HNO₂</span>
+    <span class="eq">N₂O₅ + H₂O → 2HNO₃</span>
+    <span class="eq">2NO₂ + H₂O → HNO₂ + HNO₃ <span class="cond">(диспропорционирование N)</span></span>
+    <span class="eq">3NO₂ + H₂O → <span class="we">t°</span> NO + 2HNO₃ <span class="cond">(при нагревании)</span></span>
+    <span class="eq">P₂O₅ + 3H₂O → 2H₃PO₄</span>
+    <span class="eq">SiO₂ + H₂O ↛ <span class="cond">(не реагирует — H₂SiO₃ нерастворима)</span></span>
+  </div>
+
+  <h2 class="sub-title">3.2 С основными и амфотерными оксидами</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">Кислотный оксид + основный оксид = соль</span>
+    <span class="eq">CaO + CO₂ → CaCO₃</span>
+    <span class="eq">Na₂O + SiO₂ → Na₂SiO₃</span>
+    <span class="eq">CuO + SO₃ → CuSO₄</span>
+    <span class="eq">Na₂O + 2NO₂ → NaNO₂ + NaNO₃ <span class="cond">(диспропорционирование)</span></span>
+    <span class="eq">3K₂O + P₂O₅ → 2K₃PO₄</span>
+    <span class="eq eq-schema"><br>Кислотный оксид + амфотерный оксид = соль</span>
+    <span class="eq">ZnO + SO₃ → ZnSO₄</span>
+    <span class="eq">Al₂O₃ + 3N₂O₅ → 2Al(NO₃)₃ <span class="cond">(только с сильными кислотами)</span></span>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">⚠️ Ограничение</div>
+    Основные оксиды малоактивных металлов (CuO, FeO и др.) реагируют только с кислотными оксидами, соответствующими <strong>сильным кислотам</strong>. Амфотерные оксиды — аналогично.
+  </div>
+
+  <h2 class="sub-title">3.3 Со щелочами и гидроксидами</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">Кислотный оксид + щёлочь = соль + H₂O</span>
+    <span class="eq">2NaOH + SiO₂ → Na₂SiO₃ + H₂O</span>
+    <span class="eq">2NaOH + CO₂ → Na₂CO₃ + H₂O</span>
+    <span class="eq">NaOH + CO₂ <span class="we">(избыток)</span> → NaHCO₃ <span class="cond">(кислая соль!)</span></span>
+    <span class="eq">2NaOH + SO₃ → Na₂SO₄ + H₂O</span>
+    <span class="eq">2NaOH + 2NO₂ → NaNO₂ + NaNO₃ + H₂O</span>
+    <span class="eq">6KOH(изб.) + P₂O₅ → 2K₃PO₄ + 3H₂O</span>
+    <span class="eq eq-schema"><br>С нерастворимыми основаниями: только кислотные оксиды сильных кислот</span>
+    <span class="eq">Cu(OH)₂ + SO₃ → CuSO₄ + H₂O</span>
+    <span class="eq eq-schema"><br>С амфотерными гидроксидами: только кислотные оксиды сильных кислот</span>
+    <span class="eq">Zn(OH)₂ + N₂O₅ → Zn(NO₃)₂ + H₂O</span>
+  </div>
+
+  <h2 class="sub-title">3.4 С солями (при сплавлении)</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">Менее летучий оксид вытесняет более летучий из соли:</span>
+    <span class="eq">SiO₂ + CaCO₃ →<span class="we">t°</span> CaSiO₃ + CO₂↑</span>
+    <span class="eq">SiO₂ + Na₂SO₃ →<span class="we">t°</span> Na₂SiO₃ + SO₂↑</span>
+    <span class="eq eq-schema"><br>В водном растворе (более сильная кислота вытесняет слабую):</span>
+    <span class="eq">Na₂SiO₃(р-р) + CO₂ + H₂O → Na₂CO₃ + H₂SiO₃↓</span>
+    <span class="eq">Na₂S(р-р) + CO₂ + H₂O → Na₂CO₃ + H₂S↑</span>
+  </div>
+
+  <h2 class="sub-title">3.5 Особое свойство SiO₂</h2>
+  <div class="box box-danger">
+    <div class="box-title">🔬 SiO₂ реагирует с HF (плавиковой кислотой)</div>
+    SiO₂ + 4HF(газ) → SiF₄ + 2H₂O<br>
+    Используется для <strong>травления стекла</strong>. Опыты с HF — только в пластиковой посуде!
+  </div>
+
+  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания на закрепление — блок 3</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq3')">👁 Показать все ответы</button>
+    <div id="mq3" class="inline-tasks">
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">1</div><div class="it-text">Почему SiO₂ не реагирует с водой?</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>Потому что SiO₂ соответствует нерастворимая кремниевая кислота H₂SiO₃. Кислотные оксиды реагируют с водой только если образующаяся кислота растворима.<div class="ans-note">H₂SiO₃ выпадает в осадок → реакция невозможна.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">2</div><div class="it-text">Что образуется при растворении NO₂ в воде? Запиши уравнение.</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>2NO₂ + H₂O → HNO₂ + HNO₃ (при н.у.)<br>3NO₂ + H₂O → NO + 2HNO₃ (при нагревании)<div class="ans-note">Диспропорционирование азота — ловушка ЕГЭ.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">3</div><div class="it-text">Завершите реакцию: SO₂ + NaOH (избыток CO₂) →</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>SO₂ + NaOH (SO₂ в избытке) → NaHSO₃ (кислая соль — гидросульфит натрия)<div class="ans-note">При избытке кислотного оксида (многоосновной кислоты) → кислая соль.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">4</div><div class="it-text">Можно ли провести реакцию: FeO + CO₂? Обоснуй.</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>Нет. FeO — основный оксид малоактивного металла. Он реагирует только с кислотными оксидами, соответствующими сильным кислотам (H₂SO₄, HNO₃). CO₂ — слабая кислота.<div class="ans-note">Угольная кислота слабее, чем нужно для реакции с FeO.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">5</div><div class="it-text">Запишите реакцию: Na₂SiO₃(р-р) + CO₂ + H₂O →</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>Na₂SiO₃(р-р) + CO₂ + H₂O → Na₂CO₃ + H₂SiO₃↓<div class="ans-note">Более сильная H₂CO₃ вытесняет более слабую H₂SiO₃ из раствора. Реакция только в водном растворе!</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="remember"><div class="remember-title">✅ Запомнить</div><ul>
+    <li>SiO₂ + H₂O ↛ (не реагирует!) | SiO₂ + 4HF → SiF₄ + 2H₂O (травление стекла)</li>
+    <li>2NO₂ + H₂O → HNO₂ + HNO₃ | при нагр.: 3NO₂ + H₂O → NO + 2HNO₃</li>
+    <li>Избыток кислотного оксида + щёлочь → кислая соль (NaHSO₃, NaHCO₃)</li>
+    <li>Нелетучий оксид вытесняет летучий при сплавлении (SiO₂ > CO₂ > SO₂)</li>
+  </ul></div>
+</section>
+
+<!-- ═══════════════════ SECTION 4 ═══════════════════ -->
+<section class="section fade-in" id="s4">
+  <div class="section-header"><div class="section-num">4</div><h2 class="section-title">Химические свойства основных оксидов</h2></div>
+
+  <p class="body">Основные оксиды реагируют с кислотами и кислотными оксидами. Им соответствуют основания (гидроксиды).</p>
+
+  <h2 class="sub-title">4.1 С водой</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">Оксиды ЩМ и ЩЗМ + H₂O = щёлочь</span>
+    <span class="eq">Na₂O + H₂O → 2NaOH</span>
+    <span class="eq">K₂O + H₂O → 2KOH</span>
+    <span class="eq">CaO + H₂O → Ca(OH)₂ <span class="cond">(гашение извести)</span></span>
+    <span class="eq">BaO + H₂O → Ba(OH)₂</span>
+    <span class="eq eq-schema"><br>Оксиды металлов средней активности с водой НЕ реагируют: CuO, FeO, Fe₂O₃ + H₂O ↛</span>
+  </div>
+
+  <h2 class="sub-title">4.2 С кислотными и амфотерными оксидами</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">Основный оксид + кислотный оксид = соль</span>
+    <span class="eq">CaO + CrO₃ → CaCrO₄</span>
+    <span class="eq">K₂O + SO₂ → K₂SO₃</span>
+    <span class="eq">Na₂O + 2NO₂ → NaNO₂ + NaNO₃</span>
+    <span class="eq eq-schema"><br>Основный оксид ЩМ/ЩЗМ/Mg + амфотерный оксид →<span class="we">t°</span> соль</span>
+    <span class="eq">Na₂O + ZnO →<span class="we">t°</span> Na₂ZnO₂ <span class="cond">(цинкат натрия)</span></span>
+    <span class="eq">Na₂O + Al₂O₃ →<span class="we">t°</span> 2NaAlO₂ <span class="cond">(метаалюминат натрия)</span></span>
+    <span class="eq">CaO + Al₂O₃ →<span class="we">t°</span> Ca(AlO₂)₂</span>
+  </div>
+
+  <h2 class="sub-title">4.3 С кислотами</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">Основный оксид + кислота = соль + H₂O</span>
+    <span class="eq">Na₂O + 2HCl → 2NaCl + H₂O</span>
+    <span class="eq">CaO + H₂SO₄ → CaSO₄ + H₂O</span>
+    <span class="eq">CuO + 2HCl → CuCl₂ + H₂O</span>
+    <span class="eq">Fe₃O₄ + 8HBr → FeBr₂ + 2FeBr₃ + 4H₂O <span class="cond">(железная окалина = FeO·Fe₂O₃)</span></span>
+    <span class="eq eq-schema"><br>С кислотами-окислителями (ОВР):</span>
+    <span class="eq">FeO + 4HNO₃(конц.) → Fe(NO₃)₃ + NO₂ + 2H₂O <span class="cond">(Fe²⁺ → Fe³⁺)</span></span>
+    <span class="eq">Cu₂O + 3H₂SO₄(конц.) → 2CuSO₄ + SO₂ + 3H₂O <span class="cond">(Cu⁺ → Cu²⁺)</span></span>
+  </div>
+
+  <h2 class="sub-title">4.4 С амфотерными гидроксидами (сплавление)</h2>
+  <div class="eq-block">
+    <span class="eq">K₂O + Zn(OH)₂ →<span class="we">t°</span> K₂ZnO₂ + H₂O</span>
+    <span class="eq">K₂O + 2Al(OH)₃ →<span class="we">t°</span> 2KAlO₂ + 3H₂O</span>
+    <span class="eq">BaO + 2Al(OH)₃ →<span class="we">t°</span> Ba(AlO₂)₂ + 3H₂O</span>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">⚠️ Основные оксиды с солями НЕ реагируют</div>
+    В отличие от кислотных оксидов, основные оксиды солей не вытесняют (нет реакции ионного обмена с солями в растворе).
+  </div>
+
+  <h2 class="sub-title">4.5 Термическое разложение оксидов металлов после Cu</h2>
+  <div class="eq-block">
+    <span class="eq">2HgO →<span class="we">t°</span> 2Hg + O₂</span>
+    <span class="eq">2Ag₂O →<span class="we">t°</span> 4Ag + O₂</span>
+  </div>
+
+  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания на закрепление — блок 4</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq4')">👁 Показать все ответы</button>
+    <div id="mq4" class="inline-tasks">
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">1</div><div class="it-text">Что образуется при реакции: Na₂O + Al₂O₃ →(t°)?</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>Na₂O + Al₂O₃ → 2NaAlO₂ (метаалюминат натрия).<div class="ans-note">Кислотный остаток AlO₂⁻ — метаалюминат. Реакция при сплавлении.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">2</div><div class="it-text">Составьте уравнение ОВР: FeO + HNO₃(конц.) →</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>FeO + 4HNO₃(конц.) → Fe(NO₃)₃ + NO₂↑ + 2H₂O<div class="ans-note">Fe²⁺ — восстановитель, окисляется до Fe³⁺. Азот восстанавливается до +4 (NO₂) при конц. HNO₃.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">3</div><div class="it-text">Что получится при реакции Fe₃O₄ с соляной кислотой?</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>Fe₃O₄ + 8HCl → FeCl₂ + 2FeCl₃ + 4H₂O (смесь солей Fe²⁺ и Fe³⁺).<div class="ans-note">Железная окалина = FeO·Fe₂O₃, поэтому продукты — смесь двух хлоридов.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">4</div><div class="it-text">Реагирует ли CuO с водой? Объясни.</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>Нет. С водой реагируют только оксиды щелочных и щелочноземельных металлов (ЩМ и ЩЗМ). CuO — оксид металла средней активности.<div class="ans-note">Cu(OH)₂ нерастворима → CuO + H₂O ↛.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="remember"><div class="remember-title">✅ Запомнить</div><ul>
+    <li>С водой реагируют только ЩМ и ЩЗМ оксиды: Na₂O, K₂O, CaO, BaO, SrO.</li>
+    <li>Fe₃O₄ + кислота (не-окислитель) → FeCl₂ + 2FeCl₃ (смесь!)</li>
+    <li>FeO + конц. HNO₃ → Fe(NO₃)₃ + NO₂ (ОВР, Fe²⁺ → Fe³⁺)</li>
+    <li>Оксиды после Cu (HgO, Ag₂O) разлагаются при нагревании → металл + O₂</li>
+    <li>Формулы цинкатов и алюминатов: Na₂ZnO₂, NaAlO₂, Ca(AlO₂)₂</li>
+  </ul></div>
+</section>
+
+<!-- ═══════════════════ SECTION 5 ═══════════════════ -->
+<section class="section fade-in" id="s5">
+  <div class="section-header"><div class="section-num">5</div><h2 class="section-title">Химические свойства амфотерных оксидов</h2></div>
+
+  <p class="body">Амфотерные оксиды проявляют как кислотные, так и основные свойства в зависимости от партнёра по реакции.</p>
+
+  <h2 class="sub-title">5.1 Комплексные анионы при взаимодействии со щёлочью</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Амфотерный оксид</th><th>Гидроксид</th><th>Комплексный анион (р-р)</th><th>Название</th></tr></thead>
+    <tbody>
+      <tr><td>BeO</td><td>Be(OH)₂</td><td>[Be(OH)₄]²⁻</td><td>Тетрагидроксобериллат</td></tr>
+      <tr><td>ZnO</td><td>Zn(OH)₂</td><td>[Zn(OH)₄]²⁻</td><td>Тетрагидроксоцинкат</td></tr>
+      <tr><td>Al₂O₃</td><td>Al(OH)₃</td><td>[Al(OH)₄]⁻ / [Al(OH)₆]³⁻</td><td>Тетра- / Гексагидроксоалюминат</td></tr>
+      <tr><td>Cr₂O₃</td><td>Cr(OH)₃</td><td>[Cr(OH)₄]⁻ / [Cr(OH)₆]³⁻</td><td>Тетра- / Гексагидроксохромат(III)</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="box box-danger">
+    <div class="box-title">❗ Fe₂O₃ и Fe(OH)₃ — исключение!</div>
+    Fe₂O₃ и Fe(OH)₃ <strong>не реагируют</strong> с водными растворами щелочей. Реакция возможна <strong>только с расплавом</strong> щёлочи: Fe₂O₃ + 2NaOH →(t°) 2NaFeO₂ + H₂O
+  </div>
+
+  <h2 class="sub-title">5.2 С кислотами (проявляет основные свойства)</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">Амфотерный оксид + кислота = соль + H₂O</span>
+    <span class="eq">ZnO + 2HNO₃ → Zn(NO₃)₂ + H₂O</span>
+    <span class="eq">Al₂O₃ + 3H₂SO₄ → Al₂(SO₄)₃ + 3H₂O</span>
+    <span class="eq">Fe₂O₃ + 6HBr → 2FeBr₃ + 3H₂O</span>
+  </div>
+
+  <h2 class="sub-title">5.3 С кислотными оксидами</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">Амфотерный оксид + кислотный оксид = соль <span class="cond">(только сильные кислоты)</span></span>
+    <span class="eq">ZnO + Cl₂O₅ → Zn(ClO₃)₂</span>
+    <span class="eq">Al₂O₃ + 3Cl₂O₇ → 2Al(ClO₄)₃</span>
+  </div>
+
+  <h2 class="sub-title">5.4 С основными оксидами (сплавление)</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">Амфотерный оксид + основный оксид ЩМ/ЩЗМ →<span class="we">t°</span> соль</span>
+    <span class="eq">K₂O + ZnO →<span class="we">t°</span> K₂ZnO₂</span>
+    <span class="eq">Li₂O + Al₂O₃ →<span class="we">t°</span> 2LiAlO₂</span>
+    <span class="eq">Na₂O + Fe₂O₃ →<span class="we">t°</span> 2NaFeO₂</span>
+    <span class="eq">CaO + Cr₂O₃ →<span class="we">t°</span> Ca(CrO₂)₂</span>
+  </div>
+
+  <h2 class="sub-title">5.5 Со щелочами (раствор vs расплав)</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">С раствором щёлочи → гидроксокомплекс</span>
+    <span class="eq">ZnO + 2NaOH(р-р) + H₂O → Na₂[Zn(OH)₄]</span>
+    <span class="eq">Al₂O₃ + 2KOH(р-р) + 3H₂O → 2K[Al(OH)₄]</span>
+    <span class="eq eq-schema"><br>С твёрдой щёлочью (сплавление) → средняя соль + H₂O</span>
+    <span class="eq">ZnO + 2NaOH →<span class="we">t°</span> Na₂ZnO₂ + H₂O</span>
+    <span class="eq">Al₂O₃ + 2KOH →<span class="we">t°</span> 2KAlO₂ + H₂O</span>
+    <span class="eq">Fe₂O₃ + 2NaOH →<span class="we">t°</span> 2NaFeO₂ + H₂O <span class="cond">(только расплав!)</span></span>
+    <span class="eq">Cr₂O₃ + 2NaOH →<span class="we">t°</span> 2NaCrO₂ + H₂O</span>
+  </div>
+
+  <h2 class="sub-title">5.6 Амфотерные оксиды с карбонатами</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">Амфотерный оксид + карбонат/сульфит →<span class="we">t°</span> новая соль + CO₂/SO₂</span>
+    <span class="eq">ZnO + Na₂CO₃ →<span class="we">t°</span> Na₂ZnO₂ + CO₂↑</span>
+    <span class="eq">Al₂O₃ + CaSO₃ →<span class="we">t°</span> Ca(AlO₂)₂ + SO₂↑</span>
+  </div>
+
+  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания на закрепление — блок 5</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq5')">👁 Показать все ответы</button>
+    <div id="mq5" class="inline-tasks">
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">1</div><div class="it-text">Запишите реакцию ZnO с раствором NaOH и с твёрдым NaOH. В чём разница продуктов?</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>С р-ром: ZnO + 2NaOH(р-р) + H₂O → Na₂[Zn(OH)₄] (гидроксокомплекс)<br>С тв. щёлочью: ZnO + 2NaOH →(t°) Na₂ZnO₂ + H₂O (средняя соль — цинкат)<div class="ans-note">Ключевая разница: р-р → комплексная соль, расплав → средняя соль.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">2</div><div class="it-text">Реагирует ли Fe₂O₃ с раствором NaOH? Объясни.</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>Нет. Fe₂O₃ не реагирует с водными растворами щелочей. Реакция возможна только с расплавом NaOH: Fe₂O₃ + 2NaOH →(t°) 2NaFeO₂ + H₂O.<div class="ans-note">Это важная ловушка! Fe₂O₃ и Fe(OH)₃ — исключения из амфотерных.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">3</div><div class="it-text">Запишите реакцию: Al₂O₃ + KOH (раствор) →</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>Al₂O₃ + 2KOH(р-р) + 3H₂O → 2K[Al(OH)₄] (тетрагидроксоалюминат калия)<div class="ans-note">С раствором щёлочи → гидроксокомплекс!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">4</div><div class="it-text">Назовите соль Na₂ZnO₂.</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>Цинкат натрия (тетраоксоцинкат(II) натрия). Кислотный остаток ZnO₂²⁻ — цинкат.<div class="ans-note">Аналогично: NaAlO₂ — метаалюминат натрия, NaFeO₂ — метаферрит натрия.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="remember"><div class="remember-title">✅ Запомнить</div><ul>
+    <li>Раствор щёлочи + ZnO/Al₂O₃ → гидроксокомплекс [Zn(OH)₄]²⁻, [Al(OH)₄]⁻</li>
+    <li>Расплав щёлочи + ZnO/Al₂O₃ → средняя соль Na₂ZnO₂, NaAlO₂</li>
+    <li>Fe₂O₃ не реагирует с р-ром NaOH! Только с расплавом.</li>
+    <li>При взаимодействии с кислотой — амфотерный оксид ведёт себя как основный.</li>
+    <li>При взаимодействии со щёлочью/основным оксидом — как кислотный.</li>
+  </ul></div>
+</section>
+
+<!-- ═══════════════════ SECTION 6 ═══════════════════ -->
+<section class="section fade-in" id="s6">
+  <div class="section-header"><div class="section-num">6</div><h2 class="section-title">Свойства несолеобразующих оксидов</h2></div>
+
+  <p class="body">CO, N₂O, NO, SiO — не образуют солей при обычных условиях, не реагируют ни с кислотами, ни со щелочами.</p>
+
+  <h2 class="sub-title">6.1 СО — угарный газ</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">CO — типичный <strong>восстановитель</strong></span>
+    <span class="eq">CuO + CO →<span class="we">t°</span> Cu + CO₂ <span class="cond">(восстановление оксидов металлов)</span></span>
+    <span class="eq">FeO + CO →<span class="we">t°</span> Fe + CO₂</span>
+    <span class="eq">Fe₂O₃ + 3CO →<span class="we">t°</span> 2Fe + 3CO₂</span>
+    <span class="eq">2CO + O₂ → 2CO₂ <span class="cond">(горение)</span></span>
+    <span class="eq">CO + 2H₂ →<span class="we">кат., t°, p</span> CH₃OH <span class="cond">(метанол)</span></span>
+    <span class="eq">CO + NaOH(расплав) →<span class="we">t°, p</span> HCOONa <span class="cond">(формиат натрия)</span></span>
+    <span class="eq">CO + Cl₂ →<span class="we">кат.</span> COCl₂ <span class="cond">(фосген — ядовитый газ!)</span></span>
+  </div>
+
+  <h2 class="sub-title">6.2 NO и N₂O</h2>
+  <div class="eq-block">
+    <span class="eq">2NO + O₂ → 2NO₂ <span class="cond">(NO моментально окисляется на воздухе)</span></span>
+    <span class="eq eq-schema">N₂O — окислитель, поддерживает горение:</span>
+    <span class="eq">N₂O + O₂ ↛ <span class="cond">(N₂O не реагирует с кислородом)</span></span>
+  </div>
+
+  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания на закрепление — блок 6</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq6')">👁 Показать все ответы</button>
+    <div id="mq6" class="inline-tasks">
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">1</div><div class="it-text">Почему CO называют несолеобразующим оксидом? Реагирует ли он вообще с чем-либо?</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>CO не образует солей при взаимодействии с кислотами или щелочами при обычных условиях. Но CO — активный восстановитель: реагирует с O₂, оксидами металлов, щелочью (при высоком давлении), Cl₂.<div class="ans-note">Несолеобразующий ≠ химически инертный!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">2</div><div class="it-text">Что образуется при пропускании смеси CO и Cl₂ через активированный уголь?</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>CO + Cl₂ →(кат.) COCl₂ — фосген (ядовитый газ, вызывает паралич дыхательных путей).<div class="ans-note">Историческое боевое отравляющее вещество.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 7 ═══════════════════ -->
+<section class="section fade-in" id="s7">
+  <div class="section-header"><div class="section-num">7</div><h2 class="section-title">Реакции с простыми веществами. Способы получения</h2></div>
+
+  <h2 class="sub-title">7.1 Реакции оксидов с кислородом</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">Оксиды элементов в промежуточной с.о. + O₂ → высшие оксиды</span>
+    <span class="eq">4FeO + O₂ → 2Fe₂O₃</span>
+    <span class="eq">2Cu₂O + O₂ → 4CuO</span>
+    <span class="eq">2SO₂ + O₂ →<span class="we">кат., t°</span> 2SO₃ <span class="cond">(ключевая реакция производства H₂SO₄)</span></span>
+    <span class="eq">4CrO + O₂ → 2Cr₂O₃</span>
+    <span class="eq">P₂O₃ + O₂ → P₂O₅</span>
+    <span class="eq">2NO + O₂ → 2NO₂</span>
+  </div>
+
+  <h2 class="sub-title">7.2 Реакции оксидов с углеродом и водородом</h2>
+  <div class="eq-block">
+    <span class="eq eq-schema">Оксиды металлов средней активности и неактивных + C(кокс)/H₂ →<span class="we">t°</span></span>
+    <span class="eq">ZnO + C →<span class="we">t°</span> Zn + CO</span>
+    <span class="eq">Fe₂O₃ + 3CO →<span class="we">t°</span> 2Fe + 3CO₂ <span class="cond">(доменный процесс)</span></span>
+    <span class="eq">PbO + H₂ →<span class="we">t°</span> Pb + H₂O</span>
+    <span class="eq">SiO₂ + 2C →<span class="we">t°</span> Si + 2CO</span>
+    <span class="eq">CO₂ + C →<span class="we">t°</span> 2CO <span class="cond">(сопропорционирование)</span></span>
+  </div>
+
+  <h2 class="sub-title">7.3 Реакции оксидов с металлами</h2>
+  <div class="eq-block">
+    <span class="eq">CO₂ + Mg → MgO + CO</span>
+    <span class="eq">2Mg(нед.) + SiO₂ →<span class="we">t°</span> 2MgO + Si</span>
+    <span class="eq">4Mg(изб.) + SiO₂ →<span class="we">t°</span> 2MgO + Mg₂Si</span>
+    <span class="eq">4Cu + 2NO₂ →<span class="we">t°</span> 4CuO + N₂</span>
+    <span class="eq">4Zn + 2NO₂ →<span class="we">t°</span> 4ZnO + N₂</span>
+  </div>
+
+  <h2 class="sub-title">7.4 Общие способы получения оксидов</h2>
+  <div class="algo">
+    <div class="algo-step"><div class="algo-n">1</div><div class="algo-text"><strong>Взаимодействие простых веществ с кислородом:</strong> 4P + 5O₂ → 2P₂O₅; 2Cu + O₂ → 2CuO</div></div>
+    <div class="algo-step"><div class="algo-n">2</div><div class="algo-text"><strong>Горение сложных веществ (водородные соединения, сульфиды):</strong> CH₄ + 2O₂ → CO₂ + 2H₂O; 2ZnS + 3O₂ → 2ZnO + 2SO₂</div></div>
+    <div class="algo-step"><div class="algo-n">3</div><div class="algo-text"><strong>Разложение нерастворимых гидроксидов и солей:</strong> 2Al(OH)₃ →(t°) Al₂O₃ + 3H₂O; MgCO₃ →(t°) MgO + CO₂; 2Cu(NO₃)₂ →(t°) 2CuO + 4NO₂ + O₂</div></div>
+    <div class="algo-step"><div class="algo-n">4</div><div class="algo-text"><strong>Взаимодействие солей с сильными кислотами:</strong> Na₂SO₃ + 2HCl → 2NaCl + SO₂ + H₂O</div></div>
+    <div class="algo-step"><div class="algo-n">5</div><div class="algo-text"><strong>Вытеснение летучих оксидов нелетучими при сплавлении:</strong> Na₂CO₃ + SiO₂ →(t°) Na₂SiO₃ + CO₂</div></div>
+    <div class="algo-step"><div class="algo-n">6</div><div class="algo-text"><strong>Восстановление высших оксидов до низших:</strong> CO₂ + C →(t°) 2CO; Fe₂O₃ + CO →(t°) 2FeO + CO₂</div></div>
+    <div class="algo-step"><div class="algo-n">7</div><div class="algo-text"><strong>Окисление кислотами-окислителями:</strong> Cu + 4HNO₃(конц.) → Cu(NO₃)₂ + 2NO₂↑ + 2H₂O</div></div>
+  </div>
+
+  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания на закрепление — блок 7</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq7')">👁 Показать все ответы</button>
+    <div id="mq7" class="inline-tasks">
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">1</div><div class="it-text">Какой продукт образуется при разложении Cu(NO₃)₂ при нагревании?</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>2Cu(NO₃)₂ →(t°) 2CuO + 4NO₂↑ + O₂<div class="ans-note">Разложение нитратов металлов средней активности → оксид + NO₂ + O₂.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">2</div><div class="it-text">Запишите реакцию восстановления Fe₂O₃ коксом в доменной печи.</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>Fe₂O₃ + 3CO →(t°) 2Fe + 3CO₂ (CO получается из кокса: C + CO₂ → 2CO)<div class="ans-note">В доменной печи реальный восстановитель — CO, образующийся из кокса.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">3</div><div class="it-text">Какой газ образуется при сжигании H₂S в избытке кислорода?</div></div>
+        <button class="reveal-btn" onclick="revealThis(this)">▶ Показать ответ</button>
+        <div class="answer-box"><div class="answer-label">Ответ</div>2H₂S + 3O₂(изб.) → 2SO₂ + 2H₂O<div class="ans-note">При недостатке кислорода: 2H₂S + O₂ → 2S + 2H₂O (выпадает жёлтая сера).</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 8 — FLASHCARDS ═══════════════════ -->
+<section class="section fade-in" id="s8">
+  <div class="section-header"><div class="section-num">8</div><h2 class="section-title">🃏 Флэш-карточки — ловушки ЕГЭ (50 карточек)</h2></div>
+
+  <!-- Flashcard data -->
+  <div style="display:none">
+    <span class="fc-data" data-q="SiO₂ + H₂O → ?" data-a="Реакция НЕ идёт! SiO₂ + H₂O ↛" data-hint="H₂SiO₃ нерастворима — поэтому SiO₂ не растворяется в воде"></span>
+    <span class="fc-data" data-q="ZnO — основный или амфотерный?" data-a="Амфотерный! (исключение: с.о. Zn = +2, но ZnO амфотерный)" data-hint="BeO, ZnO, SnO, PbO — исключения с с.о. +2"></span>
+    <span class="fc-data" data-q="Fe₂O₃ + NaOH(р-р) → ?" data-a="Реакция НЕ идёт! Fe₂O₃ не реагирует с водными растворами щелочей" data-hint="Fe₂O₃ реагирует только с расплавом NaOH → NaFeO₂"></span>
+    <span class="fc-data" data-q="Какой цвет у NO₂?" data-a="Бурый (красно-коричневый) газ. Тривиальное название — лисий хвост" data-hint="NO — бесцветный, NO₂ — бурый"></span>
+    <span class="fc-data" data-q="2NO₂ + H₂O → ?" data-a="2NO₂ + H₂O → HNO₂ + HNO₃ (диспропорционирование N)" data-hint="При нагревании: 3NO₂ + H₂O → NO + 2HNO₃"></span>
+    <span class="fc-data" data-q="Mn₂O₇ — кислотный или основный?" data-a="Кислотный (марганец в с.о. +7 > +5)" data-hint="С.о. металла ≥ +5 → кислотный оксид"></span>
+    <span class="fc-data" data-q="Mn₂O₇ при н.у. — газ, жидкость или твёрдое?" data-a="Жидкость (зелёная маслянистая жидкость)!" data-hint="Единственный оксид металла, жидкий при н.у."></span>
+    <span class="fc-data" data-q="CuO — чёрный или красный?" data-a="CuO — чёрный. Cu₂O — красный (кирпично-красный)" data-hint="Часто путают на ЕГЭ!"></span>
+    <span class="fc-data" data-q="Al₂O₃ + KOH(р-р) + H₂O → ?" data-a="Al₂O₃ + 2KOH(р-р) + 3H₂O → 2K[Al(OH)₄]" data-hint="С раствором щёлочи → гидроксокомплекс, не средняя соль!"></span>
+    <span class="fc-data" data-q="Al₂O₃ + KOH(расплав) → ?" data-a="Al₂O₃ + 2KOH →(t°) 2KAlO₂ + H₂O" data-hint="Расплав щёлочи → средняя соль (метаалюминат)"></span>
+    <span class="fc-data" data-q="Назови несолеобразующие оксиды" data-a="CO, N₂O, NO, SiO — не образуют солей с кислотами и щелочами" data-hint="SiO (с.о. Si = +2) несолеобразующий, SiO₂ (с.о. Si = +4) — кислотный"></span>
+    <span class="fc-data" data-q="Fe₃O₄ + 8HCl → ?" data-a="Fe₃O₄ + 8HCl → FeCl₂ + 2FeCl₃ + 4H₂O (смесь солей!)" data-hint="Железная окалина = FeO·Fe₂O₃, поэтому два разных хлорида"></span>
+    <span class="fc-data" data-q="SO₃ при стандартных условиях — газ или жидкость?" data-a="Жидкость (при ст.у. 25°C, 1 атм). При низких температурах — твёрдое." data-hint="SO₂ — газ, SO₃ — жидкость при 25°C"></span>
+    <span class="fc-data" data-q="CaO + H₂O → ? Как называется эта реакция?" data-a="CaO + H₂O → Ca(OH)₂. Это гашение извести (CaO = негашёная известь)" data-hint="Реакция экзотермическая, выделяет много тепла"></span>
+    <span class="fc-data" data-q="SiO₂ + 4HF → ?" data-a="SiO₂ + 4HF → SiF₄ + 2H₂O (травление стекла)" data-hint="Кислотные оксиды обычно не реагируют с кислотами. SiO₂ + HF — исключение!"></span>
+    <span class="fc-data" data-q="Na₂O + SiO₂ →(t°) ? Что это за реакция?" data-a="Na₂O + SiO₂ →(t°) Na₂SiO₃ (силикат натрия = жидкое стекло)" data-hint="Основный оксид + кислотный оксид = соль при сплавлении"></span>
+    <span class="fc-data" data-q="FeO + HNO₃(конц.) → ?" data-a="FeO + 4HNO₃(конц.) → Fe(NO₃)₃ + NO₂↑ + 2H₂O (ОВР! Fe²⁺ → Fe³⁺)" data-hint="Соединения Fe²⁺ — восстановители. Конц. HNO₃ → NO₂"></span>
+    <span class="fc-data" data-q="2HgO →(t°) ? Почему?" data-a="2HgO → 2Hg + O₂. Оксиды металлов после Cu разлагаются при нагревании." data-hint="Ряд после Cu: Hg, Ag, Au — их оксиды термически нестойки"></span>
+    <span class="fc-data" data-q="Какой тип оксида — CrO₃?" data-a="Кислотный оксид (Cr в с.о. +6 > +5). Соответствует H₂CrO₄ (хромовая кислота)" data-hint="CrO₃ растворяется в воде: CrO₃ + H₂O → H₂CrO₄"></span>
+    <span class="fc-data" data-q="N₂O поддерживает горение или нет?" data-a="Да, N₂O поддерживает горение (он окислитель). Но сам с O₂ не реагирует: N₂O + O₂ ↛" data-hint="Веселящий газ N₂O — окислитель, но несолеобразующий"></span>
+    <span class="fc-data" data-q="Назовите кислоту, соответствующую SO₃" data-a="H₂SO₄ — серная кислота. SO₃ + H₂O → H₂SO₄" data-hint="SO₂ → H₂SO₃ (сернистая), SO₃ → H₂SO₄ (серная)"></span>
+    <span class="fc-data" data-q="ZnO + Na₂CO₃ →(t°) ?" data-a="ZnO + Na₂CO₃ →(t°) Na₂ZnO₂ + CO₂↑" data-hint="Амфотерный оксид вытесняет летучий CO₂ из карбоната при сплавлении"></span>
+    <span class="fc-data" data-q="CO + NaOH(расплав) →(t°, p) ?" data-a="CO + NaOH(расплав) →(t°, p) HCOONa (формиат натрия)" data-hint="Необычная реакция CO! Запомни это исключение."></span>
+    <span class="fc-data" data-q="Какой цвет у Cr₂O₃?" data-a="Зелёный (тёмно-зелёный порошок)" data-hint="Cr₂O₃ используется как зелёный пигмент"></span>
+    <span class="fc-data" data-q="Реагирует ли Cu₂O с H₂SO₄(конц.)?" data-a="Да: Cu₂O + 3H₂SO₄(конц.) → 2CuSO₄ + SO₂↑ + 3H₂O (ОВР, Cu⁺ → Cu²⁺)" data-hint="Конц. H₂SO₄ → SO₂; Cu⁺ — восстановитель"></span>
+    <span class="fc-data" data-q="Al₂O₃ + 3SO₃ → ?" data-a="Al₂O₃ + 3SO₃ → Al₂(SO₄)₃ (амфотерный оксид + сильный кислотный оксид = соль)" data-hint="Амфотерные оксиды реагируют с кислотными оксидами сильных кислот (H₂SO₄, HNO₃...)"></span>
+    <span class="fc-data" data-q="Na₂SiO₃(р-р) + CO₂ + H₂O → ?" data-a="Na₂SiO₃(р-р) + CO₂ + H₂O → Na₂CO₃ + H₂SiO₃↓" data-hint="H₂CO₃ сильнее H₂SiO₃ → вытесняет кремниевую кислоту из раствора"></span>
+    <span class="fc-data" data-q="Что такое железная окалина? Формула." data-a="Fe₃O₄ = FeO·Fe₂O₃ (смешанный оксид железа(II,III))" data-hint="При реакции с кислотами-неокислителями: Fe₃O₄ → FeCl₂ + 2FeCl₃"></span>
+    <span class="fc-data" data-q="Каким кислотным остатком обладает Al(OH)₃, ведя себя как кислота?" data-a="AlO₂⁻ (метаалюминат-ион). Реакция как кислоты: Al(OH)₃ + NaOH → NaAlO₂ + 2H₂O" data-hint="Амфотерные гидроксиды проявляют и кислотные, и основные свойства"></span>
+    <span class="fc-data" data-q="SO₂ + NaOH →(SO₂ в избытке) ?" data-a="SO₂(изб.) + NaOH → NaHSO₃ (гидросульфит натрия — кислая соль)" data-hint="Избыток кислотного оксида → кислая соль"></span>
+    <span class="fc-data" data-q="Что такое корунд? Какой это оксид?" data-a="Корунд = Al₂O₃ (оксид алюминия). Глинозём — тоже Al₂O₃" data-hint="Рубин и сапфир — это тоже Al₂O₃ с примесями!"></span>
+    <span class="fc-data" data-q="CaO + Al₂O₃ →(t°) ?" data-a="CaO + Al₂O₃ →(t°) Ca(AlO₂)₂ (алюминат кальция)" data-hint="Основный оксид + амфотерный оксид при сплавлении → соль с остатком AlO₂⁻"></span>
+    <span class="fc-data" data-q="СO₂ + 2Mg →(t°) ?" data-a="CO₂ + 2Mg →(t°) 2MgO + C. Магний горит в углекислом газе!" data-hint="Магний — настолько сильный восстановитель, что восстанавливает CO₂"></span>
+    <span class="fc-data" data-q="P₂O₅ + 3H₂O → ?" data-a="P₂O₅ + 3H₂O → 2H₃PO₄ (фосфорная кислота)" data-hint="P₂O₅ — мощный осушитель, активно поглощает воду"></span>
+    <span class="fc-data" data-q="Какие оксиды реагируют с водой с образованием кислоты: SO₂ или SiO₂?" data-a="Только SO₂: SO₂ + H₂O ⇄ H₂SO₃. SiO₂ с водой не реагирует!" data-hint="Ключевое отличие: H₂SiO₃ нерастворима → SiO₂ + H₂O ↛"></span>
+    <span class="fc-data" data-q="Что соответствует N₂O₃?" data-a="N₂O₃ — кислотный оксид, соответствующий HNO₂ (азотистой кислоте). N₂O₃ + H₂O → 2HNO₂" data-hint="N₂O₃ — это ангидрид азотистой кислоты"></span>
+    <span class="fc-data" data-q="Fe₂O₃ + 2NaOH →(расплав) ?" data-a="Fe₂O₃ + 2NaOH →(t°) 2NaFeO₂ + H₂O (метаферрит натрия)" data-hint="Fe₂O₃ реагирует только с расплавом NaOH, не с раствором!"></span>
+    <span class="fc-data" data-q="3K₂O + P₂O₅ → ?" data-a="3K₂O + P₂O₅ → 2K₃PO₄ (ортофосфат калия)" data-hint="Соотношение: 3 основных оксида + 1 оксид P(V) → 2 ортофосфата"></span>
+    <span class="fc-data" data-q="Можно ли провести: CuO + CO₂ → ?" data-a="Нет! CuO — основный оксид малоактивного металла. Реагирует только с кислотными оксидами сильных кислот (H₂SO₄, HNO₃). CO₂ (H₂CO₃ — слабая кислота) не подходит." data-hint="Оксиды малоактивных металлов: CO₂, SO₂ слишком слабы для реакции"></span>
+    <span class="fc-data" data-q="SiO₂ + CaCO₃ →(t°) ?" data-a="SiO₂ + CaCO₃ →(t°) CaSiO₃ + CO₂↑ (нелетучий SiO₂ вытесняет летучий CO₂)" data-hint="Принцип: менее летучий оксид вытесняет более летучий из соли"></span>
+    <span class="fc-data" data-q="2Cu₂O + O₂ →(t°) ?" data-a="2Cu₂O + O₂ →(t°) 4CuO (окисление оксида меди(I) до меди(II))" data-hint="Оксиды промежуточной с.о. окисляются до высшей с.о. кислородом"></span>
+    <span class="fc-data" data-q="Почему CO — не кислотный оксид?" data-a="Угольная кислота H₂CO₃ неустойчива и существует лишь в разбавленном растворе. CO соответствует несуществующей H₂C₂O₂. CO — несолеобразующий." data-hint="CO не имеет соответствующей устойчивой кислоты"></span>
+    <span class="fc-data" data-q="K₂O + Mn₂O₇ → ?" data-a="K₂O + Mn₂O₇ → 2KMnO₄ (перманганат калия — марганцовка!)" data-hint="Mn₂O₇ — кислотный оксид марганца(VII), соответствующий HMnO₄"></span>
+    <span class="fc-data" data-q="Na₂O + 2NO₂ → ? Что необычного в этой реакции?" data-a="Na₂O + 2NO₂ → NaNO₂ + NaNO₃ (диспропорционирование: N+4 → N+3 и N+5)" data-hint="NO₂ — редкий кислотный оксид с диспропорционированием в двух типах реакций"></span>
+    <span class="fc-data" data-q="Что образуется при разложении Al(OH)₃ при нагревании?" data-a="2Al(OH)₃ →(t°) Al₂O₃ + 3H₂O" data-hint="Способ получения Al₂O₃: разложение нерастворимых гидроксидов"></span>
+    <span class="fc-data" data-q="Реагирует ли Ag₂O с кислотами?" data-a="Да: Ag₂O + 2HNO₃ → 2AgNO₃ + H₂O. Основный оксид + кислота = соль + H₂O" data-hint="Ag₂O — основный оксид (серебро в с.о. +1)"></span>
+    <span class="fc-data" data-q="Что такое глинозём?" data-a="Al₂O₃ (оксид алюминия). Используется для производства алюминия методом электролиза." data-hint="Корунд, рубин, сапфир — это тоже Al₂O₃ с примесями"></span>
+    <span class="fc-data" data-q="СО₂ + C →(t°) ?" data-a="CO₂ + C →(t°) 2CO (реакция сопропорционирования: C⁰ + C⁴⁺ → 2C²⁺)" data-hint="При высокой температуре в доменной печи: CO₂ превращается в CO"></span>
+    <span class="fc-data" data-q="Формула комплексного иона при ZnO + NaOH(р-р) + H₂O" data-a="[Zn(OH)₄]²⁻ — тетрагидроксоцинкат-ион. Соль: Na₂[Zn(OH)₄]" data-hint="Координационное число Zn = 4, заряд комплексного иона = -2"></span>
+    <span class="fc-data" data-q="4FeO + O₂ →(t°) ?" data-a="4FeO + O₂ →(t°) 2Fe₂O₃ (окисление FeO до Fe₂O₃)" data-hint="Fe²⁺ → Fe³⁺. Промежуточные оксиды металлов окисляются кислородом"></span>
+    <span class="fc-data" data-q="Реагирует ли NO₂ со щёлочью?" data-a="Да! 2NaOH + 2NO₂ → NaNO₂ + NaNO₃ + H₂O (диспропорционирование N)" data-hint="NO₂ — кислотный оксид, реагирует со щелочами, как и другие кислотные оксиды"></span>
+  </div>
+
+  <!-- Flashcard widget -->
+  <div class="fc-section">
+    <div class="fc-header">
+      <div class="fc-title">🃏 Флэш-карточки по оксидам</div>
+      <div class="fc-sub">Нажми на карточку или Space, чтобы перевернуть.<br>→ Знаю &nbsp;&nbsp; ← Не знаю</div>
+    </div>
+    <div id="fc-empty" class="fc-empty">Нет карточек. Обновите страницу.</div>
+    <div id="fc-card-area">
+      <div class="fc-stats">
+        <div>✅ Знаю: <span id="fc-known">0</span></div>
+        <div>❌ Не знаю: <span id="fc-unknown">0</span></div>
+      </div>
+      <div class="fc-counter" id="fc-counter">1 / 50</div>
+      <div class="fc-perspective" onclick="flipCard()">
+        <div class="fc-inner" id="fc-inner">
+          <div class="fc-face fc-front">
+            <div class="fc-tag">ВОПРОС</div>
+            <div id="fc-front">Загрузка…</div>
+          </div>
+          <div class="fc-face fc-back">
+            <div class="fc-back-tag">ОТВЕТ</div>
+            <div id="fc-back">Загрузка…</div>
+          </div>
+        </div>
+      </div>
+      <button class="fc-flip-btn" id="fc-flip-btn" onclick="flipCard()">🔄 Перевернуть</button>
+      <div class="fc-btn-row" id="fc-btn-row" style="display:none">
+        <button class="fc-btn-know" onclick="markKnown()">✅ Знаю →</button>
+        <button class="fc-btn-dontknow" onclick="markUnknown()">❌ Не знаю ←</button>
+      </div>
+      <div class="fc-keys">Space — перевернуть &nbsp;·&nbsp; → знаю &nbsp;·&nbsp; ← не знаю</div>
+    </div>
+    <div id="fc-result" class="fc-result">
+      <h3>🎉 Раунд завершён!</h3>
+      <div class="fc-res-row">
+        <div class="fc-res-card"><div class="fc-res-num fc-res-known" style="color:#1D9E75">0</div><div class="fc-res-lbl">ЗНАЮ</div></div>
+        <div class="fc-res-card"><div class="fc-res-num fc-res-unknown" style="color:#C0392B">0</div><div class="fc-res-lbl">НЕ ЗНАЮ</div></div>
+      </div>
+      <div class="fc-restart-row">
+        <button class="fc-restart-btn" onclick="repeatUnknown()">🔁 Повторить незнакомые</button>
+        <button class="fc-restart-btn primary" onclick="restartAll()">▶ Все карточки заново</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SECTION 9 — PRACTICE ═══════════════════ -->
+<section class="section fade-in" id="s9">
+  <div class="section-header"><div class="section-num">9</div><h2 class="section-title">📝 Большой практикум — 50 реакций</h2></div>
+
+
+  <div class="pt-trainer" id="pt-trainer">
+
+    <!-- ── Шапка свободного режима ── -->
+    <div class="pt-top" id="pt-top-free">
+      <div class="pt-title">📝 Практикум: расставь коэффициенты и допиши реакцию</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <div style="font-family:var(--mono);font-size:12px;color:var(--ink3);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 11px" id="pt-count-free">1 / 50</div>
+        <button class="pt-reveal-btn" style="margin-top:0;padding:7px 16px;font-size:13px" onclick="PT_startTest()">▶ Начать тест</button>
+      </div>
+    </div>
+
+    <!-- ── Панель статистики (тест / повтор) ── -->
+    <div class="pt-stats" id="pt-stats" style="display:none">
+      <div class="pt-stat">
+        <span class="pt-stat-label">Время</span>
+        <span class="pt-stat-val" id="pt-timer">00:00</span>
+      </div>
+      <div class="pt-stat">
+        <span class="pt-stat-label">Выполнено</span>
+        <span class="pt-stat-val" id="pt-done">0 / 50</span>
+      </div>
+      <div class="pt-stat">
+        <span class="pt-stat-label">Знал</span>
+        <span class="pt-stat-val" style="color:#6ee7b7" id="pt-correct-cnt">0</span>
+      </div>
+      <div class="pt-stat">
+        <span class="pt-stat-label">Не знал</span>
+        <span class="pt-stat-val" style="color:#fca5a5" id="pt-wrong-cnt">0</span>
+      </div>
+      <button class="pt-nav-btn" style="margin-left:auto;font-size:11px;padding:5px 10px" onclick="PT_endTest()">✕ Завершить</button>
+    </div>
+
+    <!-- ── Зона карточки ── -->
+    <div id="pt-question-area">
+      <div class="pt-block-tag" id="pt-block-tag">Блок А</div>
+      <div class="pt-card">
+        <div style="font-size:11px;font-family:var(--mono);color:var(--ink3);margin-bottom:6px" id="pt-task-lbl">Реакция 1 из 50</div>
+        <div class="pt-eq" id="pt-eq">SO₃ + H₂O →</div>
+        <div style="font-size:12px;color:var(--ink3);margin-top:4px;font-style:italic">Допиши правую часть и расставь коэффициенты, затем проверь себя</div>
+        <button class="pt-reveal-btn" id="pt-reveal-btn" onclick="PT_reveal()">▶ Показать ответ</button>
+        <div class="pt-answer" id="pt-answer">
+          <div class="pt-ans-label">Ответ</div>
+          <div class="pt-ans-eq" id="pt-ans-eq"></div>
+          <div class="pt-ans-note" id="pt-ans-note"></div>
+        </div>
+        <div class="pt-rating" id="pt-rating">
+          <button class="pt-btn-dontknow" onclick="PT_mark(false)">✗ Не знал</button>
+          <button class="pt-btn-know" onclick="PT_mark(true)">✓ Знал</button>
+        </div>
+      </div>
+
+      <div id="pt-repeat-notice" class="pt-repeat-notice" style="display:none"></div>
+      <div class="pt-feedback" id="pt-feedback"></div>
+
+      <div class="pt-nav" id="pt-nav">
+        <button class="pt-nav-btn" onclick="PT_prev()">← Назад</button>
+        <div class="pt-progress-wrap">
+          <div class="pt-progress-num" id="pt-progress-num">1 / 50</div>
+          <div class="pt-progress-bar"><div class="pt-progress-fill" id="pt-progress-fill" style="width:2%"></div></div>
+        </div>
+        <button class="pt-nav-btn" onclick="PT_next()">Вперёд →</button>
+      </div>
+    </div>
+
+    <!-- ── Экран результатов ── -->
+    <div id="pt-results" style="display:none"></div>
+
+  </div><!-- /pt-trainer -->
+
+  
+</section>
+
+  <section class="section fade-in" id="s10">
+    <div class="section-header">
+      <div class="section-num">10</div>
+      <h2 class="section-title">🎯 Задание 8 ЕГЭ — сопоставление</h2>
+    </div>
+    <p style="color:var(--ink2);font-size:14px;margin-bottom:12px">17 заданий в формате ЕГЭ. Для каждого реагента А/Б/В/Г введи номер продукта из списка 1–6.</p>
+    <div style="display:inline-flex;align-items:center;gap:8px;background:#FEF2F2;border:1px solid #FECACA;border-radius:8px;padding:8px 14px;margin-bottom:18px;font-size:13px;color:#991B1B">
+      <span style="font-size:16px">💯</span>
+      <span><strong>2 балла</strong> в ЕГЭ (линия 8) — за полностью верный ответ. 1 балл — если допущена одна ошибка.</span>
+    </div>
+
+    <div class="ege8-trainer" id="ege8-trainer">
+
+      <div class="ege8-top" id="ege8-top-free">
+        <div style="font-weight:700;font-size:15px;color:var(--ink1)">🎯 Задание 8 — сопоставление</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-family:var(--mono);font-size:12px;color:var(--ink3);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 11px" id="ege8-count-free">1 / 17</span>
+          <button class="ege8-check-btn" style="padding:7px 16px;font-size:13px" onclick="EGE8_startTest()">▶ Начать тест</button>
+        </div>
+      </div>
+
+      <div class="ege8-stats" id="ege8-stats" style="display:none">
+        <div class="ege8-stat"><span class="ege8-stat-label">Время</span><span class="ege8-stat-val" id="ege8-timer">00:00</span></div>
+        <div class="ege8-stat"><span class="ege8-stat-label">Выполнено</span><span class="ege8-stat-val" id="ege8-done">0 / 17</span></div>
+        <div class="ege8-stat"><span class="ege8-stat-label">Знал</span><span class="ege8-stat-val" style="color:#6ee7b7" id="ege8-correct-cnt">0</span></div>
+        <div class="ege8-stat"><span class="ege8-stat-label">Не знал</span><span class="ege8-stat-val" style="color:#fca5a5" id="ege8-wrong-cnt">0</span></div>
+        <button class="pt-nav-btn" style="margin-left:auto;font-size:11px;padding:5px 10px" onclick="EGE8_endTest()">✕ Завершить</button>
+      </div>
+
+      <div id="ege8-question-area">
+        <div id="ege8-repeat-notice" class="ege8-repeat-notice" style="display:none"></div>
+
+        <div class="ege8-card">
+          <div class="ege8-task-meta" id="ege8-task-meta">Задание 1 из 17 · 8 линия ЕГЭ</div>
+
+          <div class="ege8-cols">
+            <div>
+              <div class="ege8-col-head">Исходные вещества</div>
+              <div id="ege8-reagents"></div>
+            </div>
+            <div>
+              <div class="ege8-col-head">Продукты реакции</div>
+              <div id="ege8-products"></div>
+            </div>
+          </div>
+
+          <div class="ege8-answer-bar">
+            <div class="ege8-answer-slots" id="ege8-slots"></div>
+            <button class="ege8-check-btn" id="ege8-check-btn" onclick="EGE8_check()">✓ Проверить</button>
+          </div>
+
+          <div class="ege8-solution" id="ege8-solution"></div>
+          <div class="ege8-feedback" id="ege8-feedback"></div>
+          <div class="ege8-rating" id="ege8-rating">
+            <button class="pt-btn-dontknow" onclick="EGE8_mark(false)">✗ Не знал</button>
+            <button class="pt-btn-know" onclick="EGE8_mark(true)">✓ Знал</button>
+          </div>
+        </div>
+
+        <div class="ege8-nav" id="ege8-nav">
+          <button class="pt-nav-btn" onclick="EGE8_prev()">← Назад</button>
+          <div style="display:flex;flex-direction:column;align-items:center;flex:1;gap:4px">
+            <span style="font-size:12px;font-family:var(--mono);color:var(--ink3)" id="ege8-prog-num">1 / 17</span>
+            <div class="ege8-progress-bar"><div class="ege8-progress-fill" id="ege8-progress-fill" style="width:6%"></div></div>
+          </div>
+          <button class="pt-nav-btn" onclick="EGE8_next()">Вперёд →</button>
+        </div>
+      </div>
+
+      <div id="ege8-results" style="display:none"></div>
+    </div>
+  </section>
+
+
+
+
+</div><!-- end shell -->
+
+<button id="back-top" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- WHITEBOARD BUTTON -->
+<button onclick="wbOpen()" id="btn-board"
+  style="position:fixed;bottom:80px;right:20px;z-index:1200;
+  width:48px;height:48px;border-radius:14px;
+  background:linear-gradient(135deg,#1D9E75,#085041);
+  color:#fff;border:none;cursor:pointer;font-size:22px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(8,80,65,.35);transition:transform .15s"
+  onmouseover="this.style.transform='scale(1.07)'"
+  onmouseout="this.style.transform=''"
+  title="Открыть доску">🖊</button>
+
+<!-- WHITEBOARD -->
+<div id="wb" style="display:none;position:fixed;z-index:200;flex-direction:column;top:0;bottom:0;right:0;">
+  <div id="wb-bar" style="height:48px;display:flex;align-items:center;gap:5px;padding:0 10px;background:#f8f8fc;border-bottom:1.5px solid #e0ddf8;flex-shrink:0;overflow-x:auto;overflow-y:hidden;box-shadow:0 2px 8px rgba(60,40,160,.07)">
+    <button onclick="wbClose()" style="background:#fff;border:1.5px solid #e0ddf8;color:#444;border-radius:8px;padding:5px 11px;font-size:12px;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:sans-serif">✕ Закрыть</button>
+    <button id="wbt-mode" onclick="wbToggleMode()" style="background:#eef;border:1.5px solid #c0b0ff;color:#5b40c0;border-radius:8px;padding:5px 11px;font-size:12px;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:sans-serif;font-weight:600" title="Переключить режим">⛶ На весь экран</button>
+    <div class="wbs"></div>
+    <button onclick="wbSetTool('pen')"  class="wb-tool" id="wbt-pen"  title="Перо">✏️</button>
+    <button onclick="wbSetTool('glow')" class="wb-tool" id="wbt-glow" title="Световое перо">✨</button>
+    <div class="wbs"></div>
+    <div class="wb-col" onclick="wbSetColor('#1a1a2e')" style="background:#1a1a2e" title="Тёмный"></div>
+    <div class="wb-col" onclick="wbSetColor('#c0392b')" style="background:#c0392b" title="Красный"></div>
+    <div class="wb-col" onclick="wbSetColor('#1d6f42')" style="background:#1d6f42" title="Зелёный"></div>
+    <div class="wb-col" onclick="wbSetColor('#1a5276')" style="background:#1a5276" title="Синий"></div>
+    <div class="wb-col" onclick="wbSetColor('#6c3483')" style="background:#6c3483" title="Фиолетовый"></div>
+    <div class="wb-col" onclick="wbSetColor('#b7770d')" style="background:#b7770d" title="Оранжевый"></div>
+    <div class="wbs"></div>
+    <button onclick="wbSetSize(2)"  class="wb-sz">S</button>
+    <button onclick="wbSetSize(5)"  class="wb-sz">M</button>
+    <button onclick="wbSetSize(12)" class="wb-sz">L</button>
+    <div style="flex:1;min-width:6px"></div>
+    <button onclick="wbUndo()"  style="background:#fff;border:1.5px solid #e0ddf8;color:#555;border-radius:8px;padding:5px 11px;font-size:12px;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:sans-serif" title="Отменить (Ctrl+Z)">↩ Отмена</button>
+    <button onclick="wbClear()" style="background:#fff5f5;border:1.5px solid #fca5a5;color:#dc2626;border-radius:8px;padding:5px 11px;font-size:12px;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:sans-serif">🗑 Очистить</button>
+  </div>
+  <div id="wb-area" style="flex:1;position:relative;overflow:hidden;">
+    <canvas id="wb-canvas" style="display:block;touch-action:none;width:100%;height:100%"></canvas>
+    <textarea id="wb-txt" rows="1" style="display:none;position:absolute;background:transparent;border:1.5px dashed #7c3aed;outline:none;resize:none;padding:4px 8px;z-index:10;line-height:1.45;overflow:hidden;min-width:100px;border-radius:4px;color:#1a1a2e;font-size:18px"></textarea>
+  </div>
+</div>
+
+<script>
+/* ══ PROGRESS BAR ══ */
+window.addEventListener('scroll',function(){
+  var d=document.documentElement;
+  var s=d.scrollTop||document.body.scrollTop;
+  var h=d.scrollHeight-d.clientHeight;
+  document.getElementById('pf').style.width=(s/h*100)+'%';
+  var bt=document.getElementById('back-top');
+  bt.classList.toggle('visible',s>300);
+});
+
+/* ══ FADE IN ══ */
+(function(){
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+  },{threshold:.08});
+  document.querySelectorAll('.fade-in').forEach(function(el){io.observe(el);});
+})();
+
+/* ══ REVEAL ══ */
+function revealThis(btn){
+  var ab=btn.nextElementSibling;
+  var open=ab.classList.toggle('open');
+  btn.textContent=open?'▼ Скрыть ответ':'▶ Показать ответ';
+  btn.classList.toggle('open',open);
+}
+function toggleGroup(btn,gid){
+  var g=document.getElementById(gid);
+  var boxes=g.querySelectorAll('.answer-box');
+  var btns=g.querySelectorAll('.reveal-btn');
+  var allOpen=Array.from(boxes).every(function(b){return b.classList.contains('open');});
+  boxes.forEach(function(b){b.classList.toggle('open',!allOpen);});
+  btns.forEach(function(b){
+    b.textContent=!allOpen?'▼ Скрыть ответ':'▶ Показать ответ';
+    b.classList.toggle('open',!allOpen);
+  });
+  btn.classList.toggle('all-open',!allOpen);
+  btn.textContent=!allOpen?'🙈 Скрыть все':'👁 Показать все ответы';
+}
+
+/* ══ FLASHCARDS ══ */
+var deck=[],cur=0,flipped=false,known=[],unknown=[];
+var _sr={};
+try{_sr=JSON.parse(localStorage.getItem('fc_sr_oxides')||'{}');}catch(x){}
+function _srSave(){try{localStorage.setItem('fc_sr_oxides',JSON.stringify(_sr));}catch(x){}}
+function _srKey(q){return q.slice(0,40);}
+function _srGet(q){return _sr[_srKey(q)]||{n:1,ef:2.5,due:0};}
+function _srUpd(q,ok){
+  var k=_srKey(q),c=_srGet(q);
+  if(ok){c.n=Math.max(1,Math.round(c.n*c.ef));c.ef=Math.max(1.3,c.ef+0.1);}
+  else{c.n=1;c.ef=Math.max(1.3,c.ef-0.2);}
+  c.due=Date.now()+c.n*86400000;
+  _sr[k]=c;_srSave();
+}
+function _srBadge(q){
+  var c=_srGet(q),d=Math.round((c.due-Date.now())/86400000);
+  if(c.n<=1)return '🆕 новая';
+  return d<0?('⏰ просрочена '+(-d)+'д'):('📅 через '+d+'д');
+}
+function shuffle(arr){for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;}}
+function buildDeck(){
+  deck=Array.from(document.querySelectorAll('.fc-data')).map(function(el){
+    return{q:el.dataset.q,a:el.dataset.a,hint:el.dataset.hint||''};
+  });
+  shuffle(deck);known=[];unknown=[];cur=0;flipped=false;
+  document.getElementById('fc-result').style.display='none';
+  renderCard();
+}
+function renderCard(){
+  if(deck.length===0){document.getElementById('fc-empty').style.display='block';document.getElementById('fc-card-area').style.display='none';return;}
+  document.getElementById('fc-empty').style.display='none';
+  document.getElementById('fc-card-area').style.display='block';
+  var card=deck[cur];
+  document.getElementById('fc-front').innerHTML=card.q;
+  document.getElementById('fc-back').innerHTML=card.a+(card.hint?'<div class="fc-hint">'+card.hint+'</div>':'')+'<div class="fc-sr-badge">'+_srBadge(card.q)+'</div>';
+  document.getElementById('fc-inner').classList.remove('flipped');
+  flipped=false;
+  document.getElementById('fc-counter').textContent=(cur+1)+' / '+deck.length;
+  document.getElementById('fc-known').textContent=known.length;
+  document.getElementById('fc-unknown').textContent=unknown.length;
+  document.getElementById('fc-btn-row').style.display='none';
+  document.getElementById('fc-flip-btn').style.display='flex';
+}
+function flipCard(){
+  document.getElementById('fc-inner').classList.toggle('flipped');
+  flipped=!flipped;
+  if(flipped){document.getElementById('fc-btn-row').style.display='flex';document.getElementById('fc-flip-btn').style.display='none';}
+}
+function markKnown(){_srUpd(deck[cur].q,true);known.push(deck[cur]);cur++;if(cur>=deck.length){showResult();return;}flipped=false;renderCard();}
+function markUnknown(){_srUpd(deck[cur].q,false);unknown.push(deck[cur]);cur++;if(cur>=deck.length){showResult();return;}flipped=false;renderCard();}
+function showResult(){
+  document.getElementById('fc-card-area').style.display='none';
+  var res=document.getElementById('fc-result');res.style.display='block';
+  res.querySelector('.fc-res-known').textContent=known.length;
+  res.querySelector('.fc-res-unknown').textContent=unknown.length;
+}
+function repeatUnknown(){deck=unknown.slice();shuffle(deck);known=[];unknown=[];cur=0;flipped=false;document.getElementById('fc-result').style.display='none';renderCard();}
+function restartAll(){buildDeck();}
+document.addEventListener('keydown',function(e){
+  if(document.activeElement.tagName==='TEXTAREA'||document.activeElement.tagName==='INPUT') return;
+  if(e.key===' '){e.preventDefault();if(!flipped)flipCard();}
+  if(e.key==='ArrowRight'&&flipped)markKnown();
+  if(e.key==='ArrowLeft'&&flipped)markUnknown();
+});
+
+/* ══ PRACTICE TRAINER (PT) ══ */
+var PT_TASKS=[
+{n:1,block:'А',btitle:'Кислотные оксиды + H₂O',q:'SO₃ + H₂O →',a:'SO₃ + H₂O → H₂SO₄',note:'Основа контактного производства серной кислоты.'},
+{n:2,block:'А',btitle:'Кислотные оксиды + H₂O',q:'SO₂ + H₂O →',a:'SO₂ + H₂O ⇄ H₂SO₃ (сернистая кислота — неустойчива)',note:'Знак ⇄, так как H₂SO₃ — слабая неустойчивая кислота.'},
+{n:3,block:'А',btitle:'Кислотные оксиды + H₂O',q:'CO₂ + H₂O →',a:'CO₂ + H₂O ⇄ H₂CO₃ (угольная кислота — неустойчива)',note:'Именно поэтому газированная вода слегка кислая.'},
+{n:4,block:'А',btitle:'Кислотные оксиды + H₂O',q:'P₂O₅ + H₂O →',a:'P₂O₅ + 3H₂O → 2H₃PO₄',note:'P₂O₅ — сильнейший осушитель, жадно поглощает воду.'},
+{n:5,block:'А',btitle:'Кислотные оксиды + H₂O',q:'N₂O₅ + H₂O →',a:'N₂O₅ + H₂O → 2HNO₃',note:'N₂O₅ — ангидрид азотной кислоты.'},
+{n:6,block:'А',btitle:'Кислотные оксиды + H₂O',q:'N₂O₃ + H₂O →',a:'N₂O₃ + H₂O → 2HNO₂ (азотистая кислота)',note:'N₂O₃ — ангидрид HNO₂. Сама HNO₂ неустойчива.'},
+{n:7,block:'А',btitle:'Кислотные оксиды + H₂O',q:'NO₂ + H₂O → (при н.у.)',a:'2NO₂ + H₂O → HNO₂ + HNO₃ (диспропорционирование: N⁺⁴ → N⁺³ + N⁺⁵)\nПри нагревании: 3NO₂ + H₂O →(t°) 2HNO₃ + NO↑',note:'Ловушка ЕГЭ! При н.у. и при нагревании — разные продукты.'},
+{n:8,block:'А',btitle:'Кислотные оксиды + H₂O',q:'SiO₂ + H₂O → (реакция идёт или нет?)',a:'SiO₂ + H₂O ↛ — реакция НЕ идёт!\nH₂SiO₃ нерастворима в воде, поэтому образоваться не может.',note:'Главное исключение среди кислотных оксидов.'},
+{n:9,block:'Б',btitle:'Кислотные оксиды + оксиды / щёлочи / соли',q:'CaO + CO₂ →',a:'CaO + CO₂ → CaCO₃',note:'Основный оксид + кислотный оксид = соль. Известкование воздуха.'},
+{n:10,block:'Б',btitle:'Кислотные оксиды + оксиды / щёлочи / соли',q:'Na₂O + SiO₂ →(t°)',a:'Na₂O + SiO₂ →(t°) Na₂SiO₃ (силикат натрия = жидкое стекло)',note:'Реакция при сплавлении. SiO₂ — нелетучий, поэтому вытесняет летучие оксиды.'},
+{n:11,block:'Б',btitle:'Кислотные оксиды + оксиды / щёлочи / соли',q:'K₂O + P₂O₅ →',a:'3K₂O + P₂O₅ → 2K₃PO₄ (ортофосфат калия)',note:'3 моля основного оксида + 1 моль P₂O₅ = 2 моля ортофосфата.'},
+{n:12,block:'Б',btitle:'Кислотные оксиды + оксиды / щёлочи / соли',q:'Na₂O + NO₂ →',a:'Na₂O + 2NO₂ → NaNO₂ + NaNO₃ (диспропорционирование NO₂)',note:'N⁺⁴ → N⁺³ (нитрит) + N⁺⁵ (нитрат). Образуется смесь двух солей.'},
+{n:13,block:'Б',btitle:'Кислотные оксиды + оксиды / щёлочи / соли',q:'NaOH + SO₂ →',a:'2NaOH + SO₂ → Na₂SO₃ + H₂O (сульфит натрия)',note:'При избытке SO₂: NaOH + SO₂ → NaHSO₃ (гидросульфит — кислая соль).'},
+{n:14,block:'Б',btitle:'Кислотные оксиды + оксиды / щёлочи / соли',q:'NaOH + CO₂ → (два варианта: норма и избыток CO₂)',a:'2NaOH + CO₂ → Na₂CO₃ + H₂O (средняя соль)\nNaOH + CO₂(изб.) → NaHCO₃ (кислая соль)',note:'Соотношение NaOH:CO₂ = 2:1 → средняя соль; 1:1 → кислая соль.'},
+{n:15,block:'Б',btitle:'Кислотные оксиды + оксиды / щёлочи / соли',q:'KOH(изб.) + P₂O₅ →',a:'6KOH + P₂O₅ → 2K₃PO₄ + 3H₂O',note:'Кислотный оксид + щёлочь = соль + вода.'},
+{n:16,block:'Б',btitle:'Кислотные оксиды + оксиды / щёлочи / соли',q:'SiO₂ + CaCO₃ →(t°)',a:'SiO₂ + CaCO₃ →(t°) CaSiO₃ + CO₂↑',note:'Нелетучий SiO₂ вытесняет летучий CO₂ из карбоната при сплавлении.'},
+{n:17,block:'Б',btitle:'Кислотные оксиды + оксиды / щёлочи / соли',q:'Na₂SiO₃(р-р) + CO₂ + H₂O →',a:'Na₂SiO₃(р-р) + CO₂ + H₂O → Na₂CO₃ + H₂SiO₃↓',note:'H₂CO₃ сильнее H₂SiO₃ — вытесняет её из раствора. Только в водном растворе!'},
+{n:18,block:'Б',btitle:'Кислотные оксиды + оксиды / щёлочи / соли',q:'SiO₂ + HF →',a:'SiO₂ + 4HF → SiF₄↑ + 2H₂O',note:'Травление стекла. Единственный случай, когда кислотный оксид реагирует с кислотой!'},
+{n:19,block:'В',btitle:'Основные оксиды',q:'CaO + H₂O →',a:'CaO + H₂O → Ca(OH)₂ (гашение извести)',note:'С водой реагируют только оксиды ЩМ и ЩЗМ.'},
+{n:20,block:'В',btitle:'Основные оксиды',q:'Na₂O + H₂O →',a:'Na₂O + H₂O → 2NaOH',note:'Реакция бурная, экзотермическая.'},
+{n:21,block:'В',btitle:'Основные оксиды',q:'CaO + H₂SO₄ →',a:'CaO + H₂SO₄ → CaSO₄ + H₂O',note:'Основный оксид + кислота = соль + вода.'},
+{n:22,block:'В',btitle:'Основные оксиды',q:'CuO + HCl →',a:'CuO + 2HCl → CuCl₂ + H₂O',note:'CuO — чёрный порошок, растворяется в кислоте → голубой раствор CuCl₂.'},
+{n:23,block:'В',btitle:'Основные оксиды',q:'Fe₃O₄ + HCl →',a:'Fe₃O₄ + 8HCl → FeCl₂ + 2FeCl₃ + 4H₂O',note:'Fe₃O₄ = FeO·Fe₂O₃ → смесь солей Fe²⁺ и Fe³⁺. HCl — не окислитель.'},
+{n:24,block:'В',btitle:'Основные оксиды',q:'FeO + HNO₃(конц.) →',a:'FeO + 4HNO₃(конц.) → Fe(NO₃)₃ + NO₂↑ + 2H₂O',note:'ОВР: Fe²⁺ → Fe³⁺. Конц. HNO₃ → NO₂ (N⁺⁵ → N⁺⁴).'},
+{n:25,block:'В',btitle:'Основные оксиды',q:'Cu₂O + H₂SO₄(конц.) →',a:'Cu₂O + 3H₂SO₄(конц.) → 2CuSO₄ + SO₂↑ + 3H₂O',note:'ОВР: Cu⁺ → Cu²⁺. Конц. H₂SO₄ → SO₂ (S⁺⁶ → S⁺⁴).'},
+{n:26,block:'В',btitle:'Основные оксиды',q:'Na₂O + Al₂O₃ →(t°)',a:'Na₂O + Al₂O₃ →(t°) 2NaAlO₂ (метаалюминат натрия)',note:'Кислотный остаток AlO₂⁻ — метаалюминат. Реакция при сплавлении.'},
+{n:27,block:'В',btitle:'Основные оксиды',q:'CaO + ZnO →(t°)',a:'CaO + ZnO →(t°) CaZnO₂ (цинкат кальция)',note:'Анион ZnO₂²⁻ — цинкат-ион.'},
+{n:28,block:'В',btitle:'Основные оксиды',q:'HgO →(t°)',a:'2HgO →(t°) 2Hg + O₂↑',note:'Оксиды металлов после Cu термически разлагаются (HgO, Ag₂O).'},
+{n:29,block:'Г',btitle:'Амфотерные оксиды',q:'ZnO + HCl →',a:'ZnO + 2HCl → ZnCl₂ + H₂O',note:'С кислотой амфотерный оксид ведёт себя как основный.'},
+{n:30,block:'Г',btitle:'Амфотерные оксиды',q:'Al₂O₃ + H₂SO₄ →',a:'Al₂O₃ + 3H₂SO₄ → Al₂(SO₄)₃ + 3H₂O',note:'Al₂O₃ с кислотой → соль алюминия + вода.'},
+{n:31,block:'Г',btitle:'Амфотерные оксиды',q:'ZnO + NaOH(р-р) + H₂O →',a:'ZnO + 2NaOH(р-р) + H₂O → Na₂[Zn(OH)₄] (тетрагидроксоцинкат натрия)',note:'С раствором щёлочи → гидроксокомплекс!'},
+{n:32,block:'Г',btitle:'Амфотерные оксиды',q:'ZnO + NaOH(расплав) →(t°)',a:'ZnO + 2NaOH →(t°) Na₂ZnO₂ + H₂O (цинкат натрия — средняя соль)',note:'С расплавом щёлочи → средняя соль, не комплекс!'},
+{n:33,block:'Г',btitle:'Амфотерные оксиды',q:'Al₂O₃ + KOH(р-р) + H₂O →',a:'Al₂O₃ + 2KOH(р-р) + 3H₂O → 2K[Al(OH)₄] (тетрагидроксоалюминат калия)',note:'Комплексный анион [Al(OH)₄]⁻ — тетрагидроксоалюминат.'},
+{n:34,block:'Г',btitle:'Амфотерные оксиды',q:'Al₂O₃ + KOH(расплав) →(t°)',a:'Al₂O₃ + 2KOH →(t°) 2KAlO₂ + H₂O (метаалюминат калия)',note:'Расплав → средняя соль с анионом AlO₂⁻.'},
+{n:35,block:'Г',btitle:'Амфотерные оксиды',q:'Fe₂O₃ + NaOH →(t°, расплав)',a:'Fe₂O₃ + 2NaOH →(t°) 2NaFeO₂ + H₂O (метаферрит натрия)',note:'Fe₂O₃ НЕ реагирует с раствором NaOH! Только с расплавом.'},
+{n:36,block:'Г',btitle:'Амфотерные оксиды',q:'Cr₂O₃ + NaOH →(t°, расплав)',a:'Cr₂O₃ + 2NaOH →(t°) 2NaCrO₂ + H₂O (метахромит натрия)',note:'Анион CrO₂⁻ — метахромит. Cr₂O₃ — тёмно-зелёный порошок.'},
+{n:37,block:'Г',btitle:'Амфотерные оксиды',q:'Al₂O₃ + SO₃ →',a:'Al₂O₃ + 3SO₃ → Al₂(SO₄)₃',note:'Амфотерный оксид реагирует с кислотными оксидами сильных кислот.'},
+{n:38,block:'Г',btitle:'Амфотерные оксиды',q:'ZnO + Na₂CO₃ →(t°)',a:'ZnO + Na₂CO₃ →(t°) Na₂ZnO₂ + CO₂↑',note:'Амфотерный оксид при сплавлении с карбонатом вытесняет CO₂.'},
+{n:39,block:'Д',btitle:'Оксиды + простые вещества. ОВР. Получение',q:'SO₂ + O₂ →(кат., t°)',a:'2SO₂ + O₂ ⇄(V₂O₅, 450°C) 2SO₃',note:'Ключевая стадия производства H₂SO₄. Реакция обратима!'},
+{n:40,block:'Д',btitle:'Оксиды + простые вещества. ОВР. Получение',q:'NO + O₂ →',a:'2NO + O₂ → 2NO₂',note:'NO моментально буреет на воздухе — именно эта реакция! N⁺² → N⁺⁴.'},
+{n:41,block:'Д',btitle:'Оксиды + простые вещества. ОВР. Получение',q:'FeO + O₂ →(t°)',a:'4FeO + O₂ →(t°) 2Fe₂O₃',note:'Оксид промежуточной с.о. окисляется до высшей. Fe²⁺ → Fe³⁺.'},
+{n:42,block:'Д',btitle:'Оксиды + простые вещества. ОВР. Получение',q:'Cu₂O + O₂ →(t°)',a:'2Cu₂O + O₂ →(t°) 4CuO',note:'Cu⁺ → Cu²⁺. Красный Cu₂O превращается в чёрный CuO.'},
+{n:43,block:'Д',btitle:'Оксиды + простые вещества. ОВР. Получение',q:'Fe₂O₃ + CO →(t°)',a:'Fe₂O₃ + 3CO →(t°) 2Fe + 3CO₂',note:'Доменный процесс — получение железа из руды. CO — восстановитель.'},
+{n:44,block:'Д',btitle:'Оксиды + простые вещества. ОВР. Получение',q:'CO₂ + C →(t°)',a:'CO₂ + C →(t°) 2CO (сопропорционирование: C⁰ + C⁴⁺ → 2C²⁺)',note:'В верхней зоне доменной печи CO₂ реагирует с коксом → CO.'},
+{n:45,block:'Д',btitle:'Оксиды + простые вещества. ОВР. Получение',q:'ZnO + C →(t°)',a:'ZnO + C →(t°) Zn + CO',note:'Восстановление цинка коксом. Аналогично восстанавливают Pb, Sn и др.'},
+{n:46,block:'Д',btitle:'Оксиды + простые вещества. ОВР. Получение',q:'Mg + SiO₂ →(t°)',a:'2Mg + SiO₂ →(t°) 2MgO + Si (недостаток Mg)\n4Mg + SiO₂ →(t°) 2MgO + Mg₂Si (избыток Mg)',note:'Mg горит даже в CO₂ и SiO₂ — очень сильный восстановитель.'},
+{n:47,block:'Д',btitle:'Оксиды + простые вещества. ОВР. Получение',q:'Al(OH)₃ →(t°)',a:'2Al(OH)₃ →(t°) Al₂O₃ + 3H₂O',note:'Разложение нерастворимых гидроксидов — способ получения амфотерных оксидов.'},
+{n:48,block:'Д',btitle:'Оксиды + простые вещества. ОВР. Получение',q:'Cu(NO₃)₂ →(t°)',a:'2Cu(NO₃)₂ →(t°) 2CuO + 4NO₂↑ + O₂↑',note:'Разложение нитратов Cu, Fe, Ni, Zn → оксид + NO₂ + O₂.'},
+{n:49,block:'Д',btitle:'Оксиды + простые вещества. ОВР. Получение',q:'CO + H₂ →(кат., t°, p)',a:'CO + 2H₂ →(кат., t°, p) CH₃OH (метанол)',note:'Промышленный синтез метилового спирта из CO и H₂.'},
+{n:50,block:'Д',btitle:'Оксиды + простые вещества. ОВР. Получение',q:'Cu + NO₂ →(t°)',a:'4Cu + 2NO₂ →(t°) 4CuO + N₂',note:'Металл восстанавливает оксид неметалла. Cu⁰→Cu²⁺, N⁺⁴→N⁰.'}
+];
+
+var PT_cur=0,PT_mode='free',PT_revealed=false;
+var PT_correct=[],PT_wrong=[],PT_repeatQueue=[],PT_repeatPos=0,PT_repeatCorrectPass=[];
+var PT_elapsed=0,PT_timerInterval=null,PT_repeatCompleted=false;
+
+function PT_timerStart(){
+  clearInterval(PT_timerInterval);
+  PT_timerInterval=setInterval(function(){
+    PT_elapsed++;
+    var m=Math.floor(PT_elapsed/60),s=PT_elapsed%60;
+    var el=document.getElementById('pt-timer');
+    if(el) el.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  },1000);
+}
+function PT_timerStop(){clearInterval(PT_timerInterval);}
+
+function PT_render(){
+  var task=PT_TASKS[PT_cur];
+  PT_revealed=false;
+  var blockColors={'А':'#4E35A0','Б':'#1D9E75','В':'#BA7517','Г':'#A32D2D','Д':'#1a5276'};
+  var btag=document.getElementById('pt-block-tag');
+  if(btag){btag.textContent='Блок '+task.block+' · '+task.btitle;btag.style.background=blockColors[task.block]||'var(--p100)';btag.style.color='#fff';btag.style.borderColor='transparent';}
+  var lbl=document.getElementById('pt-task-lbl');
+  if(lbl) lbl.textContent='Реакция '+task.n+' из '+PT_TASKS.length;
+  var eq=document.getElementById('pt-eq');
+  if(eq) eq.textContent=task.q;
+  var ans=document.getElementById('pt-answer');
+  if(ans) ans.classList.remove('open');
+  var rb=document.getElementById('pt-reveal-btn');
+  if(rb){rb.textContent='▶ Показать ответ';rb.style.display='inline-flex';}
+  var rating=document.getElementById('pt-rating');
+  if(rating) rating.classList.remove('open');
+  var fb=document.getElementById('pt-feedback');
+  if(fb){fb.className='pt-feedback';fb.textContent='';}
+  var pn=document.getElementById('pt-progress-num');
+  if(pn) pn.textContent=(PT_cur+1)+' / '+PT_TASKS.length;
+  var pf=document.getElementById('pt-progress-fill');
+  if(pf) pf.style.width=((PT_cur+1)/PT_TASKS.length*100)+'%';
+  var cf=document.getElementById('pt-count-free');
+  if(cf) cf.textContent=(PT_cur+1)+' / '+PT_TASKS.length;
+}
+
+function PT_reveal(){
+  if(PT_revealed) return;
+  PT_revealed=true;
+  var task=PT_TASKS[PT_cur];
+  var ans=document.getElementById('pt-answer');
+  if(ans) ans.classList.add('open');
+  document.getElementById('pt-ans-eq').textContent=task.a;
+  document.getElementById('pt-ans-note').textContent=task.note;
+  var rb=document.getElementById('pt-reveal-btn');
+  if(rb) rb.style.display='none';
+  if(PT_mode!=='free'){
+    var rating=document.getElementById('pt-rating');
+    if(rating) rating.classList.add('open');
+  } else {
+    // Free mode - just show next button
+  }
+}
+
+function PT_mark(knew){
+  if(PT_mode==='test'){
+    if(knew){PT_correct.push(PT_cur);}else{PT_wrong.push(PT_cur);}
+  } else if(PT_mode==='repeat'){
+    if(knew){PT_repeatCorrectPass.push(PT_cur);}
+  }
+  PT_updateStats();
+  var rating=document.getElementById('pt-rating');
+  if(rating) rating.classList.remove('open');
+  var fb=document.getElementById('pt-feedback');
+  if(fb){
+    if(knew){fb.className='pt-feedback good';fb.textContent='✓ Отлично! Идём дальше.';}
+    else{fb.className='pt-feedback bad';fb.textContent='✗ Запомни эту реакцию — она попадёт в повторение.';}
+  }
+  setTimeout(function(){PT_nextAuto();},900);
+}
+
+function PT_nextAuto(){
+  if(PT_mode==='test'){
+    PT_testNext();
+  } else if(PT_mode==='repeat'){
+    PT_repeatNext();
+  }
+}
+
+function PT_updateStats(){
+  var done=PT_correct.length+PT_wrong.length;
+  var total=PT_mode==='repeat'?PT_repeatQueue.length:PT_TASKS.length;
+  var dc=document.getElementById('pt-done');
+  if(dc) dc.textContent=done+' / '+PT_TASKS.length;
+  var cc=document.getElementById('pt-correct-cnt');
+  if(cc) cc.textContent=PT_correct.length;
+  var wc=document.getElementById('pt-wrong-cnt');
+  if(wc) wc.textContent=PT_wrong.length;
+}
+
+function PT_startTest(){
+  PT_mode='test';
+  PT_elapsed=0;PT_correct=[];PT_wrong=[];
+  PT_repeatCompleted=false;
+  var queue=[];for(var i=0;i<PT_TASKS.length;i++)queue.push(i);
+  PT_cur=queue[0];
+  document.getElementById('pt-top-free').style.display='none';
+  document.getElementById('pt-stats').style.display='flex';
+  document.getElementById('pt-nav').style.display='none';
+  var rn=document.getElementById('pt-repeat-notice');
+  if(rn) rn.style.display='none';
+  document.getElementById('pt-results').style.display='none';
+  document.getElementById('pt-question-area').style.display='block';
+  PT_timerStart();
+  PT_updateStats();
+  PT_render();
+}
+
+function PT_testNext(){
+  var nextIdx=PT_cur+1;
+  if(nextIdx>=PT_TASKS.length){
+    PT_timerStop();
+    if(PT_wrong.length>0){PT_startRepeat();}
+    else{PT_showResults();}
+    return;
+  }
+  PT_cur=nextIdx;
+  PT_render();
+}
+
+function PT_endTest(){
+  PT_timerStop();
+  PT_showResults();
+}
+
+function PT_startRepeat(){
+  PT_mode='repeat';
+  PT_repeatQueue=PT_wrong.slice();
+  PT_repeatPos=0;
+  PT_repeatCorrectPass=[];
+  PT_cur=PT_repeatQueue[0];
+  var rn=document.getElementById('pt-repeat-notice');
+  if(rn){rn.style.display='block';rn.textContent='Повторение ошибок: '+PT_repeatQueue.length+' реакци'+(PT_repeatQueue.length===1?'я':'й')+'. Ответь правильно, чтобы убрать из повторения.';}
+  var timer=document.getElementById('pt-timer');
+  if(timer) timer.textContent='Повтор';
+  document.getElementById('pt-results').style.display='none';
+  document.getElementById('pt-question-area').style.display='block';
+  PT_render();
+}
+
+function PT_repeatNext(){
+  PT_repeatPos++;
+  if(PT_repeatPos>=PT_repeatQueue.length){
+    PT_repeatQueue=PT_repeatQueue.filter(function(i){return PT_repeatCorrectPass.indexOf(i)===-1;});
+    PT_repeatCorrectPass=[];
+    if(PT_repeatQueue.length===0){
+      PT_repeatCompleted=true;
+      PT_showResults();
+      return;
+    }
+    PT_repeatPos=0;
+    var rn=document.getElementById('pt-repeat-notice');
+    if(rn) rn.textContent='Повторение ошибок: '+PT_repeatQueue.length+' осталось.';
+  }
+  PT_cur=PT_repeatQueue[PT_repeatPos];
+  PT_render();
+}
+
+function PT_showResults(){
+  PT_mode='results';
+  PT_timerStop();
+  var total=PT_TASKS.length,correctCount=PT_correct.length,wrongCount=PT_wrong.length;
+  var pct=Math.round(correctCount/total*100);
+  var m=Math.floor(PT_elapsed/60),s=PT_elapsed%60;
+  var timeStr=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  var grade=pct>=90?'Отлично! 🎉':pct>=70?'Хорошо! 👍':pct>=50?'Неплохо, но нужно подтянуть 📚':'Нужно повторить всё ещё раз 💪';
+  var weakBlocks={};
+  PT_wrong.forEach(function(i){var b=PT_TASKS[i].block;weakBlocks[b]=(weakBlocks[b]||0)+1;});
+  var weakHTML='';
+  if(Object.keys(weakBlocks).length>0){
+    weakHTML='<div style="margin-top:14px"><div style="font-weight:700;color:var(--ink2);font-size:13px;margin-bottom:6px">Блоки для повторения:</div>';
+    Object.keys(weakBlocks).forEach(function(b){weakHTML+='<span class="pt-weak-tag">Блок '+b+' — '+weakBlocks[b]+' ош.</span>';});
+    weakHTML+='</div>';
+  }
+  var repeatBtn='';
+  if(PT_wrong.length>0&&!PT_repeatCompleted){
+    repeatBtn='<button class="pt-reveal-btn" onclick="PT_startRepeat()" style="margin-top:14px;width:100%;justify-content:center">↻ Повторить ошибки ('+PT_wrong.length+')</button>';
+  } else if(PT_repeatCompleted){
+    repeatBtn='<div style="margin-top:12px;color:var(--green-d);font-weight:700;font-size:13px">✓ Все ошибки исправлены в режиме повторения!</div>';
+  }
+  document.getElementById('pt-question-area').style.display='none';
+  document.getElementById('pt-stats').style.display='none';
+  var res=document.getElementById('pt-results');
+  res.style.display='block';
+  res.innerHTML=
+    '<div class="pt-res-head">'+grade+'</div>'+
+    '<div class="pt-res-sub">Время: '+timeStr+' · '+total+' реакций</div>'+
+    '<div class="pt-res-grid">'+
+    '<div class="pt-res-card good"><div class="rval">'+correctCount+'</div><div class="rlbl">Знал</div></div>'+
+    '<div class="pt-res-card bad"><div class="rval">'+wrongCount+'</div><div class="rlbl">Не знал</div></div>'+
+    '<div class="pt-res-card"><div class="rval">'+pct+'%</div><div class="rlbl">Результат</div></div>'+
+    '<div class="pt-res-card"><div class="rval">'+total+'</div><div class="rlbl">Реакций</div></div>'+
+    '</div>'+
+    weakHTML+repeatBtn+
+    '<button class="pt-nav-btn" onclick="PT_returnFree()" style="margin-top:10px;width:100%">← Вернуться к просмотру</button>';
+}
+
+function PT_returnFree(){
+  PT_mode='free';PT_cur=0;
+  PT_timerStop();
+  document.getElementById('pt-results').style.display='none';
+  document.getElementById('pt-question-area').style.display='block';
+  document.getElementById('pt-stats').style.display='none';
+  document.getElementById('pt-top-free').style.display='flex';
+  document.getElementById('pt-nav').style.display='flex';
+  var rn=document.getElementById('pt-repeat-notice');
+  if(rn) rn.style.display='none';
+  PT_render();
+}
+
+function PT_prev(){if(PT_mode!=='free')return;PT_cur=(PT_cur-1+PT_TASKS.length)%PT_TASKS.length;PT_render();}
+function PT_next(){if(PT_mode!=='free')return;PT_cur=(PT_cur+1)%PT_TASKS.length;PT_render();}
+
+document.addEventListener('DOMContentLoaded',function(){PT_render();});
+if(document.readyState!=='loading'){PT_render();}
+
+/* ══ WHITEBOARD ══ */
+(function(){
+  const WB   = document.getElementById('wb');
+  const WBC  = document.getElementById('wb-canvas');
+  const CTX  = WBC.getContext('2d');
+  const AREA = document.getElementById('wb-area');
+  const TXT  = document.getElementById('wb-txt');
+
+  let isOpen=false, mode='side';
+  let tool='pen', color='#1a1a2e', sz=5;
+  let drawing=false, pts=[], undoStack=[];
+  let txtX=0, txtY=0;
+
+  let glowCanvas=null, glowCtx=null, glowPts=[], glowFadeId=null;
+
+  function initGlowCanvas(){
+    if(glowCanvas) return;
+    glowCanvas=document.createElement('canvas');
+    glowCanvas.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:5;';
+    AREA.appendChild(glowCanvas);
+    glowCtx=glowCanvas.getContext('2d');
+  }
+  function resizeGlow(){
+    if(!glowCanvas) return;
+    glowCanvas.width=WBC.width; glowCanvas.height=WBC.height;
+  }
+  function glowDraw(pts){
+    if(!glowCtx||pts.length<2) return;
+    glowCtx.clearRect(0,0,glowCanvas.width,glowCanvas.height);
+    glowCtx.lineCap='round'; glowCtx.lineJoin='round';
+    const n=pts.length;
+    for(let i=1;i<n;i++){
+      const t=i/n;
+      const alpha=t*0.85+0.1;
+      glowCtx.globalAlpha=alpha*0.35;
+      glowCtx.strokeStyle='rgba(255,80,20,1)';
+      glowCtx.lineWidth=10;
+      glowCtx.shadowBlur=16;
+      glowCtx.shadowColor='rgba(255,60,0,0.9)';
+      glowCtx.beginPath();
+      glowCtx.moveTo(pts[i-1].x,pts[i-1].y);
+      glowCtx.lineTo(pts[i].x,pts[i].y);
+      glowCtx.stroke();
+      glowCtx.globalAlpha=alpha;
+      glowCtx.strokeStyle='rgba(255,200,100,1)';
+      glowCtx.lineWidth=3;
+      glowCtx.shadowBlur=8;
+      glowCtx.shadowColor='rgba(255,150,50,1)';
+      glowCtx.beginPath();
+      glowCtx.moveTo(pts[i-1].x,pts[i-1].y);
+      glowCtx.lineTo(pts[i].x,pts[i].y);
+      glowCtx.stroke();
+    }
+    glowCtx.shadowBlur=0; glowCtx.globalAlpha=1;
+  }
+  function glowFade(){
+    if(!glowCtx) return;
+    if(glowFadeId) cancelAnimationFrame(glowFadeId);
+    const DURATION=4000;
+    const startTime=performance.now();
+    const pts2=glowPts.slice();
+    function step(now){
+      const elapsed=now-startTime;
+      const alpha=Math.max(0,1-elapsed/DURATION);
+      glowCtx.clearRect(0,0,glowCanvas.width,glowCanvas.height);
+      if(alpha<=0){ return; }
+      const n=pts2.length;
+      glowCtx.lineCap='round'; glowCtx.lineJoin='round';
+      for(let i=1;i<n;i++){
+        const t=i/n;
+        glowCtx.globalAlpha=alpha*t*0.35;
+        glowCtx.strokeStyle='rgba(255,80,20,1)';
+        glowCtx.lineWidth=10;
+        glowCtx.shadowBlur=16;
+        glowCtx.shadowColor='rgba(255,60,0,0.9)';
+        glowCtx.beginPath();
+        glowCtx.moveTo(pts2[i-1].x,pts2[i-1].y);
+        glowCtx.lineTo(pts2[i].x,pts2[i].y);
+        glowCtx.stroke();
+        glowCtx.globalAlpha=alpha*t;
+        glowCtx.strokeStyle='rgba(255,200,100,1)';
+        glowCtx.lineWidth=3;
+        glowCtx.shadowBlur=8;
+        glowCtx.shadowColor='rgba(255,150,50,1)';
+        glowCtx.beginPath();
+        glowCtx.moveTo(pts2[i-1].x,pts2[i-1].y);
+        glowCtx.lineTo(pts2[i].x,pts2[i].y);
+        glowCtx.stroke();
+      }
+      glowCtx.shadowBlur=0; glowCtx.globalAlpha=1;
+      glowFadeId=requestAnimationFrame(step);
+    }
+    glowFadeId=requestAnimationFrame(step);
+  }
+
+  function applyBg(){
+    const w=WBC.width, h=WBC.height;
+    CTX.save();
+    CTX.globalCompositeOperation='source-over';
+    CTX.fillStyle='#ffffff';
+    CTX.fillRect(0,0,w,h);
+    CTX.fillStyle='rgba(160,145,210,0.45)';
+    const step=22;
+    for(let x=step;x<=w;x+=step)
+      for(let y=step;y<=h;y+=step){
+        CTX.beginPath();CTX.arc(x,y,1.6,0,Math.PI*2);CTX.fill();
+      }
+    CTX.restore();
+  }
+
+  function saveUndo(){
+    if(WBC.width>0&&WBC.height>0)
+      undoStack.push(CTX.getImageData(0,0,WBC.width,WBC.height));
+    if(undoStack.length>40) undoStack.shift();
+  }
+
+  function resizeWbc(){
+    const area=AREA.getBoundingClientRect();
+    const img=WBC.width>0&&WBC.height>0?CTX.getImageData(0,0,WBC.width,WBC.height):null;
+    WBC.width=Math.round(area.width);
+    WBC.height=Math.round(area.height);
+    applyBg();
+    if(img) try{CTX.putImageData(img,0,0);}catch(x){}
+    resizeGlow();
+  }
+
+  function applyMode(){
+    const modeBtn=document.getElementById('wbt-mode');
+    const shell=document.querySelector('.shell');
+    if(mode==='side'){
+      WB.style.left='auto'; WB.style.right='0';
+      WB.style.top='0'; WB.style.bottom='0'; WB.style.width='35%';
+      if(shell) shell.style.marginRight='36%';
+      if(modeBtn) modeBtn.textContent='⛶ На весь экран';
+    } else {
+      WB.style.left='0'; WB.style.right='0';
+      WB.style.top='0'; WB.style.bottom='0'; WB.style.width='100%';
+      if(shell) shell.style.marginRight='';
+      if(modeBtn) modeBtn.textContent='▪ Боковая';
+    }
+    requestAnimationFrame(()=>{ setTimeout(resizeWbc,30); });
+  }
+
+  function commitText(){
+    if(!TXT||TXT.style.display==='none') return;
+    const txt=TXT.value.trim();
+    if(txt){
+      CTX.save();
+      CTX.font='18px sans-serif';
+      CTX.fillStyle=color;
+      CTX.globalAlpha=1;
+      CTX.globalCompositeOperation='source-over';
+      txt.split('\n').forEach((l,i)=>CTX.fillText(l,txtX,txtY+(i+1)*24));
+      CTX.restore();
+    }
+    TXT.style.display='none'; TXT.value='';
+  }
+
+  function getXY(e){
+    const r=WBC.getBoundingClientRect();
+    const src=e.touches?e.touches[0]:e;
+    return{x:src.clientX-r.left, y:src.clientY-r.top, p:e.pressure||0.5};
+  }
+  function styleCtx(p){
+    CTX.lineCap='round'; CTX.lineJoin='round';
+    CTX.strokeStyle=color;
+    CTX.lineWidth=sz*(0.5+p*1.0);
+    CTX.globalAlpha=1;
+    CTX.globalCompositeOperation='source-over';
+  }
+
+  /* pointer — для стилуса */
+  WBC.addEventListener('pointerdown',function(e){
+    if(e.pointerType!=='pen') return;
+    if(tool==='glow'){
+      e.preventDefault();
+      try{WBC.setPointerCapture(e.pointerId);}catch(x){}
+      if(glowFadeId){cancelAnimationFrame(glowFadeId);glowFadeId=null;}
+      if(glowCtx) glowCtx.clearRect(0,0,glowCanvas.width,glowCanvas.height);
+      glowPts=[getXY(e)];
+      return;
+    }
+    e.preventDefault();
+    try{WBC.setPointerCapture(e.pointerId);}catch(x){}
+    saveUndo(); drawing=true;
+    const p=getXY(e); pts=[p];
+    styleCtx(p.p);
+    CTX.beginPath(); CTX.moveTo(p.x,p.y);
+  },{passive:false});
+
+  WBC.addEventListener('pointermove',function(e){
+    if(e.pointerType!=='pen') return;
+    if(tool==='glow'){
+      const p=getXY(e);
+      glowPts.push(p);
+      if(glowPts.length>120) glowPts.shift();
+      if(glowCtx) glowDraw(glowPts);
+      return;
+    }
+    if(!drawing) return;
+    e.preventDefault();
+    const p=getXY(e);
+    pts.push(p);
+    if(pts.length>=4){
+      const n=pts.length;
+      const p0=pts[n-4],p1=pts[n-3],p2=pts[n-2],p3=pts[n-1];
+      const c1x=p1.x+(p2.x-p0.x)/6, c1y=p1.y+(p2.y-p0.y)/6;
+      const c2x=p2.x-(p3.x-p1.x)/6, c2y=p2.y-(p3.y-p1.y)/6;
+      CTX.lineWidth=sz*(0.4+p.p*1.2);
+      CTX.beginPath();CTX.moveTo(p1.x,p1.y);
+      CTX.bezierCurveTo(c1x,c1y,c2x,c2y,p2.x,p2.y);
+      CTX.stroke();
+    } else if(pts.length===2){
+      CTX.lineTo(p.x,p.y); CTX.stroke();
+    }
+  },{passive:false});
+
+  WBC.addEventListener('pointerup',function(e){
+    if(e.pointerType!=='pen') return;
+    if(tool==='glow'){ glowFade(); return; }
+    drawing=false; pts=[];
+  });
+  WBC.addEventListener('pointercancel',function(e){
+    if(e.pointerType!=='pen') return;
+    if(tool==='glow'){ glowFade(); return; }
+    drawing=false; pts=[];
+  });
+
+  /* мышь и тач */
+  WBC.addEventListener('mousedown',function(e){
+    if(e.button!==0) return;
+    saveUndo(); drawing=true; pts=[];
+    const p=getXY(e); pts.push(p);
+    styleCtx(0.5);
+    CTX.beginPath(); CTX.moveTo(p.x,p.y);
+  });
+  WBC.addEventListener('mousemove',function(e){
+    if(!drawing) return;
+    const p=getXY(e); pts.push(p);
+    if(pts.length>=4){
+      const n=pts.length;
+      const p0=pts[n-4],p1=pts[n-3],p2=pts[n-2],p3=pts[n-1];
+      const c1x=p1.x+(p2.x-p0.x)/6,c1y=p1.y+(p2.y-p0.y)/6;
+      const c2x=p2.x-(p3.x-p1.x)/6,c2y=p2.y-(p3.y-p1.y)/6;
+      CTX.beginPath();CTX.moveTo(p1.x,p1.y);
+      CTX.bezierCurveTo(c1x,c1y,c2x,c2y,p2.x,p2.y);CTX.stroke();
+    }
+  });
+  WBC.addEventListener('mouseup',function(){drawing=false;pts=[];});
+  WBC.addEventListener('mouseleave',function(){drawing=false;pts=[];});
+
+  WBC.addEventListener('touchstart',function(e){
+    e.preventDefault();
+    saveUndo(); drawing=true; pts=[];
+    const p=getXY(e); pts.push(p);
+    styleCtx(0.5);
+    CTX.beginPath(); CTX.moveTo(p.x,p.y);
+  },{passive:false});
+  WBC.addEventListener('touchmove',function(e){
+    e.preventDefault(); if(!drawing) return;
+    const p=getXY(e); pts.push(p);
+    CTX.lineTo(p.x,p.y); CTX.stroke();
+  },{passive:false});
+  WBC.addEventListener('touchend',function(){drawing=false;pts=[];});
+
+  document.addEventListener('keydown',function(e){
+    if(!isOpen) return;
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();wbUndo();}
+    if(e.key==='Escape') wbClose();
+  });
+
+  window.wbOpen=function(){
+    if(isOpen) return;
+    isOpen=true;
+    WB.classList.add('wb-open');
+    initGlowCanvas();
+    applyMode();
+  };
+  window.wbClose=function(){
+    commitText();
+    isOpen=false;
+    WB.classList.remove('wb-open');
+    const shell=document.querySelector('.shell');
+    if(shell) shell.style.marginRight='';
+    if(glowFadeId){cancelAnimationFrame(glowFadeId);glowFadeId=null;}
+    if(glowCtx) glowCtx.clearRect(0,0,glowCanvas.width,glowCanvas.height);
+  };
+  window.wbToggleMode=function(){
+    mode=mode==='side'?'full':'side';
+    applyMode();
+  };
+  window.wbSetTool=function(t){
+    commitText(); tool=t;
+    document.querySelectorAll('.wb-tool').forEach(el=>el.classList.remove('on'));
+    const el=document.getElementById('wbt-'+t);
+    if(el) el.classList.add('on');
+    if(t==='glow'){
+      WBC.style.cursor='crosshair';
+    } else {
+      WBC.style.cursor='crosshair';
+    }
+  };
+  window.wbSetColor=function(c){
+    color=c;
+    document.querySelectorAll('.wb-col').forEach(el=>{
+      const bg=el.style.background||el.style.backgroundColor;
+      el.classList.toggle('on',bg===c);
+    });
+  };
+  window.wbSetSize=function(n){ sz=n; };
+  window.wbUndo=function(){
+    if(!undoStack.length) return;
+    CTX.putImageData(undoStack.pop(),0,0);
+  };
+  window.wbClear=function(){
+    CTX.clearRect(0,0,WBC.width,WBC.height);
+    applyBg(); undoStack=[];
+    if(glowCtx) glowCtx.clearRect(0,0,glowCanvas.width,glowCanvas.height);
+  };
+  window.addEventListener('resize',function(){if(isOpen) resizeWbc();});
+
+  /* Init */
+  wbSetTool('pen');
+  wbSetColor('#1a1a2e');
+})();
+
+/* ══ INIT ══ */
+window.addEventListener('DOMContentLoaded',function(){
+  buildDeck();
+  _psUpd();
+});
+
+
+/* ══ EGE8 TRAINER v2 ══ */
+var EGE8_TASKS=[
+{id:'47380',reagents:['Cu и HNO₃ (разб.)','CuS и O₂','Cu и HNO₃ (конц.)','Cu и H₂SO₄ (конц.)'],
+products:['сульфат меди(II), оксид серы(IV) и вода','нитрат меди(II), оксид азота(II) и вода','сульфит меди(II), оксид серы(VI) и вода','оксид меди(II) и оксид серы(IV)','нитрат меди(II), оксид азота(IV) и вода','оксид меди(II) и оксид серы(VI)'],
+answer:[2,4,5,1]},
+
+{id:'63133',reagents:['Mg и H₂SO₄ (конц.)','MgO и H₂SO₄','S и H₂SO₄ (конц.)','H₂S и O₂ (изб.)'],
+products:['MgSO₄ и H₂O','MgO, SO₂ и H₂O','H₂S и H₂O','SO₂ и H₂O','MgSO₄, H₂S и H₂O','SO₃ и H₂O'],
+answer:[5,1,4,4]},
+
+{id:'46909',reagents:['Cl₂ и H₂O₂','Fe и HNO₃ (конц., t°)','Cu и HNO₃ (разб.)','Cu и HNO₃ (конц.)'],
+products:['Cu(NO₃)₂, NO₂, H₂O','FeO, H₂O, N₂','HCl, O₂','Fe(NO₃)₃, NO₂, H₂O','Cl₂O₇, H₂','Cu(NO₃)₂, NO, H₂O'],
+answer:[3,4,6,1]},
+
+{id:'46776',reagents:['Al и KOH (р-р)','Al и H₂SO₄ (разб.)','Al₂S₃ и H₂O','Al₂O₃ и KOH (р-р)'],
+products:['гидроксид алюминия и сера','гидроксид алюминия и сероводород','тетрагидроксоалюминат калия и водород','сульфат алюминия и водород','алюминат калия и оксид алюминия','тетрагидроксоалюминат калия'],
+answer:[3,4,2,6]},
+
+{id:'46210',reagents:['BaO и SO₂','Ba(OH)₂ и SO₂','BaO и SO₃','BaO и H₂SO₄'],
+products:['Ba(OH)₂ и S','BaSO₃','BaSO₃ и H₂','BaSO₃ и H₂O','BaSO₄','BaSO₄ и H₂O'],
+answer:[2,4,5,6]},
+
+{id:'247608',reagents:['Ca и H₂SO₄ (конц.)','CaO и SO₃','Ca и H₂SO₄ (р-р)','CaO и H₂SO₄'],
+products:['CaSO₃','CaSO₄, H₂S и H₂O','CaSO₃ и H₂O','CaSO₄','CaSO₄ и H₂','CaSO₄ и H₂O'],
+answer:[2,4,5,6]},
+
+{id:'45636',reagents:['Al₂O₃ + KOH (р-р)','Al₂O₃ + KOH (t°, сплавление)','Al(OH)₃ →','Al + H₂SO₄ →'],
+products:['Al₂(SO₄)₃ и H₂O','Al₂O₃ и H₂O','Al₂O₃ и H₂','KAlO₂ и H₂O','K[Al(OH)₄]','Al₂(SO₄)₃ и H₂'],
+answer:[5,4,2,6]},
+
+{id:'45027',reagents:['Fe₃O₄ и HCl','Fe₂O₃ и HCl','FeO и HCl','Fe и HCl'],
+products:['FeCl₂, FeCl₃ и H₂O','FeCl₃ и H₂O','FeCl₂ и H₂O','FeCl₃ и H₂','FeCl₂ и H₂','FeCl₂, FeCl₃ и H₂'],
+answer:[1,2,3,5]},
+
+{id:'43788',reagents:['FeO + HCl →','Fe₂O₃ + HCl →','Fe₃O₄ + HCl →','Fe₂O₃ + NaOH →'],
+products:['FeCl₂, FeCl₃ и H₂O','FeCl₃ и H₂O','FeCl₂ и H₂O','Na₂O и Fe(OH)₃','NaFeO₂ и H₂O','Fe(OH)₃ и NaCl'],
+answer:[3,2,1,5]},
+
+{id:'42930',reagents:['CuS и O₂','Cu и HNO₃ (разб.)','Cu и HNO₃ (конц.)','Cu и H₂SO₄ (конц.)'],
+products:['CuSO₄, SO₂ и H₂O','Cu(NO₃)₂, NO и H₂O','CuSO₄, SO₃ и H₂O','CuO и SO₂','Cu(NO₃)₂, NO₂ и H₂O','CuO и SO₃'],
+answer:[4,2,5,1]},
+
+{id:'19199',reagents:['H₂S и O₂ (изб.)','H₂S (изб.) и O₂','H₂S и SO₂','S и H₂SO₄'],
+products:['H₂SO₄','S и H₂O','SO₂ и H₂','H₂S и H₂O','SO₃ и H₂O','SO₂ и H₂O'],
+answer:[6,2,2,6]},
+
+{id:'19193',reagents:['Fe и HCl','Fe₃O₄ и HNO₃ (конц.)','Fe₂O₃ и HCl','Fe₃O₄ и HCl'],
+products:['FeCl₃ и H₂','FeCl₃ и H₂O','FeCl₂, FeCl₃ и H₂O','FeCl₂ и H₂','Fe(NO₃)₃, NO и H₂O','Fe(NO₃)₃, NO₂ и H₂O'],
+answer:[4,6,2,3]},
+
+{id:'19158',reagents:['P₂O₅ и KOH (изб.)','SO₃ и KOH (изб.)','SO₂ (изб.) и KOH','KHSO₃ и KOH'],
+products:['K₂SO₄ и H₂O','K₂SO₃ и H₂O','K₂HPO₄ и H₂O','KHSO₃','KHSO₄','K₃PO₄ и H₂O'],
+answer:[6,1,4,2]},
+
+{id:'19156',reagents:['MgO и H₂SO₃','MgO и H₂SO₄','Mg и H₂SO₄ (конц.)','Mg₃N₂ и H₂SO₄ (изб.)'],
+products:['MgSO₄ и H₂','MgSO₄ и H₂O','MgSO₃ и H₂O','MgSO₄, H₂S и H₂O','MgSO₄ и NH₃','MgSO₄ и (NH₄)₂SO₄'],
+answer:[3,2,4,6]},
+
+{id:'19128',reagents:['Mg и H₂SO₄ (конц.)','MgO и H₂SO₄','S и H₂SO₄ (конц.)','H₂S и O₂ (изб.)'],
+products:['MgSO₄ и H₂O','MgO, SO₂ и H₂O','H₂S и H₂O','SO₂ и H₂O','MgSO₄, H₂S и H₂O','SO₃ и H₂O'],
+answer:[5,1,4,4]},
+
+{id:'19114',reagents:['CuO и Al','Na₂O₂ и CO₂','Na₂O и Al₂O₃','Na₂O и CO₂'],
+products:['Cu и Al₂O₃','Cu(AlO₂)₂','Na₂CO₃ и O₂','NaAlO₂','Na₂CO₃','Na₂O₂ и Al'],
+answer:[1,3,4,5]},
+
+{id:'19092',reagents:['Ca(OH)₂ и N₂O₅','Ca(OH)₂ и SO₂','Ca(OH)₂ и SO₃','Ca(OH)₂ и NO₂'],
+products:['CaSO₄ и H₂O','Ca(NO₂)₂, H₂O и Ca(NO₃)₂','Ca(NO₃)₂ и H₂','CaSO₄ и H₂','CaSO₃ и H₂O','Ca(NO₃)₂ и H₂O'],
+answer:[6,5,1,2]}
+];
+
+var EGE8_cur=0,EGE8_mode='free';
+var EGE8_correct=[],EGE8_wrong=[],EGE8_repeatQueue=[],EGE8_repeatPos=0,EGE8_repeatCorrectPass=[];
+var EGE8_elapsed=0,EGE8_timerInterval=null,EGE8_repeatCompleted=false,EGE8_checked=false,EGE8_peeked=false;
+
+function EGE8_timerStart(){
+  clearInterval(EGE8_timerInterval);
+  EGE8_timerInterval=setInterval(function(){
+    EGE8_elapsed++;
+    var m=Math.floor(EGE8_elapsed/60),s=EGE8_elapsed%60;
+    var el=document.getElementById('ege8-timer');
+    if(el)el.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  },1000);
+}
+function EGE8_timerStop(){clearInterval(EGE8_timerInterval);}
+
+function EGE8_render(){
+  var task=EGE8_TASKS[EGE8_cur];
+  EGE8_checked=false;EGE8_peeked=false;
+  var letters=['А','Б','В','Г'];
+
+  var rHTML='';
+  task.reagents.forEach(function(r,i){
+    rHTML+='<div class="ege8-item"><span class="ege8-item-key">'+letters[i]+')</span><span class="ege8-item-val">'+r+'</span></div>';
+  });
+  document.getElementById('ege8-reagents').innerHTML=rHTML;
+
+  var pHTML='';
+  task.products.forEach(function(p,i){
+    pHTML+='<div class="ege8-item"><span class="ege8-item-key">'+(i+1)+')</span><span class="ege8-item-val">'+p+'</span></div>';
+  });
+  document.getElementById('ege8-products').innerHTML=pHTML;
+
+  var sHTML='';
+  letters.forEach(function(l,i){
+    sHTML+='<div class="ege8-slot"><span class="ege8-slot-letter">'+l+'</span><input class="ege8-slot-input" id="ege8-inp-'+i+'" type="text" maxlength="1" inputmode="numeric" placeholder="?" oninput="this.value=this.value.replace(/[^1-6]/g,\'\')"/></div>';
+  });
+  document.getElementById('ege8-slots').innerHTML=sHTML;
+
+  var n=EGE8_cur+1,total=EGE8_TASKS.length;
+  document.getElementById('ege8-task-meta').textContent='Задание '+n+' из '+total+' · 8 линия ЕГЭ · №'+task.id;
+  document.getElementById('ege8-count-free').textContent=n+' / '+total;
+  document.getElementById('ege8-prog-num').textContent=n+' / '+total;
+  document.getElementById('ege8-progress-fill').style.width=(n/total*100)+'%';
+
+  var cb=document.getElementById('ege8-check-btn');
+  if(cb){cb.disabled=false;cb.style.display='inline-flex';}
+  document.getElementById('ege8-rating').classList.remove('open');
+  var fb=document.getElementById('ege8-feedback');
+  fb.className='ege8-feedback';fb.textContent='';
+  var sol=document.getElementById('ege8-solution');
+  sol.className='ege8-solution';sol.textContent='';
+
+  // auto-focus first slot
+  setTimeout(function(){var el=document.getElementById('ege8-inp-0');if(el)el.focus();},50);
+}
+
+function EGE8_showSolution(){
+  if(!EGE8_checked) EGE8_peeked=true;
+  var task=EGE8_TASKS[EGE8_cur];
+  var sol=document.getElementById('ege8-solution');
+  sol.className='ege8-solution show';
+  sol.textContent='Ответ: А='+task.answer[0]+' Б='+task.answer[1]+' В='+task.answer[2]+' Г='+task.answer[3];
+}
+
+function EGE8_check(){
+  if(EGE8_checked)return;
+  var task=EGE8_TASKS[EGE8_cur];
+  var vals=[],letters=['А','Б','В','Г'];
+  var allFilled=true;
+  for(var i=0;i<4;i++){
+    var el=document.getElementById('ege8-inp-'+i);
+    var v=parseInt(el?el.value:'');
+    if(!v||v<1||v>6){allFilled=false;}
+    vals.push(v||0);
+  }
+  if(!allFilled){
+    var fb=document.getElementById('ege8-feedback');
+    fb.className='ege8-feedback show bad';
+    fb.textContent='⚠ Введи цифру от 1 до 6 для каждого реагента.';
+    return;
+  }
+  EGE8_checked=true;
+  var allCorrect=true,correctCount=0;
+  for(var i=0;i<4;i++){
+    var el=document.getElementById('ege8-inp-'+i);
+    if(vals[i]===task.answer[i]){el.classList.add('correct');correctCount++;}
+    else{el.classList.add('wrong');allCorrect=false;}
+  }
+  var fb=document.getElementById('ege8-feedback');
+  if(allCorrect){fb.className='ege8-feedback show good';fb.textContent='✓ Верно! Все четыре пары правильные.';}
+  else{
+    fb.className='ege8-feedback show bad';
+    fb.textContent='✗ '+correctCount+' из 4 верно. Правильный ответ: А='+task.answer[0]+' Б='+task.answer[1]+' В='+task.answer[2]+' Г='+task.answer[3];
+  }
+  var cb=document.getElementById('ege8-check-btn');
+  if(cb)cb.style.display='none';
+  if(EGE8_mode!=='free'){
+    var rating=document.getElementById('ege8-rating');
+    rating.classList.add('open');
+    if(EGE8_peeked){
+      // скрыть кнопку «Знал» — подглядел, засчитать как «не знал»
+      rating.querySelector('.pt-btn-know').style.display='none';
+      var hint=document.createElement('span');
+      hint.style.cssText='font-size:12px;color:var(--red-d);align-self:center';
+      hint.textContent='👀 Подглядел — только «Не знал»';
+      rating.appendChild(hint);
+    }
+  }
+}
+
+function EGE8_mark(knew){
+  if(EGE8_mode==='test'){if(knew)EGE8_correct.push(EGE8_cur);else EGE8_wrong.push(EGE8_cur);}
+  else if(EGE8_mode==='repeat'){if(knew)EGE8_repeatCorrectPass.push(EGE8_cur);}
+  EGE8_updateStats();
+  document.getElementById('ege8-rating').classList.remove('open');
+  setTimeout(function(){if(EGE8_mode==='test')EGE8_testNext();else if(EGE8_mode==='repeat')EGE8_repeatNext();},700);
+}
+
+function EGE8_updateStats(){
+  var done=EGE8_correct.length+EGE8_wrong.length;
+  document.getElementById('ege8-done').textContent=done+' / '+EGE8_TASKS.length;
+  document.getElementById('ege8-correct-cnt').textContent=EGE8_correct.length;
+  document.getElementById('ege8-wrong-cnt').textContent=EGE8_wrong.length;
+}
+
+function EGE8_startTest(){
+  EGE8_mode='test';EGE8_elapsed=0;EGE8_correct=[];EGE8_wrong=[];EGE8_repeatCompleted=false;EGE8_cur=0;
+  document.getElementById('ege8-top-free').style.display='none';
+  document.getElementById('ege8-stats').style.display='flex';
+  document.getElementById('ege8-nav').style.display='none';
+  document.getElementById('ege8-repeat-notice').style.display='none';
+  document.getElementById('ege8-results').style.display='none';
+  document.getElementById('ege8-question-area').style.display='block';
+  EGE8_timerStart();EGE8_updateStats();EGE8_render();
+}
+function EGE8_testNext(){
+  var next=EGE8_cur+1;
+  if(next>=EGE8_TASKS.length){EGE8_timerStop();if(EGE8_wrong.length>0)EGE8_startRepeat();else EGE8_showResults();return;}
+  EGE8_cur=next;EGE8_render();
+}
+function EGE8_endTest(){EGE8_timerStop();EGE8_showResults();}
+function EGE8_startRepeat(){
+  EGE8_mode='repeat';EGE8_repeatQueue=EGE8_wrong.slice();EGE8_repeatPos=0;EGE8_repeatCorrectPass=[];
+  EGE8_cur=EGE8_repeatQueue[0];
+  var rn=document.getElementById('ege8-repeat-notice');
+  rn.style.display='block';rn.textContent='Повторение ошибок: '+EGE8_repeatQueue.length+' задани'+(EGE8_repeatQueue.length===1?'е':'й')+'.';
+  document.getElementById('ege8-results').style.display='none';
+  document.getElementById('ege8-question-area').style.display='block';
+  EGE8_render();
+}
+function EGE8_repeatNext(){
+  EGE8_repeatPos++;
+  if(EGE8_repeatPos>=EGE8_repeatQueue.length){
+    EGE8_repeatQueue=EGE8_repeatQueue.filter(function(i){return EGE8_repeatCorrectPass.indexOf(i)===-1;});
+    EGE8_repeatCorrectPass=[];
+    if(EGE8_repeatQueue.length===0){EGE8_repeatCompleted=true;EGE8_showResults();return;}
+    EGE8_repeatPos=0;
+    document.getElementById('ege8-repeat-notice').textContent='Повторение: '+EGE8_repeatQueue.length+' осталось.';
+  }
+  EGE8_cur=EGE8_repeatQueue[EGE8_repeatPos];EGE8_render();
+}
+function EGE8_showResults(){
+  EGE8_mode='results';EGE8_timerStop();
+  var total=EGE8_TASKS.length,c=EGE8_correct.length,w=EGE8_wrong.length,pct=Math.round(c/total*100);
+  var m=Math.floor(EGE8_elapsed/60),s=EGE8_elapsed%60;
+  var t=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  var grade=pct>=90?'Отлично! 🎉':pct>=70?'Хорошо! 👍':pct>=50?'Неплохо 📚':'Повтори ещё раз 💪';
+  var repeatBtn=EGE8_wrong.length>0&&!EGE8_repeatCompleted?
+    '<button class="ege8-check-btn" onclick="EGE8_startRepeat()" style="margin-top:14px;width:100%;justify-content:center">↻ Повторить ошибки ('+EGE8_wrong.length+')</button>':
+    EGE8_repeatCompleted?'<div style="margin-top:12px;color:var(--green-d);font-weight:700;font-size:13px">✓ Все ошибки исправлены!</div>':'';
+  document.getElementById('ege8-question-area').style.display='none';
+  document.getElementById('ege8-stats').style.display='none';
+  var res=document.getElementById('ege8-results');
+  res.style.display='block';
+  res.innerHTML='<div class="ege8-res-head">'+grade+'</div><div class="ege8-res-sub">Время: '+t+' · '+total+' заданий</div>'+
+    '<div class="ege8-res-grid">'+
+    '<div class="ege8-res-card good"><div class="rval">'+c+'</div><div class="rlbl">Знал</div></div>'+
+    '<div class="ege8-res-card bad"><div class="rval">'+w+'</div><div class="rlbl">Не знал</div></div>'+
+    '<div class="ege8-res-card"><div class="rval">'+pct+'%</div><div class="rlbl">Результат</div></div>'+
+    '<div class="ege8-res-card"><div class="rval">'+total+'</div><div class="rlbl">Заданий</div></div>'+
+    '</div>'+repeatBtn+
+    '<button class="pt-nav-btn" onclick="EGE8_returnFree()" style="margin-top:10px;width:100%">← Вернуться к просмотру</button>';
+}
+function EGE8_returnFree(){
+  EGE8_mode='free';EGE8_cur=0;EGE8_timerStop();
+  document.getElementById('ege8-results').style.display='none';
+  document.getElementById('ege8-question-area').style.display='block';
+  document.getElementById('ege8-stats').style.display='none';
+  document.getElementById('ege8-top-free').style.display='flex';
+  document.getElementById('ege8-nav').style.display='flex';
+  document.getElementById('ege8-repeat-notice').style.display='none';
+  EGE8_render();
+}
+function EGE8_prev(){if(EGE8_mode!=='free')return;EGE8_cur=(EGE8_cur-1+EGE8_TASKS.length)%EGE8_TASKS.length;EGE8_render();}
+function EGE8_next(){if(EGE8_mode!=='free')return;EGE8_cur=(EGE8_cur+1)%EGE8_TASKS.length;EGE8_render();}
+document.addEventListener('DOMContentLoaded',function(){EGE8_render();});
+if(document.readyState!=='loading'){EGE8_render();}
+
+</script>
+</body>
+</html>
