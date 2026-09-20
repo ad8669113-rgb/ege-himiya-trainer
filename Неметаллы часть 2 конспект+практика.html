@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Неметаллы. Часть 2: фосфор, кремний, углерод, водород — ЕГЭ 2026–2027</title>
+<style>
+/* ══════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════ */
+:root{
+  --p900:#2D1B69;--p800:#3D2785;--p700:#4E35A0;
+  --p600:#6248C4;--p500:#7B61DB;--p400:#9B84E8;
+  --p300:#BDB2F3;--p200:#DBD5F8;--p100:#F0EEFF;--p50:#F8F7FF;
+  --ink:#1C1B29;--ink2:#3E3C5A;--ink3:#8A88A8;
+  --line:#E2E5EC;--card:#FFFFFF;--bg:#F6F5FC;--white:#fff;
+  --green:#1D9E75;--green-t:#E1F5EE;--green-d:#085041;
+  --amber:#BA7517;--amber-t:#FAEEDA;--amber-d:#633806;
+  --red:#A32D2D;--red-t:#FCEBEB;--red-d:#7A2020;
+  --r:12px;--r-sm:8px;--r-lg:20px;
+  --shadow:0 1px 3px rgba(20,21,26,.06),0 4px 16px rgba(20,21,26,.06);
+  --shm:0 4px 20px rgba(60,40,160,.12);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px}
+
+/* PROGRESS */
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:var(--p100);z-index:999}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--p600),var(--p400));width:0;transition:width .1s}
+
+/* SHELL */
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#2D1B69 0%,#4E35A0 55%,#7B61DB 100%);padding:56px 32px 48px;margin:0 -24px 48px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(155,132,232,.15) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.82);border-radius:20px;padding:4px 14px;font-size:12px;font-family:var(--mono);letter-spacing:.6px;margin-bottom:20px}
+.hero h1{font-size:clamp(28px,5vw,48px);font-weight:800;line-height:1.06;letter-spacing:-.03em;color:#fff;margin-bottom:14px;position:relative;z-index:1}
+.hero h1 em{color:var(--p300);font-style:normal}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.7);line-height:1.7;max-width:560px;margin-bottom:28px;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.hero-chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.9);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+
+/* TOC */
+.toc{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:22px 26px;margin-bottom:48px;box-shadow:var(--shadow)}
+.toc-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p600);font-family:var(--mono);margin-bottom:14px}
+.toc ol{padding-left:20px}
+.toc li{padding:4px 0;font-size:14px}
+.toc a{color:var(--ink2);text-decoration:none;transition:color .15s}
+.toc a:hover{color:var(--p600)}
+
+/* SECTION */
+.section{margin-bottom:56px}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--p200)}
+.section-num{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;font-family:var(--mono);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+.section-title{font-size:clamp(18px,2.5vw,24px);font-weight:700;color:var(--p800);line-height:1.2}
+
+h2.sub-title{font-size:17px;font-weight:700;color:var(--p700);margin:28px 0 12px;display:flex;align-items:center;gap:8px}
+h2.sub-title::before{content:'';width:4px;height:20px;background:var(--p500);border-radius:2px;flex-shrink:0}
+h3.mini-title{font-size:14.5px;font-weight:600;color:var(--ink);margin:18px 0 8px}
+p.body{font-size:14.5px;line-height:1.75;color:var(--ink2);margin-bottom:14px}
+p.body strong{color:var(--ink)}
+
+/* BOXES */
+.box{border-radius:var(--r-sm);padding:14px 18px;margin:14px 0;font-size:14px;line-height:1.7}
+.box-title{font-weight:700;font-size:13.5px;margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:var(--amber-t);border-left:4px solid var(--amber);color:var(--amber-d)}
+.box-danger{background:var(--red-t);border-left:4px solid var(--red);color:var(--red-d)}
+.box-success{background:var(--green-t);border-left:4px solid var(--green);color:var(--green-d)}
+.box ul,.box ol{padding-left:20px;margin:6px 0}
+.box li{margin:4px 0;font-size:13.5px}
+
+/* EQ BLOCK */
+.eq-block{background:var(--white);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 18px;margin:10px 0;box-shadow:var(--shadow)}
+.eq{font-family:var(--mono);font-size:13.5px;color:var(--p900);line-height:2.1;display:block}
+.eq .cond{color:var(--ink3);font-size:11.5px}
+.eq .we{color:var(--red);font-weight:700}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);margin:14px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:13.5px}
+th{background:linear-gradient(135deg,var(--p800),var(--p600));color:#fff;font-weight:600;padding:10px 14px;text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--p50)}
+tr:hover td{background:var(--p100);transition:background .15s}
+.tr-w td{background:#FFF8EC!important}
+.tr-d td{background:#FCEBEB!important}
+.tr-s td{background:#F0FBF6!important}
+
+/* CHIP */
+.chip{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.5px;padding:3px 9px;border-radius:5px;font-weight:600;white-space:nowrap}
+.chip-p{background:var(--p100);color:var(--p700)}
+.chip-g{background:var(--green-t);color:var(--green-d)}
+.chip-a{background:var(--amber-t);color:var(--amber-d)}
+.chip-r{background:var(--red-t);color:var(--red-d)}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+@media(max-width:700px){.grid-2,.grid-3{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow);transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:var(--p300);box-shadow:var(--shm)}
+.card-title{font-weight:700;font-size:14px;color:var(--p700);margin-bottom:8px}
+.card-body{font-size:13.5px;color:var(--ink2);line-height:1.65}
+
+/* ALGO */
+.algo{margin:14px 0}
+.algo-step{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.algo-n{width:26px;height:26px;border-radius:7px;background:var(--p600);color:#fff;font-family:var(--mono);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.algo-text{font-size:14px;line-height:1.65;color:var(--ink2)}
+.algo-text strong{color:var(--ink)}
+
+/* REMEMBER */
+.remember{background:linear-gradient(135deg,var(--p100),var(--p50));border:1.5px solid var(--p300);border-radius:var(--r);padding:16px 20px;margin-top:24px}
+.remember-title{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--p600);margin-bottom:10px;font-weight:700}
+.remember ul{padding-left:18px}
+.remember li{font-size:13.5px;color:var(--p800);padding:3px 0}
+
+/* SCALE */
+.activity-scale{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:20px 24px;margin:14px 0;box-shadow:var(--shadow);overflow-x:auto}
+.scale-label{display:flex;justify-content:space-between;font-size:11px;color:var(--ink3);font-family:var(--mono);margin-bottom:8px}
+.scale-row{display:flex;align-items:center;gap:3px;overflow-x:auto;padding-bottom:6px}
+.sc-item{padding:6px 8px;border-radius:6px;white-space:nowrap;font-family:var(--mono);font-size:12.5px;font-weight:500;flex-shrink:0}
+.sc-active{background:var(--p200);color:var(--p800)}
+.sc-mid{background:var(--p100);color:var(--p700)}
+.sc-h2{background:var(--red);color:#fff;padding:6px 12px;border-radius:6px;margin:0 6px;font-weight:700}
+.sc-low{background:#EEF8F3;color:var(--green-d)}
+.scale-desc{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3);margin-top:10px;flex-wrap:wrap;gap:8px}
+
+.hr{height:1px;background:var(--line);margin:22px 0}
+.mega th{font-size:10px}
+.mega td{font-size:11.5px}
+
+/* ══════════════════════════════════
+   PRACTICE SECTION STYLES
+══════════════════════════════════ */
+.practice-section{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px 28px;margin-bottom:24px;box-shadow:var(--shadow)}
+.practice-title{font-size:16px;font-weight:700;color:var(--p800);display:flex;align-items:center;margin-bottom:14px}
+.practice-num{min-width:30px;height:30px;background:var(--p600);color:#fff;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-right:10px;flex-shrink:0}
+
+.task-item{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);margin-bottom:8px;overflow:hidden;transition:border-color .2s}
+.task-item:hover{border-color:var(--p300)}
+.task-q{display:flex;align-items:flex-start;gap:11px;padding:11px 14px}
+.task-n{min-width:24px;height:24px;background:var(--p100);color:var(--p700);border-radius:6px;font-family:var(--mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.task-text{flex:1;font-size:13.5px;font-family:var(--mono);color:var(--ink);line-height:1.6}
+.task-hint{font-size:11.5px;color:var(--ink3);font-family:var(--font)}
+
+.reveal-btn{background:none;border:none;color:var(--p600);font-size:12.5px;font-weight:600;cursor:pointer;padding:0 14px 10px;font-family:var(--font);letter-spacing:.3px;transition:color .15s;display:block;text-align:left}
+.reveal-btn:hover{color:var(--p800)}
+.reveal-btn.open{color:var(--green)}
+
+.answer-box{display:none;background:linear-gradient(135deg,var(--green-t),#F0FBF6);border-top:1px solid #B6E8D3;padding:10px 14px 13px;font-family:var(--mono);font-size:13px;color:var(--green-d);line-height:1.9}
+.answer-box.open{display:block}
+.answer-label{font-family:var(--font);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);margin-bottom:4px}
+.ans-note{font-family:var(--font);font-size:12px;color:var(--green-d);margin-top:6px;opacity:.85;font-style:italic}
+
+.reveal-all-btn{display:inline-flex;align-items:center;gap:7px;background:var(--p600);color:#fff;border:none;border-radius:var(--r-sm);padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s;margin-bottom:16px}
+.reveal-all-btn:hover{background:var(--p700)}
+.reveal-all-btn.all-open{background:var(--green)}
+
+/* BACK TOP */
+#back-top{position:fixed;bottom:24px;right:24px;width:42px;height:42px;border-radius:12px;background:var(--p600);color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(62,42,180,.35);display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .2s;opacity:0;pointer-events:none}
+#back-top.visible{opacity:1;pointer-events:all}
+#back-top:hover{transform:translateY(-2px)}
+
+/* FADE IN */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:540px){.shell{padding:0 14px 60px}.hero{padding:36px 18px 32px;margin:0 -14px 32px}.practice-section{padding:16px 18px}}
+@media print{.prog-bar-wrap,#back-top{display:none}}
+</style>
+<style>
+.cy{color:#B8860B;font-weight:600}.cb{color:#8B4513;font-weight:600}
+.ck{color:#222;font-weight:600}.cg{color:#1D9E75;font-weight:600}.cr{color:#C0392B;font-weight:600}
+.eq .cond{color:var(--ink3);font-size:11.5px}.eq .we{color:var(--red);font-weight:700}
+
+/* ── ЗАДАНИЯ С ПОЛЕМ ВВОДА ── */
+.it-input-wrap{display:flex;gap:8px;align-items:flex-start;padding:0 14px 10px}
+.it-input{
+  flex:1;font-family:var(--mono);font-size:13px;line-height:1.55;
+  padding:8px 12px;border:1.5px solid var(--line);border-radius:var(--r-sm);
+  background:var(--white);color:var(--ink);resize:none;min-height:38px;
+  overflow:hidden;transition:border-color .2s,box-shadow .2s;width:100%;
+}
+.it-input:focus{outline:none;border-color:var(--p400);box-shadow:0 0 0 3px rgba(98,72,200,.1)}
+.it-input.correct{border-color:var(--green);background:var(--green-t)}
+.it-input.wrong{border-color:var(--red);background:var(--red-t)}
+.it-check-btn{
+  flex-shrink:0;background:var(--p600);color:#fff;border:none;
+  border-radius:var(--r-sm);padding:8px 15px;font-size:12.5px;font-weight:600;
+  cursor:pointer;font-family:var(--font);transition:background .15s;
+  white-space:nowrap;align-self:flex-start;
+}
+.it-check-btn:hover{background:var(--p700)}
+.it-check-btn:disabled{background:var(--p300);cursor:default}
+.it-feedback{display:none;padding:0 14px 8px;font-size:12.5px;font-family:var(--font);line-height:1.6}
+.it-feedback.show{display:block}
+.it-feedback.ok{color:var(--green-d);font-weight:500}
+.it-feedback.miss{color:var(--red-d);font-weight:500}
+.it-show-link{background:none;border:none;color:var(--p500);font-size:12px;cursor:pointer;text-decoration:underline;font-family:var(--font);padding:0;margin-left:6px}
+
+/* ── ФЛЭШ-КАРТОЧКИ ── */
+.fc-section{background:linear-gradient(135deg,#1E1255,#4E35A0);border-radius:var(--r-lg);padding:32px 28px;margin:48px 0;color:#fff}
+.fc-header{text-align:center;margin-bottom:24px}
+.fc-title{font-size:clamp(18px,3vw,26px);font-weight:700;color:#fff;margin-bottom:6px}
+.fc-sub{font-size:14px;color:rgba(255,255,255,.65);line-height:1.6}
+.fc-stats{display:flex;justify-content:center;gap:24px;margin-bottom:16px;font-size:13px;color:rgba(255,255,255,.7);font-family:var(--mono)}
+.fc-stats span{color:#fff;font-weight:700;font-size:16px}
+.fc-counter{text-align:center;font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.5);margin-bottom:14px}
+.fc-perspective{perspective:900px;width:100%;max-width:560px;margin:0 auto;cursor:pointer}
+.fc-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,0,.2,1);min-height:180px}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);display:flex;align-items:center;justify-content:center;padding:24px 28px;text-align:center;min-height:180px;flex-direction:column;gap:8px}
+.fc-front{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);font-size:clamp(15px,2.5vw,19px);font-family:var(--mono);color:#fff;line-height:1.5}
+.fc-back{background:var(--white);transform:rotateY(180deg);font-family:var(--mono);font-size:clamp(13px,2vw,16px);color:var(--green-d);line-height:1.6}
+.fc-hint{font-family:var(--font);font-size:12px;color:var(--ink3);margin-top:6px;font-style:italic}
+.fc-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:4px}
+.fc-back-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+.fc-flip-btn{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:14px;font-weight:600;border-radius:var(--r-sm);padding:11px 26px;cursor:pointer;transition:background .2s;margin:18px auto;width:fit-content}
+.fc-flip-btn:hover{background:rgba(255,255,255,.25)}
+.fc-btn-row{display:none;gap:12px;justify-content:center;margin-top:14px}
+.fc-btn-know{background:#1D9E75;color:#fff;border:none;border-radius:var(--r-sm);padding:11px 26px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-know:hover{background:#187F5E}
+.fc-btn-dontknow{background:#C0392B;color:#fff;border:none;border-radius:var(--r-sm);padding:11px 26px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-dontknow:hover{background:#A0311F}
+.fc-keys{text-align:center;font-size:11.5px;color:rgba(255,255,255,.35);margin-top:12px;font-family:var(--mono)}
+.fc-result{display:none;text-align:center;padding:20px}
+.fc-result h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:12px}
+.fc-res-row{display:flex;gap:16px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.fc-res-card{background:rgba(255,255,255,.1);border-radius:var(--r-sm);padding:12px 22px;min-width:100px}
+.fc-res-num{font-size:28px;font-weight:700}
+.fc-res-lbl{font-size:11px;color:rgba(255,255,255,.6);font-family:var(--mono);margin-top:2px}
+.fc-restart-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.fc-restart-btn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;border-radius:var(--r-sm);padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
+.fc-restart-btn:hover{background:rgba(255,255,255,.25)}
+.fc-restart-btn.primary{background:var(--green);border-color:var(--green)}
+.fc-empty{display:none;text-align:center;color:rgba(255,255,255,.6);padding:20px}
+
+/* hints-hidden */
+.hints-hidden .box.box-info[style*="margin-bottom:14px"] { display:none !important; }
+.hints-hidden .reveal-all-btn { display:none !important; }
+/* score bar */
+#prac-score-bar{position:sticky;top:0;z-index:200;background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;border-radius:var(--r);margin-bottom:20px;box-shadow:0 4px 16px rgba(62,42,180,.3);flex-wrap:wrap;gap:8px}
+#prac-score-bar .ps-label{font-size:14px;font-weight:600;opacity:.85}
+#prac-score-bar .ps-nums{font-size:22px;font-weight:800;letter-spacing:1px}
+#prac-score-bar .ps-pct{font-size:13px;opacity:.7;font-family:var(--mono)}
+.ps-prog{height:5px;background:rgba(255,255,255,.2);border-radius:3px;margin-top:6px;width:100%}
+.ps-prog-fill{height:5px;background:#fff;border-radius:3px;transition:width .4s}
+#prac-ctrl{display:flex;gap:8px;flex-wrap:wrap}
+.ps-btn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);color:#fff;border-radius:8px;padding:6px 13px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--font);transition:background .15s}
+.ps-btn:hover{background:rgba(255,255,255,.25)}
+.ps-btn.active{background:#fff;color:var(--p700)}
+/* btn-board */
+#btn-board{position:fixed;bottom:132px;right:20px;z-index:1200;width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#1D9E75,#085041);color:#fff;border:none;cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(8,80,65,.35);transition:transform .15s}
+#btn-board:hover{transform:scale(1.07)}
+/* ── WB from урок_2 ── */
+
+#wb.wb-open{display:flex!important}
+.wbs{width:1px;height:26px;background:#e0ddf8;flex-shrink:0;margin:0 2px}
+.wb-bg{background:#fff;border:1.5px solid #e0ddf8;color:#444;border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:14px;transition:.15s;flex-shrink:0;line-height:1}
+.wb-bg:hover,.wb-bg.on{background:#ede9fe;border-color:#a78bfa}
+.wb-tool{background:#fff;border:1.5px solid #e0ddf8;color:#444;border-radius:6px;width:30px;height:28px;cursor:pointer;font-size:15px;transition:.15s;flex-shrink:0;line-height:1}
+.wb-tool:hover,.wb-tool.on{background:#ede9fe;border-color:#7c3aed;color:#5b21b6}
+.wb-col{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:.15s;flex-shrink:0}
+.wb-col:hover,.wb-col.on{border-color:#7c3aed;transform:scale(1.2)}
+.wb-sz{background:#fff;border:1.5px solid #e0ddf8;color:#444;border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:10px;font-weight:700;transition:.15s;flex-shrink:0;font-family:sans-serif}
+.wb-sz:hover,.wb-sz.on{background:#ede9fe;border-color:#7c3aed}
+#wb-canvas.pen-cur{cursor:crosshair}
+#wb-canvas.erase-cur{cursor:cell}
+#wb-canvas.text-cur{cursor:text}
+.stage.wb-squeezed{right:45%!important;transition:right .25s}
+
+/* FC Timer */
+#fc-timer-live {
+  font-family: var(--mono); font-size: 13px;
+  color: rgba(255,255,255,.55); text-align: center;
+  margin-top: 6px; letter-spacing: 1px; min-height: 18px;
+}
+.fc-time-result {
+  text-align: center; margin: 10px 0 4px;
+  font-size: 15px; font-weight: 700;
+  color: rgba(255,255,255,.9); font-family: var(--mono);
+  letter-spacing: .5px;
+}
+</style>
+</head>
+<body>
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+<div class="shell">
+
+<div class="hero">
+  <div class="hero-tag">ЕГЭ Химия 2026–2027 · Задания №7–9, 30–31</div>
+  <h1>Неметаллы. <em>Часть 2:</em><br>фосфор, кремний,<br>углерод, водород</h1>
+  <p class="hero-sub">Теория с заданиями сразу после каждого блока + 50 флэш-карточек по ловушкам ЕГЭ + большой практикум в конце.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Теория + задания сразу</span>
+    <span class="hero-chip">50 флэш-карточек</span>
+    <span class="hero-chip">Фосфор P</span>
+    <span class="hero-chip">Кремний Si</span>
+    <span class="hero-chip">Углерод C</span>
+    <span class="hero-chip">Водород H₂</span>
+  </div>
+</div>
+
+<nav class="toc fade-in">
+  <div class="toc-title">Содержание</div>
+  <ol>
+    <li><a href="#s1">Аллотропия. Физические свойства. Ключевые ловушки</a></li>
+    <li><a href="#s2">Химические свойства фосфора</a></li>
+    <li><a href="#s3">Химические свойства кремния и SiO₂</a></li>
+    <li><a href="#s4">Химические свойства углерода, CO и CO₂</a></li>
+    <li><a href="#s5">Химические свойства водорода</a></li>
+    <li><a href="#s6">🃏 Флэш-карточки — ловушки ЕГЭ (50 карточек)</a></li>
+    <li><a href="#s7">Большой практикум — 50 заданий</a></li>
+  </ol>
+</nav>
+
+<section class="section fade-in" id="s1">
+  <div class="section-header"><div class="section-num">1</div><h2 class="section-title">Аллотропия. Физические свойства. Ключевые ловушки</h2></div>
+
+  <h2 class="sub-title">1.1 Аллотропные модификации</h2>
+  <p class="body">Аллотропия — существование двух и более простых веществ одного элемента. Модификации отличаются структурой кристаллов или составом молекул.</p>
+  <div class="grid-3">
+    <div class="card"><div class="card-title">⚫ Углерод C</div><div class="card-body">
+      <strong>Алмаз</strong> — атомная решётка, sp³, изолятор, самый твёрдый<br>
+      <strong>Графит</strong> — слоистая, sp², проводник тока<br>
+      <strong>Фуллерен C₆₀</strong> — молекулярная решётка, шарообразная молекула
+    </div></div>
+    <div class="card"><div class="card-title">🔴 Фосфор P</div><div class="card-body">
+      <strong>Белый P₄</strong> — молек. решётка, ядовит, светится, самовоспл.<br>
+      <strong>Красный P</strong> — атомная, не ядовит, не светится<br>
+      <strong>Чёрный P</strong> — слоистая, полупроводник, наиболее стабилен
+    </div></div>
+    <div class="card"><div class="card-title">🔵 Водород H</div><div class="card-body">
+      <strong>Протий ¹H</strong> — обычный водород (99,98%)<br>
+      <strong>Дейтерий ²H</strong> — тяжёлый водород<br>
+      <strong>Тритий ³H</strong> — радиоактивный
+    </div></div>
+  </div>
+
+  <h2 class="sub-title">1.2 Физические свойства при н.у.</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Вещество</th><th>Состояние</th><th>Цвет и особенности</th></tr></thead>
+    <tbody>
+      <tr><td><strong>P₄ белый</strong></td><td>Твёрдое</td><td>⬜ Восковидный, ядовит. Светится в темноте. Самовоспламеняется на воздухе.</td></tr>
+      <tr><td><strong>P красный</strong></td><td>Твёрдое</td><td>🔴 Красный порошок. Не ядовит. Используется в спичках.</td></tr>
+      <tr><td><strong>Si</strong></td><td>Твёрдое</td><td>Серебристо-серый. Полупроводник. Атомная кристаллическая решётка (как алмаз).</td></tr>
+      <tr><td><strong>C алмаз</strong></td><td>Твёрдое</td><td>Прозрачный. Самое твёрдое вещество. Не проводит ток.</td></tr>
+      <tr><td><strong>C графит</strong></td><td>Твёрдое</td><td>⬛ Серо-чёрный. Проводит ток. Скользкий (смазка).</td></tr>
+      <tr><td><strong>H₂</strong></td><td>Газ</td><td>Бесцветный, самый лёгкий. Взрывоопасен в смеси с O₂ («гремучий газ»).</td></tr>
+    </tbody>
+  </table></div>  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания — блок 1</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq1')">👁 Показать все ответы</button>
+    <div id="mq1" class="inline-tasks" style="margin-top:8px">
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">1</div><div class="it-text">Чем отличаются алмаз и графит? Почему у них разные свойства?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>Оба — C, но разная структура. Алмаз: sp³, атомная решётка, изолятор, твёрдый. Графит: sp², слоистая решётка, проводник, мягкий.<div class="ans-note">Пример аллотропии: один элемент, разные свойства из-за разного строения кристалла.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">2</div><div class="it-text">Чем белый фосфор отличается от красного? Почему белый хранят под водой?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>Белый P₄ — молекулярная решётка, ядовит, самовоспламеняется на воздухе → хранят под водой. Красный P — атомная решётка, не ядовит, безопасен.<div class="ans-note">Белый фосфор воспламеняется при ~34°С — поэтому хранение под водой обязательно.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">3</div><div class="it-text">Почему Si — полупроводник? Чем его решётка похожа на алмаз?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>Si — атомная кристаллическая решётка типа алмаза (sp³). Полупроводник: проводимость зависит от t° (растёт с нагревом).<div class="ans-note">На этом свойстве основана вся микроэлектроника — транзисторы, процессоры, солнечные батареи.</div></div>
+    </div>
+    </div>
+  </div>
+  <div class="box box-danger"><div class="box-title">🚫 Главные ловушки ЕГЭ — часть 2</div><ul>
+    <li><strong>H₂ + Si ↛ и H₂ + P ↛</strong> — напрямую не реагируют! SiH₄ и PH₃ — только косвенный синтез.</li>
+    <li><strong>C + I₂ ↛</strong> — углерод с иодом не реагирует. Но <strong>Si + I₂ → SiI₄</strong> — кремний реагирует со всеми галогенами!</li>
+    <li><strong>Si + HNO₃ ↛ и Si + H₂SO₄(конц.) ↛</strong> — Si пассивен к этим кислотам, растворяется только в HF.</li>
+    <li><strong>C + O₂(нед.) → 2CO</strong> — угарный газ! Ядовит, бесцветный, без запаха.</li>
+    <li><strong>CO₂ + NaOH</strong>: изб. NaOH → Na₂CO₃; нед. NaOH → NaHCO₃. Соотношение важно!</li>
+    <li><strong>SiO₂ + HF → SiF₄ + H₂O</strong> — HF разъедает стекло (SiO₂). Другие кислоты с SiO₂ не реагируют!</li>
+  </ul></div>
+  <div class="remember"><div class="remember-title">✅ Цвета важных продуктов</div><ul>
+    <li>⬜ P₂O₅ — белый дым при горении фосфора</li>
+    <li>⬛ CuO — чёрный → при восстановлении H₂ даёт <span class="cr">🔴 красную Cu</span></li>
+    <li>⬜ CaCO₃↓ — белый (помутнение известковой воды = качественная реакция на CO₂)</li>
+    <li>⬜ H₂SiO₃↓ — белый студенистый осадок (силикаты + кислоты)</li>
+    <li>⬜ Al(OH)₃↓ — белый осадок (гидролиз AlP)</li>
+  </ul></div>
+</section>
+<section class="section fade-in" id="s2">
+  <div class="section-header"><div class="section-num">2</div><h2 class="section-title">Химические свойства фосфора</h2></div>
+
+  <h2 class="sub-title">2.1 С простыми веществами</h2>
+  <p class="body">Фосфор реагирует с большинством простых веществ. С кислородом — количество O₂ определяет продукт. С галогенами — количество галогена определяет степень окисления P (+3 или +5). С водородом — <strong>напрямую не реагирует!</strong></p>
+  <div class="eq-block">
+    <span class="eq">4P + 5O₂(изб.) → 2P₂O₅ &nbsp;<span style="color:var(--ink3)">(⬜ белый дым P₂O₅, очень гигроскопичен)</span></span>
+    <span class="eq">4P + 3O₂(нед.) → 2P₂O₃</span>
+    <span class="eq">2P + 5Cl₂(изб.) → 2PCl₅ &nbsp; 2P + 3Cl₂(нед.) → 2PCl₃ &nbsp; 2P + 3I₂ → 2PI₃ &nbsp;<span class="we">(I₂ → P только до +3)</span></span>
+    <span class="eq">H₂ + P ↛ &nbsp;<span class="we">(напрямую не реагирует! PH₃ — только косвенный синтез)</span></span>
+    <span class="eq">3Ca + 2P →<span class="cond">t°</span> Ca₃P₂ &nbsp; Al + P →<span class="cond">t°</span> AlP &nbsp; 3Zn + 2P →<span class="cond">t°</span> Zn₃P₂ &nbsp;<span style="color:var(--ink3)">(фосфиды — ионные соединения)</span></span>
+  </div>  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания — 2.1 Фосфор + простые вещества</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq2')">👁 Показать все ответы</button>
+    <div id="mq2" class="inline-tasks" style="margin-top:8px">
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">1</div><div class="it-text">4P + O₂(изб.) → ? Что наблюдается?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>4P + 5O₂(изб.) → 2P₂O₅. ⬜ Белый дым P₂O₅.<div class="ans-note">P₂O₅ очень гигроскопичен — мгновенно реагирует с водой: P₂O₅ + 3H₂O → 2H₃PO₄.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">2</div><div class="it-text">P + Cl₂(изб.) → ? и P + Cl₂(нед.) → ? Сравни с.о. P.</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>Изб.: 2P + 5Cl₂ → 2PCl₅ (P→+5). Нед.: 2P + 3Cl₂ → 2PCl₃ (P→+3).<div class="ans-note">Количество галогена определяет с.о. фосфора: изб. → +5, нед. → +3. Аналогично с I₂ → всегда PCl₃.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">3</div><div class="it-text">H₂ + P → ? Можно ли получить PH₃ прямым синтезом?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>H₂ + P ↛. PH₃ нельзя получить прямым синтезом из P и H₂.<div class="ans-note">PH₃ (фосфин) получают гидролизом фосфидов: Ca₃P₂ + 6H₂O → 3Ca(OH)₂ + 2PH₃↑.</div></div>
+    </div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">2.2 С кислотами-окислителями и щёлочью</h2>
+  <p class="body">Фосфор — восстановитель в реакциях с кислотами-окислителями. Окисляется до H₃PO₄ (высшая кислота). При реакции с горячей концентрированной щёлочью — диспропорционирует с образованием ядовитого фосфина PH₃.</p>
+  <div class="eq-block">
+    <span class="eq">P + 5HNO₃(конц.) → H₃PO₄ + 5NO₂↑ + H₂O &nbsp;<span class="cb">(🟤 NO₂)</span></span>
+    <span class="eq">3P + 5HNO₃(разб.) + 2H₂O → 3H₃PO₄ + 5NO↑</span>
+    <span class="eq">2P + 5H₂SO₄(конц.) → 2H₃PO₄ + 5SO₂↑ + 2H₂O</span>
+    <span class="eq">4P(бел.) + 3KOH(конц.) + 3H₂O →<span class="cond">t°</span> 3KH₂PO₂ + PH₃↑ &nbsp;<span class="we">(PH₃↑ — фосфин, ядовит! Самовоспламеняется)</span></span>
+  </div>
+
+  <h2 class="sub-title">2.3 Оксид фосфора P₂O₅ и кислоты фосфора</h2>
+  <div class="eq-block">
+    <span class="eq">P₂O₅ + 3H₂O → 2H₃PO₄ &nbsp;<span style="color:var(--ink3)">(P₂O₅ — сильный водоотнимающий агент)</span></span>
+    <span class="eq">H₃PO₄ + NaOH(1:1) → NaH₂PO₄ + H₂O &nbsp;<span style="color:var(--ink3)">(кислая соль — дигидрофосфат)</span></span>
+    <span class="eq">H₃PO₄ + 2NaOH(1:2) → Na₂HPO₄ + 2H₂O &nbsp;<span style="color:var(--ink3)">(кислая соль — гидрофосфат)</span></span>
+    <span class="eq">H₃PO₄ + 3NaOH(1:3) → Na₃PO₄ + 3H₂O &nbsp;<span style="color:var(--ink3)">(средняя соль — фосфат)</span></span>
+  </div>
+
+  <h2 class="sub-title">2.4 Гидролиз фосфидов и получение фосфора</h2>
+  <div class="eq-block">
+    <span class="eq">AlP + 3H₂O → Al(OH)₃↓ + PH₃↑ &nbsp;<span style="color:var(--ink3)">(⬜ Al(OH)₃ — белый осадок)</span></span>
+    <span class="eq">Ca₃P₂ + 6H₂O → 3Ca(OH)₂ + 2PH₃↑ &nbsp;<span style="color:var(--ink3)">(«болотные огни» — самовоспл. PH₃)</span></span>
+    <span class="eq">Ca₃(PO₄)₂ + 3SiO₂ + 5C →<span class="cond">t°</span> 3CaSiO₃ + 2P↑ + 5CO↑ &nbsp;<span style="color:var(--green-d)">(промышленное получение P)</span></span>
+  </div>  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания — 2.2–2.4 Фосфор со сложными веществами</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq3')">👁 Показать все ответы</button>
+    <div id="mq3" class="inline-tasks" style="margin-top:8px">
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">1</div><div class="it-text">P + HNO₃(конц.) → ? До какой кислоты окисляется P?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>P + 5HNO₃(конц.) → H₃PO₄ + 5NO₂↑ + H₂O. P→H₃PO₄ (высшая кислота). 🟤 NO₂.<div class="ans-note">P окисляется до максимальной с.о. +5. Аналогично S → H₂SO₄, C → CO₂.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">2</div><div class="it-text">4P(бел.) + KOH(конц.) + H₂O →(t°) ?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>4P + 3KOH(конц.) + 3H₂O →(t°) 3KH₂PO₂ + PH₃↑.<div class="ans-note">PH₃ — фосфин, ядовитый газ, самовоспламеняется на воздухе. KH₂PO₂ — гипофосфит.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">3</div><div class="it-text">AlP + H₂O → ? Что выделяется?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>AlP + 3H₂O → Al(OH)₃↓ + PH₃↑. ⬜ Al(OH)₃ белый осадок + PH₃ ядовитый газ.<div class="ans-note">Гидролиз фосфидов — лабораторный способ получения PH₃.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">4</div><div class="it-text">H₃PO₄ + NaOH → ? Зависит от соотношения.</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>1:1 → NaH₂PO₄; 1:2 → Na₂HPO₄; 1:3 → Na₃PO₄.<div class="ans-note">H₃PO₄ — трёхосновная кислота. Каждый H заменяется при добавлении очередного моля NaOH.</div></div>
+    </div>
+    </div>
+  </div>
+  <div class="remember"><div class="remember-title">✅ Запомнить — фосфор</div><ul>
+    <li>H₂ + P ↛ — фосфор с водородом напрямую не реагирует!</li>
+    <li>P + Cl₂(изб.) → PCl₅ (+5); P + Cl₂(нед.) → PCl₃ (+3); P + I₂ → PI₃ (+3 только).</li>
+    <li>4P(бел.) + KOH(конц.) →(t°) KH₂PO₂ + <strong>PH₃↑</strong> (ядовитый, самовоспламеняется!).</li>
+    <li>H₃PO₄ — трёхосновная: 1 моль NaOH → NaH₂PO₄; 2 → Na₂HPO₄; 3 → Na₃PO₄.</li>
+  </ul></div>
+</section>
+<section class="section fade-in" id="s3">
+  <div class="section-header"><div class="section-num">3</div><h2 class="section-title">Химические свойства кремния</h2></div>
+
+  <h2 class="sub-title">3.1 С простыми веществами</h2>
+  <p class="body">Кремний — сравнительно инертный неметалл. Реагирует с галогенами (со <em>всеми</em>, включая I₂ — в отличие от C и S!), кислородом, углеродом. С водородом напрямую не реагирует.</p>
+  <div class="eq-block">
+    <span class="eq">Si + O₂ →<span class="cond">t°</span> SiO₂ &nbsp;<span style="color:var(--ink3)">(кварц; SiO₂ — атомная кристаллическая решётка)</span></span>
+    <span class="eq">Si + 2Cl₂ →<span class="cond">t°</span> SiCl₄ &nbsp; Si + 2Br₂ →<span class="cond">t°</span> SiBr₄ &nbsp; Si + 2I₂ →<span class="cond">t°</span> SiI₄ &nbsp;<span style="color:var(--green-d)">(Si реагирует со всеми Hal₂, включая I₂!)</span></span>
+    <span class="eq">Si + C →<span class="cond">t°</span> SiC &nbsp;<span style="color:var(--ink3)">(карборунд — атомная решётка, прочность близка к алмазу)</span></span>
+    <span class="eq">Si + 2Mg →<span class="cond">t°</span> Mg₂Si &nbsp;<span style="color:var(--ink3)">(силицид магния; гидролиз: Mg₂Si + 4H₂O → 2Mg(OH)₂ + SiH₄↑)</span></span>
+    <span class="eq">H₂ + Si ↛ &nbsp;<span class="we">(напрямую не реагирует! SiH₄ — только косвенный синтез)</span></span>
+  </div>
+  <div class="box box-warn"><div class="box-title">⚠ Si vs C: ключевое отличие с галогенами</div>
+    <ul>
+      <li><strong>Si + I₂ → SiI₄</strong> — кремний реагирует с иодом!</li>
+      <li><strong>C + I₂ ↛</strong> — углерод с иодом не реагирует.</li>
+      <li><strong>S + I₂ ↛</strong> — сера с иодом не реагирует.</li>
+    </ul>
+  </div>  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания — 3.1 Кремний + простые вещества</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq4')">👁 Показать все ответы</button>
+    <div id="mq4" class="inline-tasks" style="margin-top:8px">
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">1</div><div class="it-text">Si + I₂ → ? Почему Si реагирует, а C и S нет?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>Si + 2I₂ →(t°) SiI₄. С + I₂ ↛; S + I₂ ↛.<div class="ans-note">Si образует прочные связи Si–I. У C и S связи с I₂ слишком слабые для реакции — ловушка ЕГЭ!</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">2</div><div class="it-text">Si + C → ? Какая кристаллическая решётка у продукта?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>Si + C →(t°) SiC (карборунд). Атомная кристаллическая решётка — как алмаз.<div class="ans-note">SiC — один из самых твёрдых материалов, абразив, используется в технике.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">3</div><div class="it-text">H₂ + Si → ? Можно ли получить SiH₄ прямым синтезом?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>H₂ + Si ↛. SiH₄ нельзя получить прямым синтезом.<div class="ans-note">SiH₄ (силан) получают: Mg₂Si + 4HCl → 2MgCl₂ + SiH₄↑ (гидролиз силицида).</div></div>
+    </div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">3.2 Со сложными веществами</h2>
+  <p class="body">Si — особый неметалл: он <strong>не реагирует</strong> с большинством кислот, включая конц. HNO₃ и H₂SO₄(конц.). Растворяется только в <strong>HF</strong> и смеси HF + HNO₃. Зато реагирует со щелочами!</p>
+  <div class="eq-block">
+    <span class="eq">Si + 4HF(г) → SiF₄↑ + 2H₂↑ &nbsp;<span class="we">(единственная кислота-неокислитель, растворяющая Si)</span></span>
+    <span class="eq">Si + HNO₃ ↛ &nbsp; Si + H₂SO₄(конц.) ↛ &nbsp;<span class="we">(Si пассивен к этим кислотам!)</span></span>
+    <span class="eq">Si + 2NaOH(конц.) + H₂O →<span class="cond">t°</span> Na₂SiO₃ + 2H₂↑ &nbsp;<span style="color:var(--green-d)">(Si растворяется в щёлочи — редкое свойство!)</span></span>
+    <span class="eq">Si + 2H₂O(пар) →<span class="cond">t°</span> SiO₂ + 2H₂↑</span>
+    <span class="eq">Si + 2F₂ →<span class="cond">t°</span> SiF₄ &nbsp;<span style="color:var(--ink3)">(реагирует со всеми галогенами)</span></span>
+  </div>
+
+  <h2 class="sub-title">3.3 Оксид кремния SiO₂ и силикаты</h2>
+  <div class="eq-block">
+    <span class="eq">SiO₂ + 4HF → SiF₄↑ + 2H₂O &nbsp;<span class="we">(HF разъедает стекло! Другие кислоты с SiO₂ не реагируют)</span></span>
+    <span class="eq">SiO₂ + 2NaOH →<span class="cond">t°</span> Na₂SiO₃ + H₂O &nbsp;<span style="color:var(--ink3)">(Na₂SiO₃ — жидкое стекло)</span></span>
+    <span class="eq">SiO₂ + Na₂CO₃ →<span class="cond">t°</span> Na₂SiO₃ + CO₂ &nbsp;<span style="color:var(--ink3)">(варка стекла — сильная кислота вытесняет слабую)</span></span>
+    <span class="eq">SiO₂ + HCl ↛ &nbsp; SiO₂ + H₂SO₄ ↛ &nbsp;<span class="we">(SiO₂ не реагирует с обычными кислотами!)</span></span>
+    <span class="eq">Na₂SiO₃ + 2HCl → 2NaCl + H₂SiO₃↓ &nbsp;<span style="color:var(--ink3)">(⬜ белый студенистый осадок H₂SiO₃)</span></span>
+    <span class="eq">Na₂SiO₃ + CO₂ + H₂O → Na₂CO₃ + H₂SiO₃↓ &nbsp;<span style="color:var(--ink3)">(H₂SiO₃ слабее угольной кислоты!)</span></span>
+    <span class="eq">SiO₂ + 2C →<span class="cond">t°</span> Si + 2CO↑ &nbsp;<span style="color:var(--green-d)">(промышленное получение Si)</span></span>
+  </div>  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания — 3.2–3.3 Кремний со сложными веществами</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq5')">👁 Показать все ответы</button>
+    <div id="mq5" class="inline-tasks" style="margin-top:8px">
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">1</div><div class="it-text">Si + HNO₃(конц.) → ? Si + NaOH → ? Сравни.</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>Si + HNO₃(конц.) ↛. Si + 2NaOH(конц.) + H₂O →(t°) Na₂SiO₃ + 2H₂↑.<div class="ans-note">Si пассивен к кислотам-окислителям, но реагирует со щелочами. Редкое сочетание для неметалла!</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">2</div><div class="it-text">SiO₂ + HF → ? Почему HF разъедает стекло?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>SiO₂ + 4HF → SiF₄↑ + 2H₂O. HF образует прочную связь Si–F.<div class="ans-note">Именно поэтому HF нельзя хранить в стеклянных сосудах. Используют пластик или парафин.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">3</div><div class="it-text">Na₂SiO₃ + CO₂ + H₂O → ? Что это означает о силе H₂SiO₃?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>Na₂SiO₃ + CO₂ + H₂O → Na₂CO₃ + H₂SiO₃↓. H₂SiO₃ слабее H₂CO₃.<div class="ans-note">Слабые кислоты вытесняются из солей более сильными. CO₂ + H₂O = H₂CO₃ > H₂SiO₃.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">4</div><div class="it-text">SiO₂ + Na₂CO₃ →(t°) ? Почему реакция идёт при нагреве?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>SiO₂ + Na₂CO₃ →(t°) Na₂SiO₃ + CO₂↑.<div class="ans-note">При нагреве CO₂ улетает, смещая равновесие. Это основа производства стекла.</div></div>
+    </div>
+    </div>
+  </div>
+  <div class="remember"><div class="remember-title">✅ Запомнить — кремний</div><ul>
+    <li>H₂ + Si ↛ — не реагирует напрямую! Но Si + I₂ → SiI₄ (реагирует со всеми Hal₂).</li>
+    <li>Si пассивен к HNO₃ и H₂SO₄(конц.), но <strong>реагирует с HF</strong> и со <strong>щёлочью</strong>.</li>
+    <li>SiO₂ + HF → SiF₄ + H₂O — HF разъедает стекло. Другие кислоты с SiO₂ не реагируют!</li>
+    <li>⬜ H₂SiO₃↓ — белый студенистый осадок при реакции силикатов с кислотами.</li>
+  </ul></div>
+</section>
+<section class="section fade-in" id="s4">
+  <div class="section-header"><div class="section-num">4</div><h2 class="section-title">Химические свойства углерода</h2></div>
+
+  <h2 class="sub-title">4.1 С простыми веществами</h2>
+  <p class="body">Углерод — амфотерный по окислительно-восстановительным свойствам: может быть и окислителем (с активными металлами), и восстановителем (с O₂, галогенами, кислотами). <strong>Важно: C + I₂ ↛!</strong></p>
+  <div class="eq-block">
+    <span class="eq">C + O₂(изб.) → CO₂ &nbsp; 2C + O₂(нед.) → 2CO &nbsp;<span class="we">(CO — угарный газ, ядовит! при нед. O₂)</span></span>
+    <span class="eq">C + 2H₂ ⇄<span class="cond">t°, кат.</span> CH₄ &nbsp; C + 2S →<span class="cond">t°</span> CS₂ &nbsp;<span style="color:var(--ink3)">(CS₂ — бесцветный растворитель)</span></span>
+    <span class="eq">C + 2F₂ → CF₄ &nbsp; C + 2Cl₂ →<span class="cond">t°</span> CCl₄ &nbsp; C + I₂ ↛ &nbsp;<span class="we">(углерод с иодом не реагирует!)</span></span>
+    <span class="eq">C + Si →<span class="cond">t°</span> SiC &nbsp; 2C + Ca →<span class="cond">t°</span> CaC₂ &nbsp;<span style="color:var(--ink3)">(карбид кальция; CaC₂ + 2H₂O → Ca(OH)₂ + C₂H₂↑)</span></span>
+    <span class="eq">4Al + 3C →<span class="cond">t°</span> Al₄C₃ &nbsp;<span style="color:var(--ink3)">(метанид; Al₄C₃ + 12H₂O → 4Al(OH)₃ + 3CH₄↑)</span></span>
+  </div>  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания — 4.1 Углерод + простые вещества</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq6')">👁 Показать все ответы</button>
+    <div id="mq6" class="inline-tasks" style="margin-top:8px">
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">1</div><div class="it-text">C + O₂(нед.) → ? Чем опасен продукт?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>2C + O₂(нед.) → 2CO. CO — угарный газ, бесцветный, без запаха, ядовит!<div class="ans-note">CO связывается с гемоглобином крови в 200 раз прочнее O₂ → лишает ткани кислорода.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">2</div><div class="it-text">C + Cl₂ → ? и C + I₂ → ? Сравни.</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>C + 2Cl₂ →(t°) CCl₄. C + I₂ ↛ (не реагирует).<div class="ans-note">CCl₄ — тетрахлорид углерода, растворитель. C с иодом не реагирует — запомни.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">3</div><div class="it-text">CaC₂ + H₂O → ? Что за газ выделяется?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>CaC₂ + 2H₂O → Ca(OH)₂ + C₂H₂↑. C₂H₂ — ацетилен.<div class="ans-note">Карбид кальция + вода → ацетилен. На этом основано получение ацетилена в лаборатории.</div></div>
+    </div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">4.2 Со сложными веществами</h2>
+  <div class="eq-block">
+    <span class="eq">C + H₂O(пар) →<span class="cond">t°</span> CO + H₂ &nbsp;<span style="color:var(--green-d)">(«водяной газ» — смесь CO + H₂, топливо)</span></span>
+    <span class="eq">C + 4HNO₃(конц.) → CO₂↑ + 4NO₂↑ + 2H₂O &nbsp;<span class="cb">(C→CO₂, 🟤 NO₂)</span></span>
+    <span class="eq">3C + 4HNO₃(разб.) → 3CO₂↑ + 4NO↑ + 2H₂O</span>
+    <span class="eq">C + 2H₂SO₄(конц.) → CO₂↑ + 2SO₂↑ + 2H₂O</span>
+    <span class="eq">C + NaOH ↛ &nbsp;<span class="we">(углерод со щелочами не реагирует! В отличие от Si)</span></span>
+  </div>
+
+  <h2 class="sub-title">4.3 CO и CO₂ — важнейшие соединения углерода</h2>
+  <p class="body">CO — восстановитель, ядовит, горит синим пламенем. CO₂ — кислотный оксид, реагирует с основаниями. Продукт с NaOH зависит от соотношения реагентов!</p>
+  <div class="eq-block">
+    <span class="eq">2CO + O₂ → 2CO₂ &nbsp;<span style="color:var(--ink3)">(горение CO — синее пламя)</span></span>
+    <span class="eq">FeO + CO →<span class="cond">t°</span> Fe + CO₂ &nbsp; CuO + CO →<span class="cond">t°</span> Cu + CO₂ &nbsp;<span style="color:var(--green-d)">(CO — восстановитель оксидов металлов)</span></span>
+    <span class="eq">3Fe₂O₃ + CO →<span class="cond">t°</span> 2Fe₃O₄ + CO₂ &nbsp; Fe₃O₄ + CO →<span class="cond">t°</span> 3FeO + CO₂ &nbsp; FeO + CO →<span class="cond">t°</span> Fe + CO₂</span>
+    <span class="eq">CO₂ + H₂O ⇄ H₂CO₃ &nbsp;<span style="color:var(--ink3)">(угольная кислота — слабая, двухосновная)</span></span>
+    <span class="eq">CO₂ + 2NaOH(изб.) → Na₂CO₃ + H₂O &nbsp;<span class="we">(изб. NaOH → карбонат Na₂CO₃)</span></span>
+    <span class="eq">CO₂ + NaOH(нед.) → NaHCO₃ &nbsp;<span class="we">(нед. NaOH → гидрокарбонат NaHCO₃)</span></span>
+    <span class="eq">CO₂ + Ca(OH)₂ → CaCO₃↓ + H₂O &nbsp;<span style="color:var(--ink3)">(⬜ CaCO₃↓ — помутнение известковой воды; кач. реакция на CO₂)</span></span>
+    <span class="eq">CaCO₃ →<span class="cond">t°</span> CaO + CO₂ &nbsp; Na₂CO₃ + 2HCl → 2NaCl + H₂O + CO₂↑</span>
+  </div>  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания — 4.2–4.3 Углерод со сложными веществами</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq7')">👁 Показать все ответы</button>
+    <div id="mq7" class="inline-tasks" style="margin-top:8px">
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">1</div><div class="it-text">CO₂ + NaOH(изб.) → ? и CO₂ + NaOH(нед.) → ? В чём разница?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>Изб. NaOH: CO₂ + 2NaOH → Na₂CO₃ + H₂O. Нед. NaOH: CO₂ + NaOH → NaHCO₃.<div class="ans-note">Соотношение n(NaOH)/n(CO₂): >2 → карбонат; 1–2 → смесь; <1 → гидрокарбонат.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">2</div><div class="it-text">CO₂ + Ca(OH)₂ → ? Что наблюдается?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>CO₂ + Ca(OH)₂ → CaCO₃↓ + H₂O. ⬜ Белый осадок — помутнение известковой воды.<div class="ans-note">Классическая качественная реакция на CO₂. При избытке CO₂ осадок растворяется: CaCO₃ + CO₂ + H₂O → Ca(HCO₃)₂.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">3</div><div class="it-text">C + H₂O(пар) →(t°) ? Что такое «водяной газ»?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>C + H₂O(пар) →(t°) CO + H₂↑. «Водяной газ» = CO + H₂.<div class="ans-note">CO + H₂ — горючая смесь. Исторически использовалась как топливо. Сейчас применяется в химическом синтезе.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">4</div><div class="it-text">C + NaOH → ? и Si + NaOH →(t°) ? Сравни.</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>C + NaOH ↛. Si + 2NaOH + H₂O →(t°) Na₂SiO₃ + 2H₂↑.<div class="ans-note">Углерод со щелочами не реагирует! Это отличие от Si — важная ловушка.</div></div>
+    </div>
+    </div>
+  </div>
+  <div class="remember"><div class="remember-title">✅ Запомнить — углерод</div><ul>
+    <li>C + O₂(нед.) → <strong>2CO</strong> (угарный газ, ядовит!); изб. O₂ → CO₂.</li>
+    <li>C + I₂ ↛. C + NaOH ↛ (в отличие от Si, который реагирует со щелочью).</li>
+    <li>CO₂ + NaOH: <strong>изб. → Na₂CO₃</strong>; <strong>нед. → NaHCO₃</strong>.</li>
+    <li>⬜ CaCO₃↓ — качественная реакция на CO₂ (помутнение известковой воды).</li>
+    <li>CO — восстановитель: FeO + CO →(t°) Fe + CO₂.</li>
+  </ul></div>
+</section>
+<section class="section fade-in" id="s5">
+  <div class="section-header"><div class="section-num">5</div><h2 class="section-title">Химические свойства водорода</h2></div>
+
+  <h2 class="sub-title">5.1 С простыми веществами</h2>
+  <p class="body">Водород — и окислитель (с активными металлами → гидриды H⁻¹), и восстановитель (с неметаллами → соединения H⁺¹). С Si и P напрямую <strong>не реагирует!</strong></p>
+  <div class="eq-block">
+    <span class="eq">H₂ + F₂ →<span class="cond">hν</span> 2HF &nbsp; H₂ + Cl₂ → 2HCl &nbsp; H₂ + Br₂ ⇄ 2HBr &nbsp; H₂ + I₂ ⇄ 2HI − Q</span>
+    <span class="eq">H₂ + S ⇄ H₂S &nbsp; 2H₂ + O₂ → 2H₂O &nbsp; N₂ + 3H₂ ⇄<span class="cond">Fe, t°, P</span> 2NH₃</span>
+    <span class="eq">C + 2H₂ ⇄<span class="cond">t°</span> CH₄ &nbsp;<span style="color:var(--ink3)">(метанирование)</span></span>
+    <span class="eq">H₂ + Si ↛ &nbsp; H₂ + P ↛ &nbsp;<span class="we">(Si и P с H₂ напрямую не реагируют!)</span></span>
+    <span class="eq">2Na + H₂ →<span class="cond">t°</span> 2NaH &nbsp; Ca + H₂ →<span class="cond">t°</span> CaH₂ &nbsp;<span style="color:var(--ink3)">(гидриды: H в с.о. −1)</span></span>
+  </div>  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания — 5.1 Водород + простые вещества</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq8')">👁 Показать все ответы</button>
+    <div id="mq8" class="inline-tasks" style="margin-top:8px">
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">1</div><div class="it-text">H₂ + Si → ? и H₂ + P → ?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>H₂ + Si ↛ и H₂ + P ↛. Обе реакции не идут напрямую!<div class="ans-note">SiH₄ и PH₃ получают косвенными путями (гидролиз силицидов и фосфидов).</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">2</div><div class="it-text">2Na + H₂ →(t°) ? Какая с.о. H в NaH?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>2Na + H₂ →(t°) 2NaH. H в с.о. −1 (как у галогенов!).<div class="ans-note">NaH — гидрид натрия. Реагирует с водой: NaH + H₂O → NaOH + H₂↑.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">3</div><div class="it-text">H₂ + O₂ → ? Почему смесь называется «гремучим газом»?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>2H₂ + O₂ → 2H₂O. «Гремучий газ» — взрывоопасная смесь H₂ + O₂.<div class="ans-note">Воспламеняется при малейшей искре. Используется в кислородно-водородных горелках.</div></div>
+    </div>
+    </div>
+  </div>
+
+  <h2 class="sub-title">5.2 С оксидами металлов (восстановитель)</h2>
+  <div class="eq-block">
+    <span class="eq">CuO + H₂ →<span class="cond">t°</span> Cu + H₂O &nbsp;<span style="color:var(--ink3)">(⬛ CuO чёрный → <span class="cr">🔴 Cu красная медь</span>)</span></span>
+    <span class="eq">Fe₂O₃ + 3H₂ →<span class="cond">t°</span> 2Fe + 3H₂O &nbsp; WO₃ + 3H₂ →<span class="cond">t°</span> W + 3H₂O</span>
+    <span class="eq">PbO + H₂ →<span class="cond">t°</span> Pb + H₂O &nbsp; ZnO + H₂ →<span class="cond">t°</span> Zn + H₂O</span>
+  </div>
+
+  <h2 class="sub-title">5.3 Получение водорода</h2>
+  <div class="grid-2">
+    <div class="card"><div class="card-title">Промышленность</div><div class="card-body">
+      <span class="eq" style="font-family:var(--mono);font-size:12.5px">CH₄ + H₂O(пар) →(t°) CO + 3H₂<br><span style="color:var(--ink3)">(конверсия метана — основной способ)</span></span>
+      <span class="eq" style="font-family:var(--mono);font-size:12.5px">C + H₂O(пар) →(t°) CO + H₂<br><span style="color:var(--ink3)">(газификация угля)</span></span>
+    </div></div>
+    <div class="card"><div class="card-title">Лаборатория</div><div class="card-body">
+      <span class="eq" style="font-family:var(--mono);font-size:12.5px">Zn + H₂SO₄(разб.) → ZnSO₄ + H₂↑</span>
+      <span class="eq" style="font-family:var(--mono);font-size:12.5px">2Al + 2NaOH + 6H₂O → 2Na[Al(OH)₄] + 3H₂↑</span>
+      <span class="eq" style="font-family:var(--mono);font-size:12.5px">2Na + 2H₂O → 2NaOH + H₂↑</span>
+    </div></div>
+  </div>  <div class="box box-info" style="margin-top:20px;background:var(--p50);border-left-color:var(--p400)">
+    <div class="box-title" style="color:var(--p700)">✏️ Задания — 5.2–5.3 Водород: восстановитель и получение</div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'mq9')">👁 Показать все ответы</button>
+    <div id="mq9" class="inline-tasks" style="margin-top:8px">
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">1</div><div class="it-text">CuO + H₂ →(t°) ? Что наблюдается?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>CuO + H₂ →(t°) Cu + H₂O. ⬛ Чёрный CuO → 🔴 красная медь Cu.<div class="ans-note">Одна из самых наглядных реакций восстановления. Используется для демонстрации свойств H₂ как восстановителя.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">2</div><div class="it-text">CH₄ + H₂O(пар) →(t°) ? Как называется процесс?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>CH₄ + H₂O(пар) →(t°) CO + 3H₂. Конверсия метана (паровой риформинг).<div class="ans-note">Основной промышленный метод производства H₂. CO + H₂ = синтез-газ, используется в синтезе аммиака и метанола.</div></div>
+    </div>
+    <div class="inline-task">
+      <div class="it-q"><div class="it-num">3</div><div class="it-text">Получить H₂ в лаборатории: какой металл и кислота?</div></div>
+      <div class="it-input-wrap">
+        <textarea class="it-input" rows="1" placeholder="Запиши уравнение или ответ…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+        <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+      </div>
+      <div class="it-feedback"></div>
+      <div class="answer-box"><div class="ans-lbl">Ответ</div>Zn + H₂SO₄(разб.) → ZnSO₄ + H₂↑. Цинк + разбавленная H₂SO₄.<div class="ans-note">Можно также: Fe + HCl → FeCl₂ + H₂↑. Главное — металл левее H₂ в ряду активности.</div></div>
+    </div>
+    </div>
+  </div>
+  <div class="remember"><div class="remember-title">✅ Запомнить — водород</div><ul>
+    <li>H₂ + Si ↛ и H₂ + P ↛ — не реагирует напрямую с Si и P!</li>
+    <li>⬛ CuO + H₂ →(t°) <span class="cr">🔴 Cu</span> + H₂O — яркая реакция восстановления.</li>
+    <li>Конверсия метана: CH₄ + H₂O →(t°) CO + 3H₂ — промышленное получение H₂.</li>
+    <li>Гидриды щелочных металлов (NaH, KH): H в с.о. −1, реагируют с водой → H₂↑.</li>
+  </ul></div>
+</section>
+
+<div style="display:none" id="fc-data-store"><div class="fc-data" data-q="4P + O₂(изб.) → ?" data-a="4P + 5O₂(изб.) → 2P₂O₅" data-hint="⬜ Белый дым P₂O₅, гигроскопичен" style="display:none"></div>
+<div class="fc-data" data-q="P + Cl₂(изб.) → ?" data-a="2P + 5Cl₂(изб.) → 2PCl₅" data-hint="Изб. Cl₂ → P до +5" style="display:none"></div>
+<div class="fc-data" data-q="P + Cl₂(нед.) → ?" data-a="2P + 3Cl₂(нед.) → 2PCl₃" data-hint="Нед. Cl₂ → P до +3" style="display:none"></div>
+<div class="fc-data" data-q="P + I₂ → ?" data-a="2P + 3I₂ → 2PI₃" data-hint="I₂ слабый → P только до +3" style="display:none"></div>
+<div class="fc-data" data-q="H₂ + P → ?" data-a="H₂ + P ↛ (не реагирует!)" data-hint="PH₃ получают только косвенно" style="display:none"></div>
+<div class="fc-data" data-q="4P(бел.) + KOH(конц.) + H₂O →(t°) ?" data-a="4P + 3KOH + 3H₂O →(t°) 3KH₂PO₂ + PH₃↑" data-hint="Диспропорц. P в щёлочи; PH₃ ядовит!" style="display:none"></div>
+<div class="fc-data" data-q="AlP + H₂O → ?" data-a="AlP + 3H₂O → Al(OH)₃↓ + PH₃↑" data-hint="⬜ Al(OH)₃ белый осадок + PH₃" style="display:none"></div>
+<div class="fc-data" data-q="H₃PO₄ + 3NaOH → ?" data-a="H₃PO₄ + 3NaOH → Na₃PO₄ + 3H₂O" data-hint="1:3 → средняя соль Na₃PO₄" style="display:none"></div>
+<div class="fc-data" data-q="H₃PO₄ + NaOH(1:1) → ?" data-a="H₃PO₄ + NaOH → NaH₂PO₄ + H₂O" data-hint="1:1 → кислая соль NaH₂PO₄" style="display:none"></div>
+<div class="fc-data" data-q="Ca₃(PO₄)₂ + SiO₂ + C →(t°) ?" data-a="Ca₃(PO₄)₂ + 3SiO₂ + 5C →(t°) 3CaSiO₃ + 2P↑ + 5CO↑" data-hint="Промышленное получение P" style="display:none"></div>
+<div class="fc-data" data-q="H₂ + Si → ?" data-a="H₂ + Si ↛ (не реагирует!)" data-hint="SiH₄ только косвенный синтез" style="display:none"></div>
+<div class="fc-data" data-q="Si + I₂ → ?" data-a="Si + 2I₂ →(t°) SiI₄" data-hint="Si реагирует со всеми Hal₂! (C + I₂ ↛)" style="display:none"></div>
+<div class="fc-data" data-q="Si + HNO₃(конц.) → ?" data-a="Si + HNO₃(конц.) ↛ (не реагирует!)" data-hint="Si пассивен к HNO₃ и H₂SO₄(конц.)" style="display:none"></div>
+<div class="fc-data" data-q="Si + NaOH(конц.) + H₂O →(t°) ?" data-a="Si + 2NaOH(конц.) + H₂O →(t°) Na₂SiO₃ + 2H₂↑" data-hint="Si растворяется в щёлочи!" style="display:none"></div>
+<div class="fc-data" data-q="Si + HF → ?" data-a="Si + 4HF(г) → SiF₄↑ + 2H₂↑" data-hint="Единственная к-та-неокислитель, растворяющая Si" style="display:none"></div>
+<div class="fc-data" data-q="SiO₂ + HF → ?" data-a="SiO₂ + 4HF → SiF₄↑ + 2H₂O" data-hint="HF разъедает стекло! Другие кислоты — нет" style="display:none"></div>
+<div class="fc-data" data-q="SiO₂ + NaOH →(t°) ?" data-a="SiO₂ + 2NaOH →(t°) Na₂SiO₃ + H₂O" data-hint="Жидкое стекло Na₂SiO₃" style="display:none"></div>
+<div class="fc-data" data-q="SiO₂ + HCl → ?" data-a="SiO₂ + HCl ↛ (не реагирует!)" data-hint="SiO₂ не реагирует с обычными кислотами!" style="display:none"></div>
+<div class="fc-data" data-q="Na₂SiO₃ + HCl → ?" data-a="Na₂SiO₃ + 2HCl → 2NaCl + H₂SiO₃↓" data-hint="⬜ Белый студенистый осадок H₂SiO₃" style="display:none"></div>
+<div class="fc-data" data-q="Na₂SiO₃ + CO₂ + H₂O → ?" data-a="Na₂SiO₃ + CO₂ + H₂O → Na₂CO₃ + H₂SiO₃↓" data-hint="H₂SiO₃ слабее H₂CO₃!" style="display:none"></div>
+<div class="fc-data" data-q="C + O₂(нед.) → ?" data-a="2C + O₂(нед.) → 2CO" data-hint="CO угарный газ — ядовит!" style="display:none"></div>
+<div class="fc-data" data-q="C + I₂ → ?" data-a="C + I₂ ↛ (не реагирует!)" data-hint="Углерод с иодом не реагирует (Si + I₂ → SiI₄!)" style="display:none"></div>
+<div class="fc-data" data-q="C + NaOH → ?" data-a="C + NaOH ↛ (не реагирует!)" data-hint="Углерод со щелочами не реагирует (в отличие от Si)" style="display:none"></div>
+<div class="fc-data" data-q="C + H₂O(пар) →(t°) ?" data-a="C + H₂O(пар) →(t°) CO + H₂↑" data-hint="«Водяной газ» CO + H₂" style="display:none"></div>
+<div class="fc-data" data-q="CO₂ + 2NaOH(изб.) → ?" data-a="CO₂ + 2NaOH → Na₂CO₃ + H₂O" data-hint="Изб. NaOH → карбонат Na₂CO₃" style="display:none"></div>
+<div class="fc-data" data-q="CO₂ + NaOH(нед.) → ?" data-a="CO₂ + NaOH → NaHCO₃" data-hint="Нед. NaOH → гидрокарбонат NaHCO₃" style="display:none"></div>
+<div class="fc-data" data-q="CO₂ + Ca(OH)₂ → ? (что наблюдается?)" data-a="CO₂ + Ca(OH)₂ → CaCO₃↓ + H₂O" data-hint="⬜ CaCO₃↓ белый — помутнение известковой воды" style="display:none"></div>
+<div class="fc-data" data-q="CaC₂ + H₂O → ?" data-a="CaC₂ + 2H₂O → Ca(OH)₂ + C₂H₂↑" data-hint="C₂H₂ — ацетилен" style="display:none"></div>
+<div class="fc-data" data-q="Al₄C₃ + H₂O → ?" data-a="Al₄C₃ + 12H₂O → 4Al(OH)₃ + 3CH₄↑" data-hint="Al₄C₃ — метанид, даёт CH₄" style="display:none"></div>
+<div class="fc-data" data-q="FeO + CO →(t°) ?" data-a="FeO + CO →(t°) Fe + CO₂" data-hint="CO — восстановитель оксидов металлов" style="display:none"></div>
+<div class="fc-data" data-q="H₂ + Si → ?" data-a="H₂ + Si ↛" data-hint="Не реагирует! SiH₄ — косвенный синтез" style="display:none"></div>
+<div class="fc-data" data-q="H₂ + P → ?" data-a="H₂ + P ↛" data-hint="Не реагирует! PH₃ — косвенный синтез" style="display:none"></div>
+<div class="fc-data" data-q="CuO + H₂ →(t°) ? (что наблюдается?)" data-a="CuO + H₂ →(t°) Cu + H₂O" data-hint="⬛ CuO чёрный → 🔴 Cu красная" style="display:none"></div>
+<div class="fc-data" data-q="CH₄ + H₂O(пар) →(t°) ?" data-a="CH₄ + H₂O(пар) →(t°) CO + 3H₂" data-hint="Конверсия метана — пром. получение H₂" style="display:none"></div>
+<div class="fc-data" data-q="2Na + H₂ →(t°) ?" data-a="2Na + H₂ →(t°) 2NaH" data-hint="NaH — гидрид, H в с.о. −1" style="display:none"></div>
+<div class="fc-data" data-q="Si + I₂ vs C + I₂ — кто реагирует?" data-a="Si + 2I₂ →(t°) SiI₄ (реагирует!); C + I₂ ↛" data-hint="Si реагирует со всеми галогенами, C с иодом нет" style="display:none"></div>
+<div class="fc-data" data-q="Si + NaOH vs C + NaOH — кто реагирует?" data-a="Si + 2NaOH + H₂O →(t°) Na₂SiO₃ + 2H₂↑; C + NaOH ↛" data-hint="Si реагирует со щёлочью, C нет" style="display:none"></div>
+<div class="fc-data" data-q="Si + HNO₃ vs C + HNO₃ — кто реагирует?" data-a="Si + HNO₃ ↛; C + 4HNO₃(конц.) → CO₂ + 4NO₂ + 2H₂O" data-hint="Si пассивен к HNO₃, C реагирует" style="display:none"></div>
+<div class="fc-data" data-q="H₂ + Si → ? vs H₂ + S → ?" data-a="H₂ + Si ↛; H₂ + S ⇄ H₂S" data-hint="Si с H₂ не реагирует, S реагирует" style="display:none"></div>
+<div class="fc-data" data-q="CO₂ + 2NaOH vs CO₂ + NaOH — продукты?" data-a="Изб. NaOH → Na₂CO₃; нед. NaOH → NaHCO₃" data-hint="Соотношение n(NaOH)/n(CO₂) определяет продукт" style="display:none"></div>
+<div class="fc-data" data-q="P + Cl₂(изб.) vs P + I₂ — с.о. P?" data-a="P + Cl₂(изб.) → PCl₅ (+5); P + I₂ → PI₃ (+3)" data-hint="I₂ слабый → P только до +3" style="display:none"></div>
+<div class="fc-data" data-q="4P + 5O₂(изб.) → ? и 4P + 3O₂(нед.) → ? Сравни продукты." data-a="Изб.: 4P+5O₂→2P₂O₅ (P→+5). Нед.: 4P+3O₂→2P₂O₃ (P→+3). Количество O₂ определяет с.о. P!" data-hint="Классическая ловушка: у фосфора два оксида в зависимости от количества кислорода." style="display:none"></div>
+<div class="fc-data" data-q="P + Cl₂(изб.) → ? и P + I₂ → ? Почему у фосфора разная с.о.?" data-a="Cl₂(изб.): 2P+5Cl₂→2PCl₅ (P→+5). I₂: 2P+3I₂→2PI₃ (P→+3 только!). PI₅ не существует!" data-hint="I₂ слабый окислитель → не может окислить P выше +3. PI₅ — не существует." style="display:none"></div>
+<div class="fc-data" data-q="SiO₂ + HF → ? Почему SiO₂ реагирует с HF но не с HCl?" data-a="SiO₂ + 4HF → SiF₄↑ + 2H₂O. HF разрушает стекло (SiO₂). С HCl, H₂SO₄(разб.) не реагирует." data-hint="SiO₂ — кислотный оксид, но реагирует ТОЛЬКО с HF и щелочами. Это исключение — запомни!" style="display:none"></div>
+<div class="fc-data" data-q="C + O₂(изб.) → ? и C + O₂(нед.) → ? Сравни продукты." data-a="Изб.: C+O₂→CO₂ (полное сгорание). Нед.: 2C+O₂→2CO (неполное сгорание). CO — угарный газ!" data-hint="CO — ядовитый газ без цвета и запаха. Образуется при недостатке O₂ (печи, двигатели)." style="display:none"></div>
+<div class="fc-data" data-q="CO₂ + NaOH(изб.) → ? и CO₂ + NaOH(нед.) → ? Разные продукты!" data-a="Изб. NaOH: CO₂+2NaOH→Na₂CO₃+H₂O (карбонат). Нед. NaOH: CO₂+NaOH→NaHCO₃ (гидрокарбонат)." data-hint="Соотношение CO₂:NaOH определяет продукт. 1:2→карбонат; 1:1→гидрокарбонат." style="display:none"></div>
+<div class="fc-data" data-q="Si + NaOH + H₂O → ? (реагирует ли кремний со щёлочью?)" data-a="Si + 2NaOH + H₂O → Na₂SiO₃ + 2H₂↑. Да! Кремний растворяется в щелочах." data-hint="Кремний реагирует со щелочами (как Al и Zn). C + NaOH ↛ — углерод не реагирует!" style="display:none"></div>
+<div class="fc-data" data-q="СН₄ + O₂ → ? (горение метана). Продукты?" data-a="CH₄ + 2O₂ → CO₂ + 2H₂O. Полное сгорание → CO₂ и H₂O." data-hint="Природный газ — в основном CH₄. При горении всегда CO₂+H₂O (при достатке O₂)." style="display:none"></div>
+<div class="fc-data" data-q="4P + 3KOH(конц.) + 3H₂O →(t°) ? Что выделяется?" data-a="4P + 3KOH + 3H₂O →(t°) PH₃↑ + 3KH₂PO₂. Выделяется фосфин PH₃ — ядовитый газ!" data-hint="Фосфор диспропорционирует в щёлочи: часть окисляется до +1, часть восстанавливается до −3 (PH₃)." style="display:none"></div>
+<div class="fc-data" data-q="Что такое &#39;жидкое стекло&#39; и как его получить?" data-a="Na₂SiO₃ (силикат натрия) — &#39;жидкое стекло&#39;. SiO₂ + 2NaOH →(t°) Na₂SiO₃ + H₂O." data-hint="Жидкое стекло = Na₂SiO₃ или K₂SiO₃. Применяют как клей, огнезащита, пропитка." style="display:none"></div>
+</div>
+<div class="fc-section fade-in" id="s6">
+  <div class="fc-header">
+    <div style="font-size:32px;margin-bottom:8px">🃏</div>
+    <div class="fc-title">Флэш-карточки: ловушки ЕГЭ</div>
+    <div class="fc-sub">50 карточек · Исключения и ловушки по P, Si, C, H₂<br>
+      <kbd style="background:rgba(255,255,255,.15);padding:1px 7px;border-radius:4px;font-size:11px">Пробел</kbd> — перевернуть &nbsp;·&nbsp;
+      <kbd style="background:rgba(255,255,255,.15);padding:1px 7px;border-radius:4px;font-size:11px">→</kbd> знаю &nbsp;·&nbsp;
+      <kbd style="background:rgba(255,255,255,.15);padding:1px 7px;border-radius:4px;font-size:11px">←</kbd> не знаю
+    </div>
+  </div>
+  <div class="fc-stats"><div>✅ Знаю: <span id="fc-known">0</span></div><div>❌ Не знаю: <span id="fc-unknown">0</span></div></div>
+  <div class="fc-counter" id="fc-counter">1 / 50</div>
+  <div id="fc-timer-live"></div>
+  <div id="fc-card-area">
+    <div class="fc-perspective" onclick="flipCard()">
+      <div class="fc-inner" id="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">Вопрос — напиши уравнение</div>
+          <div id="fc-front">...</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-back-tag">✅ Ответ</div>
+          <div id="fc-back">...</div>
+        </div>
+      </div>
+    </div>
+    <button class="fc-flip-btn" id="fc-flip-btn" onclick="flipCard()">🔄 Перевернуть карточку</button>
+    <div class="fc-btn-row" id="fc-btn-row">
+      <button class="fc-btn-dontknow" onclick="markUnknown()">← Не знаю</button>
+      <button class="fc-btn-know" onclick="markKnown()">Знаю →</button>
+    </div>
+    <div class="fc-keys">Горячие клавиши: Пробел — перевернуть · ← не знаю · → знаю</div>
+  </div>
+  <div id="fc-result" class="fc-result">
+    <h3>Сессия завершена! 🎉</h3>
+    <div class="fc-time-result" id="fc-time-result">⏱ —</div>
+    <div class="fc-res-row">
+      <div class="fc-res-card" style="background:rgba(29,158,117,.25)"><div class="fc-res-num cg fc-res-known">0</div><div class="fc-res-lbl">ЗНАЮ</div></div>
+      <div class="fc-res-card" style="background:rgba(192,57,43,.25)"><div class="fc-res-num cr fc-res-unknown">0</div><div class="fc-res-lbl">НЕ ЗНАЮ</div></div>
+    </div>
+    <div class="fc-restart-row">
+      <button class="fc-restart-btn primary" onclick="repeatUnknown()">🔁 Повторить незнакомые</button>
+      <button class="fc-restart-btn" onclick="restartAll()">🔄 Все карточки заново</button>
+    </div>
+  </div>
+  <div class="fc-empty" id="fc-empty">Нет карточек.</div>
+</div>
+<section class="section" id="s7">
+  <div class="section-header"><div class="section-num">7</div><h2 class="section-title">Большой практикум — 50 заданий</h2></div>
+  <p class="body">Итоговое закрепление. Напиши уравнение — потом нажми «Проверить».</p>
+
+<div id="prac-score-bar">
+  <div>
+    <div class="ps-label">📊 Результат практикума</div>
+    <div class="ps-nums"><span id="ps-correct">0</span> / <span id="ps-total">0</span></div>
+    <div class="ps-pct" id="ps-pct">решено 0%</div>
+    <div class="ps-prog"><div class="ps-prog-fill" id="ps-fill" style="width:0%"></div></div>
+  </div>
+  <div id="prac-ctrl">
+    <button class="ps-btn" id="btn-hints" onclick="PRAC_hints()" title="Скрыть правила-подсказки">🙈 Без подсказок</button>
+    <button class="ps-btn" id="btn-shuffle" onclick="PRAC_shuffle()">🔀 Перемешать</button>
+    <button class="ps-btn" onclick="PRAC_reset()">🔄 Сбросить</button>
+  </div>
+</div>
+
+  <div class="practice-section fade-in">
+    <div class="practice-title"><span class="practice-num">1</span>Фосфор: реакции с простыми веществами</div>
+    <div class="box box-info" style="margin-bottom:14px">
+      <div class="box-title">📌 Правило-шаблон</div><ul><li>4P+5O₂(изб.)→2P₂O₅; 4P+3O₂(нед.)→2P₂O₃</li><li>P+Cl₂(изб.)→PCl₅(+5); P+Cl₂(нед.)→PCl₃(+3); P+I₂→PI₃(+3 только!)</li><li>H₂+P↛ — не реагирует напрямую!</li></ul>
+    </div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'pg1')">👁 Показать все ответы</button>
+    <div id="pg1" class="inline-tasks">
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">1</div><div class="it-text">P + O₂(изб.) → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>4P + 5O₂(изб.) → 2P₂O₅<div class="ans-note">⬜ Белый дым.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">2</div><div class="it-text">P + O₂(нед.) → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>4P + 3O₂(нед.) → 2P₂O₃<div class="ans-note">Оксид фосфора(III).</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">3</div><div class="it-text">P + Cl₂(изб.) → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>2P + 5Cl₂(изб.) → 2PCl₅<div class="ans-note">P→+5.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">4</div><div class="it-text">P + Cl₂(нед.) → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>2P + 3Cl₂(нед.) → 2PCl₃<div class="ans-note">P→+3.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">5</div><div class="it-text">P + I₂ → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>2P + 3I₂ → 2PI₃<div class="ans-note">I₂→P только +3.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">6</div><div class="it-text">H₂ + P → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>H₂ + P ↛<div class="ans-note">Не реагирует!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">7</div><div class="it-text">Ca + P → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>3Ca + 2P →(t°) Ca₃P₂<div class="ans-note">Фосфид кальция.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">8</div><div class="it-text">P + HNO₃(конц.) → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>P + 5HNO₃(конц.) → H₃PO₄ + 5NO₂↑ + H₂O<div class="ans-note">P→H₃PO₄. 🟤NO₂.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">9</div><div class="it-text">P + KOH(конц.) + H₂O →(t°) ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>4P + 3KOH + 3H₂O →(t°) 3KH₂PO₂ + PH₃↑<div class="ans-note">PH₃↑ ядовит!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">10</div><div class="it-text">Ca₃(PO₄)₂ + SiO₂ + C →(t°) ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>Ca₃(PO₄)₂ + 3SiO₂ + 5C →(t°) 3CaSiO₃ + 2P↑ + 5CO↑<div class="ans-note">Получение P.</div></div>
+      </div>
+    </div>
+  </div>  <div class="practice-section fade-in">
+    <div class="practice-title"><span class="practice-num">2</span>Кремний: реакции</div>
+    <div class="box box-info" style="margin-bottom:14px">
+      <div class="box-title">📌 Правило-шаблон</div><ul><li>Si+I₂→SiI₄ (Si реагирует со всеми Hal₂!); H₂+Si↛</li><li>Si+HF→SiF₄+H₂; Si+HNO₃↛; Si+NaOH→Na₂SiO₃+H₂↑</li><li>SiO₂+HF→SiF₄+H₂O; SiO₂+HCl↛; SiO₂+NaOH→Na₂SiO₃</li></ul>
+    </div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'pg2')">👁 Показать все ответы</button>
+    <div id="pg2" class="inline-tasks">
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">1</div><div class="it-text">Si + O₂ → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>Si + O₂ →(t°) SiO₂<div class="ans-note">Кварц.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">2</div><div class="it-text">Si + I₂ → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>Si + 2I₂ →(t°) SiI₄<div class="ans-note">Si реагирует со всеми Hal₂!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">3</div><div class="it-text">H₂ + Si → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>H₂ + Si ↛<div class="ans-note">Не реагирует!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">4</div><div class="it-text">Si + HF → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>Si + 4HF(г) → SiF₄↑ + 2H₂↑<div class="ans-note">Только HF!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">5</div><div class="it-text">Si + HNO₃(конц.) → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>Si + HNO₃(конц.) ↛<div class="ans-note">Пассивен!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">6</div><div class="it-text">Si + NaOH + H₂O →(t°) ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>Si + 2NaOH + H₂O →(t°) Na₂SiO₃ + 2H₂↑<div class="ans-note">Реагирует со щёлочью!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">7</div><div class="it-text">SiO₂ + HF → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>SiO₂ + 4HF → SiF₄↑ + 2H₂O<div class="ans-note">HF разъедает стекло.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">8</div><div class="it-text">SiO₂ + NaOH →(t°) ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>SiO₂ + 2NaOH →(t°) Na₂SiO₃ + H₂O<div class="ans-note">Жидкое стекло.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">9</div><div class="it-text">Na₂SiO₃ + HCl → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>Na₂SiO₃ + 2HCl → 2NaCl + H₂SiO₃↓<div class="ans-note">⬜ Белый осадок H₂SiO₃.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">10</div><div class="it-text">Na₂SiO₃ + CO₂ + H₂O → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>Na₂SiO₃ + CO₂ + H₂O → Na₂CO₃ + H₂SiO₃↓<div class="ans-note">H₂SiO₃ слабее H₂CO₃.</div></div>
+      </div>
+    </div>
+  </div>  <div class="practice-section fade-in">
+    <div class="practice-title"><span class="practice-num">3</span>Углерод: реакции</div>
+    <div class="box box-info" style="margin-bottom:14px">
+      <div class="box-title">📌 Правило-шаблон</div><ul><li>C+O₂(нед.)→2CO (угарный!); C+I₂↛; C+NaOH↛</li><li>C+H₂O(пар)→CO+H₂ (водяной газ); CaC₂+H₂O→C₂H₂</li><li>CO₂+NaOH: изб.→Na₂CO₃; нед.→NaHCO₃</li></ul>
+    </div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'pg3')">👁 Показать все ответы</button>
+    <div id="pg3" class="inline-tasks">
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">1</div><div class="it-text">C + O₂(изб.) → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>C + O₂(изб.) → CO₂<div class="ans-note">Полное сгорание.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">2</div><div class="it-text">C + O₂(нед.) → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>2C + O₂(нед.) → 2CO<div class="ans-note">CO — угарный газ!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">3</div><div class="it-text">C + I₂ → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>C + I₂ ↛<div class="ans-note">Не реагирует!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">4</div><div class="it-text">C + NaOH → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>C + NaOH ↛<div class="ans-note">Не реагирует (Si реагирует)!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">5</div><div class="it-text">C + H₂O(пар) →(t°) ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>C + H₂O(пар) →(t°) CO + H₂↑<div class="ans-note">Водяной газ.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">6</div><div class="it-text">C + HNO₃(конц.) → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>C + 4HNO₃(конц.) → CO₂↑ + 4NO₂↑ + 2H₂O<div class="ans-note">🟤 NO₂.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">7</div><div class="it-text">CO₂ + NaOH(изб.) → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>CO₂ + 2NaOH → Na₂CO₃ + H₂O<div class="ans-note">Изб.→карбонат.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">8</div><div class="it-text">CO₂ + NaOH(нед.) → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>CO₂ + NaOH → NaHCO₃<div class="ans-note">Нед.→гидрокарбонат.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">9</div><div class="it-text">CO₂ + Ca(OH)₂ → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>CO₂ + Ca(OH)₂ → CaCO₃↓ + H₂O<div class="ans-note">⬜ CaCO₃↓ — качественная реакция.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">10</div><div class="it-text">CaC₂ + H₂O → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>CaC₂ + 2H₂O → Ca(OH)₂ + C₂H₂↑<div class="ans-note">C₂H₂ — ацетилен.</div></div>
+      </div>
+    </div>
+  </div>  <div class="practice-section fade-in">
+    <div class="practice-title"><span class="practice-num">4</span>Водород: реакции и получение</div>
+    <div class="box box-info" style="margin-bottom:14px">
+      <div class="box-title">📌 Правило-шаблон</div><ul><li>H₂+Si↛; H₂+P↛ — не реагирует напрямую!</li><li>CuO+H₂→Cu🔴+H₂O; Fe₂O₃+3H₂→2Fe+3H₂O</li><li>CH₄+H₂O(пар)→CO+3H₂ (конверсия метана)</li></ul>
+    </div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'pg4')">👁 Показать все ответы</button>
+    <div id="pg4" class="inline-tasks">
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">1</div><div class="it-text">H₂ + F₂ → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>H₂ + F₂ →(hν) 2HF<div class="ans-note">Взрыв.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">2</div><div class="it-text">H₂ + S → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>H₂ + S ⇄ H₂S<div class="ans-note">H₂S ядовит.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">3</div><div class="it-text">H₂ + Si → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>H₂ + Si ↛<div class="ans-note">Не реагирует!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">4</div><div class="it-text">H₂ + P → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>H₂ + P ↛<div class="ans-note">Не реагирует!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">5</div><div class="it-text">CuO + H₂ →(t°) ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>CuO + H₂ →(t°) Cu + H₂O<div class="ans-note">⬛→🔴 медь.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">6</div><div class="it-text">Fe₂O₃ + H₂ →(t°) ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>Fe₂O₃ + 3H₂ →(t°) 2Fe + 3H₂O<div class="ans-note">Восстановление.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">7</div><div class="it-text">Na + H₂ →(t°) ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>2Na + H₂ →(t°) 2NaH<div class="ans-note">H в с.о. −1.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">8</div><div class="it-text">CH₄ + H₂O(пар) →(t°) ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>CH₄ + H₂O(пар) →(t°) CO + 3H₂<div class="ans-note">Конверсия метана.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">9</div><div class="it-text">Zn + H₂SO₄(разб.) → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>Zn + H₂SO₄(разб.) → ZnSO₄ + H₂↑<div class="ans-note">Лаб. получение H₂.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">10</div><div class="it-text">Al + NaOH + H₂O → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>2Al + 2NaOH + 6H₂O → 2Na[Al(OH)₄] + 3H₂↑<div class="ans-note">Ещё один способ.</div></div>
+      </div>
+    </div>
+  </div>  <div class="practice-section fade-in">
+    <div class="practice-title"><span class="practice-num">5</span>Итоговый тест — ловушки P, Si, C, H₂</div>
+    <div class="box box-info" style="margin-bottom:14px">
+      <div class="box-title">📌 Правило-шаблон</div><ul><li>H₂+Si↛; H₂+P↛; C+I₂↛; Si+I₂→SiI₄</li><li>Si+HNO₃↛; C+HNO₃→CO₂+NO₂; Si+NaOH→силикат; C+NaOH↛</li><li>CO₂+NaOH: соотношение! CO₂+Ca(OH)₂→CaCO₃↓⬜</li></ul>
+    </div>
+    <button class="reveal-all-btn" onclick="toggleGroup(this,'pg5')">👁 Показать все ответы</button>
+    <div id="pg5" class="inline-tasks">
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">1</div><div class="it-text">H₂+Si→? и H₂+P→?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>H₂+Si↛ и H₂+P↛<div class="ans-note">Обе реакции не идут!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">2</div><div class="it-text">C+I₂→? и Si+I₂→?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>C+I₂↛; Si+2I₂→SiI₄<div class="ans-note">Si реагирует, C — нет!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">3</div><div class="it-text">Si+HNO₃→? и C+HNO₃(конц.)→?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>Si↛; C+4HNO₃(конц.)→CO₂+4NO₂+2H₂O<div class="ans-note">Si пассивен, C реагирует!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">4</div><div class="it-text">Si+NaOH→? и C+NaOH→?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>Si+2NaOH+H₂O→Na₂SiO₃+2H₂↑; C+NaOH↛<div class="ans-note">Si→силикат, C не реагирует!</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">5</div><div class="it-text">CO₂+NaOH(изб.) и CO₂+NaOH(нед.) → ?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>Изб.:Na₂CO₃; Нед.:NaHCO₃<div class="ans-note">Соотношение определяет продукт.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">6</div><div class="it-text">CO₂+Ca(OH)₂→? Что видно?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>CaCO₃↓+H₂O. ⬜ Белый осадок — помутнение.<div class="ans-note">Кач. реакция на CO₂.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">7</div><div class="it-text">P+Cl₂(изб.)→? и P+I₂→?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>PCl₅(+5); PI₃(+3)<div class="ans-note">I₂ слабый → P только до +3.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">8</div><div class="it-text">P+KOH+H₂O→(t°)? Что выделяется?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>3KH₂PO₂+PH₃↑. PH₃ ядовит, самовоспл.<div class="ans-note">Диспропорц. фосфора.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">9</div><div class="it-text">CuO+H₂→(t°)? Что наблюдается?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>Cu+H₂O. ⬛→🔴 Cu.<div class="ans-note">Яркое изменение цвета.</div></div>
+      </div>
+      <div class="inline-task">
+        <div class="it-q"><div class="it-num">10</div><div class="it-text">SiO₂+HF→? и SiO₂+HCl→?</div></div>
+        <div class="it-input-wrap">
+          <textarea class="it-input" rows="1" placeholder="Запиши уравнение…" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <button class="it-check-btn" onclick="checkInput(this)">Проверить</button>
+        </div>
+        <div class="it-feedback"></div>
+        <div class="answer-box"><div class="ans-lbl">Ответ</div>SiF₄+H₂O; SiO₂+HCl↛<div class="ans-note">Только HF разъедает стекло!</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">↑</button>
+
+
+<!-- ===== WHITEBOARD ===== -->
+<div id="wb" style="display:none;position:fixed;z-index:200;flex-direction:column;top:0;bottom:0;right:0;">
+  <!-- Тулбар -->
+  <div id="wb-bar" style="height:48px;display:flex;align-items:center;gap:5px;padding:0 10px;background:#f8f8fc;border-bottom:1.5px solid #e0ddf8;flex-shrink:0;overflow-x:auto;overflow-y:hidden;box-shadow:0 2px 8px rgba(60,40,160,.07)">
+    <button onclick="wbClose()" style="background:#fff;border:1.5px solid #e0ddf8;color:#444;border-radius:8px;padding:5px 11px;font-size:12px;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:sans-serif">✕ Закрыть</button>
+    <button id="wbt-mode" onclick="wbToggleMode()" style="background:#eef;border:1.5px solid #c0b0ff;color:#5b40c0;border-radius:8px;padding:5px 11px;font-size:12px;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:sans-serif;font-weight:600" title="Переключить режим">⛶ На весь экран</button>
+    <div class="wbs"></div>
+    <button onclick="wbSetTool('pen')"   class="wb-tool" id="wbt-pen"   title="Перо">✏️</button>
+    <button onclick="wbSetTool('glow')"  class="wb-tool" id="wbt-glow"  title="Световое перо">✨</button>
+    <div class="wbs"></div>
+    <div class="wb-col" onclick="wbSetColor('#1a1a2e')" style="background:#1a1a2e" title="Тёмный"></div>
+    <div class="wb-col" onclick="wbSetColor('#c0392b')" style="background:#c0392b" title="Красный"></div>
+    <div class="wb-col" onclick="wbSetColor('#1d6f42')" style="background:#1d6f42" title="Зелёный"></div>
+    <div class="wb-col" onclick="wbSetColor('#1a5276')" style="background:#1a5276" title="Синий"></div>
+    <div class="wb-col" onclick="wbSetColor('#6c3483')" style="background:#6c3483" title="Фиолетовый"></div>
+    <div class="wb-col" onclick="wbSetColor('#b7770d')" style="background:#b7770d" title="Оранжевый"></div>
+    <div class="wbs"></div>
+    <button onclick="wbSetSize(2)"  class="wb-sz">S</button>
+    <button onclick="wbSetSize(5)"  class="wb-sz">M</button>
+    <button onclick="wbSetSize(12)" class="wb-sz">L</button>
+    <div style="flex:1;min-width:6px"></div>
+    <button onclick="wbUndo()"  style="background:#fff;border:1.5px solid #e0ddf8;color:#555;border-radius:8px;padding:5px 11px;font-size:12px;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:sans-serif" title="Отменить (Ctrl+Z)">↩ Отмена</button>
+    <button onclick="wbClear()" style="background:#fff5f5;border:1.5px solid #fca5a5;color:#dc2626;border-radius:8px;padding:5px 11px;font-size:12px;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:sans-serif">🗑 Очистить</button>
+  </div>
+  <!-- Холст -->
+  <div id="wb-area" style="flex:1;position:relative;overflow:hidden;">
+    <canvas id="wb-canvas" style="display:block;touch-action:none;width:100%;height:100%"></canvas>
+    <textarea id="wb-txt" rows="1" style="display:none;position:absolute;background:transparent;border:1.5px dashed #7c3aed;outline:none;resize:none;padding:4px 8px;z-index:10;line-height:1.45;overflow:hidden;min-width:100px;border-radius:4px;color:#1a1a2e;font-size:18px"></textarea>
+  </div>
+</div>
+<button onclick="wbOpen()" id="btn-board"
+  style="position:fixed;bottom:132px;right:20px;z-index:1200;
+  width:48px;height:48px;border-radius:14px;
+  background:linear-gradient(135deg,#1D9E75,#085041);
+  color:#fff;border:none;cursor:pointer;font-size:22px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(8,80,65,.35);transition:transform .15s"
+  onmouseover="this.style.transform='scale(1.07)'"
+  onmouseout="this.style.transform=''"
+  title="Открыть доску">🖊</button>
+
+<script>
+
+/* прогресс-бар */
+const pf=document.getElementById('pf');
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  pf.style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';
+  document.getElementById('back-top').classList.toggle('visible',d.scrollTop>400);
+});
+/* fade-in */
+document.querySelectorAll('.fade-in').forEach(el=>
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),
+    {threshold:0.06,rootMargin:'0px 0px -30px 0px'}).observe(el));
+
+/* показать все ответы в группе */
+function toggleGroup(btn,gid){
+  const g=document.getElementById(gid);
+  const boxes=g.querySelectorAll('.answer-box');
+  const allOpen=btn.classList.contains('all-open');
+  boxes.forEach(b=>b.classList.toggle('open',!allOpen));
+  btn.classList.toggle('all-open',!allOpen);
+  btn.textContent=allOpen?'👁 Показать все ответы':'🙈 Скрыть все';
+}
+
+/* проверка текстового ответа */
+function checkInput(btn){
+  const wrap=btn.closest('.inline-task');
+  const input=wrap.querySelector('.it-input');
+  const fb=wrap.querySelector('.it-feedback');
+  const ansBox=wrap.querySelector('.answer-box');
+  const userVal=input.value.trim();
+  if(!userVal){input.focus();return;}
+  ansBox.classList.add('open');
+  const ansText=ansBox.textContent.replace('Ответ','').trim();
+  function tokens(s){
+    return s.replace(/[→⇄↛↑↓≠]/g,' ').replace(/\s+/g,' ')
+      .toLowerCase().split(' ')
+      .map(t=>t.replace(/[^a-zа-яёα-ω0-9₀-₉⁰-⁹+\-]/gi,''))
+      .filter(t=>t.length>=2&&!/^(и|не|при|или|это|для|что|как|в|с|из|на|по|до|то|же|а|но)$/.test(t));
+  }
+  const correct=tokens(ansText);
+  const user=tokens(userVal);
+  const matched=correct.filter(t=>user.some(u=>u.includes(t)||t.includes(u)));
+  const score=correct.length>0?matched.length/correct.length:0;
+  input.readOnly=true;
+  btn.disabled=true;
+  btn.textContent='✓ Проверено';
+  if(score>=0.45){
+    input.classList.add('correct');
+    fb.className='it-feedback show ok';
+    fb.innerHTML='✅ Верно! ';
+  } else {
+    input.classList.add('wrong');
+    fb.className='it-feedback show miss';
+    fb.innerHTML='❌ Не совсем — ';
+  }
+  const lnk=document.createElement('button');
+  lnk.className='it-show-link';
+  lnk.textContent=score>=0.45?'Смотри полный ответ ↓':'Смотри правильный ответ ↓';
+  lnk.onclick=()=>ansBox.scrollIntoView({behavior:'smooth',block:'nearest'});
+  fb.appendChild(lnk);
+}
+
+/* ══ ФЛЭШ-КАРТОЧКИ ══ */
+let deck=[],cur=0,flipped=false,known=[],unknown=[];
+function buildDeck(){
+  deck=Array.from(document.querySelectorAll('.fc-data')).map(el=>({
+    q:el.dataset.q,a:el.dataset.a,hint:el.dataset.hint||''
+  }));
+  shuffle(deck);known=[];unknown=[];cur=0;flipped=false;renderCard();
+}
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}}
+function renderCard(){
+  if(deck.length===0){document.getElementById('fc-empty').style.display='block';document.getElementById('fc-card-area').style.display='none';return;}
+  document.getElementById('fc-empty').style.display='none';
+  document.getElementById('fc-card-area').style.display='block';
+  const card=deck[cur];
+  document.getElementById('fc-front').innerHTML=card.q;
+  document.getElementById('fc-back').innerHTML=card.a+(card.hint?'<div class="fc-hint">'+card.hint+'</div>':'');
+  document.getElementById('fc-inner').classList.remove('flipped');
+  flipped=false;
+  document.getElementById('fc-counter').textContent=(cur+1)+' / '+deck.length;
+  document.getElementById('fc-known').textContent=known.length;
+  document.getElementById('fc-unknown').textContent=unknown.length;
+  document.getElementById('fc-btn-row').style.display='none';
+  document.getElementById('fc-flip-btn').style.display='flex';
+}
+function flipCard(){
+  document.getElementById('fc-inner').classList.toggle('flipped');
+  flipped=!flipped;
+  if(flipped){document.getElementById('fc-btn-row').style.display='flex';document.getElementById('fc-flip-btn').style.display='none';}
+}
+function markKnown(){known.push(deck[cur]);nextCard();}
+function markUnknown(){unknown.push(deck[cur]);nextCard();}
+function nextCard(){cur++;if(cur>=deck.length){showResult();return;}flipped=false;renderCard();}
+function showResult(){
+  _fcTimerStop();
+  document.getElementById('fc-card-area').style.display='none';
+  const res=document.getElementById('fc-result');res.style.display='block';
+  res.querySelector('.fc-res-known').textContent=known.length;
+  res.querySelector('.fc-res-unknown').textContent=unknown.length;
+}
+function repeatUnknown(){deck=[...unknown];shuffle(deck);known=[];unknown=[];cur=0;flipped=false;document.getElementById('fc-result').style.display='none';renderCard();}
+function restartAll(){buildDeck();}
+
+/* ─── РАСШИРЕНИЯ (единственный DOMContentLoaded внизу) ─── */
+
+var _sr={};
+try{_sr=JSON.parse(localStorage.getItem('fc_sr_nm2')||'{}');}catch(x){}
+function _srSave(){try{localStorage.setItem('fc_sr_nm2',JSON.stringify(_sr));}catch(x){}}
+function _srKey(q){return q.slice(0,40);}
+function _srGet(q){return _sr[_srKey(q)]||{n:1,ef:2.5,due:0};}
+function _srUpd(q,ok){
+  var k=_srKey(q),c=_srGet(q);
+  if(ok){c.n=Math.max(1,Math.round(c.n*c.ef));c.ef=Math.max(1.3,c.ef+0.1);}
+  else{c.n=1;c.ef=Math.max(1.3,c.ef-0.2);}
+  c.due=Date.now()+c.n*86400000;
+  _sr[k]=c;_srSave();
+}
+function _srBadge(q){
+  var c=_srGet(q),d=Math.round((c.due-Date.now())/86400000);
+  if(c.n<=1)return '🆕 новая';
+  return d<0?('⏰ просрочена '+(-d)+'д'):('📅 через '+d+'д');
+}
+function _srSort(arr){
+  var now=Date.now();
+  return arr.slice().sort(function(a,b){
+    var ca=_srGet(a.q),cb=_srGet(b.q);
+    if(ca.due<now&&cb.due>=now)return -1;
+    if(cb.due<now&&ca.due>=now)return 1;
+    return ca.n-cb.n;
+  });
+}
+
+window.buildDeck=function(){
+  _fcTimerStart_fn();
+  deck=Array.from(document.querySelectorAll('.fc-data')).map(function(el){
+    return{q:el.dataset.q,a:el.dataset.a,hint:el.dataset.hint||''};
+  });
+  deck=_srSort(deck);
+  known=[];unknown=[];cur=0;flipped=false;
+  renderCard();
+};
+window.renderCard=function(){
+  if(deck.length===0){
+    document.getElementById('fc-empty').style.display='block';
+    document.getElementById('fc-card-area').style.display='none';return;
+  }
+  document.getElementById('fc-empty').style.display='none';
+  document.getElementById('fc-card-area').style.display='block';
+  var card=deck[cur];
+  document.getElementById('fc-front').innerHTML=card.q;
+  document.getElementById('fc-back').innerHTML=
+    card.a+(card.hint?'<div class="fc-hint">'+card.hint+'</div>':'')+
+    '<div class="fc-sr-badge">'+_srBadge(card.q)+'</div>';
+  document.getElementById('fc-inner').classList.remove('flipped');
+  flipped=false;
+  document.getElementById('fc-counter').textContent=(cur+1)+' / '+deck.length;
+  document.getElementById('fc-known').textContent=known.length;
+  document.getElementById('fc-unknown').textContent=unknown.length;
+  document.getElementById('fc-btn-row').style.display='none';
+  document.getElementById('fc-flip-btn').style.display='flex';
+};
+window.markKnown=function(){
+  if(cur<deck.length)_srUpd(deck[cur].q,true);
+  known.push(deck[cur]);cur++;
+  if(cur>=deck.length){showResult();return;}
+  flipped=false;renderCard();
+};
+window.markUnknown=function(){
+  if(cur<deck.length)_srUpd(deck[cur].q,false);
+  unknown.push(deck[cur]);cur++;
+  if(cur>=deck.length){showResult();return;}
+  flipped=false;renderCard();
+};
+window.repeatUnknown=function(){
+  deck=_srSort(unknown.slice());known=[];unknown=[];cur=0;flipped=false;
+  document.getElementById('fc-result').style.display='none';
+  renderCard();
+};
+window.restartAll=function(){buildDeck();};
+
+var _psC=0,_psT=0;
+function _psUpd(){
+  var ec=document.getElementById('ps-correct');
+  if(!ec)return;
+  ec.textContent=_psC;
+  document.getElementById('ps-total').textContent=_psT;
+  var p=_psT?Math.round(_psC/_psT*100):0;
+  document.getElementById('ps-pct').textContent='решено '+p+'%';
+  document.getElementById('ps-fill').style.width=p+'%';
+}
+var _ck0=window.checkInput;
+window.checkInput=function(btn){
+  _ck0(btn);
+  var inp=btn.closest('.inline-task').querySelector('.it-input');
+  _psT++;if(inp.classList.contains('correct'))_psC++;
+  _psUpd();
+};
+
+var _hintsOn=true;
+function PRAC_hints(){
+  _hintsOn=!_hintsOn;
+  var s6=document.getElementById('s7');
+  if(s6)s6.classList.toggle('hints-hidden',!_hintsOn);
+  var b=document.getElementById('btn-hints');
+  if(b){b.textContent=_hintsOn?'🙈 Без подсказок':'👁 Показать подсказки';b.classList.toggle('active',!_hintsOn);}
+}
+function PRAC_shuffle(){
+  document.querySelectorAll('#s6 .inline-tasks').forEach(function(c){
+    var t=Array.from(c.querySelectorAll('.inline-task'));
+    for(var i=t.length-1;i>0;i--){
+      var j=Math.floor(Math.random()*(i+1));c.appendChild(t[j]);t.splice(j,1);
+    }
+    c.querySelectorAll('.it-num').forEach(function(el,i){el.textContent=i+1;});
+  });
+}
+function PRAC_reset(){
+  if(!confirm('Сбросить все ответы и счёт?'))return;
+  _psC=0;_psT=0;_psUpd();
+  document.querySelectorAll('.it-input').forEach(function(i){
+    i.value='';i.readOnly=false;i.classList.remove('correct','wrong');i.style.height='auto';
+  });
+  document.querySelectorAll('.it-check-btn').forEach(function(b){b.textContent='Проверить';b.disabled=false;});
+  document.querySelectorAll('.it-feedback').forEach(function(f){f.className='it-feedback';});
+  document.querySelectorAll('.answer-box').forEach(function(b){b.classList.remove('open');});
+}
+
+/* ── PENCIL-ON-PAGE: только Apple Pencil / S-Pen ── */
+
+document.addEventListener('DOMContentLoaded',function(){
+  buildDeck();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+(function(){
+  const WB   = document.getElementById('wb');
+  const WBC  = document.getElementById('wb-canvas');
+  const CTX  = WBC.getContext('2d');
+  const AREA = document.getElementById('wb-area');
+  const TXT  = document.getElementById('wb-txt');
+
+  let isOpen=false, mode='side';
+  let tool='pen', color='#1a1a2e', sz=5;
+  let drawing=false, pts=[], undoStack=[];
+  let txtX=0, txtY=0;
+
+  /* ── Световое перо: отдельный canvas поверх основного ── */
+  let glowCanvas=null, glowCtx=null, glowPts=[], glowFadeId=null;
+
+  function initGlowCanvas(){
+    if(glowCanvas) return;
+    glowCanvas=document.createElement('canvas');
+    glowCanvas.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:5;';
+    AREA.appendChild(glowCanvas);
+    glowCtx=glowCanvas.getContext('2d');
+  }
+  function resizeGlow(){
+    if(!glowCanvas) return;
+    glowCanvas.width=WBC.width; glowCanvas.height=WBC.height;
+  }
+
+  /* Рисуем светящийся след */
+  function glowDraw(pts){
+    if(!glowCtx||pts.length<2) return;
+    glowCtx.clearRect(0,0,glowCanvas.width,glowCanvas.height);
+    glowCtx.lineCap='round'; glowCtx.lineJoin='round';
+    const n=pts.length;
+    for(let i=1;i<n;i++){
+      const t=i/n; // 0..1 — позиция в линии
+      const alpha=t*0.85+0.1; // хвост прозрачнее
+      // Внешнее свечение
+      glowCtx.globalAlpha=alpha*0.35;
+      glowCtx.strokeStyle='rgba(255,80,20,1)';
+      glowCtx.lineWidth=10;
+      glowCtx.shadowBlur=16;
+      glowCtx.shadowColor='rgba(255,60,0,0.9)';
+      glowCtx.beginPath();
+      glowCtx.moveTo(pts[i-1].x,pts[i-1].y);
+      glowCtx.lineTo(pts[i].x,pts[i].y);
+      glowCtx.stroke();
+      // Яркое ядро
+      glowCtx.globalAlpha=alpha;
+      glowCtx.strokeStyle='rgba(255,200,100,1)';
+      glowCtx.lineWidth=3;
+      glowCtx.shadowBlur=8;
+      glowCtx.shadowColor='rgba(255,150,50,1)';
+      glowCtx.beginPath();
+      glowCtx.moveTo(pts[i-1].x,pts[i-1].y);
+      glowCtx.lineTo(pts[i].x,pts[i].y);
+      glowCtx.stroke();
+    }
+    glowCtx.shadowBlur=0; glowCtx.globalAlpha=1;
+  }
+
+  /* Плавное затухание */
+  function glowFade(){
+    if(!glowCtx) return;
+    if(glowFadeId) cancelAnimationFrame(glowFadeId);
+    const DURATION=4000;
+    const startTime=performance.now();
+    const pts=glowPts.slice();
+    function step(now){
+      const elapsed=now-startTime;
+      const alpha=Math.max(0,1-elapsed/DURATION);
+      glowCtx.clearRect(0,0,glowCanvas.width,glowCanvas.height);
+      if(alpha<=0){ return; }
+      const n=pts.length;
+      glowCtx.lineCap='round'; glowCtx.lineJoin='round';
+      for(let i=1;i<n;i++){
+        const t=i/n;
+        glowCtx.globalAlpha=alpha*t*0.35;
+        glowCtx.strokeStyle='rgba(255,80,20,1)';
+        glowCtx.lineWidth=10;
+        glowCtx.shadowBlur=16;
+        glowCtx.shadowColor='rgba(255,60,0,0.9)';
+        glowCtx.beginPath();
+        glowCtx.moveTo(pts[i-1].x,pts[i-1].y);
+        glowCtx.lineTo(pts[i].x,pts[i].y);
+        glowCtx.stroke();
+        glowCtx.globalAlpha=alpha*t;
+        glowCtx.strokeStyle='rgba(255,200,100,1)';
+        glowCtx.lineWidth=3;
+        glowCtx.shadowBlur=8;
+        glowCtx.shadowColor='rgba(255,150,50,1)';
+        glowCtx.beginPath();
+        glowCtx.moveTo(pts[i-1].x,pts[i-1].y);
+        glowCtx.lineTo(pts[i].x,pts[i].y);
+        glowCtx.stroke();
+      }
+      glowCtx.shadowBlur=0; glowCtx.globalAlpha=1;
+      glowFadeId=requestAnimationFrame(step);
+    }
+    glowFadeId=requestAnimationFrame(step);
+  }
+
+  /* ── Белый фон с polka-dots ── */
+  function applyBg(){
+    const w=WBC.width, h=WBC.height;
+    CTX.save();
+    CTX.globalCompositeOperation='source-over';
+    CTX.fillStyle='#ffffff';
+    CTX.fillRect(0,0,w,h);
+    CTX.fillStyle='rgba(160,145,210,0.45)';
+    const step=22;
+    for(let x=step;x<=w;x+=step)
+      for(let y=step;y<=h;y+=step){
+        CTX.beginPath();CTX.arc(x,y,1.6,0,Math.PI*2);CTX.fill();
+      }
+    CTX.restore();
+  }
+
+  function saveUndo(){
+    if(WBC.width>0&&WBC.height>0)
+      undoStack.push(CTX.getImageData(0,0,WBC.width,WBC.height));
+    if(undoStack.length>40) undoStack.shift();
+  }
+
+  function resizeWbc(){
+    const area=AREA.getBoundingClientRect();
+    const img=WBC.width>0&&WBC.height>0?CTX.getImageData(0,0,WBC.width,WBC.height):null;
+    WBC.width=Math.round(area.width);
+    WBC.height=Math.round(area.height);
+    applyBg();
+    if(img) try{CTX.putImageData(img,0,0);}catch(x){}
+    resizeGlow();
+  }
+
+  /* ── Режимы ── */
+  function applyMode(){
+    const modeBtn=document.getElementById('wbt-mode');
+    const shell=document.querySelector('.shell');
+    if(mode==='side'){
+      WB.style.left='auto'; WB.style.right='0';
+      WB.style.top='0'; WB.style.bottom='0'; WB.style.width='35%';
+      if(shell) shell.style.marginRight='36%';
+      if(modeBtn) modeBtn.textContent='⛶ На весь экран';
+    } else {
+      WB.style.left='0'; WB.style.right='0';
+      WB.style.top='0'; WB.style.bottom='0'; WB.style.width='100%';
+      if(shell) shell.style.marginRight='';
+      if(modeBtn) modeBtn.textContent='▪ Боковая';
+    }
+    requestAnimationFrame(()=>{ setTimeout(resizeWbc,30); });
+  }
+
+  function commitText(){
+    if(!TXT||TXT.style.display==='none') return;
+    const txt=TXT.value.trim();
+    if(txt){
+      CTX.save();
+      CTX.font='18px sans-serif';
+      CTX.fillStyle=color;
+      CTX.globalAlpha=1;
+      CTX.globalCompositeOperation='source-over';
+      txt.split('\n').forEach((l,i)=>CTX.fillText(l,txtX,txtY+(i+1)*24));
+      CTX.restore();
+    }
+    TXT.style.display='none'; TXT.value='';
+  }
+
+  function getXY(e){
+    const r=WBC.getBoundingClientRect();
+    const src=e.touches?e.touches[0]:e;
+    return{x:src.clientX-r.left, y:src.clientY-r.top, p:e.pressure||0.5};
+  }
+  function styleCtx(p){
+    CTX.lineCap='round'; CTX.lineJoin='round';
+    CTX.strokeStyle=color;
+    CTX.lineWidth=sz*(0.5+p*1.0);
+    CTX.globalAlpha=1;
+    CTX.globalCompositeOperation='source-over';
+  }
+
+  /* ── События ── */
+  WBC.addEventListener('pointerdown',function(e){
+    if(e.pointerType!=='pen') return;
+    if(tool==='glow'){
+      e.preventDefault();
+      try{WBC.setPointerCapture(e.pointerId);}catch(x){}
+      if(glowFadeId){cancelAnimationFrame(glowFadeId);glowFadeId=null;}
+      if(glowCtx) glowCtx.clearRect(0,0,glowCanvas.width,glowCanvas.height);
+      glowPts=[getXY(e)];
+      return;
+    }
+    e.preventDefault();
+    try{WBC.setPointerCapture(e.pointerId);}catch(x){}
+    saveUndo(); drawing=true;
+    const p=getXY(e); pts=[p];
+    styleCtx(p.p);
+    CTX.beginPath(); CTX.moveTo(p.x,p.y);
+  },{passive:false});
+
+  WBC.addEventListener('pointermove',function(e){
+    if(e.pointerType!=='pen') return;
+    if(tool==='glow'){
+      const p=getXY(e);
+      glowPts.push(p);
+      if(glowPts.length>120) glowPts.shift();
+      if(glowCtx) glowDraw(glowPts);
+      return;
+    }
+    if(!drawing) return;
+    e.preventDefault();
+    const p=getXY(e);
+    pts.push(p);
+    if(pts.length>=4){
+      const n=pts.length;
+      const p0=pts[n-4],p1=pts[n-3],p2=pts[n-2],p3=pts[n-1];
+      const c1x=p1.x+(p2.x-p0.x)/6, c1y=p1.y+(p2.y-p0.y)/6;
+      const c2x=p2.x-(p3.x-p1.x)/6, c2y=p2.y-(p3.y-p1.y)/6;
+      CTX.lineWidth=sz*(0.4+p.p*1.2);
+      CTX.beginPath();CTX.moveTo(p1.x,p1.y);
+      CTX.bezierCurveTo(c1x,c1y,c2x,c2y,p2.x,p2.y);
+      CTX.stroke();
+    } else if(pts.length===2){
+      CTX.lineTo(p.x,p.y); CTX.stroke();
+    }
+  },{passive:false});
+
+  WBC.addEventListener('pointerup',function(e){
+    if(e.pointerType!=='pen') return;
+    if(tool==='glow'){ glowFade(); return; }
+    drawing=false; pts=[];
+  });
+  WBC.addEventListener('pointercancel',function(e){
+    if(e.pointerType!=='pen') return;
+    if(tool==='glow'){ glowFade(); return; }
+    drawing=false; pts=[];
+  });
+
+  document.addEventListener('keydown',function(e){
+    if(!isOpen) return;
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();wbUndo();}
+    if(e.key==='Escape') wbClose();
+  });
+
+  window.wbOpen=function(){
+    if(isOpen) return;
+    isOpen=true;
+    WB.classList.add('wb-open');
+    initGlowCanvas();
+    applyMode();
+  };
+  window.wbClose=function(){
+    commitText();
+    isOpen=false;
+    WB.classList.remove('wb-open');
+    const shell=document.querySelector('.shell');
+    if(shell) shell.style.marginRight='';
+    if(glowFadeId){cancelAnimationFrame(glowFadeId);glowFadeId=null;}
+    if(glowCtx) glowCtx.clearRect(0,0,glowCanvas.width,glowCanvas.height);
+  };
+  window.wbToggleMode=function(){
+    mode=mode==='side'?'full':'side';
+    applyMode();
+  };
+  window.wbSetTool=function(t){
+    commitText(); tool=t;
+    document.querySelectorAll('.wb-tool').forEach(el=>el.classList.remove('on'));
+    const el=document.getElementById('wbt-'+t);
+    if(el) el.classList.add('on');
+    if(t==='glow'){
+      WBC.className=''; WBC.style.cursor='crosshair';
+    } else {
+      WBC.style.cursor='';
+      WBC.className='pen-cur';
+    }
+    WBC.style.width='100%'; WBC.style.height='100%';
+  };
+  window.wbSetColor=function(c){
+    color=c;
+    document.querySelectorAll('.wb-col').forEach(el=>{
+      const bg=el.style.background||el.style.backgroundColor;
+      el.classList.toggle('on',bg===c);
+    });
+  };
+  window.wbSetSize=function(n){ sz=n; };
+  window.wbUndo=function(){
+    if(!undoStack.length) return;
+    CTX.putImageData(undoStack.pop(),0,0);
+  };
+  window.wbClear=function(){
+    CTX.clearRect(0,0,WBC.width,WBC.height);
+    applyBg(); undoStack=[];
+    if(glowCtx) glowCtx.clearRect(0,0,glowCanvas.width,glowCanvas.height);
+  };
+
+  /* Init */
+  wbSetTool('pen');
+  wbSetColor('#1a1a2e');
+})();
+})
+
+
+/* ── FC TIMER ── */
+var _fcTimerStart = 0;
+var _fcTimerTick  = null;
+
+function _fcTimerFmt(ms) {
+  var s = Math.floor(ms / 1000);
+  var m = Math.floor(s / 60);
+  s = s % 60;
+  return (m > 0 ? m + ' мин ' : '') + s + ' сек';
+}
+function _fcTimerUpdate() {
+  var el = document.getElementById('fc-timer-live');
+  if (el) el.textContent = '⏱ ' + _fcTimerFmt(Date.now() - _fcTimerStart);
+}
+function _fcTimerStart_fn() {
+  _fcTimerStart = Date.now();
+  if (_fcTimerTick) clearInterval(_fcTimerTick);
+  _fcTimerTick = setInterval(_fcTimerUpdate, 1000);
+  var el = document.getElementById('fc-timer-live');
+  if (el) el.textContent = '⏱ 0 сек';
+}
+function _fcTimerStop() {
+  if (_fcTimerTick) { clearInterval(_fcTimerTick); _fcTimerTick = null; }
+  var elapsed = Date.now() - _fcTimerStart;
+  var el = document.getElementById('fc-timer-live');
+  if (el) el.textContent = '';
+  var res = document.getElementById('fc-time-result');
+  if (res) res.textContent = '⏱ Пройдено за ' + _fcTimerFmt(elapsed);
+}
+
+</script>
+</body>
+</html>
