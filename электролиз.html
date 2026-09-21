@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Электролиз — ЕГЭ Химия</title>
+<style>
+:root{
+  --bg:#F0F9FF;--surface:#fff;--border:#BAE6FD;--accent:#0284C7;
+  --text:#0C1A2E;--muted:#475569;--r:10px;--r-sm:7px;--r-lg:18px;
+  --font:'Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono','Courier New',monospace;
+  --shadow:0 1px 3px rgba(0,40,80,.07),0 4px 16px rgba(0,40,80,.07);
+  --cath:#1D4ED8;--cath-t:#DBEAFE;--cath-d:#1E3A8A;
+  --an:#B91C1C;--an-t:#FEE2E2;--an-d:#7F1D1D;
+  --pur:#7C3AED;--pur-t:#EDE9FE;--pur-d:#4C1D95;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{padding-bottom:60px;font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:#BAE6FD;z-index:999}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,#0284C7,#38BDF8);width:0;transition:width .1s}
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0B1E35 0%,#0F2640 60%,#1E3A5F 100%);padding:52px 36px 40px;margin:0 -24px 0;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.14) 0%,transparent 70%);pointer-events:none}
+.hero-eye{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:#38BDF8;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-size:clamp(26px,5vw,42px);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:#fff;margin-bottom:14px;position:relative;z-index:1}
+.hero h1 em{color:#38BDF8;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.62);line-height:1.75;max-width:560px;margin-bottom:26px;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.hc{background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.28);color:rgba(255,255,255,.88);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+.hc.bl{background:rgba(29,78,216,.25);border-color:rgba(99,132,255,.4);color:#BFDBFE}
+.hc.rd{background:rgba(185,28,28,.25);border-color:rgba(248,113,113,.4);color:#FCA5A5}
+.hc.gr{background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.25);color:#86EFAC}
+.hero-bar{background:#0F2640;padding:12px 36px;margin:0 -24px 48px;border-top:1px solid rgba(56,189,248,.1);display:flex;gap:24px;flex-wrap:wrap}
+.hb-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.5)}
+.hb-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* SECTIONS */
+.section{margin-bottom:40px}
+.sec-hdr{display:flex;align-items:center;gap:14px;margin-bottom:0;padding:14px 18px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);cursor:pointer;user-select:none;transition:background .15s;box-shadow:var(--shadow)}
+.sec-hdr:hover{background:#E0F2FE}
+.sec-hdr::after{content:"▲";font-size:13px;color:var(--accent);margin-left:auto;transition:transform .25s}
+.sec-hdr.collapsed::after{transform:rotate(180deg)}
+.acc-body{overflow:hidden;transition:max-height .35s ease,opacity .25s;max-height:9999px;opacity:1;background:var(--surface);border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--r) var(--r);padding:20px 22px}
+.acc-body.collapsed{max-height:0!important;opacity:0;padding:0 22px}
+.sec-num{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,#0B1E35,#0284C7);color:#fff;font-family:var(--mono);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(2,132,199,.35)}
+.sec-title{font-size:clamp(16px,2.5vw,20px);font-weight:700;color:#0B1E35;line-height:1.2}
+
+/* TEXT */
+h2.sub{font-size:16px;font-weight:700;color:var(--accent);margin:22px 0 10px;display:flex;align-items:center;gap:8px}
+h2.sub::before{content:'';width:4px;height:18px;background:#38BDF8;border-radius:2px;flex-shrink:0}
+p.body{font-size:14.5px;line-height:1.75;color:#293237;margin-bottom:12px}
+
+/* BOXES */
+.box{border-radius:var(--r-sm);padding:12px 16px;margin:12px 0;font-size:14px;line-height:1.7}
+.bi{background:#E0F2FE;border-left:4px solid #0284C7;color:#0C4A6E}
+.bw{background:#FFF8E1;border-left:4px solid #F59E0B;color:#78350F}
+.bd{background:#FEE2E2;border-left:4px solid #DC2626;color:#7F1D1D}
+.bs{background:#D1FAE5;border-left:4px solid #059669;color:#064E3B}
+.box ul{padding-left:18px;margin:6px 0}
+.box li{margin:3px 0;font-size:13.5px}
+
+/* EQ */
+.eq-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 16px;margin:8px 0;box-shadow:var(--shadow)}
+.eq{font-family:var(--mono);font-size:13.5px;color:#0C1A2E;line-height:2;display:block}
+.eq-hdr{display:block;background:linear-gradient(90deg,#E0F2FE,#F0F9FF);border-left:4px solid #0284C7;padding:5px 12px;margin:8px 0 4px;font-size:13px;font-weight:700;color:#0B1E35}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border);margin:12px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--surface);font-size:13.5px}
+.tbl-wrap th{background:linear-gradient(135deg,#0B1E35,#0284C7);color:#fff;font-weight:600;padding:9px 14px;text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+td{padding:8px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:#F0F9FF}
+tr:hover td{background:#E0F2FE;transition:background .15s}
+
+/* ELECTRODE CARDS */
+.elec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+@media(max-width:560px){.elec-grid{grid-template-columns:1fr}}
+.ec{border-radius:var(--r-sm);padding:14px 16px;border:2px solid}
+.ec-cath{background:var(--cath-t);border-color:var(--cath)}
+.ec-an{background:var(--an-t);border-color:var(--an)}
+.ec h4{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.ec-cath h4{color:var(--cath-d)}
+.ec-an h4{color:var(--an-d)}
+.ec p{font-size:13px;margin-bottom:3px}
+.ec .mono{font-family:var(--mono);font-size:12px}
+
+/* SCHEME (расплав стрелки) */
+.melt-scheme{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 18px;margin-bottom:12px;box-shadow:var(--shadow)}
+.melt-label{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);margin-bottom:10px}
+.melt-sub{font-size:12px;color:var(--muted);margin-bottom:8px}
+.melt-row{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
+.melt-el{border-radius:10px;padding:10px 16px;text-align:center;min-width:110px;border:2px solid}
+.melt-cath{background:var(--cath-t);border-color:var(--cath)}
+.melt-an{background:var(--an-t);border-color:var(--an)}
+.melt-el .lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.melt-cath .lbl{color:var(--cath-d)}
+.melt-an .lbl{color:var(--an-d)}
+.melt-el .big{font-size:20px;font-weight:800;font-family:var(--mono);margin:4px 0}
+.melt-cath .big{color:var(--cath)}
+.melt-an .big{color:var(--an)}
+.melt-el .eq2{font-size:11px}
+.melt-cath .eq2{color:var(--cath-d)}
+.melt-an .eq2{color:var(--an-d)}
+.melt-mid{padding:0 10px;text-align:center}
+.melt-arr{font-size:22px;color:#BAE6FD;display:block}
+.melt-center{font-size:16px;font-weight:800;font-family:var(--mono);color:#0284C7;margin:3px 6px;display:block}
+
+/* DECISION TREE */
+.dtree{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:14px 16px;margin:12px 0;box-shadow:var(--shadow)}
+.dtree-q{background:linear-gradient(90deg,#0B1E35,#0284C7);color:#fff;border-radius:6px;padding:8px 12px;font-size:13px;font-weight:700;margin-bottom:8px}
+.dtree-a{padding:7px 12px 7px 22px;font-size:13px;border-left:3px solid var(--border);margin:4px 0;border-radius:0 6px 6px 0;background:#F0F9FF;color:#0C4A6E}
+.dtree-a b{color:#0B1E35}
+.dtree-mono{font-family:var(--mono);font-size:12px;color:#0284C7}
+
+/* VOLTAGE SERIES */
+.volt-wrap{overflow-x:auto;margin:12px 0}
+.volt-inner{min-width:560px}
+.volt-bar{height:36px;border-radius:8px;overflow:hidden;display:flex}
+.volt-z1{flex:3;background:var(--cath);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+.volt-z2{flex:2;background:var(--pur);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+.volt-z3{flex:2;background:var(--an);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+.volt-metals{display:flex;margin-top:4px;font-family:var(--mono);font-size:11px;font-weight:700;text-align:center}
+.volt-m1{flex:3;color:var(--cath)}.volt-m2{flex:2;color:var(--pur)}.volt-m3{flex:2;color:var(--an)}
+.volt-zones{display:flex;gap:4px;margin-top:8px}
+.volt-zone{border-radius:6px;padding:8px 10px;font-size:12px;border:1.5px solid}
+.vz1{flex:3;background:var(--cath-t);border-color:var(--cath);color:var(--cath-d)}
+.vz2{flex:2;background:var(--pur-t);border-color:var(--pur);color:var(--pur-d)}
+.vz3{flex:2;background:var(--an-t);border-color:var(--an);color:var(--an-d)}
+
+/* MEMO */
+.memo{background:#E0F2FE;border:2px solid #0284C7;border-radius:var(--r-sm);padding:12px 16px;margin:12px 0}
+.memo-hd{color:#0B1E35;font-weight:800;font-size:13.5px;margin-bottom:8px}
+.memo ul{margin:0;padding-left:18px;font-size:13px;line-height:1.8}
+.trap{background:#FEF2F2;border:2px solid #DC2626;border-radius:var(--r-sm);padding:12px 16px;margin:12px 0}
+.trap-hd{color:#DC2626;font-weight:800;font-size:13.5px;margin-bottom:8px}
+
+/* KOLBE STEPS */
+.kolbe{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.kolbe-step{display:flex;align-items:flex-start;gap:10px}
+.kolbe-num{background:var(--an);color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;margin-top:1px}
+.kolbe-num.sum{background:var(--accent)}
+.kolbe-text{font-size:13px;color:#293237;line-height:1.7}
+.kolbe-eq{font-family:var(--mono);color:var(--an-d);font-size:12.5px}
+.kolbe-note{font-size:12px;color:var(--muted)}
+
+/* CATHODE/ANODE BADGE */
+.el-badge{border-radius:var(--r-sm);padding:10px 14px;margin:6px 0;font-size:13.5px;line-height:1.6}
+.cb{background:var(--cath-t);border-left:4px solid var(--cath);color:var(--cath-d)}
+.ab{background:var(--an-t);border-left:4px solid var(--an);color:var(--an-d)}
+.el-badge strong{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:3px;font-family:var(--mono)}
+
+/* ПРАКТИКА */
+.prac-hd{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-family:var(--mono);margin:22px 0 14px;display:flex;align-items:center;gap:8px}
+.prac-hd::before{content:'';display:block;height:1px;flex:1;background:var(--border)}
+.zad-card{background:#F8FAFC;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.zad-num{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1px;color:var(--accent);text-transform:uppercase;margin-bottom:6px}
+.zad-q{font-size:14px;color:#0C1A2E;line-height:1.65;margin-bottom:10px;font-weight:600}
+.zad-tbl{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 10px}
+.zad-tbl th{background:#E0F2FE;color:#0B1E35;padding:6px 10px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+.zad-tbl td{padding:5px 10px;border-bottom:1px solid var(--border)}
+.zad-tbl tr:last-child td{border-bottom:none}
+.zad-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.zad-input{font-family:var(--mono);font-size:15px;font-weight:700;width:86px;padding:7px 10px;border-radius:var(--r-sm);border:1.5px solid var(--border);background:#fff;color:#0B1E35;letter-spacing:.2em;text-align:center;transition:border-color .15s}
+.zad-input:focus{outline:none;border-color:var(--accent)}
+.chk-btn{padding:7px 16px;border-radius:var(--r-sm);font-size:13px;font-weight:700;cursor:pointer;border:none;background:var(--accent);color:#fff;transition:background .15s}
+.chk-btn:hover{background:#0369A1}
+.zad-hint-lbl{font-size:12px;color:var(--muted)}
+.zad-fb{display:none;margin-top:8px;border-radius:var(--r-sm);padding:9px 12px;font-size:13px;line-height:1.6}
+.zad-fb.ok{display:block;background:#D1FAE5;border:1.5px solid #059669;color:#064E3B}
+.zad-fb.err{display:block;background:#FEE2E2;border:1.5px solid #DC2626;color:#7F1D1D}
+
+/* FINALE */
+.finale{background:linear-gradient(135deg,#0B1E35,#0F2640,#1E3A5F);border-radius:var(--r-lg);padding:28px;margin:40px 0;color:#fff}
+.finale h2{color:rgba(255,255,255,.7);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;font-family:var(--mono);margin-bottom:16px}
+.finale table{font-size:13px}
+.finale th{background:rgba(255,255,255,.12);color:#fff;border-bottom:1px solid rgba(255,255,255,.1)}
+.finale td{color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.1)}
+.finale tr:nth-child(even) td{background:rgba(255,255,255,.05)}
+.finale tr:hover td{background:rgba(56,189,248,.08)}
+.finale td:first-child{color:#38BDF8;font-family:var(--mono);font-size:12px}
+
+/* FLASHCARDS */
+.fc-section{background:linear-gradient(135deg,#0B1E35,#0F2640,#1E3A5F);border-radius:var(--r-lg);padding:32px 28px;margin:40px 0;color:#fff}
+.fc-header{text-align:center;margin-bottom:20px}
+.fc-title{font-size:clamp(18px,3vw,22px);font-weight:700;color:#fff;margin-bottom:6px}
+.fc-sub{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6}
+.fc-stats{display:flex;justify-content:center;gap:28px;margin-bottom:14px;font-size:13px;color:rgba(255,255,255,.55);font-family:var(--mono)}
+.fc-stats span{color:#38BDF8;font-weight:700;font-size:17px}
+.fc-counter{text-align:center;font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.4);margin-bottom:12px}
+.fc-perspective{perspective:900px;width:100%;max-width:560px;margin:0 auto;cursor:pointer}
+.fc-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,0,.2,1);min-height:200px}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);display:flex;align-items:center;justify-content:center;padding:24px 28px;text-align:center;min-height:200px;flex-direction:column;gap:8px}
+.fc-front{background:rgba(56,189,248,.08);border:1.5px solid rgba(56,189,248,.22);font-size:clamp(13px,2.5vw,16px);font-family:var(--mono);color:#fff;line-height:1.65}
+.fc-back{background:#fff;transform:rotateY(180deg);font-family:var(--mono);font-size:clamp(12px,2vw,14px);color:#0B1E35;line-height:1.75;opacity:0;transition:opacity 0s 0s}
+.fc-inner.flipped .fc-back{opacity:1;transition:opacity 0s .46s}
+.fc-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px}
+.fc-back-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:#0284C7;margin-bottom:4px}
+.fc-flip-btn{display:flex;align-items:center;gap:8px;background:rgba(56,189,248,.12);border:1.5px solid rgba(56,189,248,.25);color:#fff;font-size:14px;font-weight:600;border-radius:var(--r-sm);padding:10px 24px;cursor:pointer;transition:background .2s;margin:14px auto 0;width:fit-content}
+.fc-flip-btn:hover{background:rgba(56,189,248,.22)}
+.fc-btn-row{display:none;gap:12px;justify-content:center;margin-top:14px}
+.fc-btn-know{background:#059669;color:#fff;border:none;border-radius:var(--r-sm);padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-know:hover{background:#047857}
+.fc-btn-dk{background:#DC2626;color:#fff;border:none;border-radius:var(--r-sm);padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-dk:hover{background:#B91C1C}
+.fc-keys{text-align:center;font-size:11px;color:rgba(255,255,255,.3);margin-top:10px;font-family:var(--mono)}
+.fc-result{display:none;text-align:center;padding:16px 10px 4px}
+.fc-result h3{font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:12px}
+.fc-res-row{display:flex;gap:16px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.fc-res-card{background:rgba(255,255,255,.08);border-radius:var(--r-sm);padding:12px 22px;min-width:100px}
+.fc-res-num{font-size:28px;font-weight:700}
+.fc-res-lbl{font-size:11px;color:rgba(255,255,255,.55);font-family:var(--mono);margin-top:2px}
+.fc-restart-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.fc-restart-btn{background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.22);color:#fff;border-radius:var(--r-sm);padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
+.fc-restart-btn:hover{background:rgba(255,255,255,.22)}
+.fc-restart-btn.primary{background:#0284C7;border-color:#0284C7}
+
+#back-top{display:none}
+/* ── TOPBAR ── */
+#topbar{position:fixed;top:12px;right:16px;z-index:1100;display:flex;align-items:center;gap:4px;background:rgba(2,100,180,.18);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(2,132,199,.32);border-radius:999px;padding:5px 10px 5px 6px;box-shadow:0 4px 16px rgba(2,132,199,.2)}
+#tb-menu-btn{width:32px;height:32px;border-radius:50%;border:none;background:rgba(2,132,199,.22);color:#0B1E35;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+#tb-menu-btn:hover{background:rgba(2,132,199,.4)}
+#tb-up{width:30px;height:30px;border-radius:50%;border:none;background:none;color:#0284C7;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+#tb-up:hover{background:rgba(2,132,199,.15)}
+@media(prefers-color-scheme:dark){#topbar{background:rgba(2,100,180,.3);border-color:rgba(56,189,248,.3)}#tb-menu-btn{color:#e2f0ff}#tb-up{color:#7DD3FC}}
+@media print{#topbar,#menu-overlay,#menu-panel{display:none}}
+/* ── MENU ── */
+#menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:1199;backdrop-filter:blur(3px)}
+#menu-overlay.open{display:block}
+#menu-panel{position:fixed;top:0;right:0;width:min(300px,90vw);height:100%;background:#fff;box-shadow:-4px 0 32px rgba(2,100,180,.2);z-index:1200;transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
+#menu-panel.open{transform:translateX(0)}
+.menu-head{padding:18px 18px 12px;border-bottom:1px solid #E2E8F0;display:flex;align-items:center;justify-content:space-between}
+.menu-head-title{font-size:13px;font-weight:700;color:#0B1E35;letter-spacing:.3px}
+.menu-close{border:none;background:none;font-size:20px;cursor:pointer;color:#94A3B8;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .15s}
+.menu-close:hover{background:#F0F9FF}
+.menu-nav{padding:10px 8px;flex:1}
+.menu-nav a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;text-decoration:none;color:#334155;font-size:14px;transition:background .15s,color .15s;line-height:1.35}
+.menu-nav a:hover{background:#E0F2FE;color:#0284C7}
+.mn-num{min-width:22px;height:22px;background:#E0F2FE;color:#0284C7;border-radius:5px;font-family:var(--mono);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+/* ── TOPBAR ref-buttons ── */
+.tb-ref-btn{height:30px;padding:0 10px;border-radius:999px;border:1px solid rgba(2,132,199,.3);background:rgba(2,132,199,.14);color:#0284C7;font-size:11px;font-weight:700;font-family:var(--mono);cursor:pointer;letter-spacing:.3px;transition:background .2s}
+.tb-ref-btn:hover{background:rgba(2,132,199,.28)}
+/* ── PERIODIC TABLE ── */
+.pt-ru{border-collapse:collapse;font-size:11px;white-space:nowrap}
+.pt-ru th,.pt-ru td{padding:0;border:1px solid #c4b5fd}
+.pt-corner{background:#4c1d95;color:#fff;font-size:11px;font-weight:700;text-align:center;padding:4px;min-width:32px;writing-mode:vertical-rl;text-orientation:mixed}
+.pt-ru thead th{background:#5b21b6;color:#fff;font-weight:700;text-align:center;padding:3px 6px;font-size:12px}
+.pt-viii{background:#7c3aed!important}
+.pt-noble-hdr{background:#4b5563!important}
+.pt-period{background:#ede9fe;color:#4c1d95;font-weight:800;font-size:13px;text-align:center;padding:2px 5px;min-width:24px}
+.el6{min-width:54px;max-width:54px;height:56px;text-align:center;padding:2px;vertical-align:top;cursor:default;transition:transform .15s,box-shadow .15s;position:relative}
+.el6:hover{transform:scale(1.18);box-shadow:0 4px 16px #0004;z-index:20}
+.el6 .el-num{display:block;font-size:8px;font-weight:700;opacity:.7;line-height:1.1;text-align:left;padding-left:2px}
+.el6 .el-mass{display:block;font-size:8px;opacity:.65;line-height:1;text-align:right;padding-right:2px}
+.el6 .el-sym{display:block;font-size:17px;font-weight:800;line-height:1.1}
+.el6 .el-name{display:block;font-size:7.5px;opacity:.85;line-height:1.1}
+.el-blank6{background:#f8fafc;min-width:54px}
+.pt-f-label{background:#f5d840;color:#92400e;font-size:10px;font-weight:700;text-align:center;padding:4px 6px;min-width:70px;border:1px solid #7a4208}
+.pt-legend6{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.pt-leg-item6{padding:3px 10px;border-radius:5px;font-size:11px;font-weight:700}
+/* ── SOLUBILITY TABLE ── */
+.sol-table{border-collapse:collapse;font-size:12px;white-space:nowrap}
+.sol-table th,.sol-table td{border:1px solid #d1d5db;padding:4px 7px;text-align:center;transition:background .15s,color .15s}
+.sol-table thead th{background:#4c1d95;color:#fff;font-weight:700;cursor:pointer;user-select:none}
+.sol-table thead th:first-child{cursor:default}
+.sol-table thead th.sol-col-active{background:#f59e0b!important;color:#1c1917!important}
+.sol-table tbody th{background:#ede9fe;font-weight:700;color:#4c1d95;text-align:right;padding-right:10px;position:sticky;left:0;cursor:pointer;user-select:none}
+.sol-table tbody th.sol-row-active{background:#f59e0b!important;color:#1c1917!important}
+.sol-col-hl{background:#fef3c7!important}
+.sol-row-hl{background:#fef3c7!important}
+.sol-intersect{background:#f97316!important;color:#fff!important;font-weight:900!important;outline:3px solid #ea580c;outline-offset:-2px;position:relative;z-index:2}
+.sol-P{background:#dcfce7;color:#166534;font-weight:600}
+.sol-H{background:#fee2e2;color:#991b1b;font-weight:600}
+.sol-M{background:#fef9c3;color:#854d0e;font-weight:600}
+.sol-D{background:#f3f4f6;color:#6b7280}
+.sol-Q{background:#f8fafc;color:#94a3b8;font-style:italic}
+.sol-E{background:#f8fafc}
+.sol-legend{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;margin-top:10px}
+.sol-leg{padding:4px 12px;border-radius:6px;font-weight:600}
+#global-done{display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(2,44,34,.65);backdrop-filter:blur(5px)}
+#global-done.show{display:flex}
+.gd-inner{background:#fff;border-radius:20px;padding:48px 40px 40px;text-align:center;max-width:420px;width:90%;box-shadow:0 24px 80px rgba(5,150,105,.35);animation:gd-pop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes gd-pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+.gd-icon{font-size:56px;line-height:1;margin-bottom:16px}
+.gd-title{font-size:1.55rem;font-weight:800;color:#064e3b;margin-bottom:10px}
+.gd-sub{font-size:1rem;color:#065f46;margin-bottom:6px}
+.gd-msg{font-size:.95rem;color:#047857;margin-bottom:24px}
+.gd-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+.gd-chip{background:#D1FAE5;border:1.5px solid #6EE7B7;border-radius:100px;padding:7px 18px;font-size:13px;font-weight:700;color:#064e3b}
+.gd-chip b{color:#059669;font-size:17px;margin-right:5px}
+.gd-close{background:#059669;color:#fff;border:none;border-radius:10px;padding:12px 32px;font-size:1rem;font-weight:700;cursor:pointer;transition:background .15s}
+.gd-close:hover{background:#047857}
+@media(max-width:540px){.shell{padding:0 14px 60px}.hero{padding:36px 18px 32px;margin:0 -14px 0}.hero-bar{margin:0 -14px 32px;padding:12px 18px}}
+
+/* ── CAROUSEL ── */
+.carousel-wrap{margin:20px 0}
+.c-progress{margin-bottom:6px}
+.c-prog-label{font-size:12px;font-family:var(--mono);color:var(--muted);font-weight:600}
+.c-dots{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 12px}
+.c-dot{width:12px;height:12px;border-radius:50%;background:#BAE6FD;flex-shrink:0;transition:background .2s}
+.c-dot.done{background:#059669}
+.c-dot.current{background:var(--accent);box-shadow:0 0 0 2px rgba(2,132,199,.35)}
+.c-card{background:#F8FAFC;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:16px 18px;box-shadow:var(--shadow)}
+.c-id{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1px;color:var(--accent);text-transform:uppercase;margin-bottom:6px}
+.c-text{font-size:14px;color:#0C1A2E;line-height:1.65;margin-bottom:12px}
+.c-text table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0 8px}
+.c-text th{background:#E0F2FE;color:#0B1E35;padding:6px 10px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+.c-text td{padding:5px 10px;border-bottom:1px solid var(--border)}
+.c-text tr:last-child td{border-bottom:none}
+.c-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.c-input{font-family:var(--mono);font-size:15px;font-weight:700;width:100px;padding:7px 10px;border-radius:var(--r-sm);border:1.5px solid var(--border);background:#fff;color:#0B1E35;letter-spacing:.2em;text-align:center;transition:border-color .15s}
+.c-input:focus{outline:none;border-color:var(--accent)}
+.c-btn{padding:7px 16px;border-radius:var(--r-sm);font-size:13px;font-weight:700;cursor:pointer;border:none;background:var(--accent);color:#fff;transition:background .15s}
+.c-btn:hover{background:#0369A1}
+.c-btn.next{display:none;background:#059669}
+.c-btn.next:hover{background:#047857}
+.c-btn.next.show{display:inline-block}
+.c-fb{font-size:13px;margin-top:8px;border-radius:var(--r-sm);padding:7px 11px;display:none}
+.c-fb.ok{display:block;background:#D1FAE5;border:1.5px solid #059669;color:#064E3B}
+.c-fb.err{display:block;background:#FEE2E2;border:1.5px solid #DC2626;color:#7F1D1D}
+.c-sol{margin-top:10px;background:#F0F9FF;border:1.5px solid #BAE6FD;border-radius:var(--r-sm);padding:10px 13px;font-size:13px;color:#0C4A6E;line-height:1.65;display:none}
+.c-sol.show{display:block}
+.c-done{display:none;text-align:center;padding:24px;background:linear-gradient(135deg,#0B1E35,#0F2640);border-radius:var(--r-sm);margin-top:12px}
+.c-done.show{display:block}
+.c-done-icon{font-size:40px;margin-bottom:8px}
+.c-done-title{color:#fff;font-size:18px;font-weight:700;margin-bottom:4px}
+.c-done-sub{color:rgba(255,255,255,.6);font-size:13px;margin-bottom:16px}
+.c-reset-btn{padding:8px 20px;border-radius:var(--r-sm);background:var(--accent);color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer}
+
+</style>
+</head>
+<body>
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+
+<!-- ТОПБАР -->
+<div id="topbar">
+  <button id="tb-menu-btn" onclick="openMenu()" title="Содержание">☰</button>
+  <button class="tb-ref-btn" onclick="togglePS()" title="Таблица Менделеева [T]">Пд</button>
+  <button class="tb-ref-btn" onclick="toggleRS()" title="Таблица растворимости [R]">Раст</button>
+  <button id="tb-trash" onclick="resetAllProgress()" title="Сбросить весь прогресс" style="width:30px;height:30px;border-radius:50%;border:none;background:none;color:#ef4444;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s">🗑️</button>
+  <button id="tb-up" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">↑</button>
+</div>
+
+<!-- МЕНЮ -->
+<div id="menu-overlay" onclick="closeMenu()"></div>
+<div id="menu-panel">
+  <div class="menu-head">
+    <span class="menu-head-title">Содержание</span>
+    <button class="menu-close" onclick="closeMenu()">✕</button>
+  </div>
+  <nav class="menu-nav">
+    <a href="#s1" onclick="closeMenu()"><span class="mn-num">1</span>Основные понятия. Катод и анод</a>
+    <a href="#s2" onclick="closeMenu()"><span class="mn-num">2</span>Электролиз расплавов</a>
+    <a href="#s3" onclick="closeMenu()"><span class="mn-num">3</span>Катодный процесс в растворах</a>
+    <a href="#s4" onclick="closeMenu()"><span class="mn-num">4</span>Анодный процесс в растворах</a>
+    <a href="#s5" onclick="closeMenu()"><span class="mn-num">5</span>Полные уравнения электролиза</a>
+    <a href="#s6" onclick="closeMenu()"><span class="mn-num">6</span>Промышленное применение</a>
+    <a href="#fc-anchor" onclick="closeMenu()"><span class="mn-num">🃏</span>Флэш-карточки</a>
+  </nav>
+</div>
+
+<!-- ══ ТАБЛИЦА МЕНДЕЛЕЕВА ══ -->
+<div id="ps-overlay" onclick="if(event.target===this)togglePS()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1300;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:16px;padding:20px 24px;max-width:98vw;max-height:92vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div style="font-size:16px;font-weight:800;color:#4c1d95">⚛️ Периодическая система Д.И. Менделеева</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span style="font-size:11px;color:#999;font-family:monospace">T или Esc — закрыть</span>
+        <button onclick="togglePS()" style="background:#f0f0f0;border:none;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:14px;font-weight:700">✕</button>
+      </div>
+    </div>
+    <div class="pt-legend6" style="margin-bottom:10px">
+      <span class="pt-leg-item6" style="background:#8B7ED8;color:#2D1B69">s-элементы</span>
+      <span class="pt-leg-item6" style="background:#6EC9A4;color:#064C30">p-элементы</span>
+      <span class="pt-leg-item6" style="background:#7EC4F0;color:#0A2860">d-элементы</span>
+      <span class="pt-leg-item6" style="background:#F0C840;color:#5A2E04">f-элементы</span>
+    </div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table class="pt-ru">
+    <thead><tr><th rowspan="2" class="pt-corner">Пе&shy;ри&shy;од</th><th colspan="7">Группы</th><th colspan="3">VIII</th><th rowspan="2" class="pt-noble-hdr">0</th></tr>
+    <tr><th>I</th><th>II</th><th>III</th><th>IV</th><th>V</th><th>VI</th><th>VII</th><th class="pt-viii">A</th><th class="pt-viii">B</th><th class="pt-viii">C</th></tr></thead>
+    <tbody>
+    <tr><td class="pt-period">1</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">1</span><span class="el-mass">1,008</span><span class="el-sym">H</span><span class="el-name">Водород</span></td><td colspan="5" class="el-blank6"></td><td class="el6" style="background:#f1f5f9;color:#6b7280;font-style:italic"><span class="el-sym" style="font-size:13px">(H)</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">2</span><span class="el-mass">4,00</span><span class="el-sym">He</span><span class="el-name">Гелий</span></td></tr>
+    <tr><td class="pt-period">2</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">3</span><span class="el-mass">6,94</span><span class="el-sym">Li</span><span class="el-name">Литий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">4</span><span class="el-mass">9,01</span><span class="el-sym">Be</span><span class="el-name">Бериллий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">5</span><span class="el-mass">10,81</span><span class="el-sym">B</span><span class="el-name">Бор</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">6</span><span class="el-mass">12,01</span><span class="el-sym">C</span><span class="el-name">Углерод</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">7</span><span class="el-mass">14,00</span><span class="el-sym">N</span><span class="el-name">Азот</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">8</span><span class="el-mass">16,00</span><span class="el-sym">O</span><span class="el-name">Кислород</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">9</span><span class="el-mass">19,00</span><span class="el-sym">F</span><span class="el-name">Фтор</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">10</span><span class="el-mass">20,18</span><span class="el-sym">Ne</span><span class="el-name">Неон</span></td></tr>
+    <tr><td class="pt-period">3</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">11</span><span class="el-mass">22,99</span><span class="el-sym">Na</span><span class="el-name">Натрий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">12</span><span class="el-mass">24,31</span><span class="el-sym">Mg</span><span class="el-name">Магний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">13</span><span class="el-mass">26,98</span><span class="el-sym">Al</span><span class="el-name">Алюминий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">14</span><span class="el-mass">28,09</span><span class="el-sym">Si</span><span class="el-name">Кремний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">15</span><span class="el-mass">30,97</span><span class="el-sym">P</span><span class="el-name">Фосфор</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">16</span><span class="el-mass">32,06</span><span class="el-sym">S</span><span class="el-name">Сера</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">17</span><span class="el-mass">35,45</span><span class="el-sym">Cl</span><span class="el-name">Хлор</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">18</span><span class="el-mass">39,95</span><span class="el-sym">Ar</span><span class="el-name">Аргон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">4</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">19</span><span class="el-mass">39,10</span><span class="el-sym">K</span><span class="el-name">Калий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">20</span><span class="el-mass">40,08</span><span class="el-sym">Ca</span><span class="el-name">Кальций</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">21</span><span class="el-mass">44,96</span><span class="el-sym">Sc</span><span class="el-name">Скандий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">22</span><span class="el-mass">47,90</span><span class="el-sym">Ti</span><span class="el-name">Титан</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">23</span><span class="el-mass">50,94</span><span class="el-sym">V</span><span class="el-name">Ванадий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">24</span><span class="el-mass">52,00</span><span class="el-sym">Cr</span><span class="el-name">Хром</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">25</span><span class="el-mass">54,94</span><span class="el-sym">Mn</span><span class="el-name">Марганец</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">26</span><span class="el-mass">55,85</span><span class="el-sym">Fe</span><span class="el-name">Железо</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">27</span><span class="el-mass">58,93</span><span class="el-sym">Co</span><span class="el-name">Кобальт</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">28</span><span class="el-mass">58,69</span><span class="el-sym">Ni</span><span class="el-name">Никель</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">29</span><span class="el-mass">63,55</span><span class="el-sym">Cu</span><span class="el-name">Медь</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">30</span><span class="el-mass">65,39</span><span class="el-sym">Zn</span><span class="el-name">Цинк</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">31</span><span class="el-mass">69,72</span><span class="el-sym">Ga</span><span class="el-name">Галлий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">32</span><span class="el-mass">72,59</span><span class="el-sym">Ge</span><span class="el-name">Германий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">33</span><span class="el-mass">74,92</span><span class="el-sym">As</span><span class="el-name">Мышьяк</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">34</span><span class="el-mass">78,96</span><span class="el-sym">Se</span><span class="el-name">Селен</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">35</span><span class="el-mass">79,90</span><span class="el-sym">Br</span><span class="el-name">Бром</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">36</span><span class="el-mass">83,80</span><span class="el-sym">Kr</span><span class="el-name">Криптон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">5</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">37</span><span class="el-mass">85,47</span><span class="el-sym">Rb</span><span class="el-name">Рубидий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">38</span><span class="el-mass">87,62</span><span class="el-sym">Sr</span><span class="el-name">Стронций</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">39</span><span class="el-mass">88,91</span><span class="el-sym">Y</span><span class="el-name">Иттрий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">40</span><span class="el-mass">91,22</span><span class="el-sym">Zr</span><span class="el-name">Цирконий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">41</span><span class="el-mass">92,91</span><span class="el-sym">Nb</span><span class="el-name">Ниобий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">42</span><span class="el-mass">95,94</span><span class="el-sym">Mo</span><span class="el-name">Молибден</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">43</span><span class="el-mass">98,91</span><span class="el-sym">Tc</span><span class="el-name">Технеций</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">44</span><span class="el-mass">101,07</span><span class="el-sym">Ru</span><span class="el-name">Рутений</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">45</span><span class="el-mass">102,91</span><span class="el-sym">Rh</span><span class="el-name">Родий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">46</span><span class="el-mass">106,42</span><span class="el-sym">Pd</span><span class="el-name">Палладий</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">47</span><span class="el-mass">107,87</span><span class="el-sym">Ag</span><span class="el-name">Серебро</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">48</span><span class="el-mass">112,41</span><span class="el-sym">Cd</span><span class="el-name">Кадмий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">49</span><span class="el-mass">114,82</span><span class="el-sym">In</span><span class="el-name">Индий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">50</span><span class="el-mass">118,69</span><span class="el-sym">Sn</span><span class="el-name">Олово</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">51</span><span class="el-mass">121,75</span><span class="el-sym">Sb</span><span class="el-name">Сурьма</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">52</span><span class="el-mass">127,60</span><span class="el-sym">Te</span><span class="el-name">Теллур</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">53</span><span class="el-mass">126,90</span><span class="el-sym">I</span><span class="el-name">Иод</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">54</span><span class="el-mass">131,29</span><span class="el-sym">Xe</span><span class="el-name">Ксенон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">6</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">55</span><span class="el-mass">132,91</span><span class="el-sym">Cs</span><span class="el-name">Цезий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">56</span><span class="el-mass">137,33</span><span class="el-sym">Ba</span><span class="el-name">Барий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04;opacity:.85"><span class="el-num">57</span><span class="el-mass">138,91</span><span class="el-sym">La</span><span class="el-name">Лантан*</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">72</span><span class="el-mass">178,49</span><span class="el-sym">Hf</span><span class="el-name">Гафний</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">73</span><span class="el-mass">180,95</span><span class="el-sym">Ta</span><span class="el-name">Тантал</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">74</span><span class="el-mass">183,85</span><span class="el-sym">W</span><span class="el-name">Вольфрам</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">75</span><span class="el-mass">186,21</span><span class="el-sym">Re</span><span class="el-name">Рений</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">76</span><span class="el-mass">190,2</span><span class="el-sym">Os</span><span class="el-name">Осмий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">77</span><span class="el-mass">192,22</span><span class="el-sym">Ir</span><span class="el-name">Иридий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">78</span><span class="el-mass">195,08</span><span class="el-sym">Pt</span><span class="el-name">Платина</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">79</span><span class="el-mass">196,97</span><span class="el-sym">Au</span><span class="el-name">Золото</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">80</span><span class="el-mass">200,59</span><span class="el-sym">Hg</span><span class="el-name">Ртуть</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">81</span><span class="el-mass">204,38</span><span class="el-sym">Tl</span><span class="el-name">Таллий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">82</span><span class="el-mass">207,2</span><span class="el-sym">Pb</span><span class="el-name">Свинец</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">83</span><span class="el-mass">208,98</span><span class="el-sym">Bi</span><span class="el-name">Висмут</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">84</span><span class="el-mass">[209]</span><span class="el-sym">Po</span><span class="el-name">Полоний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">85</span><span class="el-mass">[210]</span><span class="el-sym">At</span><span class="el-name">Астат</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">86</span><span class="el-mass">[222]</span><span class="el-sym">Rn</span><span class="el-name">Радон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">7</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">87</span><span class="el-mass">[223]</span><span class="el-sym">Fr</span><span class="el-name">Франций</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">88</span><span class="el-mass">226</span><span class="el-sym">Ra</span><span class="el-name">Радий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04;opacity:.85"><span class="el-num">89</span><span class="el-mass">[227]</span><span class="el-sym">Ac</span><span class="el-name">Актиний**</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">104</span><span class="el-mass">[261]</span><span class="el-sym">Rf</span><span class="el-name">Резерф.</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">105</span><span class="el-mass">[262]</span><span class="el-sym">Db</span><span class="el-name">Дубний</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">106</span><span class="el-mass">[266]</span><span class="el-sym">Sg</span><span class="el-name">Сиборг.</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">107</span><span class="el-mass">[264]</span><span class="el-sym">Bh</span><span class="el-name">Борий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">108</span><span class="el-mass">[269]</span><span class="el-sym">Hs</span><span class="el-name">Хассий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">109</span><span class="el-mass">[268]</span><span class="el-sym">Mt</span><span class="el-name">Мейтн.</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">110</span><span class="el-mass">[271]</span><span class="el-sym">Ds</span><span class="el-name">Дармш.</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">111</span><span class="el-mass">[280]</span><span class="el-sym">Rg</span><span class="el-name">Рентг.</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">112</span><span class="el-mass">[285]</span><span class="el-sym">Cn</span><span class="el-name">Копер.</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">113</span><span class="el-mass">[286]</span><span class="el-sym">Nh</span><span class="el-name">Нихоний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">114</span><span class="el-mass">[289]</span><span class="el-sym">Fl</span><span class="el-name">Флеровий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">115</span><span class="el-mass">[293]</span><span class="el-sym">Mc</span><span class="el-name">Московий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">116</span><span class="el-mass">[293]</span><span class="el-sym">Lv</span><span class="el-name">Ливерм.</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">117</span><span class="el-mass">[294]</span><span class="el-sym">Ts</span><span class="el-name">Теннесин</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">118</span><span class="el-mass">[294]</span><span class="el-sym">Og</span><span class="el-name">Оганесон</span></td></tr>
+    </tbody></table>
+    <div style="margin-top:4px;overflow-x:auto"><table class="pt-ru" style="margin-left:0"><tbody>
+    <tr><td class="pt-f-label">*Лантаноиды<br>Период 6</td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">58</span><span class="el-mass">140,12</span><span class="el-sym">Ce</span><span class="el-name">Церий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">59</span><span class="el-mass">140,91</span><span class="el-sym">Pr</span><span class="el-name">Празеодим</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">60</span><span class="el-mass">144,24</span><span class="el-sym">Nd</span><span class="el-name">Неодим</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">61</span><span class="el-mass">[145]</span><span class="el-sym">Pm</span><span class="el-name">Прометий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">62</span><span class="el-mass">150,36</span><span class="el-sym">Sm</span><span class="el-name">Самарий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">63</span><span class="el-mass">151,97</span><span class="el-sym">Eu</span><span class="el-name">Европий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">64</span><span class="el-mass">157,25</span><span class="el-sym">Gd</span><span class="el-name">Гадолиний</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">65</span><span class="el-mass">158,93</span><span class="el-sym">Tb</span><span class="el-name">Тербий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">66</span><span class="el-mass">162,50</span><span class="el-sym">Dy</span><span class="el-name">Диспрозий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">67</span><span class="el-mass">164,93</span><span class="el-sym">Ho</span><span class="el-name">Гольмий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">68</span><span class="el-mass">167,26</span><span class="el-sym">Er</span><span class="el-name">Эрбий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">69</span><span class="el-mass">168,93</span><span class="el-sym">Tm</span><span class="el-name">Тулий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">70</span><span class="el-mass">173,04</span><span class="el-sym">Yb</span><span class="el-name">Иттербий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">71</span><span class="el-mass">174,97</span><span class="el-sym">Lu</span><span class="el-name">Лютеций</span></td></tr>
+    <tr><td class="pt-f-label">**Актиноиды<br>Период 7</td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">90</span><span class="el-mass">232,04</span><span class="el-sym">Th</span><span class="el-name">Торий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">91</span><span class="el-mass">231,04</span><span class="el-sym">Pa</span><span class="el-name">Протакт.</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">92</span><span class="el-mass">238,03</span><span class="el-sym">U</span><span class="el-name">Уран</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">93</span><span class="el-mass">[237]</span><span class="el-sym">Np</span><span class="el-name">Нептуний</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">94</span><span class="el-mass">[244]</span><span class="el-sym">Pu</span><span class="el-name">Плутоний</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">95</span><span class="el-mass">[243]</span><span class="el-sym">Am</span><span class="el-name">Америций</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">96</span><span class="el-mass">[247]</span><span class="el-sym">Cm</span><span class="el-name">Кюрий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">97</span><span class="el-mass">[247]</span><span class="el-sym">Bk</span><span class="el-name">Берклий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">98</span><span class="el-mass">[251]</span><span class="el-sym">Cf</span><span class="el-name">Калиф.</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">99</span><span class="el-mass">[252]</span><span class="el-sym">Es</span><span class="el-name">Эйнштейн.</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">100</span><span class="el-mass">[257]</span><span class="el-sym">Fm</span><span class="el-name">Фермий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">101</span><span class="el-mass">[258]</span><span class="el-sym">Md</span><span class="el-name">Менделевий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">102</span><span class="el-mass">[259]</span><span class="el-sym">No</span><span class="el-name">Нобелий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">103</span><span class="el-mass">[262]</span><span class="el-sym">Lr</span><span class="el-name">Лоуренсий</span></td></tr>
+    </tbody></table></div></div>
+  </div>
+</div>
+
+<!-- ══ ТАБЛИЦА РАСТВОРИМОСТИ ══ -->
+<div id="rs-overlay" onclick="if(event.target===this)toggleRS()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1300;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;border-radius:16px;padding:18px 22px;max-width:98vw;max-height:93vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <div style="font-size:15px;font-weight:800;color:#4c1d95">🧪 Таблица растворимости кислот, солей и оснований</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span style="font-size:11px;color:#999;font-family:monospace">R или Esc — закрыть</span>
+        <button onclick="toggleRS()" style="background:#f0f0f0;border:none;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:14px;font-weight:700">✕</button>
+      </div>
+    </div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+    <table class="sol-table">
+<thead><tr><th style="min-width:90px"></th><th>H⁺</th><th>Li⁺</th><th>K⁺</th><th>Na⁺</th><th>NH₄⁺</th><th>Ba²⁺</th><th>Ca²⁺</th><th>Mg²⁺</th><th>Sr²⁺</th><th>Al³⁺</th><th>Cr³⁺</th><th>Fe²⁺</th><th>Fe³⁺</th><th>Mn²⁺</th><th>Zn²⁺</th><th>Ag⁺</th><th>Hg²⁺</th><th>Pb²⁺</th><th>Sn²⁺</th><th>Cu²⁺</th></tr></thead>
+<tbody>
+<tr><th>OH⁻</th><td class="sol-E"></td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>F⁻</th><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>Cl⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>Br⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>I⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-Q">?</td></tr>
+<tr><th>S²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-D">–</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>HS⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>SO₃²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>HSO₃⁻</th><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>SO₄²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>HSO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-D">–</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>NO₃⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td></tr>
+<tr><th>NO₂⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-M">M</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>PO₄³⁻</th><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>HPO₄²⁻</th><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-Q">?</td></tr>
+<tr><th>H₂PO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-D">–</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>CO₃²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-H">H</td></tr>
+<tr><th>HCO₃⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>CH₃COO⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td></tr>
+<tr><th>SiO₃²⁻</th><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>MnO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>Cr₂O₇²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-Q">?</td><td class="sol-P">P</td></tr>
+<tr><th>CrO₄²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>ClO₃⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td></tr>
+<tr><th>ClO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td></tr>
+</tbody>
+</table>
+    </div>
+    <div class="sol-legend" style="margin-top:10px">
+  <span class="sol-leg sol-P">Р — растворяется (&gt;1 г/100 г H₂O)</span>
+  <span class="sol-leg sol-M">М — мало растворяется (0,1–1 г)</span>
+  <span class="sol-leg sol-H">Н — не растворяется (&lt;0,01 г)</span>
+  <span class="sol-leg sol-D">– — разлагается в воде</span>
+  <span class="sol-leg sol-Q">? — нет достоверных данных</span>
+</div>
+    <div style="margin-top:12px;padding:10px 14px;background:linear-gradient(90deg,#fef2f2,#f5d840,#fef9c3);border-radius:8px;border:1px solid #7a4208">
+      <div style="font-size:11px;font-weight:800;color:#92400e;margin-bottom:5px">⚡ РЯД АКТИВНОСТИ / ЭЛЕКТРОХИМИЧЕСКИЙ РЯД НАПРЯЖЕНИЙ</div>
+      <div style="font-size:11px;line-height:1.8;font-family:monospace">
+        <span style="color:#dc2626;font-weight:700">Li Cs Rb K Ba Sr Ca Na Mg Sc Be Ti Hf Al Zr V Mn Cr Zn Fe Cd Co Ni Mo Sn W Pb</span>
+        &nbsp;<b style="font-size:14px;color:#111;padding:0 4px">H</b>&nbsp;
+        <span style="color:#059669;font-weight:700">Ge Sb Bi Cu Re Hg Ag Pd Pt Au</span>
+      </div>
+      <div style="font-size:9px;color:#92400e;margin-top:2px">← активность металлов уменьшается →</div>
+    </div>
+  </div>
+</div>
+
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eye">ЕГЭ · Химия · Задание 20 · 1 балл · Задание 31 · 4 балла</div>
+  <h1>Электролиз</h1>
+  <p class="hero-sub">ОВР на электродах при пропускании постоянного тока. Катод — восстановление, анод — окисление. Расплавы и растворы.</p>
+  <div class="hero-chips">
+    <span class="hc bl">⊖ Катод (−)</span>
+    <span class="hc rd">⊕ Анод (+)</span>
+    <span class="hc">Расплавы</span>
+    <span class="hc">Растворы</span>
+    <span class="hc">Ряд напряжений</span>
+    <span class="hc gr">Флэшкарточки</span>
+  </div>
+</div>
+<div class="hero-bar">
+  <div class="hb-item"><div class="hb-dot" style="background:#60A5FA"></div>Катод (−) — восстановление</div>
+  <div class="hb-item"><div class="hb-dot" style="background:#F87171"></div>Анод (+) — окисление</div>
+  <div class="hb-item"><div class="hb-dot" style="background:#A78BFA"></div>Средние металлы — оба процесса</div>
+</div>
+
+<!-- ═══ БЛОК 1 ═══ -->
+<div class="section" id="s1">
+  <div class="sec-hdr" onclick="toggle('s1')" id="hdr-s1">
+    <div class="sec-num">1</div>
+    <div class="sec-title">Основные понятия. Катод и анод</div>
+  </div>
+  <div class="acc-body" id="body-s1">
+    <p class="body"><b>Электролиз</b> — ОВР, происходящие на электродах при пропускании постоянного тока через расплав или раствор электролита.</p>
+
+    <div class="elec-grid">
+      <div class="ec ec-cath">
+        <h4>⊖ Катод (−)</h4>
+        <p><b>Восстановление</b> — катионы принимают электроны</p>
+        <p class="mono">Mⁿ⁺ + nē = M⁰</p>
+        <p>К катоду движутся <b>катионы</b></p>
+      </div>
+      <div class="ec ec-an">
+        <h4>⊕ Анод (+)</h4>
+        <p><b>Окисление</b> — анионы отдают электроны</p>
+        <p class="mono">Aᵐ⁻ − mē = A⁰</p>
+        <p>К аноду движутся <b>анионы</b></p>
+      </div>
+    </div>
+
+    <div class="memo">
+      <div class="memo-hd">💡 Мнемоника</div>
+      На <b>К</b>атоде — <b>К</b>атионы — <b>В</b>осстановление.<br>
+      На <b>А</b>ноде — <b>А</b>нионы — <b>О</b>кисление.
+    </div>
+
+    <h2 class="sub">Виды анода</h2>
+    <ul style="font-size:14px;line-height:1.9;padding-left:20px">
+      <li><b>Инертный анод</b> (Pt, графит, уголь) — сам не окисляется, окисляются анионы или вода</li>
+      <li><b>Растворимый анод</b> (Cu, Zn, Fe…) — металл анода окисляется: <span style="font-family:var(--mono);color:var(--accent)">M⁰ − nē = Mⁿ⁺</span>. Правила для анионов не действуют!</li>
+    </ul>
+
+    <h2 class="sub">Расплав vs Раствор</h2>
+    <div class="elec-grid">
+      <div class="ec ec-cath">
+        <h4>🔥 Расплав</h4>
+        <p>Вещество <b>нагрели до жидкого</b> состояния. Воды нет.</p>
+        <p>NaCl при 801 °C → жидкий NaCl, свободные Na⁺ и Cl⁻</p>
+        <p style="font-size:12px;margin-top:6px">👉 Только ионы самого вещества</p>
+      </div>
+      <div class="ec ec-an">
+        <h4>💧 Раствор</h4>
+        <p>Вещество <b>растворили в воде</b>. H₂O тоже участвует.</p>
+        <p>NaCl в воде → Na⁺, Cl⁻ и молекулы H₂O</p>
+        <p style="font-size:12px;margin-top:6px">👉 На катоде конкурируют ионы и вода</p>
+      </div>
+    </div>
+    <div class="box bi">Ключевое отличие: <b>расплав = только ионы вещества</b>, <b>раствор = ионы + вода</b>. Именно наличие воды меняет всё.</div>
+  </div>
+</div>
+
+<!-- ═══ БЛОК 2 ═══ -->
+<div class="section" id="s2">
+  <div class="sec-hdr" onclick="toggle('s2')" id="hdr-s2">
+    <div class="sec-num">2</div>
+    <div class="sec-title">Электролиз расплавов</div>
+  </div>
+  <div class="acc-body" id="body-s2">
+    <p class="body">В расплавах воды нет — всё просто: катионы → катод, анионы → анод. Никакой конкуренции.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Расплав</th><th>Катод (−)</th><th>Анод (+)</th><th>Итог</th></tr>
+        <tr><td>NaCl</td><td>2Na⁺+2ē=2Na</td><td>2Cl⁻−2ē=Cl₂↑</td><td>2Na + Cl₂</td></tr>
+        <tr><td>NaOH</td><td>4Na⁺+4ē=4Na</td><td>4OH⁻−4ē=2H₂O+O₂↑</td><td>4Na + O₂ + 2H₂O</td></tr>
+        <tr><td>Al₂O₃ (криолит)</td><td>4Al³⁺+12ē=4Al</td><td>6O²⁻−12ē=3O₂↑</td><td>4Al + 3O₂</td></tr>
+        <tr><td>CaF₂</td><td>Ca²⁺+2ē=Ca</td><td>2F⁻−2ē=F₂↑</td><td>Ca + F₂</td></tr>
+        <tr><td>Al₂S₃</td><td>2Al³⁺+6ē=2Al</td><td>3S²⁻−6ē=3S</td><td>2Al + 3S</td></tr>
+      </table>
+    </div>
+
+    <h2 class="sub">Что образуется на электродах — схемы</h2>
+
+    <div class="melt-scheme">
+      <div class="melt-label">Расплав NaCl</div>
+      <div class="melt-row">
+        <div class="melt-el melt-cath"><div class="lbl">⊖ Катод</div><div class="big">Na</div><div class="eq2">2Na⁺ + 2ē = 2Na</div></div>
+        <div class="melt-mid"><span class="melt-arr">←</span><span class="melt-center">NaCl</span><span class="melt-arr">→</span></div>
+        <div class="melt-el melt-an"><div class="lbl">⊕ Анод</div><div class="big">Cl₂↑</div><div class="eq2">2Cl⁻ − 2ē = Cl₂↑</div></div>
+      </div>
+    </div>
+
+    <div class="melt-scheme">
+      <div class="melt-label">Расплав NaOH</div>
+      <div class="melt-sub">OH⁻ → анод: 4OH⁻ − 4ē = O₂ + 2H₂O (нет Cl⁻ → выделяется O₂, не Cl₂)</div>
+      <div class="melt-row">
+        <div class="melt-el melt-cath"><div class="lbl">⊖ Катод</div><div class="big">Na</div><div class="eq2">Na⁺ + ē = Na</div></div>
+        <div class="melt-mid"><span class="melt-arr">←</span><span class="melt-center">NaOH</span><span class="melt-arr">→</span></div>
+        <div class="melt-el melt-an"><div class="lbl">⊕ Анод</div><div class="big">O₂↑</div><div class="eq2">4OH⁻ − 4ē = O₂ + 2H₂O</div></div>
+      </div>
+    </div>
+
+    <div class="melt-scheme">
+      <div class="melt-label">Расплав Al₂O₃ (в криолите Na₃AlF₆)</div>
+      <div class="melt-sub">Криолит снижает температуру плавления: 2050 °C → ~950 °C</div>
+      <div class="melt-row">
+        <div class="melt-el melt-cath"><div class="lbl">⊖ Катод</div><div class="big">Al</div><div class="eq2">Al³⁺ + 3ē = Al</div></div>
+        <div class="melt-mid"><span class="melt-arr">←</span><span class="melt-center">Al₂O₃</span><span class="melt-arr">→</span></div>
+        <div class="melt-el melt-an"><div class="lbl">⊕ Анод</div><div class="big">O₂↑</div><div class="eq2">2O²⁻ − 4ē = O₂↑</div></div>
+      </div>
+    </div>
+
+    <div class="melt-scheme">
+      <div class="melt-label">Расплав CaF₂</div>
+      <div class="melt-row">
+        <div class="melt-el melt-cath"><div class="lbl">⊖ Катод</div><div class="big">Ca</div><div class="eq2">Ca²⁺ + 2ē = Ca</div></div>
+        <div class="melt-mid"><span class="melt-arr">←</span><span class="melt-center">CaF₂</span><span class="melt-arr">→</span></div>
+        <div class="melt-el melt-an"><div class="lbl">⊕ Анод</div><div class="big">F₂↑</div><div class="eq2">2F⁻ − 2ē = F₂↑</div></div>
+      </div>
+    </div>
+
+    <div class="box bi">Al, Na, Ca, Mg, Li, F₂ получают <b>только</b> электролизом расплавов — в водном растворе вместо металла выделяется H₂.</div>
+
+    <div class="prac-hd">Практика — Линия 20</div>
+    <div id="cr-s2" class="carousel-wrap"></div>
+  </div>
+</div>
+
+<!-- ═══ БЛОК 3 ═══ -->
+<div class="section" id="s3">
+  <div class="sec-hdr" onclick="toggle('s3')" id="hdr-s3">
+    <div class="sec-num">3</div>
+    <div class="sec-title">Катодный процесс в растворах</div>
+  </div>
+  <div class="acc-body" id="body-s3">
+    <p class="body">На катоде в растворе конкурируют катион металла и вода. Победитель зависит от положения металла в ряду напряжений.</p>
+
+    <h2 class="sub">Ряд напряжений металлов</h2>
+    <div class="volt-wrap">
+      <div class="volt-inner">
+        <div class="volt-bar">
+          <div class="volt-z1">⬅ активные</div>
+          <div class="volt-z2">средние</div>
+          <div class="volt-z3">правее H₂ ➡</div>
+        </div>
+        <div class="volt-metals" style="margin-top:4px">
+          <div class="volt-m1">Li K Ba Ca Na Mg Al</div>
+          <div class="volt-m2">Mn Zn Fe Ni Sn Pb</div>
+          <div class="volt-m3">Sb Bi Cu Hg Ag Pt Au</div>
+        </div>
+        <div class="volt-zones" style="margin-top:8px">
+          <div class="volt-zone vz1"><b>Только H₂↑</b><br>2H₂O+2ē=H₂↑+2OH⁻<br><span style="font-size:11px">металл не осаждается</span></div>
+          <div class="volt-zone vz2"><b>H₂↑ + металл</b><br>оба процесса<br><span style="font-size:11px">одновременно</span></div>
+          <div class="volt-zone vz3"><b>Только металл</b><br>Mⁿ⁺+nē=M⁰<br><span style="font-size:11px">вода не участвует</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dtree" style="margin-top:14px">
+      <div class="dtree-q">Какой металл в составе соли?</div>
+      <div class="dtree-a">▶ <b>Li … Al</b> (активные) → выделяется <b>водород</b>: <span class="dtree-mono">2H₂O + 2ē = H₂↑ + 2OH⁻</span></div>
+      <div class="dtree-a">▶ <b>Mn … Pb</b> (средние) → выделяется <b>H₂ и металл</b>: оба процесса</div>
+      <div class="dtree-a">▶ <b>Sb … Au</b> (правее H₂) → выделяется <b>только металл</b>: <span class="dtree-mono">Mⁿ⁺ + nē = M⁰</span></div>
+    </div>
+
+    <div class="trap">
+      <div class="trap-hd">⚠ Ловушка: кислота в растворе</div>
+      Если есть H⁺ → всегда выделяется водород: <span style="font-family:var(--mono)">2H⁺ + 2ē = H₂↑</span>, независимо от металла.
+    </div>
+
+    <div class="memo">
+      <div class="memo-hd">💡 Три зоны на катоде</div>
+      <ul>
+        <li>🔵 Li…Al — <b>«Вода»</b>: слишком активные → только H₂↑</li>
+        <li>🟣 Mn…Pb — <b>«Оба»</b>: средние → H₂↑ и металл</li>
+        <li>🔴 правее H₂ — <b>«Металл»</b>: благородные → только металл</li>
+      </ul>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Соль (р-р)</th><th>Катион</th><th>Процесс на катоде</th><th>Продукт</th></tr>
+        <tr><td>NaCl</td><td>Na⁺ (до Al)</td><td>2H₂O+2ē=H₂+2OH⁻</td><td>H₂↑</td></tr>
+        <tr><td>AlBr₃</td><td>Al³⁺ (граница)</td><td>2H₂O+2ē=H₂+2OH⁻</td><td>H₂↑</td></tr>
+        <tr><td>FeSO₄</td><td>Fe²⁺ (Mn…Pb)</td><td>Fe²⁺+2ē=Fe  и  2H₂O+2ē=H₂</td><td>Fe + H₂↑</td></tr>
+        <tr><td>CuSO₄</td><td>Cu²⁺ (правее H)</td><td>Cu²⁺+2ē=Cu</td><td>Cu</td></tr>
+        <tr><td>AgNO₃</td><td>Ag⁺ (правее H)</td><td>Ag⁺+ē=Ag</td><td>Ag</td></tr>
+        <tr><td>HCl</td><td>H⁺</td><td>2H⁺+2ē=H₂↑</td><td>H₂↑</td></tr>
+      </table>
+    </div>
+
+    <div class="prac-hd">Практика — Линия 20</div>
+    <div id="cr-s3" class="carousel-wrap"></div>
+  </div>
+</div>
+
+<!-- ═══ БЛОК 4 ═══ -->
+<div class="section" id="s4">
+  <div class="sec-hdr" onclick="toggle('s4')" id="hdr-s4">
+    <div class="sec-num">4</div>
+    <div class="sec-title">Анодный процесс в растворах (инертный анод)</div>
+  </div>
+  <div class="acc-body" id="body-s4">
+    <p class="body">На аноде конкурируют анионы и вода. Приоритет зависит от природы аниона.</p>
+
+    <div class="dtree">
+      <div class="dtree-q">Какой анион в растворе?</div>
+      <div class="dtree-a">▶ <b>S²⁻, I⁻, Br⁻, Cl⁻</b> (бескислородные, кроме F⁻) → окисляется анион: <span class="dtree-mono">2Cl⁻ − 2ē = Cl₂↑</span></div>
+      <div class="dtree-a">▶ <b>SO₄²⁻, NO₃⁻, PO₄³⁻, ClO₄⁻, F⁻</b> (кислородсодержащие + F⁻) → окисляется вода: <span class="dtree-mono">2H₂O − 4ē = O₂↑ + 4H⁺</span></div>
+      <div class="dtree-a">▶ <b>RCOO⁻</b> (карбоксилат) → реакция Кольбе: <span class="dtree-mono">2RCOO⁻ − 2ē = R–R + 2CO₂↑</span></div>
+    </div>
+
+    <div class="box bi">F⁻ — исключение из бескислородных: слишком стабилен, окисляется вода → O₂, а не F₂.</div>
+
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Соль</th><th>Анион</th><th>Процесс на аноде</th><th>Продукт</th></tr>
+        <tr><td>NaCl</td><td>Cl⁻</td><td>2Cl⁻−2ē=Cl₂↑</td><td>Cl₂↑</td></tr>
+        <tr><td>KBr</td><td>Br⁻</td><td>2Br⁻−2ē=Br₂</td><td>Br₂</td></tr>
+        <tr><td>Na₂SO₄</td><td>SO₄²⁻</td><td>2H₂O−4ē=O₂↑+4H⁺</td><td>O₂↑</td></tr>
+        <tr><td>NaF</td><td>F⁻ (искл.)</td><td>2H₂O−4ē=O₂↑+4H⁺</td><td>O₂↑</td></tr>
+        <tr><td>CH₃COONa</td><td>CH₃COO⁻</td><td>2CH₃COO⁻−2ē=2CO₂+C₂H₆</td><td>CO₂+C₂H₆↑</td></tr>
+      </table>
+    </div>
+
+    <h2 class="sub">Реакция Кольбе — органика на аноде</h2>
+    <p class="body">Если в растворе карбоксилат-ион RCOO⁻ — на аноде идёт особый процесс. Механизм по шагам:</p>
+
+    <div class="kolbe">
+      <div class="kolbe-step">
+        <div class="kolbe-num">1</div>
+        <div class="kolbe-text">Карбоксилат-ион <b>отдаёт электрон</b> аноду → нестабильный радикал<br><span class="kolbe-eq">RCOO⁻ − ē → RCOO•</span></div>
+      </div>
+      <div class="kolbe-step">
+        <div class="kolbe-num">2</div>
+        <div class="kolbe-text">Радикал <b>мгновенно распадается</b> — выбрасывает CO₂<br><span class="kolbe-eq">RCOO• → R• + CO₂↑</span><br><span class="kolbe-note">Почему CO₂? Связь C–C(=O)–O слабее, чем C–C; радикал стабилизируется потерей CO₂</span></div>
+      </div>
+      <div class="kolbe-step">
+        <div class="kolbe-num">3</div>
+        <div class="kolbe-text">Два углеродных радикала <b>соединяются</b> → алкан<br><span class="kolbe-eq">R• + R• → R–R</span></div>
+      </div>
+      <div class="kolbe-step">
+        <div class="kolbe-num sum">∑</div>
+        <div class="kolbe-text"><b>Итог:</b> <span class="kolbe-eq" style="color:var(--accent)">2RCOO⁻ − 2ē = R–R + 2CO₂↑</span></div>
+      </div>
+    </div>
+
+    <div class="box box-warn" style="margin:14px 0;border-left:4px solid var(--an);background:#FFF7ED">
+      <div class="box-title" style="color:var(--an-d)">🔑 Алгоритм: как найти продукт реакции Кольбе</div>
+      <ol style="margin:6px 0 4px;padding-left:18px;font-size:13.5px;line-height:1.9;color:#293237">
+        <li>Записать карбоксилат-ион: <b>R–COO⁻</b></li>
+        <li><b>Отбросить группу COO⁻</b> → получаем радикал <b>R•</b></li>
+        <li><b>Умножить остаток R на 2</b> → алкан <b>R–R</b></li>
+      </ol>
+      <div style="font-family:var(--mono);font-size:12.5px;background:#fff3cd;border-radius:6px;padding:8px 12px;margin-top:6px;color:#7a4208">
+        Пример: <b>CH₃COO⁻</b> → убираем COO⁻ → остаток <b>CH₃•</b> → ×2 → <b>C₂H₆</b> (этан)<br>
+        Пример: <b>C₂H₅COO⁻</b> → убираем COO⁻ → остаток <b>C₂H₅•</b> → ×2 → <b>C₄H₁₀</b> (бутан)<br>
+        Пример: <b>C₃H₇COO⁻</b> → убираем COO⁻ → остаток <b>C₃H₇•</b> → ×2 → <b>C₆H₁₄</b> (гексан)
+      </div>
+      <div style="font-size:12px;color:#9a3412;margin-top:7px">⚠ Исключение: <b>HCOO⁻</b> (формиат) — остаток <b>H•</b>, ×2 = H₂↑ (водород, а не алкан) + CO₂↑</div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Карбоксилат</th><th>Убираем COO⁻ → R•</th><th>×2 → Алкан</th><th>Газы</th></tr>
+        <tr><td>HCOO⁻ (формиат)</td><td>H•</td><td>нет (H+H=H₂)</td><td>CO₂ + H₂↑</td></tr>
+        <tr><td>CH₃COO⁻ (ацетат)</td><td>CH₃•</td><td>C₂H₆ (этан)</td><td>CO₂ + C₂H₆↑</td></tr>
+        <tr><td>C₂H₅COO⁻ (пропионат)</td><td>C₂H₅•</td><td>C₄H₁₀ (бутан)</td><td>CO₂ + C₄H₁₀↑</td></tr>
+        <tr><td>C₃H₇COO⁻ (бутират)</td><td>C₃H₇•</td><td>C₆H₁₄ (гексан)</td><td>CO₂ + C₆H₁₄↑</td></tr>
+      </table>
+    </div>
+    <div class="box bs">Правило: число C в алкане = 2 × (число C в кислоте − 1). Формиат — исключение: вместо алкана выделяется H₂.</div>
+
+    <div class="prac-hd">Практика — Линия 20</div>
+    <div id="cr-s4" class="carousel-wrap"></div>
+  </div>
+</div>
+
+<!-- ═══ БЛОК 5 ═══ -->
+<div class="section" id="s5">
+  <div class="sec-hdr" onclick="toggle('s5')" id="hdr-s5">
+    <div class="sec-num">5</div>
+    <div class="sec-title">Полные уравнения электролиза</div>
+  </div>
+  <div class="acc-body" id="body-s5">
+    <p class="body">Записываем катодный + анодный процессы, складываем и сокращаем.</p>
+
+    <h2 class="sub">Раствор CuCl₂ (инертный анод)</h2>
+    <div class="el-badge cb"><strong>⊖ Катод: восстановление</strong>Cu²⁺ + 2ē = Cu</div>
+    <div class="el-badge ab"><strong>⊕ Анод: окисление</strong>2Cl⁻ − 2ē = Cl₂↑ (Cl⁻ бескислородный)</div>
+    <div class="eq-block"><span class="eq">CuCl₂ →(эл.)→ Cu↓ + Cl₂↑</span></div>
+
+    <h2 class="sub">Раствор NaCl (инертный анод)</h2>
+    <div class="el-badge cb"><strong>⊖ Катод</strong>2H₂O + 2ē = H₂↑ + 2OH⁻ (Na до Al → вода)</div>
+    <div class="el-badge ab"><strong>⊕ Анод</strong>2Cl⁻ − 2ē = Cl₂↑ (Cl⁻ бескислородный)</div>
+    <div class="eq-block"><span class="eq">2NaCl + 2H₂O →(эл.)→ H₂↑ + Cl₂↑ + 2NaOH</span></div>
+
+    <h2 class="sub">Раствор H₂SO₄ (инертный анод)</h2>
+    <div class="el-badge cb"><strong>⊖ Катод</strong>2H⁺ + 2ē = H₂↑</div>
+    <div class="el-badge ab"><strong>⊕ Анод</strong>2H₂O − 4ē = O₂↑ + 4H⁺ (SO₄²⁻ кислородсодержащий)</div>
+    <div class="eq-block"><span class="eq">2H₂O →(эл.)→ 2H₂↑ + O₂↑</span></div>
+
+    <h2 class="sub">Растворимый Cu-анод (рафинирование, CuSO₄)</h2>
+    <div class="el-badge cb"><strong>⊖ Катод</strong>Cu²⁺ + 2ē = Cu↓ (осаждается чистая Cu)</div>
+    <div class="el-badge ab"><strong>⊕ Анод (Cu)</strong>Cu⁰ − 2ē = Cu²⁺ (анод растворяется, примеси в шлам)</div>
+    <div class="box bs">Рафинирование: нечистая Cu → Cu²⁺ → чистая Cu на катоде. Концентрация CuSO₄ не меняется.</div>
+
+    <div class="prac-hd">Практика — Линия 20</div>
+    <div id="cr-s5" class="carousel-wrap"></div>
+  </div>
+</div>
+
+<!-- ═══ БЛОК 6 ═══ -->
+<div class="section" id="s6">
+  <div class="sec-hdr" onclick="toggle('s6')" id="hdr-s6">
+    <div class="sec-num">6</div>
+    <div class="sec-title">Промышленное применение электролиза</div>
+  </div>
+  <div class="acc-body" id="body-s6">
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Продукт</th><th>Сырьё</th><th>Способ</th></tr>
+        <tr><td>Al</td><td>Al₂O₃ + криолит</td><td>Электролиз расплава при ~950 °C</td></tr>
+        <tr><td>Na</td><td>Расплав NaCl или NaOH</td><td>Электролиз расплава</td></tr>
+        <tr><td>F₂</td><td>Расплав KF·2HF</td><td>Электролиз расплава (из р-ра нельзя)</td></tr>
+        <tr><td>Cl₂, H₂, NaOH</td><td>Р-р NaCl (рассол)</td><td>Хлор-щелочной электролиз</td></tr>
+        <tr><td>Cu (рафинирование)</td><td>Р-р CuSO₄</td><td>Растворимый Cu-анод</td></tr>
+        <tr><td>Br₂</td><td>Р-р KBr</td><td>Электролиз р-ра</td></tr>
+        <tr><td>I₂</td><td>Р-р KI</td><td>Электролиз р-ра</td></tr>
+      </table>
+    </div>
+    <div class="box bi">F₂, Na, Al, Ca, Mg, Li получают <b>исключительно</b> электролизом расплавов — в воде вместо металла выделяется H₂.</div>
+
+    <div class="prac-hd">Практика — Линия 20</div>
+    <div id="cr-s6" class="carousel-wrap"></div>
+  </div>
+</div>
+
+<!-- ИТОГОВАЯ ШПАРГАЛКА -->
+<div class="finale">
+  <h2>Итоговая шпаргалка</h2>
+
+  <!-- КАТОД: ряд напряжений -->
+  <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#93C5FD;font-family:var(--mono);margin-bottom:10px">⊖ КАТОД (−) в растворе — что выделяется?</div>
+  <div style="overflow-x:auto;margin-bottom:8px">
+    <div style="min-width:540px">
+      <!-- Полоса -->
+      <div style="display:flex;height:32px;border-radius:8px;overflow:hidden;font-size:12px;font-weight:700">
+        <div style="flex:3;background:#1D4ED8;display:flex;align-items:center;justify-content:center;color:#fff">только H₂↑</div>
+        <div style="flex:2;background:#7C3AED;display:flex;align-items:center;justify-content:center;color:#fff">H₂↑ + металл</div>
+        <div style="flex:2;background:#B91C1C;display:flex;align-items:center;justify-content:center;color:#fff">только металл</div>
+      </div>
+      <!-- Металлы -->
+      <div style="display:flex;font-family:var(--mono);font-size:11px;font-weight:700;text-align:center;margin-top:5px">
+        <div style="flex:3;color:#93C5FD">Li K Ba Ca Na Mg Al</div>
+        <div style="flex:2;color:#C4B5FD">Mn Zn Fe Ni Sn Pb</div>
+        <div style="flex:2;color:#FCA5A5">Bi Cu Hg Ag Pt Au</div>
+      </div>
+      <!-- Уравнения -->
+      <div style="display:flex;gap:6px;margin-top:8px">
+        <div style="flex:3;background:rgba(29,78,216,.25);border:1px solid rgba(99,132,255,.3);border-radius:7px;padding:8px 10px;font-size:12px;color:rgba(255,255,255,.85)">
+          <div style="font-family:var(--mono);color:#93C5FD;margin-bottom:3px">2H₂O + 2ē = H₂↑ + 2OH⁻</div>
+          Металл слишком активный — в растворе не осаждается
+        </div>
+        <div style="flex:2;background:rgba(124,58,237,.25);border:1px solid rgba(167,139,250,.3);border-radius:7px;padding:8px 10px;font-size:12px;color:rgba(255,255,255,.85)">
+          <div style="font-family:var(--mono);color:#C4B5FD;margin-bottom:3px">Mⁿ⁺+nē=M⁰  и  2H₂O+2ē=H₂</div>
+          Оба процесса идут параллельно
+        </div>
+        <div style="flex:2;background:rgba(185,28,28,.25);border:1px solid rgba(248,113,113,.3);border-radius:7px;padding:8px 10px;font-size:12px;color:rgba(255,255,255,.85)">
+          <div style="font-family:var(--mono);color:#FCA5A5;margin-bottom:3px">Mⁿ⁺ + nē = M⁰</div>
+          Вода не участвует
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:20px;font-family:var(--mono)">* Расплав — всегда металл: Mⁿ⁺ + nē = M⁰ · * Кислота — всегда H₂: 2H⁺ + 2ē = H₂↑</div>
+
+  <!-- АНОД: три карточки -->
+  <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#FCA5A5;font-family:var(--mono);margin-bottom:10px">⊕ АНОД (+) инертный в растворе — что выделяется?</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px">
+    <div style="background:rgba(220,38,38,.15);border:1.5px solid rgba(248,113,113,.35);border-radius:10px;padding:14px 14px 12px">
+      <div style="font-size:18px;margin-bottom:6px">🟥</div>
+      <div style="font-size:12px;font-weight:800;color:#FCA5A5;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Бескислородные<br>S²⁻ I⁻ Br⁻ Cl⁻</div>
+      <div style="font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.9);line-height:1.7">2X⁻ − 2ē = X₂↑<br><span style="color:rgba(255,255,255,.5);font-size:11px">выделяется неметалл</span></div>
+      <div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,.45)">⚠ F⁻ — исключение → O₂</div>
+    </div>
+    <div style="background:rgba(5,150,105,.15);border:1.5px solid rgba(52,211,153,.3);border-radius:10px;padding:14px 14px 12px">
+      <div style="font-size:18px;margin-bottom:6px">🟩</div>
+      <div style="font-size:12px;font-weight:800;color:#6EE7B7;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Кислородсодержащие<br>SO₄²⁻ NO₃⁻ F⁻ CO₃²⁻…</div>
+      <div style="font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.9);line-height:1.7">2H₂O − 4ē = O₂↑ + 4H⁺<br><span style="color:rgba(255,255,255,.5);font-size:11px">окисляется вода → O₂</span></div>
+    </div>
+    <div style="background:rgba(234,179,8,.12);border:1.5px solid rgba(253,224,71,.3);border-radius:10px;padding:14px 14px 12px">
+      <div style="font-size:18px;margin-bottom:6px">🟨</div>
+      <div style="font-size:12px;font-weight:800;color:#FDE68A;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Карбоксилат<br>RCOO⁻ (Кольбе)</div>
+      <div style="font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.9);line-height:1.7">2RCOO⁻−2ē = R–R + 2CO₂↑<br><span style="color:rgba(255,255,255,.5);font-size:11px">алкан + CO₂</span></div>
+      <div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,.45)">⚠ HCOO⁻ → H₂ + CO₂</div>
+    </div>
+  </div>
+  <div style="background:rgba(255,255,255,.07);border-radius:8px;padding:9px 14px;font-size:12px;color:rgba(255,255,255,.6)">
+    <b style="color:#FCA5A5">Растворимый анод (Cu, Zn…):</b> всегда M⁰ − nē = Mⁿ⁺, природа аниона не важна
+  </div>
+</div>
+
+<!-- ФЛЭШКАРТОЧКИ -->
+<div id="fc-anchor"></div>
+<div class="fc-section">
+  <div class="fc-header">
+    <div class="fc-title">⚡ Флэш-карточки</div>
+    <div class="fc-sub">Нажми на карточку, чтобы перевернуть. Отмечай что знаешь.</div>
+  </div>
+  <div class="fc-stats">
+    <div>Всего: <span id="fc-total">0</span></div>
+    <div>Знаю: <span id="fc-know-c" style="color:#4ADE80">0</span></div>
+    <div>Повторить: <span id="fc-rep-c" style="color:#F87171">0</span></div>
+  </div>
+  <div class="fc-counter" id="fc-counter"></div>
+
+  <div class="fc-perspective" id="fc-card" onclick="fcFlip()">
+    <div class="fc-inner" id="fc-inner">
+      <div class="fc-face fc-front">
+        <div class="fc-tag" id="fc-front-tag"></div>
+        <div id="fc-front-text"></div>
+      </div>
+      <div class="fc-face fc-back">
+        <div class="fc-back-tag" id="fc-back-tag">Ответ</div>
+        <div id="fc-back-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <button class="fc-flip-btn" onclick="fcFlip()">↩ Перевернуть</button>
+  <div class="fc-btn-row" id="fc-btn-row">
+    <button class="fc-btn-know" onclick="fcAnswer(true)">✓ Знаю</button>
+    <button class="fc-btn-dk" onclick="fcAnswer(false)">✗ Не знаю</button>
+  </div>
+  <div class="fc-keys">Пробел — перевернуть · ← Не знаю · → Знаю</div>
+
+  <div class="fc-result" id="fc-result">
+    <h3>Раунд завершён!</h3>
+    <div class="fc-res-row">
+      <div class="fc-res-card"><div class="fc-res-num" id="res-know" style="color:#4ADE80">0</div><div class="fc-res-lbl">знаю</div></div>
+      <div class="fc-res-card"><div class="fc-res-num" id="res-rep" style="color:#F87171">0</div><div class="fc-res-lbl">повторить</div></div>
+    </div>
+    <div class="fc-restart-row">
+      <button class="fc-restart-btn primary" onclick="fcRestart(false)">Все карточки</button>
+      <button class="fc-restart-btn" onclick="fcRestart(true)">Только ошибки</button>
+    </div>
+  </div>
+</div>
+
+<!-- ГЛОБАЛЬНОЕ ПОЗДРАВЛЕНИЕ (fullscreen overlay) -->
+<div id="global-done">
+  <div class="gd-inner">
+    <div class="gd-icon">🎉</div>
+    <div class="gd-title">Поздравляю! У вас 100%!</div>
+    <div class="gd-sub">Вы решили все задания и прошли все флэш-карточки.</div>
+    <div class="gd-msg">Электролиз — в кармане! 🧪⚡</div>
+    <div class="gd-chips">
+      <div class="gd-chip"><b>67</b>заданий</div>
+      <div class="gd-chip"><b id="gd-fc-count">0</b>флэш-карточек</div>
+    </div>
+    <button class="gd-close" onclick="document.getElementById('global-done').classList.remove('show')">Закрыть</button>
+  </div>
+</div>
+
+</div><!-- /shell -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* MENU */
+function openMenu(){document.getElementById('menu-overlay').classList.add('open');document.getElementById('menu-panel').classList.add('open');}
+function closeMenu(){document.getElementById('menu-overlay').classList.remove('open');document.getElementById('menu-panel').classList.remove('open');}
+function togglePS(){const el=document.getElementById('ps-overlay');if(!el)return;const show=el.style.display==='flex';el.style.display=show?'none':'flex';}
+function toggleRS(){const el=document.getElementById('rs-overlay');if(!el)return;const show=el.style.display==='flex';el.style.display=show?'none':'flex';}
+function resetAllProgress(){
+  if(!confirm('Сбросить весь прогресс?\nВсе решённые задания и флэш-карточки будут обнулены.'))return;
+  try{localStorage.removeItem('elektroliz_progress');localStorage.removeItem('elektroliz_fc_progress');}catch(e){}
+  Object.keys(CR).forEach(id=>{CR[id].idx=0;CR[id].done=new Set();CR[id].ready=false;crRender(id);});
+  Q=[...FC_CARDS];WRONG=[];KNOW=0;IDX=0;FLIPPED=false;fcRender();
+  const gd=document.getElementById('global-done');if(gd)gd.classList.remove('show');
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeMenu();document.getElementById('ps-overlay').style.display='none';document.getElementById('rs-overlay').style.display='none';}
+  if(e.key==='t'||e.key==='T'){const inp=document.activeElement;if(inp&&(inp.tagName==='INPUT'||inp.tagName==='TEXTAREA'))return;togglePS();}
+  if(e.key==='r'||e.key==='R'){const inp=document.activeElement;if(inp&&(inp.tagName==='INPUT'||inp.tagName==='TEXTAREA'))return;toggleRS();}
+});
+/* Solubility table highlight */
+(function(){
+  function initSolHL(){
+    const tbl=document.querySelector('#rs-overlay .sol-table');
+    if(!tbl)return;
+    const heads=[...tbl.querySelectorAll('thead th')].slice(1);
+    const rows=[...tbl.querySelectorAll('tbody tr')];
+    function clearAll(){
+      heads.forEach(h=>h.classList.remove('sol-col-active'));
+      rows.forEach(r=>r.querySelector('th')&&r.querySelector('th').classList.remove('sol-row-active'));
+      tbl.querySelectorAll('td').forEach(td=>{td.classList.remove('sol-col-hl','sol-row-hl','sol-intersect');});
+    }
+    let activeCol=-1,activeRow=-1;
+    heads.forEach((h,ci)=>{
+      h.addEventListener('click',()=>{
+        if(activeCol===ci){clearAll();activeCol=-1;return;}
+        clearAll();activeCol=ci;
+        h.classList.add('sol-col-active');
+        rows.forEach(r=>{
+          const cells=[...r.querySelectorAll('td')];
+          if(cells[ci])cells[ci].classList.add(activeRow>=0&&rows.indexOf(r)===activeRow?'sol-intersect':'sol-col-hl');
+        });
+      });
+    });
+    rows.forEach((r,ri)=>{
+      const th=r.querySelector('th');
+      if(!th)return;
+      th.addEventListener('click',()=>{
+        if(activeRow===ri){clearAll();activeRow=-1;return;}
+        clearAll();activeRow=ri;
+        th.classList.add('sol-row-active');
+        const cells=[...r.querySelectorAll('td')];
+        cells.forEach((td,ci)=>{td.classList.add(activeCol>=0&&ci===activeCol?'sol-intersect':'sol-row-hl');});
+      });
+    });
+  }
+  document.addEventListener('click',function once(e){
+    if(e.target.closest('#rs-overlay')){document.removeEventListener('click',once);initSolHL();}
+  });
+})();
+
+/* PROGRESS */
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('pf').style.width=((h.scrollTop/(h.scrollHeight-h.clientHeight))*100)+'%';
+});
+
+/* SECTIONS */
+function toggle(id){
+  const hdr=document.getElementById('hdr-'+id);
+  const body=document.getElementById('body-'+id);
+  const col=body.classList.contains('collapsed');
+  body.classList.toggle('collapsed',!col);
+  hdr.classList.toggle('collapsed',!col);
+}
+
+/* CHECK ЗАДАНИЯ */
+function checkZad(btn,correct,explanation){
+  const card=btn.closest('.zad-card');
+  const inp=card.querySelector('.zad-input');
+  const fb=card.querySelector('.zad-fb');
+  const raw=inp.value.trim();
+  if(raw===correct){
+    fb.className='zad-fb ok';
+    fb.innerHTML='<b>✓ Правильно!</b> Ответ: <span style="font-family:var(--mono)">'+correct+'</span><br><span style="font-size:12px">'+explanation+'</span>';
+  } else {
+    fb.className='zad-fb err';
+    fb.innerHTML='<b>✗ Неверно.</b> Твой: <span style="font-family:var(--mono)">'+(raw||'—')+'</span> · Правильно: <span style="font-family:var(--mono)">'+correct+'</span><br><span style="font-size:12px">'+explanation+'</span>';
+  }
+}
+
+/* FLASHCARDS */
+const FC_CARDS=[
+  {q:'Что такое электролиз?',a:'ОВР на электродах при пропускании постоянного тока через расплав или раствор электролита.',tag:'Определение'},
+  {q:'Катод — (+) или (−)?',a:'Катод — отрицательный (−). К нему притягиваются катионы. На катоде — восстановление.',tag:'Электроды'},
+  {q:'Анод — (+) или (−)?',a:'Анод — положительный (+). К нему притягиваются анионы. На аноде — окисление.',tag:'Электроды'},
+  {q:'Что происходит на катоде?',a:'Восстановление: Mⁿ⁺ + nē = M⁰\nили 2H₂O + 2ē = H₂↑ + 2OH⁻',tag:'Катод'},
+  {q:'Что происходит на аноде (инертном)?',a:'Окисление: Aᵐ⁻ − mē = A⁰\nили 2H₂O − 4ē = O₂↑ + 4H⁺',tag:'Анод'},
+  {q:'Расплав NaCl — продукты электролиза?',a:'Катод: 2Na⁺+2ē = 2Na\nАнод: 2Cl⁻−2ē = Cl₂↑\nИтог: 2Na + Cl₂',tag:'Расплавы'},
+  {q:'Расплав Al₂O₃ — продукты?',a:'Катод: 4Al³⁺+12ē = 4Al\nАнод: 6O²⁻−12ē = 3O₂↑\nИтог: 4Al + 3O₂',tag:'Расплавы'},
+  {q:'Почему Al получают из расплава, а не из раствора?',a:'Al стоит до Al в ряду напряжений → в растворе восстанавливается вода (H₂↑), а не Al³⁺.',tag:'Расплавы'},
+  {q:'Катод в р-ре. Металл Li…Al. Что выделяется?',a:'Только водород: 2H₂O + 2ē = H₂↑ + 2OH⁻. Металл не осаждается.',tag:'Катод р-р'},
+  {q:'Катод в р-ре. Металл правее H₂. Что выделяется?',a:'Только металл: Mⁿ⁺ + nē = M⁰. Вода не участвует.',tag:'Катод р-р'},
+  {q:'Катод в р-ре AlCl₃. Что выделится?',a:'Водород: 2H₂O+2ē=H₂↑+2OH⁻. Al на границе активности → вода.',tag:'Катод р-р'},
+  {q:'Катод в р-ре CuSO₄. Что выделится?',a:'Медь: Cu²⁺ + 2ē = Cu. Cu правее H₂.',tag:'Катод р-р'},
+  {q:'Анод (инертный) в р-ре NaCl. Что выделяется?',a:'Хлор: 2Cl⁻ − 2ē = Cl₂↑. Cl⁻ — бескислородный анион.',tag:'Анод р-р'},
+  {q:'Анод (инертный) в р-ре Na₂SO₄. Что выделяется?',a:'Кислород: 2H₂O − 4ē = O₂↑ + 4H⁺. SO₄²⁻ — кислородсодержащий.',tag:'Анод р-р'},
+  {q:'Почему F⁻ — исключение из бескислородных?',a:'F⁻ слишком стабилен. На аноде окисляется вода → O₂↑, а не F₂.',tag:'Анод р-р'},
+  {q:'Что такое растворимый анод?',a:'Анод из металла (Cu, Zn). Окисляется сам: M⁰ − nē = Mⁿ⁺. Природа аниона не важна.',tag:'Анод растворимый'},
+  {q:'Реакция Кольбе: механизм (3 шага)',a:'1) RCOO⁻ − ē → RCOO•\n2) RCOO• → R• + CO₂↑\n3) R• + R• → R–R (алкан)',tag:'Кольбе'},
+  {q:'Реакция Кольбе: CH₃COO⁻ → ?',a:'2CH₃COO⁻ − 2ē = C₂H₆↑ + 2CO₂↑\n(ацетат → этан + диоксид углерода)',tag:'Кольбе'},
+  {q:'Электролиз р-ра NaCl — полное уравнение?',a:'2NaCl + 2H₂O → H₂↑ + Cl₂↑ + 2NaOH',tag:'Уравнения'},
+  {q:'Как получают F₂ в промышленности?',a:'Электролиз расплава KF·2HF. Из водного раствора F₂ получить нельзя.',tag:'Промышленность'},
+];
+
+let Q=[],WRONG=[],IDX=0,KNOW=0,FLIPPED=false;
+
+function fcRender(){
+  const total=Q.length;
+  document.getElementById('fc-total').textContent=FC_CARDS.length;
+  document.getElementById('fc-know-c').textContent=KNOW;
+  document.getElementById('fc-rep-c').textContent=WRONG.length;
+  if(IDX>=total){
+    document.getElementById('fc-card').style.display='none';
+    document.querySelector('.fc-flip-btn').style.display='none';
+    document.getElementById('fc-btn-row').style.display='none';
+    document.querySelector('.fc-keys').style.display='none';
+    const r=document.getElementById('fc-result');
+    r.style.display='block';
+    document.getElementById('res-know').textContent=KNOW;
+    document.getElementById('res-rep').textContent=WRONG.length;
+    if(typeof checkGlobalDone==='function') checkGlobalDone();
+    return;
+  }
+  document.getElementById('fc-result').style.display='none';
+  document.getElementById('fc-card').style.display='block';
+  document.querySelector('.fc-flip-btn').style.display='flex';
+  document.querySelector('.fc-keys').style.display='block';
+  const c=Q[IDX];
+  document.getElementById('fc-front-tag').textContent=c.tag;
+  document.getElementById('fc-front-text').textContent=c.q;
+  document.getElementById('fc-back-text').textContent=c.a;
+  document.getElementById('fc-inner').classList.remove('flipped');
+  document.getElementById('fc-btn-row').style.display='none';
+  document.getElementById('fc-counter').textContent=(IDX+1)+' / '+total;
+  FLIPPED=false;
+}
+
+function fcFlip(){
+  if(IDX>=Q.length) return;
+  FLIPPED=!FLIPPED;
+  document.getElementById('fc-inner').classList.toggle('flipped',FLIPPED);
+  document.getElementById('fc-btn-row').style.display=FLIPPED?'flex':'none';
+}
+
+function fcAnswer(know){
+  if(know) KNOW++; else WRONG.push(Q[IDX]);
+  IDX++;
+  fcSave();
+  fcRender();
+}
+
+function fcRestart(onlyWrong){
+  if(onlyWrong && !WRONG.length) return;
+  Q=onlyWrong?[...WRONG]:[...FC_CARDS];
+  WRONG=[];KNOW=0;IDX=0;
+  fcSave();
+  fcRender();
+}
+
+const LS_FC_KEY='elektroliz_fc_progress';
+function fcSave(){
+  try{
+    const qIds=Q.map(c=>FC_CARDS.indexOf(c));
+    const wrongIds=WRONG.map(c=>FC_CARDS.indexOf(c));
+    localStorage.setItem(LS_FC_KEY,JSON.stringify({ts:Date.now(),know:KNOW,idx:IDX,qIds,wrongIds}));
+  }catch(e){}
+}
+function fcLoadSaved(){
+  try{
+    const raw=localStorage.getItem(LS_FC_KEY);
+    if(!raw)return null;
+    const data=JSON.parse(raw);
+    if(Date.now()-data.ts>6*24*60*60*1000){localStorage.removeItem(LS_FC_KEY);return null;}
+    return data;
+  }catch(e){return null;}
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.code==='Space'){e.preventDefault();fcFlip();}
+  if(e.code==='ArrowRight'&&FLIPPED) fcAnswer(true);
+  if(e.code==='ArrowLeft'&&FLIPPED) fcAnswer(false);
+});
+
+(function(){
+  const sv=fcLoadSaved();
+  if(sv){
+    Q=(sv.qIds||[]).map(i=>FC_CARDS[i]).filter(Boolean);
+    WRONG=(sv.wrongIds||[]).map(i=>FC_CARDS[i]).filter(Boolean);
+    KNOW=sv.know||0;IDX=sv.idx||0;
+    if(!Q.length){Q=[...FC_CARDS];WRONG=[];KNOW=0;IDX=0;fcSave();}
+    fcRender();
+  }else{
+    fcRestart(false);
+  }
+})();
+
+/* ==================== CAROUSEL ENGINE ==================== */
+const CR={};
+const LS_KEY='elektroliz_progress';
+const LS_TTL=6*24*60*60*1000;
+
+function crRender(id){
+  const s=CR[id];
+  const t=s.tasks[s.idx];
+  const tot=s.tasks.length;
+  const wrap=document.getElementById('cr-'+id);
+  if(!wrap)return;
+  const ml=t.ans.length;
+  const ph='Х'.repeat(ml);
+  const dots=s.tasks.map((_,i)=>`<div class="c-dot ${s.done.has(i)?'done':i===s.idx?'current':''}"></div>`).join('');
+  wrap.innerHTML=`
+<div class="c-progress"><span class="c-prog-label">Задание ${s.idx+1} из ${tot} · ✓ ${s.done.size} решено</span></div>
+<div class="c-dots">${dots}</div>
+<div class="c-card">
+  <div class="c-id">${t.id}</div>
+  <div class="c-text">${t.text}</div>
+  <div class="c-row">
+    <input class="c-input" id="ci-${id}" placeholder="${ph}" maxlength="${ml}"
+      onkeydown="if(event.key==='Enter')crCheck('${id}')">
+    <button class="c-btn" onclick="crCheck('${id}')">Проверить</button>
+    <button class="c-btn next${s.ready?' show':''}" id="cn-${id}" onclick="crNext('${id}')">${s.idx+1<tot?'Следующее →':'🎉 Завершить'}</button>
+  </div>
+  <div class="c-fb" id="cf-${id}"></div>
+  <div class="c-sol${s.ready?' show':''}" id="cs-${id}">${t.sol}</div>
+</div>
+${s.done.size===tot?`<div class="c-done show"><div class="c-done-icon">🎉</div><div class="c-done-title">Все ${tot} заданий решены!</div><div class="c-done-sub">Отличная работа!</div><button class="c-reset-btn" onclick="crReset('${id}')">Начать заново</button></div>`:''}`;
+  if(s.ready){const inp=document.getElementById('ci-'+id);if(inp)inp.disabled=true;}
+}
+function checkGlobalDone(){
+  const ids=['s2','s3','s4','s5','s6'];
+  const allTasks=ids.every(id=>CR[id]&&CR[id].done.size===CR[id].tasks.length);
+  const allFC=(typeof KNOW!=='undefined')&&KNOW===FC_CARDS.length&&(typeof WRONG!=='undefined')&&WRONG.length===0&&(typeof IDX!=='undefined')&&IDX>=FC_CARDS.length;
+  if(allTasks&&allFC){
+    const el=document.getElementById('global-done');
+    if(el&&!el.classList.contains('show')){
+      document.getElementById('gd-fc-count').textContent=FC_CARDS.length;
+      el.classList.add('show');
+    }
+  }
+}
+function crSave(){
+  try{
+    const data={ts:Date.now(),state:{}};
+    Object.entries(CR).forEach(([id,s])=>{data.state[id]={idx:s.idx,done:[...s.done],ready:s.ready};});
+    localStorage.setItem(LS_KEY,JSON.stringify(data));
+  }catch(e){}
+  checkGlobalDone();
+}
+function crLoadSaved(){
+  try{
+    const raw=localStorage.getItem(LS_KEY);
+    if(!raw)return null;
+    const data=JSON.parse(raw);
+    if(Date.now()-data.ts>LS_TTL){localStorage.removeItem(LS_KEY);return null;}
+    return data.state;
+  }catch(e){return null;}
+}
+function crCheck(id){
+  const s=CR[id];
+  if(s.ready)return;
+  const inp=document.getElementById('ci-'+id);
+  const val=(inp.value||'').trim();
+  const ans=s.tasks[s.idx].ans;
+  const fb=document.getElementById('cf-'+id);
+  if(val===ans){
+    fb.className='c-fb ok';fb.textContent='✓ Верно!';
+    s.done.add(s.idx);s.ready=true;
+    inp.disabled=true;
+    document.getElementById('cs-'+id).classList.add('show');
+    document.getElementById('cn-'+id).classList.add('show');
+    crSave();
+  }else{
+    fb.className='c-fb err';fb.textContent='✗ Неверно — попробуй ещё раз!';
+    inp.select();inp.focus();
+  }
+}
+function crNext(id){
+  const s=CR[id];
+  if(s.idx+1<s.tasks.length){s.idx++;s.ready=false;}
+  crRender(id);crSave();
+  setTimeout(()=>{const i=document.getElementById('ci-'+id);if(i)i.focus();},60);
+}
+function crReset(id){
+  const s=CR[id];s.idx=0;s.done=new Set();s.ready=false;
+  crRender(id);crSave();
+  setTimeout(()=>{const i=document.getElementById('ci-'+id);if(i)i.focus();},60);
+}
+function crInit(id,tasks){
+  const saved=crLoadSaved();
+  const sv=saved&&saved[id];
+  CR[id]={tasks,idx:sv?sv.idx:0,done:sv?new Set(sv.done):new Set(),ready:sv?sv.ready:false};
+  crRender(id);
+}
+
+/* ── Task data ── */
+crInit('s2',[
+  {id:'№11942',ans:'214',
+   text:`Установите соответствие между формулой соли и продуктами электролиза расплава этой соли, которые выделяются на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) Al₂S₃</td><td>1) металл и хлор</td></tr><tr><td>Б) NaCl</td><td>2) металл и сера</td></tr><tr><td>В) CaF₂</td><td>3) металл и кислород</td></tr><tr><td></td><td>4) металл и фтор</td></tr></table>`,
+   sol:`А) Al₂S₃ (расплав): Al → металл, S → сера → <b>2</b>. Б) NaCl: Na → металл, Cl₂ → хлор → <b>1</b>. В) CaF₂: Ca → металл, F₂ → фтор → <b>4</b>. <b>Ответ: 214</b>`},
+  {id:'№11946',ans:'463',
+   text:`Установите соответствие между формулой соли и продуктами, образующимися при её электролизе на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) CH₃COONa (р-р)</td><td>1) CH₄, CO₂, H₂</td></tr><tr><td>Б) CaCl₂ (распл.)</td><td>2) H₂, Cl₂</td></tr><tr><td>В) KMnO₄ (р-р)</td><td>3) O₂, H₂</td></tr><tr><td></td><td>4) C₂H₆, CO₂, H₂</td></tr><tr><td></td><td>5) K, MnO₂</td></tr><tr><td></td><td>6) Ca, Cl₂</td></tr></table>`,
+   sol:`А) CH₃COONa(р-р): катод→H₂, анод→Кольбе→C₂H₆+CO₂ → <b>4</b>. Б) CaCl₂(распл.): Ca + Cl₂ → <b>6</b>. В) KMnO₄(р-р): K→H₂; MnO₄⁻→O₂ → <b>3</b>. <b>Ответ: 463</b>`},
+  {id:'№11947',ans:'343',
+   text:`Установите соответствие между формулой соли и продуктами, образующимися при её электролизе на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) LiF (р-р)</td><td>1) Na, O₂</td></tr><tr><td>Б) LiF (распл.)</td><td>2) H₂, MnO₂</td></tr><tr><td>В) NaMnO₄ (р-р)</td><td>3) O₂, H₂</td></tr><tr><td></td><td>4) Li, F₂</td></tr><tr><td></td><td>5) Na, MnO₂</td></tr><tr><td></td><td>6) Li, O₂</td></tr></table>`,
+   sol:`А) LiF(р-р): Li активный→H₂; F⁻(искл.)→O₂ → <b>3</b>. Б) LiF(распл.): Li + F₂ → <b>4</b>. В) NaMnO₄(р-р): Na→H₂; MnO₄⁻→O₂ → <b>3</b>. <b>Ответ: 343</b>`},
+  {id:'№8264',ans:'414',
+   text:`Установите соответствие между формулой вещества и уравнением процесса, протекающего на катоде при его электролизе: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>УРАВНЕНИЕ КАТОДНОГО ПРОЦЕССА</th></tr><tr><td>А) AlBr₃ (р-р)</td><td>1) Na⁺ + ē → Na⁰</td></tr><tr><td>Б) Na₂SO₄ (распл.)</td><td>2) 2H⁺ + 2ē → H₂⁰</td></tr><tr><td>В) KNO₃ (р-р)</td><td>3) Al³⁺ + 3ē → Al⁰</td></tr><tr><td></td><td>4) 2H₂O + 2ē → H₂ + 2OH⁻</td></tr></table>`,
+   sol:`А) AlBr₃(р-р): Al на границе → H₂O → <b>4</b>. Б) Na₂SO₄(распл.): расплав → Na⁺+ē=Na → <b>1</b>. В) KNO₃(р-р): K активный → H₂O → <b>4</b>. <b>Ответ: 414</b>`}
+]);
+crInit('s3',[
+  {id:'№302',ans:'211',
+   text:`Установите соответствие между формулой соли и уравнением процесса, протекающего на катоде при электролизе её водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>УРАВНЕНИЕ КАТОДНОГО ПРОЦЕССА</th></tr><tr><td>А) Hg(ClO₄)₂</td><td>1) 2H₂O + 2ē → H₂ + 2OH⁻</td></tr><tr><td>Б) AlCl₃</td><td>2) Hg²⁺ + 2ē → Hg⁰</td></tr><tr><td>В) RbHSO₄</td><td>3) Al³⁺ + 3ē → Al⁰</td></tr><tr><td></td><td>4) 2H₂O − 4ē → 4H⁺ + O₂</td></tr></table>`,
+   sol:`А) Hg(ClO₄)₂: Hg правее H₂ → Hg²⁺+2ē=Hg → <b>2</b>. Б) AlCl₃: Al на границе → H₂O → <b>1</b>. В) RbHSO₄: Rb активный + H⁺ → 2H⁺+2ē=H₂ → <b>1</b>. <b>Ответ: 211</b>`},
+  {id:'№45090',ans:'111',
+   text:`Установите соответствие между формулой соли и уравнением процесса, протекающего на катоде при электролизе её водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>УРАВНЕНИЕ КАТОДНОГО ПРОЦЕССА</th></tr><tr><td>А) Al(ClO₄)₃</td><td>1) 2H₂O + 2ē → H₂ + 2OH⁻</td></tr><tr><td>Б) KBr</td><td>2) 2H⁺ + 2ē → H₂⁰</td></tr><tr><td>В) MgBr₂</td><td>3) Al³⁺ + 3ē → Al⁰</td></tr><tr><td></td><td>4) 2H₂O − 4ē → 4H⁺ + O₂</td></tr><tr><td></td><td>5) 2Br⁻ − 2ē → Br₂⁰</td></tr></table>`,
+   sol:`А) Al(ClO₄)₃: Al граница → H₂O → <b>1</b>. Б) KBr: K активный → H₂O → <b>1</b>. В) MgBr₂: Mg активный → H₂O → <b>1</b>. <b>Ответ: 111</b>`},
+  {id:'№50946',ans:'121',
+   text:`Установите соответствие между формулой вещества и уравнением процесса, протекающего на катоде при электролизе его водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>УРАВНЕНИЕ КАТОДНОГО ПРОЦЕССА</th></tr><tr><td>А) KCl</td><td>1) 2H₂O + 2ē → H₂ + 2OH⁻</td></tr><tr><td>Б) AgNO₃</td><td>2) Ag⁺ + ē → Ag⁰</td></tr><tr><td>В) AlCl₃</td><td>3) Al³⁺ + 3ē → Al⁰</td></tr><tr><td></td><td>4) 2H₂O − 4ē → 4H⁺ + O₂</td></tr></table>`,
+   sol:`А) KCl: K активный → H₂O → <b>1</b>. Б) AgNO₃: Ag правее H₂ → Ag⁺+ē=Ag → <b>2</b>. В) AlCl₃: Al граница → H₂O → <b>1</b>. <b>Ответ: 121</b>`},
+  {id:'№60112',ans:'142',
+   text:`Установите соответствие между формулой вещества и уравнением процесса, протекающего на катоде при электролизе его водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>УРАВНЕНИЕ КАТОДНОГО ПРОЦЕССА</th></tr><tr><td>А) HCl</td><td>1) 2H⁺ + 2ē → H₂⁰</td></tr><tr><td>Б) AlBr₃</td><td>2) Cu²⁺ + 2ē → Cu⁰</td></tr><tr><td>В) CuSO₄</td><td>3) Al³⁺ + 3ē → Al⁰</td></tr><tr><td></td><td>4) 2H₂O + 2ē → H₂ + 2OH⁻</td></tr></table>`,
+   sol:`А) HCl: H⁺+2ē=H₂ → <b>1</b>. Б) AlBr₃: Al граница → H₂O → <b>4</b>. В) CuSO₄: Cu правее H₂ → Cu²⁺+2ē=Cu → <b>2</b>. <b>Ответ: 142</b>`},
+  {id:'№247608',ans:'442',
+   text:`Установите соответствие между формулой соли и уравнением процесса, протекающего на катоде при электролизе её водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>УРАВНЕНИЕ КАТОДНОГО ПРОЦЕССА</th></tr><tr><td>А) AlCl₃</td><td>1) 2H₂O − 4ē → 4H⁺ + O₂</td></tr><tr><td>Б) Ba(NO₃)₂</td><td>2) Cu²⁺ + 2ē → Cu⁰</td></tr><tr><td>В) CuSO₄</td><td>3) Al³⁺ + 3ē → Al⁰</td></tr><tr><td></td><td>4) 2H₂O + 2ē → H₂ + 2OH⁻</td></tr></table>`,
+   sol:`А) AlCl₃: Al граница → H₂O → <b>4</b>. Б) Ba(NO₃)₂: Ba активный → H₂O → <b>4</b>. В) CuSO₄: Cu правее H₂ → Cu → <b>2</b>. <b>Ответ: 442</b>`},
+  {id:'№8403',ans:'231',
+   text:`Установите соответствие между формулой вещества и продуктами электролиза его водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) NaF</td><td>1) водород, галоген</td></tr><tr><td>Б) Fe₂(SO₄)₃</td><td>2) водород, кислород</td></tr><tr><td>В) AlBr₃</td><td>3) металл, водород, кислород</td></tr><tr><td></td><td>4) металл, кислород</td></tr></table>`,
+   sol:`А) NaF: Na→H₂; F⁻(искл.)→O₂ → <b>2</b>. Б) Fe₂(SO₄)₃: Fe(средний)→Fe+H₂; SO₄²⁻→O₂ → <b>3</b>. В) AlBr₃: Al граница→H₂; Br⁻→Br₂ → <b>1</b>. <b>Ответ: 231</b>`},
+  {id:'№11584',ans:'132',
+   text:`Установите соответствие между формулой соли и продуктами электролиза водного раствора этой соли, которые выделились на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) Na₂SO₄</td><td>1) H₂, O₂</td></tr><tr><td>Б) Cu(NO₃)₂</td><td>2) H₂, Cl₂</td></tr><tr><td>В) BaCl₂</td><td>3) Cu, O₂</td></tr><tr><td></td><td>4) Cu, NO₂</td></tr></table>`,
+   sol:`А) Na₂SO₄: Na→H₂; SO₄²⁻→O₂ → <b>1</b>. Б) Cu(NO₃)₂: Cu→Cu; NO₃⁻→O₂ → <b>3</b>. В) BaCl₂: Ba→H₂; Cl⁻→Cl₂ → <b>2</b>. <b>Ответ: 132</b>`}
+]);
+crInit('s4',[
+  {id:'№11590',ans:'214',
+   text:`Установите соответствие между формулой соли и продуктами, образующимися при электролизе её водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) AlCl₃</td><td>1) C₂H₆, CO₂, NaOH, H₂</td></tr><tr><td>Б) CH₃COONa</td><td>2) H₂, Cl₂, Al(OH)₃</td></tr><tr><td>В) Cu(NO₃)₂</td><td>3) C₂H₆, CO₂, NaOH</td></tr><tr><td></td><td>4) Cu, O₂, HNO₃</td></tr></table>`,
+   sol:`А) AlCl₃: H₂+Cl₂+Al(OH)₃ → <b>2</b>. Б) CH₃COONa: катод→H₂; анод→Кольбе→C₂H₆+CO₂ → <b>1</b>. В) Cu(NO₃)₂: Cu→Cu; NO₃⁻→O₂ → <b>4</b>. <b>Ответ: 214</b>`},
+  {id:'№11656',ans:'142',
+   text:`Установите соответствие между формулой вещества и продуктами, которые выделяются при электролизе его водного раствора на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) Na₂SO₄</td><td>1) H₂, O₂</td></tr><tr><td>Б) K₂S</td><td>2) Cu, O₂</td></tr><tr><td>В) CuSO₄</td><td>3) Na, O₂</td></tr><tr><td></td><td>4) H₂, S</td></tr></table>`,
+   sol:`А) Na₂SO₄: Na→H₂; SO₄²⁻→O₂ → <b>1</b>. Б) K₂S: K→H₂; S²⁻→S → <b>4</b>. В) CuSO₄: Cu→Cu; SO₄²⁻→O₂ → <b>2</b>. <b>Ответ: 142</b>`},
+  {id:'№11887',ans:'114',
+   text:`Установите соответствие между формулой вещества и продуктами, которые выделяются при его электролизе на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) H₂SO₄</td><td>1) H₂, O₂</td></tr><tr><td>Б) Na₂SO₄</td><td>2) Ni, O₂</td></tr><tr><td>В) Ni(NO₃)₂</td><td>3) H₂, O₂, SO₃</td></tr><tr><td></td><td>4) H₂, Ni, O₂</td></tr></table>`,
+   sol:`А) H₂SO₄: H⁺→H₂; SO₄²⁻→O₂ → <b>1</b>. Б) Na₂SO₄: Na→H₂; SO₄²⁻→O₂ → <b>1</b>. В) Ni(NO₃)₂: Ni(средний)→Ni; NO₃⁻→O₂ → <b>4</b>. <b>Ответ: 114</b>`},
+  {id:'№11908',ans:'244',
+   text:`Установите соответствие между формулой соли и продуктами, образующимися при электролизе её водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) Li₂S</td><td>1) Al, O₂</td></tr><tr><td>Б) Al(NO₃)₃</td><td>2) H₂, S</td></tr><tr><td>В) KMnO₄</td><td>3) Al, O₂, HNO₃</td></tr><tr><td></td><td>4) H₂, O₂</td></tr></table>`,
+   sol:`А) Li₂S: Li→H₂; S²⁻→S → <b>2</b>. Б) Al(NO₃)₃: Al→H₂; NO₃⁻→O₂ → <b>4</b>. В) KMnO₄: K→H₂; MnO₄⁻→O₂ → <b>4</b>. <b>Ответ: 244</b>`},
+  {id:'№11909',ans:'214',
+   text:`Установите соответствие между формулой соли и продуктами, образующимися при электролизе её водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) CaCl₂</td><td>1) Ag, O₂, HF</td></tr><tr><td>Б) AgF</td><td>2) H₂, Cl₂, Ca(OH)₂</td></tr><tr><td>В) Na₂SO₄</td><td>3) H₂, S, NaOH</td></tr><tr><td></td><td>4) H₂, O₂</td></tr><tr><td></td><td>5) Ag, F₂</td></tr></table>`,
+   sol:`А) CaCl₂: Ca→H₂; Cl⁻→Cl₂ → <b>2</b>. Б) AgF: Ag→Ag; F⁻(искл.)→O₂ → <b>1</b>. В) Na₂SO₄: Na→H₂; SO₄²⁻→O₂ → <b>4</b>. <b>Ответ: 214</b>`},
+  {id:'№11913',ans:'433',
+   text:`Установите соответствие между веществом и продуктами, образующимися при электролизе его водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ВЕЩЕСТВО</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) AgF</td><td>1) H₂, O₂, Cr</td></tr><tr><td>Б) KNO₃</td><td>2) Ag, F₂</td></tr><tr><td>В) Na₂Cr₂O₇</td><td>3) H₂, O₂</td></tr><tr><td></td><td>4) Ag, O₂</td></tr></table>`,
+   sol:`А) AgF: Ag→Ag; F⁻(искл.)→O₂ → <b>4</b>. Б) KNO₃: K→H₂; NO₃⁻→O₂ → <b>3</b>. В) Na₂Cr₂O₇: Na→H₂; Cr₂O₇²⁻→O₂ → <b>3</b>. <b>Ответ: 433</b>`},
+  {id:'№11595',ans:'133',
+   text:`Установите соответствие между формулой соли и продуктом электролиза её водного раствора, выделяющимся на графитовом аноде: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТ, ВЫДЕЛЯЮЩИЙСЯ НА АНОДЕ</th></tr><tr><td>А) NaCl</td><td>1) Cl₂</td></tr><tr><td>Б) AgF</td><td>2) H₂</td></tr><tr><td>В) Cr₂(SO₄)₃</td><td>3) O₂</td></tr><tr><td></td><td>4) F₂</td></tr></table>`,
+   sol:`А) NaCl: Cl⁻→Cl₂ → <b>1</b>. Б) AgF: F⁻(искл.)→O₂ → <b>3</b>. В) Cr₂(SO₄)₃: SO₄²⁻→O₂ → <b>3</b>. <b>Ответ: 133</b>`},
+  {id:'№11653',ans:'444',
+   text:`Установите соответствие между формулой соли и продуктами, выделяющимися на аноде при электролизе её водного раствора с инертными электродами: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТЫ, ВЫДЕЛЯЮЩИЕСЯ НА АНОДЕ</th></tr><tr><td>А) Al(NO₃)₃</td><td>1) F₂</td></tr><tr><td>Б) FeSO₄</td><td>2) SO₂</td></tr><tr><td>В) NaF</td><td>3) NO₂</td></tr><tr><td></td><td>4) O₂</td></tr></table>`,
+   sol:`А) Al(NO₃)₃: NO₃⁻→O₂ → <b>4</b>. Б) FeSO₄: SO₄²⁻→O₂ → <b>4</b>. В) NaF: F⁻(искл.)→O₂ → <b>4</b>. <b>Ответ: 444</b>`},
+  {id:'№11892',ans:'442',
+   text:`Установите соответствие между веществом и схемой процесса, протекающего на инертном аноде при электролизе его водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ВЕЩЕСТВО</th><th>СХЕМА ПРОЦЕССА НА АНОДЕ</th></tr><tr><td>А) Cu(NO₃)₂</td><td>1) 2H₂O + 2ē → H₂ + 2OH⁻</td></tr><tr><td>Б) K₂SO₄</td><td>2) 2Br⁻ − 2ē → Br₂</td></tr><tr><td>В) NaBr</td><td>3) 2NO₃⁻ − 2ē → 2NO₂ + O₂</td></tr><tr><td></td><td>4) 2H₂O − 4ē → O₂ + 4H⁺</td></tr><tr><td></td><td>5) SO₄²⁻ − 2ē → SO₂ + O₂</td></tr></table>`,
+   sol:`А) Cu(NO₃)₂: NO₃⁻→O₂ → <b>4</b>. Б) K₂SO₄: SO₄²⁻→O₂ → <b>4</b>. В) NaBr: Br⁻→Br₂ → <b>2</b>. <b>Ответ: 442</b>`},
+  {id:'№11907',ans:'555',
+   text:`Установите соответствие между веществом и процессом, происходящим на аноде при электролизе его водного раствора с инертными электродами: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ВЕЩЕСТВО</th><th>ПРОЦЕСС, ПРОИСХОДЯЩИЙ НА АНОДЕ</th></tr><tr><td>А) CuCr₂O₇</td><td>1) 2H₂O + 2ē → H₂ + 2OH⁻</td></tr><tr><td>Б) Na₂CrO₄</td><td>2) 2BrO₃⁻ − 2ē → Br₂O₆ + O₂</td></tr><tr><td>В) HBrO₄</td><td>3) 2CrO₄²⁻ − 2ē → 2CrO + 3O₂</td></tr><tr><td></td><td>4) 2Cr₂O₇²⁻ − 2ē → 2Cr₂O₃ + 4O₂</td></tr><tr><td></td><td>5) 2H₂O − 4ē → O₂ + 4H⁺</td></tr></table>`,
+   sol:`А) CuCr₂O₇: Cr₂O₇²⁻(кислородсодержащий)→O₂ → <b>5</b>. Б) Na₂CrO₄: CrO₄²⁻→O₂ → <b>5</b>. В) HBrO₄: BrO₄⁻(кислородсодержащий)→O₂ → <b>5</b>. <b>Ответ: 555</b>`},
+  {id:'№11912',ans:'555',
+   text:`Установите соответствие между формулой соли и схемой процесса, протекающего на инертном аноде при электролизе её водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>СХЕМА ПРОЦЕССА НА АНОДЕ</th></tr><tr><td>А) Mn(NO₃)₂</td><td>1) 2NO₃⁻ − 2ē → 2NO₂ + O₂</td></tr><tr><td>Б) HF</td><td>2) 2F⁻ − 2ē → F₂</td></tr><tr><td>В) MgSO₄</td><td>3) 2H₂O + 2ē → H₂ + 2OH⁻</td></tr><tr><td></td><td>4) SO₄²⁻ − 2ē → SO₂ + O₂</td></tr><tr><td></td><td>5) 2H₂O − 4ē → O₂ + 4H⁺</td></tr></table>`,
+   sol:`А) Mn(NO₃)₂: NO₃⁻→O₂ → <b>5</b>. Б) HF: F⁻(искл.)→O₂ → <b>5</b>. В) MgSO₄: SO₄²⁻→O₂ → <b>5</b>. <b>Ответ: 555</b>`},
+  {id:'№8404',ans:'441',
+   text:`Установите соответствие между формулой вещества и уравнением процесса, протекающего на аноде при электролизе ее водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>УРАВНЕНИЕ АНОДНОГО ПРОЦЕССА</th></tr><tr><td>А) Na₂SO₄</td><td>1) 2Cl⁻ − 2ē → Cl₂⁰</td></tr><tr><td>Б) Fe(NO₃)₃</td><td>2) 2SO₄²⁻ − 4ē → 2SO₃ + O₂</td></tr><tr><td>В) CuCl₂</td><td>3) 2NO₃⁻ − 2ē → 2NO₂ + O₂</td></tr><tr><td></td><td>4) 2H₂O − 4ē → 4H⁺ + O₂</td></tr></table>`,
+   sol:`А) Na₂SO₄: SO₄²⁻→O₂ → <b>4</b>. Б) Fe(NO₃)₃: NO₃⁻→O₂ → <b>4</b>. В) CuCl₂: Cl⁻→Cl₂ → <b>1</b>. <b>Ответ: 441</b>`},
+  {id:'№11923',ans:'333',
+   text:`Установите соответствие между веществом и процессом, происходящим на аноде при электролизе его водного раствора с инертными электродами: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ВЕЩЕСТВО</th><th>ПРОЦЕСС, ПРОИСХОДЯЩИЙ НА АНОДЕ</th></tr><tr><td>А) H₂SO₄</td><td>1) 2H₂O + 2ē → H₂ + 2OH⁻</td></tr><tr><td>Б) Fe(NO₃)₃</td><td>2) SO₄²⁻ − 2ē → SO₂ + O₂</td></tr><tr><td>В) NaF</td><td>3) 2H₂O − 4ē → O₂ + 4H⁺</td></tr><tr><td></td><td>4) 2NO₃⁻ − 2ē → 2NO₂ + O₂</td></tr><tr><td></td><td>5) 2F⁻ − 2ē → F₂</td></tr></table>`,
+   sol:`А) H₂SO₄: SO₄²⁻→O₂ → <b>3</b>. Б) Fe(NO₃)₃: NO₃⁻→O₂ → <b>3</b>. В) NaF: F⁻(искл.)→O₂ → <b>3</b>. <b>Ответ: 333</b>`},
+  {id:'№12020',ans:'133',
+   text:`Установите соответствие между формулой соли и процессом, протекающим на аноде при электролизе её водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">СОЛЬ</th><th>ПРОЦЕСС НА АНОДЕ</th></tr><tr><td>А) CaCl₂</td><td>1) 2Cl⁻ − 2ē → Cl₂</td></tr><tr><td>Б) NaF</td><td>2) 2F⁻ − 2ē → F₂</td></tr><tr><td>В) Li₂CO₃</td><td>3) 2H₂O − 4ē → O₂ + 4H⁺</td></tr><tr><td></td><td>4) CO₃²⁻ − 2ē → CO₂ + O₂</td></tr><tr><td></td><td>5) 2H₂O + 2ē → H₂ + 2OH⁻</td></tr></table>`,
+   sol:`А) CaCl₂: Cl⁻→Cl₂ → <b>1</b>. Б) NaF: F⁻(искл.)→O₂ → <b>3</b>. В) Li₂CO₃: CO₃²⁻(кислородсодержащий)→O₂ → <b>3</b>. <b>Ответ: 133</b>`}
+]);
+crInit('s5',[
+  {id:'№11914',ans:'242',
+   text:`Установите соответствие между веществом и продуктами, образующимися при электролизе его водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ВЕЩЕСТВО</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) KMnO₄</td><td>1) H₂, O₂, Mn</td></tr><tr><td>Б) BaBr₂</td><td>2) H₂, O₂</td></tr><tr><td>В) Al₂(SO₄)₃</td><td>3) Al, H₂, O₂</td></tr><tr><td></td><td>4) H₂, Br₂</td></tr></table>`,
+   sol:`А) KMnO₄: K→H₂; MnO₄⁻→O₂ → <b>2</b>. Б) BaBr₂: Ba→H₂; Br⁻→Br₂ → <b>4</b>. В) Al₂(SO₄)₃: Al граница→H₂; SO₄²⁻→O₂ → <b>2</b>. <b>Ответ: 242</b>`},
+  {id:'№11915',ans:'142',
+   text:`Установите соответствие между веществом и продуктами, образующимися при электролизе его водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ВЕЩЕСТВО</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) Cr₂(SO₄)₃</td><td>1) Cr, H₂, O₂</td></tr><tr><td>Б) AlI₃</td><td>2) Zn, H₂, O₂</td></tr><tr><td>В) Zn(MnO₄)₂</td><td>3) H₂, O₂</td></tr><tr><td></td><td>4) H₂, I₂</td></tr></table>`,
+   sol:`А) Cr₂(SO₄)₃: Cr(средний)→Cr+H₂; SO₄²⁻→O₂ → <b>1</b>. Б) AlI₃: Al граница→H₂; I⁻→I₂ → <b>4</b>. В) Zn(MnO₄)₂: Zn(средний)→Zn; MnO₄⁻→O₂ → <b>2</b>. <b>Ответ: 142</b>`},
+  {id:'№11918',ans:'113',
+   text:`Установите соответствие между формулой вещества и продуктами, образующимися при электролизе её водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) Li₂CO₃</td><td>1) H₂, O₂</td></tr><tr><td>Б) HClO₄</td><td>2) H₂, Cl₂</td></tr><tr><td>В) CH₃CH₂CH₂COOLi</td><td>3) C₆H₁₄, CO₂, LiOH, H₂</td></tr><tr><td></td><td>4) H₂, CO₂, LiOH</td></tr></table>`,
+   sol:`А) Li₂CO₃: Li→H₂; CO₃²⁻→O₂ → <b>1</b>. Б) HClO₄: H⁺→H₂; ClO₄⁻→O₂ → <b>1</b>. В) бутаноат Li: Кольбе→C₆H₁₄+CO₂; катод→H₂ → <b>3</b>. <b>Ответ: 113</b>`},
+  {id:'№11919',ans:'413',
+   text:`Установите соответствие между формулой соли и продуктами, образующимися при электролизе её водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) Ca(ClO₄)₂</td><td>1) Ag, O₂, HNO₃</td></tr><tr><td>Б) AgNO₃</td><td>2) H₂, Cl₂, Ca(OH)₂</td></tr><tr><td>В) Na₂S</td><td>3) H₂, S, NaOH</td></tr><tr><td></td><td>4) H₂, O₂</td></tr></table>`,
+   sol:`А) Ca(ClO₄)₂: Ca→H₂; ClO₄⁻→O₂ → <b>4</b>. Б) AgNO₃: Ag→Ag; NO₃⁻→O₂ → <b>1</b>. В) Na₂S: Na→H₂; S²⁻→S → <b>3</b>. <b>Ответ: 413</b>`},
+  {id:'№11930',ans:'123',
+   text:`Установите соответствие между формулой вещества и продуктами электролиза, которые образуются на инертных электродах: к каждой позиции обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) CH₃COONa (р-р)</td><td>1) C₂H₆, CO₂, H₂</td></tr><tr><td>Б) MnBr₂ (р-р)</td><td>2) Mn, H₂, Br₂</td></tr><tr><td>В) KF (распл.)</td><td>3) K, F₂</td></tr><tr><td></td><td>4) H₂, O₂</td></tr></table>`,
+   sol:`А) CH₃COONa: Кольбе→C₂H₆+CO₂; катод→H₂ → <b>1</b>. Б) MnBr₂(р-р): Mn(средний)+H₂; Br⁻→Br₂ → <b>2</b>. В) KF(распл.): K + F₂ → <b>3</b>. <b>Ответ: 123</b>`},
+  {id:'№11931',ans:'223',
+   text:`Установите соответствие между веществом и продуктами, выделяющимися на инертных электродах при электролизе его водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ВЕЩЕСТВО</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) карбонат натрия</td><td>1) металл и кислород</td></tr><tr><td>Б) серная кислота</td><td>2) водород и кислород</td></tr><tr><td>В) хлорид железа(II)</td><td>3) металл, водород и галоген</td></tr><tr><td></td><td>4) водород и галоген</td></tr></table>`,
+   sol:`А) Na₂CO₃: Na→H₂; CO₃²⁻→O₂ → <b>2</b>. Б) H₂SO₄: H⁺→H₂; SO₄²⁻→O₂ → <b>2</b>. В) FeCl₂: Fe(средний)→Fe+H₂; Cl⁻→Cl₂ → <b>3</b>. <b>Ответ: 223</b>`},
+  {id:'№11932',ans:'214',
+   text:`Установите соответствие между веществом и продуктами, выделяющимися на инертных электродах при электролизе его водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) CH₃CH₂COOK</td><td>1) Cu, Cl₂</td></tr><tr><td>Б) CuCl₂</td><td>2) C₄H₁₀, H₂, CO₂</td></tr><tr><td>В) KF</td><td>3) K, F₂</td></tr><tr><td></td><td>4) H₂, O₂</td></tr></table>`,
+   sol:`А) CH₃CH₂COOK (пропионат): Кольбе→C₄H₁₀+CO₂; катод→H₂ → <b>2</b>. Б) CuCl₂: Cu→Cu; Cl⁻→Cl₂ → <b>1</b>. В) KF: K→H₂; F⁻(искл.)→O₂ → <b>4</b>. <b>Ответ: 214</b>`},
+  {id:'№11933',ans:'121',
+   text:`Установите соответствие между формулой кислоты и продуктами, выделяющимися на инертных электродах при электролизе её водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА КИСЛОТЫ</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) H₂SO₄</td><td>1) водород, кислород</td></tr><tr><td>Б) HCl</td><td>2) водород, галоген</td></tr><tr><td>В) HF</td><td>3) водород, оксид серы(IV)</td></tr><tr><td></td><td>4) водород, сера</td></tr></table>`,
+   sol:`А) H₂SO₄: H⁺→H₂; SO₄²⁻→O₂ → <b>1</b>. Б) HCl: H⁺→H₂; Cl⁻→Cl₂ → <b>2</b>. В) HF: H⁺→H₂; F⁻(искл.)→O₂ → <b>1</b>. <b>Ответ: 121</b>`},
+  {id:'№11934',ans:'321',
+   text:`Установите соответствие между формулой соли и продуктами, выделяющимися на инертных электродах при электролизе её водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) MgSO₄</td><td>1) металл, водород, кислород</td></tr><tr><td>Б) NaCl</td><td>2) водород, галоген</td></tr><tr><td>В) FeF₂</td><td>3) водород, кислород</td></tr><tr><td></td><td>4) металл, галоген</td></tr></table>`,
+   sol:`А) MgSO₄: Mg→H₂; SO₄²⁻→O₂ → <b>3</b>. Б) NaCl: Na→H₂; Cl⁻→Cl₂ → <b>2</b>. В) FeF₂: Fe(средний)→Fe+H₂; F⁻(искл.)→O₂ → <b>1</b>. <b>Ответ: 321</b>`},
+  {id:'№11938',ans:'122',
+   text:`Установите соответствие между формулой соли и продуктами электролиза водного раствора этой соли, которые выделились на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) Mg(NO₃)₂</td><td>1) водород, кислород</td></tr><tr><td>Б) NiF₂</td><td>2) металл, водород и кислород</td></tr><tr><td>В) NiSO₄</td><td>3) металл, кислород</td></tr><tr><td></td><td>4) металл, галоген</td></tr></table>`,
+   sol:`А) Mg(NO₃)₂: Mg→H₂; NO₃⁻→O₂ → <b>1</b>. Б) NiF₂: Ni(средний)→Ni+H₂; F⁻(искл.)→O₂ → <b>2</b>. В) NiSO₄: Ni(средний)→Ni+H₂; SO₄²⁻→O₂ → <b>2</b>. <b>Ответ: 122</b>`},
+  {id:'№11945',ans:'423',
+   text:`Установите соответствие между формулой соли и продуктами электролиза водного раствора этой соли, которые выделились на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) CH₃COONa</td><td>1) метан, углекислый газ, водород</td></tr><tr><td>Б) Cs₂SO₄</td><td>2) водород, кислород</td></tr><tr><td>В) NaCl</td><td>3) водород, галоген</td></tr><tr><td></td><td>4) этан, углекислый газ, водород</td></tr></table>`,
+   sol:`А) CH₃COONa: Кольбе→C₂H₆+CO₂; катод→H₂ → <b>4</b>. Б) Cs₂SO₄: Cs→H₂; SO₄²⁻→O₂ → <b>2</b>. В) NaCl: Na→H₂; Cl⁻→Cl₂ → <b>3</b>. <b>Ответ: 423</b>`},
+  {id:'№11952',ans:'324',
+   text:`Установите соответствие между формулой соли и продуктами электролиза водного раствора этой соли, которые выделились на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) KF</td><td>1) K, F₂</td></tr><tr><td>Б) CuSO₄</td><td>2) Cu, O₂</td></tr><tr><td>В) FeSO₄</td><td>3) O₂, H₂</td></tr><tr><td></td><td>4) Fe, H₂, O₂</td></tr><tr><td></td><td>5) Cu, S, O₂</td></tr><tr><td></td><td>6) Fe, H₂, S</td></tr></table>`,
+   sol:`А) KF: K→H₂; F⁻(искл.)→O₂ → <b>3</b>. Б) CuSO₄: Cu→Cu; SO₄²⁻→O₂ → <b>2</b>. В) FeSO₄: Fe(средний)→Fe+H₂; SO₄²⁻→O₂ → <b>4</b>. <b>Ответ: 324</b>`},
+  {id:'№11956',ans:'432',
+   text:`Установите соответствие между формулой вещества и продуктами электролиза его водного раствора, которые образуются на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) CH₃COONa</td><td>1) Cl₂, O₂, H₂</td></tr><tr><td>Б) Hg(ClO₃)₂</td><td>2) H₂, I₂</td></tr><tr><td>В) KI</td><td>3) Hg, O₂</td></tr><tr><td></td><td>4) CO₂, H₂, C₂H₆</td></tr></table>`,
+   sol:`А) CH₃COONa: Кольбе→C₂H₆+CO₂; катод→H₂ → <b>4</b>. Б) Hg(ClO₃)₂: Hg→Hg; ClO₃⁻→O₂ → <b>3</b>. В) KI: K→H₂; I⁻→I₂ → <b>2</b>. <b>Ответ: 432</b>`},
+  {id:'№11957',ans:'111',
+   text:`Установите соответствие между формулой вещества и продуктами электролиза его водного раствора, которые образуются на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) H₂SO₄</td><td>1) H₂, O₂</td></tr><tr><td>Б) KF</td><td>2) K, F₂</td></tr><tr><td>В) Na₂SO₄</td><td>3) H₂, O₂, SO₃</td></tr><tr><td></td><td>4) Na, O₂</td></tr></table>`,
+   sol:`А) H₂SO₄: H⁺→H₂; SO₄²⁻→O₂ → <b>1</b>. Б) KF: K→H₂; F⁻(искл.)→O₂ → <b>1</b>. В) Na₂SO₄: Na→H₂; SO₄²⁻→O₂ → <b>1</b>. <b>Ответ: 111</b>`},
+  {id:'№11961',ans:'351',
+   text:`Установите соответствие между формулой соли и продуктами электролиза водного раствора этой соли, которые выделились на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА СОЛИ</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) CuCr₂O₇</td><td>1) водород, кислород</td></tr><tr><td>Б) AgClO₄</td><td>2) медь, хром, кислород</td></tr><tr><td>В) KMnO₄</td><td>3) медь, кислород</td></tr><tr><td></td><td>4) серебро, хлор</td></tr><tr><td></td><td>5) серебро, кислород</td></tr></table>`,
+   sol:`А) CuCr₂O₇: Cu(средний)→Cu; Cr₂O₇²⁻→O₂ → <b>3</b>. Б) AgClO₄: Ag→Ag; ClO₄⁻→O₂ → <b>5</b>. В) KMnO₄: K→H₂; MnO₄⁻→O₂ → <b>1</b>. <b>Ответ: 351</b>`},
+  {id:'№12001',ans:'132',
+   text:`Установите соответствие между формулой вещества и продуктами электролиза водного раствора этого вещества, которые выделились на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) (CH₃COO)₂Ca</td><td>1) H₂, CO₂, C₂H₆</td></tr><tr><td>Б) KClO</td><td>2) H₂, S</td></tr><tr><td>В) Li₂S</td><td>3) H₂, O₂</td></tr><tr><td></td><td>4) CO₂, H₂</td></tr></table>`,
+   sol:`А) (CH₃COO)₂Ca: Кольбе→C₂H₆+CO₂; катод→H₂ → <b>1</b>. Б) KClO: K→H₂; ClO⁻(кислородсодержащий)→O₂ → <b>3</b>. В) Li₂S: Li→H₂; S²⁻→S → <b>2</b>. <b>Ответ: 132</b>`},
+  {id:'№12004',ans:'341',
+   text:`Установите соответствие между формулой вещества и продуктами электролиза водного раствора этого вещества, которые выделились на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) Al₂(SO₄)₃</td><td>1) C₂H₆, Ag, CO₂</td></tr><tr><td>Б) SnF₂</td><td>2) H₂, Sn, F₂</td></tr><tr><td>В) CH₃COOAg</td><td>3) H₂, O₂</td></tr><tr><td></td><td>4) H₂, O₂, Sn</td></tr><tr><td></td><td>5) Al, O₂</td></tr><tr><td></td><td>6) C₂H₆, Ag</td></tr></table>`,
+   sol:`А) Al₂(SO₄)₃: Al граница→H₂; SO₄²⁻→O₂ → <b>3</b>. Б) SnF₂: Sn(средний)→Sn+H₂; F⁻(искл.)→O₂ → <b>4</b>. В) CH₃COOAg: Ag→Ag; Кольбе→C₂H₆+CO₂ → <b>1</b>. <b>Ответ: 341</b>`},
+  {id:'№12006',ans:'132',
+   text:`Установите соответствие между веществом и продуктами, образующимися при электролизе его водного раствора: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ВЕЩЕСТВО</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) BaI₂</td><td>1) H₂, I₂</td></tr><tr><td>Б) K₂CO₃</td><td>2) H₂, Br₂, Fe</td></tr><tr><td>В) FeBr₃</td><td>3) H₂, O₂</td></tr><tr><td></td><td>4) H₂, Br₂</td></tr></table>`,
+   sol:`А) BaI₂: Ba→H₂; I⁻→I₂ → <b>1</b>. Б) K₂CO₃: K→H₂; CO₃²⁻→O₂ → <b>3</b>. В) FeBr₃: Fe(средний)→Fe+H₂; Br⁻→Br₂ → <b>2</b>. <b>Ответ: 132</b>`},
+  {id:'№12013',ans:'113',
+   text:`Установите соответствие между формулой вещества и продуктами электролиза его водного раствора, которые выделились на инертных электродах: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>ПРОДУКТЫ ЭЛЕКТРОЛИЗА</th></tr><tr><td>А) H₂SO₄</td><td>1) O₂, H₂</td></tr><tr><td>Б) NaF</td><td>2) Na, F₂</td></tr><tr><td>В) CH₃COOH</td><td>3) C₆H₁₄, CO₂, H₂</td></tr><tr><td></td><td>4) SO₂, O₂, H₂</td></tr><tr><td></td><td>5) CO₂, O₂, H₂O</td></tr></table>`,
+   sol:`А) H₂SO₄: H⁺→H₂; SO₄²⁻→O₂ → <b>1</b>. Б) NaF: Na→H₂; F⁻(искл.)→O₂ → <b>1</b>. В) CH₃COOH: H⁺→H₂; CH₃COO⁻→Кольбе → <b>3</b>. <b>Ответ: 113</b>`}
+]);
+crInit('s6',[
+  {id:'№8071',ans:'443',
+   text:`Установите соответствие между названием вещества и возможным способом его получения путём электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">НАЗВАНИЕ ВЕЩЕСТВА</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) F₂</td><td>1) водный раствор KF</td></tr><tr><td>Б) K</td><td>2) водный раствор AlCl₃</td></tr><tr><td>В) Al</td><td>3) расплав Al₂O₃ в криолите</td></tr><tr><td></td><td>4) расплав KF</td></tr></table>`,
+   sol:`А) F₂: расплав KF → <b>4</b>. Б) K: расплав KF → <b>4</b>. В) Al: расплав Al₂O₃ в криолите → <b>3</b>. <b>Ответ: 443</b>`},
+  {id:'№11585',ans:'134',
+   text:`Установите соответствие между названием вещества и электролитическим способом его получения: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">НАЗВАНИЕ ВЕЩЕСТВА</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) алюминий</td><td>1) расплав Al₂O₃ в криолите</td></tr><tr><td>Б) сера</td><td>2) водный раствор KF</td></tr><tr><td>В) фтор</td><td>3) водный раствор Na₂S</td></tr><tr><td></td><td>4) расплав KF</td></tr></table>`,
+   sol:`А) Al: расплав Al₂O₃ → <b>1</b>. Б) сера: р-р Na₂S → <b>3</b>. В) F₂: расплав KF → <b>4</b>. <b>Ответ: 134</b>`},
+  {id:'№11654',ans:'212',
+   text:`Установите соответствие между названием вещества и возможным способом его получения путём электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">НАЗВАНИЕ ВЕЩЕСТВА</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) фтор</td><td>1) раствор Al₂O₃ в расплаве криолита</td></tr><tr><td>Б) алюминий</td><td>2) NaF (распл.)</td></tr><tr><td>В) натрий</td><td>3) AlCl₃ (р-р)</td></tr><tr><td></td><td>4) NaF (р-р)</td></tr></table>`,
+   sol:`А) F₂: расплав NaF → <b>2</b>. Б) Al: расплав Al₂O₃ → <b>1</b>. В) Na: расплав NaF → <b>2</b>. <b>Ответ: 212</b>`},
+  {id:'№11910',ans:'432',
+   text:`Установите соответствие между названием вещества и электролитическим способом его получения: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">НАЗВАНИЕ ВЕЩЕСТВА</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) углекислый газ</td><td>1) (NH₄)₂CO₃ (р-р)</td></tr><tr><td>Б) калий</td><td>2) KI (р-р)</td></tr><tr><td>В) йод</td><td>3) KF (распл.)</td></tr><tr><td></td><td>4) (CH₃COO)₂Ca (р-р)</td></tr></table>`,
+   sol:`А) CO₂: р-р (CH₃COO)₂Ca (Кольбе) → <b>4</b>. Б) K: расплав KF → <b>3</b>. В) I₂: р-р KI → <b>2</b>. <b>Ответ: 432</b>`},
+  {id:'№11911',ans:'423',
+   text:`Установите соответствие между названием вещества и электролитическим способом его получения: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">НАЗВАНИЕ ВЕЩЕСТВА</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) серебро</td><td>1) NaNO₃ (р-р)</td></tr><tr><td>Б) сера</td><td>2) K₂S (р-р)</td></tr><tr><td>В) натрий</td><td>3) NaCl (распл.)</td></tr><tr><td></td><td>4) AgClO₄ (р-р)</td></tr></table>`,
+   sol:`А) Ag: р-р AgClO₄ → <b>4</b>. Б) сера: р-р K₂S → <b>2</b>. В) Na: расплав NaCl → <b>3</b>. <b>Ответ: 423</b>`},
+  {id:'№11920',ans:'132',
+   text:`Установите соответствие между названием вещества и электролитическим способом его получения: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">НАЗВАНИЕ ВЕЩЕСТВА</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) бром</td><td>1) AlBr₃ (р-р)</td></tr><tr><td>Б) алюминий</td><td>2) CaCl₂ (распл.)</td></tr><tr><td>В) кальций</td><td>3) раствор Al₂O₃ в расплавленном криолите</td></tr><tr><td></td><td>4) KF (распл.)</td></tr></table>`,
+   sol:`А) Br₂: р-р AlBr₃ → <b>1</b>. Б) Al: расплав Al₂O₃ → <b>3</b>. В) Ca: расплав CaCl₂ → <b>2</b>. <b>Ответ: 132</b>`},
+  {id:'№11921',ans:'124',
+   text:`Установите соответствие между названием вещества и электролитическим способом его получения: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">НАЗВАНИЕ ВЕЩЕСТВА</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) железо</td><td>1) FeCl₃ (распл.)</td></tr><tr><td>Б) фтор</td><td>2) KF (распл.)</td></tr><tr><td>В) кислород</td><td>3) Na₂S (р-р)</td></tr><tr><td></td><td>4) NaF (р-р)</td></tr></table>`,
+   sol:`А) Fe: расплав FeCl₃ → <b>1</b>. Б) F₂: расплав KF → <b>2</b>. В) O₂: р-р NaF (F⁻→O₂) → <b>4</b>. <b>Ответ: 124</b>`},
+  {id:'№11926',ans:'143',
+   text:`Установите соответствие между формулой вещества и возможным способом его получения с помощью электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) NaOH</td><td>1) водного раствора хлорида натрия</td></tr><tr><td>Б) Cu</td><td>2) раствора сульфата калия</td></tr><tr><td>В) S</td><td>3) расплава сульфида магния</td></tr><tr><td></td><td>4) водного раствора хлорида меди</td></tr></table>`,
+   sol:`А) NaOH: р-р NaCl → <b>1</b>. Б) Cu: р-р CuCl₂ → <b>4</b>. В) S: расплав сульфида магния → <b>3</b>. <b>Ответ: 143</b>`},
+  {id:'№11929',ans:'134',
+   text:`Установите соответствие между формулой вещества и возможным способом его получения с помощью электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ВЕЩЕСТВА</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) Al</td><td>1) раствора оксида в расплаве криолита</td></tr><tr><td>Б) S</td><td>2) водного раствора фторида калия</td></tr><tr><td>В) F₂</td><td>3) расплава сульфида бария</td></tr><tr><td></td><td>4) расплава фторида магния</td></tr></table>`,
+   sol:`А) Al: раствор Al₂O₃ в расплаве → <b>1</b>. Б) S: расплав сульфида бария → <b>3</b>. В) F₂: расплав MgF₂ → <b>4</b>. <b>Ответ: 134</b>`},
+  {id:'№11935',ans:'241',
+   text:`Установите соответствие между веществом и возможным способом его получения с помощью электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ВЕЩЕСТВО</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) кальций</td><td>1) водного раствора CaSO₄</td></tr><tr><td>Б) медь</td><td>2) расплава CaCl₂</td></tr><tr><td>В) кислород</td><td>3) расплава NaF</td></tr><tr><td></td><td>4) водного раствора CuCl₂</td></tr></table>`,
+   sol:`А) Ca: расплав CaCl₂ → <b>2</b>. Б) Cu: р-р CuCl₂ → <b>4</b>. В) O₂: р-р CaSO₄ (SO₄²⁻→O₂) → <b>1</b>. <b>Ответ: 241</b>`},
+  {id:'№11941',ans:'431',
+   text:`Установите соответствие между названием вещества и возможным способом его получения путём электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">НАЗВАНИЕ ВЕЩЕСТВА</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) кислород</td><td>1) расплава KCl</td></tr><tr><td>Б) бром</td><td>2) водного раствора NaI</td></tr><tr><td>В) калий</td><td>3) водного раствора KBr</td></tr><tr><td></td><td>4) водного раствора AgF</td></tr></table>`,
+   sol:`А) O₂: р-р AgF (Ag→Ag, F⁻→O₂) → <b>4</b>. Б) Br₂: р-р KBr → <b>3</b>. В) K: расплав KCl → <b>1</b>. <b>Ответ: 431</b>`},
+  {id:'№11949',ans:'632',
+   text:`Установите соответствие между названием вещества и возможным способом его получения с помощью электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">НАЗВАНИЕ ВЕЩЕСТВА</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) Al</td><td>1) водный раствор AlBr₃</td></tr><tr><td>Б) CO₂</td><td>2) водный раствор AlI₃</td></tr><tr><td>В) I₂</td><td>3) водный раствор C₂H₅COOH</td></tr><tr><td></td><td>4) водный раствор Na₂CO₃</td></tr><tr><td></td><td>5) водный раствор NaHCO₃</td></tr><tr><td></td><td>6) раствор Al₂O₃ в расплавленном криолите</td></tr></table>`,
+   sol:`А) Al: раствор Al₂O₃ в расплаве → <b>6</b>. Б) CO₂: р-р C₂H₅COOH (Кольбе) → <b>3</b>. В) I₂: р-р AlI₃ → <b>2</b>. <b>Ответ: 632</b>`},
+  {id:'№11990',ans:'234',
+   text:`Установите соответствие между названием сложного вещества и возможным способом его получения с помощью электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">СЛОЖНОЕ ВЕЩЕСТВО</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) CO₂</td><td>1) водного раствора карбоната калия</td></tr><tr><td>Б) Ca(OH)₂</td><td>2) водного раствора ацетата серебра</td></tr><tr><td>В) H₂SO₄</td><td>3) водного раствора хлорида кальция</td></tr><tr><td></td><td>4) водного раствора сульфата меди(II)</td></tr></table>`,
+   sol:`А) CO₂: р-р ацетата серебра (Кольбе) → <b>2</b>. Б) Ca(OH)₂: р-р CaCl₂ (Ca→H₂; Cl⁻→Cl₂; с водой Ca²⁺→Ca(OH)₂) → <b>3</b>. В) H₂SO₄: р-р CuSO₄ → <b>4</b>. <b>Ответ: 234</b>`},
+  {id:'№11993',ans:'314',
+   text:`Установите соответствие между названием простого вещества и возможным способом его получения с помощью электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ПРОСТОЕ ВЕЩЕСТВО</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) йод</td><td>1) раствора Al₂O₃ в расплаве криолита</td></tr><tr><td>Б) алюминий</td><td>2) водного раствора фторида натрия</td></tr><tr><td>В) фтор</td><td>3) раствора йодида лития</td></tr><tr><td></td><td>4) расплава фторида натрия</td></tr></table>`,
+   sol:`А) I₂: р-р йодида лития (LiI) → <b>3</b>. Б) Al: расплав Al₂O₃ → <b>1</b>. В) F₂: расплав NaF → <b>4</b>. <b>Ответ: 314</b>`},
+  {id:'№11996',ans:'513',
+   text:`Установите соответствие между металлом и возможным способом его получения путём электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">МЕТАЛЛ</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) Na</td><td>1) водного раствора нитрата серебра</td></tr><tr><td>Б) Ag</td><td>2) водного раствора фторида натрия</td></tr><tr><td>В) Al</td><td>3) раствора Al₂O₃ в расплаве криолита</td></tr><tr><td></td><td>4) водного раствора хлорида алюминия</td></tr><tr><td></td><td>5) расплава фторида натрия</td></tr></table>`,
+   sol:`А) Na: расплав NaF → <b>5</b>. Б) Ag: р-р AgNO₃ → <b>1</b>. В) Al: расплав Al₂O₃ → <b>3</b>. <b>Ответ: 513</b>`},
+  {id:'№11999',ans:'231',
+   text:`Установите соответствие между веществом и возможным способом его электролитического получения: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ВЕЩЕСТВО</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) Cu</td><td>1) водного раствора фторида серебра</td></tr><tr><td>Б) CO₂</td><td>2) водного раствора сульфата меди(II)</td></tr><tr><td>В) Ag</td><td>3) водного раствора пропионата лития</td></tr><tr><td></td><td>4) водного раствора карбоната натрия</td></tr><tr><td></td><td>5) расплава фторида натрия</td></tr></table>`,
+   sol:`А) Cu: р-р CuSO₄ → <b>2</b>. Б) CO₂: р-р пропионата лития (Кольбе) → <b>3</b>. В) Ag: р-р AgF → <b>1</b>. <b>Ответ: 231</b>`},
+  {id:'№12002',ans:'365',
+   text:`Установите соответствие между формулой галогена и возможным способом его получения путём электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ФОРМУЛА ГАЛОГЕНА</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) Br₂</td><td>1) водного раствора нитрата цинка</td></tr><tr><td>Б) F₂</td><td>2) водного раствора фторида калия</td></tr><tr><td>В) Cl₂</td><td>3) водного раствора бромида магния</td></tr><tr><td></td><td>4) водного раствора пербромата натрия</td></tr><tr><td></td><td>5) водного раствора хлорида алюминия</td></tr><tr><td></td><td>6) расплава фторида серебра</td></tr></table>`,
+   sol:`А) Br₂: р-р MgBr₂ → <b>3</b>. Б) F₂: расплав AgF → <b>6</b>. В) Cl₂: р-р AlCl₃ → <b>5</b>. <b>Ответ: 365</b>`},
+  {id:'№12003',ans:'143',
+   text:`Установите соответствие между названием вещества и возможным способом его получения путём электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">НАЗВАНИЕ ВЕЩЕСТВА</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) хлор</td><td>1) расплава хлорида натрия</td></tr><tr><td>Б) водород</td><td>2) водного раствора нитрата меди(II)</td></tr><tr><td>В) фтор</td><td>3) расплава фторида натрия</td></tr><tr><td></td><td>4) водного раствора перхлората кальция</td></tr><tr><td></td><td>5) водного раствора хлората серебра</td></tr></table>`,
+   sol:`А) Cl₂: расплав NaCl → <b>1</b>. Б) H₂: р-р Cu(NO₃)₂ (Cu→Cu, NO₃⁻→O₂; катод→H₂) → <b>4</b>. В) F₂: расплав NaF → <b>3</b>. <b>Ответ: 143</b>`},
+  {id:'№12011',ans:'231',
+   text:`Установите соответствие между названием металла и возможным способом его получения путём электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">МЕТАЛЛ</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) Ca</td><td>1) водного раствора Cu(NO₃)₂</td></tr><tr><td>Б) Na</td><td>2) расплава CaCl₂</td></tr><tr><td>В) Cu</td><td>3) расплава NaOH</td></tr><tr><td></td><td>4) раствора Al₂O₃ в расплаве криолита</td></tr><tr><td></td><td>5) водного раствора CaCl₂</td></tr></table>`,
+   sol:`А) Ca: расплав CaCl₂ → <b>2</b>. Б) Na: расплав NaOH → <b>3</b>. В) Cu: р-р Cu(NO₃)₂ → <b>1</b>. <b>Ответ: 231</b>`},
+  {id:'№12021',ans:'224',
+   text:`Установите соответствие между неметаллом и способом его электролитического получения: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">НЕМЕТАЛЛ</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) водород</td><td>1) CuBr₂ (р-р)</td></tr><tr><td>Б) хлор</td><td>2) NaCl (р-р)</td></tr><tr><td>В) кислород</td><td>3) AgF (распл.)</td></tr><tr><td></td><td>4) AgF (р-р)</td></tr></table>`,
+   sol:`А) H₂: р-р NaCl (катод) → <b>2</b>. Б) Cl₂: р-р NaCl (анод) → <b>2</b>. В) O₂: р-р AgF (F⁻→O₂) → <b>4</b>. <b>Ответ: 224</b>`},
+  {id:'№24969',ans:'124',
+   text:`Установите соответствие между названием вещества и возможным способом его получения путём электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ВЕЩЕСТВО</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) натрий</td><td>1) расплава хлорида натрия</td></tr><tr><td>Б) этан</td><td>2) раствора ацетата натрия</td></tr><tr><td>В) фтор</td><td>3) раствора хлорида натрия</td></tr><tr><td></td><td>4) расплава фторида калия</td></tr></table>`,
+   sol:`А) Na: расплав NaCl → <b>1</b>. Б) этан: р-р ацетата натрия (Кольбе) → <b>2</b>. В) F₂: расплав KF → <b>4</b>. <b>Ответ: 124</b>`},
+  {id:'№27590',ans:'3564',
+   text:`Установите соответствие между названием простого вещества и возможным электролитическим способом его получения: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">НАЗВАНИЕ ВЕЩЕСТВА</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) натрий</td><td>1) водного раствора AgF</td></tr><tr><td>Б) алюминий</td><td>2) водного раствора Al₂(SO₄)₃</td></tr><tr><td>В) сера</td><td>3) расплава NaCl</td></tr><tr><td>Г) фтор</td><td>4) расплава KF</td></tr><tr><td></td><td>5) раствора Al₂O₃ в расплавленном криолите</td></tr><tr><td></td><td>6) водного раствора Na₂S</td></tr></table>`,
+   sol:`А) Na: расплав NaCl → <b>3</b>. Б) Al: раствор Al₂O₃ в расплаве → <b>5</b>. В) сера: р-р Na₂S → <b>6</b>. Г) F₂: расплав KF → <b>4</b>. <b>Ответ: 3564</b>`},
+  {id:'№27609',ans:'1413',
+   text:`Установите соответствие между веществом и возможным способом его получения путём электролиза: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.<br><table><tr><th style="width:55%">ВЕЩЕСТВО</th><th>ПОЛУЧЕНИЕ ЭЛЕКТРОЛИЗОМ</th></tr><tr><td>А) водород</td><td>1) водного раствора AlCl₃</td></tr><tr><td>Б) алюминий</td><td>2) водного раствора Cu(ClO₃)₂</td></tr><tr><td>В) хлор</td><td>3) расплава KF</td></tr><tr><td>Г) калий</td><td>4) раствора Al₂O₃ в расплавленном криолите</td></tr><tr><td></td><td>5) водного раствора Hg(NO₃)₂</td></tr></table>`,
+   sol:`А) H₂: р-р AlCl₃ (Al граница→H₂) → <b>1</b>. Б) Al: расплав Al₂O₃ → <b>4</b>. В) Cl₂: р-р AlCl₃ (Cl⁻→Cl₂) → <b>1</b>. Г) K: расплав KF → <b>3</b>. <b>Ответ: 1413</b>`}
+]);
+
+</script>
+</body>
+</html>
