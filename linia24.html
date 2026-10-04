@@ -1,0 +1,2339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Линия 24 · Качественные реакции</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  --p900:#1a3a5c;--p800:#1e4976;--p700:#235a91;--p600:#2b72b8;--p500:#3a8fd4;
+  --p400:#6aaede;--p300:#a8d0ed;--p200:#d6eaf8;--p100:#eaf4fb;--p50:#f5faff;
+  --ink:#0d1f2d;--ink2:#2d4a5e;--ink3:#7a9baf;
+  --line:#d8e8f0;--bg:#f2f7fb;--white:#fff;
+  --green:#1a8c6e;--green-t:#e0f5ef;--green-d:#0a5240;
+  --amber:#b06a10;--amber-t:#faeedd;--amber-d:#6b3a00;
+  --red:#a02525;--red-t:#fceaea;--red-d:#6e1515;
+  --r:12px;--r-sm:8px;--r-lg:20px;
+  --shadow:0 1px 3px rgba(10,30,50,.06),0 4px 16px rgba(10,30,50,.06);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+  --h1:#0a2540;--h2:#1565c0;--h3:#1e88e5;
+  --acc:#1565c0;--acc-l:#e3f0fd;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:17px}
+
+/* TOPBAR */
+#topbar{position:fixed;top:12px;right:16px;z-index:999;display:flex;align-items:center;gap:4px;background:#fff;border:1.5px solid rgba(21,101,192,.3);border-radius:999px;padding:5px 6px;box-shadow:0 4px 20px rgba(21,101,192,.22);transition:all .25s;cursor:pointer;user-select:none}
+.tb-collapsible{display:flex;align-items:center;gap:4px}
+#topbar .tb-expand{display:none}
+#topbar.collapsed .tb-expand{display:flex}
+#topbar.collapsed .tb-collapsible{display:none}
+#topbar.collapsed{gap:0}
+.tb-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;border-radius:50%;font-size:15px;color:var(--ink3);cursor:pointer;transition:.12s;flex-shrink:0}
+.tb-btn:hover{background:rgba(21,101,192,.1);color:var(--h2)}
+.tb-sep{width:1px;height:16px;background:rgba(21,101,192,.15);margin:0 2px;flex-shrink:0}
+.tb-prog-wrap{width:52px;height:2px;background:rgba(21,101,192,.15);border-radius:1px;flex-shrink:0}
+.tb-prog-fill{height:2px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;border-radius:1px;transition:width .1s}
+.tb-label{font-family:var(--mono);font-size:10px;color:var(--ink3);padding:0 4px;white-space:nowrap}
+.tb-streak{display:flex;gap:3px;align-items:center;padding:0 2px}
+.tb-day{width:7px;height:7px;border-radius:50%;background:rgba(21,101,192,.15);flex-shrink:0;transition:.2s}
+.tb-day.done{background:#1a8c6e}
+.tb-day.part{background:var(--h3);opacity:.7}
+.tb-day.today{outline:1.5px solid rgba(21,101,192,.5);outline-offset:1.5px}
+
+/* SIDE MENU */
+#menu-overlay{display:none;position:fixed;inset:0;background:rgba(10,37,64,.3);z-index:1000}
+#menu-overlay.open{display:block}
+#menu-panel{position:fixed;top:0;left:0;width:300px;height:100vh;background:#fff;border-right:1px solid var(--line);overflow-y:auto;padding:20px;z-index:1001;box-shadow:4px 0 20px rgba(21,101,192,.12);transform:translateX(-100%);transition:transform .3s ease}
+#menu-panel.open{transform:none}
+.mp-title{font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:1.5px;text-transform:uppercase;padding:10px 12px 4px;font-family:var(--mono)}
+.mp-item{padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--ink2);display:flex;gap:10px;align-items:center;margin-bottom:1px;transition:.1s;text-decoration:none}
+.mp-item:hover{background:#e3f0fd;color:var(--h2)}
+.mp-close{background:none;border:none;font-size:20px;color:var(--ink3);cursor:pointer;padding:4px;float:right;margin-bottom:8px}
+
+/* PROG BAR */
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(21,101,192,.1);z-index:998}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;transition:width .1s}
+
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#060e2b 0%,#0d2461 38%,#1565c0 72%,#1e88e5 100%);padding:48px 32px 40px;margin:0 -24px 40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;bottom:-30%;left:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(30,136,229,.2) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);border-radius:20px;padding:4px 14px;font-size:12px;font-family:var(--mono);letter-spacing:.6px;margin-bottom:16px}
+.hero h1{font-size:clamp(28px,5vw,46px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#fff;margin-bottom:12px;text-wrap:balance}
+.hero h1 em{color:#90caf9;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.68);line-height:1.7;max-width:540px;margin-bottom:22px}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px}
+.hero-chip{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.17);color:rgba(255,255,255,.88);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+
+/* SECTIONS */
+.section{margin-bottom:44px}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--p200)}
+.section-title{font-size:clamp(16px,2.5vw,21px);font-weight:700;color:var(--p800);line-height:1.2;text-wrap:balance}
+.section-pill{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.8px;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.section-pill.green{background:linear-gradient(135deg,#0a5240,#1a8c6e)}
+.section-pill.amber{background:linear-gradient(135deg,var(--amber-d),var(--amber))}
+
+h3.sub{font-size:15px;font-weight:700;color:var(--p700);margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+h3.sub::before{content:'';width:3px;height:16px;background:var(--h2);border-radius:2px;flex-shrink:0}
+
+/* BOXES */
+.box{border-radius:var(--r-sm);padding:12px 16px;margin:10px 0;font-size:15px;line-height:1.75}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:var(--amber-t);border-left:4px solid var(--amber);color:var(--amber-d)}
+.box-danger{background:var(--red-t);border-left:4px solid var(--red);color:var(--red-d)}
+.box-success{background:var(--green-t);border-left:4px solid var(--green);color:var(--green-d)}
+.box-blue{background:#e3f0fd;border-left:4px solid var(--h2);color:var(--h1)}
+.box-title{font-weight:700;font-size:12px;margin-bottom:5px;text-transform:uppercase;letter-spacing:.6px}
+.box ul,.box ol{padding-left:18px;margin:4px 0}
+.box li{margin:3px 0;font-size:15px}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);margin:12px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:14px}
+th{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-weight:600;padding:9px 12px;text-align:left;font-size:11.5px;letter-spacing:.3px}
+td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.55}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td:not(.pt-period):not(.el6):not(.el-blank6){background:#e3f0fd22}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+@media(max-width:680px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* ALGO */
+.algo{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.algo-step{display:flex;gap:10px;align-items:flex-start}
+.algo-n{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-family:var(--mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.algo-text{font-size:15px;line-height:1.7;color:var(--ink2)}
+.algo-text strong{color:var(--ink)}
+
+/* CARDS */
+.hack-card{background:#e3f0fd;border:1.5px solid #90caf9;border-radius:var(--r-sm);padding:12px 16px;font-size:15px;margin:8px 0}
+.hack-card strong{color:var(--h1)}
+.warn-card{background:var(--amber-t);border:1.5px solid #fbbf24;border-radius:var(--r-sm);padding:12px 16px;font-size:15px;margin:8px 0}
+.warn-card strong{color:var(--amber-d)}
+
+/* SIGN CARDS */
+.sign-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+@media(max-width:620px){.sign-cards{grid-template-columns:1fr 1fr}}
+.sign-card{border-radius:var(--r);padding:14px;border:2px solid;text-align:center}
+.sc-osad{background:#e3f0fd;border-color:#90caf9}
+.sc-gaz{background:#f0fdf4;border-color:#6ee7b7}
+.sc-cvet{background:#fef3c7;border-color:#fbbf24}
+.sc-rastvoren{background:#fce7f3;border-color:#f0abfc}
+.sc-zapah{background:#fff7ed;border-color:#fdba74}
+.sc-plam{background:#fee2e2;border-color:#fca5a5}
+.sc-icon{font-size:28px;line-height:1;margin-bottom:4px}
+.sc-name{font-size:12px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.sc-desc{font-size:11px;color:var(--ink3);line-height:1.4}
+
+/* FADE */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.fade-in.vis{opacity:1;transform:none}
+
+/* TRAINER */
+.tr-input{font-size:22px;max-width:180px;letter-spacing:.18em;text-align:center;font-family:var(--mono);border:2px solid var(--line);border-radius:8px;padding:8px 12px;outline:none;width:100%;background:var(--bg);color:var(--ink);transition:border-color .15s}
+.tr-input:focus{border-color:var(--h2)}
+.tr-feedback{min-height:22px;font-size:16px;font-weight:700;margin-top:8px}
+.tr-feedback.ok{color:var(--green-d)}
+.tr-feedback.err{color:var(--red-d)}
+.tr-check-btn,.tr-next-btn,.tr-retry-btn,.tr-reset-btn{border:none;border-radius:8px;padding:11px 26px;font-size:16px;font-weight:700;cursor:pointer;transition:.12s}
+.tr-check-btn{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff}
+.tr-check-btn:hover{opacity:.9}
+.tr-next-btn{background:var(--green);color:#fff}
+.tr-retry-btn{background:var(--amber);color:#fff}
+.tr-reset-btn{background:var(--line);color:var(--ink2)}
+.tr-card,.tr-result{background:var(--white);border:1.5px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow)}
+.tr-result{text-align:center}
+
+/* MATCH TABLE in trainer */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:560px){.match-grid{grid-template-columns:1fr}}
+.match-col{background:var(--bg);border:1.5px solid var(--line);border-radius:8px;padding:10px 12px}
+.match-col-title{font-size:10px;font-weight:800;color:var(--ink3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px;font-family:var(--mono)}
+.match-row{font-size:13px;line-height:1.85;color:var(--ink)}
+.match-row b{color:var(--h2);font-family:var(--mono)}
+
+  .cation-header{background:#D97706;color:#fff;font-weight:700}
+  .anion-header{background:#92400E;color:#fff;font-weight:700}
+  .soluble{color:#1d7a3c;font-weight:700}
+  .insoluble{color:#b33a3a;font-weight:700}
+  .slightly{color:#c97d1a;font-weight:700}
+  .pt-legend6{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+  .pt-leg-item6{font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px}
+  .pt-ru{border-collapse:collapse;font-size:11px;white-space:nowrap;width:auto}
+  .pt-ru th,.pt-ru td{padding:0;border:1px solid #fca5a5}
+  .pt-corner{background:#D97706;color:#fff;font-size:11px;font-weight:700;text-align:center;padding:4px;min-width:32px;writing-mode:vertical-rl}
+  .pt-ru thead th{background:#D97706;color:#fff;font-weight:700;text-align:center;padding:3px 6px;font-size:12px}
+  .pt-noble-hdr{background:#5A2D82;color:#fff;font-weight:700;text-align:center;padding:3px 6px;font-size:12px}
+  .pt-viii{background:#9B3EE8;color:#fff;font-weight:700;text-align:center;padding:3px 6px;font-size:12px}
+  .pt-period{background:#D97706;color:#fff;font-weight:700;text-align:center;padding:3px 5px;font-size:11px;vertical-align:middle}
+  .el6{min-width:54px;max-width:54px;height:56px;text-align:center;padding:2px;vertical-align:top;cursor:default;transition:transform .15s,box-shadow .15s;position:relative}
+  .el6:hover{transform:scale(1.18);box-shadow:0 4px 16px #0004;z-index:20}
+  .el-blank6{min-width:54px;background:#f8f8f8}
+  .el-num{display:block;font-size:9px;opacity:.75;line-height:1.1;margin-top:1px}
+  .el-mass{display:block;font-size:8.5px;opacity:.6;line-height:1.1}
+  .el-sym{display:block;font-size:16px;font-weight:800;line-height:1.2}
+  .el-name{display:block;font-size:7.5px;opacity:.75;line-height:1.1;margin-bottom:1px}
+  .pt-f-label{background:#f0f0f0;color:#555;font-size:9px;font-weight:700;text-align:center;padding:2px 4px;white-space:nowrap;vertical-align:middle}
+  .sol-table{border-collapse:collapse;font-size:12px;white-space:nowrap}
+  .sol-table th,.sol-table td{border:1px solid #e5e7eb;padding:5px 7px;text-align:center;min-width:36px}
+  .sol-table thead th{background:#D97706;color:#fff;font-weight:700;font-size:11px}
+  .sol-table thead th:first-child{background:#fff}
+  .sol-table tbody th{background:#FFFBEB;color:#78350F;font-weight:700;font-size:12px;text-align:left;padding:5px 10px;min-width:80px}
+  .sol-P{background:#d1fae5;color:#065f46;font-weight:600}
+  .sol-M{background:#fef9c3;color:#854d0e;font-weight:600}
+  .sol-H{background:#fee2e2;color:#991b1b;font-weight:600}
+  .sol-D{background:#f3f4f6;color:#6b7280}
+  .sol-Q{background:#f8fafc;color:#94a3b8;font-style:italic}
+  .sol-E{background:#f8fafc}
+  .sol-legend{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;margin-top:10px}
+  .sol-leg{padding:4px 12px;border-radius:6px;font-weight:600}
+  .sol-table th.anion-sel{background:#92400E!important;color:#fff!important;cursor:pointer}
+  .sol-table th.cation-sel{background:#92400E!important;color:#fff!important;cursor:pointer}
+  .sol-table td.row-hl{background:#FEF3C7!important;outline:none}
+  .sol-table td.col-hl{background:#FEF3C7!important;outline:none}
+  .sol-table td.intersect{background:#F59E0B!important;color:#fff!important;font-weight:800;font-size:14px;transform:scale(1.1);box-shadow:0 0 0 2px #D97706}
+  .sol-table th[data-col]{cursor:pointer;transition:background .15s}
+  .sol-table th[data-col]:hover{background:#D97706!important;color:#fff!important}
+  .sol-table tbody th{cursor:pointer;transition:background .15s}
+  .sol-table tbody th:hover{background:#D97706!important;color:#fff!important}
+</style>
+</head>
+<body>
+
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+
+<!-- TOPBAR -->
+<div id="topbar" class="collapsed" onclick="toggleTopbar(event)" title="Нажми чтобы развернуть">
+  <span class="tb-expand" style="font-size:18px;width:32px;height:32px;align-items:center;justify-content:center;color:var(--h2);font-weight:700">☰</span>
+  <div class="tb-collapsible">
+    <button class="tb-btn" onclick="openMenu();event.stopPropagation()" title="Меню">☰</button>
+    <div class="tb-sep"></div>
+    <div class="tb-prog-wrap"><div class="tb-prog-fill" id="tb-pf"></div></div>
+    <span class="tb-label" id="tb-lbl">0%</span>
+    <div class="tb-sep"></div>
+    <div class="tb-streak" id="tb-streak"></div>
+    <button class="tb-btn" onclick="clearHistory();event.stopPropagation()" title="Очистить историю">🗑️</button>
+    <div class="tb-sep"></div>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" onclick="togglePS();event.stopPropagation()" title="Таблица Менделеева (T)">⚗️</button>
+    <button class="tb-btn" onclick="toggleRS();event.stopPropagation()" title="Таблица растворимости (R)">🧪</button>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" onclick="toggleTopbar(event)" title="Свернуть">✕</button>
+  </div>
+</div>
+
+<!-- SIDE MENU -->
+<div id="menu-overlay" onclick="closeMenu()"></div>
+<div id="menu-panel">
+  <button class="mp-close" onclick="closeMenu()">✕</button>
+  <div class="mp-title">Блок 1 — Признаки реакций</div>
+  <a class="mp-item" href="#s-signs" onclick="closeMenu()">🔬 Признаки реакций</a>
+  <a class="mp-item" href="#s-indicators" onclick="closeMenu()">🧪 Индикаторы</a>
+  <a class="mp-item" href="#s-algo" onclick="closeMenu()">📋 Алгоритм решения</a>
+  <a class="mp-item" href="#s-ions-table" onclick="closeMenu()">🔥 Цвета пламени</a>
+  <a class="mp-item" href="#tr-b1" onclick="closeMenu()">📝 Тренажёр — Признаки</a>
+  <div class="mp-title" style="margin-top:12px">Блок 2 — Реактивы</div>
+  <a class="mp-item" href="#s-reagents" onclick="closeMenu()">🧪 Реактивы для распознавания</a>
+  <a class="mp-item" href="#s-reagents-algo" onclick="closeMenu()">📋 Алгоритм — реактивы</a>
+  <a class="mp-item" href="#tr-b2" onclick="closeMenu()">📝 Тренажёр — Реактивы</a>
+  <a class="mp-item" href="#s-organic" onclick="closeMenu()">🧬 Органика — теория</a>
+  <a class="mp-item" href="#s-organic-algo" onclick="closeMenu()">📋 Алгоритм — органика</a>
+  <a class="mp-item" href="#s-organic-table" onclick="closeMenu()">📊 Таблица — органика</a>
+  <a class="mp-item" href="#tr-b3" onclick="closeMenu()">📝 Тренажёр — Органика</a>
+</div>
+
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">ЛИНИЯ 24 · ЕГЭ ХИМИЯ · 2 БАЛЛА</div>
+  <h1>Качественные <em>реакции</em></h1>
+  <p class="hero-sub">Признаки реакций, реактивы для распознавания веществ и органическая химия — всё для линии 24 ЕГЭ.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Блок 1 · Признаки реакций — 30 зад.</span>
+    <span class="hero-chip">Блок 2 · Реактивы — 15 зад.</span>
+    <span class="hero-chip">Блок 3 · Органика</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 1 — ПРИЗНАКИ ХИМИЧЕСКИХ РЕАКЦИЙ -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section fade-in" id="s-signs">
+  <div class="section-header">
+    <div class="section-pill">ТЕОРИЯ</div>
+    <span class="section-title">Признаки химических реакций</span>
+  </div>
+
+  <div class="box box-blue">
+    <div class="box-title">Что это такое?</div>
+    Признак реакции — наблюдаемое изменение, которое указывает на то, что реакция протекает. В задании нужно сопоставить пару веществ с наблюдаемым признаком.
+  </div>
+
+  <div class="sign-cards">
+    <div class="sign-card sc-osad">
+      <div class="sc-icon">🪨</div>
+      <div class="sc-name">Осадок</div>
+      <div class="sc-desc">Выпадение нерастворимого вещества: белого, голубого, жёлтого, бурого, чёрного</div>
+    </div>
+    <div class="sign-card sc-gaz">
+      <div class="sc-icon">💨</div>
+      <div class="sc-name">Выделение газа</div>
+      <div class="sc-desc">CO₂ (бесцвет.), SO₂, NH₃, H₂S, NO₂ (бурый), NO, H₂, Cl₂</div>
+    </div>
+    <div class="sign-card sc-cvet">
+      <div class="sc-icon">🎨</div>
+      <div class="sc-name">Изменение цвета</div>
+      <div class="sc-desc">Появление или исчезновение окраски раствора</div>
+    </div>
+    <div class="sign-card sc-rastvoren">
+      <div class="sc-icon">🫧</div>
+      <div class="sc-name">Растворение осадка</div>
+      <div class="sc-desc">Исчезновение ранее образованного или имевшегося осадка</div>
+    </div>
+    <div class="sign-card sc-zapah">
+      <div class="sc-icon">👃</div>
+      <div class="sc-name">Запах</div>
+      <div class="sc-desc">NH₃ (резкий), H₂S (тухлый), SO₂ (едкий), HCl (кислый)</div>
+    </div>
+    <div class="sign-card sc-plam">
+      <div class="sc-icon">🔥</div>
+      <div class="sc-name">Окраска пламени</div>
+      <div class="sc-desc">Li — карминовый, Na — жёлтый, K — фиолетовый, Cu — зелёный</div>
+    </div>
+  </div>
+
+  <h3 class="sub">Цвета осадков — главная шпаргалка</h3>
+  <div class="grid-2">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Белые осадки</th><th>Соединение</th></tr></thead>
+        <tbody>
+          <tr><td>BaSO₄</td><td>Барий + сульфат-ион</td></tr>
+          <tr><td>AgCl</td><td>Серебро + хлорид-ион</td></tr>
+          <tr><td>Al(OH)₃</td><td>Алюминий + щёлочь</td></tr>
+          <tr><td>Zn(OH)₂</td><td>Цинк + щёлочь (р-р)</td></tr>
+          <tr><td>CaCO₃, BaCO₃</td><td>Ca²⁺/Ba²⁺ + карбонат</td></tr>
+          <tr><td>H₂SiO₃</td><td>Силикат + кислота</td></tr>
+          <tr><td>Li₃PO₄</td><td>Li⁺ + фосфат</td></tr>
+          <tr><td>BaSO₃</td><td>Ba²⁺ + сульфит-ион</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Цветные осадки</th><th>Цвет</th></tr></thead>
+          <tbody>
+            <tr><td>Cu(OH)₂</td><td>🔵 Голубой</td></tr>
+            <tr><td>Fe(OH)₃</td><td>🟤 Бурый</td></tr>
+            <tr><td>Fe(OH)₂</td><td>🟢 Серо-зелёный</td></tr>
+            <tr><td>AgI, AgBr, Ag₃PO₄</td><td>🟡 Жёлтый</td></tr>
+            <tr><td>Cr(OH)₃</td><td>🟢 Серо-зелёный</td></tr>
+            <tr><td>CuS, FeS, PbS</td><td>⚫ Чёрный</td></tr>
+            <tr><td>Cu₂O</td><td>🔴 Красный</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-wrap" style="margin-top:8px">
+        <table>
+          <thead><tr><th>Цвет раствора</th><th>Ион / вещество</th></tr></thead>
+          <tbody>
+            <tr><td>🟡 Жёлтый / оранжевый</td><td>CrO₄²⁻ / Cr₂O₇²⁻</td></tr>
+            <tr><td>🟣 Фиолетовый</td><td>MnO₄⁻ (KMnO₄)</td></tr>
+            <tr><td>🔵 Голубой</td><td>Cu²⁺</td></tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <h3 class="sub">Газы — цвет и запах</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Газ</th><th>Название</th><th>Цвет</th><th>Запах / особенности</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>SO₂</b></td><td>Сернистый газ</td><td>бесцветный</td><td>👃 резкий (горелая спичка), токсичен</td></tr>
+        <tr><td><b>NH₃</b></td><td>Аммиак</td><td>бесцветный</td><td>👃 резкий характерный</td></tr>
+        <tr><td><b>H₂S</b></td><td>Сероводород</td><td>бесцветный</td><td>👃 тухлые яйца, токсичен</td></tr>
+        <tr><td><b>CO₂</b></td><td>Углекислый газ</td><td>бесцветный</td><td>без запаха</td></tr>
+        <tr><td><b>N₂O</b></td><td>Закись азота</td><td>бесцветный</td><td>🍬 приятный, сладковатый (веселящий)</td></tr>
+        <tr><td><b>NO</b></td><td>Оксид азота (II)</td><td>бесцветный</td><td>без запаха</td></tr>
+        <tr><td><b>NO₂</b></td><td>Диоксид азота</td><td>🟤 <b>бурый</b></td><td>👃 резкий, пары ядовиты</td></tr>
+        <tr><td><b>N₂</b></td><td>Азот</td><td>бесцветный</td><td>без запаха (78% воздуха)</td></tr>
+        <tr><td><b>Cl₂</b></td><td>Хлор</td><td>🟡🟢 <b>жёлто-зелёный</b></td><td>👃 резкий удушливый, ядовит</td></tr>
+        <tr><td><b>H₂</b></td><td>Водород</td><td>бесцветный</td><td>без цвета, запаха и вкуса</td></tr>
+        <tr><td><b>O₂</b></td><td>Кислород</td><td>бесцветный</td><td>без запаха (21% воздуха)</td></tr>
+        <tr><td><b>O₃</b></td><td>Озон</td><td>🔵 <b>голубой</b></td><td>👃 резкий специфический, ядовит</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <h3 class="sub">Реакции без видимых признаков</h3>
+  <div class="box box-warn">
+    <div class="box-title">Когда «видимых признаков нет»</div>
+    Реакция протекает, но внешне ничего не видно. <b>Главный признак таких реакций — образование воды</b> без выделения газа и без выпадения осадка.<br><br>
+    <ul>
+      <li>Нейтрализация сильной кислоты сильным основанием: HCl + NaOH → NaCl + H₂O</li>
+      <li>Реакция с образованием только растворимых солей: CH₃COOH + NaOH → CH₃COONa + H₂O</li>
+      <li>Некоторые реакции обмена без осадка/газа: KHCO₃ + KOH → K₂CO₃ + H₂O</li>
+    </ul>
+  </div>
+</div>
+
+
+
+<!-- SECTION — ИНДИКАТОРЫ -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section fade-in" id="s-indicators">
+  <div class="section-header">
+    <div class="section-pill" style="background:linear-gradient(135deg,#6a1b9a,#ab47bc)">ИНДИКАТОРЫ</div>
+    <span class="section-title">Изменение цвета индикаторов</span>
+  </div>
+
+  <style>
+  .ind-card{background:var(--white);border:1.5px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow)}
+  .ind-block{display:flex;align-items:center;gap:14px;padding:10px 0}
+  .ind-block+.ind-block{border-top:1px solid var(--line)}
+  .ind-block-name{width:130px;flex-shrink:0}
+  .ind-block-nm{font-size:13.5px;font-weight:700;color:var(--p800)}
+  .ind-block-memo{font-size:12px;font-weight:700;color:var(--ink3);margin-top:2px;letter-spacing:.3px}
+  .ind-tubes{display:flex;gap:10px;align-items:flex-end}
+  .ind-tw{display:flex;flex-direction:column;align-items:center;gap:5px}
+  .ind-tw-lbl{font-size:10px;font-weight:600;color:var(--ink3);text-align:center;line-height:1.2}
+  .ind-tw-clr{font-size:10.5px;font-weight:700;text-align:center;line-height:1.2}
+  @media(max-width:480px){
+    .ind-block{flex-wrap:wrap}
+    .ind-block-name{width:100%}
+  }
+  </style>
+
+  <div class="ind-card">
+
+    <!-- ЛАКМУС -->
+    <div class="ind-block">
+      <div class="ind-block-name">
+        <div class="ind-block-nm">Лакмус</div>
+        <div class="ind-block-memo">К · Ф · С</div>
+      </div>
+      <div class="ind-tubes">
+        <div class="ind-tw">
+          <div class="ind-tw-lbl">Кислота</div>
+          <svg width="34" height="76" viewBox="0 0 34 76" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="i-lk-a" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#e53935" stop-opacity=".85"/>
+                <stop offset="100%" stop-color="#ef9a9a" stop-opacity=".55"/>
+              </linearGradient>
+            </defs>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="url(#i-lk-a)"/>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+            <rect x="7" y="6" width="8" height="56" rx="3" fill="rgba(255,255,255,.22)"/>
+            <ellipse cx="17" cy="62" rx="10" ry="3.5" fill="#e53935" opacity=".6"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="rgba(255,255,255,.3)"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1"/>
+          </svg>
+          <div class="ind-tw-clr" style="color:#c62828">красный</div>
+        </div>
+        <div class="ind-tw">
+          <div class="ind-tw-lbl">Нейтр.</div>
+          <svg width="34" height="76" viewBox="0 0 34 76" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="i-lk-n" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#7b1fa2" stop-opacity=".8"/>
+                <stop offset="100%" stop-color="#ce93d8" stop-opacity=".5"/>
+              </linearGradient>
+            </defs>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="url(#i-lk-n)"/>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+            <rect x="7" y="6" width="8" height="56" rx="3" fill="rgba(255,255,255,.22)"/>
+            <ellipse cx="17" cy="62" rx="10" ry="3.5" fill="#7b1fa2" opacity=".55"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="rgba(255,255,255,.3)"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1"/>
+          </svg>
+          <div class="ind-tw-clr" style="color:#6a1b9a">фиолет.</div>
+        </div>
+        <div class="ind-tw">
+          <div class="ind-tw-lbl">Щёлочь</div>
+          <svg width="34" height="76" viewBox="0 0 34 76" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="i-lk-b" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#1565c0" stop-opacity=".85"/>
+                <stop offset="100%" stop-color="#90caf9" stop-opacity=".5"/>
+              </linearGradient>
+            </defs>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="url(#i-lk-b)"/>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+            <rect x="7" y="6" width="8" height="56" rx="3" fill="rgba(255,255,255,.22)"/>
+            <ellipse cx="17" cy="62" rx="10" ry="3.5" fill="#1565c0" opacity=".55"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="rgba(255,255,255,.3)"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1"/>
+          </svg>
+          <div class="ind-tw-clr" style="color:#0d47a1">синий</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- МЕТИЛОРАНЖ -->
+    <div class="ind-block">
+      <div class="ind-block-name">
+        <div class="ind-block-nm">Метилоранж</div>
+        <div class="ind-block-memo">КОРЖ</div>
+      </div>
+      <div class="ind-tubes">
+        <div class="ind-tw">
+          <div class="ind-tw-lbl">Кислота</div>
+          <svg width="34" height="76" viewBox="0 0 34 76" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="i-mo-a" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#c62828" stop-opacity=".85"/>
+                <stop offset="100%" stop-color="#ef9a9a" stop-opacity=".5"/>
+              </linearGradient>
+            </defs>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="url(#i-mo-a)"/>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+            <rect x="7" y="6" width="8" height="56" rx="3" fill="rgba(255,255,255,.22)"/>
+            <ellipse cx="17" cy="62" rx="10" ry="3.5" fill="#c62828" opacity=".55"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="rgba(255,255,255,.3)"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1"/>
+          </svg>
+          <div class="ind-tw-clr" style="color:#b71c1c">красный</div>
+        </div>
+        <div class="ind-tw">
+          <div class="ind-tw-lbl">Нейтр.</div>
+          <svg width="34" height="76" viewBox="0 0 34 76" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="i-mo-n" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#e65100" stop-opacity=".9"/>
+                <stop offset="100%" stop-color="#ffcc80" stop-opacity=".55"/>
+              </linearGradient>
+            </defs>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="url(#i-mo-n)"/>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+            <rect x="7" y="6" width="8" height="56" rx="3" fill="rgba(255,255,255,.22)"/>
+            <ellipse cx="17" cy="62" rx="10" ry="3.5" fill="#e65100" opacity=".55"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="rgba(255,255,255,.3)"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1"/>
+          </svg>
+          <div class="ind-tw-clr" style="color:#bf360c">оранж.</div>
+        </div>
+        <div class="ind-tw">
+          <div class="ind-tw-lbl">Щёлочь</div>
+          <svg width="34" height="76" viewBox="0 0 34 76" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="i-mo-b" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#f9a825" stop-opacity=".9"/>
+                <stop offset="100%" stop-color="#fff176" stop-opacity=".55"/>
+              </linearGradient>
+            </defs>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="url(#i-mo-b)"/>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+            <rect x="7" y="6" width="8" height="56" rx="3" fill="rgba(255,255,255,.22)"/>
+            <ellipse cx="17" cy="62" rx="10" ry="3.5" fill="#f9a825" opacity=".55"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="rgba(255,255,255,.3)"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1"/>
+          </svg>
+          <div class="ind-tw-clr" style="color:#f57f17">жёлтый</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ФЕНОЛФТАЛЕИН -->
+    <div class="ind-block">
+      <div class="ind-block-name">
+        <div class="ind-block-nm">Фенолфталеин</div>
+        <div class="ind-block-memo">в щёлочи — малиновый</div>
+      </div>
+      <div class="ind-tubes">
+        <div class="ind-tw">
+          <div class="ind-tw-lbl">Кислота</div>
+          <svg width="34" height="76" viewBox="0 0 34 76" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="i-ff-a" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#d6eaf8" stop-opacity=".9"/>
+                <stop offset="100%" stop-color="#eaf4fb" stop-opacity=".6"/>
+              </linearGradient>
+            </defs>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="url(#i-ff-a)"/>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+            <rect x="7" y="6" width="8" height="56" rx="3" fill="rgba(255,255,255,.35)"/>
+            <ellipse cx="17" cy="62" rx="10" ry="3.5" fill="#b8d4e8" opacity=".4"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="rgba(255,255,255,.45)"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          </svg>
+          <div class="ind-tw-clr" style="color:#78909c">бесцв.</div>
+        </div>
+        <div class="ind-tw">
+          <div class="ind-tw-lbl">Нейтр.</div>
+          <svg width="34" height="76" viewBox="0 0 34 76" xmlns="http://www.w3.org/2000/svg">
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="#d6eaf8" opacity=".85"/>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+            <rect x="7" y="6" width="8" height="56" rx="3" fill="rgba(255,255,255,.35)"/>
+            <ellipse cx="17" cy="62" rx="10" ry="3.5" fill="#b8d4e8" opacity=".4"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="rgba(255,255,255,.45)"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          </svg>
+          <div class="ind-tw-clr" style="color:#78909c">бесцв.</div>
+        </div>
+        <div class="ind-tw">
+          <div class="ind-tw-lbl">Щёлочь</div>
+          <svg width="34" height="76" viewBox="0 0 34 76" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="i-ff-b" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#880e4f" stop-opacity=".9"/>
+                <stop offset="100%" stop-color="#f48fb1" stop-opacity=".55"/>
+              </linearGradient>
+            </defs>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="url(#i-ff-b)"/>
+            <rect x="7" y="6" width="20" height="56" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+            <rect x="7" y="6" width="8" height="56" rx="3" fill="rgba(255,255,255,.22)"/>
+            <ellipse cx="17" cy="62" rx="10" ry="3.5" fill="#880e4f" opacity=".6"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="rgba(255,255,255,.3)"/>
+            <rect x="11" y="1" width="12" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1"/>
+          </svg>
+          <div class="ind-tw-clr" style="color:#880e4f">малин.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /ind-card -->
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 2 — АЛГОРИТМ -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section fade-in" id="s-algo">
+  <div class="section-header">
+    <div class="section-pill amber">АЛГОРИТМ</div>
+    <span class="section-title">Как решать задание Линии 24</span>
+  </div>
+
+  <div class="algo">
+    <div class="algo-step">
+      <div class="algo-n">1</div>
+      <div class="algo-text"><strong>Определи тип реакции</strong> — кислота + основание, соль + кислота, соль + основание, металл + кислота</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">2</div>
+      <div class="algo-text"><strong>Напиши продукты</strong> — по правилам ионных реакций. Осадок? Газ? Растворимые продукты?</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">3</div>
+      <div class="algo-text"><strong>Определи признак</strong> — по продукту реакции. Если в продуктах нерастворимая соль → осадок; газ → выделение газа; все продукты растворимы → нет видимых признаков.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">4</div>
+      <div class="algo-text"><strong>Сопоставь с вариантами ответа</strong> — найди нужный номер и запиши 4-значный ответ для А, Б, В, Г.</div>
+    </div>
+  </div>
+
+  <div class="hack-card">
+    <strong>💡 Лайфхак: осадок или нет — смотри в таблицу растворимости</strong><br>
+    Если хоть один продукт нерастворим (Н в таблице) → признак «образование осадка».<br>
+    Если исходное вещество осадок + реагент → смотри, растворится ли он: Zn(OH)₂ + H₂SO₄ → ZnSO₄ (раств.) → <em>растворение осадка</em>.
+  </div>
+
+  <div class="warn-card">
+    <strong>⚠️ Ловушки:</strong><br>
+    • Амфотерные гидроксиды (Al(OH)₃, Zn(OH)₂, Be(OH)₂, Cr(OH)₃) растворяются <em>и в кислотах, и в щелочах</em><br>
+    • Хромат K₂CrO₄ (жёлтый) + кислота → дихромат K₂Cr₂O₇ (оранжевый) — <strong>изменение цвета</strong><br>
+    • Дихромат K₂Cr₂O₇ + щёлочь → хромат (жёлтый) — <strong>изменение цвета</strong><br>
+    • Cu + HNO₃(конц) → Cu(NO₃)₂ + NO₂ (бурый газ) + H₂O — и <em>растворение металла</em>, и <em>выделение газа</em>
+  </div>
+
+  <h3 class="sub">Особые случаи — выучи наизусть</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Реагирующие вещества</th><th>Признак</th><th>Уравнение</th></tr></thead>
+      <tbody>
+        <tr><td>Fe(OH)₂ + H₂O₂</td><td>🟤 Бурый осадок (изменение окраски осадка)</td><td>4Fe(OH)₂ + O₂ + 2H₂O → 4Fe(OH)₃↓</td></tr>
+        <tr><td>K₂CrO₄ + HNO₃</td><td>🟡→🟠 Изменение цвета (жёлт → оранж)</td><td>2K₂CrO₄ + H₂SO₄ → K₂Cr₂O₇ + K₂SO₄ + H₂O</td></tr>
+        <tr><td>K₂Cr₂O₇ + NaOH</td><td>🟠→🟡 Изменение цвета (оранж → жёлт)</td><td>K₂Cr₂O₇ + 2NaOH → 2K₂CrO₄ + H₂O</td></tr>
+        <tr><td>Na₂SO₃ + H₂SO₄</td><td>💨 Выделение бесцветного газа (SO₂)</td><td>Na₂SO₃ + H₂SO₄ → Na₂SO₄ + SO₂↑ + H₂O</td></tr>
+        <tr><td>NaOH(р-р) + CrCl₃(изб.)</td><td>🟢 Серо-зелёный осадок</td><td>3NaOH + CrCl₃ → Cr(OH)₃↓ + 3NaCl</td></tr>
+        <tr><td>NH₄Cl + AgNO₃</td><td>🟡 Белый осадок AgCl</td><td>NH₄Cl + AgNO₃ → AgCl↓ + NH₄NO₃</td></tr>
+        <tr><td>HI + AgNO₃</td><td>🟡 Жёлтый осадок AgI</td><td>HI + AgNO₃ → AgI↓ + HNO₃</td></tr>
+        <tr><td>Ag + HNO₃(конц.)</td><td>🟤 Бурый газ NO₂ + растворение</td><td>Ag + 2HNO₃(конц.) → AgNO₃ + NO₂↑ + H₂O</td></tr>
+        <tr><td>CaCO₃ + HCl</td><td>💨 + растворение осадка (CO₂)</td><td>CaCO₃ + 2HCl → CaCl₂ + CO₂↑ + H₂O</td></tr>
+        <tr><td>Zn + NaOH + H₂O</td><td>💨 Выделение газа H₂</td><td>Zn + 2NaOH + 2H₂O → Na₂[Zn(OH)₄] + H₂↑</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 3 — ТАБЛИЦА ИОНОВ -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section fade-in" id="s-ions-table">
+  <div class="section-header">
+    <div class="section-pill">СПРАВКА</div>
+    <span class="section-title">Цвета пламени металлов</span>
+  </div>
+
+  <div class="box box-info">
+    <div class="box-title">Как определяют</div>
+    Соль металла вносят в пламя горелки на платиновой проволоке — пламя окрашивается в характерный цвет. Используется для качественного обнаружения катионов щелочных и щелочноземельных металлов.
+  </div>
+
+  <style>
+    .flame-cards{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+    .flame-card{display:flex;align-items:center;gap:14px;background:var(--white);border-radius:var(--r);padding:14px 16px;border:1.5px solid var(--line)}
+    .flame-vis{flex-shrink:0;width:44px;display:flex;justify-content:center}
+    .flame-info{flex:1;min-width:0}
+    .flame-element{font-size:15px;font-weight:900;color:var(--p800);font-family:var(--mono)}
+    .flame-name{font-size:11.5px;color:var(--ink3);margin-left:5px;font-weight:500}
+    .flame-color{font-size:13px;font-weight:700;margin-top:2px}
+    .flame-note{font-size:11.5px;color:var(--ink3);margin-top:3px}
+  </style>
+
+  <div class="flame-cards">
+
+    <!-- Li -->
+    <div class="flame-card" style="border-color:#dc2626">
+      <div class="flame-vis">
+        <svg width="38" height="64" viewBox="0 0 38 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="fl-li" cx="50%" cy="80%" r="60%">
+              <stop offset="0%" stop-color="#fef2f2"/>
+              <stop offset="40%" stop-color="#dc2626" stop-opacity=".9"/>
+              <stop offset="100%" stop-color="#7f1d1d" stop-opacity=".6"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="19" cy="48" rx="10" ry="4" fill="#7f1d1d" opacity=".3"/>
+          <path d="M19 54 C12 44 9 34 14 22 C16 16 19 10 19 6 C19 10 22 16 24 22 C29 34 26 44 19 54Z" fill="url(#fl-li)"/>
+          <path d="M19 50 C15 42 13 35 16 26 C17.5 21 19 16 19 12 C19 16 20.5 21 22 26 C25 35 23 42 19 50Z" fill="#fca5a5" opacity=".6"/>
+          <path d="M19 46 C17 40 16 35 18 29 C18.5 26 19 23 19 21 C19 23 19.5 26 20 29 C22 35 21 40 19 46Z" fill="white" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="flame-info">
+        <div><span class="flame-element">Li</span><span class="flame-name">Литий</span></div>
+        <div class="flame-color" style="color:#dc2626">🔴 карминово-красный</div>
+        <div class="flame-note">LiCl, Li₂SO₄, LiNO₃ — соединения лития</div>
+      </div>
+    </div>
+
+    <!-- Na -->
+    <div class="flame-card" style="border-color:#ca8a04">
+      <div class="flame-vis">
+        <svg width="38" height="64" viewBox="0 0 38 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="fl-na" cx="50%" cy="80%" r="60%">
+              <stop offset="0%" stop-color="#fefce8"/>
+              <stop offset="40%" stop-color="#eab308" stop-opacity=".95"/>
+              <stop offset="100%" stop-color="#78350f" stop-opacity=".5"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="19" cy="48" rx="10" ry="4" fill="#78350f" opacity=".25"/>
+          <path d="M19 54 C12 44 9 34 14 22 C16 16 19 10 19 6 C19 10 22 16 24 22 C29 34 26 44 19 54Z" fill="url(#fl-na)"/>
+          <path d="M19 50 C15 42 13 35 16 26 C17.5 21 19 16 19 12 C19 16 20.5 21 22 26 C25 35 23 42 19 50Z" fill="#fde047" opacity=".65"/>
+          <path d="M19 46 C17 40 16 35 18 29 C18.5 26 19 23 19 21 C19 23 19.5 26 20 29 C22 35 21 40 19 46Z" fill="white" opacity=".45"/>
+        </svg>
+      </div>
+      <div class="flame-info">
+        <div><span class="flame-element">Na</span><span class="flame-name">Натрий</span></div>
+        <div class="flame-color" style="color:#ca8a04">🟡 ярко-жёлтый</div>
+        <div class="flame-note">NaCl, Na₂SO₄, NaOH — даже следы Na дают жёлтый цвет</div>
+      </div>
+    </div>
+
+    <!-- K -->
+    <div class="flame-card" style="border-color:#7c3aed">
+      <div class="flame-vis">
+        <svg width="38" height="64" viewBox="0 0 38 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="fl-k" cx="50%" cy="80%" r="60%">
+              <stop offset="0%" stop-color="#faf5ff"/>
+              <stop offset="40%" stop-color="#7c3aed" stop-opacity=".9"/>
+              <stop offset="100%" stop-color="#3b0764" stop-opacity=".6"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="19" cy="48" rx="10" ry="4" fill="#3b0764" opacity=".25"/>
+          <path d="M19 54 C12 44 9 34 14 22 C16 16 19 10 19 6 C19 10 22 16 24 22 C29 34 26 44 19 54Z" fill="url(#fl-k)"/>
+          <path d="M19 50 C15 42 13 35 16 26 C17.5 21 19 16 19 12 C19 16 20.5 21 22 26 C25 35 23 42 19 50Z" fill="#c4b5fd" opacity=".6"/>
+          <path d="M19 46 C17 40 16 35 18 29 C18.5 26 19 23 19 21 C19 23 19.5 26 20 29 C22 35 21 40 19 46Z" fill="white" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="flame-info">
+        <div><span class="flame-element">K</span><span class="flame-name">Калий</span></div>
+        <div class="flame-color" style="color:#7c3aed">🟣 фиолетовый / сиреневый</div>
+        <div class="flame-note">KCl, K₂SO₄, KNO₃ — виден через синее стекло (маскирует Na)</div>
+      </div>
+    </div>
+
+    <!-- Ca -->
+    <div class="flame-card" style="border-color:#ea580c">
+      <div class="flame-vis">
+        <svg width="38" height="64" viewBox="0 0 38 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="fl-ca" cx="50%" cy="80%" r="60%">
+              <stop offset="0%" stop-color="#fff7ed"/>
+              <stop offset="40%" stop-color="#ea580c" stop-opacity=".9"/>
+              <stop offset="100%" stop-color="#7c2d12" stop-opacity=".55"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="19" cy="48" rx="10" ry="4" fill="#7c2d12" opacity=".25"/>
+          <path d="M19 54 C12 44 9 34 14 22 C16 16 19 10 19 6 C19 10 22 16 24 22 C29 34 26 44 19 54Z" fill="url(#fl-ca)"/>
+          <path d="M19 50 C15 42 13 35 16 26 C17.5 21 19 16 19 12 C19 16 20.5 21 22 26 C25 35 23 42 19 50Z" fill="#fdba74" opacity=".6"/>
+          <path d="M19 46 C17 40 16 35 18 29 C18.5 26 19 23 19 21 C19 23 19.5 26 20 29 C22 35 21 40 19 46Z" fill="white" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="flame-info">
+        <div><span class="flame-element">Ca</span><span class="flame-name">Кальций</span></div>
+        <div class="flame-color" style="color:#ea580c">🟠 кирпично-красный / оранжево-красный</div>
+        <div class="flame-note">CaCl₂, Ca(NO₃)₂, CaSO₄</div>
+      </div>
+    </div>
+
+    <!-- Sr -->
+    <div class="flame-card" style="border-color:#be123c">
+      <div class="flame-vis">
+        <svg width="38" height="64" viewBox="0 0 38 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="fl-sr" cx="50%" cy="80%" r="60%">
+              <stop offset="0%" stop-color="#fff1f2"/>
+              <stop offset="35%" stop-color="#be123c" stop-opacity=".95"/>
+              <stop offset="100%" stop-color="#4c0519" stop-opacity=".6"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="19" cy="48" rx="10" ry="4" fill="#4c0519" opacity=".25"/>
+          <path d="M19 54 C12 44 9 34 14 22 C16 16 19 10 19 6 C19 10 22 16 24 22 C29 34 26 44 19 54Z" fill="url(#fl-sr)"/>
+          <path d="M19 50 C15 42 13 35 16 26 C17.5 21 19 16 19 12 C19 16 20.5 21 22 26 C25 35 23 42 19 50Z" fill="#fda4af" opacity=".6"/>
+          <path d="M19 46 C17 40 16 35 18 29 C18.5 26 19 23 19 21 C19 23 19.5 26 20 29 C22 35 21 40 19 46Z" fill="white" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="flame-info">
+        <div><span class="flame-element">Sr</span><span class="flame-name">Стронций</span></div>
+        <div class="flame-color" style="color:#be123c">🔴 малиново-красный / карминовый</div>
+        <div class="flame-note">SrCl₂, Sr(NO₃)₂ — ярче и насыщеннее Li</div>
+      </div>
+    </div>
+
+    <!-- Ba -->
+    <div class="flame-card" style="border-color:#65a30d">
+      <div class="flame-vis">
+        <svg width="38" height="64" viewBox="0 0 38 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="fl-ba" cx="50%" cy="80%" r="60%">
+              <stop offset="0%" stop-color="#f7fee7"/>
+              <stop offset="40%" stop-color="#65a30d" stop-opacity=".9"/>
+              <stop offset="100%" stop-color="#1a2e05" stop-opacity=".5"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="19" cy="48" rx="10" ry="4" fill="#1a2e05" opacity=".25"/>
+          <path d="M19 54 C12 44 9 34 14 22 C16 16 19 10 19 6 C19 10 22 16 24 22 C29 34 26 44 19 54Z" fill="url(#fl-ba)"/>
+          <path d="M19 50 C15 42 13 35 16 26 C17.5 21 19 16 19 12 C19 16 20.5 21 22 26 C25 35 23 42 19 50Z" fill="#bef264" opacity=".6"/>
+          <path d="M19 46 C17 40 16 35 18 29 C18.5 26 19 23 19 21 C19 23 19.5 26 20 29 C22 35 21 40 19 46Z" fill="white" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="flame-info">
+        <div><span class="flame-element">Ba</span><span class="flame-name">Барий</span></div>
+        <div class="flame-color" style="color:#65a30d">🟢 жёлто-зелёный</div>
+        <div class="flame-note">BaCl₂, Ba(NO₃)₂ — зеленоватый оттенок отличает от Ca</div>
+      </div>
+    </div>
+
+    <!-- Cu -->
+    <div class="flame-card" style="border-color:#0891b2">
+      <div class="flame-vis">
+        <svg width="38" height="64" viewBox="0 0 38 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="fl-cu" cx="50%" cy="80%" r="60%">
+              <stop offset="0%" stop-color="#ecfeff"/>
+              <stop offset="40%" stop-color="#0891b2" stop-opacity=".9"/>
+              <stop offset="100%" stop-color="#083344" stop-opacity=".55"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="19" cy="48" rx="10" ry="4" fill="#083344" opacity=".25"/>
+          <path d="M19 54 C12 44 9 34 14 22 C16 16 19 10 19 6 C19 10 22 16 24 22 C29 34 26 44 19 54Z" fill="url(#fl-cu)"/>
+          <path d="M19 50 C15 42 13 35 16 26 C17.5 21 19 16 19 12 C19 16 20.5 21 22 26 C25 35 23 42 19 50Z" fill="#67e8f9" opacity=".6"/>
+          <path d="M19 46 C17 40 16 35 18 29 C18.5 26 19 23 19 21 C19 23 19.5 26 20 29 C22 35 21 40 19 46Z" fill="white" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="flame-info">
+        <div><span class="flame-element">Cu</span><span class="flame-name">Медь</span></div>
+        <div class="flame-color" style="color:#0891b2">🔵 сине-зелёный / голубовато-зелёный</div>
+        <div class="flame-note">CuCl₂, Cu(NO₃)₂ — характерный сине-зелёный цвет</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 4 — ТРЕНАЖЁР -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section fade-in" id="tr-b1">
+  <div class="section-header">
+    <div class="section-pill green">ЗАДАНИЯ</div>
+    <span class="section-title">Признаки реакций — 30 заданий ЕГЭ</span>
+  </div>
+
+  <div class="box box-warn" style="margin-bottom:14px">
+    <div class="box-title">Формат ответа</div>
+    Сопоставь каждое вещество (А, Б, В, Г) с признаком реакции из правого столбца. Введи 4 цифры подряд — ответ для А, Б, В, Г (например: <span style="font-family:var(--mono);font-weight:700">2423</span>).
+  </div>
+
+  <div id="tr-wrap-b1">
+    <div class="tr-card" id="tr-card-b1">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <span class="tr-prog-text" style="font-size:12px;font-family:var(--mono);color:var(--ink3);white-space:nowrap">0/30</span>
+        <div style="flex:1;height:4px;background:var(--line);border-radius:2px">
+          <div class="tr-prog-bar-fill" style="height:4px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;border-radius:2px;transition:width .3s"></div>
+        </div>
+      </div>
+      <div class="tr-q"></div>
+      <input class="tr-input" type="text" inputmode="numeric" placeholder="——" maxlength="4">
+      <div class="tr-feedback"></div>
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+        <button class="tr-check-btn">Проверить</button>
+        <button class="tr-next-btn" style="display:none">Далее →</button>
+        <div class="tr-solution" hidden></div>
+      </div>
+    </div>
+    <div class="tr-result" id="tr-res-b1" style="display:none">
+      <div style="font-size:40px;font-weight:900;font-family:var(--mono);color:var(--h2)" class="tr-score"></div>
+      <div style="font-size:13px;color:var(--ink3);margin:6px 0 18px">из 30 заданий выполнено верно</div>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <button class="tr-retry-btn" style="display:none">Отработать ошибки</button>
+        <button class="tr-reset-btn">Начать заново</button>
+      </div>
+      <div class="tr-done" style="display:none;font-size:20px;margin-top:14px;color:var(--green-d);font-weight:700">🎉 Все верно! Блок пройден!</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- БЛОК 2 — РЕАКТИВЫ ДЛЯ РАСПОЗНАВАНИЯ -->
+<!-- ══════════════════════════════════════════════════ -->
+
+<div class="section fade-in" id="s-reagents">
+  <div class="section-header">
+    <div class="section-pill">БЛОК 2 · ТЕОРИЯ</div>
+    <span class="section-title">Реактивы для распознавания веществ</span>
+  </div>
+
+  <div class="box box-blue">
+    <div class="box-title">Суть задания</div>
+    Дана пара веществ (А, Б, В, Г). Нужно найти реактив, который реагирует <strong>с одним из двух</strong> (даёт видимый эффект), но не реагирует с другим. Это позволяет «различить» вещества.
+  </div>
+
+  <div class="sign-cards">
+    <div class="sign-card sc-osad">
+      <div class="sc-icon">⚗️</div>
+      <div class="sc-name">AgNO₃</div>
+      <div class="sc-desc">Cl⁻→AgCl белый, Br⁻→AgBr жёлт, I⁻→AgI жёлт. Не реагирует с NO₃⁻, SO₄²⁻</div>
+    </div>
+    <div class="sign-card sc-gaz">
+      <div class="sc-icon">🧊</div>
+      <div class="sc-name">BaCl₂ / Ba(NO₃)₂</div>
+      <div class="sc-desc">SO₄²⁻ → BaSO₄↓ белый (нерастворим в HNO₃)</div>
+    </div>
+    <div class="sign-card sc-cvet">
+      <div class="sc-icon">🟦</div>
+      <div class="sc-name">NaOH (изб.)</div>
+      <div class="sc-desc">Al³⁺/Zn²⁺ (раств.осадок), Cu²⁺ (голубой↓), Fe³⁺ (бурый↓), NH₄⁺ (NH₃↑)</div>
+    </div>
+    <div class="sign-card sc-rastvoren">
+      <div class="sc-icon">🔵</div>
+      <div class="sc-name">CuSO₄</div>
+      <div class="sc-desc">NH₃ → Cu(OH)₂↓ голубой; KOH → Cu(OH)₂↓. Не реагирует с NaCl, KNO₃</div>
+    </div>
+    <div class="sign-card sc-zapah">
+      <div class="sc-icon">🟡</div>
+      <div class="sc-name">H₂SO₄ (разб.)</div>
+      <div class="sc-desc">Ba²⁺→BaSO₄↓, карбонаты→CO₂↑, сульфиты→SO₂↑, Ме(акт.)→H₂↑</div>
+    </div>
+    <div class="sign-card sc-plam">
+      <div class="sc-icon">🟤</div>
+      <div class="sc-name">HCl / HNO₃</div>
+      <div class="sc-desc">Силикаты→H₂SiO₃↓, карбонаты→CO₂↑, акт. Ме→H₂↑; Cu реагирует только с HNO₃</div>
+    </div>
+  </div>
+</div>
+
+<div class="section fade-in" id="s-reagents-algo">
+  <div class="section-header">
+    <div class="section-pill amber">АЛГОРИТМ</div>
+    <span class="section-title">Как выбрать реактив для различения</span>
+  </div>
+
+  <div class="algo">
+    <div class="algo-step">
+      <div class="algo-n">1</div>
+      <div class="algo-text"><strong>Определи «уникальный» ион</strong> у каждого из двух веществ в паре — что есть у одного, чего нет у другого?</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">2</div>
+      <div class="algo-text"><strong>Найди реактив</strong>, который реагирует с этим уникальным ионом и даёт видимый признак (осадок, газ, цвет).</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">3</div>
+      <div class="algo-text"><strong>Проверь:</strong> с другим веществом пары этот реактив не реагирует (или нет видимого признака).</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">4</div>
+      <div class="algo-text"><strong>Запиши номер реактива</strong> для этой позиции.</div>
+    </div>
+  </div>
+
+  <div class="hack-card">
+    <strong>💡 Типичные пары и их реактивы:</strong><br>
+    Хлорид vs нитрат → AgNO₃ (AgCl↓ с хлоридом, нет с нитратом)<br>
+    Al(OH)₃ vs Mg(OH)₂ → NaOH изб. (Al(OH)₃ растворяется, Mg(OH)₂ — нет)<br>
+    Карбонат vs сульфат → HCl (CO₂↑ с карбонатом, нет с сульфатом)<br>
+    Силикат vs карбонат → HCl (H₂SiO₃↓ с силикатом, CO₂↑ с карбонатом — разные признаки!)
+  </div>
+
+  <div class="warn-card">
+    <strong>⚠️ Ловушки:</strong><br>
+    • Cu реагирует с HNO₃(разб.), но <em>не реагирует</em> с H₂SO₄(разб.) и HCl!<br>
+    • NaOH(изб.) растворяет Al(OH)₃ и Zn(OH)₂, но НЕ растворяет Mg(OH)₂ и Ca(OH)₂<br>
+    • BaCl₂ даёт белый осадок и с SO₄²⁻ (BaSO₄), и с SO₃²⁻ (BaSO₃) — не различает их!<br>
+    • Лакмус различает кислоту и щёлочь, но не различает два вещества одного класса
+  </div>
+
+</div>
+
+<div class="section fade-in" id="tr-b2">
+  <div class="section-header">
+    <div class="section-pill green">ЗАДАНИЯ</div>
+    <span class="section-title">Реактивы — 15 заданий ЕГЭ</span>
+  </div>
+
+  <div class="box box-warn" style="margin-bottom:14px">
+    <div class="box-title">Формат ответа</div>
+    Для каждой пары (А, Б, В, Г) найди реактив, которым можно <strong>различить</strong> два вещества. Введи 4 цифры для А, Б, В, Г (например: <span style="font-family:var(--mono);font-weight:700">3424</span>).
+  </div>
+
+  <div id="tr-wrap-b2">
+    <div class="tr-card" id="tr-card-b2">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <span class="tr-prog-text" style="font-size:12px;font-family:var(--mono);color:var(--ink3);white-space:nowrap">0/15</span>
+        <div style="flex:1;height:4px;background:var(--line);border-radius:2px">
+          <div class="tr-prog-bar-fill" style="height:4px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;border-radius:2px;transition:width .3s"></div>
+        </div>
+      </div>
+      <div class="tr-q"></div>
+      <input class="tr-input" type="text" inputmode="numeric" placeholder="——" maxlength="4">
+      <div class="tr-feedback"></div>
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+        <button class="tr-check-btn">Проверить</button>
+        <button class="tr-next-btn" style="display:none">Далее →</button>
+        <div class="tr-solution" hidden></div>
+      </div>
+    </div>
+    <div class="tr-result" id="tr-res-b2" style="display:none">
+      <div style="font-size:40px;font-weight:900;font-family:var(--mono);color:var(--h2)" class="tr-score"></div>
+      <div style="font-size:13px;color:var(--ink3);margin:6px 0 18px">из 15 заданий выполнено верно</div>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <button class="tr-retry-btn" style="display:none">Отработать ошибки</button>
+        <button class="tr-reset-btn">Начать заново</button>
+      </div>
+      <div class="tr-done" style="display:none;font-size:20px;margin-top:14px;color:var(--green-d);font-weight:700">🎉 Все верно! Блок пройден!</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const RAW=[
+    {q:'А) HNO₃ и K₂SO₄\nБ) KOH и K₂CO₃\nВ) K₃PO₄ и K₂SO₄\nГ) MgI₂ и Sr(NO₃)₂|1) NaCl\n2) LiCl\n3) Cu\n4) H₂SO₄ (разб.)\n5) KBr',a:'3424',s:''},
+    {q:'А) HNO₃ и NaNO₃\nБ) KCl и NaOH\nВ) NaCl и BaCl₂\nГ) AlCl₃ и MgCl₂|1) Cu\n2) KOH\n3) HCl\n4) KNO₃\n5) CuSO₄',a:'1552',s:''},
+    {q:'А) H₂O и KOH (р-р)\nБ) Fe(NO₃)₃ и FeCl₃ (р-р)\nВ) KBr (р-р) и AlBr₃ (р-р)\nГ) Zn(OH)₂ и Mg(OH)₂|1) NaOH (р-р)\n2) AgNO₃ (р-р)\n3) H₂O\n4) H₂SO₄ (разб.)\n5) HCl (р-р)',a:'2211',s:'А) H₂O + AgNO₃ → не реагируют; KOH + AgNO₃ → KNO₃ + Ag₂O↓ (тёмно-коричневый осадок) + H₂O\nБ) Fe(NO₃)₃ + AgNO₃ → не реагируют; FeCl₃ + AgNO₃ → AgCl↓ (белый осадок) + Fe(NO₃)₃\nВ) KBr + NaOH → не реагируют; AlBr₃ + NaOH → Al(OH)₃↓ (белый осадок) + NaBr\nГ) Zn(OH)₂ + NaOH(р-р) → Na₂[Zn(OH)₄] (растворение осадка); Mg(OH)₂ + NaOH → не реагируют'},
+    {q:'А) KCl и NaF\nБ) HCl и HNO₃\nВ) NaCl и NaI\nГ) ZnCl₂ и MgCl₂|1) Cu\n2) KOH\n3) Br₂\n4) лакмус\n5) Na₂SO₄',a:'4132',s:'А) KCl + лакмус → фиолетовое; NaF + лакмус → синее окрашивание\nБ) HCl + Cu → не реагируют; HNO₃(разб.) + Cu → Cu(NO₃)₂ + NO↑ (газ) + H₂O\nВ) NaCl + Br₂ → не реагируют; NaI + Br₂ → NaBr + I₂ (чёрный осадок)\nГ) ZnCl₂ + KOH(изб.) → K₂[Zn(OH)₄] + KCl; MgCl₂ + KOH(изб.) → Mg(OH)₂↓ (белый осадок) + KCl'},
+    {q:'А) Al₂(SO₄)₃ и MgSO₄\nБ) NaCl и K₂SO₃\nВ) CuBr₂ и Cu(NO₃)₂\nГ) HBr и KBr|1) KCl (р-р)\n2) AgNO₃ (р-р)\n3) HNO₃ (разб.)\n4) NaOH (р-р)\n5) K₂CO₃ (р-р)',a:'4325',s:'А) Al₂(SO₄)₃ + NaOH(изб.) → Na[Al(OH)₄] + Na₂SO₄; MgSO₄ + NaOH(изб.) → Mg(OH)₂↓ (белый осадок) + Na₂SO₄\nБ) NaCl + HNO₃(разб.) → не реагируют; K₂SO₃ + HNO₃(разб.) → K₂SO₄ + NO↑ (газ) + H₂O\nВ) CuBr₂ + AgNO₃ → AgBr↓ (светло-жёлтый осадок) + Cu(NO₃)₂; Cu(NO₃)₂ + AgNO₃ → не реагируют\nГ) HBr + K₂CO₃ → KBr + CO₂↑ (газ) + H₂O; KBr + K₂CO₃ → не реагируют'},
+    {q:'А) CuCl₂ и Cu(NO₃)₂\nБ) Na₂SO₃ и MgSO₄\nВ) Zn и Mg\nГ) HBr и HNO₃|1) KBr (р-р)\n2) AgNO₃ (р-р)\n3) Al₂O₃\n4) KOH (р-р)\n5) CH₃COOK (р-р)',a:'2442',s:'А) CuCl₂ + AgNO₃ → AgCl↓ (белый осадок) + Cu(NO₃)₂; Cu(NO₃)₂ + AgNO₃ → не реагируют\nБ) Na₂SO₃ + KOH → не реагируют; MgSO₄ + KOH → Mg(OH)₂↓ (белый осадок) + K₂SO₄\nВ) Zn + KOH + H₂O → K₂[Zn(OH)₄] (растворение металла) + H₂↑; Mg + KOH → не реагируют\nГ) HBr + AgNO₃ → AgBr↓ (светло-жёлтый осадок) + HNO₃; HNO₃ + AgNO₃ → не реагируют'},
+    {q:'А) Na₂SiO₃ и Na₂CO₃\nБ) ZnSO₄ и MgSO₄\nВ) AlCl₃ и BaCl₂\nГ) KCl и KI|1) Ba(NO₃)₂\n2) AgNO₃\n3) HCl\n4) NaOH\n5) Fe(NO₃)₂',a:'3442',s:'А) Na₂SiO₃ + HCl → NaCl + H₂SiO₃↓ (белый осадок); Na₂CO₃ + HCl → NaCl + CO₂↑ (газ) + H₂O\nБ) ZnSO₄ + NaOH(изб.) → Na₂[Zn(OH)₄] + Na₂SO₄; MgSO₄ + NaOH(изб.) → Mg(OH)₂↓ (белый осадок) + Na₂SO₄\nВ) AlCl₃ + NaOH → Al(OH)₃↓ (белый осадок) + NaCl; BaCl₂ + NaOH → не реагируют\nГ) KCl + AgNO₃ → AgCl↓ (белый осадок) + KNO₃; KI + AgNO₃ → AgI↓ (жёлтый осадок) + KNO₃'},
+    {q:'А) Al(NO₃)₃ и Mg(NO₃)₂\nБ) Na₃PO₄ и K₂SO₄\nВ) KCl и HCl\nГ) KBr и LiNO₃|1) AlCl₃ (р-р)\n2) Cl₂\n3) Fe\n4) KOH (р-р)\n5) BaCl₂ (р-р)',a:'4132',s:'А) Al(NO₃)₃ + KOH(изб.) → K[Al(OH)₄] + KNO₃; Mg(NO₃)₂ + KOH(изб.) → Mg(OH)₂↓ (белый осадок) + KNO₃\nБ) Na₃PO₄ + AlCl₃ → AlPO₄↓ (белый осадок) + NaCl; K₂SO₄ + AlCl₃ → не реагируют\nВ) KCl + Fe → не реагируют; HCl + Fe → FeCl₂ (растворение металла) + H₂↑ (газ)\nГ) KBr + Cl₂ → KCl + Br₂ (красно-бурый раствор); LiNO₃ + Cl₂ → не реагируют'},
+    {q:'А) CaCl₂ и KCl\nБ) Na₂SO₃ и Na₂SO₄\nВ) Na₂SO₄ и ZnSO₄\nГ) FeCl₂ и Zn(NO₃)₂|1) фенолфталеин\n2) нитрат бария\n3) карбонат калия\n4) нитрат лития\n5) нитрат свинца',a:'3135',s:'А) CaCl₂ + K₂CO₃ → CaCO₃↓ (белый осадок) + KCl; KCl + K₂CO₃ → не реагируют\nБ) Na₂SO₃ + фенолфталеин → малиновое окрашивание; Na₂SO₄ + фенолфталеин → бесцветный раствор\nВ) Na₂SO₄ + K₂CO₃ → не реагируют; ZnSO₄ + K₂CO₃ → ZnCO₃↓ (белый осадок) + K₂SO₄\nГ) FeCl₂ + Pb(NO₃)₂ → PbCl₂↓ (белый осадок) + Fe(NO₃)₂; Zn(NO₃)₂ + Pb(NO₃)₂ → не реагируют'},
+    {q:'А) NH₃ (р-р) и H₂O (ж)\nБ) KCl и NaOH\nВ) NaCl и CaCl₂\nГ) FeCl₃ и MgCl₂|1) HCl\n2) KI\n3) HNO₃\n4) KNO₃\n5) CuSO₄',a:'5552',s:'А) NH₃ + CuSO₄ + H₂O → Cu(OH)₂↓ (голубой осадок) + (NH₄)₂SO₄; H₂O + CuSO₄ → не реагируют\nБ) KCl + CuSO₄ → не реагируют; NaOH + CuSO₄ → Cu(OH)₂↓ (голубой осадок) + Na₂SO₄\nВ) NaCl + CuSO₄ → не реагируют; CaCl₂ + CuSO₄ → CaSO₄↓ (белый осадок) + CuCl₂\nГ) FeCl₃ + KI → FeI₂ + I₂ (чёрный осадок) + KCl; MgCl₂ + KI → не реагируют'},
+    {q:'А) KNO₃ и KCl\nБ) NH₄Cl и NaCl\nВ) Na₂SO₃ и K₂SO₄\nГ) NaCl и KI|1) HCl\n2) Ba(NO₃)₂\n3) NaOH\n4) Na₂CO₃\n5) AgNO₃',a:'5315',s:'А) KNO₃ + AgNO₃ → не реагируют; KCl + AgNO₃ → AgCl↓ (белый осадок) + KNO₃\nБ) NH₄Cl + NaOH → NaCl + NH₃↑ (газ) + H₂O; NaCl + NaOH → не реагируют\nВ) Na₂SO₃ + HCl → NaCl + SO₂↑ (газ) + H₂O; K₂SO₄ + HCl → не реагируют\nГ) NaCl + AgNO₃ → AgCl↓ (белый осадок) + NaNO₃; KI + AgNO₃ → AgI↓ (жёлтый осадок) + KNO₃'},
+    {q:'А) Ca(OH)₂ и KOH\nБ) K₂SO₄ и ZnSO₄\nВ) ZnCl₂ и ZnSO₄\nГ) Na₂SO₄ и H₂SO₄|1) Na₃PO₄\n2) CuCl₂\n3) HNO₃\n4) CuO\n5) Ba(NO₃)₂',a:'1154',s:'А) Ca(OH)₂ + Na₃PO₄ → Ca₃(PO₄)₂↓ (белый осадок) + NaOH; KOH + Na₃PO₄ → не реагируют\nБ) K₂SO₄ + Na₃PO₄ → не реагируют; ZnSO₄ + Na₃PO₄ → Zn₃(PO₄)₂↓ (белый осадок) + Na₂SO₄\nВ) ZnCl₂ + Ba(NO₃)₂ → не реагируют; ZnSO₄ + Ba(NO₃)₂ → BaSO₄↓ (белый осадок) + Zn(NO₃)₂\nГ) Na₂SO₄ + CuO → не реагируют; H₂SO₄ + CuO → CuSO₄ + H₂O (растворение осадка)'},
+    {q:'А) KOH и KCl\nБ) KOH и Ca(OH)₂\nВ) FeSO₄ и FeCl₂\nГ) Na₃PO₄ и Na₂SO₄|1) Na₂CO₃\n2) NaOH\n3) Ba(NO₃)₂\n4) MgCl₂\n5) NH₃ (р-р)',a:'4134',s:'А) KOH + MgCl₂ → Mg(OH)₂↓ (белый осадок) + KCl; KCl + MgCl₂ → не реагируют\nБ) KOH + Na₂CO₃ → не реагируют; Ca(OH)₂ + Na₂CO₃ → CaCO₃↓ (белый осадок) + NaOH\nВ) FeSO₄ + Ba(NO₃)₂ → BaSO₄↓ (белый осадок) + Fe(NO₃)₂; FeCl₂ + Ba(NO₃)₂ → не реагируют\nГ) Na₃PO₄ + MgCl₂ → Mg₃(PO₄)₂↓ (белый осадок) + NaCl; Na₂SO₄ + MgCl₂ → не реагируют'},
+    {q:'А) Cu и Fe₂O₃\nБ) K₂S и K₂SiO₃\nВ) Zn и Mg\nГ) NaCl (р-р) и HCl (р-р)|1) Na₂SO₄\n2) Zn(OH)₂\n3) HBr\n4) NaI\n5) KOH (р-р)',a:'3352',s:'А) Cu + HBr → не реагируют; Fe₂O₃ + HBr → FeBr₃ + H₂O (растворение осадка)\nБ) K₂S + HBr → KBr + H₂S↑ (газ); K₂SiO₃ + HBr → KBr + H₂SiO₃↓ (осадок)\nВ) Zn + KOH + H₂O → K₂[Zn(OH)₄] (растворение металла) + H₂↑; Mg + KOH → не реагируют\nГ) NaCl + Zn(OH)₂ → не реагируют; HCl + Zn(OH)₂ → ZnCl₂ + H₂O (растворение осадка)'},
+    {q:'А) CuSO₄ и CuCl₂\nБ) Na₂SO₄ и Li₂SO₄\nВ) NH₃ и NH₄Cl\nГ) HNO₃ и HCl|1) H₂O\n2) фенолфталеин\n3) Ba(NO₃)₂\n4) Cu\n5) Na₃PO₄',a:'3524',s:'А) CuSO₄ + Ba(NO₃)₂ → BaSO₄↓ (белый осадок) + Cu(NO₃)₂; CuCl₂ + Ba(NO₃)₂ → не реагируют\nБ) Na₂SO₄ + Na₃PO₄ → не реагируют; Li₂SO₄ + Na₃PO₄ → Li₃PO₄↓ (белый осадок) + Na₂SO₄\nВ) NH₃ + фенолфталеин → малиновое окрашивание; NH₄Cl + фенолфталеин → бесцветный раствор\nГ) HNO₃ + Cu → Cu(NO₃)₂ + NO↑ (газ) + H₂O; HCl + Cu → не реагируют'}
+  ];
+  const el=document.getElementById('tr-wrap-b2');
+  if(!el)return;
+  function norm(s){return s.trim().replace(/[^0-9]/g,'');}
+  function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+  function $(s){return el.querySelector(s);}
+  let queue,answered,wrongIds,wrongAtPos,cur;
+  const _SK='linia24_st_b2';
+  const _6D=6*24*3600*1000;
+  function _saveState(){try{localStorage.setItem(_SK,JSON.stringify({ts:Date.now(),q:queue,an:[...answered],wi:[...wrongIds],wp:[...wrongAtPos],cur:cur}))}catch(e){}}
+  function _clearState(){try{localStorage.removeItem(_SK)}catch(e){}}
+  function _loadState(){try{const raw=localStorage.getItem(_SK);if(!raw)return false;const s=JSON.parse(raw);if(Date.now()-s.ts>_6D){localStorage.removeItem(_SK);return false;}queue=s.q;answered=new Set(s.an);wrongIds=new Set(s.wi);wrongAtPos=new Set(s.wp);cur=s.cur;return true;}catch(e){return false;}}
+  function init(){if(!_loadState()){queue=shuffle(RAW.map((_,i)=>i));answered=new Set();wrongIds=new Set();wrongAtPos=new Set();cur=0;}showCard();render();}
+  function showCard(){$('.tr-card').style.display='';$('.tr-result').style.display='none';}
+  function render(){
+    if(cur>=queue.length){showResult();return;}
+    const t=RAW[queue[cur]];
+    const parts=t.q.split('|');
+    const subs=parts[0].split('\n');
+    const signs=parts[1]?parts[1].split('\n'):[];
+    let html='<div class="match-grid"><div class="match-col"><div class="match-col-title">Формулы веществ</div>';
+    subs.forEach(s=>{html+='<div class="match-row">'+s+'</div>';});
+    html+='</div><div class="match-col"><div class="match-col-title">Реактив</div>';
+    signs.forEach(s=>{html+='<div class="match-row">'+s+'</div>';});
+    html+='</div></div><div style="font-size:13px;color:var(--ink3);margin-bottom:8px">Введи реактив для А, Б, В, Г — 4 цифры:</div>';
+    $('.tr-q').innerHTML=html;
+    $('.tr-input').value='';$('.tr-feedback').textContent='';$('.tr-feedback').className='tr-feedback';
+    $('.tr-next-btn').style.display='none';$('.tr-check-btn').style.display='';$('.tr-input').focus();const _sd=$('.tr-solution');if(_sd){_sd.hidden=true;_sd.innerHTML='';}prog();
+  }
+  function check(){
+    const raw=$('.tr-input').value;if(!raw.trim())return;
+    const t=RAW[queue[cur]];
+    if(norm(raw)===norm(t.a)){
+      answered.add(queue[cur]);
+      wrongIds.delete(queue[cur]);
+      wrongAtPos.delete(cur);
+      $('.tr-feedback').textContent='✓ Верно!';$('.tr-feedback').className='tr-feedback ok';
+      $('.tr-check-btn').style.display='none';$('.tr-next-btn').style.display='';
+      if(t.s){const _sd=$('.tr-solution');_sd.hidden=false;_sd.innerHTML='<div class="tr-solution-hd">Решение</div>'+t.s.split('\n').map(r=>'<div>'+r+'</div>').join('');}
+    }else{
+      if(!wrongAtPos.has(cur))queue.push(queue[cur]);
+      wrongAtPos.add(cur);wrongIds.add(queue[cur]);
+      $('.tr-feedback').textContent='✗ Неверно — попробуй ещё';$('.tr-feedback').className='tr-feedback err';
+    }
+    prog();_saveState();
+  }
+  function next(){cur++;_saveState();render();}
+  function showResult(){
+    $('.tr-card').style.display='none';$('.tr-result').style.display='';
+    $('.tr-score').textContent=`${RAW.length}/${RAW.length}`;$('.tr-retry-btn').style.display='none';
+    $('.tr-done').style.display=wrongIds.size===0?'':'none';
+    if(window.blockDone)window.blockDone(el.id);
+  }
+  function retry(){}
+  function reset(){_clearState();showCard();queue=shuffle(RAW.map((_,i)=>i));answered=new Set();wrongIds=new Set();wrongAtPos=new Set();cur=0;render();}
+  function prog(){const p=Math.round(answered.size/RAW.length*100);$('.tr-prog-text').textContent=`${answered.size}/${RAW.length}`;$('.tr-prog-bar-fill').style.width=p+'%';}
+  $('.tr-check-btn').addEventListener('click',check);
+  $('.tr-next-btn').addEventListener('click',next);
+  $('.tr-retry-btn').addEventListener('click',retry);
+  $('.tr-reset-btn').addEventListener('click',reset);
+  $('.tr-input').addEventListener('keydown',e=>{if(e.key==='Enter'){if($('.tr-next-btn').style.display!=='none')next();else check();}});
+  init();
+})();
+
+function togglePS(){const o=document.getElementById('ps-overlay');const shown=o.style.display==='flex';o.style.display=shown?'none':'flex';}
+function toggleRS(){const o=document.getElementById('rs-overlay');const shown=o.style.display==='flex';o.style.display=shown?'none':'flex';if(o.style.display==='flex')initSolTable();}
+let solInited=false;
+function initSolTable(){
+  if(solInited)return;solInited=true;
+  const tbl=document.querySelector('.sol-table');
+  if(!tbl)return;
+  let selRow=-1,selCol=-1;
+
+  function clearAll(){
+    tbl.querySelectorAll('td').forEach(td=>{td.classList.remove('row-hl','col-hl','intersect')});
+    tbl.querySelectorAll('th[data-col]').forEach(th=>th.classList.remove('cation-sel'));
+    tbl.querySelectorAll('tbody th').forEach(th=>th.classList.remove('anion-sel'));
+  }
+  function highlight(){
+    clearAll();
+    const rows=tbl.querySelectorAll('tbody tr');
+    rows.forEach((tr,ri)=>{
+      const cells=tr.querySelectorAll('td');
+      cells.forEach((td,ci)=>{
+        const col=ci+1;
+        const isRow=(ri===selRow);
+        const isCol=(col===selCol);
+        if(isRow&&isCol){td.classList.add('intersect');}
+        else if(isRow){td.classList.add('row-hl');}
+        else if(isCol){td.classList.add('col-hl');}
+      });
+    });
+    if(selCol>0){const th=tbl.querySelector('th[data-col="'+selCol+'"]');if(th)th.classList.add('cation-sel');}
+    if(selRow>=0){const ths=tbl.querySelectorAll('tbody tr');if(ths[selRow]){const th=ths[selRow].querySelector('th');if(th)th.classList.add('anion-sel');}}
+  }
+
+  tbl.querySelectorAll('tbody th').forEach((th,ri)=>{
+    th.addEventListener('click',()=>{
+      if(selRow===ri){selRow=-1;}else{selRow=ri;}
+      highlight();
+    });
+  });
+  tbl.querySelectorAll('th[data-col]').forEach(th=>{
+    th.addEventListener('click',()=>{
+      const c=+th.dataset.col;
+      if(selCol===c){selCol=-1;}else{selCol=c;}
+      highlight();
+    });
+  });
+}
+
+</script>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- БЛОК 3 — ОРГАНИЧЕСКАЯ ХИМИЯ -->
+<!-- ══════════════════════════════════════════════════ -->
+
+<div class="section fade-in" id="s-organic">
+  <div class="section-header">
+    <div class="section-pill" style="background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff">БЛОК 3 · ТЕОРИЯ</div>
+    <span class="section-title">Качественные реакции органических веществ</span>
+  </div>
+
+  <div class="box box-blue">
+    <div class="box-title">Суть задания</div>
+    Даны органические вещества (А, Б, В, Г) и признаки реакций. Нужно сопоставить каждое вещество с признаком его взаимодействия с указанным реагентом.
+  </div>
+
+  <style>
+  .org-cards{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+  .org-card{display:flex;align-items:center;gap:14px;background:var(--white);border-radius:var(--r);padding:14px 16px;border:1.5px solid var(--line);box-shadow:var(--shadow)}
+  .org-card-vis{flex-shrink:0;width:48px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .org-card-body{flex:1;min-width:0}
+  .org-card-reagent{font-size:13px;font-weight:800;color:var(--p800);font-family:var(--mono);margin-bottom:3px}
+  .org-card-sign{font-size:12.5px;font-weight:700;margin-bottom:5px}
+  .org-card-who{font-size:12px;color:var(--ink2);line-height:1.5}
+  .org-card-who b{color:var(--ink)}
+  .org-card-who code{font-family:var(--mono);font-size:11.5px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:4px;padding:1px 5px;color:#0f172a}
+  </style>
+
+  <div class="org-cards">
+
+    <!-- 1. Алканы -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="#e2e8f0" opacity=".7"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.4)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#cbd5e1" opacity=".5"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.4)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="36" text-anchor="middle" font-size="15" fill="#94a3b8">✕</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Алканы CₙH₂ₙ₊₂</div>
+        <div class="org-card-sign" style="color:#64748b">✕ нет реакции с KMnO₄ и Br₂</div>
+        <div class="org-card-who">
+          не обесцвечивают KMnO₄ (розовый) и бромную воду —<br>
+          <b>нет кратных связей</b> (нет C=C и C≡C)
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Кратные связи: алкены, алкадиены, алкины -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-krat" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7c3aed" stop-opacity=".8"/>
+              <stop offset="55%" stop-color="#c4b5fd" stop-opacity=".5"/>
+              <stop offset="100%" stop-color="#f1f5f9" stop-opacity=".9"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-krat)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.18)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#e2e8f0" opacity=".7"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="30" text-anchor="middle" font-size="8.5" fill="rgba(255,255,255,.9)">C=C</text>
+          <text x="19" y="41" text-anchor="middle" font-size="8" fill="#475569">→⬜</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Алкены, алкадиены, алкины (C=C, C≡C)</div>
+        <div class="org-card-sign" style="color:#6d28d9">🟣/🟤→⬜ обесцвечивание</div>
+        <div class="org-card-who">
+          <b>1. KMnO₄ (нейтр. среда):</b> обесцвечивание + бурый осадок MnO₂<br>
+          3CH₂=CH₂ + 2KMnO₄ + 4H₂O → 3HOCH₂–CH₂OH + 2MnO₂↓ + 2KOH<br>
+          <b>2. KMnO₄ (щелочная среда):</b> 🟢 зелёный раствор (манганат K₂MnO₄)<br>
+          CH₂=CH₂ + 2KMnO₄ + 2KOH → продукты окисления + 2K₂MnO₄ + 2H₂O<br>
+          <b>3. KMnO₄ (кислая среда, H₂SO₄):</b> обесцвечивание (без осадка, Mn²⁺)<br>
+          5CH₂=CH₂ + 2KMnO₄ + 3H₂SO₄ → 5CH₂OH–CH₂OH + 2MnSO₄ + K₂SO₄ + 3H₂O<br>
+          <b>4. Br₂ (водн., жёлтый):</b> обесцвечивание<br>
+          CH₂=CH₂ + Br₂ → CH₂Br–CH₂Br<br>
+          <b>5. I₂ (бурый):</b> обесцвечивание<br>
+          CH₂=CH₂ + I₂ → CH₂I–CH₂I
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Ацетилен и терминальные алкины -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-alkin" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f8fafc" stop-opacity=".9"/>
+              <stop offset="100%" stop-color="#e2e8f0" stop-opacity=".9"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-alkin)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.4)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <!-- белый осадок -->
+          <ellipse cx="19" cy="57" rx="10" ry="3.5" fill="#d1d5db" opacity=".9"/>
+          <ellipse cx="19" cy="55" rx="8" ry="2" fill="white" opacity=".9"/>
+          <!-- красный осадок намёк -->
+          <rect x="10" y="50" width="18" height="5" rx="2" fill="#ef4444" opacity=".4"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#9ca3af" opacity=".4"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="24" text-anchor="middle" font-size="6.5" fill="#475569">C≡C–H</text>
+          <text x="19" y="34" text-anchor="middle" font-size="6" fill="#475569">↓ Ag</text>
+          <text x="19" y="43" text-anchor="middle" font-size="6" fill="#b91c1c">↓ Cu</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Ацетилен и терминальные алкины (R–C≡C–H)</div>
+        <div class="org-card-sign" style="color:#374151">⬜↓ белый осадок / 🔴↓ красный осадок</div>
+        <div class="org-card-who">
+          <b>1. [Ag(NH₃)₂]OH:</b> белый осадок (взрывоопасен!)<br>
+          CH≡CH + 2[Ag(NH₃)₂]OH → CAg≡CAg↓ + 4NH₃↑ + 2H₂O<br>
+          <b>2. [Cu(NH₃)₂]Cl:</b> красный осадок<br>
+          CH≡CH + 2[Cu(NH₃)₂]Cl → CCu≡CCu↓ + 2NH₄Cl + 2NH₃↑<br>
+          <b>не реагируют</b> внутренние алкины (R–C≡C–R)
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Бензол -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-benz" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fef9c3" stop-opacity=".9"/>
+              <stop offset="100%" stop-color="#ca8a04" stop-opacity=".6"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-benz)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.3)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#a16207" opacity=".4"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <!-- benzene ring small -->
+          <circle cx="19" cy="33" r="9" fill="none" stroke="#a16207" stroke-width="1.3"/>
+          <circle cx="19" cy="33" r="5" fill="none" stroke="#a16207" stroke-width="1" stroke-dasharray="2,1.5"/>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Бензол C₆H₆</div>
+        <div class="org-card-sign" style="color:#92400e">🟡 жёлтая жидкость с запахом миндаля</div>
+        <div class="org-card-who">
+          <b>Нитрующая смесь (HNO₃ + H₂SO₄):</b> нитрование<br>
+          C₆H₆ + HNO₃ → C₆H₅NO₂ + H₂O<br>
+          нитробензол — светло-жёлтая маслянистая жидкость<br>
+          <b>не обесцвечивает</b> KMnO₄ и бромную воду (ароматическое кольцо)
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Толуол, алкилбензолы -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-tol" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7c3aed" stop-opacity=".75"/>
+              <stop offset="60%" stop-color="#c4b5fd" stop-opacity=".4"/>
+              <stop offset="100%" stop-color="#f8fafc" stop-opacity=".85"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-tol)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.18)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#e2e8f0" opacity=".6"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="26" text-anchor="middle" font-size="6" fill="rgba(255,255,255,.9)">KMnO₄</text>
+          <text x="19" y="36" text-anchor="middle" font-size="8" fill="rgba(255,255,255,.8)">→⬜</text>
+          <text x="19" y="47" text-anchor="middle" font-size="5.5" fill="#475569">обесцв.</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Толуол C₆H₅–CH₃, алкилбензолы</div>
+        <div class="org-card-sign" style="color:#6d28d9">🟣→⬜ обесцвечивание KMnO₄</div>
+        <div class="org-card-who">
+          <b>KMnO₄ + H₂SO₄:</b> обесцвечивание (окисляется боковая цепь)<br>
+          C₆H₅–CH₃ + KMnO₄ + H₂SO₄ → C₆H₅–COOH + K₂SO₄ + MnSO₄ + H₂O<br>
+          <b>бензольное кольцо не обесцвечивает</b> KMnO₄ и Br₂
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Фенол -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-fenol" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7c3aed" stop-opacity=".75"/>
+              <stop offset="55%" stop-color="#a78bfa" stop-opacity=".5"/>
+              <stop offset="100%" stop-color="#e2e8f0" stop-opacity=".9"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-fenol)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.18)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="57" rx="10" ry="3.5" fill="#d1d5db" opacity=".9"/>
+          <ellipse cx="19" cy="55" rx="8" ry="2" fill="white" opacity=".85"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#9ca3af" opacity=".4"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="26" text-anchor="middle" font-size="6" fill="rgba(255,255,255,.9)">FeCl₃→🟣</text>
+          <text x="19" y="36" text-anchor="middle" font-size="6" fill="rgba(200,200,255,.9)">Br₂→↓</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Фенол C₆H₅–OH (карболовая к-та)</div>
+        <div class="org-card-sign" style="color:#6d28d9">🟣 фиолетовый р-р / ⬜↓ белый осадок</div>
+        <div class="org-card-who">
+          <b>1. FeCl₃ (р-р):</b> фиолетовый/малиновый раствор<br>
+          C₆H₅OH + FeCl₃ → фиолетовый комплекс<br>
+          <b>2. Br₂ (водн., насыщ.):</b> белый осадок + обесцвечивание<br>
+          C₆H₅OH + 3Br₂ → C₆H₂Br₃OH↓ + 3HBr (2,4,6-трибромфенол)<br>
+          <b>3. Na, K:</b> H₂↑ (кислотные свойства –OH)
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Анилин -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-anilin" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6d28d9" stop-opacity=".7"/>
+              <stop offset="50%" stop-color="#a78bfa" stop-opacity=".5"/>
+              <stop offset="100%" stop-color="#e2e8f0" stop-opacity=".9"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-anilin)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.18)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="57" rx="10" ry="3.5" fill="#d1d5db" opacity=".9"/>
+          <ellipse cx="19" cy="55" rx="8" ry="2" fill="white" opacity=".85"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#9ca3af" opacity=".4"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="25" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.9)">CaOCl₂→🟣</text>
+          <text x="19" y="35" text-anchor="middle" font-size="5.5" fill="rgba(220,220,255,.9)">Br₂→↓</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Анилин C₆H₅–NH₂ (аминобензол)</div>
+        <div class="org-card-sign" style="color:#6d28d9">🟣 фиолетовый р-р / ⬜↓ белый осадок</div>
+        <div class="org-card-who">
+          <b>1. CaOCl₂ (хлорная известь, бесцв.):</b> фиолетовый р-р<br>
+          C₆H₅NH₂ + CaOCl₂ → фиолетовый комплекс<br>
+          <b>2. Br₂ (водн., насыщ.):</b> белый осадок + обесцвечивание<br>
+          C₆H₅NH₂ + 3Br₂ → C₆H₂Br₃NH₂↓ + 3HBr (2,4,6-триброманилин)
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Спирты — OH группа -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-spirt" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#d1fae5" stop-opacity=".8"/>
+              <stop offset="100%" stop-color="#6ee7b7" stop-opacity=".6"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-spirt)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.3)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#6ee7b7" opacity=".5"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <circle cx="15" cy="45" r="2.2" fill="rgba(255,255,255,.8)"/>
+          <circle cx="22" cy="38" r="1.8" fill="rgba(255,255,255,.8)"/>
+          <circle cx="18" cy="50" r="1.5" fill="rgba(255,255,255,.8)"/>
+          <circle cx="24" cy="44" r="1.3" fill="rgba(255,255,255,.7)"/>
+          <text x="19" y="26" text-anchor="middle" font-size="6" fill="#065f46" font-weight="bold">H₂↑</text>
+          <text x="19" y="34" text-anchor="middle" font-size="6" fill="#065f46">+ Na</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Спирты, фенол (–OH группа)</div>
+        <div class="org-card-sign" style="color:#15803d">💨 выделение H₂↑</div>
+        <div class="org-card-who">
+          <b>Металлический Na, K:</b> пузырьки H₂, бесцветная масса<br>
+          2CH₃–CH₂–OH + 2Na → 2CH₃–CH₂–ONa + H₂↑<br>
+          2C₆H₅OH + 2K → 2C₆H₅OK + H₂↑<br>
+          <b>кислоты (–OH не спиртовой):</b> тоже + H₂↑ с Na
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Этанол — особые реакции -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-etoh" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fef9c3" stop-opacity=".95"/>
+              <stop offset="70%" stop-color="#fde047" stop-opacity=".7"/>
+              <stop offset="100%" stop-color="#b45309" stop-opacity=".6"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-etoh)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.3)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <!-- Cu осадок на дне -->
+          <ellipse cx="19" cy="57" rx="10" ry="3.5" fill="#b45309" opacity=".7"/>
+          <ellipse cx="19" cy="55" rx="8" ry="2" fill="#d97706" opacity=".8"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#78350f" opacity=".5"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="25" text-anchor="middle" font-size="5.5" fill="#78350f">CHI₃↓</text>
+          <text x="19" y="34" text-anchor="middle" font-size="5.5" fill="#78350f">жёлтый</text>
+          <text x="19" y="44" text-anchor="middle" font-size="5.5" fill="#78350f">Cu↓</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Этанол CH₃–CH₂–OH (особые реакции)</div>
+        <div class="org-card-sign" style="color:#92400e">🟡↓ осадок CHI₃ / 🔴↓ медь</div>
+        <div class="org-card-who">
+          <b>1. I₂ + NaOH (иодоформная проба):</b><br>
+          CH₃–CH₂–OH + I₂ + NaOH → CHI₃↓ + HCOONa + NaI + H₂O<br>
+          осадок CHI₃ — светло-жёлтый, специфический запах<br>
+          <b>2. CuO (прокалённая медная проволока):</b><br>
+          CH₃–CH₂–OH + CuO → CH₃CHO + Cu↓ + H₂O<br>
+          медь восстанавливается, запах ацетальдегида
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Многоатомные спирты, глюкоза -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-multi" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1d4ed8" stop-opacity=".85"/>
+              <stop offset="100%" stop-color="#3b82f6" stop-opacity=".6"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-multi)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.2)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#1d4ed8" opacity=".6"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="32" text-anchor="middle" font-size="7" fill="rgba(255,255,255,.9)">Cu(OH)₂</text>
+          <text x="19" y="43" text-anchor="middle" font-size="6" fill="rgba(255,255,255,.8)">→ синий</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Многоатомные спирты, глюкоза (≥2 –OH рядом)</div>
+        <div class="org-card-sign" style="color:#1d4ed8">🔵 ярко-синий раствор</div>
+        <div class="org-card-who">
+          <b>Cu(OH)₂ (свежеосажд., без нагрева):</b> растворяется → ярко-синий р-р<br>
+          2HOCH₂–CH₂OH + Cu(OH)₂ → этиленгликолят меди(II) + 2H₂O<br>
+          <b>реагируют:</b> глицерин (3×–OH), этиленгликоль (2×–OH), глюкоза<br>
+          <b>не реагирует:</b> одноатомный спирт (только 1 –OH)
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Альдегиды (–CHO) -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-ald" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#e2e8f0" stop-opacity=".9"/>
+              <stop offset="50%" stop-color="#f1f5f9" stop-opacity=".95"/>
+              <stop offset="100%" stop-color="#b91c1c" stop-opacity=".8"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-ald)"/>
+          <!-- silver mirror effect -->
+          <rect x="9" y="8" width="10" height="50" rx="2" fill="rgba(192,200,210,.5)"/>
+          <rect x="11" y="10" width="5" height="44" rx="1.5" fill="rgba(230,235,240,.6)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <!-- red Cu2O precipitate -->
+          <ellipse cx="19" cy="57" rx="10" ry="3.5" fill="#b91c1c" opacity=".8"/>
+          <ellipse cx="19" cy="55" rx="8" ry="2" fill="#ef4444" opacity=".7"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#7f1d1d" opacity=".5"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="26" text-anchor="middle" font-size="5.5" fill="#475569">Ag↓</text>
+          <text x="19" y="34" text-anchor="middle" font-size="5" fill="#475569">зеркало</text>
+          <text x="19" y="44" text-anchor="middle" font-size="5.5" fill="#b91c1c">Cu₂O↓</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Альдегиды –CHO (и муравьиная к-та HCOOH)</div>
+        <div class="org-card-sign" style="color:#475569">🪞 серебряное зеркало / 🔴↓ Cu₂O</div>
+        <div class="org-card-who">
+          <b>1. [Ag(NH₃)₂]OH:</b> блестящий налёт Ag («серебряное зеркало»)<br>
+          CH₃CHO + 2[Ag(NH₃)₂]OH → CH₃COOH + 2Ag↓ + 4NH₃↑ + H₂O<br>
+          <b>2. Cu(OH)₂ (свежеосажд., нагрев):</b> красный осадок Cu₂O<br>
+          CH₃CHO + 2Cu(OH)₂ →(t°) CH₃COOH + Cu₂O↓ + 2H₂O<br>
+          <b>HCOOH также:</b> имеет –CHO → даёт оба признака
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Муравьиная кислота HCOOH -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-formic" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fecdd3" stop-opacity=".9"/>
+              <stop offset="55%" stop-color="#f87171" stop-opacity=".6"/>
+              <stop offset="100%" stop-color="#b91c1c" stop-opacity=".8"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-formic)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.25)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="57" rx="10" ry="3.5" fill="#b91c1c" opacity=".8"/>
+          <ellipse cx="19" cy="55" rx="8" ry="2" fill="#ef4444" opacity=".7"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#7f1d1d" opacity=".5"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="24" text-anchor="middle" font-size="5.5" fill="#7f1d1d" font-weight="bold">HCOOH</text>
+          <text x="19" y="34" text-anchor="middle" font-size="5.5" fill="#7f1d1d">–CHO</text>
+          <text x="19" y="44" text-anchor="middle" font-size="5.5" fill="#7f1d1d">+–COOH</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Муравьиная кислота HCOOH</div>
+        <div class="org-card-sign" style="color:#b91c1c">🔴 лакмус / Cu₂O↓ / серебряное зеркало</div>
+        <div class="org-card-who">
+          <b>1. Лакмус:</b> розово-красный р-р (кислота)<br>
+          <b>2. Cu(OH)₂ (нагрев):</b> красный осадок Cu₂O (есть –CHO!)<br>
+          HCOOH + Cu(OH)₂ → Cu₂O↓ + CO₂↑ + H₂O<br>
+          <b>3. [Ag(NH₃)₂]OH:</b> серебряное зеркало (есть –CHO!)<br>
+          HCOOH + 2[Ag(NH₃)₂]OH → (NH₄)₂CO₃ + 2Ag↓ + 2NH₃↑ + H₂O
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. Карбоновые кислоты -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-acid" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fca5a5" stop-opacity=".85"/>
+              <stop offset="100%" stop-color="#ef4444" stop-opacity=".6"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-acid)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.3)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#ef4444" opacity=".5"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <!-- bubbles (CO2) -->
+          <circle cx="15" cy="46" r="2" fill="rgba(255,255,255,.7)"/>
+          <circle cx="22" cy="39" r="1.6" fill="rgba(255,255,255,.7)"/>
+          <circle cx="18" cy="52" r="1.8" fill="rgba(255,255,255,.7)"/>
+          <text x="19" y="25" text-anchor="middle" font-size="5.5" fill="#7f1d1d">лакмус</text>
+          <text x="19" y="33" text-anchor="middle" font-size="5.5" fill="#7f1d1d">→ красн.</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Карбоновые кислоты (–COOH)</div>
+        <div class="org-card-sign" style="color:#dc2626">🔴 лакмус / 💨 CO₂↑ с NaHCO₃</div>
+        <div class="org-card-who">
+          <b>1. Лакмус:</b> розово-красный р-р<br>
+          <b>2. NaHCO₃:</b> выделение CO₂↑<br>
+          CH₃COOH + NaHCO₃ → CH₃COONa + CO₂↑ + H₂O<br>
+          <b>3. Спирт + H₂SO₄ (катализ.):</b> запах сложного эфира<br>
+          CH₃COOH + CH₃CH₂OH ⇄ CH₃COOC₂H₅ + H₂O
+        </div>
+      </div>
+    </div>
+
+    <!-- 14. Олеиновая кислота (ненасыщенная) -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-olein" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7c3aed" stop-opacity=".75"/>
+              <stop offset="55%" stop-color="#c4b5fd" stop-opacity=".45"/>
+              <stop offset="100%" stop-color="#f8fafc" stop-opacity=".85"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-olein)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.18)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#e2e8f0" opacity=".6"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="25" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.9)">C=C (есть!)</text>
+          <text x="19" y="35" text-anchor="middle" font-size="8" fill="rgba(255,255,255,.8)">→⬜</text>
+          <text x="19" y="46" text-anchor="middle" font-size="5.5" fill="#475569">обесцв.</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Олеиновая кислота C₁₇H₃₃COOH (C=C есть!)</div>
+        <div class="org-card-sign" style="color:#6d28d9">🟣/🟤→⬜ обесцвечивание (как алкены)</div>
+        <div class="org-card-who">
+          <b>1. KMnO₄ (водн.):</b> обесцвечивание + MnO₂↓<br>
+          C₁₇H₃₃COOH + KMnO₄ + H₂O → [по C=C] + MnO₂↓ + KOH<br>
+          <b>2. Br₂:</b> обесцвечивание (по C=C)<br>
+          <b>3. I₂:</b> обесцвечивание (по C=C)<br>
+          <b>стеариновая C₁₇H₃₅COOH — насыщ., не обесцвечивает!</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15. Ацетаты -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-acet" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fbbf24" stop-opacity=".7"/>
+              <stop offset="100%" stop-color="#92400e" stop-opacity=".85"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-acet)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.2)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#78350f" opacity=".6"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="30" text-anchor="middle" font-size="6" fill="rgba(255,255,255,.9)">FeCl₃</text>
+          <text x="19" y="41" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.85)">→ красно-</text>
+          <text x="19" y="50" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.85)">бурый</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Ацетаты CH₃COO⁻ (соли уксусной к-ты)</div>
+        <div class="org-card-sign" style="color:#92400e">🟤 красно-бурый р-р с FeCl₃</div>
+        <div class="org-card-who">
+          <b>FeCl₃ (р-р):</b> красно-бурое окрашивание<br>
+          3CH₃COONa + FeCl₃ → (CH₃COO)₃Fe + 3NaCl<br>
+          <b>реагируют:</b> ацетат натрия, кальция, аммония…
+        </div>
+      </div>
+    </div>
+
+    <!-- 16. Стеарат натрия (мыло) -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-soap" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f0fdf4" stop-opacity=".95"/>
+              <stop offset="100%" stop-color="#e2e8f0" stop-opacity=".9"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-soap)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.4)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="57" rx="10" ry="3.5" fill="#cbd5e1" opacity=".85"/>
+          <ellipse cx="19" cy="55" rx="8" ry="2" fill="white" opacity=".9"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#94a3b8" opacity=".4"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="24" text-anchor="middle" font-size="5.5" fill="#475569">Ca²⁺→↓</text>
+          <text x="19" y="33" text-anchor="middle" font-size="5.5" fill="#ec4899">фф→🌸</text>
+          <text x="19" y="42" text-anchor="middle" font-size="5.5" fill="#475569">↓белый</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Стеарат натрия C₁₇H₃₅COONa (мыло)</div>
+        <div class="org-card-sign" style="color:#475569">⬜↓ осадок / 🌸 малиновый (фенолфталеин)</div>
+        <div class="org-card-who">
+          <b>1. Раствор Ca²⁺ (CaCl₂):</b> серовато-белый осадок<br>
+          2C₁₇H₃₅COONa + CaCl₂ → (C₁₇H₃₅COO)₂Ca↓ + 2NaCl<br>
+          <b>2. Конц. HCl (H⁺):</b> белый осадок стеариновой к-ты<br>
+          C₁₇H₃₅COONa + H⁺ → C₁₇H₃₅COOH↓ + Na⁺<br>
+          <b>3. H₂O (гидролиз) + фенолфталеин:</b> малиновый р-р (щелочная среда)
+        </div>
+      </div>
+    </div>
+
+    <!-- 17. Крахмал -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-starch" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1e3a8a" stop-opacity=".9"/>
+              <stop offset="100%" stop-color="#1d4ed8" stop-opacity=".7"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-starch)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.12)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#1e3a8a" opacity=".6"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="30" text-anchor="middle" font-size="6.5" fill="rgba(255,255,255,.9)">I₂</text>
+          <text x="19" y="41" text-anchor="middle" font-size="5.5" fill="rgba(255,255,255,.8)">→ синий</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Крахмал (C₆H₁₀O₅)ₙ</div>
+        <div class="org-card-sign" style="color:#1d4ed8">🔵 тёмно-синяя окраска с I₂</div>
+        <div class="org-card-who">
+          <b>I₂ (р-р):</b> тёмно-синяя/фиолетово-синяя окраска<br>
+          <b>не реагируют с I₂:</b> глюкоза, сахароза, целлюлоза<br>
+          реакция обратима: при нагревании окраска исчезает, при охлаждении — возвращается
+        </div>
+      </div>
+    </div>
+
+    <!-- 18. Белки -->
+    <div class="org-card">
+      <div class="org-card-vis">
+        <svg width="38" height="72" viewBox="0 0 38 72" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="oc-prot" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fef9c3" stop-opacity=".9"/>
+              <stop offset="55%" stop-color="#fbbf24" stop-opacity=".75"/>
+              <stop offset="100%" stop-color="#ea580c" stop-opacity=".8"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="url(#oc-prot)"/>
+          <rect x="8" y="7" width="9" height="52" rx="3" fill="rgba(255,255,255,.22)"/>
+          <rect x="8" y="7" width="22" height="52" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1.2"/>
+          <ellipse cx="19" cy="59" rx="11" ry="3.5" fill="#ea580c" opacity=".55"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="rgba(255,255,255,.35)"/>
+          <rect x="12" y="1" width="14" height="8" rx="2" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="1"/>
+          <text x="19" y="24" text-anchor="middle" font-size="5.5" fill="#78350f">HNO₃→🟡</text>
+          <text x="19" y="33" text-anchor="middle" font-size="5.5" fill="#9a3412">NaOH→🟠</text>
+          <text x="19" y="42" text-anchor="middle" font-size="5.5" fill="#7c3aed">Cu→🟣</text>
+        </svg>
+      </div>
+      <div class="org-card-body">
+        <div class="org-card-reagent">Белки (полипептиды)</div>
+        <div class="org-card-sign" style="color:#b45309">🟡→🟠 ксантопротеиновая / 🟣 биуретовая</div>
+        <div class="org-card-who">
+          <b>1. Пламя:</b> запах «жжёных перьев / паленого»<br>
+          <b>2. HNO₃ (конц.) — ксантопротеиновая:</b><br>
+          жёлтое окрашивание → + NH₃: оранжевое (ароматические а/к)<br>
+          <b>3. Cu(OH)₂ в щелочи — биуретовая:</b><br>
+          ярко-фиолетовый р-р (пептидные связи –CO–NH–)<br>
+          <b>4. Pb(CH₃COO)₂ в щелочи — цистеиновая:</b><br>
+          чёрное окрашивание PbS (цистеин содержит –SH)
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section fade-in" id="s-organic-algo">
+  <div class="section-header">
+    <div class="section-pill amber">АЛГОРИТМ</div>
+    <span class="section-title">Подход к заданиям блока 3</span>
+  </div>
+
+  <div class="algo">
+    <div class="algo-step">
+      <div class="algo-n">1</div>
+      <div class="algo-text"><strong>Определи класс вещества</strong> по функциональной группе: –OH (спирт/фенол), –CHO (альдегид), –COOH (кислота), C=C (алкен), C≡C (алкин)</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">2</div>
+      <div class="algo-text"><strong>Вспомни ключевые тесты</strong> для каждого класса: фенол → FeCl₃ (фиолет); альдегид → Cu(OH)₂ t° (красный) или [Ag(NH₃)₂]OH (зеркало)</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">3</div>
+      <div class="algo-text"><strong>Установи соответствие</strong>: какой признак из списка описывает эту реакцию?</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">4</div>
+      <div class="algo-text"><strong>Запомни исключения</strong>: муравьиная кислота (HCOOH) — и кислота, и альдегид (дёт серебряное зеркало!); глюкоза — многоатомный спирт + альдегид</div>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="section fade-in" id="tr-b3">
+  <div class="section-header">
+    <div class="section-pill" style="background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff">ЗАДАНИЯ</div>
+    <span class="section-title">Органика — 30 заданий ЕГЭ</span>
+  </div>
+
+  <div class="box box-warn" style="margin-bottom:14px">
+    <div class="box-title">Формат ответа</div>
+    Для каждого вещества (А, Б, В, Г) найди соответствующий признак или реактив из правого столбца. Введи 4 цифры (например: <span style="font-family:var(--mono);font-weight:700">2315</span>).
+  </div>
+
+  <div id="tr-wrap-b3">
+    <div class="tr-card" id="tr-card-b3">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <span class="tr-prog-text" style="font-size:12px;font-family:var(--mono);color:var(--ink3);white-space:nowrap">0/30</span>
+        <div style="flex:1;height:4px;background:var(--line);border-radius:2px">
+          <div class="tr-prog-bar-fill" style="height:4px;background:linear-gradient(90deg,#7c3aed,#a855f7);width:0;border-radius:2px;transition:width .3s"></div>
+        </div>
+      </div>
+      <div class="tr-q"></div>
+      <input class="tr-input" type="text" inputmode="numeric" placeholder="——" maxlength="4">
+      <div class="tr-feedback"></div>
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+        <button class="tr-check-btn">Проверить</button>
+        <button class="tr-next-btn" style="display:none">Далее →</button>
+        <div class="tr-solution" hidden></div>
+      </div>
+    </div>
+    <div class="tr-result" id="tr-res-b3" style="display:none">
+      <div style="font-size:40px;font-weight:900;font-family:var(--mono);color:#7c3aed" class="tr-score"></div>
+      <div style="font-size:13px;color:var(--ink3);margin:6px 0 18px">из 30 заданий выполнено верно</div>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <button class="tr-retry-btn" style="display:none">Отработать ошибки</button>
+        <button class="tr-reset-btn">Начать заново</button>
+      </div>
+      <div class="tr-done" style="display:none;font-size:20px;margin-top:14px;color:var(--green-d);font-weight:700">🎉 Все верно! Блок пройден!</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /shell -->
+
+<script>
+(function(){
+  /* ── Задания (А|Б|В|Г — признаки 1..5) ──
+     Формат q: "А) ...\nБ) ...\nВ) ...\nГ) ...|1) ...\n2) ...\n3) ...\n4) ...\n5) ..."
+     Формат a: 4-значная строка цифр, порядок важен */
+  const RAW=[
+    {q:'А) Zn(OH)₂ и KOH (р-р)\nБ) HCOOH и KOH (р-р)\nВ) Zn(OH)₂ и H₂SO₄\nГ) Ba(NO₃)₂ и CuSO₄|1) изменение цвета раствора\n2) растворение осадка\n3) образование белого осадка\n4) видимые признаки отсутствуют\n5) образование голубого осадка',a:'2423',s:'А) Zn(OH)₂ + KOH(р-р) → K₂[Zn(OH)₄] (растворение осадка)\nБ) HCOOH + KOH → HCOOK + H₂O (без видимых признаков)\nВ) Zn(OH)₂ + H₂SO₄ → ZnSO₄ + H₂O (растворение осадка)\nГ) Ba(NO₃)₂ + CuSO₄ → BaSO₄↓ (белый осадок) + Cu(NO₃)₂'},
+    {q:'А) NaOH (р-р) и CH₃COOH (р-р)\nБ) NaOH (р-р) и Zn(OH)₂\nВ) Ba(OH)₂ (р-р) и K₂SO₄ (р-р)\nГ) Zn(OH)₂ и H₂SO₄ (р-р)|1) выделение бесцветного газа\n2) образование окрашенного осадка\n3) образование белого осадка\n4) растворение осадка\n5) видимые признаки отсутствуют',a:'5434',s:''},
+    {q:'А) NH₃ (р-р) и AlCl₃ (р-р)\nБ) KOH (р-р) и KHCO₃ (р-р)\nВ) NaHCO₃ (р-р) и H₂SO₄ (р-р)\nГ) Mg(OH)₂ и HNO₃ (р-р)|1) растворение осадка\n2) выделение газа\n3) образование синего осадка\n4) образование белого осадка\n5) видимые признаки отсутствуют',a:'4521',s:'А) NH₃ + AlCl₃ + H₂O → Al(OH)₃↓ (белый осадок) + NH₄Cl\nБ) KOH + KHCO₃ → K₂CO₃ + H₂O (без видимых признаков)\nВ) NaHCO₃ + H₂SO₄ → Na₂SO₄ + CO₂↑ (газ) + H₂O\nГ) Mg(OH)₂ + HNO₃ → Mg(NO₃)₂ + H₂O (растворение осадка)'},
+    {q:'А) Al(OH)₃ и KOH\nБ) HNO₃ и K₂CO₃ (р-р)\nВ) K₂Cr₂O₇ (р-р) и NaOH\nГ) Zn(OH)₂ и HNO₃ (р-р)|1) видимые признаки отсутствуют\n2) растворение осадка\n3) образование осадка\n4) выделение газа\n5) изменение цвета раствора',a:'2452',s:'А) Al(OH)₃ + KOH → K[Al(OH)₄] (растворение осадка)\nБ) HNO₃ + K₂CO₃ → KNO₃ + CO₂↑ (газ) + H₂O\nВ) K₂Cr₂O₇ + NaOH → K₂CrO₄ + Na₂CrO₄ (жёлтый раствор) + H₂O\nГ) Zn(OH)₂ + HNO₃ → Zn(NO₃)₂ + H₂O (растворение осадка)'},
+    {q:'А) Серная кислота (р-р) и сульфит натрия (р-р)\nБ) Гидроксид цинка и гидроксид натрия (р-р)\nВ) Силикат натрия (р-р) и серная кислота (р-р)\nГ) Хлорид аммония (конц., р-р) и гидроксид бария (конц., р-р) при нагревании|1) видимых изменений не наблюдается\n2) растворение осадка\n3) образование осадка\n4) выделение газа',a:'4234',s:'А) H₂SO₄ + Na₂SO₃ → Na₂SO₄ + SO₂↑ + H₂O (выделение газа)\nБ) Zn(OH)₂ + 2NaOH(р-р) → Na₂[Zn(OH)₄] (растворение осадка)\nВ) Na₂SiO₃ + H₂SO₄ → Na₂SO₄ + H₂SiO₃↓ (образование осадка)\nГ) 2NH₄Cl + Ba(OH)₂ →(t°) BaCl₂ + 2NH₃↑ + 2H₂O (выделение газа)'},
+    {q:'А) K₂SO₃ (р-р) и азотная кислота (р-р)\nБ) Гидроксид алюминия и гидроксид натрия (р-р)\nВ) Хлорид аммония (тв.) и гидроксид кальция (тв.)\nГ) Нитрат бария (р-р) и серная кислота|1) растворение осадка\n2) образование окрашенного раствора\n3) образование осадка\n4) образование газа\n5) обесцвечивание раствора',a:'4143',s:'А) K₂SO₃ + 2HNO₃ → 2KNO₃ + SO₂↑ + H₂O (выделение газа)\nБ) Al(OH)₃ + NaOH(р-р) → Na[Al(OH)₄] (растворение осадка)\nВ) 2NH₄Cl(тв.) + Ca(OH)₂(тв.) →(t°) CaCl₂ + 2NH₃↑ + 2H₂O (выделение газа)\nГ) Ba(NO₃)₂ + H₂SO₄ → BaSO₄↓ (белый осадок) + 2HNO₃'},
+    {q:'А) Al₂(SO₄)₃ (изб.) и NaOH\nБ) KOH и метилоранж\nВ) HCl и NaHCO₃\nГ) HNO₃ и KOH|1) изменение окраски раствора\n2) растворение осадка\n3) видимых изменений нет\n4) выделение газа\n5) образование осадка',a:'5143',s:'А) Al₂(SO₄)₃ + NaOH → Al(OH)₃↓ (белый осадок) + Na₂SO₄\nБ) KOH + метилоранж → жёлтое окрашивание\nВ) HCl + NaHCO₃ → NaCl + CO₂↑ (газ) + H₂O\nГ) HNO₃ + KOH → KNO₃ + H₂O (без видимых признаков)'},
+    {q:'А) KOH и H₂S\nБ) CO₂ и Ca(OH)₂\nВ) KHCO₃ и HCl\nГ) Na₂CO₃ и H₂SO₄|1) помутнение раствора\n2) обесцвечивание раствора\n3) образование чёрного осадка\n4) выделение газа\n5) видимые признаки реакции отсутствуют',a:'5144',s:'А) KOH + H₂S → K₂S + H₂O (без видимых признаков)\nБ) CO₂ + Ca(OH)₂ → CaCO₃↓ (белый осадок) + H₂O\nВ) KHCO₃ + HCl → KCl + CO₂↑ (газ) + H₂O\nГ) Na₂CO₃ + H₂SO₄ → Na₂SO₄ + CO₂↑ (газ) + H₂O'},
+    {q:'А) K₂CO₃ и HCl\nБ) K₂CO₃ и BaCl₂\nВ) HI и AgNO₃\nГ) Ag и HNO₃ (конц.)|1) выпал жёлтый осадок\n2) выпал белый осадок\n3) выпал бурый осадок\n4) выделился бесцветный газ\n5) выделился бурый газ',a:'4215',s:'А) K₂CO₃ + HCl → KCl + CO₂↑ (бесцветный газ) + H₂O\nБ) K₂CO₃ + BaCl₂ → BaCO₃↓ (белый осадок) + KCl\nВ) HI + AgNO₃ → AgI↓ (жёлтый осадок) + HNO₃\nГ) Ag + HNO₃(конц.) → AgNO₃ + NO₂↑ (бурый газ) + H₂O'},
+    {q:'А) Zn(OH)₂ и KOH (р-р)\nБ) Al(OH)₃ и HNO₃ (р-р)\nВ) BaCl₂ и H₂SO₄\nГ) K и H₂O|1) изменение окраски раствора\n2) растворение осадка\n3) видимых изменений нет\n4) выделение газа\n5) образование осадка',a:'2254',s:'А) Zn(OH)₂ + KOH → K₂[Zn(OH)₄] (растворение осадка)\nБ) Al(OH)₃ + HNO₃ → Al(NO₃)₃ + H₂O (растворение осадка)\nВ) BaCl₂ + H₂SO₄ → BaSO₄↓ (белый осадок) + HCl\nГ) K + H₂O → KOH + H₂↑ (газ)'},
+    {q:'А) Cu и HNO₃ (р-р разб.)\nБ) Na₂CrO₄ и H₂SO₄\nВ) Mg(OH)₂ и HCl (р-р)\nГ) Al(OH)₃ и NaOH (р-р)|1) выделение газа и растворение твёрдого вещества\n2) образование белого осадка\n3) образование жёлтого осадка\n4) изменение окраски раствора на оранжевую\n5) растворение осадка',a:'1455',s:'А) 3Cu + 8HNO₃(разб.) → 3Cu(NO₃)₂ + 2NO↑ + 4H₂O (выделение газа, растворение меди)\nБ) Na₂CrO₄ + H₂SO₄ → Na₂Cr₂O₇ (оранжевый раствор) + Na₂SO₄ + H₂O (изменение окраски)\nВ) Mg(OH)₂ + 2HCl → MgCl₂ + 2H₂O (растворение осадка)\nГ) Al(OH)₃ + NaOH(р-р) → Na[Al(OH)₄] (растворение осадка)'},
+    {q:'А) Zn(OH)₂ и KOH (р-р)\nБ) Na и H₂O\nВ) H₂SO₄ и BaCl₂\nГ) Be(OH)₂ и HNO₃ (р-р)|1) видимых изменений нет\n2) растворение осадка\n3) изменение окраски раствора\n4) выделение газа\n5) образование осадка',a:'2452',s:'А) Zn(OH)₂ + KOH(р-р) → K₂[Zn(OH)₄] (растворение осадка)\nБ) Na + H₂O → NaOH + H₂↑ (газ)\nВ) H₂SO₄ + BaCl₂ → BaSO₄↓ (белый осадок) + HCl\nГ) Be(OH)₂ + HNO₃ → Be(NO₃)₂ + H₂O (растворение осадка)'},
+    {q:'А) Силикат натрия и соляная кислота\nБ) Карбонат кальция и соляная кислота\nВ) Цинк и гидроксид натрия + H₂O\nГ) Нитрат серебра(I) и фосфат калия|1) выпадение белого осадка\n2) выпадение жёлтого осадка\n3) выделение газа и растворение осадка\n4) выделение газа\n5) образование бесцветного желеобразного осадка',a:'5342',s:'А) Na₂SiO₃ + 2HCl → 2NaCl + H₂SiO₃↓ (белый желеобразный осадок)\nБ) CaCO₃ + 2HCl → CaCl₂ + CO₂↑ + H₂O (выделение газа, растворение осадка)\nВ) Zn + 2NaOH(р-р) + 2H₂O → Na₂[Zn(OH)₄] + H₂↑ (выделение газа)\nГ) 3AgNO₃ + K₃PO₄ → Ag₃PO₄↓ (жёлтый осадок) + 3KNO₃'},
+    {q:'А) Na₂Cr₂O₇ и LiOH\nБ) Ba(HCO₃)₂ и HCOOH\nВ) Zn(NO₃)₂ (изб.) и CsOH\nГ) K₂CrO₄ и HF|1) изменение окраски раствора на оранжевую\n2) изменение окраски раствора на жёлтую\n3) растворение осадка\n4) выделение газа\n5) образование белого осадка',a:'2451',s:'А) Na₂Cr₂O₇ + LiOH → Na₂CrO₄ + Li₂CrO₄ (жёлтый раствор) + H₂O\nБ) Ba(HCO₃)₂ + HCOOH → (HCOO)₂Ba + CO₂↑ (газ) + H₂O\nВ) Zn(NO₃)₂(изб.) + CsOH → Zn(OH)₂↓ (белый осадок) + CsNO₃\nГ) K₂CrO₄ + HF → K₂Cr₂O₇ (оранжевый раствор) + KF + H₂O'},
+    {q:'А) Al(OH)₃ и KOH (р-р)\nБ) Fe(OH)₂ и H₂O₂\nВ) Ca(HCO₃)₂ и HCl\nГ) NaOH и H₂SO₄|1) выделение газа\n2) растворение осадка\n3) образование осадка\n4) видимые признаки реакции отсутствуют\n5) изменение окраски осадка',a:'2514',s:'А) Al(OH)₃ + KOH → K[Al(OH)₄] (растворение осадка)\nБ) Fe(OH)₂ + H₂O₂ → Fe(OH)₃↓ (серо-зелёный осадок → бурый)\nВ) Ca(HCO₃)₂ + HCl → CaCl₂ + CO₂↑ (газ) + H₂O\nГ) NaOH + H₂SO₄ → Na₂SO₄ + H₂O (без видимых признаков)'},
+    {q:'А) Mg(OH)₂ и HBr (р-р)\nБ) BaCl₂ (р-р) и H₂SO₄ (р-р)\nВ) K₂CO₃ (р-р) и HNO₃ (конц.)\nГ) Cu и HNO₃ (конц.)|1) выделение бесцветного газа\n2) выделение бурого газа\n3) образование белого осадка\n4) растворение белого осадка\n5) изменение окраски раствора на жёлтую',a:'4312',s:'А) Mg(OH)₂ + HBr → MgBr₂ + H₂O (растворение белого осадка)\nБ) BaCl₂ + H₂SO₄(р-р) → BaSO₄↓ (белый осадок) + HCl\nВ) K₂CO₃ + HNO₃(конц.) → KNO₃ + CO₂↑ (бесцветный газ) + H₂O\nГ) Cu + HNO₃(конц.) → Cu(NO₃)₂ + NO₂↑ (бурый газ) + H₂O'},
+    {q:'А) NaOH (р-р) и CrCl₃ (изб.)\nБ) KOH (р-р) и Be(OH)₂\nВ) Na₂CO₃ и HNO₃\nГ) CaCO₃, H₂O и CO₂|1) растворение осадка\n2) образование белого осадка\n3) выделение бесцветного газа\n4) образование окрашенного осадка\n5) видимые признаки отсутствуют',a:'4131',s:'А) NaOH + CrCl₃(изб.) → Cr(OH)₃↓ (серо-зелёный осадок) + NaCl\nБ) KOH + Be(OH)₂ → K₂[Be(OH)₄] (растворение осадка)\nВ) Na₂CO₃ + HNO₃ → NaNO₃ + CO₂↑ (бесцветный газ) + H₂O\nГ) CaCO₃ + CO₂ + H₂O → Ca(HCO₃)₂ (растворение осадка)'},
+    {q:'А) Zn(OH)₂ и NaOH (р-р)\nБ) NaOH (р-р) и HCOOH (р-р)\nВ) Ba(OH)₂ и K₂SO₄\nГ) Zn(OH)₂ и H₂SO₄|1) растворение осадка\n2) образование белого осадка\n3) выделение бесцветного газа\n4) видимые признаки реакции отсутствуют\n5) образование синего осадка',a:'1421',s:'А) Zn(OH)₂ + NaOH(р-р) → Na₂[Zn(OH)₄] (растворение осадка)\nБ) NaOH(р-р) + HCOOH(р-р) → HCOONa + H₂O (без видимых признаков)\nВ) Ba(OH)₂ + K₂SO₄ → BaSO₄↓ (белый осадок) + KOH\nГ) Zn(OH)₂ + H₂SO₄ → ZnSO₄ + H₂O (растворение осадка)'},
+    {q:'А) AgNO₃ и NaCl\nБ) Ba(OH)₂ и Al₂(SO₄)₃\nВ) Ca(OH)₂ (р-р) и FeCl₃\nГ) NaOH и CH₃COOH|1) растворение осадка\n2) образование белого осадка\n3) выделение бесцветного газа\n4) образование бурого осадка\n5) видимые признаки реакции отсутствуют',a:'2245',s:'А) AgNO₃ + NaCl → AgCl↓ (белый осадок) + NaNO₃\nБ) Ba(OH)₂ + Al₂(SO₄)₃ → Al(OH)₃↓ (белый осадок) + BaSO₄↓ (белый осадок)\nВ) Ca(OH)₂ + FeCl₃ → Fe(OH)₃↓ (бурый осадок) + CaCl₂\nГ) NaOH + CH₃COOH → CH₃COONa + H₂O (без видимых признаков)'},
+    {q:'А) AgNO₃ и KI\nБ) Ba(OH)₂ и MgSO₄\nВ) Ba(OH)₂ и FeCl₃\nГ) KOH и HCOOH|1) растворение осадка\n2) образование белого осадка\n3) выделение бесцветного газа\n4) образование окрашенного осадка\n5) видимые признаки реакции отсутствуют',a:'4245',s:'А) AgNO₃ + KI → AgI↓ (жёлтый осадок) + KNO₃\nБ) Ba(OH)₂ + MgSO₄ → Mg(OH)₂↓ (белый осадок) + BaSO₄↓ (белый осадок)\nВ) Ba(OH)₂ + FeCl₃ → Fe(OH)₃↓ (бурый осадок) + BaCl₂\nГ) KOH + HCOOH → HCOOK + H₂O (без видимых признаков)'},
+    {q:'А) Ca(HCO₃)₂ и HCl\nБ) KOH (р-р) и Al(OH)₃\nВ) NaHCO₃ и Ca(OH)₂\nГ) CO₂ и K[Al(OH)₄] (р-р)|1) выделение газа\n2) растворение осадка\n3) образование белого осадка\n4) видимые признаки реакции не наблюдаются\n5) образование синего осадка',a:'1233',s:'А) Ca(HCO₃)₂ + HCl → CaCl₂ + CO₂↑ (газ) + H₂O\nБ) KOH + Al(OH)₃ → K[Al(OH)₄] (растворение осадка)\nВ) NaHCO₃ + Ca(OH)₂ → CaCO₃↓ (белый осадок) + Na₂CO₃ + H₂O\nГ) CO₂ + K[Al(OH)₄] → Al(OH)₃↓ (белый осадок) + K₂CO₃ + H₂O'},
+    {q:'А) Zn(OH)₂ и NaOH (р-р)\nБ) Mg и H₂SO₄\nВ) KHCO₃ и KOH (р-р)\nГ) NH₄Cl и AgNO₃ (р-р)|1) видимые признаки реакции отсутствуют\n2) только растворение осадка\n3) образование белого осадка\n4) выделение газа\n5) образование жёлтого осадка',a:'2413',s:'А) Zn(OH)₂ + NaOH(р-р) → Na₂[Zn(OH)₄] (растворение осадка)\nБ) Mg + H₂SO₄ → MgSO₄ + H₂↑ (газ)\nВ) KHCO₃ + KOH(р-р) → K₂CO₃ + H₂O (без видимых признаков)\nГ) NH₄Cl + AgNO₃ → AgCl↓ (белый осадок) + NH₄NO₃'},
+    {q:'А) Ba(OH)₂ (р-р) и HNO₃ (р-р)\nБ) Cu(OH)₂ и HNO₃ (р-р)\nВ) Fe(OH)₃ и HCl (р-р)\nГ) Ba(OH)₂ (р-р) и H₂SO₄ (р-р)|1) образование белого осадка\n2) образование голубого раствора\n3) растворение осадка с образованием жёлтого раствора\n4) растворение осадка с образованием голубого раствора\n5) видимые признаки реакции отсутствуют',a:'5431',s:'А) Ba(OH)₂ + HNO₃ → Ba(NO₃)₂ + H₂O (без видимых признаков)\nБ) Cu(OH)₂ + HNO₃ → Cu(NO₃)₂ (голубой раствор) + H₂O (растворение осадка)\nВ) Fe(OH)₃ + HCl → FeCl₃ (жёлтый раствор) + H₂O (растворение осадка)\nГ) Ba(OH)₂ + H₂SO₄ → BaSO₄↓ (белый осадок) + H₂O'},
+    {q:'А) Cu(OH)₂ и H₂SO₄\nБ) CO₂ и Ba(OH)₂ (р-р)\nВ) KOH (р-р) и HCl\nГ) NaHCO₃ и HI|1) растворение осадка\n2) помутнение раствора\n3) образование чёрного осадка\n4) выделение газа\n5) видимых признаков реакции не наблюдается',a:'1254',s:'А) Cu(OH)₂ + H₂SO₄ → CuSO₄ + H₂O (растворение осадка)\nБ) CO₂ + Ba(OH)₂(р-р) → BaCO₃↓ (белый осадок, помутнение) + H₂O\nВ) KOH(р-р) + HCl → KCl + H₂O (без видимых признаков)\nГ) NaHCO₃ + HI → NaI + CO₂↑ (газ) + H₂O'},
+    {q:'А) NH₃ (р-р) и HCl (р-р)\nБ) Ba(OH)₂ (р-р) и SO₂ (г)\nВ) Ba(OH)₂ (р-р) и CO₂ (г)\nГ) NaOH (р-р) и H₂S (г)|1) образование окрашенного раствора\n2) образование бурого осадка\n3) образование белого осадка\n4) выделение бурого газа\n5) видимые признаки реакции отсутствуют',a:'5335',s:'А) NH₃ + HCl → NH₄Cl (без видимых признаков)\nБ) Ba(OH)₂ + SO₂ → BaSO₃↓ (белый осадок) + H₂O\nВ) Ba(OH)₂ + CO₂ → BaCO₃↓ (белый осадок) + H₂O\nГ) NaOH + H₂S → Na₂S + H₂O (без видимых признаков)'},
+    {q:'А) ZnO и KOH (р-р)\nБ) K₂CrO₄ и HNO₃ (р-р)\nВ) NaHCO₃ (р-р) и H₂SO₄\nГ) HCl и AgNO₃|1) образование жёлтого осадка\n2) образование белого осадка\n3) растворение твёрдого вещества\n4) выделение газа\n5) изменение окраски раствора на оранжевую',a:'3542',s:'А) ZnO + 2KOH(р-р) + H₂O → K₂[Zn(OH)₄] (растворение твёрдого вещества)\nБ) 2K₂CrO₄ + 2HNO₃ → K₂Cr₂O₇ (оранжевый р-р) + 2KNO₃ + H₂O (изменение цвета)\nВ) NaHCO₃ + H₂SO₄ → Na₂SO₄ + CO₂↑ + H₂O (выделение газа)\nГ) HCl + AgNO₃ → AgCl↓ (белый осадок) + HNO₃'},
+    {q:'А) Zn(OH)₂ и NaOH (р-р)\nБ) Na₂SO₃ и H₂SO₄ (р-р)\nВ) NaHCO₃ и HI\nГ) NH₄Cl и AgNO₃|1) обесцвечивание раствора\n2) растворение осадка\n3) образование белого осадка\n4) выделение газа\n5) образование жёлтого осадка',a:'2443',s:'А) Zn(OH)₂ + NaOH → Na₂[Zn(OH)₄] (растворение осадка)\nБ) Na₂SO₃ + H₂SO₄(р-р) → Na₂SO₄ + SO₂↑ (газ) + H₂O\nВ) NaHCO₃ + HI → NaI + CO₂↑ (газ) + H₂O\nГ) NH₄Cl + AgNO₃ → AgCl↓ (белый осадок) + NH₄NO₃'},
+    {q:'А) AgNO₃ и NaI\nБ) FeCl₃ и Ba(OH)₂\nВ) Ba(OH)₂ и Al₂(SO₄)₃\nГ) KOH и CH₃COOH|1) выделение бесцветного газа\n2) образование окрашенного осадка\n3) образование белого осадка\n4) растворение осадка\n5) видимые признаки реакции не наблюдаются',a:'2235',s:'А) AgNO₃ + NaI → AgI↓ (жёлтый осадок) + NaNO₃\nБ) FeCl₃ + Ba(OH)₂ → Fe(OH)₃↓ (бурый осадок) + BaCl₂\nВ) Ba(OH)₂ + Al₂(SO₄)₃ → Al(OH)₃↓ (белый осадок) + BaSO₄↓ (белый осадок)\nГ) KOH + CH₃COOH → CH₃COOK + H₂O (без видимых признаков)'},
+    {q:'А) MgCl₂ и NaOH\nБ) Na₂Cr₂O₇ и LiOH\nВ) Mg(HCO₃)₂ и HNO₃\nГ) K₂CrO₄ и HNO₃|1) изменение окраски раствора на оранжевую\n2) выделение газа\n3) образование белого осадка\n4) растворение осадка\n5) изменение окраски раствора на жёлтую',a:'3521',s:'А) MgCl₂ + NaOH → Mg(OH)₂↓ (белый осадок) + NaCl\nБ) Na₂Cr₂O₇ + LiOH → Na₂CrO₄ (жёлтый раствор) + Li₂CrO₄ + H₂O\nВ) Mg(HCO₃)₂ + HNO₃ → Mg(NO₃)₂ + CO₂↑ (газ) + H₂O\nГ) K₂CrO₄ + HNO₃ → K₂Cr₂O₇ (оранжевый раствор) + KNO₃ + H₂O'},
+    {q:'А) Cu(OH)₂ и HBr (р-р)\nБ) Al(OH)₃ и KOH (р-р)\nВ) K₂CrO₄ и H₂SO₄\nГ) Mg и HNO₃ (конц.)|1) изменение окраски раствора на оранжевую\n2) растворение осадка\n3) образование белого осадка\n4) выделение газа\n5) образование жёлтого осадка',a:'2214',s:'А) Cu(OH)₂ + HBr → CuBr₂ + H₂O (растворение осадка)\nБ) Al(OH)₃ + KOH → K[Al(OH)₄] (растворение осадка)\nВ) K₂CrO₄ + H₂SO₄ → K₂Cr₂O₇ (оранжевый раствор) + K₂SO₄ + H₂O\nГ) Mg + HNO₃(конц.) → Mg(NO₃)₂ + NO₂↑ (газ) + H₂O'}
+  ];
+
+  const el=document.getElementById('tr-wrap-b1');
+  if(!el)return;
+
+  function norm(s){return s.trim().replace(/[^0-9]/g,'');}
+  function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+  function $(s){return el.querySelector(s);}
+
+  let queue,answered,wrongIds,wrongAtPos,cur;
+  const _SK='linia24_st_b1';
+  const _6D=6*24*3600*1000;
+  function _saveState(){try{localStorage.setItem(_SK,JSON.stringify({ts:Date.now(),q:queue,an:[...answered],wi:[...wrongIds],wp:[...wrongAtPos],cur:cur}))}catch(e){}}
+  function _clearState(){try{localStorage.removeItem(_SK)}catch(e){}}
+  function _loadState(){try{const raw=localStorage.getItem(_SK);if(!raw)return false;const s=JSON.parse(raw);if(Date.now()-s.ts>_6D){localStorage.removeItem(_SK);return false;}queue=s.q;answered=new Set(s.an);wrongIds=new Set(s.wi);wrongAtPos=new Set(s.wp);cur=s.cur;return true;}catch(e){return false;}}
+
+  function init(){if(!_loadState()){queue=shuffle(RAW.map((_,i)=>i));answered=new Set();wrongIds=new Set();wrongAtPos=new Set();cur=0;}showCard();render();}
+  function showCard(){$('.tr-card').style.display='';$('.tr-result').style.display='none';}
+
+  function render(){
+    if(cur>=queue.length){showResult();return;}
+    const t=RAW[queue[cur]];
+    const parts=t.q.split('|');
+    const subs=parts[0].split('\n');
+    const signs=parts[1]?parts[1].split('\n'):[];
+    let html='<div class="match-grid">';
+    html+='<div class="match-col"><div class="match-col-title">Реагирующие вещества</div>';
+    subs.forEach(s=>{html+='<div class="match-row">'+s+'</div>';});
+    html+='</div>';
+    html+='<div class="match-col"><div class="match-col-title">Признак реакции</div>';
+    signs.forEach(s=>{html+='<div class="match-row">'+s+'</div>';});
+    html+='</div></div>';
+    html+='<div style="font-size:13px;color:var(--ink3);margin-bottom:8px">Введи ответ — 4 цифры для А, Б, В, Г:</div>';
+    $('.tr-q').innerHTML=html;
+    $('.tr-input').value='';
+    $('.tr-feedback').textContent='';
+    $('.tr-feedback').className='tr-feedback';
+    $('.tr-next-btn').style.display='none';
+    $('.tr-check-btn').style.display='';
+    $('.tr-input').focus();
+    prog();
+  }
+
+  function check(){
+    const raw=$('.tr-input').value;
+    if(!raw.trim())return;
+    const t=RAW[queue[cur]];
+    if(norm(raw)===norm(t.a)){
+      answered.add(queue[cur]);
+      wrongIds.delete(queue[cur]);
+      wrongAtPos.delete(cur);
+      $('.tr-feedback').textContent='✓ Верно!';
+      $('.tr-feedback').className='tr-feedback ok';
+      $('.tr-check-btn').style.display='none';
+      $('.tr-next-btn').style.display='';
+      if(t.s){const _sd=$('.tr-solution');_sd.hidden=false;_sd.innerHTML='<div class="tr-solution-hd">Решение</div>'+t.s.split('\n').map(r=>'<div>'+r+'</div>').join('');}
+    }else{
+      if(!wrongAtPos.has(cur))queue.push(queue[cur]);
+      wrongAtPos.add(cur);
+      wrongIds.add(queue[cur]);
+      $('.tr-feedback').textContent='✗ Неверно — попробуй ещё';
+      $('.tr-feedback').className='tr-feedback err';
+    }
+    prog();_saveState();
+  }
+
+  function next(){cur++;_saveState();render();}
+
+  function showResult(){
+    $('.tr-card').style.display='none';
+    $('.tr-result').style.display='';
+    $('.tr-score').textContent=`${RAW.length}/${RAW.length}`;
+    $('.tr-retry-btn').style.display='none';
+    $('.tr-done').style.display=wrongIds.size===0?'':'none';
+    if(window.blockDone)window.blockDone(el.id);
+  }
+
+  function retry(){}
+  function reset(){_clearState();showCard();queue=shuffle(RAW.map((_,i)=>i));answered=new Set();wrongIds=new Set();wrongAtPos=new Set();cur=0;render();}
+
+  function prog(){
+    const p=Math.round(answered.size/RAW.length*100);
+    $('.tr-prog-text').textContent=`${answered.size}/${RAW.length}`;
+    $('.tr-prog-bar-fill').style.width=p+'%';
+  }
+
+  $('.tr-check-btn').addEventListener('click',check);
+  $('.tr-next-btn').addEventListener('click',next);
+  $('.tr-retry-btn').addEventListener('click',retry);
+  $('.tr-reset-btn').addEventListener('click',reset);
+  $('.tr-input').addEventListener('keydown',e=>{
+    if(e.key==='Enter'){
+      if($('.tr-next-btn').style.display!=='none')next();else check();
+    }
+  });
+  init();
+})();
+</script>
+
+<script>
+(function(){
+  const RAW=[
+    {q:'А) C₂H₂ и [Ag(NH₃)₂]OH\nБ) C₂H₂ и Br₂ (р-р)\nВ) HOCH₂CH₂OH и Cu(OH)₂\nГ) C₆H₅OH (р-р) и KOH (р-р)|1) образование раствора синего цвета\n2) образование осадка\n3) обесцвечивание раствора\n4) образование металлического серебра\n5) видимые признаки реакции отсутствуют',a:'2315',s:'А) HC≡CH + [Ag(NH₃)₂]OH → HC≡CAg↓ (белый осадок) + NH₃ + H₂O\nБ) HC≡CH + Br₂(водн.) → CHBr₂–CHBr₂ (обесцвечивание раствора)\nВ) CH₂OH–CH₂OH + Cu(OH)₂ → синее окрашивание раствора\nГ) C₆H₅OH + KOH → C₆H₅OK + H₂O (без видимых признаков)'},
+    {q:'А) пропановая кислота и литий\nБ) пропанол-2 и калий\nВ) гидроксид цинка и уксусная кислота\nГ) бромная вода и ацетилен|1) растворение осадка\n2) образование осадка\n3) видимые признаки реакции отсутствуют\n4) выделение газа\n5) обесцвечивание раствора',a:'4415',s:''},
+    {q:'А) уксусная кислота и цинк\nБ) карбонат кальция и муравьиная кислота\nВ) белок и азотная кислота\nГ) этиленгликоль и гидроксид меди(II)|1) только обесцвечивание раствора\n2) появление жёлтой окраски\n3) образование чёрного осадка\n4) выделение бесцветного газа\n5) образование ярко-синего раствора',a:'4425',s:'А) CH₃–COOH + Zn → (CH₃–COO)₂Zn + H₂↑ (бесцветный газ)\nБ) CaCO₃ + HCOOH → (HCOO)₂Ca + CO₂↑ (бесцветный газ) + H₂O\nВ) белок + HNO₃(конц.) → жёлтое окрашивание\nГ) HO–CH₂–CH₂–OH + Cu(OH)₂ → синее окрашивание'},
+    {q:'А) гидроксид цинка и уксусная кислота\nБ) пропановая кислота и магний\nВ) пропанол-2 и натрий\nГ) бромная вода и пропилен|1) растворение осадка\n2) выделение бесцветного газа\n3) выделение бурого газа\n4) обесцвечивание раствора\n5) образование осадка',a:'1224',s:'А) Zn(OH)₂ + CH₃–COOH → (CH₃–COO)₂Zn + H₂O (растворение осадка)\nБ) CH₃–CH₂–COOH + Mg → (CH₃–CH₂–COO)₂Mg + H₂↑ (газ)\nВ) CH₃–CH(OH)–CH₃ + Na → CH₃–CH(ONa)–CH₃ + H₂↑ (газ)\nГ) Br₂(водн.) + CH₂=CH–CH₃ → Br–CH₂–CH(Br)–CH₃ (обесцвечивание раствора)'},
+    {q:'А) этановая кислота и магний\nБ) пропанол-1 и натрий\nВ) гидроксид магния и уксусная кислота\nГ) бромная вода и этилен|1) видимые признаки реакции отсутствуют\n2) растворение осадка\n3) образование осадка\n4) выделение газа\n5) изменение цвета раствора',a:'4425',s:'А) CH₃–COOH + Mg → (CH₃–COO)₂Mg + H₂↑ (газ)\nБ) CH₃–CH₂–CH₂–OH + Na → CH₃–CH₂–CH₂–ONa + H₂↑ (газ)\nВ) Mg(OH)₂ + CH₃–COOH → (CH₃–COO)₂Mg + H₂O (растворение осадка)\nГ) CH₂=CH₂ + Br₂(водн.) → Br–CH₂–CH₂–Br (обесцвечивание раствора)'},
+    {q:'А) этановая кислота и карбонат калия\nБ) пропанол-1 и натрий\nВ) фенол и хлорид железа(III)\nГ) уксусная кислота и гидроксид бария (р-р)|1) изменение окраски раствора\n2) выделение газа\n3) обесцвечивание раствора\n4) образование осадка\n5) видимых изменений нет',a:'2215',s:'А) CH₃–COOH + K₂CO₃ → CH₃–COOK + CO₂↑ (газ) + H₂O\nБ) CH₃–CH₂–CH₂–OH + Na → CH₃–CH₂–CH₂–ONa + H₂↑ (газ)\nВ) C₆H₅–OH + FeCl₃ → фиолетовое окрашивание\nГ) CH₃–COOH + Ba(OH)₂ → (CH₃–COO)₂Ba + H₂O (без видимых признаков)'},
+    {q:'А) фенол (р-р) и бромная вода\nБ) анилин и бромная вода\nВ) пентен-1 и бромная вода\nГ) ацетилен и бромная вода|1) только обесцвечивание раствора\n2) обесцвечивание раствора и образование белого осадка\n3) образование окрашенного осадка\n4) выделение бесцветного газа\n5) выделение бурого газа',a:'2211',s:'А) C₆H₅–OH + Br₂(водн.) → 2,4,6-трибромфенол↓ (белый осадок) + HBr (обесцвечивание раствора)\nБ) C₆H₅–NH₂ + Br₂(водн.) → 2,4,6-триброманилин↓ (белый осадок) + HBr (обесцвечивание раствора)\nВ) CH₂=CH–CH₂–CH₃ + Br₂(водн.) → Br–CH₂–CH(Br)–CH₂–CH₃ (обесцвечивание раствора)\nГ) HC≡CH + Br₂(водн.) → Br₂CH–CHBr₂ (обесцвечивание раствора)'},
+    {q:'А) C₂H₅CHO и Ag₂O (NH₃ р-р)\nБ) CH₂OH–CHOH–CH₂OH и Cu(OH)₂\nВ) CH₃COOH и Mg\nГ) CH₃CH=CH₂ и Br₂|1) образование осадка\n2) обесцвечивание раствора\n3) появление синей окраски\n4) появление красной окраски\n5) выделение газа',a:'1352',s:'А) CH₃–CH₂–CHO + [Ag(NH₃)₂]OH →(t°) CH₃–CH₂–COONH₄ + Ag↓ (серебряный налёт) + NH₃ + H₂O\nБ) CH₂OH–CHOH–CH₂OH + Cu(OH)₂ → синее окрашивание\nВ) CH₃–COOH + Mg → (CH₃–COO)₂Mg + H₂↑ (газ)\nГ) CH₃–CH=CH₂ + Br₂(водн.) → CH₃–CH(Br)–CH₂–Br (обесцвечивание раствора)'},
+    {q:'А) фенол и Br₂ (р-р)\nБ) анилин и Br₂ (р-р)\nВ) формальдегид и [Ag(NH₃)₂]OH\nГ) ацетилен и [Ag(NH₃)₂]OH|1) выделение газа\n2) появление фиолетовой окраски раствора\n3) только выпадение осадка\n4) выпадение осадка металлического серебра\n5) обесцвечивание раствора и образование осадка',a:'5543',s:'А) C₆H₅OH + 3Br₂ → C₆H₂Br₃OH↓ + 3HBr (обесцвечивание + белый осадок — ответ 5)\\nБ) C₆H₅NH₂ + 3Br₂ → C₆H₂Br₃NH₂↓ + 3HBr (обесцвечивание + белый осадок — ответ 5)\\nВ) HCHO + [Ag(NH₃)₂]OH → CO₂ + Ag↓ + NH₃ + H₂O (выпадение Ag — ответ 4)\\nГ) HC≡CH + [Ag(NH₃)₂]OH → AgC≡CAg↓ (осадок ацетиленида — ответ 3)'},
+    {q:'А) уксусная кислота и Mg\nБ) ацетальдегид и Cu(OH)₂ (t°)\nВ) бутандиол-2,3 и K\nГ) бутандиол-2,3 и Cu(OH)₂|1) появление фиолетовой окраски\n2) образование кирпично-красного осадка\n3) растворение осадка с образованием раствора синего цвета\n4) выделение газа\n5) обесцвечивание раствора',a:'4243',s:'А) CH₃–COOH + Mg → (CH₃–COO)₂Mg + H₂↑ (газ)\nБ) CH₃–CHO + Cu(OH)₂ →(t°) CH₃–COOH + Cu₂O↓ (кирпично-красный осадок) + H₂O\nВ) бутандиол-2,3 + K → CH₃–CH(OK)–CH(OK)–CH₃ + H₂↑ (газ)\nГ) бутандиол-2,3 + Cu(OH)₂ → ярко-синее окрашивание раствора, растворение осадка'},
+    {q:'А) фенол (р-р) и KOH (р-р)\nБ) Br₂ (водн.) и циклопропан (t°)\nВ) Br₂ (водн.) и C₂H₂ (г)\nГ) FeCl₃ (р-р) и фенол (р-р)|1) обесцвечивание раствора\n2) образование бурого осадка\n3) образование белого осадка\n4) появление фиолетовой окраски раствора\n5) видимые признаки реакции не наблюдаются',a:'5114',s:'А) C₆H₅–OH + KOH → C₆H₅–OK + H₂O (без видимых признаков)\nБ) Br₂(водн.) + C₃H₆ →(t°) Br–CH₂–CH₂–CH₂–Br (обесцвечивание раствора)\nВ) Br₂(водн.) + HC≡CH → Br–CH(Br)–CHBr₂ (обесцвечивание раствора)\nГ) FeCl₃ + C₆H₅–OH → фиолетовое окрашивание'},
+    {q:'А) пентен-2 и Br₂ (р-р)\nБ) пропанол-1 и K\nВ) бутен-1 и H₂\nГ) фенол (р-р) и NaOH (р-р)|1) появление фиолетовой окраски\n2) образование кирпично-красного осадка\n3) обесцвечивание раствора\n4) выделение газа\n5) видимые признаки реакции не наблюдаются',a:'3455',s:'А) CH₃–CH=CH–CH₂–CH₃ + Br₂(водн.) → CH₃–CH(Br)–CH(Br)–CH₂–CH₃ (обесцвечивание раствора)\nБ) CH₃–CH₂–CH₂–OH + K → CH₃–CH₂–CH₂–OK + H₂↑ (газ)\nВ) CH₂=CH–CH₂–CH₃ + H₂ →(Pt,t°) CH₃–CH₂–CH₂–CH₃ (без видимых признаков)\nГ) C₆H₅–OH + NaOH → C₆H₅–ONa + H₂O (без видимых признаков)'},
+    {q:'А) фенол и FeCl₃\nБ) ацетальдегид и Cu(OH)₂\nВ) пропин и Ag₂O (NH₃)\nГ) муравьиная кислота и Na₂CO₃|1) образование белого осадка\n2) образование кирпично-красного осадка\n3) выделение бесцветного газа\n4) выделение бурого газа\n5) изменение цвета раствора',a:'5213',s:'А) C₆H₅–OH + FeCl₃ → фиолетовое окрашивание\nБ) CH₃–CHO + Cu(OH)₂ →(t°) CH₃–COOH + Cu₂O↓ (кирпично-красный осадок) + H₂O\nВ) HC≡C–CH₃ + [Ag(NH₃)₂]OH → AgC≡C–CH₃↓ (белый осадок) + NH₃ + H₂O\nГ) HCOOH + Na₂CO₃ → HCOONa + CO₂↑ (газ) + H₂O'},
+    {q:'А) этанол и натрий\nБ) муравьиная кислота и [Ag(NH₃)₂]OH\nВ) этин и [Ag(NH₃)₂]OH\nГ) бензальдегид и Cu(OH)₂ (при нагревании)|1) выпадение белого осадка\n2) образование кирпично-красного осадка\n3) выпадение осадка серебра\n4) выделение газа\n5) образование ярко-синего раствора',a:'4312',s:'А) 2C₂H₅OH + 2Na → 2C₂H₅ONa + H₂↑ (выделение газа)\\nБ) HCOOH + [Ag(NH₃)₂]OH → CO₂↑ + Ag↓ + NH₃ + H₂O (серебряное зеркало)\\nВ) HC≡CH + [Ag(NH₃)₂]OH → AgC≡CAg↓ (белый осадок ацетиленида серебра) + NH₄OH\\nГ) C₆H₅CHO + Cu(OH)₂ →(t°) C₆H₅COOH + Cu₂O↓ + H₂O (кирпично-красный осадок)'},
+    {q:'А) фенол (р-р) и гексан\nБ) пропанол-2 и пропаналь\nВ) пропаналь и муравьиная кислота\nГ) муравьиная кислота и пропановая кислота|1) FeCl₃\n2) CH₃COOK\n3) KHCO₃\n4) NaOH\n5) [Ag(NH₃)₂]OH',a:'1535',s:'А) C₆H₅–OH + FeCl₃ → фиолетовое; CH₃–CH₂–CH₂–CH₂–CH₂–CH₃ + FeCl₃ → не реагируют\nБ) CH₃–CH(OH)–CH₃ + [Ag(NH₃)₂]OH → не реагируют; CH₃–CH₂–CHO + [Ag(NH₃)₂]OH →(t°) CH₃–CH₂–COONH₄ + Ag↓ (серебряный налёт) + NH₃ + H₂O\nВ) CH₃–CH₂–CHO + KHCO₃ → не реагируют; HCOOH + KHCO₃ → HCOOK + CO₂↑ (газ) + H₂O\nГ) HCOOH + [Ag(NH₃)₂]OH →(t°) (NH₄)₂CO₃ + Ag↓ (серебряный налёт) + NH₃ + H₂O; CH₃–CH₂–COOH + [Ag(NH₃)₂]OH → не реагируют'},
+    {q:'А) этановая кислота и магний\nБ) пропанол-1 и натрий\nВ) гидроксид алюминия и азотная кислота\nГ) бромная вода и этилен|1) видимые признаки реакции отсутствуют\n2) растворение осадка\n3) образование осадка\n4) выделение газа и растворение твёрдого вещества\n5) изменение цвета раствора',a:'4425',s:'А) 2CH₃COOH + Mg → (CH₃COO)₂Mg + H₂↑ (выделение газа)\\nБ) 2CH₃CH₂CH₂OH + 2Na → 2CH₃CH₂CH₂ONa + H₂↑ (выделение газа)\\nВ) Al(OH)₃ + 3HNO₃ → Al(NO₃)₃ + 3H₂O (растворение осадка)\\nГ) Br₂(водн.) + CH₂=CH₂ → CH₂BrCH₂Br (обесцвечивание)'},
+    {q:'А) бутадиен-1,3 и Br₂ (водн.)\nБ) пропаналь и Cu(OH)₂ (t°)\nВ) пентен-2 и KMnO₄ (H⁺)\nГ) этановая кислота и калий|1) обесцвечивание раствора\n2) появление синей окраски\n3) образование белого осадка\n4) выделение газа\n5) образование кирпично-красного осадка',a:'1514',s:'А) CH₂=CH–CH=CH₂ + Br₂(водн.) → Br–CH₂–CH=CH–CH₂–Br (обесцвечивание раствора)\nБ) CH₃–CH₂–CHO + Cu(OH)₂ →(t°) CH₃–CH₂–COOH + Cu₂O↓ (кирпично-красный осадок) + H₂O\nВ) CH₃–CH=CH–CH₂–CH₃ + KMnO₄ + H₂SO₄ → CH₃–COOH + CH₃–CH₂–COOH + MnSO₄ + H₂O (обесцвечивание раствора)\nГ) CH₃–COOH + K → CH₃–COOK + H₂↑ (растворение металла, газ)'},
+    {q:'А) этиленгликоль и натрий\nБ) бензальдегид и Cu(OH)₂ (t°)\nВ) бутин-1 и [Ag(NH₃)₂]OH\nГ) этиленгликоль и Cu(OH)₂|1) появление фиолетового окрашивания\n2) образование ярко-синего раствора\n3) образование белого осадка\n4) выделение газа\n5) образование кирпично-красного осадка',a:'4532',s:'А) 2HOCH₂CH₂OH + 2Na → 2NaOCH₂CH₂OH + H₂↑ (выделение газа)\\nБ) C₆H₅CHO + Cu(OH)₂ →(t°) C₆H₅COOH + Cu₂O↓ + H₂O (кирпично-красный осадок)\\nВ) C₄H₆ + [Ag(NH₃)₂]OH → C₄H₅Ag↓ + NH₄OH + NH₃ (осадок, если терминальная ≡)\\nГ) HOCH₂CH₂OH + Cu(OH)₂ → ярко-синий раствор (комплекс)'},
+    {q:'А) уксусная кислота и Zn\nБ) хлорид метиламмония и AgNO₃ (р-р)\nВ) пропановая кислота (р-р) и KOH (р-р)\nГ) бутандиол-1,2 и Cu(OH)₂|1) растворение жёлтого осадка\n2) выделение бесцветного газа\n3) образование белого осадка\n4) видимые признаки реакции отсутствуют\n5) образование синей окраски',a:'2345',s:'А) CH₃–COOH + Zn → (CH₃–COO)₂Zn + H₂↑ (бесцветный газ)\nБ) [CH₃–NH₃]Cl + AgNO₃ → AgCl↓ (белый осадок) + [CH₃–NH₃]NO₃\nВ) CH₃–CH₂–COOH + KOH → CH₃–CH₂–COOK + H₂O (без видимых признаков)\nГ) HO–CH₂–CH(OH)–CH₂–CH₃ + Cu(OH)₂ → ярко-синее окрашивание, растворение осадка (синяя окраска)'},
+    {q:'А) этиленгликоль и Cu(OH)₂\nБ) пентен-2 и KMnO₄ (H⁺)\nВ) этаналь и Cu(OH)₂ (t°)\nГ) пропен и Br₂ (водн.)|1) обесцвечивание раствора\n2) растворение осадка с образованием синего раствора\n3) образование белого осадка\n4) выделение газа\n5) образование кирпично-красного осадка',a:'2151',s:'А) HO–CH₂–CH₂–OH + Cu(OH)₂ → ярко-синее окрашивание, растворение осадка\nБ) CH₃–CH=CH–CH₂–CH₃ + KMnO₄ + H₂SO₄ → CH₃–COOH + CH₃–CH₂–COOH + MnSO₄ + H₂O (обесцвечивание)\nВ) CH₃–CHO + Cu(OH)₂ →(t°) CH₃–COOH + Cu₂O↓ (кирпично-красный осадок) + H₂O\nГ) CH₂=CH–CH₃ + Br₂(водн.) → Br–CH₂–CH(Br)–CH₃ (обесцвечивание раствора)'},
+    {q:'А) бутандиол-1,2 и Cu(OH)₂\nБ) пропановая кислота и NaOH\nВ) ацетилен и Br₂ (р-р)\nГ) муравьиная кислота и KOH|1) растворение красного осадка с образованием бесцветного раствора\n2) выделение бесцветного газа\n3) обесцвечивание раствора\n4) видимые признаки реакции отсутствуют\n5) растворение осадка с образованием синего раствора',a:'5434',s:'А) HO–CH₂–CH(OH)–CH₂–CH₃ + Cu(OH)₂ → ярко-синее окрашивание, растворение осадка\nБ) CH₃–CH₂–COOH + NaOH → CH₃–CH₂–COONa + H₂O (без видимых признаков)\nВ) HC≡CH + Br₂(водн.) → Br–CH(Br)–CHBr₂ (обесцвечивание раствора)\nГ) HCOOH + KOH → HCOOK + H₂O (без видимых признаков)'},
+    {q:'А) фенол и FeCl₃ (р-р)\nБ) бутен-1 и Br₂ (водн.)\nВ) бутандиол-1,2 и Na\nГ) CH₃COOH и NaHCO₃|1) обесцвечивание раствора\n2) образование голубого раствора\n3) появление фиолетовой окраски\n4) выделение газа\n5) образование кирпично-красного осадка',a:'3144',s:'А) C₆H₅–OH + FeCl₃ → фиолетовое окрашивание\nБ) CH₂=CH–CH₂–CH₃ + Br₂(водн.) → Br–CH₂–CH(Br)–CH₂–CH₃ (обесцвечивание раствора)\nВ) HO–CH₂–CH(OH)–CH₂–CH₃ + Na → NaO–CH₂–CH(ONa)–CH₂–CH₃ + H₂↑ (газ)\nГ) CH₃–COOH + NaHCO₃ → CH₃–COONa + CO₂↑ (газ) + H₂O'},
+    {q:'А) бутандиол-2,3 и Cu(OH)₂\nБ) C₆H₅OH и FeCl₃ (р-р)\nВ) CH₃COOH и Mg\nГ) CH₃CH=CHCH₃ и Br₂ (водн.)|1) появление фиолетовой окраски\n2) обесцвечивание раствора\n3) образование синего раствора\n4) выделение газа\n5) образование кирпично-красного осадка',a:'3142',s:'А) CH₃–CH(OH)–CH(OH)–CH₃ + Cu(OH)₂ → ярко-синее окрашивание\nБ) C₆H₅–OH + FeCl₃ → фиолетовое окрашивание\nВ) CH₃–COOH + Mg → (CH₃–COO)₂Mg + H₂↑ (газ)\nГ) CH₃–CH=CH–CH₃ + Br₂(водн.) → CH₃–CH(Br)–CH(Br)–CH₃ (обесцвечивание раствора)'},
+    {q:'А) CH₂(OH)–CH(OH)–CH₂(OH) и Cu(OH)₂\nБ) CH₃CH=CHCH₃ и KMnO₄ (H⁺)\nВ) CH₃CHO и Cu(OH)₂ (t°)\nГ) CH₂=CHCOOH и Br₂ (водн.)|1) образование белого осадка\n2) обесцвечивание раствора\n3) растворение осадка с образованием синего раствора\n4) выделение газа\n5) образование кирпично-красного осадка',a:'3252',s:'А) глицерин + Cu(OH)₂ → ярко-синий раствор глицерата меди (комплекс)\nБ) CH₃CH=CHCH₃ + KMnO₄(H⁺) → 2CH₃COOH + MnSO₄ + H₂O (обесцвечивание KMnO₄)\nВ) CH₃CHO + Cu(OH)₂ →(t°) CH₃COOH + Cu₂O↓ + H₂O (кирпично-красный осадок)\nГ) CH₂=CHCOOH + Br₂(водн.) → Br–CH₂–CHBr–COOH (обесцвечивание раствора)'},
+    {q:'А) FeCl₃ и фенол\nБ) KOH (р-р) и фенол\nВ) бромная вода и ацетилен\nГ) бромная вода и циклопропан|1) видимые признаки реакции отсутствуют\n2) появление фиолетовой окраски\n3) обесцвечивание раствора\n4) образование белого осадка\n5) образование бурого осадка',a:'2133',s:'А) FeCl₃ + C₆H₅–OH → фиолетовое окрашивание\nБ) KOH(р-р) + C₆H₅–OH → C₆H₅–OK + H₂O (без видимых признаков)\nВ) HC≡CH + Br₂(водн.) → Br–CH(Br)–CHBr₂ (обесцвечивание раствора)\nГ) C₃H₆ + Br₂(водн.) → Br–CH₂–CH₂–CH₂–Br (обесцвечивание раствора)'},
+    {q:'А) Br₂ (водн.) и этилен\nБ) KMnO₄ (H⁺) и пропен\nВ) KOH и уксусная кислота\nГ) CaC₂ и H₂O|1) выделение газа\n2) только обесцвечивание раствора\n3) обесцвечивание раствора\n4) растворение осадка\n5) видимые признаки реакции отсутствуют',a:'2351',s:'А) Br₂(водн.) + CH₂=CH₂ → Br–CH₂–CH₂–Br (обесцвечивание раствора)\nБ) CH₂=CH–CH₃ + KMnO₄ + H₂SO₄ → CH₃–COOH + CO₂ + MnSO₄ + H₂O (обесцвечивание)\nВ) KOH + CH₃–COOH → CH₃–COOK + H₂O (без видимых признаков)\nГ) CaC₂ + H₂O → Ca(OH)₂ + HC≡CH↑ (газ)'},
+    {q:'А) стеарат натрия и CaCl₂ (р-р)\nБ) этаналь и KMnO₄ (H⁺)\nВ) бутен-2 и Br₂ (р-р)\nГ) муравьиная кислота и NaOH|1) выделение бесцветного газа\n2) обесцвечивание раствора\n3) образование белого осадка\n4) растворение осадка\n5) видимые признаки реакции отсутствуют',a:'3225',s:'А) C₁₇H₃₅COONa + CaCl₂ → (C₁₇H₃₅COO)₂Ca↓ (белый осадок) + NaCl\nБ) CH₃–CHO + KMnO₄ + H₂SO₄ → CH₃–COOH + MnSO₄ + H₂O (обесцвечивание раствора)\nВ) CH₃–CH=CH–CH₃ + Br₂(водн.) → CH₃–CH(Br)–CH(Br)–CH₃ (обесцвечивание раствора)\nГ) HCOOH + NaOH → HCOONa + H₂O (без видимых признаков)'},
+    {q:'А) толуол и KMnO₄ (H⁺)\nБ) CH₃COOH и K₂CO₃\nВ) бутаналь и Cu(OH)₂ (t°)\nГ) фенол и бромная вода|1) образование синего осадка\n2) обесцвечивание раствора\n3) выделение газа\n4) образование кирпично-красного осадка\n5) образование белого осадка и обесцвечивание раствора',a:'2345',s:'А) C₆H₅CH₃ + KMnO₄(H⁺) → C₆H₅COOH + MnSO₄ + H₂O (обесцвечивание KMnO₄)\nБ) CH₃COOH + K₂CO₃ → 2CH₃COOK + CO₂↑ + H₂O (выделение газа)\nВ) CH₃CH₂CH₂CHO + Cu(OH)₂ →(t°) CH₃CH₂CH₂COOH + Cu₂O↓ + H₂O (кирпично-красный осадок)\nГ) C₆H₅OH + 3Br₂(водн.) → C₆H₂Br₃OH↓ (белый осадок) + 3HBr (обесцвечивание + осадок)'},
+    {q:'А) муравьиная кислота и калий\nБ) этиленгликоль и гидроксид меди(II)\nВ) пентен-2 и KMnO₄ (H⁺)\nГ) крахмал (р-р) и I₂ (спирт.)|1) появление синей окраски раствора\n2) обесцвечивание раствора\n3) выделение газа\n4) образование кирпично-красного осадка\n5) образование белого осадка',a:'3121',s:'А) HCOOH + K → HCOOK + H₂↑ (газ)\nБ) HO–CH₂–CH₂–OH + Cu(OH)₂ → ярко-синее окрашивание\nВ) CH₃–CH=CH–CH₂–CH₃ + KMnO₄ + H₂SO₄ → CH₃–COOH + CH₃–CH₂–COOH + MnSO₄ + H₂O (обесцвечивание)\nГ) крахмал + I₂(спирт.) → синее окрашивание'},
+    {q:'А) пропин и бутадиен-1,3\nБ) пропан и пропадиен\nВ) фенол и этандиол\nГ) уксусная кислота и пропанол-2|1) бромная вода\n2) AlCl₃\n3) фенолфталеин\n4) [Ag(NH₃)₂]OH\n5) лакмус',a:'4115',s:'А) пропин: HC≡C–CH₃ + [Ag(NH₃)₂]OH → AgC≡C–CH₃↓ (осадок), реагирует с бромной водой;\\n   бутадиен-1,3: реагирует с бромной водой, с [Ag(NH₃)₂]OH не реагирует\\nБ) пропан: CH₃CH₂CH₃ — не реагирует ни с одним из реагентов (1–5) в обычных условиях;\\n   пропадиен: CH₂=C=CH₂ — реагирует с бромной водой\\nВ) фенол: реагирует с AlCl₃ (кислотные св-ва), с фенолфталеином не окрашивает;\\n   этандиол: не реагирует с AlCl₃\\nГ) уксусная кислота: CH₃COOH — реагирует с лакмусом (красный), с фенолфталеином — бесцветный;\\n   пропанол-2: (CH₃)₂CHOH — не реагирует с лакмусом'}
+  ];
+  const el=document.getElementById('tr-wrap-b3');
+  if(!el)return;
+  function norm(s){return s.trim().replace(/[^0-9]/g,'');}
+  function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+  function $(s){return el.querySelector(s);}
+  let queue,answered,wrongIds,wrongAtPos,cur;
+  const _SK='linia24_st_b3';
+  const _6D=6*24*3600*1000;
+  function _saveState(){try{localStorage.setItem(_SK,JSON.stringify({ts:Date.now(),q:queue,an:[...answered],wi:[...wrongIds],wp:[...wrongAtPos],cur:cur}))}catch(e){}}
+  function _clearState(){try{localStorage.removeItem(_SK)}catch(e){}}
+  function _loadState(){try{const raw=localStorage.getItem(_SK);if(!raw)return false;const s=JSON.parse(raw);if(Date.now()-s.ts>_6D){localStorage.removeItem(_SK);return false;}queue=s.q;answered=new Set(s.an);wrongIds=new Set(s.wi);wrongAtPos=new Set(s.wp);cur=s.cur;return true;}catch(e){return false;}}
+  function init(){if(!_loadState()){queue=shuffle(RAW.map((_,i)=>i));answered=new Set();wrongIds=new Set();wrongAtPos=new Set();cur=0;}showCard();render();}
+  function showCard(){$('.tr-card').style.display='';$('.tr-result').style.display='none';}
+  function render(){
+    if(cur>=queue.length){showResult();return;}
+    const t=RAW[queue[cur]];
+    const parts=t.q.split('|');
+    const left=parts[0].split('\n');
+    const right=parts[1]?parts[1].split('\n'):[];
+    const leftTitle=left.some(s=>/^[А-Г]\)/.test(s))?'Вещества':'Вещества';
+    const rightTitle=right.some(s=>/^[1-5]\)/.test(s.trim())&&s.includes('FeCl'))? 'Реактив':'Признак реакции';
+    let html='<div class="match-grid"><div class="match-col"><div class="match-col-title">Вещества</div>';
+    left.forEach(s=>{html+='<div class="match-row">'+s+'</div>';});
+    html+='</div><div class="match-col"><div class="match-col-title">Признак / Реактив</div>';
+    right.forEach(s=>{html+='<div class="match-row">'+s+'</div>';});
+    html+='</div></div><div style="font-size:13px;color:var(--ink3);margin-bottom:8px">Введи ответ для А, Б, В, Г — 4 цифры:</div>';
+    $('.tr-q').innerHTML=html;
+    $('.tr-input').value='';$('.tr-feedback').textContent='';$('.tr-feedback').className='tr-feedback';
+    $('.tr-next-btn').style.display='none';$('.tr-check-btn').style.display='';$('.tr-input').focus();const _sd=$('.tr-solution');if(_sd){_sd.hidden=true;_sd.innerHTML='';}prog();
+  }
+  function check(){
+    const raw=$('.tr-input').value;if(!raw.trim())return;
+    const t=RAW[queue[cur]];
+    if(norm(raw)===norm(t.a)){
+      answered.add(queue[cur]);
+      wrongIds.delete(queue[cur]);
+      wrongAtPos.delete(cur);
+      $('.tr-feedback').textContent='✓ Верно!';$('.tr-feedback').className='tr-feedback ok';
+      $('.tr-check-btn').style.display='none';$('.tr-next-btn').style.display='';
+      if(t.s){const _sd=$('.tr-solution');_sd.hidden=false;_sd.innerHTML='<div class="tr-solution-hd">Решение</div>'+t.s.split('\n').map(r=>'<div>'+r+'</div>').join('');}
+    }else{
+      if(!wrongAtPos.has(cur))queue.push(queue[cur]);
+      wrongAtPos.add(cur);wrongIds.add(queue[cur]);
+      $('.tr-feedback').textContent='✗ Неверно — попробуй ещё';$('.tr-feedback').className='tr-feedback err';
+    }
+    prog();_saveState();
+  }
+  function next(){cur++;_saveState();render();}
+  function showResult(){
+    $('.tr-card').style.display='none';$('.tr-result').style.display='';
+    $('.tr-score').textContent=`${RAW.length}/${RAW.length}`;$('.tr-retry-btn').style.display='none';
+    $('.tr-done').style.display=wrongIds.size===0?'':'none';
+    if(window.blockDone)window.blockDone(el.id);
+  }
+  function reset(){_clearState();showCard();queue=shuffle(RAW.map((_,i)=>i));answered=new Set();wrongIds=new Set();wrongAtPos=new Set();cur=0;render();}
+  function prog(){const p=Math.round(answered.size/RAW.length*100);$('.tr-prog-text').textContent=`${answered.size}/${RAW.length}`;$('.tr-prog-bar-fill').style.width=p+'%';}
+  $('.tr-check-btn').addEventListener('click',check);
+  $('.tr-next-btn').addEventListener('click',next);
+  $('.tr-retry-btn').addEventListener('click',()=>{});
+  $('.tr-reset-btn').addEventListener('click',reset);
+  $('.tr-input').addEventListener('keydown',e=>{if(e.key==='Enter'){if($('.tr-next-btn').style.display!=='none')next();else check();}});
+  init();
+})();
+</script>
+
+<script>
+if('scrollRestoration' in history)history.scrollRestoration='manual';
+window.scrollTo({top:0,behavior:'instant'});
+
+function toggleTopbar(e){if(e)e.stopPropagation();document.getElementById('topbar').classList.toggle('collapsed');}
+function openMenu(){document.getElementById('menu-overlay').classList.add('open');document.getElementById('menu-panel').classList.add('open');}
+function closeMenu(){document.getElementById('menu-overlay').classList.remove('open');document.getElementById('menu-panel').classList.remove('open');}
+
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  const pct=h>0?window.scrollY/h*100:0;
+  document.getElementById('pf').style.width=pct+'%';
+  document.getElementById('tb-pf').style.width=pct+'%';
+  document.getElementById('tb-lbl').textContent=Math.round(pct)+'%';
+});
+
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')});},{threshold:0.07});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+// История 6 дней
+const _HIST_KEY='linia24_history';
+function _getHist(){try{return JSON.parse(localStorage.getItem(_HIST_KEY))||[];}catch(e){return[];}}
+function _saveHist(h){try{localStorage.setItem(_HIST_KEY,JSON.stringify(h));}catch(e){}}
+function _todayStr(){return new Date().toISOString().slice(0,10);}
+
+function updateStreak(){
+  const h=_getHist();
+  const c=document.getElementById('tb-streak');
+  if(!c)return;
+  c.innerHTML='';
+  for(let i=5;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const ds=d.toISOString().slice(0,10);
+    const entry=h.find(x=>x.d===ds);
+    const n=entry?entry.b.length:0;
+    const dot=document.createElement('div');
+    dot.className='tb-day'+(n>=3?' done':n>0?' part':'')+(i===0?' today':'');
+    dot.title=d.toLocaleDateString('ru',{day:'numeric',month:'short'})+': '+(n>=3?'все 3 блока ✓':n>0?n+'/3 блоков':'нет данных');
+    c.appendChild(dot);
+  }
+}
+
+function clearHistory(){
+  if(!confirm('Очистить весь прогресс и историю? Все блоки начнутся заново.'))return;
+  try{
+    localStorage.removeItem(_HIST_KEY);
+    localStorage.removeItem('linia24_st_b1');
+    localStorage.removeItem('linia24_st_b2');
+    localStorage.removeItem('linia24_st_b3');
+  }catch(e){}
+  location.reload();
+}
+updateStreak();
+
+// Глобальное поздравление
+const _done=new Set();
+window.blockDone=function(id){
+  _done.add(id);
+  const today=_todayStr();
+  const h=_getHist();
+  let entry=h.find(x=>x.d===today);
+  if(!entry){entry={d:today,b:[]};h.push(entry);}
+  if(!entry.b.includes(id))entry.b.push(id);
+  const cutoff=new Date();cutoff.setDate(cutoff.getDate()-6);
+  _saveHist(h.filter(x=>x.d>=cutoff.toISOString().slice(0,10)));
+  updateStreak();
+  if(_done.size===3){
+    setTimeout(()=>{document.getElementById('congrats-overlay').style.display='flex';},400);
+  }
+};
+
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('congrats-close').addEventListener('click',()=>{
+    document.getElementById('congrats-overlay').style.display='none';
+  });
+});
+
+document.addEventListener('keydown',e=>{
+  const k=e.key.toLowerCase();
+  const ps=document.getElementById('ps-overlay');
+  const rs=document.getElementById('rs-overlay');
+  if(e.key==='Escape'){
+    if(ps.style.display==='flex')togglePS();
+    if(rs.style.display==='flex')toggleRS();
+    return;
+  }
+  if(document.activeElement&&['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;
+  if(k==='t')togglePS();
+  if(k==='r')toggleRS();
+});
+</script>
+
+<div id="congrats-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(6,14,43,.82);align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:20px;padding:40px 32px;max-width:380px;width:100%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.3)">
+    <div style="font-size:56px;margin-bottom:8px">🎉</div>
+    <div style="font-size:22px;font-weight:900;color:var(--h1);margin-bottom:8px">Все блоки пройдены!</div>
+    <div style="font-size:15px;color:var(--ink2);line-height:1.6;margin-bottom:24px">Ты отработал все задания по качественным реакциям.<br>Линия 24 ЕГЭ — готова!</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;border-radius:10px;padding:14px;font-size:15px;font-weight:700">100% заданий выполнено ✓</div>
+      <button id="congrats-close" style="background:var(--line);color:var(--ink2);border:none;border-radius:10px;padding:12px;font-size:14px;cursor:pointer;font-weight:600">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="ps-overlay" onclick="if(event.target===this)togglePS()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:16px;padding:20px 24px;max-width:98vw;max-height:92vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div style="font-size:16px;font-weight:800;color:#D97706">⚛️ Периодическая система Д.И. Менделеева</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span style="font-size:11px;color:#999;font-family:monospace">T или Esc — закрыть</span>
+        <button onclick="togglePS()" style="background:#f0f0f0;border:none;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:14px;font-weight:700">✕</button>
+      </div>
+    </div>
+    <div class="pt-legend6" style="margin-bottom:10px">
+      <span class="pt-leg-item6" style="background:#8B7ED8;color:#2D1B69">s-элементы</span>
+      <span class="pt-leg-item6" style="background:#6EC9A4;color:#064C30">p-элементы</span>
+      <span class="pt-leg-item6" style="background:#7EC4F0;color:#0A2860">d-элементы</span>
+      <span class="pt-leg-item6" style="background:#F0C840;color:#5A2E04">f-элементы</span>
+    </div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table class="pt-ru">
+    <thead><tr><th rowspan="2" class="pt-corner">Пе&shy;ри&shy;од</th><th colspan="7">Группы</th><th colspan="3">VIII</th><th rowspan="2" class="pt-noble-hdr">0</th></tr>
+    <tr><th>I</th><th>II</th><th>III</th><th>IV</th><th>V</th><th>VI</th><th>VII</th><th class="pt-viii">A</th><th class="pt-viii">B</th><th class="pt-viii">C</th></tr></thead>
+    <tbody>
+    <tr><td class="pt-period">1</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">1</span><span class="el-mass">1,008</span><span class="el-sym">H</span><span class="el-name">Водород</span></td><td colspan="5" class="el-blank6"></td><td class="el6" style="background:#f1f5f9;color:#6b7280;font-style:italic"><span class="el-sym" style="font-size:13px">(H)</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">2</span><span class="el-mass">4,00</span><span class="el-sym">He</span><span class="el-name">Гелий</span></td></tr>
+    <tr><td class="pt-period">2</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">3</span><span class="el-mass">6,94</span><span class="el-sym">Li</span><span class="el-name">Литий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">4</span><span class="el-mass">9,01</span><span class="el-sym">Be</span><span class="el-name">Бериллий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">5</span><span class="el-mass">10,81</span><span class="el-sym">B</span><span class="el-name">Бор</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">6</span><span class="el-mass">12,01</span><span class="el-sym">C</span><span class="el-name">Углерод</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">7</span><span class="el-mass">14,00</span><span class="el-sym">N</span><span class="el-name">Азот</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">8</span><span class="el-mass">16,00</span><span class="el-sym">O</span><span class="el-name">Кислород</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">9</span><span class="el-mass">19,00</span><span class="el-sym">F</span><span class="el-name">Фтор</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">10</span><span class="el-mass">20,18</span><span class="el-sym">Ne</span><span class="el-name">Неон</span></td></tr>
+    <tr><td class="pt-period">3</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">11</span><span class="el-mass">22,99</span><span class="el-sym">Na</span><span class="el-name">Натрий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">12</span><span class="el-mass">24,31</span><span class="el-sym">Mg</span><span class="el-name">Магний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">13</span><span class="el-mass">26,98</span><span class="el-sym">Al</span><span class="el-name">Алюминий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">14</span><span class="el-mass">28,09</span><span class="el-sym">Si</span><span class="el-name">Кремний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">15</span><span class="el-mass">30,97</span><span class="el-sym">P</span><span class="el-name">Фосфор</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">16</span><span class="el-mass">32,06</span><span class="el-sym">S</span><span class="el-name">Сера</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">17</span><span class="el-mass">35,45</span><span class="el-sym">Cl</span><span class="el-name">Хлор</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">18</span><span class="el-mass">39,95</span><span class="el-sym">Ar</span><span class="el-name">Аргон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">4</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">19</span><span class="el-mass">39,10</span><span class="el-sym">K</span><span class="el-name">Калий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">20</span><span class="el-mass">40,08</span><span class="el-sym">Ca</span><span class="el-name">Кальций</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">21</span><span class="el-mass">44,96</span><span class="el-sym">Sc</span><span class="el-name">Скандий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">22</span><span class="el-mass">47,90</span><span class="el-sym">Ti</span><span class="el-name">Титан</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">23</span><span class="el-mass">50,94</span><span class="el-sym">V</span><span class="el-name">Ванадий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">24</span><span class="el-mass">52,00</span><span class="el-sym">Cr</span><span class="el-name">Хром</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">25</span><span class="el-mass">54,94</span><span class="el-sym">Mn</span><span class="el-name">Марганец</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">26</span><span class="el-mass">55,85</span><span class="el-sym">Fe</span><span class="el-name">Железо</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">27</span><span class="el-mass">58,93</span><span class="el-sym">Co</span><span class="el-name">Кобальт</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">28</span><span class="el-mass">58,69</span><span class="el-sym">Ni</span><span class="el-name">Никель</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">29</span><span class="el-mass">63,55</span><span class="el-sym">Cu</span><span class="el-name">Медь</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">30</span><span class="el-mass">65,39</span><span class="el-sym">Zn</span><span class="el-name">Цинк</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">31</span><span class="el-mass">69,72</span><span class="el-sym">Ga</span><span class="el-name">Галлий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">32</span><span class="el-mass">72,59</span><span class="el-sym">Ge</span><span class="el-name">Германий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">33</span><span class="el-mass">74,92</span><span class="el-sym">As</span><span class="el-name">Мышьяк</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">34</span><span class="el-mass">78,96</span><span class="el-sym">Se</span><span class="el-name">Селен</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">35</span><span class="el-mass">79,90</span><span class="el-sym">Br</span><span class="el-name">Бром</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">36</span><span class="el-mass">83,80</span><span class="el-sym">Kr</span><span class="el-name">Криптон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">5</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">37</span><span class="el-mass">85,47</span><span class="el-sym">Rb</span><span class="el-name">Рубидий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">38</span><span class="el-mass">87,62</span><span class="el-sym">Sr</span><span class="el-name">Стронций</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">39</span><span class="el-mass">88,91</span><span class="el-sym">Y</span><span class="el-name">Иттрий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">40</span><span class="el-mass">91,22</span><span class="el-sym">Zr</span><span class="el-name">Цирконий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">41</span><span class="el-mass">92,91</span><span class="el-sym">Nb</span><span class="el-name">Ниобий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">42</span><span class="el-mass">95,94</span><span class="el-sym">Mo</span><span class="el-name">Молибден</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">43</span><span class="el-mass">98,91</span><span class="el-sym">Tc</span><span class="el-name">Технеций</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">44</span><span class="el-mass">101,07</span><span class="el-sym">Ru</span><span class="el-name">Рутений</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">45</span><span class="el-mass">102,91</span><span class="el-sym">Rh</span><span class="el-name">Родий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">46</span><span class="el-mass">106,42</span><span class="el-sym">Pd</span><span class="el-name">Палладий</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">47</span><span class="el-mass">107,87</span><span class="el-sym">Ag</span><span class="el-name">Серебро</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">48</span><span class="el-mass">112,41</span><span class="el-sym">Cd</span><span class="el-name">Кадмий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">49</span><span class="el-mass">114,82</span><span class="el-sym">In</span><span class="el-name">Индий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">50</span><span class="el-mass">118,69</span><span class="el-sym">Sn</span><span class="el-name">Олово</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">51</span><span class="el-mass">121,75</span><span class="el-sym">Sb</span><span class="el-name">Сурьма</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">52</span><span class="el-mass">127,60</span><span class="el-sym">Te</span><span class="el-name">Теллур</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">53</span><span class="el-mass">126,90</span><span class="el-sym">I</span><span class="el-name">Иод</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">54</span><span class="el-mass">131,29</span><span class="el-sym">Xe</span><span class="el-name">Ксенон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">6</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">55</span><span class="el-mass">132,91</span><span class="el-sym">Cs</span><span class="el-name">Цезий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">56</span><span class="el-mass">137,33</span><span class="el-sym">Ba</span><span class="el-name">Барий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04;opacity:.85"><span class="el-num">57</span><span class="el-mass">138,91</span><span class="el-sym">La</span><span class="el-name">Лантан*</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">72</span><span class="el-mass">178,49</span><span class="el-sym">Hf</span><span class="el-name">Гафний</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">73</span><span class="el-mass">180,95</span><span class="el-sym">Ta</span><span class="el-name">Тантал</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">74</span><span class="el-mass">183,85</span><span class="el-sym">W</span><span class="el-name">Вольфрам</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">75</span><span class="el-mass">186,21</span><span class="el-sym">Re</span><span class="el-name">Рений</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">76</span><span class="el-mass">190,2</span><span class="el-sym">Os</span><span class="el-name">Осмий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">77</span><span class="el-mass">192,22</span><span class="el-sym">Ir</span><span class="el-name">Иридий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">78</span><span class="el-mass">195,08</span><span class="el-sym">Pt</span><span class="el-name">Платина</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">79</span><span class="el-mass">196,97</span><span class="el-sym">Au</span><span class="el-name">Золото</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">80</span><span class="el-mass">200,59</span><span class="el-sym">Hg</span><span class="el-name">Ртуть</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">81</span><span class="el-mass">204,38</span><span class="el-sym">Tl</span><span class="el-name">Таллий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">82</span><span class="el-mass">207,2</span><span class="el-sym">Pb</span><span class="el-name">Свинец</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">83</span><span class="el-mass">208,98</span><span class="el-sym">Bi</span><span class="el-name">Висмут</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">84</span><span class="el-mass">[209]</span><span class="el-sym">Po</span><span class="el-name">Полоний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">85</span><span class="el-mass">[210]</span><span class="el-sym">At</span><span class="el-name">Астат</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">86</span><span class="el-mass">[222]</span><span class="el-sym">Rn</span><span class="el-name">Радон</span></td></tr>
+    </tbody></table>
+    <div style="margin-top:4px;overflow-x:auto"><table class="pt-ru" style="margin-left:0"><tbody>
+    <tr><td class="pt-f-label">*Лантаноиды<br>Период 6</td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">58</span><span class="el-mass">140,12</span><span class="el-sym">Ce</span><span class="el-name">Церий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">59</span><span class="el-mass">140,91</span><span class="el-sym">Pr</span><span class="el-name">Празеодим</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">60</span><span class="el-mass">144,24</span><span class="el-sym">Nd</span><span class="el-name">Неодим</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">61</span><span class="el-mass">[145]</span><span class="el-sym">Pm</span><span class="el-name">Прометий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">62</span><span class="el-mass">150,36</span><span class="el-sym">Sm</span><span class="el-name">Самарий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">63</span><span class="el-mass">151,97</span><span class="el-sym">Eu</span><span class="el-name">Европий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">64</span><span class="el-mass">157,25</span><span class="el-sym">Gd</span><span class="el-name">Гадолиний</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">65</span><span class="el-mass">158,93</span><span class="el-sym">Tb</span><span class="el-name">Тербий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">66</span><span class="el-mass">162,50</span><span class="el-sym">Dy</span><span class="el-name">Диспрозий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">67</span><span class="el-mass">164,93</span><span class="el-sym">Ho</span><span class="el-name">Гольмий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">68</span><span class="el-mass">167,26</span><span class="el-sym">Er</span><span class="el-name">Эрбий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">69</span><span class="el-mass">168,93</span><span class="el-sym">Tm</span><span class="el-name">Тулий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">70</span><span class="el-mass">173,04</span><span class="el-sym">Yb</span><span class="el-name">Иттербий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">71</span><span class="el-mass">174,97</span><span class="el-sym">Lu</span><span class="el-name">Лютеций</span></td></tr>
+    <tr><td class="pt-f-label">**Актиноиды<br>Период 7</td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">90</span><span class="el-mass">232,04</span><span class="el-sym">Th</span><span class="el-name">Торий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">91</span><span class="el-mass">231,04</span><span class="el-sym">Pa</span><span class="el-name">Протакт.</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">92</span><span class="el-mass">238,03</span><span class="el-sym">U</span><span class="el-name">Уран</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">93</span><span class="el-mass">[237]</span><span class="el-sym">Np</span><span class="el-name">Нептуний</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">94</span><span class="el-mass">[244]</span><span class="el-sym">Pu</span><span class="el-name">Плутоний</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">95</span><span class="el-mass">[243]</span><span class="el-sym">Am</span><span class="el-name">Америций</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">96</span><span class="el-mass">[247]</span><span class="el-sym">Cm</span><span class="el-name">Кюрий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">97</span><span class="el-mass">[247]</span><span class="el-sym">Bk</span><span class="el-name">Берклий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">98</span><span class="el-mass">[251]</span><span class="el-sym">Cf</span><span class="el-name">Калиф.</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">99</span><span class="el-mass">[252]</span><span class="el-sym">Es</span><span class="el-name">Эйнштейн.</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">100</span><span class="el-mass">[257]</span><span class="el-sym">Fm</span><span class="el-name">Фермий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">101</span><span class="el-mass">[258]</span><span class="el-sym">Md</span><span class="el-name">Менделевий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">102</span><span class="el-mass">[259]</span><span class="el-sym">No</span><span class="el-name">Нобелий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">103</span><span class="el-mass">[262]</span><span class="el-sym">Lr</span><span class="el-name">Лоуренсий</span></td></tr>
+    </tbody></table></div></div>
+  </div>
+</div>
+
+<!-- SOLUBILITY TABLE OVERLAY -->
+<div id="rs-overlay" onclick="if(event.target===this)toggleRS()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;border-radius:16px;padding:18px 22px;max-width:98vw;max-height:93vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <div style="font-size:15px;font-weight:800;color:#D97706">🧪 Таблица растворимости кислот, солей и оснований</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span style="font-size:11px;color:#999;font-family:monospace">R или Esc — закрыть</span>
+        <button onclick="toggleRS()" style="background:#f0f0f0;border:none;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:14px;font-weight:700">✕</button>
+      </div>
+    </div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+    <table class="sol-table">
+<thead><tr><th style="min-width:90px;background:#fff"></th><th data-col="1">H⁺</th><th data-col="2">Li⁺</th><th data-col="3">K⁺</th><th data-col="4">Na⁺</th><th data-col="5">NH₄⁺</th><th data-col="6">Ba²⁺</th><th data-col="7">Ca²⁺</th><th data-col="8">Mg²⁺</th><th data-col="9">Sr²⁺</th><th data-col="10">Al³⁺</th><th data-col="11">Cr³⁺</th><th data-col="12">Fe²⁺</th><th data-col="13">Fe³⁺</th><th data-col="14">Mn²⁺</th><th data-col="15">Zn²⁺</th><th data-col="16">Ag⁺</th><th data-col="17">Hg²⁺</th><th data-col="18">Pb²⁺</th><th data-col="19">Sn²⁺</th><th data-col="20">Cu²⁺</th></tr></thead>
+<tbody>
+<tr><th>OH⁻</th><td class="sol-E"></td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>F⁻</th><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>Cl⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>Br⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>I⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-Q">?</td></tr>
+<tr><th>S²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-D">–</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>HS⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>SO₃²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>HSO₃⁻</th><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>SO₄²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>HSO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-D">–</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>NO₃⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td></tr>
+<tr><th>NO₂⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-M">M</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>PO₄³⁻</th><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>HPO₄²⁻</th><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-Q">?</td></tr>
+<tr><th>H₂PO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-D">–</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>CO₃²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-H">H</td></tr>
+<tr><th>HCO₃⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>CH₃COO⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td></tr>
+<tr><th>SiO₃²⁻</th><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>MnO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>Cr₂O₇²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-Q">?</td><td class="sol-P">P</td></tr>
+<tr><th>CrO₄²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>ClO₃⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td></tr>
+<tr><th>ClO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td></tr>
+</tbody>
+</table>
+    </div>
+    <div class="sol-legend" style="margin-top:10px">
+      <span class="sol-leg sol-P">Р — растворяется (&gt;1 г/100 г H₂O)</span>
+      <span class="sol-leg sol-M">М — мало растворяется (0,1–1 г)</span>
+      <span class="sol-leg sol-H">Н — не растворяется (&lt;0,01 г)</span>
+      <span class="sol-leg sol-D">– — разлагается в воде</span>
+      <span class="sol-leg sol-Q">? — нет достоверных данных</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
