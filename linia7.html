@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Линия 7 · Взаимодействие веществ</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  --p900:#1a3a5c;--p800:#1e4976;--p700:#235a91;--p600:#2b72b8;--p500:#3a8fd4;
+  --p400:#6aaede;--p300:#a8d0ed;--p200:#d6eaf8;--p100:#eaf4fb;--p50:#f5faff;
+  --ink:#0d1f2d;--ink2:#2d4a5e;--ink3:#7a9baf;
+  --line:#d8e8f0;--bg:#f2f7fb;--white:#fff;
+  --green:#1a8c6e;--green-t:#e0f5ef;--green-d:#0a5240;
+  --amber:#b06a10;--amber-t:#faeedd;--amber-d:#6b3a00;
+  --red:#a02525;--red-t:#fceaea;--red-d:#6e1515;
+  --r:12px;--r-sm:8px;--r-lg:20px;
+  --shadow:0 1px 3px rgba(10,30,50,.06),0 4px 16px rgba(10,30,50,.06);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+  --h1:#0a2540;--h2:#1565c0;--h3:#1e88e5;
+  --acc:#1565c0;--acc-l:#e3f0fd;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:17px}
+
+/* TOPBAR */
+#topbar{position:fixed;top:12px;right:16px;z-index:999;display:flex;align-items:center;gap:4px;background:#fff;border:1.5px solid rgba(21,101,192,.3);border-radius:999px;padding:5px 6px;box-shadow:0 4px 20px rgba(21,101,192,.22);transition:all .25s;cursor:pointer;user-select:none}
+.tb-collapsible{display:flex;align-items:center;gap:4px}
+#topbar .tb-expand{display:none}
+#topbar.collapsed .tb-expand{display:flex}
+#topbar.collapsed .tb-collapsible{display:none}
+#topbar.collapsed{gap:0}
+.tb-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;border-radius:50%;font-size:15px;color:var(--ink3);cursor:pointer;transition:.12s;flex-shrink:0}
+.tb-btn:hover{background:rgba(21,101,192,.1);color:var(--h2)}
+.tb-sep{width:1px;height:16px;background:rgba(21,101,192,.15);margin:0 2px;flex-shrink:0}
+.tb-prog-wrap{width:52px;height:2px;background:rgba(21,101,192,.15);border-radius:1px;flex-shrink:0}
+.tb-prog-fill{height:2px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;border-radius:1px;transition:width .1s}
+.tb-label{font-family:var(--mono);font-size:10px;color:var(--ink3);padding:0 4px;white-space:nowrap}
+.tb-streak{display:flex;gap:3px;align-items:center;padding:0 2px}
+.tb-day{width:7px;height:7px;border-radius:50%;background:rgba(21,101,192,.15);flex-shrink:0;transition:.2s}
+.tb-day.done{background:#1a8c6e}
+.tb-day.part{background:var(--h3);opacity:.7}
+.tb-day.today{outline:1.5px solid rgba(21,101,192,.5);outline-offset:1.5px}
+
+/* SIDE MENU */
+#menu-overlay{display:none;position:fixed;inset:0;background:rgba(10,37,64,.3);z-index:1000}
+#menu-overlay.open{display:block}
+#menu-panel{position:fixed;top:0;left:0;width:300px;height:100vh;background:#fff;border-right:1px solid var(--line);overflow-y:auto;padding:20px;z-index:1001;box-shadow:4px 0 20px rgba(21,101,192,.12);transform:translateX(-100%);transition:transform .3s ease}
+#menu-panel.open{transform:none}
+.mp-title{font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:1.5px;text-transform:uppercase;padding:10px 12px 4px;font-family:var(--mono)}
+.mp-item{padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--ink2);display:flex;gap:10px;align-items:center;margin-bottom:1px;transition:.1s;text-decoration:none}
+.mp-item:hover{background:#e3f0fd;color:var(--h2)}
+.mp-close{background:none;border:none;font-size:20px;color:var(--ink3);cursor:pointer;padding:4px;float:right;margin-bottom:8px}
+
+/* PROG BAR */
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(21,101,192,.1);z-index:998}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;transition:width .1s}
+
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#060e2b 0%,#0d2461 38%,#1565c0 72%,#1e88e5 100%);padding:48px 32px 40px;margin:0 -24px 40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;bottom:-30%;left:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(30,136,229,.2) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);border-radius:20px;padding:4px 14px;font-size:12px;font-family:var(--mono);letter-spacing:.6px;margin-bottom:16px}
+.hero h1{font-size:clamp(28px,5vw,46px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#fff;margin-bottom:12px;text-wrap:balance}
+.hero h1 em{color:#90caf9;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.68);line-height:1.7;max-width:540px;margin-bottom:22px}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px}
+.hero-chip{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.17);color:rgba(255,255,255,.88);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+
+/* SECTIONS */
+.section{margin-bottom:44px}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--p200)}
+.section-title{font-size:clamp(16px,2.5vw,21px);font-weight:700;color:var(--p800);line-height:1.2;text-wrap:balance}
+.section-pill{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.8px;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.section-pill.green{background:linear-gradient(135deg,#0a5240,#1a8c6e)}
+.section-pill.amber{background:linear-gradient(135deg,var(--amber-d),var(--amber))}
+
+h3.sub{font-size:15px;font-weight:700;color:var(--p700);margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+h3.sub::before{content:'';width:3px;height:16px;background:var(--h2);border-radius:2px;flex-shrink:0}
+
+/* BOXES */
+.box{border-radius:var(--r-sm);padding:12px 16px;margin:10px 0;font-size:15px;line-height:1.75}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:var(--amber-t);border-left:4px solid var(--amber);color:var(--amber-d)}
+.box-success{background:var(--green-t);border-left:4px solid var(--green);color:var(--green-d)}
+.box-blue{background:#e3f0fd;border-left:4px solid var(--h2);color:var(--h1)}
+.box-title{font-weight:700;font-size:12px;margin-bottom:5px;text-transform:uppercase;letter-spacing:.6px}
+.box ul,.box ol{padding-left:18px;margin:4px 0}
+.box li{margin:3px 0;font-size:15px}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);margin:12px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:14px}
+th{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-weight:600;padding:9px 12px;text-align:left;font-size:11.5px;letter-spacing:.3px}
+td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.55}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:#e3f0fd22}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+@media(max-width:680px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* ALGO */
+.algo{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.algo-step{display:flex;gap:10px;align-items:flex-start}
+.algo-n{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-family:var(--mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.algo-text{font-size:15px;line-height:1.7;color:var(--ink2)}
+.algo-text strong{color:var(--ink)}
+
+/* CARDS */
+.hack-card{background:#e3f0fd;border:1.5px solid #90caf9;border-radius:var(--r-sm);padding:12px 16px;font-size:15px;margin:8px 0}
+.hack-card strong{color:var(--h1)}
+.warn-card{background:var(--amber-t);border:1.5px solid #fbbf24;border-radius:var(--r-sm);padding:12px 16px;font-size:15px;margin:8px 0}
+.warn-card strong{color:var(--amber-d)}
+
+/* REACTION MATRIX */
+.rx-matrix{width:100%;border-collapse:collapse;font-size:13px}
+.rx-matrix th,.rx-matrix td{border:1px solid var(--line);padding:6px 10px;text-align:center}
+.rx-matrix thead th{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-weight:700;font-size:11px;padding:7px 8px}
+.rx-matrix tbody th{background:var(--p50);color:var(--p800);font-weight:700;text-align:left;padding:6px 10px;white-space:nowrap}
+.rx-yes{color:var(--green-d);font-weight:700}
+.rx-no{color:var(--red-d);font-weight:700}
+.rx-cond{color:var(--amber-d);font-size:11px;font-style:italic}
+
+/* FADE */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.fade-in.vis{opacity:1;transform:none}
+
+/* TRAINER */
+.tr-input{font-size:22px;max-width:180px;letter-spacing:.18em;text-align:center;font-family:var(--mono);border:2px solid var(--line);border-radius:8px;padding:8px 12px;outline:none;width:100%;background:var(--bg);color:var(--ink);transition:border-color .15s}
+.tr-input:focus{border-color:var(--h2)}
+.tr-feedback{min-height:22px;font-size:16px;font-weight:700;margin-top:8px}
+.tr-feedback.ok{color:var(--green-d)}
+.tr-feedback.err{color:var(--red-d)}
+.tr-check-btn,.tr-next-btn,.tr-retry-btn,.tr-reset-btn{border:none;border-radius:8px;padding:11px 26px;font-size:16px;font-weight:700;cursor:pointer;transition:.12s}
+.tr-check-btn{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff}
+.tr-check-btn:hover{opacity:.9}
+.tr-next-btn{background:var(--green);color:#fff}
+.tr-retry-btn{background:var(--amber);color:#fff}
+.tr-reset-btn{background:var(--line);color:var(--ink2)}
+.tr-card,.tr-result{background:var(--white);border:1.5px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow)}
+.tr-result{text-align:center}
+.tr-solution-hd{font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px}
+
+/* MATCH TABLE in trainer */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:560px){.match-grid{grid-template-columns:1fr}}
+.match-col{background:var(--bg);border:1.5px solid var(--line);border-radius:8px;padding:10px 12px}
+.match-col-title{font-size:10px;font-weight:800;color:var(--ink3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px;font-family:var(--mono)}
+.match-row{font-size:13px;line-height:1.85;color:var(--ink)}
+.match-row b{color:var(--h2);font-family:var(--mono)}
+</style>
+</head>
+<body>
+
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+
+<!-- TOPBAR -->
+<div id="topbar" class="collapsed" onclick="toggleTopbar(event)" title="Нажми чтобы развернуть">
+  <span class="tb-expand" style="font-size:18px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--h2);font-weight:700">☰</span>
+  <div class="tb-collapsible">
+    <button class="tb-btn" onclick="openMenu();event.stopPropagation()" title="Меню">☰</button>
+    <div class="tb-sep"></div>
+    <div class="tb-prog-wrap"><div class="tb-prog-fill" id="tb-pf"></div></div>
+    <span class="tb-label" id="tb-lbl">0%</span>
+    <div class="tb-sep"></div>
+    <div class="tb-streak" id="tb-streak"></div>
+    <button class="tb-btn" onclick="clearHistory();event.stopPropagation()" title="Очистить историю">🗑️</button>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" onclick="toggleTopbar(event)" title="Свернуть">✕</button>
+  </div>
+</div>
+
+<!-- SIDE MENU -->
+<div id="menu-overlay" onclick="closeMenu()"></div>
+<div id="menu-panel">
+  <button class="mp-close" onclick="closeMenu()">✕</button>
+  <div class="mp-title">Линия 7 — Теория</div>
+  <a class="mp-item" href="#s-theory" onclick="closeMenu()">📊 Металлы</a>
+  <a class="mp-item" href="#s-neme" onclick="closeMenu()">⚗️ Неметаллы (F₂, Cl₂, Si, C…)</a>
+  <a class="mp-item" href="#s-mxnm" onclick="closeMenu()">🔢 Металлы × НеМе матрица</a>
+  <a class="mp-item" href="#s-nmxnm" onclick="closeMenu()">🔢 НеМе × НеМе матрица</a>
+  <a class="mp-item" href="#s-mevoda" onclick="closeMenu()">💧 Ме + вода / кислота</a>
+  <a class="mp-item" href="#s-ox" onclick="closeMenu()">🧱 Оксиды</a>
+  <a class="mp-item" href="#s-acid" onclick="closeMenu()">🔴 Кислоты</a>
+  <a class="mp-item" href="#s-base" onclick="closeMenu()">🟢 Основания</a>
+  <a class="mp-item" href="#s-salt" onclick="closeMenu()">🟡 Соли</a>
+  <a class="mp-item" href="#s-algo" onclick="closeMenu()">📋 Алгоритм решения</a>
+  <div class="mp-title" style="margin-top:12px">Тренажёры</div>
+  <a class="mp-item" href="#tr-b1" onclick="closeMenu()">📝 Блок 1 — 50 заданий</a>
+</div>
+
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">ЛИНИЯ 7 · ЕГЭ ХИМИЯ · 2 БАЛЛА</div>
+  <h1>Взаимодействие <em>веществ</em></h1>
+  <p class="hero-sub">Установи соответствие: формула вещества → группа реагентов. Охватывает все классы неорганических соединений.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Блок 1 · 50 заданий ЕГЭ</span>
+    <span class="hero-chip">Реальные варианты · Ермолаев И.С.</span>
+  </div>
+</div>
+
+<!-- THEORY -->
+<div class="section fade-in" id="s-theory">
+  <div class="section-header">
+    <div class="section-pill">ТЕОРИЯ</div>
+    <span class="section-title">Таблицы реакций по классам веществ</span>
+  </div>
+
+  <div class="box box-blue">
+    <div class="box-title">Формат задания</div>
+    Дано 4 вещества (А, Б, В, Г) и 5 групп реагентов (1–5). Для каждого вещества найди группу реагентов, с каждым из которых оно реагирует. Ответ — 4 цифры (например: <span style="font-family:var(--mono);font-weight:700">4512</span>).
+  </div>
+
+  <h3 class="sub">Металлы</h3>
+  <div class="table-wrap">
+    <table class="rx-matrix">
+      <thead><tr><th>Металл</th><th>H₂O</th><th>Кислоты</th><th>Щёлочи</th><th>Соли</th><th>Оксид металла</th><th>O₂, Cl₂, S</th></tr></thead>
+      <tbody>
+        <tr><th>Na, K, Li (щелочные)</th><td class="rx-yes">+</td><td class="rx-yes">+</td><td class="rx-no">−</td><td class="rx-yes">+</td><td class="rx-no">−</td><td class="rx-yes">+</td></tr>
+        <tr><th>Ca, Ba (щёлочноземельн.)</th><td class="rx-yes">+</td><td class="rx-yes">+</td><td class="rx-no">−</td><td class="rx-yes">+</td><td class="rx-no">−</td><td class="rx-yes">+</td></tr>
+        <tr><th>Al</th><td class="rx-cond">+ (щёлочь)</td><td class="rx-yes">+</td><td class="rx-yes">+</td><td class="rx-yes">+</td><td class="rx-yes">+</td><td class="rx-yes">+</td></tr>
+        <tr><th>Zn</th><td class="rx-cond">+ (щёлочь)</td><td class="rx-yes">+</td><td class="rx-yes">+</td><td class="rx-yes">+</td><td class="rx-yes">+</td><td class="rx-yes">+</td></tr>
+        <tr><th>Fe</th><td class="rx-no">−</td><td class="rx-yes">+ (разб.)</td><td class="rx-no">−</td><td class="rx-yes">+</td><td class="rx-yes">+</td><td class="rx-yes">+</td></tr>
+        <tr><th>Cu</th><td class="rx-no">−</td><td class="rx-cond">HNO₃, H₂SO₄(конц.)</td><td class="rx-no">−</td><td class="rx-yes">+</td><td class="rx-no">−</td><td class="rx-yes">+</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub" id="s-neme">Неметаллы — реакции с водой, щёлочью, кислотами, металлами</h3>
+  <div class="table-wrap">
+    <table class="rx-matrix">
+      <thead>
+        <tr><th>НеМе</th><th>+ H₂O</th><th>+ Щёлочь</th><th>+ Кислота</th><th>+ Металлы</th><th>+ O₂</th><th>Особые реакции</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>F₂ ⚡</th>
+          <td class="rx-yes">2F₂+2H₂O→<br>4HF+O₂</td>
+          <td class="rx-yes">2F₂+2NaOH→<br>2NaF+OF₂+H₂O</td>
+          <td class="rx-no">с обычными не реагируют<br><span style="color:var(--green-d);font-size:13px">с галогеноводородами: F₂+2HCl→2HF+Cl₂</span></td>
+          <td class="rx-yes">все металлы</td>
+          <td class="rx-yes">O₂+2F₂→2OF₂</td>
+          <td class="rx-cond">Реагирует со всеми неМе! C+2F₂→CF₄; Si+2F₂→SiF₄; 2P+5F₂→2PF₅<br><em>Более активный галоген вытесняет менее активный:</em><br>Cl₂+H₂S→S+2HCl; Br₂+2HI→I₂+2HBr</td>
+        </tr>
+        <tr>
+          <th>Cl₂, Br₂</th>
+          <td class="rx-yes">⇌ HX + HXO<br>(хлорная вода)</td>
+          <td class="rx-yes">Cl₂+2KOH→KCl+KClO+H₂O (без нагр.)<br>3Cl₂+6KOH→5KCl+KClO₃+3H₂O (нагр.)</td>
+          <td class="rx-no">с обычными не реагируют<br><span style="color:var(--green-d);font-size:13px">с галогеноводородами (менее акт.): Cl₂+2HBr→2HCl+Br₂</span></td>
+          <td class="rx-yes">все металлы<br>(Cl₂,Br₂: Fe→Fe³⁺, Cu→Cu²⁺)</td>
+          <td class="rx-no">−</td>
+          <td class="rx-cond">Cl₂+H₂S→S+2HCl; Br₂+2HI→I₂+2HBr (вытесняет галоген)</td>
+        </tr>
+        <tr>
+          <th>I₂</th>
+          <td class="rx-no">−</td>
+          <td class="rx-yes">3I₂+6KOH→<br>5KI+KIO₃+3H₂O (нагр.)</td>
+          <td class="rx-no">−</td>
+          <td class="rx-yes">все металлы<br>(Fe→Fe²⁺, Cu→Cu⁺)</td>
+          <td class="rx-no">−</td>
+          <td class="rx-cond">I₂+10HNO₃(конц.)→2HIO₃+10NO₂+4H₂O</td>
+        </tr>
+        <tr>
+          <th>S</th>
+          <td class="rx-no">−</td>
+          <td class="rx-yes">3S+6KOH→<br>K₂SO₃+2K₂S+3H₂O (нагр.)</td>
+          <td class="rx-cond">HNO₃конц., H₂SO₄конц.</td>
+          <td class="rx-yes">все металлы<br>(кроме Pt,Au)</td>
+          <td class="rx-yes">S+O₂→SO₂</td>
+          <td class="rx-cond">S+6HNO₃(конц.)→H₂SO₄+6NO₂+2H₂O<br>S+2H₂SO₄(конц.)→3SO₂+2H₂O</td>
+        </tr>
+        <tr>
+          <th>P</th>
+          <td class="rx-no">−</td>
+          <td class="rx-yes">4P+3NaOH+3H₂O→<br>3NaH₂PO₂+PH₃↑ (нагр.)</td>
+          <td class="rx-cond">HNO₃, H₂SO₄конц.</td>
+          <td class="rx-yes">активные Ме</td>
+          <td class="rx-yes">4P+3O₂→2P₂O₃<br>4P+5O₂→2P₂O₅</td>
+          <td class="rx-cond">P+5HNO₃(конц.)→H₃PO₄+5NO₂+H₂O<br>2P+5H₂SO₄(конц.)→2H₃PO₄+5SO₂</td>
+        </tr>
+        <tr>
+          <th>C (углерод)</th>
+          <td class="rx-no">−</td>
+          <td class="rx-no">−</td>
+          <td class="rx-cond">HNO₃конц., H₂SO₄конц.</td>
+          <td class="rx-cond">активные Ме (t°):<br>Ca+2C→CaC₂<br>4Al+3C→Al₄C₃</td>
+          <td class="rx-yes">2C+O₂(нед.)→2CO<br>C+O₂(изб.)→CO₂</td>
+          <td class="rx-cond">C+4HNO₃(конц.)→CO₂+4NO₂+2H₂O<br>C+2H₂SO₄(конц.)→CO₂+2SO₂+2H₂O<br>C+Si→SiC (карборунд); C+2S→CS₂</td>
+        </tr>
+        <tr>
+          <th>Si (кремний)</th>
+          <td class="rx-no">−</td>
+          <td class="rx-yes">Si+2NaOH+H₂O→<br>Na₂SiO₃+2H₂</td>
+          <td class="rx-cond">только HF!<br>Si+4HF→SiF₄+2H₂</td>
+          <td class="rx-yes">активные Ме (t°):<br>2Mg+Si→Mg₂Si<br>4Na+Si→Na₄Si</td>
+          <td class="rx-yes">Si+O₂→SiO₂</td>
+          <td class="rx-cond">Si+2Cl₂→SiCl₄; Si+2S→SiS₂<br>3Si+2N₂⇌Si₃N₄; C+Si→SiC</td>
+        </tr>
+        <tr>
+          <th>N₂</th>
+          <td class="rx-no">−</td>
+          <td class="rx-no">−</td>
+          <td class="rx-no">−</td>
+          <td class="rx-cond">только Li без нагр.:<br>6Li+N₂→2Li₃N<br>Cr,Al (t°)</td>
+          <td class="rx-yes">N₂+O₂⇌2NO (t°, молния)</td>
+          <td class="rx-cond">3H₂+N₂⇌2NH₃ (t°, кат., давл.)</td>
+        </tr>
+        <tr>
+          <th>H₂</th>
+          <td class="rx-no">−</td>
+          <td class="rx-no">−</td>
+          <td class="rx-no">−</td>
+          <td class="rx-yes">Na, K, Ca:<br>2Na+H₂→2NaH</td>
+          <td class="rx-yes">2H₂+O₂→2H₂O<br>(гремучая смесь)</td>
+          <td class="rx-cond">H₂+F₂→2HF; H₂+Cl₂→2HCl (hν)<br>H₂+S⇌H₂S; CuO+H₂→Cu+H₂O (восст.)</td>
+        </tr>
+        <tr>
+          <th>CO</th>
+          <td class="rx-no">−</td>
+          <td class="rx-cond">расплав: CO+NaOH→HCOONa</td>
+          <td class="rx-no">−</td>
+          <td class="rx-no">−</td>
+          <td class="rx-yes">2CO+O₂→2CO₂</td>
+          <td class="rx-cond">CO+CuO→Cu+CO₂; FeO+CO→Fe+CO₂<br>CO+H₂→CH₃OH (кат.); восстановитель оксидов</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub" id="s-mxnm">Металлы × Неметаллы — матрица</h3>
+  <div class="table-wrap">
+    <table class="rx-matrix">
+      <thead>
+        <tr>
+          <th>НеМе ↓ / Ме →</th>
+          <th>ЩМ (Na,K…)</th><th>ЩЗМ (Ca,Ba)</th><th>Mg</th><th>Al</th><th>Zn</th><th>Fe</th><th>Cr</th><th>Cu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>Hal (F₂,Cl₂,Br₂,I₂)</th>
+          <td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td>
+          <td class="rx-cond">✓ Fe³⁺<br>(I₂→Fe²⁺)</td><td class="rx-yes">✓</td><td class="rx-cond">✓ Cu²⁺<br>(I₂→Cu⁺)</td></tr>
+        <tr><th>H₂</th>
+          <td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td>
+          <td class="rx-no">−</td><td class="rx-no">−</td><td class="rx-no">−</td><td class="rx-no">−</td><td class="rx-no">−</td></tr>
+        <tr><th>O₂</th>
+          <td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td></tr>
+        <tr><th>S</th>
+          <td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td></tr>
+        <tr><th>N₂</th>
+          <td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td>
+          <td class="rx-no">−</td><td class="rx-no">−</td><td class="rx-yes">✓</td><td class="rx-no">−</td></tr>
+        <tr><th>P</th>
+          <td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-no">−</td></tr>
+        <tr><th>C</th>
+          <td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td>
+          <td class="rx-no">−</td><td class="rx-no">−</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-no">−</td></tr>
+        <tr><th>Si</th>
+          <td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td>
+          <td class="rx-no">−</td><td class="rx-no">−</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-no">−</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="box box-info" style="font-size:13px;margin:8px 0">
+    <strong>Ряд электроотрицательности:</strong> металлы &lt; Si = H = P &lt; C &lt; S &lt; I &lt; Br &lt; Cl &lt; N &lt; O &lt; F<br>
+    ЩМ+O₂: Li→Li₂O; Na→Na₂O₂ (пероксид); K,Rb,Cs→MeO₂ (надпероксид)<br>
+    Cu+O₂: 2Cu+O₂→2CuO (400–500°); 4Cu+O₂→2Cu₂O (&gt;1000°)<br>
+    3Fe+2O₂→Fe₃O₄ (горение); 4Fe+3O₂+6H₂O→4Fe(OH)₃ (ржавление на воздухе)
+  </div>
+
+  <h3 class="sub" id="s-nmxnm">Неметаллы × Неметаллы</h3>
+  <div class="table-wrap">
+    <table class="rx-matrix">
+      <thead>
+        <tr><th></th><th>Cl₂,Br₂</th><th>I₂</th><th>H₂</th><th>O₂</th><th>S</th><th>N₂</th><th>P</th><th>C</th><th>Si</th></tr>
+      </thead>
+      <tbody>
+        <tr><th>Cl₂,Br₂</th><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-no">−</td><td class="rx-yes">✓</td><td class="rx-no">−</td><td class="rx-yes">✓</td><td class="rx-no">−</td><td class="rx-yes">✓</td></tr>
+        <tr><th>I₂</th><td>—</td><td>—</td><td class="rx-yes">✓</td><td class="rx-no">−</td><td class="rx-no">−</td><td class="rx-no">−</td><td class="rx-yes">✓</td><td class="rx-no">−</td><td class="rx-no">−</td></tr>
+        <tr><th>H₂</th><td>—</td><td>—</td><td>—</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-no">−</td><td class="rx-yes">✓</td><td class="rx-no">−</td></tr>
+        <tr><th>O₂</th><td>—</td><td>—</td><td>—</td><td>—</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td></tr>
+        <tr><th>S</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="rx-no">−</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td><td class="rx-yes">✓</td></tr>
+        <tr><th>N₂</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="rx-no">−</td><td class="rx-cond">~</td><td class="rx-cond">~</td></tr>
+        <tr><th>P</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="rx-no">−</td><td class="rx-no">−</td></tr>
+        <tr><th>C</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="rx-yes">✓</td></tr>
+        <tr><th>Si</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="hack-card" style="font-size:13px">
+    <strong>F₂ реагирует со всеми неМе</strong> (таблица показывает только остальные галогены).<br>
+    <strong>Образование HX:</strong> H₂+F₂→2HF (взрыв); H₂+Cl₂→2HCl (hν); H₂+Br₂→2HBr (t°); H₂+I₂⇌2HI (t°, обратимо)<br>
+    <strong>Галогены в р-ре щелочи (более эл/отр → CO⁻¹; менее → CO⁺⁵):</strong><br>
+    5Cl₂+Br₂+6H₂O→2HBrO₃+10HCl; 5Cl₂+I₂+6H₂O→2HIO₃+10HCl<br>
+    <strong>P+Hal:</strong> 2P+3Cl₂→2PCl₃ (нед.); 2P+5Cl₂→2PCl₅ (изб.)
+  </div>
+
+  <h3 class="sub" id="s-mevoda">Металлы — вода, кислота, щёлочь</h3>
+  <div class="table-wrap">
+    <table class="rx-matrix">
+      <thead>
+        <tr><th>Металл</th><th>+ H₂O</th><th>+ кислота (разб.)</th></tr>
+      </thead>
+      <tbody>
+        <tr><th>ЩМ (Li,Na,K…)</th>
+          <td class="rx-yes">бурно: 2Na+2H₂O→2NaOH+H₂</td>
+          <td class="rx-yes">2K+2HCl→2KCl+H₂</td></tr>
+        <tr><th>ЩЗМ (Ca,Ba)</th>
+          <td class="rx-yes">Ca+2H₂O→Ca(OH)₂+H₂</td>
+          <td class="rx-yes">Ca+2HCl→CaCl₂+H₂</td></tr>
+        <tr><th>Mg</th>
+          <td class="rx-cond">Mg+2H₂O→Mg(OH)₂+H₂ (нагр.)</td>
+          <td class="rx-yes">Mg+H₂SO₄→MgSO₄+H₂</td></tr>
+        <tr><th>Al</th>
+          <td class="rx-cond">2Al+6H₂O→2Al(OH)₃+3H₂ (нагр.)</td>
+          <td class="rx-yes">2Al+6HCl→2AlCl₃+3H₂</td></tr>
+        <tr><th>Zn</th>
+          <td class="rx-cond">Zn+H₂O→ZnO+H₂ (пар)</td>
+          <td class="rx-yes">Zn+2HCl→ZnCl₂+H₂</td></tr>
+        <tr><th>Fe</th>
+          <td class="rx-cond">3Fe+4H₂O→Fe₃O₄+4H₂ (пар)</td>
+          <td class="rx-yes">Fe+2HCl→FeCl₂+H₂</td></tr>
+        <tr><th>Cr</th>
+          <td class="rx-cond">2Cr+3H₂O→Cr₂O₃+3H₂ (пар)</td>
+          <td class="rx-yes">Cr+H₂SO₄(разб.)→CrSO₄+H₂</td></tr>
+        <tr><th>Cu</th>
+          <td class="rx-no">−</td>
+          <td class="rx-no">− (только HNO₃ и H₂SO₄конц.)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="hack-card" style="font-size:13px">
+    <strong>Al и Zn + р-р щёлочи:</strong><br>
+    2Al + 2NaOH + 6H₂O → 2Na[Al(OH)₄] + 3H₂<br>
+    Zn + 2KOH + 2H₂O → K₂[Zn(OH)₄] + H₂<br><br>
+    <strong>Кислоты-окислители</strong> (H₂SO₄конц., HNO₃конц., HNO₃разб.) реагируют со всеми металлами, кроме Pt и Au.<br>
+    <strong>⚠️ Пассивация:</strong> Al, Fe, Cr не реагируют с H₂SO₄конц. и HNO₃конц. при обычных условиях.
+  </div>
+
+  <h3 class="sub" id="s-ox">Оксиды — матрица реакций</h3>
+  <div class="table-wrap">
+    <table class="rx-matrix">
+      <thead>
+        <tr>
+          <th>Реагент</th>
+          <th>Осн. оксид (CaO, Na₂O…)</th>
+          <th>Амф. оксид (ZnO, Al₂O₃…)</th>
+          <th>Кисл. оксид (SO₃, P₂O₅…)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>H₂O</th>
+          <td class="rx-yes">+ → щёлочь<br>(только ЩМ и ЩЗМ!)<br>CaO+H₂O→Ca(OH)₂</td>
+          <td class="rx-no">−</td>
+          <td class="rx-yes">+ → кислота<br>SO₃+H₂O→H₂SO₄<br>искл: SiO₂+H₂O≠</td>
+        </tr>
+        <tr>
+          <th>Осн. оксид</th>
+          <td class="rx-no">−</td>
+          <td class="rx-yes">ZnO+CaO→CaZnO₂</td>
+          <td class="rx-yes">CaO+SO₃→CaSO₄</td>
+        </tr>
+        <tr>
+          <th>Амф. оксид</th>
+          <td class="rx-yes">CaO+ZnO→CaZnO₂</td>
+          <td class="rx-no">−</td>
+          <td class="rx-yes">ZnO+SO₃→ZnSO₄</td>
+        </tr>
+        <tr>
+          <th>Кисл. оксид</th>
+          <td class="rx-yes">CaO+SO₃→CaSO₄</td>
+          <td class="rx-yes">ZnO+SO₃→ZnSO₄</td>
+          <td class="rx-no">−</td>
+        </tr>
+        <tr>
+          <th>Кислота</th>
+          <td class="rx-yes">MgO+2HCl→MgCl₂+H₂O</td>
+          <td class="rx-yes">Al₂O₃+6HCl→2AlCl₃+3H₂O</td>
+          <td class="rx-no">−<br>искл: SiO₂+4HF→SiF₄+2H₂O</td>
+        </tr>
+        <tr>
+          <th>Основание</th>
+          <td class="rx-no">−</td>
+          <td class="rx-yes">ZnO+2NaOH(тв.)→Na₂ZnO₂+H₂O<br>ZnO+2NaOH+H₂O→Na₂[Zn(OH)₄]</td>
+          <td class="rx-yes">SO₂+2KOH→K₂SO₃+H₂O</td>
+        </tr>
+        <tr>
+          <th>Соль</th>
+          <td class="rx-no">−</td>
+          <td class="rx-cond">только карбонаты и сульфиты:<br>CaCO₃+ZnO→CaZnO₂+CO₂</td>
+          <td class="rx-cond">SiO₂ и P₂O₅ — с карбонатами:<br>CaCO₃+SiO₂→CaSiO₃+CO₂</td>
+        </tr>
+        <tr>
+          <th>O₂</th>
+          <td colspan="3" class="rx-cond">Оксиды не в высш. ст. окисления: 2SO₂+O₂→2SO₃; искл: Fe₂O₃, Cr₂O₃, MnO₂ — не реагируют</td>
+        </tr>
+        <tr>
+          <th>H₂, C, CO, Al</th>
+          <td colspan="3" class="rx-cond">Оксиды среднеактивных/малоактивных металлов: CuO+H₂→Cu+H₂O; FeO+CO→Fe+CO₂; Fe₂O₃+2Al→2Fe+Al₂O₃; 2Mg+CO₂→2MgO+C</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub" id="s-acid">Кислоты — неокислитель и окислитель</h3>
+  <div class="table-wrap">
+    <table class="rx-matrix">
+      <thead>
+        <tr>
+          <th>Реагент</th>
+          <th>Неокислитель (HCl, H₂SO₄разб., H₃PO₄…)</th>
+          <th>Окислитель (H₂SO₄конц., HNO₃конц./разб.)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>H₂O</th><td colspan="2" class="rx-no">−</td></tr>
+        <tr>
+          <th>Кислота</th>
+          <td class="rx-no">−</td>
+          <td class="rx-yes">Окисляет H₂S, HBr, HI:<br>2HBr+H₂SO₄(конц.)→Br₂+SO₂+2H₂O<br>3H₂S+4H₂SO₄(конц.)→4SO₂+4H₂O+3S</td>
+        </tr>
+        <tr><th>Основание</th><td colspan="2" class="rx-yes">+ → соль + H₂O</td></tr>
+        <tr><th>Амф. гидроксид</th><td colspan="2" class="rx-yes">Zn(OH)₂+H₂SO₄→ZnSO₄+2H₂O</td></tr>
+        <tr>
+          <th>Соль</th>
+          <td class="rx-yes">Слабый электролит (газ/осадок/вода):<br>CaCO₃+2HCl→CaCl₂+CO₂+H₂O<br>ZnS+2HCl→ZnCl₂+H₂S<br>Искл: CuS, PbS, AgCl, BaSO₄, SrSO₄ — не реаг.</td>
+          <td class="rx-yes">Растворяет сульфиды, окисляет Br⁻, I⁻, Fe²⁺, Cr²⁺:<br>CuS+8HNO₃(конц.)→CuSO₄+8NO₂+4H₂O<br>5H₂SO₄(конц.)+8KI→H₂S+4I₂+4K₂SO₄+4H₂O<br>3Fe(NO₃)₂+4HNO₃(разб.)→3Fe(NO₃)₃+NO+2H₂O</td>
+        </tr>
+        <tr>
+          <th>Металл</th>
+          <td class="rx-yes">Только металлы в ЭРН до H:<br>Zn+2HCl→ZnCl₂+H₂↑<br>Fe+H₂SO₄(разб.)→FeSO₄+H₂↑</td>
+          <td class="rx-yes">Все Ме, кроме Pt и Au.<br>⚠️ Al, Fe, Cr пассивируются H₂SO₄конц. и HNO₃конц.<br>3Cu+8HNO₃(разб.)→3Cu(NO₃)₂+2NO+4H₂O</td>
+        </tr>
+        <tr>
+          <th>НеМе</th>
+          <td class="rx-cond">Cl₂,Br₂ вытесняют I₂: Br₂+2HI→I₂+2HBr<br>Si+4HF→SiF₄+2H₂ (только с HF!)</td>
+          <td class="rx-yes">I₂+10HNO₃(конц.)→2HIO₃+10NO₂+4H₂O<br>S+6HNO₃(конц.)→H₂SO₄+6NO₂+2H₂O<br>C+4HNO₃(конц.)→CO₂+4NO₂+2H₂O<br>P+5HNO₃(конц.)→H₃PO₄+5NO₂+H₂O<br>2P+5H₂SO₄(конц.)→2H₃PO₄+5SO₂</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub" id="s-base">Основания и амфотерные гидроксиды</h3>
+  <div class="table-wrap">
+    <table class="rx-matrix">
+      <thead>
+        <tr>
+          <th>Реагент</th>
+          <th>Сильное основание (NaOH, KOH…)</th>
+          <th>Слабое основание (Cu(OH)₂, Fe(OH)₂…)</th>
+          <th>Амф. гидроксид (Zn(OH)₂, Al(OH)₃)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>H₂O</th><td class="rx-no">−</td><td class="rx-no">−</td><td class="rx-no">−</td></tr>
+        <tr>
+          <th>Кислота</th>
+          <td class="rx-yes">2NaOH+H₂SO₄→Na₂SO₄+2H₂O</td>
+          <td class="rx-yes">Cu(OH)₂+2HCl→CuCl₂+2H₂O</td>
+          <td class="rx-yes">Zn(OH)₂+2HCl→ZnCl₂+2H₂O</td>
+        </tr>
+        <tr>
+          <th>Основание</th>
+          <td class="rx-no">−</td>
+          <td class="rx-no">−</td>
+          <td class="rx-yes">Zn(OH)₂+2NaOH→Na₂[Zn(OH)₄]<br>Al(OH)₃+NaOH→Na[Al(OH)₄]</td>
+        </tr>
+        <tr>
+          <th>Растворимая соль</th>
+          <td class="rx-yes">Оба раств.+осадок:<br>2NaOH+MgCl₂→2NaCl+Mg(OH)₂↓</td>
+          <td class="rx-cond">Только NH₃·H₂O:<br>3NH₃+3H₂O+FeCl₃→Fe(OH)₃↓+3NH₄Cl</td>
+          <td class="rx-no">−</td>
+        </tr>
+        <tr>
+          <th>Металл</th>
+          <td class="rx-yes">Только Al и Zn:<br>Zn+2NaOH+2H₂O→Na₂[Zn(OH)₄]+H₂<br>2Al+2NaOH+6H₂O→2Na[Al(OH)₄]+3H₂</td>
+          <td class="rx-no">−</td>
+          <td class="rx-no">−</td>
+        </tr>
+        <tr>
+          <th>НеМе</th>
+          <td class="rx-yes">Si,P,S,Cl₂,Br₂,I₂:<br>Si+2NaOH+H₂O→Na₂SiO₃+2H₂<br>Cl₂+2NaOH→NaCl+NaClO+H₂O<br>3Cl₂+6NaOH→5NaCl+NaClO₃+3H₂O (нагр.)<br>4P+3NaOH+3H₂O→3NaH₂PO₂+PH₃ (нагр.)</td>
+          <td class="rx-no">−</td>
+          <td class="rx-no">−</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub" id="s-salt">Соли — средняя, кислая, комплексная</h3>
+  <div class="table-wrap">
+    <table class="rx-matrix">
+      <thead>
+        <tr>
+          <th>Реагент</th>
+          <th>Средняя соль</th>
+          <th>Кислая соль (NaHCO₃, NaHS…)</th>
+          <th>Комплексная соль (Na[Al(OH)₄]…)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Основание</th>
+          <td class="rx-yes">Оба раств.+осадок:<br>2NaOH+MgCl₂→2NaCl+Mg(OH)₂↓</td>
+          <td class="rx-yes">NaHCO₃+NaOH→Na₂CO₃+H₂O</td>
+          <td class="rx-no">−</td>
+        </tr>
+        <tr>
+          <th>Кислота</th>
+          <td class="rx-yes">Слабый электролит:<br>ZnS+2HCl→ZnCl₂+H₂S<br>Na₂CO₃+2HCl→2NaCl+CO₂+H₂O<br>Перевод в кислую: H₂SO₄+Na₂SO₄→2NaHSO₄</td>
+          <td class="rx-yes">2NaHS+H₂SO₄→Na₂SO₄+2H₂S</td>
+          <td class="rx-yes">Na[Al(OH)₄]+4HCl→AlCl₃+NaCl+4H₂O</td>
+        </tr>
+        <tr>
+          <th>Соль</th>
+          <td class="rx-yes">Оба раств.+осадок:<br>AgNO₃+NaCl→NaNO₃+AgCl↓</td>
+          <td class="rx-yes">BaCl₂+Na₂HPO₄→BaHPO₄↓+2NaCl</td>
+          <td class="rx-yes">3Na[Al(OH)₄]+AlCl₃(конц.)→4Al(OH)₃↓+3NaCl</td>
+        </tr>
+        <tr>
+          <th>Металл</th>
+          <td class="rx-yes">Более активный вытесняет менее:<br>Fe+CuSO₄→FeSO₄+Cu↓</td>
+          <td class="rx-cond">~</td>
+          <td class="rx-no">−</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warn-card">
+    <strong>⚠️ Полный гидролиз</strong> — соль слаб. основания + слаб. кислоты (прочерк «−» в таблице растворимости):<br>
+    Al₂S₃ + 6H₂O → 2Al(OH)₃↓ + 3H₂S↑<br>
+    Fe₂(CO₃)₃ + 3H₂O → 2Fe(OH)₃↓ + 3CO₂↑<br><br>
+    <strong>Кислые соли (KHCO₃, NaHSO₄…)</strong> реагируют как с кислотами, так и со щёлочами:<br>
+    KHCO₃ + NaOH → K₂CO₃ + H₂O; KHCO₃ + HCl → KCl + CO₂↑ + H₂O
+  </div>
+</div>
+
+<!-- ALGORITHM -->
+<div class="section fade-in" id="s-algo">
+  <div class="section-header">
+    <div class="section-pill amber">АЛГОРИТМ</div>
+    <span class="section-title">Как решить задание за 3 шага</span>
+  </div>
+
+  <div class="algo">
+    <div class="algo-step">
+      <div class="algo-n">1</div>
+      <div class="algo-text"><strong>Определи класс вещества</strong> (А, Б, В, Г): металл, неметалл, оксид (основной/кислотный/амфотерный), кислота, основание или соль.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">2</div>
+      <div class="algo-text"><strong>Проверь каждый реагент в группе</strong> (1–5): все три вещества в группе должны реагировать с твоим веществом. Если хоть одно не реагирует — эта группа не подходит.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">3</div>
+      <div class="algo-text"><strong>Запиши 4 цифры</strong> — номер группы для каждой позиции А, Б, В, Г подряд.</div>
+    </div>
+  </div>
+
+  <div class="hack-card">
+    <strong>💡 Частые ловушки:</strong><br>
+    • Cu НЕ реагирует с разб. HCl и разб. H₂SO₄ — только с HNO₃ и конц. H₂SO₄<br>
+    • N₂ реагирует с O₂ (t°), H₂ (t°, кат.) и только с Li, Mg при нормальных условиях<br>
+    • Соли реагируют с кислотами/щёлочами только в р-ре (кроме летучих кислот)<br>
+    • Al, Zn реагируют и с кислотами, и со щёлочами (амфотерные металлы)
+  </div>
+</div>
+
+<!-- TRAINER BLOCK 1 -->
+<div class="section fade-in" id="tr-b1">
+  <div class="section-header">
+    <div class="section-pill green">ЗАДАНИЯ</div>
+    <span class="section-title">Блок 1 — 50 заданий ЕГЭ</span>
+  </div>
+
+  <div class="box box-warn" style="margin-bottom:14px">
+    <div class="box-title">Формат ответа</div>
+    Для каждого вещества (А, Б, В, Г) найди группу реагентов, с которыми оно взаимодействует. Введи 4 цифры для А, Б, В, Г (например: <span style="font-family:var(--mono);font-weight:700">4512</span>).
+  </div>
+
+  <div id="tr-wrap-b1">
+    <div class="tr-card" id="tr-card-b1">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <span class="tr-prog-text" style="font-size:12px;font-family:var(--mono);color:var(--ink3);white-space:nowrap">0/50</span>
+        <div style="flex:1;height:4px;background:var(--line);border-radius:2px">
+          <div class="tr-prog-bar-fill" style="height:4px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;border-radius:2px;transition:width .3s"></div>
+        </div>
+      </div>
+      <div class="tr-q"></div>
+      <input class="tr-input" type="text" inputmode="numeric" placeholder="——" maxlength="4">
+      <div class="tr-feedback"></div>
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+        <button class="tr-check-btn">Проверить</button>
+        <button class="tr-next-btn" style="display:none">Далее →</button>
+        <div class="tr-solution" hidden style="width:100%;margin-top:10px;background:var(--p50);border:1.5px solid var(--p200);border-radius:8px;padding:12px 14px"></div>
+      </div>
+    </div>
+    <div class="tr-result" id="tr-res-b1" style="display:none">
+      <div style="font-size:40px;font-weight:900;font-family:var(--mono);color:var(--h2)" class="tr-score"></div>
+      <div style="font-size:13px;color:var(--ink3);margin:6px 0 18px">из 50 заданий выполнено верно</div>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <button class="tr-retry-btn" style="display:none">Отработать ошибки</button>
+        <button class="tr-reset-btn">Начать заново</button>
+      </div>
+      <div class="tr-done" style="display:none;font-size:20px;margin-top:14px;color:var(--green-d);font-weight:700">🎉 Все верно! Блок пройден!</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /shell -->
+
+<script>
+if('scrollRestoration' in history)history.scrollRestoration='manual';
+window.scrollTo({top:0,behavior:'instant'});
+window.addEventListener('load',()=>window.scrollTo({top:0,behavior:'instant'}));
+
+function toggleTopbar(e){e.stopPropagation();document.getElementById('topbar').classList.toggle('collapsed');}
+function openMenu(){document.getElementById('menu-overlay').classList.add('open');document.getElementById('menu-panel').classList.add('open');}
+function closeMenu(){document.getElementById('menu-overlay').classList.remove('open');document.getElementById('menu-panel').classList.remove('open');}
+
+// fade-in on scroll
+(function(){
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.08});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+})();
+
+// TRAINER BLOCK 1
+(function(){
+  const RAW=[
+    {q:'А) Cl₂\nБ) Al₂O₃\nВ) Ca(OH)₂\nГ) Na₂SO₃|1) NaHCO₃, Zn, HF\n2) O₂, HBr, KMnO₄\n3) O₂, H₂, Li\n4) NaBr, Ba(OH)₂, Fe\n5) HCl, NaOH, CaO',
+     a:'4512',
+     s:'А) Cl₂ + NaBr → NaCl + Br₂; Cl₂ + Ba(OH)₂ → Ba(ClO)₂ + BaCl₂ + H₂O; Cl₂ + Fe → FeCl₃\nБ) Al₂O₃ + HCl → AlCl₃ + H₂O; Al₂O₃ + NaOH → NaAlO₂ + H₂O; Al₂O₃ + CaO → Ca(AlO₂)₂\nВ) Ca(OH)₂ + NaHCO₃ → CaCO₃ + Na₂CO₃ + H₂O; Ca(OH)₂ + Zn + H₂O → Ca[Zn(OH)₄] + H₂; Ca(OH)₂ + HF → CaF₂ + H₂O\nГ) Na₂SO₃ + O₂ → Na₂SO₄; Na₂SO₃ + HBr → NaBr + SO₂ + H₂O; Na₂SO₃ + KMnO₄ + H₂SO₄ → Na₂SO₄ + MnSO₄ + H₂O'},
+    {q:'А) Zn\nБ) CuO\nВ) Ca(OH)₂ (р-р)\nГ) Na₂CO₃|1) O₂, HNO₃, FeCl₃\n2) H₂, HCl, NH₃\n3) Cu(OH)₂, O₂, MgCl₂\n4) HNO₃, BaCO₃, Na₃PO₄\n5) H₂SO₄, HCl, ZnCl₂',
+     a:'1255',
+     s:'А) Zn + O₂ → ZnO; Zn + HNO₃(конц.) → Zn(NO₃)₂ + NO₂ + H₂O; Zn + FeCl₃ → Fe + ZnCl₂\nБ) CuO + H₂ → Cu + H₂O; CuO + HCl → CuCl₂ + H₂O; CuO + NH₃ → Cu + N₂ + H₂O\nВ) Ca(OH)₂ + H₂SO₄ → CaSO₄ + H₂O; Ca(OH)₂ + HCl → CaCl₂ + H₂O; Ca(OH)₂ + ZnCl₂ → CaCl₂ + Zn(OH)₂\nГ) Na₂CO₃ + H₂SO₄ → Na₂SO₄ + CO₂ + H₂O; Na₂CO₃ + HCl → NaCl + CO₂ + H₂O; Na₂CO₃ + ZnCl₂ → NaCl + ZnCO₃'},
+    {q:'А) Na₃PO₄ (р-р)\nБ) HBr\nВ) Fe\nГ) K₂O|1) Ba, KNO₃, S\n2) Zn, CuO, ZnO\n3) H₂SO₄ (р-р), Fe₂O₃, S\n4) H₂O, CO₂, HNO₂\n5) AgNO₃, Ba(OH)₂, Sr(NO₃)₂',
+     a:'5234',
+     s:'А) Na₃PO₄ + AgNO₃ → Ag₃PO₄↓ + NaNO₃; Na₃PO₄ + Ba(OH)₂ → Ba₃(PO₄)₂↓ + NaOH; Na₃PO₄ + Sr(NO₃)₂ → Sr₃(PO₄)₂↓ + NaNO₃\nБ) HBr + Zn → ZnBr₂ + H₂; HBr + CuO → CuBr₂ + H₂O; HBr + ZnO → ZnBr₂ + H₂O\nВ) Fe + H₂SO₄(р-р) → FeSO₄ + H₂; Fe + Fe₂O₃ → FeO; Fe + S → FeS\nГ) K₂O + H₂O → KOH; K₂O + CO₂ → K₂CO₃; K₂O + HNO₂ → KNO₂ + H₂O'},
+    {q:'А) Li\nБ) CO₂\nВ) Ba(OH)₂\nГ) Ca(HCO₃)₂|1) HCl, Ca(OH)₂, Na₂SiO₃\n2) H₂, KOH, Na₂SO₄\n3) CuCl₂, Na₂CO₃, Fe(NO₃)₂\n4) C, Mg, NaOH\n5) H₂O, N₂, Cl₂',
+     a:'5431',
+     s:'А) Li + H₂O → LiOH + H₂; Li + N₂ → Li₃N; Li + Cl₂ → LiCl\nБ) CO₂ + C → CO; CO₂ + Mg → MgO + C; CO₂ + NaOH → Na₂CO₃ + H₂O\nВ) Ba(OH)₂ + CuCl₂ → Cu(OH)₂↓ + BaCl₂; Ba(OH)₂ + Na₂CO₃ → BaCO₃↓ + NaOH; Ba(OH)₂ + Fe(NO₃)₂ → Fe(OH)₂↓ + Ba(NO₃)₂\nГ) Ca(HCO₃)₂ + HCl → CaCl₂ + CO₂ + H₂O; Ca(HCO₃)₂ + Ca(OH)₂ → CaCO₃↓ + H₂O; Ca(HCO₃)₂ + Na₂SiO₃ → CaSiO₃↓ + NaHCO₃'},
+    {q:'А) HI\nБ) Cl₂ (г)\nВ) Al₂O₃\nГ) Na₃PO₄|1) Cu, P, Na\n2) Al(OH)₃, K₂CO₃, Mg\n3) K₂CO₃, KOH, H₂SO₄ (р-р)\n4) CuCl₂, Ca(NO₃)₂, Al₂(SO₄)₃\n5) HNO₃, N₂, NH₄Cl',
+     a:'2134',
+     s:'А) HI + Al(OH)₃ → AlI₃ + H₂O; HI + K₂CO₃ → KI + CO₂ + H₂O; HI + Mg → MgI₂ + H₂\nБ) Cl₂ + Cu → CuCl₂; Cl₂ + P → PCl₅; Cl₂ + Na → NaCl\nВ) Al₂O₃ + K₂CO₃ → KAlO₂ + CO₂; Al₂O₃ + KOH → KAlO₂ + H₂O; Al₂O₃ + H₂SO₄ → Al₂(SO₄)₃ + H₂O\nГ) Na₃PO₄ + CuCl₂ → Cu₃(PO₄)₂↓ + NaCl; Na₃PO₄ + Ca(NO₃)₂ → Ca₃(PO₄)₂↓ + NaNO₃; Na₃PO₄ + Al₂(SO₄)₃ → AlPO₄↓ + Na₂SO₄'},
+    {q:'А) K₂CO₃\nБ) H₂SO₄ (р-р)\nВ) Cu\nГ) ZnO|1) HBr, NaOH, H₂SO₄ (конц.)\n2) Fe, Al, Fe(OH)₂\n3) HNO₃ (р-р), O₂, AgNO₃\n4) CaCl₂, HNO₃, Ba(OH)₂\n5) Al(OH)₃, Cl₂, LiNO₃',
+     a:'4231',
+     s:'А) K₂CO₃ + CaCl₂ → CaCO₃↓ + KCl; K₂CO₃ + HNO₃ → KNO₃ + CO₂ + H₂O; K₂CO₃ + Ba(OH)₂ → BaCO₃↓ + KOH\nБ) H₂SO₄ + Fe → FeSO₄ + H₂; H₂SO₄ + Al → Al₂(SO₄)₃ + H₂; H₂SO₄ + Fe(OH)₂ → FeSO₄ + H₂O\nВ) Cu + HNO₃(конц.) → Cu(NO₃)₂ + NO₂ + H₂O; Cu + O₂ → CuO; Cu + AgNO₃ → Cu(NO₃)₂ + Ag\nГ) ZnO + HBr → ZnBr₂ + H₂O; ZnO + NaOH → Na₂ZnO₂ + H₂O; ZnO + H₂SO₄ → ZnSO₄ + H₂O'},
+    {q:'А) N₂\nБ) Fe₂(SO₄)₃\nВ) SO₃\nГ) HCl|1) H₂O, MgO, KOH\n2) AgNO₃, Ba(OH)₂, CuO\n3) Ba(NO₃)₂, Mg, Zn\n4) KNO₃, Cu(OH)₂, NaCl\n5) Ca, O₂, H₂',
+     a:'5312',
+     s:'А) N₂ + Ca → Ca₃N₂; N₂ + O₂ → NO (t°); N₂ + H₂ → NH₃ (t°, кат.)\nБ) Fe₂(SO₄)₃ + Ba(NO₃)₂ → BaSO₄↓ + Fe(NO₃)₃; Fe₂(SO₄)₃ + Mg → MgSO₄ + Fe; Fe₂(SO₄)₃ + Zn → ZnSO₄ + Fe\nВ) SO₃ + H₂O → H₂SO₄; SO₃ + MgO → MgSO₄; SO₃ + KOH → K₂SO₄ + H₂O\nГ) HCl + AgNO₃ → AgCl↓ + HNO₃; HCl + Ba(OH)₂ → BaCl₂ + H₂O; HCl + CuO → CuCl₂ + H₂O'},
+    {q:'А) K₂SO₄\nБ) Al(OH)₃\nВ) SO₂\nГ) H₂|1) N₂, Na, K\n2) H₂SO₄, KHCO₃, O₂\n3) NaOH, O₂, Ba(OH)₂\n4) Sr(NO₃)₂, Pb(NO₃)₂, BaBr₂\n5) Ba(OH)₂, HCl, HI',
+     a:'4531',
+     s:'А) K₂SO₄ + Sr(NO₃)₂ → SrSO₄↓ + KNO₃; K₂SO₄ + Pb(NO₃)₂ → PbSO₄↓ + KNO₃; K₂SO₄ + BaBr₂ → BaSO₄↓ + KBr\nБ) Al(OH)₃ + Ba(OH)₂ → Ba[Al(OH)₄]₂; Al(OH)₃ + HCl → AlCl₃ + H₂O; Al(OH)₃ + HI → AlI₃ + H₂O\nВ) SO₂ + NaOH → Na₂SO₃ + H₂O; SO₂ + O₂ → SO₃ (t°, кат.); SO₂ + Ba(OH)₂ → BaSO₃↓ + H₂O\nГ) H₂ + N₂ → NH₃ (t°, кат.); H₂ + Na → NaH; H₂ + K → KH'},
+    {q:'А) AlCl₃\nБ) HNO₃ (конц.)\nВ) Zn\nГ) FeO|1) NaOH, AgNO₃, K₃PO₄\n2) H₂SO₄ (р-р), Al, HBr\n3) Mg, Fe, O₂\n4) C, Ca, Cu\n5) NaOH, O₂, S',
+     a:'1452',
+     s:'А) AlCl₃ + NaOH → Al(OH)₃↓ + NaCl; AlCl₃ + AgNO₃ → AgCl↓ + Al(NO₃)₃; AlCl₃ + K₃PO₄ → AlPO₄↓ + KCl\nБ) HNO₃(конц.) + C → CO₂ + NO₂ + H₂O; HNO₃(конц.) + Ca → Ca(NO₃)₂ + NO₂ + H₂O; HNO₃(конц.) + Cu → Cu(NO₃)₂ + NO₂ + H₂O\nВ) Zn + NaOH + H₂O → Na₂[Zn(OH)₄] + H₂; Zn + O₂ → ZnO; Zn + S → ZnS\nГ) FeO + H₂SO₄ → FeSO₄ + H₂O; FeO + Al → Al₂O₃ + Fe; FeO + HBr → FeBr₂ + H₂O'},
+    {q:'А) Na\nБ) SO₂\nВ) Al(OH)₃\nГ) MgBr₂|1) CaO, O₂, KOH\n2) Cl₂, K₃PO₄, KOH\n3) K₂SO₄, P₂O₅, HNO₃\n4) Ba(OH)₂, H₂SO₄, HCl\n5) H₂SO₄, S, C₂H₅OH',
+     a:'5142',
+     s:'А) Na + H₂SO₄ → Na₂SO₄ + H₂S + H₂O; Na + S → Na₂S; Na + C₂H₅OH → C₂H₅ONa + H₂\nБ) SO₂ + CaO → CaSO₃; SO₂ + O₂ → SO₃ (t°, кат.); SO₂ + KOH → K₂SO₃ + H₂O\nВ) Al(OH)₃ + Ba(OH)₂ → Ba[Al(OH)₄]₂; Al(OH)₃ + H₂SO₄ → Al₂(SO₄)₃ + H₂O; Al(OH)₃ + HCl → AlCl₃ + H₂O\nГ) MgBr₂ + Cl₂ → MgCl₂ + Br₂; MgBr₂ + K₃PO₄ → Mg₃(PO₄)₂↓ + KBr; MgBr₂ + KOH → Mg(OH)₂↓ + KBr'},
+    {q:'А) P₂O₅\nБ) Fe(OH)₂\nВ) NH₄Br\nГ) Cu(NO₃)₂|1) Ca(OH)₂, AgNO₃, Cl₂\n2) Fe, Na₃PO₄, KOH\n3) H₂O₂, H₂SO₄, HCl\n4) H₂O, CaO, LiOH\n5) CO, H₂O, PbS',
+     a:'4312',
+     s:'А) P₂O₅ + H₂O → H₃PO₄; P₂O₅ + CaO → Ca₃(PO₄)₂; P₂O₅ + LiOH → Li₃PO₄ + H₂O\nБ) Fe(OH)₂ + H₂O₂ → Fe(OH)₃; Fe(OH)₂ + H₂SO₄(конц.) → Fe₂(SO₄)₃ + SO₂ + H₂O; Fe(OH)₂ + HCl → FeCl₂ + H₂O\nВ) NH₄Br + Ca(OH)₂ → CaBr₂ + NH₃↑ + H₂O; NH₄Br + AgNO₃ → AgBr↓ + NH₄NO₃; NH₄Br + Cl₂ → NH₄Cl + Br₂\nГ) Cu(NO₃)₂ + Fe → Cu + Fe(NO₃)₂; Cu(NO₃)₂ + Na₃PO₄ → Cu₃(PO₄)₂↓ + NaNO₃; Cu(NO₃)₂ + KOH → Cu(OH)₂↓ + KNO₃'},
+    {q:'А) S\nБ) P₂O₃\nВ) Fe₂O₃\nГ) Cu(OH)₂|1) H₂O, NaOH, HCl\n2) Fe, HCl, NaOH\n3) HCl, HCHO, H₂SO₄\n4) O₂, NaOH, HNO₃\n5) H₂O, CO₂, HCl',
+     a:'4423',
+     s:'А) S + O₂ → SO₂; S + NaOH → Na₂S + Na₂SO₃ + H₂O (горяч.); S + HNO₃(конц.) → H₂SO₄ + NO₂\nБ) P₂O₃ + O₂ → P₂O₅; P₂O₃ + NaOH → Na₂HPO₃ + H₂O; P₂O₃ + HNO₃(конц.) + H₂O → H₃PO₄ + NO₂\nВ) Fe₂O₃ + Fe → FeO (t°); Fe₂O₃ + HCl → FeCl₃ + H₂O; Fe₂O₃ + NaOH → NaFeO₂ + H₂O (t°)\nГ) Cu(OH)₂ + HCl → CuCl₂ + H₂O; Cu(OH)₂ + HCHO → Cu₂O + CO₂ + H₂O; Cu(OH)₂ + H₂SO₄ → CuSO₄ + H₂O'},
+    {q:'А) CaO\nБ) S\nВ) Zn(OH)₂\nГ) KHCO₃|1) K, Br₂, CaSO₄\n2) O₂, KOH, HNO₃\n3) NaOH, HNO₃, CH₃COOH\n4) HBr, SO₃, N₂\n5) CO₂, H₂O, HCl',
+     a:'5233',
+     s:'А) CaO + CO₂ → CaCO₃; CaO + H₂O → Ca(OH)₂; CaO + HCl → CaCl₂ + H₂O\nБ) S + O₂ → SO₂; S + KOH → K₂S + K₂SO₃ + H₂O; S + HNO₃(конц.) → H₂SO₄ + NO₂\nВ) Zn(OH)₂ + NaOH → Na₂[Zn(OH)₄]; Zn(OH)₂ + HNO₃ → Zn(NO₃)₂ + H₂O; Zn(OH)₂ + CH₃COOH → (CH₃COO)₂Zn + H₂O\nГ) KHCO₃ + NaOH → K₂CO₃ + Na₂CO₃ + H₂O; KHCO₃ + HNO₃ → KNO₃ + CO₂ + H₂O; KHCO₃ + CH₃COOH → CH₃COOK + CO₂ + H₂O'},
+    {q:'А) Zn\nБ) P₂O₃\nВ) Ca(OH)₂\nГ) MgSO₄|1) HCl, Na₂CO₃, HNO₃\n2) BaCl₂, NaOH, Na₃PO₄\n3) H₂O, HCl, CO₂\n4) HBr, NaOH, CuSO₄\n5) O₂, Ba(OH)₂, CaO',
+     a:'4512',
+     s:'А) Zn + HBr → ZnBr₂ + H₂; Zn + NaOH + H₂O → Na₂[Zn(OH)₄] + H₂; Zn + CuSO₄ → Cu + ZnSO₄\nБ) P₂O₃ + O₂ → P₂O₅; P₂O₃ + Ba(OH)₂ → BaHPO₃ + H₂O; P₂O₃ + CaO + H₂O → CaHPO₃\nВ) Ca(OH)₂ + HCl → CaCl₂ + H₂O; Ca(OH)₂ + Na₂CO₃ → CaCO₃↓ + NaOH; Ca(OH)₂ + HNO₃ → Ca(NO₃)₂ + H₂O\nГ) MgSO₄ + BaCl₂ → BaSO₄↓ + MgCl₂; MgSO₄ + NaOH → Mg(OH)₂↓ + Na₂SO₄; MgSO₄ + Na₃PO₄ → Mg₃(PO₄)₂↓ + Na₂SO₄'},
+    {q:'А) Al\nБ) O₂\nВ) CO\nГ) H₂SO₄|1) CaO, H₂S, LiOH\n2) NaOH, HCl, CH₄\n3) O₂, Zn, KOH (р-р)\n4) C, P₂O₃, SO₂\n5) Fe₂O₃, O₂, CuO',
+     a:'5451',
+     s:'А) Al + Fe₂O₃ → Al₂O₃ + Fe; Al + O₂ → Al₂O₃; Al + CuO → Al₂O₃ + Cu\nБ) O₂ + C → CO₂; O₂ + P₂O₃ → P₂O₅; O₂ + SO₂ → SO₃ (t°, кат.)\nВ) CO + Fe₂O₃ → Fe + CO₂; CO + O₂ → CO₂; CO + CuO → Cu + CO₂\nГ) H₂SO₄ + CaO → CaSO₄ + H₂O; H₂SO₄(конц.) + H₂S → SO₂ + H₂O; H₂SO₄ + LiOH → Li₂SO₄ + H₂O'},
+    {q:'А) H₂O\nБ) O₂\nВ) Si\nГ) CuSO₄|1) P₂O₅, Na, Al₂S₃\n2) H₂S, FeO, NH₃\n3) Cl₂, KOH, Ca\n4) CO₂, HF, CH₄\n5) H₂S, NaOH, KI',
+     a:'1235',
+     s:'А) H₂O + P₂O₅ → H₃PO₄; H₂O + Na → NaOH + H₂; H₂O + Al₂S₃ → Al(OH)₃ + H₂S\nБ) O₂ + H₂S → SO₂ + H₂O; O₂ + FeO → Fe₂O₃; O₂ + NH₃ → N₂ + H₂O\nВ) Si + Cl₂ → SiCl₄; Si + KOH + H₂O → K₂SiO₃ + H₂; Si + Ca → Ca₂Si\nГ) CuSO₄ + H₂S → CuS↓ + H₂SO₄; CuSO₄ + NaOH → Cu(OH)₂↓ + Na₂SO₄; CuSO₄ + KI → CuI + I₂ + K₂SO₄'},
+    {q:'А) Cr(OH)₃\nБ) H₂SO₄ (разб.)\nВ) H₂S\nГ) Ba|1) LiOH, HNO₃, HCl\n2) NaOH, K₂O, CuSO₄\n3) H₂O, S, HNO₃\n4) Zn, BaCl₂, NaHS\n5) NaNO₃, CuO, SiO₂',
+     a:'1423',
+     s:'А) Cr(OH)₃ + LiOH → Li₃[Cr(OH)₆]; Cr(OH)₃ + HNO₃ → Cr(NO₃)₃ + H₂O; Cr(OH)₃ + HCl → CrCl₃ + H₂O\nБ) H₂SO₄ + Zn → ZnSO₄ + H₂; H₂SO₄ + BaCl₂ → BaSO₄↓ + HCl; H₂SO₄ + NaHS → Na₂SO₄ + H₂S\nВ) H₂S + NaOH → Na₂S + H₂O; H₂S + K₂O → K₂S + H₂O; H₂S + CuSO₄ → CuS↓ + H₂SO₄\nГ) Ba + H₂O → Ba(OH)₂ + H₂; Ba + S → BaS; Ba + HNO₃(разб.) → Ba(NO₃)₂ + N₂ + H₂O'},
+    {q:'А) Cl₂\nБ) Al₂O₃\nВ) Ca(OH)₂\nГ) NaHSO₃|1) NaOH, NaCl, HF\n2) H₂SO₄, NaOH, HBr\n3) NaHSO₄, Br₂, SO₂\n4) NaBr, Ba(OH)₂, Fe\n5) C₆H₆, HCl, NaOH',
+     a:'4232',
+     s:'А) Cl₂ + NaBr → NaCl + Br₂; Cl₂ + Ba(OH)₂ → Ba(ClO)₂ + BaCl₂ + H₂O; Cl₂ + Fe → FeCl₃\nБ) Al₂O₃ + H₂SO₄ → Al₂(SO₄)₃ + H₂O; Al₂O₃ + NaOH(тв.) → NaAlO₂ + H₂O; Al₂O₃ + HBr → AlBr₃ + H₂O\nВ) Ca(OH)₂ + NaHSO₄ → CaSO₄ + NaOH + H₂O; Ca(OH)₂ + Br₂ → Ca(BrO)₂ + CaBr₂ + H₂O; Ca(OH)₂ + SO₂ → CaSO₃\nГ) NaHSO₃ + H₂SO₄ → Na₂SO₄ + SO₂ + H₂O; NaHSO₃ + NaOH → Na₂SO₃ + H₂O; NaHSO₃ + HBr → NaBr + SO₂ + H₂O'},
+    {q:'А) Li\nБ) SO₂\nВ) Zn(OH)₂\nГ) ZnBr₂|1) CaO, O₂, KOH\n2) Al, Na₂CO₃, LiOH\n3) K₂SO₄, P₂O₅, HNO₃\n4) Ba(OH)₂, KOH, HCl\n5) H₂SO₄, C₂H₅OH, N₂',
+     a:'5142',
+     s:'А) Li + H₂SO₄(конц.) → Li₂SO₄ + H₂S + H₂O; Li + C₂H₅OH → C₂H₅OLi + H₂; Li + N₂ → Li₃N\nБ) SO₂ + CaO → CaSO₃; SO₂ + O₂ → SO₃; SO₂ + KOH → K₂SO₃ + H₂O\nВ) Zn(OH)₂ + Ba(OH)₂ → Ba[Zn(OH)₄]; Zn(OH)₂ + KOH → K₂[Zn(OH)₄]; Zn(OH)₂ + HCl → ZnCl₂ + H₂O\nГ) ZnBr₂ + Al → AlBr₃ + Zn; ZnBr₂ + Na₂CO₃ → ZnCO₃ + NaBr; ZnBr₂ + LiOH → Zn(OH)₂ + LiBr'},
+    {q:'А) Zn(OH)₂\nБ) H₂SO₄ (разб.)\nВ) H₂S\nГ) Ca|1) LiOH, HNO₃, HCl\n2) NaOH, K₂O, CuSO₄\n3) H₂O, S, HNO₃\n4) Zn, BaCl₂, NaHS\n5) NaNO₃, CuO, SiO₂',
+     a:'1423',
+     s:'А) Zn(OH)₂ + LiOH → Li₂[Zn(OH)₄]; Zn(OH)₂ + HNO₃ → Zn(NO₃)₂ + H₂O; Zn(OH)₂ + HCl → ZnCl₂ + H₂O\nБ) H₂SO₄ + Zn → ZnSO₄ + H₂; H₂SO₄ + BaCl₂ → BaSO₄↓ + HCl; H₂SO₄ + NaHS → Na₂SO₄ + H₂S\nВ) H₂S + NaOH → Na₂S + H₂O; H₂S + K₂O → K₂S + H₂O; H₂S + CuSO₄ → CuS↓ + H₂SO₄\nГ) Ca + H₂O → Ca(OH)₂ + H₂; Ca + S → CaS; Ca + HNO₃(разб.) → Ca(NO₃)₂ + N₂ + H₂O'},
+    {q:'А) Br₂\nБ) SiO₂\nВ) K₂CO₃\nГ) Fe₂(SO₄)₃|1) HF, NaOH, CaCO₃\n2) HCl, Al₂O₃, CaCl₂\n3) LiOH, KI, BaCl₂\n4) H₂SO₄, O₂, CO₂\n5) Mg, H₂S, H₂',
+     a:'5123',
+     s:'А) Br₂ + Mg → MgBr₂; Br₂ + H₂S → HBr + S; Br₂ + H₂ → HBr\nБ) SiO₂ + HF → SiF₄ + H₂O; SiO₂ + NaOH → Na₂SiO₃ + H₂O; SiO₂ + CaCO₃ → CaSiO₃ + CO₂\nВ) K₂CO₃ + HCl → KCl + CO₂ + H₂O; K₂CO₃ + Al₂O₃ → KAlO₂ + CO₂; K₂CO₃ + CaCl₂ → CaCO₃↓ + KCl\nГ) Fe₂(SO₄)₃ + LiOH → Fe(OH)₃↓ + Li₂SO₄; Fe₂(SO₄)₃ + KI → FeI₂ + I₂ + K₂SO₄; Fe₂(SO₄)₃ + BaCl₂ → BaSO₄↓ + FeCl₃'},
+    {q:'А) Ba\nБ) Ba(OH)₂\nВ) SO₂\nГ) FeS|1) H₂O, HBr, Mg\n2) P₂O₅, CrO₃, Li₂SO₄\n3) NaOH, H₂O, O₂\n4) CO, K₃PO₄, H₂\n5) HCl, O₂, HNO₃',
+     a:'5235',
+     s:'А) Ba + HCl → BaCl₂ + H₂; Ba + O₂ → BaO; Ba + HNO₃(конц.) → Ba(NO₃)₂ + NO₂ + H₂O\nБ) Ba(OH)₂ + P₂O₅ → Ba₃(PO₄)₂ + H₂O; Ba(OH)₂ + CrO₃ → BaCrO₄ + H₂O; Ba(OH)₂ + Li₂SO₄ → BaSO₄↓ + LiOH\nВ) SO₂ + NaOH → Na₂SO₃ + H₂O; SO₂ + H₂O → H₂SO₃; SO₂ + O₂ → SO₃\nГ) FeS + HCl → FeCl₂ + H₂S; FeS + O₂ → Fe₂O₃ + SO₂; FeS + HNO₃(конц.) → Fe₂(SO₄)₃ + Fe(NO₃)₃ + NO₂ + H₂O'},
+    {q:'А) S\nБ) SO₃\nВ) Zn(OH)₂\nГ) ZnBr₂|1) AgNO₃, Na₃PO₄, Cl₂\n2) BaO, H₂O, KOH\n3) H₂, Cl₂, O₂\n4) HBr, LiOH, CH₃COOH\n5) H₃PO₄, BaCl₂, CuO',
+     a:'3241',
+     s:'А) S + H₂ → H₂S; S + Cl₂ → SCl₂; S + O₂ → SO₂\nБ) SO₃ + BaO → BaSO₄; SO₃ + H₂O → H₂SO₄; SO₃ + KOH → K₂SO₄ + H₂O\nВ) Zn(OH)₂ + HBr → ZnBr₂ + H₂O; Zn(OH)₂ + LiOH → Li₂[Zn(OH)₄]; Zn(OH)₂ + CH₃COOH → (CH₃COO)₂Zn + H₂O\nГ) ZnBr₂ + AgNO₃ → AgBr↓ + Zn(NO₃)₂; ZnBr₂ + Na₃PO₄ → Zn₃(PO₄)₂↓ + NaBr; ZnBr₂ + Cl₂ → ZnCl₂ + Br₂'},
+    {q:'А) P\nБ) P₂O₅\nВ) Al(OH)₃\nГ) K₂S|1) Ca, O₂, S\n2) H₂O, NH₃, BaSO₄\n3) H₃PO₄, HBr, NaOH\n4) Br₂, Pb(CH₃COO)₂, H₂SO₄\n5) H₂O, Li₂O, Ca(OH)₂',
+     a:'1534',
+     s:'А) P + Ca → Ca₃P₂; P + O₂ → P₂O₅; P + S → P₂S₅\nБ) P₂O₅ + H₂O → H₃PO₄; P₂O₅ + Li₂O → Li₃PO₄; P₂O₅ + Ca(OH)₂ → Ca₃(PO₄)₂ + H₂O\nВ) Al(OH)₃ + H₃PO₄ → AlPO₄ + H₂O; Al(OH)₃ + HBr → AlBr₃ + H₂O; Al(OH)₃ + NaOH → Na[Al(OH)₄]\nГ) K₂S + Br₂ → KBr + S; K₂S + Pb(CH₃COO)₂ → PbS↓ + CH₃COOK; K₂S + H₂SO₄ → K₂SO₄ + H₂S'},
+    {q:'А) C\nБ) Al₂O₃\nВ) H₂S\nГ) BaCl₂|1) AgNO₃, K₂HPO₄, H₂SO₄\n2) Ba(OH)₂, Pb(NO₃)₂, O₂\n3) KOH, HCl, Sr(OH)₂\n4) CaCO₃, NH₄Br, HNO₃\n5) O₂, H₂, ZnO',
+     a:'5321',
+     s:'А) C + O₂ → CO₂; C + H₂ → CH₄; C + ZnO → Zn + CO₂\nБ) Al₂O₃ + KOH(тв.) → KAlO₂ + H₂O; Al₂O₃ + HCl → AlCl₃ + H₂O; Al₂O₃ + Sr(OH)₂(тв.) → Sr(AlO₂)₂ + H₂O\nВ) H₂S + Ba(OH)₂ → Ba(HS)₂ + H₂O; H₂S + Pb(NO₃)₂ → PbS↓ + HNO₃; H₂S + O₂ → SO₂ + H₂O\nГ) BaCl₂ + AgNO₃ → AgCl↓ + Ba(NO₃)₂; BaCl₂ + K₂HPO₄ → BaHPO₄↓ + 2KCl; BaCl₂ + H₂SO₄ → BaSO₄↓ + HCl'},
+    {q:'А) Ca\nБ) KOH\nВ) SO₂\nГ) ZnS|1) MgO, Ba(OH)₂, H₂SO₃\n2) NaOH, H₂O, O₂\n3) NH₄Cl, P₂O₅, CrO₃\n4) CO, Na₃PO₄, H₂\n5) HCl, O₂, HNO₃',
+     a:'5325',
+     s:'А) Ca + HCl → CaCl₂ + H₂; Ca + O₂ → CaO; Ca + HNO₃(конц.) → Ca(NO₃)₂ + NO₂ + H₂O\nБ) KOH + NH₄Cl → KCl + NH₃ + H₂O; KOH + P₂O₅ → K₃PO₄ + H₂O; KOH + CrO₃ → K₂CrO₄ + H₂O\nВ) SO₂ + NaOH → Na₂SO₃ + H₂O; SO₂ + H₂O → H₂SO₃; SO₂ + O₂ → SO₃ (t°, кат.)\nГ) ZnS + HCl → ZnCl₂ + H₂S; ZnS + O₂ → ZnO + SO₂; ZnS + HNO₃(конц.) → ZnSO₄ + NO₂ + H₂O'},
+    {q:'А) O₂\nБ) CO₂\nВ) Ba(OH)₂\nГ) NH₄Br|1) Cl₂, Ca(OH)₂, AgNO₃\n2) Li₂O, CaO, C\n3) Fe₂O₃, HNO₃, ZnS\n4) CO, H₂S, Mg\n5) Al(OH)₃, SO₃, ZnSO₄',
+     a:'4251',
+     s:'А) O₂ + CO → CO₂; O₂ + H₂S → SO₂ + H₂O; O₂ + Mg → MgO\nБ) CO₂ + Li₂O → Li₂CO₃; CO₂ + CaO → CaCO₃; CO₂ + C → CO\nВ) Ba(OH)₂ + Al(OH)₃ → Ba[Al(OH)₄]₂; Ba(OH)₂ + SO₃ → BaSO₄ + H₂O; Ba(OH)₂ + ZnSO₄ → BaSO₄↓ + Zn(OH)₂\nГ) NH₄Br + Cl₂ → NH₄Cl + Br₂; NH₄Br + Ca(OH)₂ → CaBr₂ + NH₃ + H₂O; NH₄Br + AgNO₃ → AgBr↓ + NH₄NO₃'},
+    {q:'А) Cu\nБ) ZnO\nВ) Ba(OH)₂\nГ) NH₄Cl|1) HCl, C, NaOH\n2) HNO₃, O₂, Br₂\n3) SrCl₂, CO, SO₂\n4) HBr, Al(OH)₃, Na₂CO₃\n5) Ca(OH)₂, AgNO₃, H₂SO₄ (конц.)',
+     a:'2145',
+     s:'А) Cu + HNO₃(конц.) → Cu(NO₃)₂ + NO₂ + H₂O; Cu + O₂ → CuO; Cu + Br₂ → CuBr₂\nБ) ZnO + HCl → ZnCl₂ + H₂O; ZnO + C → Zn + CO; ZnO + NaOH(тв.) → Na₂ZnO₂ + H₂O\nВ) Ba(OH)₂ + HBr → BaBr₂ + H₂O; Ba(OH)₂ + Al(OH)₃ → Ba[Al(OH)₄]₂; Ba(OH)₂ + Na₂CO₃ → BaCO₃↓ + NaOH\nГ) NH₄Cl + Ca(OH)₂ → CaCl₂ + NH₃ + H₂O; NH₄Cl + AgNO₃ → AgCl↓ + NH₄NO₃; NH₄Cl(тв.) + H₂SO₄(конц.) → (NH₄)₂SO₄ + HCl'},
+    {q:'А) Fe\nБ) Cr₂O₃\nВ) H₃PO₄\nГ) Na₂CO₃|1) HBr, BaCl₂, HNO₃\n2) Al(OH)₃, SO₂, Li₃PO₄\n3) Ca, NH₃, Zn(OH)₂\n4) H₂SO₄, KOH, Al\n5) S, CuSO₄, HCl',
+     a:'5431',
+     s:'А) Fe + S → FeS; Fe + CuSO₄ → Cu + FeSO₄; Fe + HCl → FeCl₂ + H₂\nБ) Cr₂O₃ + H₂SO₄ → Cr₂(SO₄)₃ + H₂O; Cr₂O₃ + KOH → KCrO₂ + H₂O; Cr₂O₃ + Al → Cr + Al₂O₃\nВ) H₃PO₄ + Ca → Ca₃(PO₄)₂ + H₂; H₃PO₄ + NH₃ → (NH₄)₂HPO₄; H₃PO₄ + Zn(OH)₂ → Zn₃(PO₄)₂ + H₂O\nГ) Na₂CO₃ + HBr → NaBr + CO₂ + H₂O; Na₂CO₃ + BaCl₂ → BaCO₃↓ + NaCl; Na₂CO₃ + HNO₃ → NaNO₃ + CO₂ + H₂O'},
+    {q:'А) Na\nБ) SiO₂\nВ) H₂SO₄\nГ) CuSO₄|1) CaCO₃, Zn, H₂\n2) H₃PO₄, Cl₂, H₂O\n3) LiOH, Ba(NO₃)₂, (NH₄)₂S\n4) HF, Na₂CO₃, KOH\n5) CO₂, Li₃PO₄, BaO',
+     a:'2433',
+     s:'А) Na + H₃PO₄ → Na₃PO₄ + H₂; Na + Cl₂ → NaCl; Na + H₂O → NaOH + H₂\nБ) SiO₂ + HF → SiF₄ + H₂O; SiO₂ + Na₂CO₃ → Na₂SiO₃ + CO₂; SiO₂ + KOH → K₂SiO₃ + H₂O\nВ) H₂SO₄ + LiOH → Li₂SO₄ + H₂O; H₂SO₄ + Ba(NO₃)₂ → BaSO₄↓ + HNO₃; H₂SO₄ + (NH₄)₂S → (NH₄)₂SO₄ + H₂S\nГ) CuSO₄ + LiOH → Cu(OH)₂↓ + Li₂SO₄; CuSO₄ + Ba(NO₃)₂ → BaSO₄↓ + Cu(NO₃)₂; CuSO₄ + (NH₄)₂S → CuS↓ + (NH₄)₂SO₄'},
+    {q:'А) S\nБ) P₂O₅\nВ) Zn(OH)₂\nГ) Na₂S|1) O₂, Fe, Cl₂\n2) Br₂, FeSO₄, HCl\n3) Li₂O, Ba(OH)₂, H₂O\n4) NH₃, Ca₃(PO₄)₂, HNO₃\n5) KOH, H₃PO₄, HBr',
+     a:'1352',
+     s:'А) S + O₂ → SO₂; S + Fe → FeS; S + Cl₂ → SCl₂\nБ) P₂O₅ + Li₂O → Li₃PO₄; P₂O₅ + Ba(OH)₂ → Ba₃(PO₄)₂ + H₂O; P₂O₅ + H₂O → H₃PO₄\nВ) Zn(OH)₂ + KOH → K₂[Zn(OH)₄]; Zn(OH)₂ + H₃PO₄ → Zn₃(PO₄)₂ + H₂O; Zn(OH)₂ + HBr → ZnBr₂ + H₂O\nГ) Na₂S + Br₂ → NaBr + S; Na₂S + FeSO₄ → FeS↓ + Na₂SO₄; Na₂S + HCl → NaCl + H₂S'},
+    {q:'А) P\nБ) CO₂\nВ) Al(OH)₃\nГ) CuCl₂|1) K₂SO₄, CO₂, (NH₄)₃PO₄\n2) (NH₄)₂S, Fe, AgNO₃\n3) CaO, NaOH, H₂O\n4) HI, Ba(OH)₂, HCl\n5) Na, HNO₃, Br₂',
+     a:'5342',
+     s:'А) P + Na → Na₃P; P + HNO₃(конц.) → H₃PO₄ + NO₂ + H₂O; P + Br₂ → PBr₅\nБ) CO₂ + CaO → CaCO₃; CO₂ + NaOH → Na₂CO₃ + H₂O; CO₂ + H₂O → CO₂·H₂O\nВ) Al(OH)₃ + HI → AlI₃ + H₂O; Al(OH)₃ + Ba(OH)₂ → Ba[Al(OH)₄]₂; Al(OH)₃ + HCl → AlCl₃ + H₂O\nГ) CuCl₂ + (NH₄)₂S → CuS↓ + NH₄Cl; CuCl₂ + Fe → FeCl₂ + Cu; CuCl₂ + AgNO₃ → AgCl↓ + Cu(NO₃)₂'},
+    {q:'А) Sr\nБ) Na₂O\nВ) HNO₃\nГ) (NH₄)₂SO₄|1) Pb, S, C\n2) O₂, S, Cl₂\n3) HCl, CO₂, P₂O₅\n4) CaO, Br₂, K₂SO₄\n5) Ba(NO₃)₂, KOH, Ca(OH)₂',
+     a:'2315',
+     s:'А) Sr + O₂ → SrO; Sr + S → SrS; Sr + Cl₂ → SrCl₂\nБ) Na₂O + HCl → NaCl + H₂O; Na₂O + CO₂ → Na₂CO₃; Na₂O + P₂O₅ → Na₃PO₄\nВ) HNO₃(конц.) + Pb → Pb(NO₃)₂ + NO₂ + H₂O; HNO₃(конц.) + S → H₂SO₄ + NO₂ + H₂O; HNO₃(конц.) + C → CO₂ + NO₂ + H₂O\nГ) (NH₄)₂SO₄ + Ba(NO₃)₂ → BaSO₄↓ + NH₄NO₃; (NH₄)₂SO₄ + KOH → K₂SO₄ + NH₃ + H₂O; (NH₄)₂SO₄ + Ca(OH)₂ → CaSO₄ + NH₃ + H₂O'},
+    {q:'А) Ca\nБ) ZnO\nВ) CuSO₄\nГ) Na₂SO₃|1) HCl, BaCl₂, HNO₃\n2) Al, NaOH, Na₂S\n3) Cu, HCl, BaCl₂\n4) H₂, HCl, NaOH\n5) P, HCl, O₂',
+     a:'5421',
+     s:'А) Ca + P → Ca₃P₂; Ca + HCl → CaCl₂ + H₂; Ca + O₂ → CaO\nБ) ZnO + H₂ → Zn + H₂O; ZnO + HCl → ZnCl₂ + H₂O; ZnO + NaOH(тв.) → Na₂ZnO₂ + H₂O\nВ) CuSO₄ + Al → Al₂(SO₄)₃ + Cu; CuSO₄ + NaOH → Cu(OH)₂↓ + Na₂SO₄; CuSO₄ + Na₂S → CuS↓ + Na₂SO₄\nГ) Na₂SO₃ + HCl → NaCl + SO₂ + H₂O; Na₂SO₃ + BaCl₂ → BaSO₃↓ + NaCl; Na₂SO₃ + HNO₃ → NaNO₃ + SO₂ + H₂O'},
+    {q:'А) N₂\nБ) CuO\nВ) HNO₃\nГ) CuSO₄|1) H₂, O₂, Li\n2) H₂, CO, Al\n3) Fe₂O₃, O₂, CO₂\n4) S, Na₂CO₃, FeS\n5) NaOH, BaCl₂, KI',
+     a:'1245',
+     s:'А) N₂ + H₂ → NH₃ (t°, кат.); N₂ + O₂ → NO (t°); N₂ + Li → Li₃N\nБ) CuO + H₂ → Cu + H₂O; CuO + CO → Cu + CO₂; CuO + Al → Al₂O₃ + Cu\nВ) HNO₃(конц.) + S → H₂SO₄ + NO₂ + H₂O; HNO₃ + Na₂CO₃ → NaNO₃ + CO₂ + H₂O; HNO₃(конц.) + FeS → Fe₂(SO₄)₃ + Fe(NO₃)₃ + NO₂ + H₂O\nГ) CuSO₄ + NaOH → Cu(OH)₂↓ + Na₂SO₄; CuSO₄ + BaCl₂ → BaSO₄↓ + CuCl₂; CuSO₄ + KI → CuI + I₂ + K₂SO₄'},
+    {q:'А) H₂\nБ) H₂O\nВ) HCl\nГ) NaOH|1) S, CuO, N₂\n2) Fe, CuO, NH₃\n3) Ca, SO₂, Na₂O\n4) Cu, N₂, H₂SO₄\n5) CuCl₂, NH₄Cl, SiO₂',
+     a:'1325',
+     s:'А) H₂ + S → H₂S; H₂ + CuO → Cu + H₂O; H₂ + N₂ → NH₃ (t°, кат.)\nБ) H₂O + Ca → Ca(OH)₂ + H₂; H₂O + SO₂ → H₂SO₃; H₂O + Na₂O → NaOH\nВ) HCl + Fe → FeCl₂ + H₂; HCl + CuO → CuCl₂ + H₂O; HCl + NH₃ → NH₄Cl\nГ) NaOH + CuCl₂ → Cu(OH)₂↓ + NaCl; NaOH + NH₄Cl → NaCl + NH₃ + H₂O; NaOH + SiO₂ → Na₂SiO₃ + H₂O'},
+    {q:'А) Fe\nБ) KI\nВ) HCl\nГ) CO₂|1) NaOH, C, Mg\n2) Br₂, CuCl₂, AgNO₃\n3) AgNO₃, KOH, MnO₂\n4) H₂, CuSO₄, HCl\n5) N₂, Na₂O, Ba(OH)₂',
+     a:'2231',
+     s:'А) Fe + Br₂ → FeBr₃; Fe + CuCl₂ → FeCl₂ + Cu; Fe + AgNO₃ → Fe(NO₃)₂ + Ag\nБ) KI + Br₂ → KBr + I₂; KI + CuCl₂ → CuI + I₂ + KCl; KI + AgNO₃ → AgI↓ + KNO₃\nВ) HCl + AgNO₃ → AgCl↓ + HNO₃; HCl + KOH → KCl + H₂O; HCl + MnO₂ → MnCl₂ + Cl₂ + H₂O\nГ) CO₂ + NaOH → Na₂CO₃ + H₂O; CO₂ + C → CO; CO₂ + Mg → C + MgO'},
+    {q:'А) O₂\nБ) H₂O\nВ) NaOH\nГ) NaHCO₃|1) Mg, CuO, CuSO₄\n2) CO, P₂O₃, Cu\n3) HCl (р-р), KOH (р-р), H₂SO₄\n4) NH₄Cl (р-р), HCl (р-р), CuSO₄ (р-р)\n5) P₂O₅, CaC₂, Na₂O',
+     a:'2543',
+     s:'А) O₂ + CO → CO₂; O₂ + P₂O₃ → P₂O₅; O₂ + Cu → CuO\nБ) H₂O + P₂O₅ → H₃PO₄; H₂O + CaC₂ → Ca(OH)₂ + C₂H₂; H₂O + Na₂O → NaOH\nВ) NaOH + NH₄Cl → NaCl + NH₃ + H₂O; NaOH + HCl → NaCl + H₂O; NaOH + CuSO₄ → Cu(OH)₂↓ + Na₂SO₄\nГ) NaHCO₃ + HCl → NaCl + CO₂ + H₂O; NaHCO₃ + KOH → Na₂CO₃ + K₂CO₃ + H₂O; NaHCO₃ + H₂SO₄ → Na₂SO₄ + CO₂ + H₂O'},
+    {q:'А) P красн.\nБ) P₂O₃\nВ) MgBr₂\nГ) Zn(OH)₂|1) HCl, NaOH, CaO\n2) NaOH, Na₃PO₄, Cl₂\n3) HNO₃, HCl, Cl₂\n4) O₂, NaOH, HNO₃\n5) S, HCl, O₂',
+     a:'4421',
+     s:'А) P + O₂ → P₂O₅; P + NaOH + H₂O → NaH₂PO₂ + PH₃; P + HNO₃(конц.) → H₃PO₄ + NO₂ + H₂O\nБ) P₂O₃ + O₂ → P₂O₅; P₂O₃ + NaOH → Na₂HPO₃ + H₂O; P₂O₃ + HNO₃(конц.) → H₃PO₄ + NO₂ + H₂O\nВ) MgBr₂ + NaOH → Mg(OH)₂↓ + NaBr; MgBr₂ + Na₃PO₄ → Mg₃(PO₄)₂↓ + NaBr; MgBr₂ + Cl₂ → MgCl₂ + Br₂\nГ) Zn(OH)₂ + HCl → ZnCl₂ + H₂O; Zn(OH)₂ + NaOH → Na₂[Zn(OH)₄]; Zn(OH)₂ + CaO → CaZnO₂ + H₂O'},
+    {q:'А) Cu\nБ) CO₂\nВ) HCl\nГ) CuBr₂|1) Mg, CaO, C\n2) S, Cl₂, HNO₃\n3) Cl₂, NaOH, KI\n4) Br₂, H₂SO₄, KCl\n5) Mg, MgO, AgNO₃',
+     a:'2153',
+     s:'А) Cu + S → CuS; Cu + Cl₂ → CuCl₂; Cu + HNO₃(конц.) → Cu(NO₃)₂ + NO₂ + H₂O\nБ) CO₂ + Mg → MgO + C; CO₂ + CaO → CaCO₃; CO₂ + C → CO\nВ) HCl + Mg → MgCl₂ + H₂; HCl + MgO → MgCl₂ + H₂O; HCl + AgNO₃ → AgCl↓ + HNO₃\nГ) CuBr₂ + Cl₂ → CuCl₂ + Br₂; CuBr₂ + NaOH → Cu(OH)₂↓ + NaBr; CuBr₂ + KI → CuI + I₂ + KBr'},
+    {q:'А) Cl₂\nБ) SiO₂\nВ) K₂CO₃\nГ) CuSO₄|1) HF, NaOH, Na₂CO₃\n2) HCl, Al₂O₃, CaCl₂\n3) NaOH, KI, BaCl₂\n4) H₂SO₄, O₂, CO₂\n5) Mg, H₂S, H₂',
+     a:'5123',
+     s:'А) Cl₂ + Mg → MgCl₂; Cl₂ + H₂S → HCl + S; Cl₂ + H₂ → HCl (hν)\nБ) SiO₂ + HF → SiF₄ + H₂O; SiO₂ + NaOH → Na₂SiO₃ + H₂O; SiO₂ + Na₂CO₃ → Na₂SiO₃ + CO₂\nВ) K₂CO₃ + HCl → KCl + CO₂ + H₂O; K₂CO₃ + Al₂O₃ → KAlO₂ + CO₂; K₂CO₃ + CaCl₂ → CaCO₃↓ + KCl\nГ) CuSO₄ + NaOH → Cu(OH)₂↓ + Na₂SO₄; CuSO₄ + KI → CuI + I₂ + K₂SO₄; CuSO₄ + BaCl₂ → BaSO₄↓ + CuCl₂'},
+    {q:'А) Si\nБ) SO₃\nВ) LiOH (р-р)\nГ) CuBr₂ (р-р)|1) NaOH, Zn, AgNO₃\n2) O₂, NaOH, Cl₂\n3) NaHCO₃, HBr, KHSO₄\n4) KOH, O₂, HCl\n5) MgO, Ca(OH)₂, H₂O',
+     a:'2531',
+     s:'А) Si + O₂ → SiO₂; Si + NaOH + H₂O → Na₂SiO₃ + H₂; Si + Cl₂ → SiCl₄\nБ) SO₃ + MgO → MgSO₄; SO₃ + Ca(OH)₂ → CaSO₄ + H₂O; SO₃ + H₂O → H₂SO₄\nВ) LiOH + NaHCO₃ → Li₂CO₃ + Na₂CO₃ + H₂O; LiOH + HBr → LiBr + H₂O; LiOH + KHSO₄ → Li₂SO₄ + K₂SO₄ + H₂O\nГ) CuBr₂ + NaOH → Cu(OH)₂↓ + NaBr; CuBr₂ + Zn → Cu + ZnBr₂; CuBr₂ + AgNO₃ → AgBr↓ + Cu(NO₃)₂'},
+    {q:'А) BaCl₂\nБ) MgO\nВ) CO₂\nГ) Fe|1) H₂, Na₂SO₄, Na\n2) O₃, HCl, Cl₂\n3) Ca(OH)₂, LiOH, Na₂SiO₃\n4) C, CO₂, HCl\n5) AgNO₃, Na₂CO₃, H₂SO₄',
+     a:'5432',
+     s:'А) BaCl₂ + AgNO₃ → AgCl↓ + Ba(NO₃)₂; BaCl₂ + Na₂CO₃ → BaCO₃↓ + NaCl; BaCl₂ + H₂SO₄ → BaSO₄↓ + HCl\nБ) MgO + C → Mg + CO; MgO + CO₂ → MgCO₃; MgO + HCl → MgCl₂ + H₂O\nВ) CO₂ + Ca(OH)₂ → CaCO₃↓ + H₂O; CO₂ + LiOH → Li₂CO₃ + H₂O; CO₂ + H₂O + Na₂SiO₃ → Na₂CO₃ + H₂SiO₃\nГ) Fe + O₃ → Fe₂O₃; Fe + HCl → FeCl₂ + H₂; Fe + Cl₂ → FeCl₃'},
+    {q:'А) Na\nБ) SO₂\nВ) ZnBr₂ (р-р)\nГ) HCl (разбавл.)|1) S, H₂, H₂O\n2) NaOH, O₂, Ba(OH)₂\n3) AgNO₃, Mg, KOH\n4) Ca, CaO, Hg\n5) Cu, KMnO₄, NaOH',
+     a:'1233',
+     s:'А) Na + S → Na₂S; Na + H₂ → NaH; Na + H₂O → NaOH + H₂\nБ) SO₂ + NaOH → Na₂SO₃ + H₂O; SO₂ + O₂ → SO₃ (t°, кат.); SO₂ + Ba(OH)₂ → BaSO₃ + H₂O\nВ) ZnBr₂ + AgNO₃ → AgBr↓ + Zn(NO₃)₂; ZnBr₂ + Mg → MgBr₂ + Zn; ZnBr₂ + KOH → Zn(OH)₂↓ + KBr\nГ) HCl + AgNO₃ → AgCl↓ + HNO₃; HCl + Mg → MgCl₂ + H₂; HCl + KOH → KCl + H₂O'},
+    {q:'А) HCl (конц.)\nБ) Al(OH)₃\nВ) NaHCO₃\nГ) Mg|1) HNO₃, HBr, KOH\n2) KMnO₄, NaHCO₃, Ca\n3) O₂, H₂O, KH\n4) CO₂, Zn(NO₃)₂, P\n5) Ag, Cu(OH)₂, CaO',
+     a:'2114',
+     s:'А) HCl(конц.) + KMnO₄ → MnCl₂ + Cl₂ + KCl + H₂O; HCl + NaHCO₃ → NaCl + CO₂ + H₂O; HCl + Ca → CaCl₂ + H₂\nБ) Al(OH)₃ + HNO₃ → Al(NO₃)₃ + H₂O; Al(OH)₃ + HBr → AlBr₃ + H₂O; Al(OH)₃ + KOH → K[Al(OH)₄]\nВ) NaHCO₃ + HNO₃ → NaNO₃ + CO₂ + H₂O; NaHCO₃ + HBr → NaBr + CO₂ + H₂O; NaHCO₃ + KOH → Na₂CO₃ + K₂CO₃ + H₂O\nГ) Mg + CO₂ → MgO + C; Mg + Zn(NO₃)₂ → Mg(NO₃)₂ + Zn; Mg + P → Mg₃P₂'},
+    {q:'А) HNO₃\nБ) ZnO\nВ) K₂SO₃\nГ) O₂|1) HNO₃, H₂SO₄, KOH\n2) KCl, NaHCO₃, Ca\n3) NO, H₂, Na\n4) FeCl₃, Zn(NO₃)₂, HCl\n5) Cu, Cu(OH)₂, K₂SiO₃',
+     a:'5143',
+     s:'А) HNO₃(конц.) + Cu → Cu(NO₃)₂ + NO₂ + H₂O; HNO₃ + Cu(OH)₂ → Cu(NO₃)₂ + H₂O; HNO₃ + K₂SiO₃ → KNO₃ + H₂SiO₃\nБ) ZnO + HNO₃ → Zn(NO₃)₂ + H₂O; ZnO + H₂SO₄ → ZnSO₄ + H₂O; ZnO + KOH(тв.) → K₂ZnO₂ + H₂O\nВ) K₂SO₃ + FeCl₃ + H₂O → FeCl₂ + K₂SO₄ + HCl; K₂SO₃ + Zn(NO₃)₂ → ZnSO₃↓ + KNO₃; K₂SO₃ + HCl → KCl + SO₂ + H₂O\nГ) O₂ + NO → NO₂; O₂ + H₂ → H₂O; O₂ + Na → Na₂O'},
+    {q:'А) P\nБ) Fe₂O₃\nВ) Cu₂O\nГ) NH₄Cl|1) HCl, HNO₃, Na₂CO₃\n2) O₂, Zn, KOH (р-р)\n3) BaCl₂, AgNO₃, CO\n4) O₂, CO, HCl\n5) H₂SO₄ (конц.), KOH, Pb(NO₃)₂',
+     a:'2145',
+     s:'А) P + O₂ → P₂O₅; P + Zn → Zn₃P₂; P + KOH + H₂O → KH₂PO₂ + PH₃\nБ) Fe₂O₃ + HCl → FeCl₃ + H₂O; Fe₂O₃ + HNO₃ → Fe(NO₃)₃ + H₂O; Fe₂O₃ + Na₂CO₃ → NaFeO₂ + CO₂\nВ) Cu₂O + O₂ → CuO; Cu₂O + CO → Cu + CO₂; Cu₂O + HCl → CuCl + H₂O\nГ) NH₄Cl + H₂SO₄(конц.) → (NH₄)₂SO₄ + HCl; NH₄Cl + KOH → KCl + NH₃ + H₂O; NH₄Cl + Pb(NO₃)₂ → PbCl₂↓ + NH₄NO₃'},
+    {q:'А) NH₄Br\nБ) HNO₃\nВ) Ba(OH)₂\nГ) Na|1) HCl, CO₂, Na₃PO₄\n2) AgNO₃, KOH (р-р), Ca(OH)₂\n3) Pb, S, C\n4) CaO, Br₂, K₂SO₄\n5) S, Cl₂, H₂O',
+     a:'2315',
+     s:'А) NH₄Br + AgNO₃ → AgBr↓ + NH₄NO₃; NH₄Br + KOH → KBr + NH₃ + H₂O; NH₄Br + Ca(OH)₂ → CaBr₂ + NH₃ + H₂O\nБ) HNO₃(конц.) + Pb → Pb(NO₃)₂ + NO₂ + H₂O; HNO₃(конц.) + S → H₂SO₄ + NO₂ + H₂O; HNO₃(конц.) + C → CO₂ + NO₂ + H₂O\nВ) Ba(OH)₂ + HCl → BaCl₂ + H₂O; Ba(OH)₂ + CO₂ → BaCO₃↓ + H₂O; Ba(OH)₂ + Na₃PO₄ → Ba₃(PO₄)₂↓ + NaOH\nГ) Na + S → Na₂S; Na + Cl₂ → NaCl; Na + H₂O → NaOH + H₂'},
+    {q:'А) Al\nБ) Al(OH)₃\nВ) NaOH\nГ) CuCl₂|1) HCl, CO₂, NaHCO₃\n2) O₂, Cl₂, Ca\n3) HNO₃, Cu, H₃PO₄\n4) HCl, H₂SO₄, KOH (р-р)\n5) NaOH (р-р), (NH₄)₂S (р-р), AgNO₃',
+     a:'4415',
+     s:'А) Al + HCl → AlCl₃ + H₂; Al + H₂SO₄(конц.) → Al₂(SO₄)₃ + SO₂ + H₂O; Al + KOH + H₂O → K[Al(OH)₄] + H₂\nБ) Al(OH)₃ + HCl → AlCl₃ + H₂O; Al(OH)₃ + H₂SO₄ → Al₂(SO₄)₃ + H₂O; Al(OH)₃ + KOH → K[Al(OH)₄]\nВ) NaOH + HCl → NaCl + H₂O; NaOH + CO₂ → Na₂CO₃ + H₂O; NaOH + NaHCO₃ → Na₂CO₃ + H₂O\nГ) CuCl₂ + NaOH → Cu(OH)₂↓ + NaCl; CuCl₂ + (NH₄)₂S → CuS↓ + NH₄Cl; CuCl₂ + AgNO₃ → AgCl↓ + Cu(NO₃)₂'},
+    {q:'А) K\nБ) Zn\nВ) Cl₂\nГ) N₂|1) Fe, KI, NaOH\n2) NaOH, MgCl₂, HF\n3) C₆H₆, CsOH, CO₂\n4) O₂, H₂, Li\n5) O₂, S, HBr',
+     a:'5514',
+     s:'А) K + O₂ → K₂O; K + S → K₂S; K + HBr → KBr + H₂\nБ) Zn + O₂ → ZnO; Zn + S → ZnS; Zn + HBr → ZnBr₂ + H₂\nВ) Cl₂ + Fe → FeCl₃; Cl₂ + KI → KCl + I₂; Cl₂ + NaOH → NaCl + NaClO + H₂O\nГ) N₂ + O₂ → NO (t°); N₂ + H₂ → NH₃ (t°, кат.); N₂ + Li → Li₃N'}
+  ];
+  const el=document.getElementById('tr-wrap-b1');
+  if(!el)return;
+  function norm(s){return s.trim().replace(/[^0-9]/g,'');}
+  function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+  function $(s){return el.querySelector(s);}
+  let queue,answered,wrongIds,wrongAtPos,resolvedRepeats,cur;
+  const _SK='linia7_b1';
+  const _6D=6*24*3600*1000;
+  function _saveState(){try{localStorage.setItem(_SK,JSON.stringify({ts:Date.now(),q:queue,an:[...answered],wi:[...wrongIds],wp:[...wrongAtPos],rr:[...resolvedRepeats],cur:cur}))}catch(e){}}
+  function _clearState(){try{localStorage.removeItem(_SK)}catch(e){}}
+  function _loadState(){try{const raw=localStorage.getItem(_SK);if(!raw)return false;const s=JSON.parse(raw);if(Date.now()-s.ts>_6D){localStorage.removeItem(_SK);return false;}queue=s.q;answered=new Set(s.an);wrongIds=new Set(s.wi);wrongAtPos=new Set(s.wp);resolvedRepeats=new Set(s.rr||[]);cur=s.cur;return true;}catch(e){return false;}}
+  function init(){if(!_loadState()){queue=shuffle(RAW.map((_,i)=>i));answered=new Set();wrongIds=new Set();wrongAtPos=new Set();resolvedRepeats=new Set();cur=0;}showCard();render();}
+  function showCard(){$('.tr-card').style.display='';$('.tr-result').style.display='none';}
+  function render(){
+    if(cur>=queue.length){showResult();return;}
+    const t=RAW[queue[cur]];
+    const parts=t.q.split('|');
+    const subs=parts[0].split('\n');
+    const reags=parts[1]?parts[1].split('\n'):[];
+    let html='<div class="match-grid"><div class="match-col"><div class="match-col-title">Формула вещества</div>';
+    subs.forEach(s=>{html+='<div class="match-row">'+s+'</div>';});
+    html+='</div><div class="match-col"><div class="match-col-title">Реагенты</div>';
+    reags.forEach(s=>{html+='<div class="match-row">'+s+'</div>';});
+    html+='</div></div><div style="font-size:13px;color:var(--ink3);margin-bottom:8px">Введи группу для А, Б, В, Г — 4 цифры:</div>';
+    $('.tr-q').innerHTML=html;
+    $('.tr-input').value='';$('.tr-feedback').textContent='';$('.tr-feedback').className='tr-feedback';
+    $('.tr-next-btn').style.display='none';$('.tr-check-btn').style.display='';$('.tr-input').focus();
+    const _sd=$('.tr-solution');if(_sd){_sd.hidden=true;_sd.innerHTML='';}
+    prog();
+  }
+  function check(){
+    const raw=$('.tr-input').value;if(!raw.trim())return;
+    const t=RAW[queue[cur]];
+    if(norm(raw)===norm(t.a)){
+      const wasRepeat=answered.has(queue[cur]);
+      answered.add(queue[cur]);
+      wrongIds.delete(queue[cur]);
+      wrongAtPos.delete(cur);
+      if(wasRepeat)resolvedRepeats.add(queue[cur]);
+      $('.tr-feedback').textContent='✓ Верно!';$('.tr-feedback').className='tr-feedback ok';
+      $('.tr-check-btn').style.display='none';$('.tr-next-btn').style.display='';
+      if(t.s){
+        const _sd=$('.tr-solution');
+        _sd.hidden=false;
+        let html='<div class="tr-solution-hd">Решение</div>';
+        t.s.split('\n').forEach(line=>{
+          const isLetter=/^[АБВГ]\)/.test(line);
+          html+=`<div style="font-size:13px;line-height:1.7;padding:${isLetter?'6px 0 2px':'1px 0 1px 14px'};${isLetter?'font-weight:700;color:var(--h2)':'color:var(--ink)'}">${line}</div>`;
+        });
+        _sd.innerHTML=html;
+      }
+    }else{
+      if(!wrongAtPos.has(cur)&&!resolvedRepeats.has(queue[cur]))queue.push(queue[cur]);
+      wrongAtPos.add(cur);wrongIds.add(queue[cur]);
+      $('.tr-feedback').textContent='✗ Неверно — попробуй ещё';$('.tr-feedback').className='tr-feedback err';
+    }
+    prog();_saveState();
+  }
+  function next(){cur++;_saveState();render();}
+  function showResult(){
+    $('.tr-card').style.display='none';$('.tr-result').style.display='';
+    $('.tr-score').textContent=`${RAW.length}/${RAW.length}`;$('.tr-retry-btn').style.display='none';
+    $('.tr-done').style.display=wrongIds.size===0?'':'none';
+    if(window.blockDone)window.blockDone(el.id);
+  }
+  function reset(){_clearState();queue=shuffle(RAW.map((_,i)=>i));answered=new Set();wrongIds=new Set();wrongAtPos=new Set();resolvedRepeats=new Set();cur=0;showCard();render();}
+  function prog(){const p=Math.round(answered.size/RAW.length*100);const rep=wrongIds.size;const txt=rep>0?`${answered.size}/${RAW.length} + ${rep} повтор${rep===1?'':'а'}`:` ${answered.size}/${RAW.length}`;$('.tr-prog-text').textContent=txt;$('.tr-prog-bar-fill').style.width=p+'%';document.getElementById('pf').style.width=p+'%';document.getElementById('tb-pf').style.width=p+'%';document.getElementById('tb-lbl').textContent=p+'%';}
+  $('.tr-check-btn').addEventListener('click',check);
+  $('.tr-next-btn').addEventListener('click',next);
+  $('.tr-retry-btn').addEventListener('click',()=>{});
+  $('.tr-reset-btn').addEventListener('click',reset);
+  $('.tr-input').addEventListener('keydown',e=>{if(e.key==='Enter'){if($('.tr-next-btn').style.display!=='none')next();else check();}});
+  init();
+})();
+
+// История 6 дней
+const _HIST_KEY='linia7_history';
+function _getHist(){try{return JSON.parse(localStorage.getItem(_HIST_KEY))||[];}catch(e){return[];}}
+function _saveHist(h){try{localStorage.setItem(_HIST_KEY,JSON.stringify(h));}catch(e){}}
+function _todayStr(){return new Date().toISOString().slice(0,10);}
+
+function updateStreak(){
+  const h=_getHist();
+  const c=document.getElementById('tb-streak');
+  if(!c)return;
+  c.innerHTML='';
+  for(let i=5;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const ds=d.toISOString().slice(0,10);
+    const entry=h.find(x=>x.d===ds);
+    const n=entry?entry.b.length:0;
+    const dot=document.createElement('div');
+    dot.className='tb-day'+(n>=1?' done':'')+(i===0?' today':'');
+    dot.title=d.toLocaleDateString('ru',{day:'numeric',month:'short'})+': '+(n>=1?'блок пройден ✓':'нет данных');
+    c.appendChild(dot);
+  }
+}
+
+function clearHistory(){
+  if(!confirm('Очистить весь прогресс и историю? Блок начнётся заново.'))return;
+  try{
+    localStorage.removeItem(_HIST_KEY);
+    localStorage.removeItem('linia7_b1');
+  }catch(e){}
+  location.reload();
+}
+updateStreak();
+
+const _done=new Set();
+window.blockDone=function(id){
+  _done.add(id);
+  const today=_todayStr();
+  const h=_getHist();
+  let entry=h.find(x=>x.d===today);
+  if(!entry){entry={d:today,b:[]};h.push(entry);}
+  if(!entry.b.includes(id))entry.b.push(id);
+  const cutoff=new Date();cutoff.setDate(cutoff.getDate()-6);
+  _saveHist(h.filter(x=>x.d>=cutoff.toISOString().slice(0,10)));
+  updateStreak();
+};
+</script>
+</body>
+</html>
