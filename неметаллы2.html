@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script>history.scrollRestoration='manual';</script>
+<title>Неметаллы. Часть 2 — ЕГЭ 2026–2027</title>
+<style>
+/* ══ ТОКЕНЫ — изумрудная палитра ══ */
+:root{
+  --p900:#053535;--p800:#07484a;--p700:#0a5e60;
+  --p600:#0d7778;--p500:#119496;--p400:#3bb8ba;
+  --p300:#79d8d9;--p200:#bbeeef;--p100:#e5f8f8;--p50:#f2fcfc;
+  --ink:#1a2424;--ink2:#3a5050;--ink3:#7a9696;
+  --line:#d4eced;--card:#ffffff;--bg:#f2fcfc;--white:#fff;
+  --green:#1D9E75;--green-t:#E1F5EE;--green-d:#085041;
+  --amber:#BA7517;--amber-t:#FAEEDA;--amber-d:#633806;
+  --red:#A32D2D;--red-t:#FCEBEB;--red-d:#7A2020;
+  --r:12px;--r-sm:8px;--r-lg:20px;
+  --shadow:0 1px 3px rgba(10,94,96,.06),0 4px 16px rgba(10,94,96,.07);
+  --shm:0 4px 20px rgba(10,94,96,.16);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:17px;font-weight:500}
+
+/* ПРОГРЕСС */
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:var(--p100);z-index:999}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--p600),var(--p400));width:0;transition:width .1s}
+
+/* SHELL */
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#053535 0%,#0a5e60 55%,#119496 100%);padding:56px 32px 48px;margin:0 -24px 48px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(59,184,186,.18) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.82);border-radius:20px;padding:4px 14px;font-size:12px;font-family:var(--mono);letter-spacing:.6px;margin-bottom:20px}
+.hero h1{font-size:clamp(24px,5vw,44px);font-weight:800;line-height:1.06;letter-spacing:-.03em;color:#fff;margin-bottom:14px;position:relative;z-index:1}
+.hero h1 em{color:#79d8d9;font-style:normal}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.75);line-height:1.7;max-width:560px;margin-bottom:28px;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.hero-chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.9);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+
+/* TOC */
+.toc{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:22px 26px;margin-bottom:48px;box-shadow:var(--shadow)}
+.toc-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p600);font-family:var(--mono);margin-bottom:14px}
+.toc ol{padding-left:20px}
+.toc li{padding:4px 0;font-size:14px}
+.toc a{color:var(--ink2);text-decoration:none;transition:color .15s}
+.toc a:hover{color:var(--p600)}
+
+/* SECTION */
+.section{margin-bottom:56px}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--p200)}
+.section-num{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;font-family:var(--mono);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+.section-title{font-size:clamp(20px,2.5vw,26px);font-weight:800;color:var(--p800);line-height:1.2}
+
+h2.sub-title{font-size:21px;font-weight:800;color:var(--p700);margin:28px 0 12px;display:flex;align-items:center;gap:8px}
+h2.sub-title::before{content:'';width:4px;height:20px;background:var(--p500);border-radius:2px;flex-shrink:0}
+h3.mini-title{font-size:15px;font-weight:700;color:var(--ink);margin:18px 0 8px}
+p.body{font-size:16.5px;line-height:1.75;color:var(--ink2);margin-bottom:14px;font-weight:500}
+p.body strong{color:var(--ink)}
+
+/* BOXES */
+.box{border-radius:var(--r-sm);padding:14px 18px;margin:14px 0;font-size:clamp(15.5px,1.7vw,17px);line-height:1.75;font-weight:500}
+.box-title{font-weight:800;font-size:clamp(14px,1.5vw,15.5px);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:var(--amber-t);border-left:4px solid var(--amber);color:var(--amber-d)}
+.box-danger{background:var(--red-t);border-left:4px solid var(--red);color:var(--red-d)}
+.box-success{background:var(--green-t);border-left:4px solid var(--green);color:var(--green-d)}
+.box ul,.box ol{padding-left:20px;margin:6px 0}
+.box li{margin:5px 0;font-size:clamp(14.5px,1.6vw,16px)}
+
+/* EQ BLOCK */
+.eq-block{background:var(--white);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px 20px;margin:10px 0;box-shadow:var(--shadow)}
+.eq{font-family:var(--mono);font-size:clamp(15px,1.8vw,17px);font-weight:700;color:#111;line-height:2.2;display:block}
+.eq .cond{color:#c0392b;font-size:clamp(12px,1.3vw,13.5px);font-weight:400}
+.eq .we{color:var(--red);font-weight:700}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);margin:14px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:clamp(14px,1.5vw,15.5px)}
+th{background:linear-gradient(135deg,var(--p800),var(--p600));color:#fff;font-weight:700;padding:10px 14px;text-align:left;font-size:clamp(11px,1.2vw,12.5px);text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-weight:600;color:#111}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--p50)}
+tr:hover td{background:var(--p100);transition:background .15s}
+
+/* CHIP */
+.chip{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.5px;padding:3px 9px;border-radius:5px;font-weight:600;white-space:nowrap}
+.chip-p{background:var(--p100);color:var(--p700)}
+.chip-g{background:var(--green-t);color:var(--green-d)}
+.chip-a{background:var(--amber-t);color:var(--amber-d)}
+.chip-r{background:var(--red-t);color:var(--red-d)}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+@media(max-width:700px){.grid-2,.grid-3{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow);transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:var(--p300);box-shadow:var(--shm)}
+.card-title{font-weight:700;font-size:14px;color:var(--p700);margin-bottom:8px}
+.card-body{font-size:14px;color:var(--ink2);line-height:1.65}
+
+/* REMEMBER */
+.remember{background:linear-gradient(135deg,var(--p100),var(--p50));border:1.5px solid var(--p300);border-radius:var(--r);padding:16px 20px;margin-top:24px}
+.remember-title{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--p600);margin-bottom:10px;font-weight:700}
+.remember ul{padding-left:18px}
+.remember li{font-size:14.5px;color:var(--p800);padding:4px 0;line-height:1.65}
+
+.hr{height:1px;background:var(--line);margin:22px 0}
+
+/* BACK TOP */
+#back-top{position:fixed;bottom:24px;right:24px;width:42px;height:42px;border-radius:12px;background:var(--p600);color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(13,119,120,.35);display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .2s;opacity:0;pointer-events:none}
+#back-top.visible{opacity:1;pointer-events:all}
+#back-top:hover{transform:translateY(-2px)}
+
+/* FADE IN */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ══ ТОПБАР ══ */
+#topbar{position:fixed;top:12px;right:16px;z-index:1100;display:flex;align-items:center;gap:4px;background:rgba(10,94,96,.15);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(10,94,96,.28);border-radius:999px;padding:5px 10px 5px 6px;box-shadow:0 4px 16px rgba(10,94,96,.22)}
+#topbar-menu-btn{width:32px;height:32px;border-radius:50%;border:none;background:rgba(10,94,96,.18);color:var(--p800);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+#topbar-menu-btn:hover{background:rgba(10,94,96,.35)}
+.tb-top-btn{width:30px;height:30px;border-radius:50%;border:none;background:none;color:var(--p700);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.tb-top-btn:hover{background:rgba(10,94,96,.15)}
+:fullscreen #topbar-fs,:-webkit-full-screen #topbar-fs{color:var(--p500)}
+
+/* ══ БОКОВОЕ МЕНЮ ══ */
+#menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:1199;backdrop-filter:blur(3px)}
+#menu-overlay.open{display:block}
+#menu-panel{position:fixed;top:0;right:0;width:min(320px,90vw);height:100%;background:var(--card);box-shadow:-4px 0 32px rgba(5,53,53,.2);z-index:1200;transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
+#menu-panel.open{transform:translateX(0)}
+.menu-head{padding:20px 20px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.menu-head-title{font-size:13px;font-weight:700;color:var(--p800);letter-spacing:.3px}
+.menu-close{border:none;background:none;font-size:20px;cursor:pointer;color:var(--ink3);width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .15s}
+.menu-close:hover{background:var(--p100)}
+.menu-nav{padding:12px 10px;flex:1}
+.menu-nav a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;text-decoration:none;color:var(--ink2);font-size:14px;transition:background .15s,color .15s;line-height:1.35}
+.menu-nav a:hover{background:var(--p100);color:var(--p700)}
+.menu-nav .mn-num{min-width:22px;height:22px;background:var(--p100);color:var(--p700);border-radius:5px;font-family:var(--mono);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ══ ТЁМНАЯ ТЕМА ══ */
+
+/* ══ ШИРОКИЙ ЭКРАН ══ */
+@media(min-width:900px){
+  body{font-size:19px}
+  p.body{font-size:18px}
+  .eq{font-size:clamp(17px,1.8vw,19px)}
+  .eq .cond{font-size:13px}
+  .box{font-size:17.5px}
+  .box li{font-size:16.5px}
+  .box-title{font-size:15.5px}
+  h2.sub-title{font-size:24px}
+  table{font-size:15.5px}
+  td{padding:11px 16px}
+  .section-title{font-size:clamp(22px,2.5vw,28px)}
+  .remember{font-size:16px}
+  .remember li{font-size:16px}
+}
+
+/* COLOR HELPERS */
+.cy{color:#B8860B;font-weight:600}.cb{color:#6B3FA0;font-weight:600}
+.ck{color:#222;font-weight:600}.cg{color:#1D9E75;font-weight:600}.cr{color:#C0392B;font-weight:600}
+
+@media(max-width:540px){.shell{padding:0 14px 60px}.hero{padding:36px 18px 32px;margin:0 -14px 32px}}
+@media print{.prog-bar-wrap,#back-top,#topbar,#menu-overlay,#menu-panel{display:none}}
+
+/* ══ АЛЛОТРОПНЫЕ КАРТОЧКИ ══ */
+.allo-group{margin:16px 0 26px}
+.allo-label{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:var(--ink3);font-family:var(--mono);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.allo-label::after{content:'';flex:1;height:1px;background:var(--line)}
+.allo-cards{display:flex;flex-wrap:wrap;gap:12px}
+.allo-card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);width:calc(33.333% - 8px);min-width:148px;flex:1 1 148px;max-width:220px;display:flex;flex-direction:column;transition:box-shadow .2s,border-color .2s,transform .15s}
+.allo-card:hover{border-color:var(--p300);box-shadow:var(--shm);transform:translateY(-2px)}
+.allo-img{height:120px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.allo-info{padding:12px 14px 14px}
+.allo-badge{display:inline-block;font-size:10px;font-family:var(--mono);font-weight:700;padding:2px 8px;border-radius:4px;margin-bottom:7px}
+.allo-name{font-weight:800;font-size:14px;color:var(--ink);margin-bottom:5px;line-height:1.2}
+.allo-desc{font-size:12.5px;color:var(--ink2);line-height:1.6}
+@media(max-width:640px){.allo-card{max-width:calc(50% - 6px)}}
+@media(max-width:380px){.allo-card{max-width:100%}}
+
+/* ══ ПАРТНЁР-ЗАГОЛОВОК внутри eq-block ══ */
+.eq-partner{display:block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.6px;color:var(--p600);font-family:var(--mono);padding:10px 0 3px;border-top:1px dashed var(--line);margin-top:8px}
+.eq-block .eq-partner:first-child{border-top:none;padding-top:0;margin-top:0}
+
+/* ══ СТРИК (история 6 дней) ══ */
+.tb-streak{display:flex;gap:3px;align-items:center;padding:0 2px}
+.tb-day{width:7px;height:7px;border-radius:50%;background:rgba(10,94,96,.18);flex-shrink:0;transition:.2s}
+.tb-day.done{background:#1a8c6e}
+.tb-day.today{outline:1.5px solid rgba(10,94,96,.55);outline-offset:1.5px}
+
+/* ══ ФЛЭШ-КАРТОЧКИ ══ */
+.fc-section{background:linear-gradient(135deg,var(--p900),var(--p700));border-radius:var(--r-lg);padding:32px 28px;margin:48px 0;color:#fff}
+.fc-header{text-align:center;margin-bottom:24px}
+.fc-title{font-size:clamp(18px,3vw,26px);font-weight:800;color:#fff;margin-bottom:6px}
+.fc-sub{font-size:14px;color:rgba(255,255,255,.65);line-height:1.6}
+.fc-stats{display:flex;justify-content:center;gap:24px;margin-bottom:16px;font-size:13px;color:rgba(255,255,255,.7);font-family:var(--mono)}
+.fc-stats span{color:#fff;font-weight:700;font-size:16px}
+.fc-counter{text-align:center;font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.5);margin-bottom:14px}
+.fc-perspective{perspective:900px;width:100%;max-width:560px;margin:0 auto;cursor:pointer}
+.fc-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,0,.2,1);min-height:180px}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);display:flex;align-items:center;justify-content:center;padding:24px 28px;text-align:center;min-height:180px;flex-direction:column;gap:8px}
+.fc-front{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);font-size:clamp(15px,2.5vw,19px);font-family:var(--mono);color:#fff;line-height:1.5}
+.fc-back{background:var(--white);transform:rotateY(180deg);font-family:var(--mono);font-size:clamp(13px,2vw,16px);color:var(--green-d);line-height:1.6}
+.fc-hint{font-family:var(--font);font-size:12px;color:var(--ink3);margin-top:6px;font-style:italic}
+.fc-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:4px}
+.fc-back-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:4px}
+.fc-flip-btn{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:14px;font-weight:600;border-radius:var(--r-sm);padding:11px 26px;cursor:pointer;transition:background .2s;margin:18px auto;width:fit-content}
+.fc-flip-btn:hover{background:rgba(255,255,255,.25)}
+.fc-btn-row{display:none;gap:12px;justify-content:center;margin-top:14px}
+.fc-btn-know{background:#1D9E75;color:#fff;border:none;border-radius:var(--r-sm);padding:11px 26px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-know:hover{background:#187F5E}
+.fc-btn-dontknow{background:#C0392B;color:#fff;border:none;border-radius:var(--r-sm);padding:11px 26px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-dontknow:hover{background:#A0311F}
+.fc-keys{text-align:center;font-size:11.5px;color:rgba(255,255,255,.35);margin-top:12px;font-family:var(--mono)}
+.fc-result{display:none;text-align:center;padding:20px}
+.fc-result h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:12px}
+.fc-res-row{display:flex;gap:16px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.fc-res-card{background:rgba(255,255,255,.1);border-radius:var(--r-sm);padding:12px 22px;min-width:100px}
+.fc-res-num{font-size:28px;font-weight:700}
+.fc-res-lbl{font-size:11px;color:rgba(255,255,255,.6);font-family:var(--mono);margin-top:2px}
+.fc-restart-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.fc-restart-btn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;border-radius:var(--r-sm);padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
+.fc-restart-btn:hover{background:rgba(255,255,255,.25)}
+.fc-restart-btn.primary{background:var(--green);border-color:var(--green)}
+.fc-empty{display:none;text-align:center;color:rgba(255,255,255,.6);padding:20px}
+.fc-sr-badge{font-size:11px;font-family:var(--font);color:rgba(255,255,255,.45);margin-top:4px}
+.fc-back .fc-sr-badge{color:var(--ink3)}
+#fc-timer-live{font-family:var(--mono);font-size:13px;color:rgba(255,255,255,.55);text-align:center;margin-top:6px;letter-spacing:1px;min-height:18px}
+.fc-time-result{text-align:center;margin:10px 0 4px;font-size:15px;font-weight:700;color:rgba(255,255,255,.9)}
+
+/* ══ ПРАКТИКУМ PRC ══ */
+.prc-shell{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;box-shadow:var(--shadow)}
+.prc-prog-wrap{margin-bottom:14px}
+.prc-prog-bar{height:7px;background:var(--bg);border-radius:4px;overflow:hidden}
+.prc-prog-fill{height:100%;background:linear-gradient(90deg,var(--p500),var(--p400));border-radius:4px;transition:width .4s}
+.prc-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.prc-num{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--p600)}
+.prc-live{font-family:var(--mono);font-size:12px;color:var(--ink2)}
+.prc-repeat-notice{background:rgba(10,94,96,.07);border:1px solid var(--p200);border-radius:var(--r-sm);padding:7px 14px;font-size:12.5px;color:var(--p700);margin-bottom:12px;display:none}
+.prc-q{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--ink);line-height:1.7;margin-bottom:18px;padding:16px 20px;background:var(--bg);border-radius:var(--r-sm);border:1px solid var(--line)}
+.prc-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.prc-inp{flex:1;min-width:200px;font-family:var(--mono);font-size:13.5px;padding:10px 14px;border:1.5px solid var(--line);border-radius:var(--r-sm);background:var(--white);color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s}
+.prc-inp:focus{border-color:var(--p400);box-shadow:0 0 0 3px rgba(10,94,96,.1)}
+.prc-inp.correct{border-color:var(--green);background:var(--green-t)}
+.prc-inp.wrong{border-color:var(--red);background:var(--red-t)}
+.prc-btn{background:var(--p600);color:#fff;border:none;border-radius:var(--r-sm);padding:10px 20px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--font);transition:background .15s;white-space:nowrap}
+.prc-btn:hover{background:var(--p700)}
+.prc-btn:disabled{background:var(--p300);cursor:default}
+.prc-btn.next{background:var(--green)}
+.prc-btn.next:hover{background:var(--green-d)}
+.prc-fb{font-size:13.5px;min-height:22px;margin-bottom:12px;font-weight:600}
+.prc-fb.ok{color:var(--green-d)}
+.prc-fb.miss{color:var(--red-d)}
+.prc-ans{display:none;background:linear-gradient(135deg,var(--green-t),#F0FBF6);border:1px solid #B6E8D3;border-radius:var(--r-sm);padding:12px 16px;font-family:var(--mono);font-size:13.5px;color:var(--green-d);line-height:1.8}
+.prc-ans-lbl{font-family:var(--font);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);margin-bottom:5px}
+.prc-result-box{text-align:center;padding:40px 20px 20px;display:none}
+.prc-grade{font-size:52px;line-height:1;margin-bottom:10px}
+.prc-pct{font-size:40px;font-weight:900;color:var(--p700);letter-spacing:-1px;margin-bottom:22px;font-family:var(--mono)}
+.prc-stat-row{display:flex;justify-content:center;gap:20px;margin-bottom:28px;flex-wrap:wrap}
+.prc-stat-row>div{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px 22px;min-width:88px}
+.prc-stat-n{font-size:26px;font-weight:800;color:var(--p700);font-family:var(--mono)}
+.prc-stat-l{font-size:12px;color:var(--ink2);margin-top:4px}
+.prc-restart-btn{background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;border:none;border-radius:var(--r-sm);padding:13px 36px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:opacity .15s}
+.prc-restart-btn:hover{opacity:.85}
+@media(max-width:540px){.prc-shell{padding:18px 16px}.prc-row{flex-direction:column}.prc-inp{min-width:100%;width:100%}}
+/* ══ ПОЗДРАВЛЕНИЕ ══ */
+.congrats-overlay{position:fixed;inset:0;background:rgba(5,53,53,.78);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .4s}
+.congrats-overlay.show{opacity:1;pointer-events:auto}
+.congrats-card{background:var(--white);border-radius:var(--r-lg);padding:44px 32px 36px;max-width:420px;width:100%;text-align:center;box-shadow:0 24px 64px rgba(5,53,53,.35);transform:scale(.88) translateY(20px);transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.congrats-overlay.show .congrats-card{transform:scale(1) translateY(0)}
+.congrats-emoji{font-size:62px;line-height:1.1;margin-bottom:10px}
+.congrats-title{font-size:24px;font-weight:900;color:var(--p700);margin-bottom:8px;font-family:var(--font)}
+.congrats-sub{font-size:14.5px;color:var(--ink2);margin-bottom:8px;line-height:1.55}
+.congrats-pct{font-size:44px;font-weight:900;color:var(--p500);font-family:var(--mono);margin:10px 0 20px}
+.congrats-close{background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;border:none;border-radius:var(--r);padding:13px 36px;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.3px}
+</style>
+</head>
+<body>
+
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+
+<!-- ТОПБАР -->
+<div id="topbar">
+  <button id="topbar-menu-btn" onclick="openMenu()" title="Содержание">☰</button>
+  <button class="tb-top-btn" id="topbar-fs" onclick="toggleFullscreen()" title="Полный экран [F]">⛶</button>
+  <button class="tb-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">↑</button>
+  <div class="tb-streak" id="tb-streak"></div>
+  <button class="tb-top-btn" onclick="clearHistory()" title="Сбросить историю">🗑</button>
+</div>
+
+<!-- БОКОВОЕ МЕНЮ -->
+<div id="menu-overlay" onclick="closeMenu()"></div>
+<div id="menu-panel">
+  <div class="menu-head">
+    <span class="menu-head-title">Неметаллы. Часть 2</span>
+    <button class="menu-close" onclick="closeMenu()">✕</button>
+  </div>
+  <nav class="menu-nav">
+    <a href="#s1" onclick="closeMenu()"><span class="mn-num">1</span>Аллотропия. Физические свойства</a>
+    <a href="#s2" onclick="closeMenu()"><span class="mn-num">2</span>Химические свойства фосфора</a>
+    <a href="#s3" onclick="closeMenu()"><span class="mn-num">3</span>Химические свойства кремния</a>
+    <a href="#s4" onclick="closeMenu()"><span class="mn-num">4</span>Химические свойства углерода</a>
+    <a href="#s5" onclick="closeMenu()"><span class="mn-num">5</span>Химические свойства водорода</a>
+    <a href="#s6" onclick="closeMenu()"><span class="mn-num">🃏</span>Флэш-карточки</a>
+    <a href="#s7" onclick="closeMenu()"><span class="mn-num">✏️</span>Практикум</a>
+  </nav>
+</div>
+
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">ЕГЭ Химия 2026–2027 · Задания №7–9, 30–31</div>
+  <h1>Неметаллы. <em>Часть 2:</em><br>фосфор, кремний,<br>углерод, водород</h1>
+  <p class="hero-sub">Теория с ловушками ЕГЭ по каждому блоку + флэш-карточки + большой практикум в конце.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Фосфор P</span>
+    <span class="hero-chip">Кремний Si</span>
+    <span class="hero-chip">Углерод C</span>
+    <span class="hero-chip">Водород H₂</span>
+    <span class="hero-chip">Флэш-карточки</span>
+    <span class="hero-chip">Практикум</span>
+  </div>
+</div>
+
+
+<!-- ══ БЛОК 1 ══ -->
+<section class="section fade-in" id="s1">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2 class="section-title">Аллотропия. Физические свойства. Главные ловушки</h2>
+  </div>
+
+  <!-- 1.1 Аллотропия -->
+  <h2 class="sub-title">1.1 Аллотропные модификации</h2>
+  <p class="body">Аллотропия — существование двух и более простых веществ одного элемента с разным строением. Модификации одного элемента сильно отличаются по свойствам.</p>
+
+  <!-- ──── УГЛЕРОД ──── -->
+  <div class="allo-group">
+    <div class="allo-label">Углерод C</div>
+    <div class="allo-cards">
+
+      <!-- АЛМАЗ -->
+      <div class="allo-card">
+        <div class="allo-img" style="background:linear-gradient(145deg,#cef0ff 0%,#eaf8ff 100%)">
+          <svg viewBox="0 0 120 110" width="114" height="105" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="60,14 102,46 60,97 18,46" fill="rgba(180,230,255,.62)" stroke="rgba(55,135,185,.8)" stroke-width="1.5"/>
+            <polygon points="60,14 102,46 76,36" fill="rgba(225,248,255,.93)" stroke="rgba(55,135,185,.5)" stroke-width=".9"/>
+            <polygon points="60,14 18,46 44,36" fill="rgba(205,242,255,.93)" stroke="rgba(55,135,185,.5)" stroke-width=".9"/>
+            <polygon points="102,46 76,36 60,57" fill="rgba(135,200,232,.85)" stroke="rgba(55,135,185,.5)" stroke-width=".9"/>
+            <polygon points="18,46 44,36 60,57" fill="rgba(160,215,240,.85)" stroke="rgba(55,135,185,.5)" stroke-width=".9"/>
+            <polygon points="102,46 60,97 60,57" fill="rgba(95,175,218,.8)" stroke="rgba(55,135,185,.5)" stroke-width=".9"/>
+            <polygon points="18,46 60,97 60,57" fill="rgba(120,190,228,.8)" stroke="rgba(55,135,185,.5)" stroke-width=".9"/>
+            <text x="96" y="22" font-size="14" fill="#e8c030">✦</text>
+            <text x="7" y="30" font-size="9.5" fill="rgba(230,195,40,.75)">✦</text>
+            <text x="102" y="60" font-size="8" fill="rgba(220,185,30,.6)">✦</text>
+          </svg>
+        </div>
+        <div class="allo-info">
+          <div class="allo-badge" style="background:#ddf0ff;color:#1875aa">sp³ · атомная</div>
+          <div class="allo-name">Алмаз</div>
+          <div class="allo-desc">Самый твёрдый. <strong>Изолятор</strong> (не проводит ток). Прозрачный. t° пл. ≈ 3550°C.</div>
+        </div>
+      </div>
+
+      <!-- ГРАФИТ -->
+      <div class="allo-card">
+        <div class="allo-img" style="background:linear-gradient(145deg,#cdd5d9 0%,#e4eaec 100%)">
+          <svg viewBox="0 0 120 110" width="114" height="105" xmlns="http://www.w3.org/2000/svg">
+            <!-- Слой 3 (сзади) -->
+            <g transform="translate(6,6)" opacity=".28" stroke="#556" stroke-width="1.1" fill="rgba(80,88,96,.12)">
+              <path d="M18,62 L30,55 L42,62 L42,76 L30,83 L18,76Z"/>
+              <path d="M42,62 L54,55 L66,62 L66,76 L54,83 L42,76Z"/>
+              <path d="M66,62 L78,55 L90,62 L90,76 L78,83 L66,76Z"/>
+            </g>
+            <!-- Слой 2 -->
+            <g transform="translate(3,3)" opacity=".5" stroke="#4a5560" stroke-width="1.3" fill="rgba(80,88,96,.14)">
+              <path d="M18,62 L30,55 L42,62 L42,76 L30,83 L18,76Z"/>
+              <path d="M42,62 L54,55 L66,62 L66,76 L54,83 L42,76Z"/>
+              <path d="M66,62 L78,55 L90,62 L90,76 L78,83 L66,76Z"/>
+            </g>
+            <!-- Слой 1 (перед) -->
+            <g stroke="#3d4a56" stroke-width="1.6" fill="rgba(80,88,96,.18)">
+              <path d="M18,62 L30,55 L42,62 L42,76 L30,83 L18,76Z"/>
+              <path d="M42,62 L54,55 L66,62 L66,76 L54,83 L42,76Z"/>
+              <path d="M66,62 L78,55 L90,62 L90,76 L78,83 L66,76Z"/>
+            </g>
+            <!-- Верхний ряд гексагонов -->
+            <g stroke="#3d4a56" stroke-width="1.6" fill="rgba(80,88,96,.18)">
+              <path d="M18,38 L30,31 L42,38 L42,52 L30,59 L18,52Z"/>
+              <path d="M42,38 L54,31 L66,38 L66,52 L54,59 L42,52Z"/>
+              <path d="M66,38 L78,31 L90,38 L90,52 L78,59 L66,52Z"/>
+            </g>
+            <!-- Межслоевые пунктиры -->
+            <line x1="30" y1="8" x2="30" y2="22" stroke="#889" stroke-width=".9" stroke-dasharray="2,3"/>
+            <line x1="54" y1="8" x2="54" y2="22" stroke="#889" stroke-width=".9" stroke-dasharray="2,3"/>
+            <line x1="78" y1="8" x2="78" y2="22" stroke="#889" stroke-width=".9" stroke-dasharray="2,3"/>
+          </svg>
+        </div>
+        <div class="allo-info">
+          <div class="allo-badge" style="background:#e0e5e8;color:#3d4a56">sp² · слоистая</div>
+          <div class="allo-name">Графит</div>
+          <div class="allo-desc"><strong>Проводит ток!</strong> Мягкий, скользкий. Серо-чёрный. Используется в карандашах, электродах.</div>
+        </div>
+      </div>
+
+      <!-- ФУЛЛЕРЕН C60 -->
+      <div class="allo-card">
+        <div class="allo-img" style="background:linear-gradient(145deg,#16163a 0%,#25254a 100%)">
+          <svg viewBox="0 0 120 110" width="114" height="105" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="fg" cx="38%" cy="30%" r="60%">
+                <stop offset="0%" stop-color="rgba(80,75,130,.45)"/>
+                <stop offset="100%" stop-color="rgba(20,20,50,.0)"/>
+              </radialGradient>
+            </defs>
+            <circle cx="60" cy="55" r="40" fill="rgba(35,35,68,.9)" stroke="rgba(120,110,200,.65)" stroke-width="1.3"/>
+            <circle cx="60" cy="55" r="40" fill="url(#fg)"/>
+            <!-- Гексагоны и пентагоны -->
+            <g stroke="rgba(155,145,225,.62)" stroke-width="1.1" fill="none">
+              <path d="M60,35 L74,43 L74,59 L60,67 L46,59 L46,43Z"/>
+              <path d="M60,19 L72,26 L74,37 L60,35 L46,37 L48,26Z"/>
+              <path d="M74,43 L88,43 L97,55 L88,67 L74,59Z"/>
+              <path d="M46,43 L32,43 L23,55 L32,67 L46,59Z"/>
+              <path d="M60,67 L74,67 L79,80 L60,88 L41,80 L46,67Z"/>
+              <path d="M74,37 L88,43"/>
+              <path d="M46,37 L32,43"/>
+            </g>
+            <g fill="rgba(190,182,240,.72)">
+              <circle cx="60" cy="35" r="2.2"/><circle cx="74" cy="43" r="2.2"/>
+              <circle cx="74" cy="59" r="2.2"/><circle cx="60" cy="67" r="2.2"/>
+              <circle cx="46" cy="59" r="2.2"/><circle cx="46" cy="43" r="2.2"/>
+              <circle cx="60" cy="19" r="2"/><circle cx="72" cy="26" r="2"/>
+              <circle cx="48" cy="26" r="2"/><circle cx="88" cy="43" r="2"/>
+              <circle cx="32" cy="43" r="2"/>
+            </g>
+            <text x="47" y="105" font-size="10" fill="rgba(175,165,235,.8)" font-family="monospace" font-weight="700">C₆₀</text>
+          </svg>
+        </div>
+        <div class="allo-info">
+          <div class="allo-badge" style="background:#1e1e3a;color:#9a90d8">молекулярная</div>
+          <div class="allo-name">Фуллерен C₆₀</div>
+          <div class="allo-desc">Шар из 60 атомов C: 20 шестиугольников + 12 пятиугольников. Молекулярная решётка.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ──── ФОСФОР ──── -->
+  <div class="allo-group">
+    <div class="allo-label">Фосфор P</div>
+    <div class="allo-cards">
+
+      <!-- БЕЛЫЙ P4 -->
+      <div class="allo-card">
+        <div class="allo-img" style="background:linear-gradient(145deg,#fffbdc 0%,#fff7a8 100%)">
+          <svg viewBox="0 0 120 110" width="114" height="105" xmlns="http://www.w3.org/2000/svg">
+            <!-- P4 тетраэдр: атомы top(60,18) left(24,82) right(96,82) front(60,62) -->
+            <!-- Задние рёбра (пунктир) -->
+            <line x1="24" y1="80" x2="96" y2="80" stroke="rgba(170,120,0,.42)" stroke-width="1.8" stroke-dasharray="4,3.5"/>
+            <line x1="24" y1="80" x2="60" y2="20" stroke="rgba(170,120,0,.42)" stroke-width="1.8" stroke-dasharray="4,3.5"/>
+            <line x1="96" y1="80" x2="60" y2="20" stroke="rgba(170,120,0,.42)" stroke-width="1.8" stroke-dasharray="4,3.5"/>
+            <!-- Передние рёбра -->
+            <line x1="24" y1="80" x2="60" y2="62" stroke="#c09000" stroke-width="2.4"/>
+            <line x1="96" y1="80" x2="60" y2="62" stroke="#c09000" stroke-width="2.4"/>
+            <line x1="60" y1="20" x2="60" y2="62" stroke="#c09000" stroke-width="2.4"/>
+            <!-- Атомы P -->
+            <circle cx="60" cy="20" r="11" fill="#fff4a0" stroke="#c09000" stroke-width="2"/>
+            <circle cx="24" cy="80" r="11" fill="#fff4a0" stroke="#c09000" stroke-width="2"/>
+            <circle cx="96" cy="80" r="11" fill="#fff4a0" stroke="#c09000" stroke-width="2"/>
+            <circle cx="60" cy="62" r="11" fill="#fffce0" stroke="#c09000" stroke-width="2"/>
+            <text x="55.5" y="24.5" font-size="8.5" font-weight="800" fill="#7a5000" font-family="monospace">P</text>
+            <text x="19.5" y="84.5" font-size="8.5" font-weight="800" fill="#7a5000" font-family="monospace">P</text>
+            <text x="91.5" y="84.5" font-size="8.5" font-weight="800" fill="#7a5000" font-family="monospace">P</text>
+            <text x="55.5" y="66.5" font-size="8.5" font-weight="800" fill="#7a5000" font-family="monospace">P</text>
+          </svg>
+        </div>
+        <div class="allo-info">
+          <div class="allo-badge" style="background:#fff8c4;color:#9a7000">P₄ · молекулярная</div>
+          <div class="allo-name">Белый P₄</div>
+          <div class="allo-desc"><span style="color:#c0392b;font-weight:800">Ядовит!</span> Самовоспл. при ~34°C. Светится в темноте. Хранят под водой.</div>
+        </div>
+      </div>
+
+      <!-- КРАСНЫЙ P -->
+      <div class="allo-card">
+        <div class="allo-img" style="background:linear-gradient(145deg,#c0392b 0%,#e74c3c 100%)">
+          <svg viewBox="0 0 120 110" width="114" height="105" xmlns="http://www.w3.org/2000/svg">
+            <!-- Полимерная цепочка (амфорная) -->
+            <g stroke="rgba(255,210,205,.55)" stroke-width="2" fill="none">
+              <path d="M14,54 Q24,34 40,54 Q56,74 72,54 Q88,34 106,54"/>
+              <path d="M14,70 Q24,50 40,70 Q56,90 72,70 Q88,50 106,70"/>
+              <path d="M14,38 Q24,18 40,38 Q56,58 72,38 Q88,18 106,38"/>
+            </g>
+            <g fill="rgba(255,240,238,.88)" stroke="rgba(255,210,205,.5)" stroke-width="1.2">
+              <circle cx="14" cy="54" r="5.5"/><circle cx="40" cy="54" r="5.5"/>
+              <circle cx="72" cy="54" r="5.5"/><circle cx="106" cy="54" r="5.5"/>
+              <circle cx="14" cy="70" r="4.5"/><circle cx="40" cy="70" r="4.5"/>
+              <circle cx="72" cy="70" r="4.5"/><circle cx="106" cy="70" r="4.5"/>
+              <circle cx="14" cy="38" r="4.5"/><circle cx="40" cy="38" r="4.5"/>
+              <circle cx="72" cy="38" r="4.5"/><circle cx="106" cy="38" r="4.5"/>
+            </g>
+          </svg>
+        </div>
+        <div class="allo-info">
+          <div class="allo-badge" style="background:#fce8e6;color:#a32d2d">атомная · полимер</div>
+          <div class="allo-name">Красный P</div>
+          <div class="allo-desc">Не ядовит. Стабилен на воздухе. Используется в спичках. Красно-бурый порошок.</div>
+        </div>
+      </div>
+
+      <!-- ЧЁРНЫЙ P -->
+      <div class="allo-card">
+        <div class="allo-img" style="background:linear-gradient(145deg,#0e0e1c 0%,#1e1e2c 100%)">
+          <svg viewBox="0 0 120 110" width="114" height="105" xmlns="http://www.w3.org/2000/svg">
+            <!-- Слоистая гофрированная структура — 2 слоя -->
+            <!-- Слой задний -->
+            <g transform="translate(0,12)" opacity=".38" stroke="rgba(175,170,210,.6)" stroke-width="1.2" fill="none">
+              <path d="M18,60 L34,48 L50,60 L66,48 L82,60 L98,48"/>
+              <path d="M34,48 L34,36 L50,28 L66,36 L66,48"/>
+              <path d="M82,60 L82,48 L98,40"/>
+              <g fill="rgba(155,150,195,.5)">
+                <circle cx="18" cy="60" r="3.8"/><circle cx="34" cy="48" r="3.8"/>
+                <circle cx="50" cy="60" r="3.8"/><circle cx="66" cy="48" r="3.8"/>
+                <circle cx="82" cy="60" r="3.8"/><circle cx="98" cy="48" r="3.8"/>
+                <circle cx="34" cy="36" r="3.5"/><circle cx="50" cy="28" r="3.5"/>
+                <circle cx="66" cy="36" r="3.5"/>
+              </g>
+            </g>
+            <!-- Слой передний -->
+            <g transform="translate(0,28)" stroke="rgba(200,195,235,.8)" stroke-width="1.6" fill="none">
+              <path d="M18,60 L34,48 L50,60 L66,48 L82,60 L98,48"/>
+              <path d="M34,48 L34,36 L50,28 L66,36 L66,48"/>
+              <path d="M18,60 L18,72 L34,80 L50,72 L50,60"/>
+              <path d="M66,48 L82,40 L98,48"/>
+              <g fill="rgba(188,182,225,.72)">
+                <circle cx="18" cy="60" r="4.5"/><circle cx="34" cy="48" r="4.5"/>
+                <circle cx="50" cy="60" r="4.5"/><circle cx="66" cy="48" r="4.5"/>
+                <circle cx="82" cy="60" r="4.5"/><circle cx="98" cy="48" r="4.5"/>
+                <circle cx="34" cy="36" r="4.2"/><circle cx="50" cy="28" r="4.2"/>
+                <circle cx="66" cy="36" r="4.2"/><circle cx="82" cy="40" r="4.2"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="allo-info">
+          <div class="allo-badge" style="background:#181828;color:#9090b8">слоистая</div>
+          <div class="allo-name">Чёрный P</div>
+          <div class="allo-desc"><strong>Полупроводник.</strong> Наиболее стабилен. Слоистая гофрированная структура. Похож на графит.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ──── КРЕМНИЙ ──── -->
+  <div class="allo-group">
+    <div class="allo-label">Кремний Si</div>
+    <div class="allo-cards">
+
+      <!-- КРИСТАЛЛИЧЕСКИЙ Si -->
+      <div class="allo-card">
+        <div class="allo-img" style="background:linear-gradient(145deg,#b8c4cc 0%,#d4dde4 100%)">
+          <svg viewBox="0 0 120 110" width="114" height="105" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="sg" cx="35%" cy="30%" r="65%">
+                <stop offset="0%" stop-color="rgba(255,255,255,.45)"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+              </radialGradient>
+            </defs>
+            <!-- Задние грани куба -->
+            <g stroke="rgba(70,95,115,.32)" stroke-width="1.2" fill="none">
+              <line x1="32" y1="26" x2="92" y2="26"/>
+              <line x1="32" y1="26" x2="32" y2="78"/>
+              <line x1="92" y1="26" x2="92" y2="78"/>
+              <line x1="32" y1="78" x2="92" y2="78"/>
+            </g>
+            <!-- Передние грани куба -->
+            <g stroke="rgba(50,75,100,.72)" stroke-width="1.6" fill="none">
+              <line x1="22" y1="36" x2="82" y2="36"/>
+              <line x1="22" y1="36" x2="22" y2="88"/>
+              <line x1="82" y1="36" x2="82" y2="88"/>
+              <line x1="22" y1="88" x2="82" y2="88"/>
+              <line x1="32" y1="26" x2="22" y2="36"/>
+              <line x1="92" y1="26" x2="82" y2="36"/>
+              <line x1="92" y1="78" x2="82" y2="88"/>
+              <line x1="32" y1="78" x2="22" y2="88"/>
+            </g>
+            <!-- Тетраэдральные связи внутри -->
+            <g stroke="rgba(50,75,100,.42)" stroke-width="1" stroke-dasharray="3,2.5">
+              <line x1="52" y1="62" x2="32" y2="26"/>
+              <line x1="52" y1="62" x2="92" y2="26"/>
+              <line x1="52" y1="62" x2="22" y2="88"/>
+              <line x1="52" y1="62" x2="82" y2="88"/>
+            </g>
+            <!-- Атомы Si -->
+            <g fill="#8298b2" stroke="rgba(255,255,255,.62)" stroke-width="1.2">
+              <circle cx="32" cy="26" r="6"/><circle cx="92" cy="26" r="6"/>
+              <circle cx="22" cy="36" r="6"/><circle cx="82" cy="36" r="6"/>
+              <circle cx="32" cy="78" r="6"/><circle cx="92" cy="78" r="6"/>
+              <circle cx="22" cy="88" r="6"/><circle cx="82" cy="88" r="6"/>
+              <circle cx="52" cy="62" r="6.8" fill="#9aaec2"/>
+            </g>
+            <!-- Металлический блеск -->
+            <circle cx="32" cy="26" r="2.5" fill="rgba(255,255,255,.5)" stroke="none"/>
+            <circle cx="92" cy="26" r="2.5" fill="rgba(255,255,255,.5)" stroke="none"/>
+            <circle cx="52" cy="62" r="3" fill="rgba(255,255,255,.45)" stroke="none"/>
+          </svg>
+        </div>
+        <div class="allo-info">
+          <div class="allo-badge" style="background:#dde3e8;color:#3d5268">sp³ · алмазный тип</div>
+          <div class="allo-name">Кристаллический Si</div>
+          <div class="allo-desc">Атомная решётка. Полупроводник. Серебристый металлический блеск. Тугоплавкий (1414°C).</div>
+        </div>
+      </div>
+
+      <!-- АМОРФНЫЙ Si -->
+      <div class="allo-card">
+        <div class="allo-img" style="background:linear-gradient(145deg,#b0bcc6 0%,#c8d4dc 100%)">
+          <svg viewBox="0 0 120 110" width="114" height="105" xmlns="http://www.w3.org/2000/svg">
+            <!-- Неупорядоченная сеть связей -->
+            <g stroke="rgba(60,82,105,.52)" stroke-width="1.6" fill="none">
+              <line x1="28" y1="32" x2="54" y2="25"/>
+              <line x1="54" y1="25" x2="82" y2="35"/>
+              <line x1="82" y1="35" x2="98" y2="20"/>
+              <line x1="54" y1="25" x2="48" y2="54"/>
+              <line x1="82" y1="35" x2="88" y2="58"/>
+              <line x1="28" y1="32" x2="20" y2="57"/>
+              <line x1="20" y1="57" x2="48" y2="54"/>
+              <line x1="48" y1="54" x2="38" y2="80"/>
+              <line x1="48" y1="54" x2="72" y2="68"/>
+              <line x1="88" y1="58" x2="72" y2="68"/>
+              <line x1="88" y1="58" x2="102" y2="72"/>
+              <line x1="72" y1="68" x2="64" y2="90"/>
+              <line x1="38" y1="80" x2="64" y2="90"/>
+              <line x1="20" y1="57" x2="16" y2="82"/>
+              <line x1="98" y1="20" x2="102" y2="42"/>
+              <line x1="102" y1="42" x2="88" y2="58"/>
+            </g>
+            <!-- Атомы Si (нерегулярные позиции) -->
+            <g fill="#96a8b8" stroke="rgba(255,255,255,.52)" stroke-width="1.1">
+              <circle cx="28" cy="32" r="5.2"/><circle cx="54" cy="25" r="5.2"/>
+              <circle cx="82" cy="35" r="5.2"/><circle cx="98" cy="20" r="4.8"/>
+              <circle cx="20" cy="57" r="5.2"/><circle cx="48" cy="54" r="5.2"/>
+              <circle cx="88" cy="58" r="5.2"/><circle cx="38" cy="80" r="5.2"/>
+              <circle cx="72" cy="68" r="5.2"/><circle cx="102" cy="72" r="4.8"/>
+              <circle cx="64" cy="90" r="5.2"/><circle cx="16" cy="82" r="4.8"/>
+              <circle cx="102" cy="42" r="4.8"/>
+            </g>
+          </svg>
+        </div>
+        <div class="allo-info">
+          <div class="allo-badge" style="background:#d2dae0;color:#4a5f72">нет порядка</div>
+          <div class="allo-name">Аморфный Si</div>
+          <div class="allo-desc">Без строгой кристаллической решётки. Реакционноспособнее кристаллического. Применяется в солнечных батареях.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="box box-info">
+    <div class="box-title">💡 Тип решётки → свойства</div>
+    <ul>
+      <li><strong>Атомная</strong> (алмаз, Si, красный P, SiO₂) — очень твёрдые, тугоплавкие, плохо проводят ток</li>
+      <li><strong>Молекулярная</strong> (белый P₄, CO₂, H₂O) — летучие, низкая t° плавления, хрупкие</li>
+      <li><strong>Слоистая</strong> (графит, чёрный P) — скользкие, анизотропные, могут проводить ток</li>
+    </ul>
+  </div>
+
+  <!-- 1.2 Физические свойства -->
+  <h2 class="sub-title">1.2 Физические свойства при н.у.</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Вещество</th><th>Состояние</th><th>Цвет и особенности</th></tr></thead>
+    <tbody>
+      <tr><td><strong>P₄ белый</strong></td><td>Твёрдое</td><td>⬜ Восковидный, <span class="cr">ядовит</span>. Светится в темноте. Самовоспламеняется на воздухе (~34°C). Хранят под водой!</td></tr>
+      <tr><td><strong>P красный</strong></td><td>Твёрдое</td><td>🔴 Красный порошок. Не ядовит. Используется в спичках.</td></tr>
+      <tr><td><strong>Si</strong></td><td>Твёрдое</td><td>⬜ Серебристо-серый. Полупроводник. Атомная кристаллическая решётка (как алмаз). Тугоплавкий.</td></tr>
+      <tr><td><strong>C алмаз</strong></td><td>Твёрдое</td><td>⬜ Прозрачный. Самое твёрдое природное вещество. Не проводит ток (в отличие от графита!).</td></tr>
+      <tr><td><strong>C графит</strong></td><td>Твёрдое</td><td>⬛ Серо-чёрный. <strong>Проводит ток</strong>. Скользкий (смазка). Используется в карандашах и электродах.</td></tr>
+      <tr><td><strong>H₂</strong></td><td>Газ</td><td>Бесцветный, без запаха, самый лёгкий газ. Взрывоопасен в смеси с O₂ («гремучий газ», 2:1).</td></tr>
+    </tbody>
+  </table></div>
+
+  <!-- 1.3 Главные ловушки -->
+  <h2 class="sub-title">1.3 Главные ловушки ЕГЭ — часть 2</h2>
+
+  <div class="box box-danger">
+    <div class="box-title">🚫 НЕ РЕАГИРУЮТ — запомни!</div>
+    <ul>
+      <li><strong>H₂ + Si ↛</strong> и <strong>H₂ + P ↛</strong> — с водородом напрямую не реагируют! SiH₄ и PH₃ получают только косвенно (гидролиз силицидов и фосфидов).</li>
+      <li><strong>C + I₂ ↛</strong> — углерод с иодом не реагирует. Но <strong>Si + I₂ → SiI₄</strong> — кремний реагирует со всеми галогенами!</li>
+      <li><strong>Si + HNO₃ ↛</strong> и <strong>Si + H₂SO₄(конц.) ↛</strong> — Si пассивен к кислотам-окислителям, растворяется только в <strong>HF</strong>.</li>
+      <li><strong>C + NaOH ↛</strong> — углерод со щелочами не реагирует. Но <strong>Si + NaOH → Na₂SiO₃ + H₂↑</strong>!</li>
+      <li><strong>SiO₂ + HCl ↛</strong>, <strong>SiO₂ + H₂SO₄ ↛</strong> — SiO₂ реагирует только с <strong>HF</strong> и щелочами.</li>
+    </ul>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">⚠ Зависит от количества реагента</div>
+    <ul>
+      <li><strong>P + Cl₂(изб.) → PCl₅</strong> (P→+5); <strong>P + Cl₂(нед.) → PCl₃</strong> (P→+3)</li>
+      <li><strong>P + I₂ → PI₃</strong> всегда (P→+3 только, PI₅ не существует!)</li>
+      <li><strong>C + O₂(нед.) → 2CO</strong> — угарный газ; <strong>C + O₂(изб.) → CO₂</strong></li>
+    </ul>
+  </div>
+
+
+</section>
+
+<!-- ══ БЛОК 2 ══ -->
+<section class="section fade-in" id="s2">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2 class="section-title">Химические свойства фосфора</h2>
+  </div>
+
+  <!-- 2.1 С простыми веществами -->
+  <h2 class="sub-title">2.1 С простыми веществами</h2>
+  <p class="body">Фосфор реагирует с большинством простых веществ. С кислородом — количество O₂ определяет продукт. С галогенами — количество галогена определяет с.о. P (+3 или +5). С водородом — <strong>напрямую не реагирует!</strong></p>
+
+  <div class="eq-block">
+    <span class="eq-partner">С кислородом</span>
+    <span class="eq">4P + 5O₂<span class="cond">(изб.)</span> → 2P₂O₅ &nbsp;<span style="color:var(--ink3)">(⬜ белый дым, P₂O₅ — сильный водоотнимающий агент)</span></span>
+    <span class="eq">4P + 3O₂<span class="cond">(нед.)</span> → 2P₂O₃</span>
+    <span class="eq-partner">С галогенами</span>
+    <span class="eq">2P + 5Cl₂<span class="cond">(изб.)</span> → 2PCl₅</span>
+    <span class="eq">2P + 3Cl₂<span class="cond">(нед.)</span> → 2PCl₃</span>
+    <span class="eq">2P + 3I₂ → 2PI₃ &nbsp;<span class="we">(с I₂ — только до +3, PI₅ не существует!)</span></span>
+    <span class="eq-partner">С водородом</span>
+    <span class="eq">H₂ + P ↛ &nbsp;<span class="we">(напрямую не реагируют! PH₃ — только косвенный синтез)</span></span>
+    <span class="eq" style="color:var(--ink3);font-size:11px;font-weight:600;letter-spacing:.5px;line-height:1.6">↳ косвенные пути → PH₃:</span>
+    <span class="eq">AlP + 3H₂O → Al(OH)₃↓ + PH₃↑ &nbsp;<span style="color:var(--ink3)">(гидролиз фосфида)</span></span>
+    <span class="eq">Ca₃P₂ + 6H₂O → 3Ca(OH)₂ + 2PH₃↑ &nbsp;<span style="color:var(--ink3)">(гидролиз фосфида)</span></span>
+    <span class="eq">4P<span class="cond">(бел.)</span> + 3KOH<span class="cond">(конц.)</span> + 3H₂O →<span class="cond">t°</span> 3KH₂PO₂ + PH₃↑ &nbsp;<span class="we">(диспропорционирование)</span></span>
+    <span class="eq-partner">С металлами</span>
+    <span class="eq">3Ca + 2P →<span class="cond">t°</span> Ca₃P₂ &nbsp;<span style="color:var(--ink3)">(фосфид кальция)</span></span>
+    <span class="eq">Al + P →<span class="cond">t°</span> AlP &nbsp;<span style="color:var(--ink3)">(фосфид алюминия)</span></span>
+    <span class="eq">3Zn + 2P →<span class="cond">t°</span> Zn₃P₂ &nbsp;<span style="color:var(--ink3)">(фосфид цинка)</span></span>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">⚠ Галогены и фосфор — количество решает!</div>
+    <ul>
+      <li>P + Cl₂ <strong>(изб.)</strong> → PCl₅ (P→ <strong>+5</strong>)</li>
+      <li>P + Cl₂ <strong>(нед.)</strong> → PCl₃ (P→ <strong>+3</strong>)</li>
+      <li>P + I₂ → PI₃ — с иодом <strong>всегда только +3</strong>. PI₅ не существует!</li>
+    </ul>
+  </div>
+
+  <!-- 2.2 С кислотами-окислителями и щёлочью -->
+  <h2 class="sub-title">2.2 С кислотами-окислителями и щёлочью</h2>
+  <p class="body">Фосфор — восстановитель: окисляется кислотами-окислителями до H₃PO₄. При нагревании с концентрированной щёлочью — <strong>диспропорционирует</strong>, образуя ядовитый PH₃.</p>
+
+  <div class="eq-block">
+    <span class="eq">P + 5HNO₃<span class="cond">(конц.)</span> → H₃PO₄ + 5NO₂↑ + H₂O &nbsp;<span style="color:#6B3FA0">(🟤 NO₂)</span></span>
+    <span class="eq">3P + 5HNO₃<span class="cond">(разб.)</span> + 2H₂O → 3H₃PO₄ + 5NO↑</span>
+    <span class="eq">2P + 5H₂SO₄<span class="cond">(конц.)</span> → 2H₃PO₄ + 5SO₂↑ + 2H₂O</span>
+    <span class="eq">4P<span class="cond">(бел.)</span> + 3KOH<span class="cond">(конц.)</span> + 3H₂O →<span class="cond">t°</span> 3KH₂PO₂ + PH₃↑ &nbsp;<span class="we">(PH₃ — ядовит, самовоспл.!)</span></span>
+  </div>
+
+  <div class="box box-danger">
+    <div class="box-title">🚫 Диспропорционирование белого фосфора со щёлочью</div>
+    Только <strong>белый P₄</strong> реагирует со щёлочью. Красный — нет!<br>
+    Продукт: <strong>KH₂PO₂</strong> (гипофосфит, P→+1) + <strong>PH₃↑</strong> (фосфин, P→−3).<br>
+    PH₃ — бесцветный ядовитый газ, самовоспламеняется на воздухе («болотные огни»!).
+  </div>
+
+  <!-- 2.3 Промышленное получение фосфора -->
+  <h2 class="sub-title">2.3 Промышленное получение P</h2>
+
+  <div class="eq-block">
+    <span class="eq">Ca₃(PO₄)₂ + 3SiO₂ + 5C →<span class="cond">t°</span> 3CaSiO₃ + 2P↑ + 5CO↑ &nbsp;<span style="color:var(--green-d)">(промышленное получение фосфора)</span></span>
+  </div>
+
+
+</section>
+
+<!-- ══ БЛОК 3 ══ -->
+<section class="section fade-in" id="s3">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2 class="section-title">Химические свойства кремния</h2>
+  </div>
+
+  <!-- 3.1 С простыми веществами -->
+  <h2 class="sub-title">3.1 С простыми веществами</h2>
+  <p class="body">Кремний — сравнительно инертный неметалл. Реагирует с галогенами (<em>всеми</em>, включая I₂ — в отличие от C и S!), кислородом, углеродом. С водородом напрямую не реагирует.</p>
+
+  <div class="eq-block">
+    <span class="eq-partner">С кислородом</span>
+    <span class="eq">Si + O₂ →<span class="cond">t°</span> SiO₂ &nbsp;<span style="color:var(--ink3)">(кварц; SiO₂ — атомная кристаллическая решётка)</span></span>
+    <span class="eq-partner">С галогенами</span>
+    <span class="eq">Si + 2Cl₂ →<span class="cond">t°</span> SiCl₄</span>
+    <span class="eq">Si + 2Br₂ →<span class="cond">t°</span> SiBr₄</span>
+    <span class="eq">Si + 2I₂ →<span class="cond">t°</span> SiI₄ &nbsp;<span style="color:var(--green-d)">(Si реагирует со всеми Hal₂, включая I₂!)</span></span>
+    <span class="eq-partner">С углеродом</span>
+    <span class="eq">Si + C →<span class="cond">t°</span> SiC &nbsp;<span style="color:var(--ink3)">(карборунд — атомная решётка, прочность близка к алмазу)</span></span>
+    <span class="eq-partner">С металлами</span>
+    <span class="eq">Si + 2Mg →<span class="cond">t°</span> Mg₂Si &nbsp;<span style="color:var(--ink3)">(гидролиз: Mg₂Si + 4H₂O → 2Mg(OH)₂ + SiH₄↑)</span></span>
+    <span class="eq-partner">С водородом</span>
+    <span class="eq">H₂ + Si ↛ &nbsp;<span class="we">(SiH₄ нельзя получить прямым синтезом!)</span></span>
+    <span class="eq" style="color:var(--ink3);font-size:11px;font-weight:600;letter-spacing:.5px;line-height:1.6">↳ косвенные пути → SiH₄:</span>
+    <span class="eq">Mg₂Si + 4H₂O → 2Mg(OH)₂ + SiH₄↑ &nbsp;<span style="color:var(--ink3)">(гидролиз силицида водой)</span></span>
+    <span class="eq">Mg₂Si + 4HCl → 2MgCl₂ + SiH₄↑ &nbsp;<span style="color:var(--ink3)">(гидролиз силицида кислотой)</span></span>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">⚠ Si vs C vs S — реакция с I₂ (ловушка ЕГЭ!)</div>
+    <ul>
+      <li><strong>Si + I₂ → SiI₄</strong> — кремний реагирует с иодом ✓</li>
+      <li><strong>C + I₂ ↛</strong> — углерод с иодом не реагирует</li>
+      <li><strong>S + I₂ ↛</strong> — сера с иодом не реагирует</li>
+    </ul>
+  </div>
+
+  <!-- 3.2 Со сложными веществами -->
+  <h2 class="sub-title">3.2 Со сложными веществами</h2>
+  <p class="body">Si <strong>не реагирует</strong> с большинством кислот, включая конц. HNO₃ и H₂SO₄. Растворяется только в <strong>HF</strong>. Зато реагирует со щелочами — редкое свойство для неметалла.</p>
+
+  <div class="eq-block">
+    <span class="eq-partner">С кислотами (только HF!)</span>
+    <span class="eq">Si + 4HF → SiF₄↑ + 2H₂↑ &nbsp;<span class="we">(единственная кислота-неокислитель, растворяющая Si)</span></span>
+    <span class="eq-partner">С кислотами-окислителями ↛</span>
+    <span class="eq">Si + HNO₃ ↛ &nbsp;<span class="we">(пассивен!)</span></span>
+    <span class="eq">Si + H₂SO₄<span class="cond">(конц.)</span> ↛ &nbsp;<span class="we">(Si пассивен к кислотам-окислителям!)</span></span>
+    <span class="eq-partner">Со щёлочью</span>
+    <span class="eq">Si + 2NaOH<span class="cond">(конц.)</span> + H₂O →<span class="cond">t°</span> Na₂SiO₃ + 2H₂↑ &nbsp;<span style="color:var(--green-d)">(Si реагирует со щёлочью — редкость!)</span></span>
+    <span class="eq-partner">С водяным паром</span>
+    <span class="eq">Si + 2H₂O<span class="cond">(пар)</span> →<span class="cond">t°</span> SiO₂ + 2H₂↑</span>
+  </div>
+
+  <div class="box box-danger">
+    <div class="box-title">🚫 Si пассивен к HNO₃ и H₂SO₄(конц.) — но реагирует с HF и NaOH!</div>
+    Сравни с Fe: Fe тоже пассивируется конц. HNO₃ и H₂SO₄ — но по другой причине (оксидная плёнка).<br>
+    Si не растворяется из-за особой прочности связей Si–O на поверхности.<br>
+    <strong>HF</strong> разрушает эту плёнку, образуя летучий SiF₄.
+  </div>
+
+  <!-- 3.3 Получение кремния -->
+  <h2 class="sub-title">3.3 Получение кремния</h2>
+
+  <div class="eq-block">
+    <span class="eq">SiO₂ + 2C →<span class="cond">t°</span> Si + 2CO↑ &nbsp;<span style="color:var(--green-d)">(промышленный способ — восстановление коксом)</span></span>
+    <span class="eq">SiO₂ + 2Mg →<span class="cond">t°</span> Si + 2MgO &nbsp;<span style="color:var(--ink3)">(лабораторный способ)</span></span>
+    <span class="eq">Mg₂Si + 4HCl → 2MgCl₂ + SiH₄↑ &nbsp;<span style="color:var(--ink3)">(получение силана SiH₄ — гидролиз силицида)</span></span>
+  </div>
+
+
+</section>
+
+<!-- ══ БЛОК 4 ══ -->
+<section class="section fade-in" id="s4">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2 class="section-title">Химические свойства углерода</h2>
+  </div>
+
+  <!-- 4.1 С простыми веществами -->
+  <h2 class="sub-title">4.1 С простыми веществами</h2>
+  <p class="body">Углерод — амфотерный по ОВР: может быть <strong>окислителем</strong> (с активными металлами) и <strong>восстановителем</strong> (с O₂, галогенами, кислотами). C + I₂ ↛ — главная ловушка!</p>
+
+  <div class="eq-block">
+    <span class="eq-partner">С кислородом</span>
+    <span class="eq">C + O₂<span class="cond">(изб.)</span> → CO₂</span>
+    <span class="eq">2C + O₂<span class="cond">(нед.)</span> → 2CO &nbsp;<span class="we">(CO — угарный газ, ядовит! бесцветный, без запаха)</span></span>
+    <span class="eq-partner">С водородом и серой</span>
+    <span class="eq">C + 2H₂ ⇄<span class="cond">t°, кат.</span> CH₄</span>
+    <span class="eq">C + 2S →<span class="cond">t°</span> CS₂ &nbsp;<span style="color:var(--ink3)">(CS₂ — бесцветная жидкость-растворитель)</span></span>
+    <span class="eq-partner">С галогенами</span>
+    <span class="eq">C + 2Cl₂ →<span class="cond">t°</span> CCl₄</span>
+    <span class="eq">C + 2F₂ → CF₄</span>
+    <span class="eq">C + I₂ ↛ &nbsp;<span class="we">(углерод с иодом не реагирует!)</span></span>
+    <span class="eq-partner">С металлами (карбиды)</span>
+    <span class="eq">2C + Ca →<span class="cond">t°</span> CaC₂ &nbsp;<span style="color:var(--ink3)">(карбид кальция; CaC₂ + 2H₂O → Ca(OH)₂ + C₂H₂↑ — ацетилен)</span></span>
+    <span class="eq">4Al + 3C →<span class="cond">t°</span> Al₄C₃ &nbsp;<span style="color:var(--ink3)">(метанид; Al₄C₃ + 12H₂O → 4Al(OH)₃ + 3CH₄↑)</span></span>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">⚠ Карбиды и их гидролиз — продукт зависит от типа карбида</div>
+    <ul>
+      <li><strong>CaC₂</strong> (ацетиленид, C₂²⁻) + H₂O → <strong>C₂H₂↑</strong> (ацетилен)</li>
+      <li><strong>Al₄C₃</strong> (метанид, C⁴⁻) + H₂O → <strong>CH₄↑</strong> (метан)</li>
+      <li><strong>Be₂C</strong> (метанид) + H₂O → <strong>CH₄↑</strong></li>
+    </ul>
+  </div>
+
+  <!-- 4.2 Со сложными веществами -->
+  <h2 class="sub-title">4.2 Со сложными веществами</h2>
+
+  <div class="eq-block">
+    <span class="eq-partner">С водяным паром</span>
+    <span class="eq">C + H₂O<span class="cond">(пар)</span> →<span class="cond">t°</span> CO + H₂ &nbsp;<span style="color:var(--green-d)">(«водяной газ» — горючая смесь CO + H₂)</span></span>
+    <span class="eq-partner">С кислотами-окислителями</span>
+    <span class="eq">C + 4HNO₃<span class="cond">(конц.)</span> → CO₂↑ + 4NO₂↑ + 2H₂O &nbsp;<span style="color:#6B3FA0">(C→CO₂, 🟤 NO₂)</span></span>
+    <span class="eq">3C + 4HNO₃<span class="cond">(разб.)</span> → 3CO₂↑ + 4NO↑ + 2H₂O</span>
+    <span class="eq">C + 2H₂SO₄<span class="cond">(конц.)</span> → CO₂↑ + 2SO₂↑ + 2H₂O</span>
+    <span class="eq-partner">Со щёлочью ↛</span>
+    <span class="eq">C + NaOH ↛ &nbsp;<span class="we">(углерод со щёлочью не реагирует! В отличие от Si)</span></span>
+  </div>
+
+
+</section>
+
+<!-- ══ БЛОК 5 ══ -->
+<section class="section fade-in" id="s5">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <h2 class="section-title">Химические свойства водорода</h2>
+  </div>
+
+  <!-- 5.1 С простыми веществами -->
+  <h2 class="sub-title">5.1 С простыми веществами</h2>
+  <p class="body">Водород — <strong>окислитель</strong> с активными металлами (→ гидриды, H⁻¹) и <strong>восстановитель</strong> с неметаллами (→ H⁺¹). С Si и P напрямую <strong>не реагирует!</strong></p>
+
+  <div class="eq-block">
+    <span class="eq-partner">С галогенами</span>
+    <span class="eq">H₂ + F₂ →<span class="cond">hν</span> 2HF &nbsp;<span style="color:var(--ink3)">(взрыв даже в темноте!)</span></span>
+    <span class="eq">H₂ + Cl₂ → 2HCl &nbsp;<span style="color:var(--ink3)">(взрыв на свету)</span></span>
+    <span class="eq">H₂ + Br₂ ⇄ 2HBr</span>
+    <span class="eq">H₂ + I₂ ⇄ 2HI − Q &nbsp;<span class="we">(с поглощением тепла)</span></span>
+    <span class="eq-partner">С кислородом, серой, азотом</span>
+    <span class="eq">2H₂ + O₂ → 2H₂O</span>
+    <span class="eq">H₂ + S ⇄ H₂S</span>
+    <span class="eq">N₂ + 3H₂ ⇄<span class="cond">Fe, t°, P</span> 2NH₃</span>
+    <span class="eq-partner">С углеродом</span>
+    <span class="eq">C + 2H₂ ⇄<span class="cond">t°, кат.</span> CH₄ &nbsp;<span style="color:var(--ink3)">(метанирование)</span></span>
+    <span class="eq-partner">Не реагирует</span>
+    <span class="eq">H₂ + Si ↛ &nbsp;<span class="we">(SiH₄ нельзя получить прямым синтезом!)</span></span>
+    <span class="eq">H₂ + P ↛ &nbsp;<span class="we">(Si и P с H₂ напрямую не реагируют!)</span></span>
+    <span class="eq-partner">С активными металлами (гидриды)</span>
+    <span class="eq">2Na + H₂ →<span class="cond">t°</span> 2NaH &nbsp;<span style="color:var(--ink3)">(H в с.о. −1)</span></span>
+    <span class="eq">Ca + H₂ →<span class="cond">t°</span> CaH₂ &nbsp;<span style="color:var(--ink3)">(гидриды: H в с.о. −1)</span></span>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">⚠ Активность H₂ с галогенами убывает!</div>
+    <ul>
+      <li>H₂ + F₂ → <strong>взрыв на свету</strong> (даже в темноте)</li>
+      <li>H₂ + Cl₂ → взрыв на свету; в темноте — медленно</li>
+      <li>H₂ + Br₂ ⇄ обратимо; H₂ + I₂ ⇄ обратимо <strong>с поглощением тепла</strong></li>
+    </ul>
+  </div>
+
+  <!-- 5.2 С оксидами металлов -->
+  <h2 class="sub-title">5.2 С оксидами металлов — H₂ как восстановитель</h2>
+
+  <div class="eq-block">
+    <span class="eq">CuO + H₂ →<span class="cond">t°</span> Cu + H₂O &nbsp;<span style="color:var(--ink3)">(⬛ CuO чёрный → <span class="cr">🔴 Cu красная</span>)</span></span>
+    <span class="eq">Fe₂O₃ + 3H₂ →<span class="cond">t°</span> 2Fe + 3H₂O</span>
+    <span class="eq">WO₃ + 3H₂ →<span class="cond">t°</span> W + 3H₂O</span>
+    <span class="eq">PbO + H₂ →<span class="cond">t°</span> Pb + H₂O</span>
+    <span class="eq">ZnO + H₂ →<span class="cond">t°</span> Zn + H₂O</span>
+  </div>
+
+  <div class="box box-info">
+    <div class="box-title">💡 CuO + H₂ — самая наглядная реакция восстановления</div>
+    ⬛ Чёрный оксид меди CuO при нагревании в токе H₂ превращается в <span class="cr"><strong>красную медь Cu</strong></span>. Видна смена цвета — классическое наблюдение для ЕГЭ.<br>
+    <strong>H₂ восстанавливает оксиды металлов, стоящих правее Al в ряду активности.</strong>
+  </div>
+
+  <!-- 5.3 Получение водорода -->
+  <h2 class="sub-title">5.3 Получение водорода</h2>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">🏭 Промышленность</div>
+      <div class="card-body">
+        <span class="eq" style="font-size:13.5px;line-height:2">CH₄ + H₂O<span class="cond">(пар)</span> →<span class="cond">t°</span> CO + 3H₂<br><span style="color:var(--ink3)">(конверсия метана — основной способ)</span></span>
+        <span class="eq" style="font-size:13.5px;line-height:2">C + H₂O<span class="cond">(пар)</span> →<span class="cond">t°</span> CO + H₂<br><span style="color:var(--ink3)">(газификация угля)</span></span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🧪 Лаборатория</div>
+      <div class="card-body">
+        <span class="eq" style="font-size:13.5px;line-height:2">Zn + H₂SO₄<span class="cond">(разб.)</span> → ZnSO₄ + H₂↑</span>
+        <span class="eq" style="font-size:13.5px;line-height:2">2Al + 2NaOH + 6H₂O → 2Na[Al(OH)₄] + 3H₂↑</span>
+        <span class="eq" style="font-size:13.5px;line-height:2">2Na + 2H₂O → 2NaOH + H₂↑</span>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+<!-- ──── ФЛЭШ-КАРТОЧКИ ──── -->
+<div style="display:none" id="fc-data-store">
+<div class="fc-data" data-q="4P + O₂(изб.) → ?" data-a="4P + 5O₂(изб.) → 2P₂O₅" data-hint="⬜ Белый дым P₂O₅, гигроскопичен" style="display:none"></div>
+<div class="fc-data" data-q="P + Cl₂(изб.) → ?" data-a="2P + 5Cl₂(изб.) → 2PCl₅" data-hint="Изб. Cl₂ → P до +5" style="display:none"></div>
+<div class="fc-data" data-q="P + Cl₂(нед.) → ?" data-a="2P + 3Cl₂(нед.) → 2PCl₃" data-hint="Нед. Cl₂ → P до +3" style="display:none"></div>
+<div class="fc-data" data-q="P + I₂ → ?" data-a="2P + 3I₂ → 2PI₃" data-hint="I₂ слабый → P только до +3" style="display:none"></div>
+<div class="fc-data" data-q="H₂ + P → ?" data-a="H₂ + P ↛ (не реагирует!)" data-hint="PH₃ получают только косвенно" style="display:none"></div>
+<div class="fc-data" data-q="4P(бел.) + KOH(конц.) + H₂O →(t°) ?" data-a="4P + 3KOH + 3H₂O →(t°) 3KH₂PO₂ + PH₃↑" data-hint="Диспропорц. P в щёлочи; PH₃ ядовит!" style="display:none"></div>
+<div class="fc-data" data-q="AlP + H₂O → ?" data-a="AlP + 3H₂O → Al(OH)₃↓ + PH₃↑" data-hint="⬜ Al(OH)₃ белый осадок + PH₃" style="display:none"></div>
+<div class="fc-data" data-q="H₃PO₄ + 3NaOH → ?" data-a="H₃PO₄ + 3NaOH → Na₃PO₄ + 3H₂O" data-hint="1:3 → средняя соль Na₃PO₄" style="display:none"></div>
+<div class="fc-data" data-q="H₃PO₄ + NaOH(1:1) → ?" data-a="H₃PO₄ + NaOH → NaH₂PO₄ + H₂O" data-hint="1:1 → кислая соль NaH₂PO₄" style="display:none"></div>
+<div class="fc-data" data-q="Ca₃(PO₄)₂ + SiO₂ + C →(t°) ?" data-a="Ca₃(PO₄)₂ + 3SiO₂ + 5C →(t°) 3CaSiO₃ + 2P↑ + 5CO↑" data-hint="Промышленное получение P" style="display:none"></div>
+<div class="fc-data" data-q="H₂ + Si → ?" data-a="H₂ + Si ↛ (не реагирует!)" data-hint="SiH₄ только косвенный синтез" style="display:none"></div>
+<div class="fc-data" data-q="Si + I₂ → ?" data-a="Si + 2I₂ →(t°) SiI₄" data-hint="Si реагирует со всеми Hal₂! (C + I₂ ↛)" style="display:none"></div>
+<div class="fc-data" data-q="Si + HNO₃(конц.) → ?" data-a="Si + HNO₃(конц.) ↛ (не реагирует!)" data-hint="Si пассивен к HNO₃ и H₂SO₄(конц.)" style="display:none"></div>
+<div class="fc-data" data-q="Si + NaOH(конц.) + H₂O →(t°) ?" data-a="Si + 2NaOH(конц.) + H₂O →(t°) Na₂SiO₃ + 2H₂↑" data-hint="Si растворяется в щёлочи!" style="display:none"></div>
+<div class="fc-data" data-q="Si + HF → ?" data-a="Si + 4HF(г) → SiF₄↑ + 2H₂↑" data-hint="Единственная к-та-неокислитель, растворяющая Si" style="display:none"></div>
+<div class="fc-data" data-q="SiO₂ + HF → ?" data-a="SiO₂ + 4HF → SiF₄↑ + 2H₂O" data-hint="HF разъедает стекло! Другие кислоты — нет" style="display:none"></div>
+<div class="fc-data" data-q="SiO₂ + NaOH →(t°) ?" data-a="SiO₂ + 2NaOH →(t°) Na₂SiO₃ + H₂O" data-hint="Жидкое стекло Na₂SiO₃" style="display:none"></div>
+<div class="fc-data" data-q="SiO₂ + HCl → ?" data-a="SiO₂ + HCl ↛ (не реагирует!)" data-hint="SiO₂ не реагирует с обычными кислотами!" style="display:none"></div>
+<div class="fc-data" data-q="Na₂SiO₃ + HCl → ?" data-a="Na₂SiO₃ + 2HCl → 2NaCl + H₂SiO₃↓" data-hint="⬜ Белый студенистый осадок H₂SiO₃" style="display:none"></div>
+<div class="fc-data" data-q="Na₂SiO₃ + CO₂ + H₂O → ?" data-a="Na₂SiO₃ + CO₂ + H₂O → Na₂CO₃ + H₂SiO₃↓" data-hint="H₂SiO₃ слабее H₂CO₃!" style="display:none"></div>
+<div class="fc-data" data-q="C + O₂(нед.) → ?" data-a="2C + O₂(нед.) → 2CO" data-hint="CO угарный газ — ядовит!" style="display:none"></div>
+<div class="fc-data" data-q="C + I₂ → ?" data-a="C + I₂ ↛ (не реагирует!)" data-hint="Углерод с иодом не реагирует (Si + I₂ → SiI₄!)" style="display:none"></div>
+<div class="fc-data" data-q="C + NaOH → ?" data-a="C + NaOH ↛ (не реагирует!)" data-hint="Углерод со щелочами не реагирует (в отличие от Si)" style="display:none"></div>
+<div class="fc-data" data-q="C + H₂O(пар) →(t°) ?" data-a="C + H₂O(пар) →(t°) CO + H₂↑" data-hint="«Водяной газ» CO + H₂" style="display:none"></div>
+<div class="fc-data" data-q="CO₂ + 2NaOH(изб.) → ?" data-a="CO₂ + 2NaOH → Na₂CO₃ + H₂O" data-hint="Изб. NaOH → карбонат Na₂CO₃" style="display:none"></div>
+<div class="fc-data" data-q="CO₂ + NaOH(нед.) → ?" data-a="CO₂ + NaOH → NaHCO₃" data-hint="Нед. NaOH → гидрокарбонат NaHCO₃" style="display:none"></div>
+<div class="fc-data" data-q="CO₂ + Ca(OH)₂ → ? (что наблюдается?)" data-a="CO₂ + Ca(OH)₂ → CaCO₃↓ + H₂O" data-hint="⬜ CaCO₃↓ белый — помутнение известковой воды" style="display:none"></div>
+<div class="fc-data" data-q="CaC₂ + H₂O → ?" data-a="CaC₂ + 2H₂O → Ca(OH)₂ + C₂H₂↑" data-hint="C₂H₂ — ацетилен" style="display:none"></div>
+<div class="fc-data" data-q="Al₄C₃ + H₂O → ?" data-a="Al₄C₃ + 12H₂O → 4Al(OH)₃ + 3CH₄↑" data-hint="Al₄C₃ — метанид, даёт CH₄" style="display:none"></div>
+<div class="fc-data" data-q="FeO + CO →(t°) ?" data-a="FeO + CO →(t°) Fe + CO₂" data-hint="CO — восстановитель оксидов металлов" style="display:none"></div>
+<div class="fc-data" data-q="CuO + H₂ →(t°) ? (что наблюдается?)" data-a="CuO + H₂ →(t°) Cu + H₂O" data-hint="⬛ CuO чёрный → 🔴 Cu красная" style="display:none"></div>
+<div class="fc-data" data-q="CH₄ + H₂O(пар) →(t°) ?" data-a="CH₄ + H₂O(пар) →(t°) CO + 3H₂" data-hint="Конверсия метана — пром. получение H₂" style="display:none"></div>
+<div class="fc-data" data-q="2Na + H₂ →(t°) ?" data-a="2Na + H₂ →(t°) 2NaH" data-hint="NaH — гидрид, H в с.о. −1" style="display:none"></div>
+<div class="fc-data" data-q="Si + I₂ vs C + I₂ — кто реагирует?" data-a="Si + 2I₂ →(t°) SiI₄ (реагирует!); C + I₂ ↛" data-hint="Si реагирует со всеми галогенами, C с иодом нет" style="display:none"></div>
+<div class="fc-data" data-q="Si + NaOH vs C + NaOH — кто реагирует?" data-a="Si + 2NaOH + H₂O →(t°) Na₂SiO₃ + 2H₂↑; C + NaOH ↛" data-hint="Si реагирует со щёлочью, C нет" style="display:none"></div>
+<div class="fc-data" data-q="Si + HNO₃ vs C + HNO₃ — кто реагирует?" data-a="Si + HNO₃ ↛; C + 4HNO₃(конц.) → CO₂ + 4NO₂ + 2H₂O" data-hint="Si пассивен к HNO₃, C реагирует" style="display:none"></div>
+<div class="fc-data" data-q="H₂ + Si → ? vs H₂ + S → ?" data-a="H₂ + Si ↛; H₂ + S ⇄ H₂S" data-hint="Si с H₂ не реагирует, S реагирует" style="display:none"></div>
+<div class="fc-data" data-q="CO₂ + 2NaOH vs CO₂ + NaOH — продукты?" data-a="Изб. NaOH → Na₂CO₃; нед. NaOH → NaHCO₃" data-hint="Соотношение n(NaOH)/n(CO₂) определяет продукт" style="display:none"></div>
+<div class="fc-data" data-q="P + Cl₂(изб.) vs P + I₂ — с.о. P?" data-a="P + Cl₂(изб.) → PCl₅ (+5); P + I₂ → PI₃ (+3)" data-hint="I₂ слабый → P только до +3" style="display:none"></div>
+<div class="fc-data" data-q="4P + 5O₂(изб.) → ? и 4P + 3O₂(нед.) → ? Сравни продукты." data-a="Изб.: 4P+5O₂→2P₂O₅ (P→+5). Нед.: 4P+3O₂→2P₂O₃ (P→+3). Количество O₂ определяет с.о. P!" data-hint="Классическая ловушка: у фосфора два оксида в зависимости от количества кислорода." style="display:none"></div>
+<div class="fc-data" data-q="P + Cl₂(изб.) → ? и P + I₂ → ? Почему у фосфора разная с.о.?" data-a="Cl₂(изб.): 2P+5Cl₂→2PCl₅ (P→+5). I₂: 2P+3I₂→2PI₃ (P→+3 только!). PI₅ не существует!" data-hint="I₂ слабый окислитель → не может окислить P выше +3. PI₅ — не существует." style="display:none"></div>
+<div class="fc-data" data-q="SiO₂ + HF → ? Почему SiO₂ реагирует с HF но не с HCl?" data-a="SiO₂ + 4HF → SiF₄↑ + 2H₂O. HF разъедает стекло (SiO₂). С HCl, H₂SO₄(разб.) не реагирует." data-hint="SiO₂ — кислотный оксид, но реагирует ТОЛЬКО с HF и щелочами. Это исключение — запомни!" style="display:none"></div>
+<div class="fc-data" data-q="C + O₂(изб.) → ? и C + O₂(нед.) → ? Сравни продукты." data-a="Изб.: C+O₂→CO₂ (полное сгорание). Нед.: 2C+O₂→2CO (неполное сгорание). CO — угарный газ!" data-hint="CO — ядовитый газ без цвета и запаха. Образуется при недостатке O₂ (печи, двигатели)." style="display:none"></div>
+<div class="fc-data" data-q="CO₂ + NaOH(изб.) → ? и CO₂ + NaOH(нед.) → ? Разные продукты!" data-a="Изб. NaOH: CO₂+2NaOH→Na₂CO₃+H₂O (карбонат). Нед. NaOH: CO₂+NaOH→NaHCO₃ (гидрокарбонат)." data-hint="Соотношение CO₂:NaOH определяет продукт. 1:2→карбонат; 1:1→гидрокарбонат." style="display:none"></div>
+<div class="fc-data" data-q="Si + NaOH + H₂O → ? (реагирует ли кремний со щёлочью?)" data-a="Si + 2NaOH + H₂O → Na₂SiO₃ + 2H₂↑. Да! Кремний растворяется в щелочах." data-hint="Кремний реагирует со щелочами (как Al и Zn). C + NaOH ↛ — углерод не реагирует!" style="display:none"></div>
+<div class="fc-data" data-q="СН₄ + O₂ → ? (горение метана). Продукты?" data-a="CH₄ + 2O₂ → CO₂ + 2H₂O. Полное сгорание → CO₂ и H₂O." data-hint="Природный газ — в основном CH₄. При горении всегда CO₂+H₂O (при достатке O₂)." style="display:none"></div>
+<div class="fc-data" data-q="4P + 3KOH(конц.) + 3H₂O →(t°) ? Что выделяется?" data-a="4P + 3KOH + 3H₂O →(t°) PH₃↑ + 3KH₂PO₂. Выделяется фосфин PH₃ — ядовитый газ!" data-hint="Фосфор диспропорционирует в щёлочи: часть окисляется до +1, часть восстанавливается до −3 (PH₃)." style="display:none"></div>
+<div class="fc-data" data-q="Что такое 'жидкое стекло' и как его получить?" data-a="Na₂SiO₃ (силикат натрия) — 'жидкое стекло'. SiO₂ + 2NaOH →(t°) Na₂SiO₃ + H₂O." data-hint="Жидкое стекло = Na₂SiO₃ или K₂SiO₃. Применяют как клей, огнезащита, пропитка." style="display:none"></div>
+</div>
+
+<div class="fc-section fade-in" id="s6">
+  <div class="fc-header">
+    <div style="font-size:32px;margin-bottom:8px">🃏</div>
+    <div class="fc-title">Флэш-карточки: ловушки ЕГЭ</div>
+    <div class="fc-sub">48 карточек · Исключения и ловушки по P, Si, C, H₂<br>
+      <kbd style="background:rgba(255,255,255,.15);padding:1px 7px;border-radius:4px;font-size:11px">Пробел</kbd> — перевернуть &nbsp;·&nbsp;
+      <kbd style="background:rgba(255,255,255,.15);padding:1px 7px;border-radius:4px;font-size:11px">→</kbd> знаю &nbsp;·&nbsp;
+      <kbd style="background:rgba(255,255,255,.15);padding:1px 7px;border-radius:4px;font-size:11px">←</kbd> не знаю
+    </div>
+  </div>
+  <div class="fc-stats"><div>✅ Знаю: <span id="fc-known">0</span></div><div>❌ Не знаю: <span id="fc-unknown">0</span></div></div>
+  <div class="fc-counter" id="fc-counter">1 / 50</div>
+  <div id="fc-timer-live"></div>
+  <div id="fc-card-area">
+    <div class="fc-perspective" onclick="flipCard()">
+      <div class="fc-inner" id="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">Вопрос — напиши уравнение</div>
+          <div id="fc-front">...</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-back-tag">✅ Ответ</div>
+          <div id="fc-back">...</div>
+        </div>
+      </div>
+    </div>
+    <button class="fc-flip-btn" id="fc-flip-btn" onclick="flipCard()">🔄 Перевернуть карточку</button>
+    <div class="fc-btn-row" id="fc-btn-row">
+      <button class="fc-btn-dontknow" onclick="markUnknown()">← Не знаю</button>
+      <button class="fc-btn-know" onclick="markKnown()">Знаю →</button>
+    </div>
+    <div class="fc-keys">Горячие клавиши: Пробел — перевернуть · ← не знаю · → знаю</div>
+  </div>
+  <div id="fc-result" class="fc-result">
+    <h3>Сессия завершена! 🎉</h3>
+    <div class="fc-time-result" id="fc-time-result">⏱ —</div>
+    <div class="fc-res-row">
+      <div class="fc-res-card" style="background:rgba(29,158,117,.25)"><div class="fc-res-num fc-res-known">0</div><div class="fc-res-lbl">ЗНАЮ</div></div>
+      <div class="fc-res-card" style="background:rgba(192,57,43,.25)"><div class="fc-res-num fc-res-unknown">0</div><div class="fc-res-lbl">НЕ ЗНАЮ</div></div>
+    </div>
+    <div class="fc-restart-row">
+      <button class="fc-restart-btn primary" onclick="repeatUnknown()">🔁 Повторить незнакомые</button>
+      <button class="fc-restart-btn" onclick="restartAll()">🔄 Все карточки заново</button>
+    </div>
+  </div>
+  <div class="fc-empty" id="fc-empty">Нет карточек.</div>
+</div>
+
+<section class="section fade-in" id="s7">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <h2 class="section-title">Большой практикум — 50 заданий</h2>
+  </div>
+  <p class="body">Одно задание за раз. Напиши только продукты — нажми «Проверить». Ошибка? Задание вернётся в конец очереди.</p>
+
+  <div class="prc-shell">
+    <div id="prc-task-area">
+      <div class="prc-prog-wrap">
+        <div class="prc-prog-bar"><div class="prc-prog-fill" id="prc-fill" style="width:0%"></div></div>
+      </div>
+      <div class="prc-meta">
+        <span class="prc-num" id="prc-num">1 / 50</span>
+        <span class="prc-live" id="prc-live">✓ 0 &nbsp;✗ 0</span>
+      </div>
+      <div class="prc-repeat-notice" id="prc-repeat-notice">🔁 Повтор добавлен в конец очереди</div>
+      <div class="prc-q" id="prc-q">Загрузка…</div>
+      <div class="prc-row">
+        <input class="prc-inp" id="prc-inp" type="text" placeholder="Напиши только продукты…" autocomplete="off">
+        <button class="prc-btn" id="prc-check-btn" onclick="prcCheck()">Проверить</button>
+        <button class="prc-btn next" id="prc-next-btn" onclick="prcNext()" style="display:none">Далее →</button>
+      </div>
+      <div class="prc-fb" id="prc-fb"></div>
+      <div class="prc-ans" id="prc-ans">
+        <div class="prc-ans-lbl">Правильный ответ</div>
+        <div id="prc-ans-txt"></div>
+      </div>
+    </div>
+    <div class="prc-result-box" id="prc-result">
+      <div class="prc-grade" id="prc-grade">🎉</div>
+      <div class="prc-pct" id="prc-pct">0%</div>
+      <div class="prc-stat-row">
+        <div><div class="prc-stat-n" id="prc-ok-n">0</div><div class="prc-stat-l">Верно</div></div>
+        <div><div class="prc-stat-n" id="prc-err-n">0</div><div class="prc-stat-l">Ошибок</div></div>
+        <div><div class="prc-stat-n" id="prc-first-n">0</div><div class="prc-stat-l">С первой попытки</div></div>
+      </div>
+      <button class="prc-restart-btn" onclick="prcRestart()">Пройти снова</button>
+    </div>
+  </div>
+</section>
+
+</div><!-- /shell -->
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">↑</button>
+
+<script>
+/* ── Прогресс-бар и кнопка наверх ── */
+const pf=document.getElementById('pf');
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  pf.style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';
+  document.getElementById('back-top').classList.toggle('visible',d.scrollTop>400);
+});
+
+/* ── Fade-in при скролле ── */
+document.querySelectorAll('.fade-in').forEach(el=>
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),
+    {threshold:0.06,rootMargin:'0px 0px -30px 0px'}).observe(el));
+
+/* ── Боковое меню ── */
+function openMenu(){document.getElementById('menu-overlay').classList.add('open');document.getElementById('menu-panel').classList.add('open');}
+function closeMenu(){document.getElementById('menu-overlay').classList.remove('open');document.getElementById('menu-panel').classList.remove('open');}
+
+/* ── Полный экран ── */
+function toggleFullscreen(){
+  const btn=document.getElementById('topbar-fs');
+  if(!document.fullscreenElement&&!document.webkitFullscreenElement){
+    const el=document.documentElement;(el.requestFullscreen||el.webkitRequestFullscreen).call(el);
+  } else {
+    (document.exitFullscreen||document.webkitExitFullscreen).call(document);
+  }
+}
+document.addEventListener('fullscreenchange',()=>{const b=document.getElementById('topbar-fs');if(b)b.textContent=document.fullscreenElement?'✕':'⛶';});
+document.addEventListener('webkitfullscreenchange',()=>{const b=document.getElementById('topbar-fs');if(b)b.textContent=document.webkitFullscreenElement?'✕':'⛶';});
+
+/* ── Клавиши ── */
+document.addEventListener('keydown',e=>{
+  const isInput=e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA';
+  if(e.key==='Escape'){closeMenu();return;}
+  if(isInput)return;
+  if(e.key.toLowerCase()==='f'){e.preventDefault();toggleFullscreen();}
+});
+
+/* ══ ПРАКТИКУМ PRC ══ */
+const PRC=[
+  // Группа 1: Фосфор
+  {q:"P + O₂(изб.) → ?",a:"P₂O₅",eq:"4P + 5O₂(изб.) → 2P₂O₅",hint:"⬜ Белый дым."},
+  {q:"P + O₂(нед.) → ?",a:"P₂O₃",eq:"4P + 3O₂(нед.) → 2P₂O₃",hint:"Оксид фосфора(III)."},
+  {q:"P + Cl₂(изб.) → ?",a:"PCl₅",eq:"2P + 5Cl₂(изб.) → 2PCl₅",hint:"P→+5."},
+  {q:"P + Cl₂(нед.) → ?",a:"PCl₃",eq:"2P + 3Cl₂(нед.) → 2PCl₃",hint:"P→+3."},
+  {q:"P + I₂ → ?",a:"PI₃",eq:"2P + 3I₂ → 2PI₃",hint:"I₂ слабый → P только +3!"},
+  {q:"H₂ + P → ?",a:"↛",eq:"H₂ + P ↛",hint:"Не реагирует напрямую!"},
+  {q:"Ca + P → ?",a:"Ca₃P₂",eq:"3Ca + 2P →(t°) Ca₃P₂",hint:"Фосфид кальция."},
+  {q:"Al + P → ?",a:"AlP",eq:"Al + P →(t°) AlP",hint:"Фосфид алюминия."},
+  {q:"Ca₃P₂ + H₂O → ?",a:"Ca(OH)₂ + PH₃",eq:"Ca₃P₂ + 6H₂O → 3Ca(OH)₂ + 2PH₃↑",hint:"PH₃ самовоспламеняется!"},
+  {q:"AlP + H₂O → ?",a:"Al(OH)₃ + PH₃",eq:"AlP + 3H₂O → Al(OH)₃↓ + PH₃↑",hint:"⬜ Осадок Al(OH)₃ + ядовитый PH₃."},
+  {q:"P + HNO₃(конц.) → ?",a:"H₃PO₄ + NO₂ + H₂O",eq:"P + 5HNO₃(конц.) → H₃PO₄ + 5NO₂↑ + H₂O",hint:"🟤 NO₂."},
+  {q:"P + KOH(конц.) + H₂O →(t°) ?",a:"KH₂PO₂ + PH₃",eq:"4P + 3KOH + 3H₂O →(t°) 3KH₂PO₂ + PH₃↑",hint:"PH₃↑ ядовит!"},
+  {q:"P + NaOH(конц.) + H₂O →(t°) ?",a:"NaH₂PO₂ + PH₃",eq:"4P + 3NaOH + 3H₂O →(t°) 3NaH₂PO₂ + PH₃↑",hint:"Как с KOH — диспропорционирование P."},
+  {q:"P + Ca(OH)₂ + H₂O →(t°) ?",a:"Ca(H₂PO₂)₂ + PH₃",eq:"8P + 3Ca(OH)₂ + 6H₂O →(t°) 3Ca(H₂PO₂)₂ + 2PH₃↑",hint:"Ca²⁺ → соль Ca(H₂PO₂)₂."},
+  {q:"Ca₃(PO₄)₂ + SiO₂ + C →(t°) ?",a:"CaSiO₃ + P + CO",eq:"Ca₃(PO₄)₂ + 3SiO₂ + 5C →(t°) 3CaSiO₃ + 2P↑ + 5CO↑",hint:"Промышленное получение P."},
+  // Группа 2: Кремний
+  {q:"Si + O₂ → ?",a:"SiO₂",eq:"Si + O₂ →(t°) SiO₂",hint:"Кварц."},
+  {q:"Si + I₂ → ?",a:"SiI₄",eq:"Si + 2I₂ →(t°) SiI₄",hint:"Si реагирует со всеми Hal₂!"},
+  {q:"H₂ + Si → ?",a:"↛",eq:"H₂ + Si ↛",hint:"Не реагирует!"},
+  {q:"Si + HF → ?",a:"SiF₄ + H₂",eq:"Si + 4HF(г) → SiF₄↑ + 2H₂↑",hint:"Только HF!"},
+  {q:"Si + HNO₃(конц.) → ?",a:"↛",eq:"Si + HNO₃(конц.) ↛",hint:"Пассивен!"},
+  {q:"Si + NaOH + H₂O →(t°) ?",a:"Na₂SiO₃ + H₂",eq:"Si + 2NaOH + H₂O →(t°) Na₂SiO₃ + 2H₂↑",hint:"Реагирует со щёлочью!"},
+  {q:"Si + Ba(OH)₂ + H₂O →(t°) ?",a:"BaSiO₃ + H₂",eq:"Si + Ba(OH)₂ + H₂O →(t°) BaSiO₃ + 2H₂↑",hint:"Ba(OH)₂ — сильное основание."},
+  {q:"Si + Ca(OH)₂ + H₂O →(t°) ?",a:"CaSiO₃ + H₂",eq:"Si + Ca(OH)₂ + H₂O →(t°) CaSiO₃ + 2H₂↑",hint:"Аналогично NaOH и Ba(OH)₂."},
+  {q:"Si + Cl₂ → ?",a:"SiCl₄",eq:"Si + 2Cl₂ →(t°) SiCl₄",hint:"Si реагирует со всеми галогенами."},
+  {q:"Si + F₂ → ?",a:"SiF₄",eq:"Si + 2F₂ → SiF₄",hint:"F₂ — самый активный галоген."},
+  {q:"Si + LiOH + H₂O →(t°) ?",a:"Li₂SiO₃ + H₂",eq:"Si + 2LiOH + H₂O →(t°) Li₂SiO₃ + 2H₂↑",hint:"Щёлочи растворяют Si."},
+  {q:"SiO₂ + C →(t°) ?",a:"Si + CO",eq:"SiO₂ + 2C →(t°) Si + 2CO↑",hint:"Промышленное получение Si."},
+  // Группа 3: Углерод
+  {q:"C + O₂(изб.) → ?",a:"CO₂",eq:"C + O₂(изб.) → CO₂",hint:"Полное сгорание."},
+  {q:"C + O₂(нед.) → ?",a:"CO",eq:"2C + O₂(нед.) → 2CO",hint:"CO — угарный газ!"},
+  {q:"C + I₂ → ?",a:"↛",eq:"C + I₂ ↛",hint:"Не реагирует (Si реагирует)!"},
+  {q:"C + NaOH → ?",a:"↛",eq:"C + NaOH ↛",hint:"Не реагирует (Si реагирует)!"},
+  {q:"C + H₂O(пар) →(t°) ?",a:"CO + H₂",eq:"C + H₂O(пар) →(t°) CO + H₂↑",hint:"Водяной газ."},
+  {q:"C + HNO₃(конц.) → ?",a:"CO₂ + NO₂ + H₂O",eq:"C + 4HNO₃(конц.) → CO₂↑ + 4NO₂↑ + 2H₂O",hint:"🟤 NO₂."},
+  {q:"C + HNO₃(разб.) → ?",a:"CO₂ + NO + H₂O",eq:"3C + 4HNO₃(разб.) → 3CO₂↑ + 4NO↑ + 2H₂O",hint:"Разб. HNO₃ → NO (не NO₂!)."},
+  {q:"C + H₂SO₄(конц.) →(t°) ?",a:"CO₂ + SO₂ + H₂O",eq:"C + 2H₂SO₄(конц.) →(t°) CO₂↑ + 2SO₂↑ + 2H₂O",hint:"🟡 Конц. H₂SO₄ — окислитель."},
+  {q:"CaC₂ + H₂O → ?",a:"Ca(OH)₂ + C₂H₂",eq:"CaC₂ + 2H₂O → Ca(OH)₂ + C₂H₂↑",hint:"C₂H₂ — ацетилен."},
+  // Группа 4: Водород и металлы
+  {q:"H₂ + F₂ → ?",a:"HF",eq:"H₂ + F₂ →(hν) 2HF",hint:"Взрыв на свету!"},
+  {q:"H₂ + Cl₂ → ?",a:"HCl",eq:"H₂ + Cl₂ →(hν) 2HCl",hint:"Взрыв на свету, цепная реакция."},
+  {q:"H₂ + S → ?",a:"H₂S",eq:"H₂ + S ⇄ H₂S",hint:"H₂S ядовит."},
+  {q:"H₂ + Si → ?",a:"↛",eq:"H₂ + Si ↛",hint:"Не реагирует!"},
+  {q:"H₂ + P → ?",a:"↛",eq:"H₂ + P ↛",hint:"Не реагирует!"},
+  {q:"CuO + H₂ →(t°) ?",a:"Cu + H₂O",eq:"CuO + H₂ →(t°) Cu + H₂O",hint:"⬛→🔴 Медь."},
+  {q:"ZnO + H₂ →(t°) ?",a:"Zn + H₂O",eq:"ZnO + H₂ →(t°) Zn + H₂O",hint:"Восстановление оксидов."},
+  {q:"ZnO + C →(t°) ?",a:"Zn + CO",eq:"ZnO + C →(t°) Zn + CO↑",hint:"Коксотермия."},
+  {q:"Fe₂O₃ + H₂ →(t°) ?",a:"Fe + H₂O",eq:"Fe₂O₃ + 3H₂ →(t°) 2Fe + 3H₂O",hint:"Восстановление."},
+  {q:"Na + H₂ →(t°) ?",a:"NaH",eq:"2Na + H₂ →(t°) 2NaH",hint:"H в с.о. −1."},
+  {q:"CH₄ + H₂O(пар) →(t°) ?",a:"CO + H₂",eq:"CH₄ + H₂O(пар) →(t°) CO + 3H₂",hint:"Конверсия метана."},
+  // Группа 5: Дополнительные
+  {q:"C + CuO →(t°) ?",a:"Cu + CO₂",eq:"2CuO + C →(t°) 2Cu + CO₂↑",hint:"C восстанавливает металлы из оксидов."},
+  {q:"CO + CuO →(t°) ?",a:"Cu + CO₂",eq:"CuO + CO →(t°) Cu + CO₂",hint:"CO — восстановитель."},
+  {q:"H₂ + N₂ ⇄ ?",a:"NH₃",eq:"N₂ + 3H₂ ⇄(t°, кат.) 2NH₃",hint:"Синтез аммиака (Габер)."},
+];
+
+let prcQueue=[],prcPos=0,prcOk=0,prcErr=0,prcFirst=0,prcAttempts={},prcDone=false;
+
+function prcInit(){
+  if(!_loadPrc()){
+    prcQueue=[...PRC].sort(()=>Math.random()-.5);
+    prcPos=0;prcOk=0;prcErr=0;prcFirst=0;prcAttempts={};prcDone=false;
+  }
+  document.getElementById('prc-result').style.display='none';
+  document.getElementById('prc-task-area').style.display='block';
+  prcShow();
+}
+function prcShow(){
+  const t=prcQueue[prcPos];
+  document.getElementById('prc-q').textContent=t.q;
+  document.getElementById('prc-fill').style.width=(prcPos/prcQueue.length*100)+'%';
+  document.getElementById('prc-num').textContent=(prcPos+1)+' / '+prcQueue.length;
+  document.getElementById('prc-live').innerHTML='✓ '+prcOk+' &nbsp;✗ '+prcErr;
+  const fb=document.getElementById('prc-fb');
+  fb.className='prc-fb';fb.textContent='';
+  document.getElementById('prc-ans').style.display='none';
+  document.getElementById('prc-repeat-notice').style.display='none';
+  const inp=document.getElementById('prc-inp');
+  inp.value='';inp.readOnly=false;inp.className='prc-inp';
+  document.getElementById('prc-check-btn').style.display='';
+  document.getElementById('prc-check-btn').disabled=false;
+  document.getElementById('prc-next-btn').style.display='none';
+  inp.focus({preventScroll:true});
+}
+function prcTokenScore(u,a){
+  const sub='₀₁₂₃₄₅₆₇₈₉';
+  function norm(s){return s.replace(/[₀-₉]/g,c=>''+sub.indexOf(c));}
+  function tok(s){
+    return norm(s)
+      .toLowerCase()
+      .replace(/[→⇄↑↓≠↛\[\]]/g,'')
+      .split(/[\s+,]+/)
+      .map(w=>w.replace(/[^a-zа-яё0-9()]/gi,''))
+      .map(w=>w.replace(/^\d+/,''))
+      .filter(w=>w.length>=2&&!/^(и|при|или|это|для|что|как|в|с|из|на|по|до|то|же|а|но)$/.test(w));
+  }
+  const ac=tok(a),uc=tok(u);
+  if(!ac.length)return 1;
+  return ac.every(ct=>uc.some(ut=>ut===ct||ut.includes(ct)||ct.includes(ut)))?1:0;
+}
+function prcIsCorrect(val,t){
+  if(t.a==='↛'){
+    const v=val.trim().toLowerCase();
+    return val.includes('↛')||val.includes('↛')||v.includes('не реаги')||v==='нет'||v==='-'||v==='—'||v.includes('не протек')||v.includes('не идет')||v.includes('не идёт');
+  }
+  return prcTokenScore(val,t.a)===1;
+}
+function prcCheck(){
+  const t=prcQueue[prcPos];
+  const inp=document.getElementById('prc-inp');
+  const val=inp.value.trim();
+  if(!val){inp.focus();return;}
+  const ok=prcIsCorrect(val,t);
+  const fb=document.getElementById('prc-fb');
+  if(ok){
+    inp.readOnly=true;
+    inp.classList.add('correct');
+    fb.className='prc-fb ok';fb.textContent='✅ Верно!';
+    prcOk++;
+    if(!prcAttempts[prcPos])prcFirst++;
+    document.getElementById('prc-ans').style.display='block';
+    document.getElementById('prc-ans-txt').innerHTML=t.eq+(t.hint?' <span style="font-family:var(--font);font-size:12px;color:var(--green);margin-left:6px;font-style:italic">'+t.hint+'</span>':'');
+    document.getElementById('prc-check-btn').style.display='none';
+    document.getElementById('prc-next-btn').style.display='';
+  }else{
+    inp.classList.add('wrong');
+    fb.className='prc-fb miss';fb.textContent='❌ Не совсем — попробуй ещё раз';
+    prcAttempts[prcPos]=(prcAttempts[prcPos]||0)+1;
+    if(prcAttempts[prcPos]===1){
+      prcErr++;prcQueue.push(t);
+      const rn=document.getElementById('prc-repeat-notice');
+      rn.style.display='block';
+      setTimeout(()=>{rn.style.display='none';},2500);
+    }
+    setTimeout(()=>{
+      inp.value='';inp.classList.remove('wrong');
+      fb.className='prc-fb';fb.textContent='';
+      inp.focus();
+    },900);
+  }
+  document.getElementById('prc-live').innerHTML='✓ '+prcOk+' &nbsp;✗ '+prcErr;
+}
+function prcNext(){
+  prcPos++;
+  if(prcPos>=prcQueue.length){prcFinish();}else{_savePrc();prcShow();}
+}
+var _fcAllDone=false;
+function _checkBothDone(){
+  if(_fcAllDone&&prcDone){
+    setTimeout(function(){document.getElementById('congrats-overlay').classList.add('show');},700);
+  }
+}
+function prcFinish(){
+  prcDone=true;_savePrc();
+  const pct=Math.round(prcFirst/PRC.length*100);
+  const grade=pct>=90?'🎉':pct>=70?'✅':pct>=50?'💪':'📚';
+  document.getElementById('prc-grade').textContent=grade;
+  document.getElementById('prc-pct').textContent=pct+'%';
+  document.getElementById('prc-ok-n').textContent=prcOk;
+  document.getElementById('prc-err-n').textContent=prcErr;
+  document.getElementById('prc-first-n').textContent=prcFirst;
+  document.getElementById('prc-task-area').style.display='none';
+  document.getElementById('prc-result').style.display='block';
+  markToday();
+  _checkBothDone();
+}
+function prcRestart(){
+  prcQueue=[...PRC].sort(()=>Math.random()-.5);
+  prcPos=0;prcOk=0;prcErr=0;prcFirst=0;prcAttempts={};prcDone=false;
+  document.getElementById('congrats-overlay').classList.remove('show');
+  try{localStorage.removeItem('nemetally2_prc');}catch(x){}
+  document.getElementById('prc-result').style.display='none';
+  document.getElementById('prc-task-area').style.display='block';
+  prcShow();
+}
+var _PRC_TTL=6*24*3600*1000;
+function _savePrc(){
+  try{localStorage.setItem('nemetally2_prc',JSON.stringify({ts:Date.now(),q:prcQueue.map(t=>t.q),pos:prcPos,ok:prcOk,err:prcErr,first:prcFirst,done:prcDone}));}catch(x){}
+}
+function _loadPrc(){
+  try{
+    var d=JSON.parse(localStorage.getItem('nemetally2_prc'));
+    if(!d||d.done)return false;
+    if(d.ts&&Date.now()-d.ts>_PRC_TTL){localStorage.removeItem('nemetally2_prc');return false;}
+    var map={};PRC.forEach(t=>{map[t.q]=t;});
+    var q=(d.q||[]).map(k=>map[k]).filter(Boolean);
+    if(q.length<1)return false;
+    prcQueue=q;prcPos=d.pos||0;prcOk=d.ok||0;prcErr=d.err||0;prcFirst=d.first||0;
+    return true;
+  }catch(x){return false;}
+}
+
+/* ══ ФЛЭШ-КАРТОЧКИ ══ */
+let deck=[],cur=0,flipped=false,known=[],unknown=[];
+
+var _sr={};
+try{_sr=JSON.parse(localStorage.getItem('nemetally2_fc_sr')||'{}');}catch(x){}
+function _srSave(){try{localStorage.setItem('nemetally2_fc_sr',JSON.stringify(_sr));}catch(x){}}
+function _srKey(q){return q.slice(0,40);}
+function _srGet(q){return _sr[_srKey(q)]||{n:1,ef:2.5,due:0};}
+function _srUpd(q,ok){
+  var k=_srKey(q),c=_srGet(q);
+  if(ok){c.n=Math.max(1,Math.round(c.n*c.ef));c.ef=Math.max(1.3,c.ef+0.1);}
+  else{c.n=1;c.ef=Math.max(1.3,c.ef-0.2);}
+  c.due=Date.now()+c.n*86400000;
+  _sr[k]=c;_srSave();
+}
+function _srBadge(q){
+  var c=_srGet(q),d=Math.round((c.due-Date.now())/86400000);
+  if(c.n<=1)return '🆕 новая';
+  return d<0?('⏰ просрочена '+(-d)+'д'):('📅 через '+d+'д');
+}
+function _srSort(arr){
+  var now=Date.now();
+  return arr.slice().sort(function(a,b){
+    var ca=_srGet(a.q),cb=_srGet(b.q);
+    if(ca.due<now&&cb.due>=now)return -1;
+    if(cb.due<now&&ca.due>=now)return 1;
+    return ca.n-cb.n;
+  });
+}
+
+function buildDeck(){
+  _fcTimerStart_fn();
+  deck=Array.from(document.querySelectorAll('.fc-data')).map(function(el){
+    return{q:el.dataset.q,a:el.dataset.a,hint:el.dataset.hint||''};
+  });
+  deck=_srSort(deck);
+  known=[];unknown=[];cur=0;flipped=false;
+  document.getElementById('fc-result').style.display='none';
+  renderCard();
+}
+function renderCard(){
+  if(deck.length===0){document.getElementById('fc-empty').style.display='block';document.getElementById('fc-card-area').style.display='none';return;}
+  document.getElementById('fc-empty').style.display='none';
+  document.getElementById('fc-card-area').style.display='block';
+  var card=deck[cur];
+  document.getElementById('fc-front').innerHTML=card.q;
+  document.getElementById('fc-back').innerHTML=card.a+(card.hint?'<div class="fc-hint">'+card.hint+'</div>':'')+
+    '<div class="fc-sr-badge">'+_srBadge(card.q)+'</div>';
+  document.getElementById('fc-inner').classList.remove('flipped');
+  flipped=false;
+  document.getElementById('fc-counter').textContent=(cur+1)+' / '+deck.length;
+  document.getElementById('fc-known').textContent=known.length;
+  document.getElementById('fc-unknown').textContent=unknown.length;
+  document.getElementById('fc-btn-row').style.display='none';
+  document.getElementById('fc-flip-btn').style.display='flex';
+}
+function flipCard(){
+  document.getElementById('fc-inner').classList.toggle('flipped');
+  flipped=!flipped;
+  if(flipped){document.getElementById('fc-btn-row').style.display='flex';document.getElementById('fc-flip-btn').style.display='none';}
+}
+function markKnown(){
+  if(cur<deck.length)_srUpd(deck[cur].q,true);
+  known.push(deck[cur]);cur++;
+  if(cur>=deck.length){showResult();return;}
+  flipped=false;renderCard();
+}
+function markUnknown(){
+  if(cur<deck.length)_srUpd(deck[cur].q,false);
+  unknown.push(deck[cur]);cur++;
+  if(cur>=deck.length){showResult();return;}
+  flipped=false;renderCard();
+}
+function showResult(){
+  _fcTimerStop();
+  document.getElementById('fc-card-area').style.display='none';
+  const res=document.getElementById('fc-result');res.style.display='block';
+  res.querySelector('.fc-res-known').textContent=known.length;
+  res.querySelector('.fc-res-unknown').textContent=unknown.length;
+  if(unknown.length===0&&known.length>0){_fcAllDone=true;_checkBothDone();}
+}
+function repeatUnknown(){
+  deck=_srSort(unknown.slice());known=[];unknown=[];cur=0;flipped=false;
+  document.getElementById('fc-result').style.display='none';
+  renderCard();
+}
+function restartAll(){_fcAllDone=false;buildDeck();}
+
+/* ══ FC TIMER ══ */
+var _fcTimerStart=0,_fcTimerTick=null;
+function _fcTimerFmt(ms){var s=Math.floor(ms/1000),m=Math.floor(s/60);s=s%60;return(m>0?m+' мин ':'')+s+' сек';}
+function _fcTimerUpdate(){var el=document.getElementById('fc-timer-live');if(el)el.textContent='⏱ '+_fcTimerFmt(Date.now()-_fcTimerStart);}
+function _fcTimerStart_fn(){_fcTimerStart=Date.now();if(_fcTimerTick)clearInterval(_fcTimerTick);_fcTimerTick=setInterval(_fcTimerUpdate,1000);var el=document.getElementById('fc-timer-live');if(el)el.textContent='⏱ 0 сек';}
+function _fcTimerStop(){if(_fcTimerTick){clearInterval(_fcTimerTick);_fcTimerTick=null;}var elapsed=Date.now()-_fcTimerStart;var el=document.getElementById('fc-timer-live');if(el)el.textContent='';var res=document.getElementById('fc-time-result');if(res)res.textContent='⏱ Пройдено за '+_fcTimerFmt(elapsed);}
+
+document.addEventListener('DOMContentLoaded',function(){
+  window.scrollTo(0,0);
+  buildDeck();
+  prcInit();
+  document.getElementById('prc-inp').addEventListener('keydown',function(e){
+    if(e.key!=='Enter')return;
+    e.preventDefault();
+    var nb=document.getElementById('prc-next-btn');
+    if(nb&&nb.style.display!=='none'){prcNext();}else{prcCheck();}
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.target.tagName==='TEXTAREA'||e.target.tagName==='INPUT')return;
+    const ca=document.getElementById('fc-card-area');
+    if(!ca||ca.style.display==='none')return;
+    if(e.key===' '){e.preventDefault();flipCard();}
+    else if(e.key==='ArrowRight'){e.preventDefault();if(flipped)markKnown();}
+    else if(e.key==='ArrowLeft'){e.preventDefault();if(flipped)markUnknown();}
+  });
+});
+
+/* ── История занятий (6 дней) ── */
+const _HIST_KEY='nemetally2_hist';
+function _getHist(){try{return JSON.parse(localStorage.getItem(_HIST_KEY))||[];}catch(e){return[];}}
+function _saveHist(h){try{localStorage.setItem(_HIST_KEY,JSON.stringify(h));}catch(e){}}
+function _todayStr(){return new Date().toISOString().slice(0,10);}
+
+function updateStreak(){
+  const h=_getHist();
+  const c=document.getElementById('tb-streak');
+  if(!c)return;
+  c.innerHTML='';
+  for(let i=5;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const ds=d.toISOString().slice(0,10);
+    const entry=h.find(x=>x.d===ds);
+    const done=entry&&entry.b&&entry.b.length>=1;
+    const dot=document.createElement('div');
+    dot.className='tb-day'+(done?' done':'')+(i===0?' today':'');
+    dot.title=d.toLocaleDateString('ru',{day:'numeric',month:'short'})+': '+(done?'выполнено ✓':'нет данных');
+    c.appendChild(dot);
+  }
+}
+
+function markToday(){
+  const today=_todayStr();
+  const h=_getHist();
+  let entry=h.find(x=>x.d===today);
+  if(!entry){entry={d:today,b:[]};h.push(entry);}
+  if(!entry.b.includes('done'))entry.b.push('done');
+  const cutoff=new Date();cutoff.setDate(cutoff.getDate()-6);
+  _saveHist(h.filter(x=>x.d>=cutoff.toISOString().slice(0,10)));
+  updateStreak();
+}
+
+function clearHistory(){
+  if(!confirm('Сбросить весь прогресс и историю занятий?'))return;
+  try{
+    localStorage.removeItem(_HIST_KEY);
+    localStorage.removeItem('nemetally2_prc');
+    localStorage.removeItem('nemetally2_fc_sr');
+  }catch(e){}
+  location.reload();
+}
+
+updateStreak();
+</script>
+<div class="congrats-overlay" id="congrats-overlay">
+  <div class="congrats-card">
+    <div class="congrats-emoji">🎉</div>
+    <div class="congrats-title">Поздравляю! Молодец!</div>
+    <div class="congrats-sub">Ты выполнила все флэш-карты и весь практикум</div>
+    <div class="congrats-pct">100%</div>
+    <button class="congrats-close" onclick="document.getElementById('congrats-overlay').classList.remove('show')">Спасибо! ✨</button>
+  </div>
+</div>
+</body>
+</html>
