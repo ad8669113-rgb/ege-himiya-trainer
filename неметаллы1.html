@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script>history.scrollRestoration='manual';</script>
+<title>Неметаллы. Часть 1 — ЕГЭ 2026–2027</title>
+<style>
+/* ══ ТОКЕНЫ — изумрудная палитра ══ */
+:root{
+  --p900:#053535;--p800:#07484a;--p700:#0a5e60;
+  --p600:#0d7778;--p500:#119496;--p400:#3bb8ba;
+  --p300:#79d8d9;--p200:#bbeeef;--p100:#e5f8f8;--p50:#f2fcfc;
+  --ink:#1a2424;--ink2:#3a5050;--ink3:#7a9696;
+  --line:#d4eced;--card:#ffffff;--bg:#f2fcfc;--white:#fff;
+  --green:#1D9E75;--green-t:#E1F5EE;--green-d:#085041;
+  --amber:#BA7517;--amber-t:#FAEEDA;--amber-d:#633806;
+  --red:#A32D2D;--red-t:#FCEBEB;--red-d:#7A2020;
+  --r:12px;--r-sm:8px;--r-lg:20px;
+  --shadow:0 1px 3px rgba(10,94,96,.06),0 4px 16px rgba(10,94,96,.07);
+  --shm:0 4px 20px rgba(10,94,96,.16);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:17px;font-weight:500}
+
+/* ПРОГРЕСС */
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:var(--p100);z-index:999}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--p600),var(--p400));width:0;transition:width .1s}
+
+/* SHELL */
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#053535 0%,#0a5e60 55%,#119496 100%);padding:56px 32px 48px;margin:0 -24px 48px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(59,184,186,.18) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.82);border-radius:20px;padding:4px 14px;font-size:12px;font-family:var(--mono);letter-spacing:.6px;margin-bottom:20px}
+.hero h1{font-size:clamp(24px,5vw,44px);font-weight:800;line-height:1.06;letter-spacing:-.03em;color:#fff;margin-bottom:14px;position:relative;z-index:1}
+.hero h1 em{color:#79d8d9;font-style:normal}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.75);line-height:1.7;max-width:560px;margin-bottom:28px;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.hero-chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.9);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+
+/* TOC */
+.toc{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:22px 26px;margin-bottom:48px;box-shadow:var(--shadow)}
+.toc-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p600);font-family:var(--mono);margin-bottom:14px}
+.toc ol{padding-left:20px}
+.toc li{padding:4px 0;font-size:14px}
+.toc a{color:var(--ink2);text-decoration:none;transition:color .15s}
+.toc a:hover{color:var(--p600)}
+
+/* SECTION */
+.section{margin-bottom:56px}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--p200)}
+.section-num{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,var(--p700),var(--p500));color:#fff;font-family:var(--mono);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+.section-title{font-size:clamp(20px,2.5vw,26px);font-weight:800;color:var(--p800);line-height:1.2}
+
+h2.sub-title{font-size:21px;font-weight:800;color:var(--p700);margin:28px 0 12px;display:flex;align-items:center;gap:8px}
+h2.sub-title::before{content:'';width:4px;height:20px;background:var(--p500);border-radius:2px;flex-shrink:0}
+h3.mini-title{font-size:15px;font-weight:700;color:var(--ink);margin:18px 0 8px}
+p.body{font-size:16.5px;line-height:1.75;color:var(--ink2);margin-bottom:14px;font-weight:500}
+p.body strong{color:var(--ink)}
+
+/* BOXES */
+.box{border-radius:var(--r-sm);padding:14px 18px;margin:14px 0;font-size:clamp(15.5px,1.7vw,17px);line-height:1.75;font-weight:500}
+.box-title{font-weight:800;font-size:clamp(14px,1.5vw,15.5px);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:var(--amber-t);border-left:4px solid var(--amber);color:var(--amber-d)}
+.box-danger{background:var(--red-t);border-left:4px solid var(--red);color:var(--red-d)}
+.box-success{background:var(--green-t);border-left:4px solid var(--green);color:var(--green-d)}
+.box ul,.box ol{padding-left:20px;margin:6px 0}
+.box li{margin:5px 0;font-size:clamp(14.5px,1.6vw,16px)}
+
+/* EQ BLOCK */
+.eq-block{background:var(--white);border:1px solid var(--line);border-radius:var(--r-sm);padding:14px 20px;margin:10px 0;box-shadow:var(--shadow)}
+.eq{font-family:var(--mono);font-size:clamp(15px,1.8vw,17px);font-weight:700;color:#111;line-height:2.2;display:block}
+.eq .cond{color:#c0392b;font-size:clamp(12px,1.3vw,13.5px);font-weight:400}
+.eq .we{color:var(--red);font-weight:700}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);margin:14px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:clamp(14px,1.5vw,15.5px)}
+th{background:linear-gradient(135deg,var(--p800),var(--p600));color:#fff;font-weight:700;padding:10px 14px;text-align:left;font-size:clamp(11px,1.2vw,12.5px);text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-weight:600;color:#111}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--p50)}
+tr:hover td{background:var(--p100);transition:background .15s}
+
+/* CHIP */
+.chip{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.5px;padding:3px 9px;border-radius:5px;font-weight:600;white-space:nowrap}
+.chip-p{background:var(--p100);color:var(--p700)}
+.chip-g{background:var(--green-t);color:var(--green-d)}
+.chip-a{background:var(--amber-t);color:var(--amber-d)}
+.chip-r{background:var(--red-t);color:var(--red-d)}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+@media(max-width:700px){.grid-2,.grid-3{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow);transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:var(--p300);box-shadow:var(--shm)}
+.card-title{font-weight:700;font-size:14px;color:var(--p700);margin-bottom:8px}
+.card-body{font-size:14px;color:var(--ink2);line-height:1.65}
+
+/* SCALE */
+.activity-scale{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:20px 24px;margin:14px 0;box-shadow:var(--shadow);overflow-x:auto}
+.scale-label{display:flex;justify-content:space-between;font-size:11px;color:var(--ink3);font-family:var(--mono);margin-bottom:8px}
+.scale-row{display:flex;align-items:center;gap:3px;overflow-x:auto;padding-bottom:6px}
+.sc-item{padding:6px 8px;border-radius:6px;white-space:nowrap;font-family:var(--mono);font-size:12.5px;font-weight:500;flex-shrink:0}
+.sc-active{background:var(--p200);color:var(--p800)}
+.sc-mid{background:var(--p100);color:var(--p700)}
+.sc-h2{background:var(--red);color:#fff;padding:6px 12px;border-radius:6px;margin:0 6px;font-weight:700}
+.sc-low{background:#EEF8F3;color:var(--green-d)}
+.scale-desc{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3);margin-top:10px;flex-wrap:wrap;gap:8px}
+
+/* REMEMBER */
+.remember{background:linear-gradient(135deg,var(--p100),var(--p50));border:1.5px solid var(--p300);border-radius:var(--r);padding:16px 20px;margin-top:24px}
+.remember-title{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--p600);margin-bottom:10px;font-weight:700}
+.remember ul{padding-left:18px}
+.remember li{font-size:14.5px;color:var(--p800);padding:4px 0;line-height:1.65}
+
+.hr{height:1px;background:var(--line);margin:22px 0}
+
+/* ══ АККОРДЕОН-ПРАКТИКА (как металлы2) ══ */
+.acc-wrap{margin:28px 0;border:2px solid var(--p300);border-radius:16px;overflow:hidden;background:var(--card)}
+.acc-head{background:linear-gradient(90deg,var(--p100),var(--p50));padding:13px 20px;font-weight:800;font-size:13px;color:var(--p800);border-bottom:2px solid var(--p300);display:flex;align-items:center;gap:8px;letter-spacing:.3px}
+.acc-task{padding:18px 20px;border-bottom:1px solid var(--p200)}
+.acc-task:last-of-type{border-bottom:none}
+.acc-task.acc-locked{display:none}
+.acc-num{font-size:11px;font-weight:700;color:var(--p500);margin-bottom:7px;text-transform:uppercase;letter-spacing:.8px}
+.acc-q{font-size:15.5px;font-weight:600;color:var(--ink);margin-bottom:12px;line-height:1.55}
+.acc-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.acc-inp{flex:1;min-width:160px;padding:9px 13px;border:2px solid var(--p300);border-radius:10px;font-size:14px;font-family:var(--mono);background:var(--bg);color:var(--ink);outline:none;transition:border-color .18s,background .18s}
+.acc-inp:focus{border-color:var(--p500);background:var(--card)}
+.acc-inp.acc-ok{border-color:#16a34a!important;background:#dcfce7!important;color:#166534!important}
+.acc-inp.acc-err{border-color:#dc2626!important;background:#fef2f2!important;animation:acc-shake .35s}
+.acc-btn{padding:9px 18px;background:var(--p600);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;transition:background .18s;flex-shrink:0;white-space:nowrap}
+.acc-btn:hover:not(:disabled){background:var(--p700)}
+.acc-btn:disabled{background:var(--p300);cursor:default}
+.acc-fb{font-size:13px;margin-top:7px;font-weight:600;min-height:18px}
+.acc-fb.ok{color:#16a34a}
+.acc-fb.err{color:#dc2626}
+.acc-done-msg{padding:16px 20px;text-align:center;font-size:15px;font-weight:800;color:var(--p700);background:var(--p50);border-top:1px solid var(--p200)}
+.why-box{background:linear-gradient(135deg,#fef9c3,#fef3c7);border:1.5px solid #f59e0b;border-radius:12px;padding:14px 18px;margin:12px 0 4px;font-size:14.5px;line-height:1.65;color:#78350f}
+.why-box b{color:#92400e}
+@keyframes acc-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+/* BACK TOP */
+#back-top{position:fixed;bottom:24px;right:24px;width:42px;height:42px;border-radius:12px;background:var(--p600);color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(13,119,120,.35);display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .2s;opacity:0;pointer-events:none}
+#back-top.visible{opacity:1;pointer-events:all}
+#back-top:hover{transform:translateY(-2px)}
+
+/* FADE IN */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ══ ТОПБАР ══ */
+#topbar{position:fixed;top:12px;right:16px;z-index:1100;display:flex;align-items:center;gap:4px;background:rgba(10,94,96,.15);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(10,94,96,.28);border-radius:999px;padding:5px 10px 5px 6px;box-shadow:0 4px 16px rgba(10,94,96,.22)}
+#topbar-menu-btn{width:32px;height:32px;border-radius:50%;border:none;background:rgba(10,94,96,.18);color:var(--p800);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+#topbar-menu-btn:hover{background:rgba(10,94,96,.35)}
+.tb-top-btn{width:30px;height:30px;border-radius:50%;border:none;background:none;color:var(--p700);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.tb-top-btn:hover{background:rgba(10,94,96,.15)}
+:fullscreen #topbar-fs,:-webkit-full-screen #topbar-fs{color:var(--p500)}
+
+/* ══ БОКОВОЕ МЕНЮ ══ */
+#menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:1199;backdrop-filter:blur(3px)}
+#menu-overlay.open{display:block}
+#menu-panel{position:fixed;top:0;right:0;width:min(320px,90vw);height:100%;background:var(--card);box-shadow:-4px 0 32px rgba(5,53,53,.2);z-index:1200;transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);overflow-y:auto;display:flex;flex-direction:column}
+#menu-panel.open{transform:translateX(0)}
+.menu-head{padding:20px 20px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.menu-head-title{font-size:13px;font-weight:700;color:var(--p800);letter-spacing:.3px}
+.menu-close{border:none;background:none;font-size:20px;cursor:pointer;color:var(--ink3);width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .15s}
+.menu-close:hover{background:var(--p100)}
+.menu-nav{padding:12px 10px;flex:1}
+.menu-nav a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;text-decoration:none;color:var(--ink2);font-size:14px;transition:background .15s,color .15s;line-height:1.35}
+.menu-nav a:hover{background:var(--p100);color:var(--p700)}
+.menu-nav .mn-num{min-width:22px;height:22px;background:var(--p100);color:var(--p700);border-radius:5px;font-family:var(--mono);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ══ ТЁМНАЯ ТЕМА ══ */
+@media(prefers-color-scheme:dark){
+  :root{--bg:#061c1c;--card:#0a2a2a;--ink:#d8f0f0;--ink2:#8ab8b8;--ink3:#3a7070;--line:#0f3838;--white:#0a2a2a;--p50:#071f1f;--p100:#0a2828;--p200:#0f3838}
+  #topbar{background:rgba(17,148,150,.18);border-color:rgba(17,148,150,.3)}
+  #topbar-menu-btn{background:rgba(17,148,150,.25);color:var(--p300)}
+  #menu-panel{background:#0a2a2a}
+  .hero{background:linear-gradient(135deg,#021a1a 0%,#063838 55%,#0a5252 100%)}
+}
+
+/* ══ ПОЛНЫЙ ЭКРАН ══ */
+:fullscreen .shell,:-webkit-full-screen .shell{max-width:100%;padding:0 60px 80px}
+:fullscreen .hero,:-webkit-full-screen .hero{margin:0 -60px 32px;border-radius:0}
+:fullscreen body,:-webkit-full-screen body{font-size:20px}
+:fullscreen .eq,:-webkit-full-screen .eq{font-size:clamp(19px,2vw,22px)}
+:fullscreen .eq .cond,:-webkit-full-screen .eq .cond{font-size:15px}
+:fullscreen .box,:-webkit-full-screen .box{font-size:19px}
+:fullscreen .box li,:-webkit-full-screen .box li{font-size:18px}
+:fullscreen .box-title,:-webkit-full-screen .box-title{font-size:17px}
+:fullscreen h2.sub-title,:-webkit-full-screen h2.sub-title{font-size:27px}
+:fullscreen .section-title,:-webkit-full-screen .section-title{font-size:clamp(24px,3vw,32px)}
+:fullscreen table,:-webkit-full-screen table{font-size:17px}
+:fullscreen td,:-webkit-full-screen td{padding:12px 18px}
+:fullscreen .acc-q,:-webkit-full-screen .acc-q{font-size:19px}
+:fullscreen .acc-inp,:-webkit-full-screen .acc-inp{font-size:16px}
+:fullscreen .remember,:-webkit-full-screen .remember{font-size:17px}
+:fullscreen .remember li,:-webkit-full-screen .remember li{font-size:17px}
+
+/* ══ ШИРОКИЙ ЭКРАН ══ */
+@media(min-width:900px){
+  body{font-size:19px}
+  p.body{font-size:18px}
+  .eq{font-size:clamp(17px,1.8vw,19px)}
+  .eq .cond{font-size:13px}
+  .box{font-size:17.5px}
+  .box li{font-size:16.5px}
+  .box-title{font-size:15.5px}
+  h2.sub-title{font-size:24px}
+  table{font-size:15.5px}
+  td{padding:11px 16px}
+  .section-title{font-size:clamp(22px,2.5vw,28px)}
+  .remember{font-size:16px}
+  .remember li{font-size:16px}
+}
+
+/* COLOR HELPERS */
+.cy{color:#B8860B;font-weight:600}.cb{color:#6B3FA0;font-weight:600}
+.ck{color:#222;font-weight:600}.cg{color:#1D9E75;font-weight:600}.cr{color:#C0392B;font-weight:600}
+
+@media(max-width:540px){.shell{padding:0 14px 60px}.hero{padding:36px 18px 32px;margin:0 -14px 32px}.acc-wrap{margin:20px 0}}
+@media print{.prog-bar-wrap,#back-top,#topbar,#menu-overlay,#menu-panel{display:none}}
+
+/* ══ ФЛЭШ-КАРТОЧКИ (single-card) ══ */
+.fc-section-wrap{background:linear-gradient(135deg,var(--p900,#083637),var(--p700));border-radius:20px;padding:28px 24px 32px;margin-top:4px}
+.fc-section-wrap .body{color:rgba(255,255,255,.7);margin-bottom:20px}
+.fc-stats-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:8px}
+.fc-stat{font-size:13px;font-family:var(--mono);font-weight:700;color:rgba(255,255,255,.85)}
+.fc-stat span{color:#fff}
+.fc-progress{flex:1;min-width:80px;height:5px;background:rgba(255,255,255,.2);border-radius:3px;overflow:hidden;margin:0 12px}
+.fc-progress-fill{height:100%;background:#1D9E75;border-radius:3px;transition:width .4s}
+.fc-perspective{perspective:900px;width:100%;max-width:560px;margin:0 auto;cursor:pointer;user-select:none}
+.fc-inner{position:relative;width:100%;height:190px;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;top:0;left:0;right:0;bottom:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;align-items:center;justify-content:center;padding:24px 28px;text-align:center;flex-direction:column;gap:8px}
+.fc-front{background:#0a5455;border:1.5px solid rgba(255,255,255,.2)}
+.fc-back{background:#fff;transform:rotateY(180deg)}
+.fc-tag{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:.55;margin-bottom:2px}
+.fc-front .fc-tag{color:#fff}
+.fc-back .fc-tag{color:var(--p600)}
+.fc-q-text{font-size:clamp(15px,2.5vw,19px);font-family:var(--mono);font-weight:600;color:#fff;line-height:1.45}
+.fc-a-text{font-size:clamp(13px,2vw,17px);font-family:var(--mono);font-weight:700;color:var(--p700);line-height:1.45}
+.fc-card-wrap{position:relative;margin-bottom:16px}
+.fc-flip-hint{margin-top:10px;text-align:center;font-size:12px;color:rgba(255,255,255,.45);pointer-events:none}
+.fc-btn-row{display:none;gap:12px;justify-content:center;margin-top:14px}
+.fc-btn-row.visible{display:flex}
+.fc-btn{padding:10px 28px;border-radius:12px;font-size:14px;font-weight:700;border:none;cursor:pointer;transition:opacity .15s,transform .1s}
+.fc-btn:active{transform:scale(.96)}
+.fc-btn-know{background:#1D9E75;color:#fff}
+.fc-btn-dontknow{background:#C0392B;color:#fff}
+.fc-btn-flip{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 auto;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;padding:9px 24px;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s}
+.fc-btn-flip:hover{background:rgba(255,255,255,.25)}
+.fc-keys{margin-top:18px;text-align:center;font-size:11px;color:rgba(255,255,255,.4)}
+.fc-result{display:none;text-align:center;padding:16px 0}
+.fc-result.visible{display:block}
+.fc-res-emoji{font-size:52px;margin-bottom:8px}
+.fc-res-title{font-size:20px;font-weight:800;color:#fff;margin-bottom:20px}
+.fc-res-cards{display:flex;gap:20px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+.fc-res-card{background:rgba(255,255,255,.12);border-radius:14px;padding:14px 22px;min-width:90px}
+.fc-res-num{font-size:28px;font-weight:800;color:#fff;font-family:var(--mono)}
+.fc-res-lbl{font-size:11px;color:rgba(255,255,255,.6);margin-top:2px}
+.fc-res-card.green .fc-res-num{color:#4ade80}
+.fc-res-card.red .fc-res-num{color:#f87171}
+.fc-restart-btn{padding:10px 32px;border-radius:12px;font-size:14px;font-weight:700;border:none;cursor:pointer;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);color:#fff;transition:background .15s}
+.fc-restart-btn:hover{background:rgba(255,255,255,.25)}
+
+/* ══ МИНИ-ТРЕНАЖЁР (практикум) ══ */
+.prc-shell{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:24px 24px 20px;box-shadow:var(--shadow)}
+.prc-prog-bar{height:6px;background:var(--p100);border-radius:3px;overflow:hidden;margin-bottom:4px}
+.prc-prog-fill{height:100%;background:linear-gradient(90deg,var(--p600),var(--p400));border-radius:3px;transition:width .3s}
+.prc-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3);font-family:var(--mono);font-weight:700;margin-bottom:14px}
+.prc-meta .prc-num{color:var(--p600);font-size:13px}
+.prc-q{min-height:70px;background:var(--bg);border-radius:12px;padding:16px 18px;margin-bottom:14px;font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.55}
+.prc-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.prc-inp{flex:1;min-width:150px;padding:9px 13px;border:2px solid var(--p300);border-radius:10px;font-size:14px;font-family:var(--mono);background:var(--white);color:var(--ink);outline:none;transition:border-color .18s,background .18s}
+.prc-inp:focus{border-color:var(--p500)}
+.prc-inp.p-ok{border-color:#16a34a!important;background:#f0fdf4!important;color:#15803d!important}
+.prc-inp.p-err{border-color:#dc2626!important;background:#fef2f2!important;animation:acc-shake .35s}
+.prc-btn{padding:9px 18px;background:var(--p600);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .18s}
+.prc-btn:hover:not(:disabled){background:var(--p700)}
+.prc-btn:disabled{background:var(--p300);cursor:default}
+.prc-fb{font-size:13px;font-weight:600;min-height:18px}
+.prc-fb.ok{color:#16a34a}.prc-fb.err{color:#dc2626}
+.prc-ans{margin-top:10px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0;border-radius:10px;padding:10px 14px;font-family:var(--mono);font-size:13px;color:#15803d;line-height:1.7}
+.prc-ans-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:#16a34a;margin-bottom:3px}
+.prc-repeat-notice{background:#fef3c7;border:1px solid #f59e0b;border-radius:8px;padding:8px 14px;font-size:13px;color:#92400e;margin-bottom:10px;text-align:center;font-weight:600}
+.done-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;display:flex;align-items:center;justify-content:center}
+.done-card{background:#fff;border-radius:24px;padding:48px 36px;text-align:center;max-width:340px;box-shadow:0 24px 60px rgba(0,0,0,.3)}
+.done-emoji{font-size:64px;margin-bottom:8px}
+.done-pct{font-size:80px;font-weight:900;color:var(--p700);line-height:1;margin:4px 0}
+.done-title{font-size:20px;font-weight:700;color:#111;margin:12px 0 6px}
+.done-sub{font-size:15px;color:#555;margin-bottom:24px}
+.done-close{background:var(--p700);color:#fff;border:none;border-radius:10px;padding:10px 28px;font-size:15px;font-weight:700;cursor:pointer}
+.prc-result-box{text-align:center;padding:24px 12px}
+.prc-grade{font-size:52px;margin-bottom:6px}
+.prc-pct{font-size:48px;font-weight:800;color:var(--p600);line-height:1.1}
+.prc-stat-row{display:flex;justify-content:center;gap:20px;margin-top:20px;flex-wrap:wrap}
+.prc-stat-n{font-size:28px;font-weight:800;color:var(--ink);line-height:1}
+.prc-stat-l{font-size:11.5px;color:var(--ink3);margin-top:3px;text-align:center}
+.prc-restart-btn{margin-top:22px;padding:11px 26px;background:var(--p600);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer}
+.prc-restart-btn:hover{background:var(--p700)}
+
+/* ══ СТРИК (история 6 дней) ══ */
+.tb-streak{display:flex;gap:3px;align-items:center;padding:0 2px}
+.tb-day{width:7px;height:7px;border-radius:50%;background:rgba(10,94,96,.18);flex-shrink:0;transition:.2s}
+.tb-day.done{background:#1a8c6e}
+.tb-day.today{outline:1.5px solid rgba(10,94,96,.55);outline-offset:1.5px}
+</style>
+</head>
+<body>
+
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+
+<!-- ТОПБАР -->
+<div id="topbar">
+  <button id="topbar-menu-btn" onclick="openMenu()" title="Содержание">☰</button>
+  <button class="tb-top-btn" id="topbar-fs" onclick="toggleFullscreen()" title="Полный экран [F]">⛶</button>
+  <button class="tb-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">↑</button>
+  <div class="tb-streak" id="tb-streak"></div>
+  <button class="tb-top-btn" onclick="clearHistory()" title="Сбросить прогресс и историю">🗑</button>
+</div>
+
+<!-- БОКОВОЕ МЕНЮ -->
+<div id="menu-overlay" onclick="closeMenu()"></div>
+<div id="menu-panel">
+  <div class="menu-head">
+    <span class="menu-head-title">Неметаллы. Часть 1</span>
+    <button class="menu-close" onclick="closeMenu()">✕</button>
+  </div>
+  <nav class="menu-nav">
+    <a href="#s1" onclick="closeMenu()"><span class="mn-num">1</span>Физические свойства. Ряд ЭО</a>
+    <a href="#s2" onclick="closeMenu()"><span class="mn-num">2</span>Химические свойства галогенов</a>
+    <a href="#s3" onclick="closeMenu()"><span class="mn-num">3</span>Химические свойства серы</a>
+    <a href="#s4" onclick="closeMenu()"><span class="mn-num">4</span>Азот и аммиак</a>
+    <a href="#s5" onclick="closeMenu()"><span class="mn-num">🃏</span>Флэш-карточки</a>
+    <a href="#s6" onclick="closeMenu()"><span class="mn-num">✏️</span>Практикум — 60 заданий</a>
+  </nav>
+</div>
+
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">ЕГЭ Химия 2026–2027 · Задания №7–9, 30–31</div>
+  <h1>Неметаллы. <em>Часть 1:</em><br>галогены, сера, азот</h1>
+  <p class="hero-sub">Теория с заданиями сразу после каждого блока + флэш-карточки по ловушкам ЕГЭ + большой практикум в конце.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Теория + задания в блоке</span>
+    <span class="hero-chip">Галогены F₂ Cl₂ Br₂ I₂</span>
+    <span class="hero-chip">Сера S</span>
+    <span class="hero-chip">Азот N₂ и NH₃</span>
+    <span class="hero-chip">50 флэш-карточек</span>
+    <span class="hero-chip">Практикум 60 заданий</span>
+  </div>
+</div>
+
+
+<!-- ══ БЛОК 1 ══ -->
+<section class="section fade-in" id="s1">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2 class="section-title">Физические свойства. Аллотропия. Ряд ЭО</h2>
+  </div>
+
+  <!-- 1.1 Ряд ЭО -->
+  <h2 class="sub-title">1.1 Ряд электроотрицательности</h2>
+  <p class="body">Атомы неметаллов имеют большое число электронов на внешнем слое, небольшой радиус и <strong>высокую ЭО</strong> — поэтому стремятся принимать электроны. Исключение — фтор: он <strong>всегда только окислитель</strong>, с.о. всегда −1.</p>
+
+  <div class="activity-scale">
+    <div class="scale-label"><span>◄ слабее (восстановители)</span><span>сильнее (окислители) ►</span></div>
+    <div class="scale-row">
+      <span class="sc-item sc-active">Ме</span>
+      <span class="sc-item sc-mid">Si = H = P</span>
+      <span class="sc-item sc-mid">C</span>
+      <span class="sc-item" style="background:#fef08a;color:#854d0e;font-weight:700">S</span>
+      <span class="sc-item" style="background:#e9d5ff;color:#6b21a8;font-weight:700">I</span>
+      <span class="sc-item" style="background:#fed7aa;color:#9a3412;font-weight:700">Br</span>
+      <span class="sc-item" style="background:#bbf7d0;color:#14532d;font-weight:700">Cl</span>
+      <span class="sc-item" style="background:#bfdbfe;color:#1e3a8a;font-weight:700">N</span>
+      <span class="sc-item" style="background:#bae6fd;color:#0c4a6e;font-weight:700">O</span>
+      <span class="sc-h2">F</span>
+    </div>
+    <div class="scale-desc">
+      <span style="color:var(--p600)">Si, H, P, C, S — преимущественно восстановители</span>
+      <span style="color:var(--green-d)">N, O, F — преимущественно окислители</span>
+    </div>
+  </div>
+
+  <!-- 1.2 Физические свойства -->
+  <h2 class="sub-title">1.2 Физические свойства и цвета</h2>
+  <p class="body">Важно знать наизусть агрегатное состояние и цвет каждого неметалла — это встречается в заданиях на наблюдаемые признаки реакций.</p>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th>Вещество</th><th>Состояние при н.у.</th><th>Цвет и особенности</th></tr></thead>
+    <tbody>
+      <tr><td><strong>F₂</strong></td><td>Газ</td><td>🟡 Бледно-жёлтый. Самый сильный окислитель. С.о. всегда −1. Реагирует с водой со взрывом.</td></tr>
+      <tr><td><strong>O₂</strong></td><td>Газ</td><td>Бесцветный, без запаха. 21% атмосферы. <strong>Жидкий O₂ — голубого цвета</strong>. Аллотропия: O₂ и O₃ (озон — резкий запах, сильнее окисляет).</td></tr>
+      <tr><td><strong>Cl₂</strong></td><td>Газ</td><td>🟡🟢 Жёлто-зелёный. Резкий запах. Ядовит. В воде → хлорная вода (HCl + HClO).</td></tr>
+      <tr><td><strong>Br₂</strong></td><td>⚠ Жидкость</td><td>🟤 Красно-бурая жидкость. <strong>Единственный жидкий неметалл при н.у.</strong></td></tr>
+      <tr><td><strong>I₂</strong></td><td>Твёрдое</td><td>⬛ Серо-чёрные кристаллы. Пары <span class="cb">фиолетовые</span>. С крахмалом → <span class="ck">синий цвет</span>.</td></tr>
+      <tr><td><strong>S</strong></td><td>Твёрдое</td><td>🟡 Жёлтое твёрдое. Аллотропия: ромбическая S₈ (устойчивая при н.у.), моноклинная S₈.</td></tr>
+      <tr><td><strong>N₂</strong></td><td>Газ</td><td>Бесцветный, без запаха. 78% атмосферы. Тройная связь N≡N — очень прочная.</td></tr>
+    </tbody>
+  </table></div>
+
+
+  <!-- ЗАПОМНИТЬ -->
+  <div class="remember">
+    <div class="remember-title">✅ Запомнить — блок 1</div>
+    <ul>
+      <li>🟤 <strong>Br₂</strong> — единственный жидкий неметалл. ⬛ <strong>I₂</strong> — пары <span class="cb">фиолетовые</span>, с крахмалом — <span class="ck">синий</span>.</li>
+      <li><strong>F₂</strong> — только окислитель, с.о. всегда −1. Жидкий <strong>O₂</strong> — <span style="color:#1a6bbf;font-weight:600">голубой</span>. О₃ — аллотроп кислорода, резкий запах.</li>
+      <li>Ряд ЭО: F₂ > O > N > Cl > Br > S > C > P = H = Si > Ме</li>
+      <li>🟡 <strong>S↓</strong> жёлтый осадок: при Cl₂+H₂S, H₂S+O₂(нед.), I₂+H₂S и др.</li>
+      <li>🟤 <strong>NO₂</strong> — бурый газ; <strong>NO</strong> — бесцветный; <strong>SO₂</strong> — бесцветный, резкий запах.</li>
+    </ul>
+  </div>
+
+</section>
+
+<!-- Заглушки для остальных блоков (добавим потом) -->
+<section class="section fade-in" id="s2">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2 class="section-title">Химические свойства галогенов</h2>
+  </div>
+
+  <p class="body">Галогены — самые активные неметаллы. Все реакции идут как реакции <strong>окисления</strong>: галоген принимает электроны. Активность убывает: <strong>F₂ > Cl₂ > Br₂ > I₂</strong>.</p>
+
+  <!-- 2.1 С водородом -->
+  <h2 class="sub-title">2.1 Реакции с водородом H₂</h2>
+  <p class="body">Все галогены реагируют с H₂, но условия и обратимость разные:</p>
+
+  <div class="eq-block">
+    <span class="eq">F₂ + H₂ → 2HF <span class="cond">— взрыв в темноте, −200°C, неконтролируемо</span></span>
+    <span class="eq">Cl₂ + H₂ →(свет или t°) 2HCl <span class="cond">— взрыв на свету</span></span>
+    <span class="eq">Br₂ + H₂ →(t°, кат.) 2HBr <span class="cond">— только при нагревании</span></span>
+    <span class="eq">I₂ + H₂ ⇄ 2HI <span class="cond">— обратимо, неполно, I₂ частично выделяется обратно</span></span>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">⚠ Ловушка ЕГЭ</div>
+    Реакция I₂ + H₂ — <strong>обратимая</strong>. Ставь ⇄, а не →. Иодоводород HI нестоек и разлагается при нагревании.
+  </div>
+
+  <!-- 2.2 С металлами -->
+  <h2 class="sub-title">2.2 Реакции с металлами</h2>
+  <p class="body">Галогены реагируют со <strong>всеми</strong> металлами. Главные ловушки — железо и медь:</p>
+
+  <div class="box box-tip">
+    <div class="box-title">💡 Правило: активный галоген — максимальная с.о. металла</div>
+    <p style="margin:6px 0 0">Активные галогены (F₂, Cl₂, Br₂) — сильные окислители: они забирают <strong>максимальное</strong> количество электронов у металла → металл в высшей с.о. (<strong>Fe³⁺, Cu²⁺</strong>).<br>
+    Пассивный галоген (I₂) — слабее: забирает меньше электронов → металл в промежуточной с.о. (<strong>Fe²⁺, Cu⁺</strong>).</p>
+  </div>
+
+  <div class="eq-block">
+    <span class="eq">2Fe + 3Cl₂ →(t°) 2FeCl₃ <span class="cond">— Fe окисляется до +3</span></span>
+    <span class="eq">Fe + I₂ →(t°) FeI₂ <span class="cond">— I₂ слабее, Fe только до +2</span></span>
+    <span class="eq">Cu + Cl₂ →(t°) CuCl₂ <span class="cond">— Cu до +2</span></span>
+    <span class="eq">2Al + 3Br₂ → 2AlBr₃ <span class="cond">— без нагревания!</span></span>
+    <span class="eq">2Au + 3F₂ → 2AuF₃ <span class="cond">— F₂ реагирует даже с золотом и платиной</span></span>
+  </div>
+
+  <div class="box box-danger">
+    <div class="box-title">🔴 Главные ловушки с металлами</div>
+    <ul>
+      <li><strong>Fe + Cl₂ → FeCl₃</strong> (не FeCl₂!) — хлор окисляет Fe до +3</li>
+      <li><strong>Fe + I₂ → FeI₂</strong> (не FeI₃!) — иод слабее, только до +2</li>
+      <li><strong>Cu + Cl₂ → CuCl₂</strong> (не CuCl!) — хлор даёт Cu²⁺</li>
+      <li>F₂ реагирует с <strong>любым</strong> металлом, включая Au и Pt</li>
+    </ul>
+  </div>
+
+  <!-- 2.3 С водой -->
+  <h2 class="sub-title">2.3 Реакции с водой H₂O</h2>
+
+  <div class="eq-block">
+    <span class="eq">2F₂ + 2H₂O → 4HF + O₂ <span class="cond">— F₂ окисляет воду (разложение H₂O)</span></span>
+    <span class="eq">Cl₂ + H₂O ⇄ HCl + HClO <span class="cond">— хлорная вода, реакция диспропорционирования</span></span>
+    <span class="eq">Br₂ + H₂O ⇄ HBr + HBrO <span class="cond">— слабее, чем Cl₂</span></span>
+    <span class="eq">I₂ + H₂O ↛ <span class="cond">— практически не реагирует</span></span>
+  </div>
+
+  <div class="box box-info">
+    <div class="box-title">💡 Хлорная вода</div>
+    Cl₂ + H₂O ⇄ HCl + HClO — смесь двух кислот. HClO (хлорноватистая кислота) — нестойкая, сильный окислитель. На свету разлагается: HClO → HCl + [O].
+  </div>
+
+  <!-- 2.4 Со щелочами -->
+  <h2 class="sub-title">2.4 Реакции со щелочами</h2>
+  <p class="body">Реакции галогенов со щелочами (кроме F₂) — это <strong>диспропорционирование</strong>: один и тот же элемент одновременно окисляется и восстанавливается. Например, в Cl₂ + 2NaOH хлор из 0 идёт и в −1 (NaCl) и в +1 (NaClO). Cl₂ и Br₂ реагируют по-разному в зависимости от температуры. I₂ — при любых условиях одинаково. F₂ реагирует особо (нет диспропорционирования — F₂ только окислитель):</p>
+
+  <div class="eq-block">
+    <span class="eq">2F₂ + 4NaOH → 4NaF + O₂ + 2H₂O <span class="cond">— F₂ окисляет OH⁻, выделяется O₂</span></span>
+    <span class="eq">Cl₂ + 2NaOH →(хол.) NaCl + NaClO + H₂O <span class="cond">— хлорид + гипохлорит (отбеливатель)</span></span>
+    <span class="eq">3Cl₂ + 6KOH →(t°) 5KCl + KClO₃ + 3H₂O <span class="cond">— хлорат</span></span>
+    <span class="eq">Br₂ + 2NaOH →(хол.) NaBr + NaBrO + H₂O</span>
+    <span class="eq">3Br₂ + 6KOH →(t°) 5KBr + KBrO₃ + 3H₂O</span>
+    <span class="eq">3I₂ + 6KOH → 5KI + KIO₃ + 3H₂O <span class="cond">— при <strong>любых условиях</strong> → иодат!</span></span>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">⚠ Ловушка ЕГЭ — иод и щелочь</div>
+    I₂ + KOH всегда даёт KIO₃ (иодат), независимо от температуры. У Cl₂ и Br₂ — холод даёт гипогалогенит, горячо — галогенат. У иода такого разделения нет.
+  </div>
+
+  <!-- 2.5 Вытеснение -->
+  <h2 class="sub-title">2.5 Вытеснение галогенов из солей</h2>
+  <p class="body">Более активный галоген вытесняет менее активный из раствора его соли:</p>
+
+  <div class="eq-block">
+    <span class="eq">Cl₂ + 2NaBr → 2NaCl + Br₂ <span class="cond">— хлор вытесняет бром ✓</span></span>
+    <span class="eq">Cl₂ + 2KI → 2KCl + I₂ <span class="cond">— хлор вытесняет иод ✓</span></span>
+    <span class="eq">Br₂ + 2KI → 2KBr + I₂ <span class="cond">— бром вытесняет иод ✓</span></span>
+    <span class="eq we">Br₂ + NaCl ↛ <span class="cond">— бром НЕ вытесняет хлор ✗</span></span>
+    <span class="eq we">I₂ + NaBr ↛ &nbsp;&nbsp;I₂ + NaCl ↛ <span class="cond">— иод не вытесняет ни бром, ни хлор ✗</span></span>
+  </div>
+
+  <!-- 2.6 С HHal и кислотами-окислителями -->
+  <h2 class="sub-title">2.6 Реакции с галогеноводородными кислотами и кислотами-окислителями</h2>
+
+  <div class="eq-block">
+    <span class="eq">Cl₂ + 2HBr → 2HCl + Br₂ <span class="cond">— хлор вытесняет Br₂ из HBr</span></span>
+    <span class="eq">Cl₂ + 2HI → 2HCl + I₂</span>
+    <span class="eq">Br₂ + 2HI → 2HBr + I₂</span>
+    <span class="eq">I₂ + 10HNO₃(конц.) → 10NO₂ + 2HIO₃ + 4H₂O</span>
+  </div>
+
+  <div class="box box-danger">
+    <div class="box-title">🔴 Только I₂ реагирует с конц. HNO₃!</div>
+    <p style="margin:6px 0 0">F₂, Cl₂, Br₂ с конц. HNO₃ <strong>не реагируют</strong> — они сами сильные окислители и не могут быть окислены азотной кислотой.<br>
+    Иод — самый слабый из галогенов-окислителей, поэтому конц. HNO₃ его окисляет до HIO₃.</p>
+  </div>
+  </div>
+
+
+</section>
+
+<section class="section fade-in" id="s3">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2 class="section-title">Химические свойства серы</h2>
+  </div>
+
+  <p class="body">Сера — типичный неметалл с переменной с.о.: <strong>−2, 0, +4, +6</strong>. Проявляет свойства и окислителя (с металлами, H₂), и восстановителя (с кислотами-окислителями, O₂, F₂).</p>
+
+  <!-- 3.1 Сера как окислитель -->
+  <h2 class="sub-title">3.1 Сера как окислитель — с металлами и водородом</h2>
+
+  <div class="eq-block">
+    <span class="eq">Fe + S →(t°) FeS <span class="cond">— железо только до +2 (как с I₂!)</span></span>
+    <span class="eq">2Cu + S(нед.) →(t°) Cu₂S <span class="cond">— недостаток S → Cu⁺</span></span>
+    <span class="eq">Cu + S(изб.) →(t°) CuS <span class="cond">— избыток S → Cu²⁺</span></span>
+    <span class="eq">Hg + S → HgS <span class="cond">— при обычных условиях! (демеркуризация ртути)</span></span>
+    <span class="eq">2Al + 3S →(t°) Al₂S₃</span>
+    <span class="eq">2Na + S →(t°) Na₂S</span>
+    <span class="eq">H₂ + S ⇄(t°) H₂S <span class="cond">— обратимо</span></span>
+  </div>
+
+  <div class="box box-danger">
+    <div class="box-title">🔴 Ловушки с серой и металлами</div>
+    <ul>
+      <li><strong>Fe + S → FeS</strong> (не Fe₂S₃!) — как у иода: слабый окислитель → Fe только +2</li>
+      <li><strong>Cu + S(нед.) → Cu₂S</strong> — недостаток серы → Cu только +1; <strong>Cu + S(изб.) → CuS</strong> — избыток серы → Cu до +2</li>
+      <li><strong>Hg + S → HgS</strong> при н.у. — единственный металл, реагирующий с S без нагрева</li>
+    </ul>
+  </div>
+
+  <!-- 3.2 Сера как восстановитель -->
+  <h2 class="sub-title">3.2 Сера как восстановитель — с кислотами-окислителями и O₂</h2>
+
+  <div class="eq-block">
+    <span class="eq">S + O₂ →(t°) SO₂</span>
+    <span class="eq">S + 2H₂SO₄(конц.) →(t°) 3SO₂ + 2H₂O</span>
+    <span class="eq">S + 6HNO₃(конц.) →(t°) 6NO₂ + H₂SO₄ + 2H₂O</span>
+    <span class="eq">S + 2HNO₃(разб.) →(t°) 2NO + H₂SO₄</span>
+    <span class="eq">S + F₂ → SF₆ <span class="cond">— фторид серы(VI)</span></span>
+  </div>
+
+  <!-- 3.3 Сера со щелочами -->
+  <h2 class="sub-title">3.3 Реакция серы со щелочами — диспропорционирование</h2>
+  <p class="body">Как и галогены, сера диспропорционирует в щелочной среде: S(0) → S(+4) и S(−2) одновременно.</p>
+
+  <div class="eq-block">
+    <span class="eq">3S + 6KOH →(конц., t°) K₂SO₃ + 2K₂S + 3H₂O <span class="cond">— диспропорционирование</span></span>
+    <span class="eq">3S + 6NaOH →(конц., t°) Na₂SO₃ + 2Na₂S + 3H₂O</span>
+    <span class="eq">3S + 6LiOH →(конц., t°) Li₂SO₃ + 2Li₂S + 3H₂O</span>
+    <span class="eq">3S + 3Ba(OH)₂ →(конц., t°) BaSO₃ + 2BaS + 3H₂O</span>
+    <span class="eq">3S + 3Ca(OH)₂ →(конц., t°) CaSO₃ + 2CaS + 3H₂O</span>
+    <span class="eq">3S + 3Sr(OH)₂ →(конц., t°) SrSO₃ + 2SrS + 3H₂O</span>
+  </div>
+  </div>
+
+</section>
+
+<!-- ══ БЛОК 4 ══ -->
+<section class="section fade-in" id="s4">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2 class="section-title">Химические свойства азота и аммиака</h2>
+  </div>
+
+  <p class="body">Азот N₂ очень инертен из-за прочной тройной связи N≡N. Аммиак NH₃ — важнейший продукт промышленности, проявляет свойства <strong>основания</strong> и <strong>восстановителя</strong>.</p>
+
+  <!-- 4.1 N₂ -->
+  <h2 class="sub-title">4.1 Химические свойства азота N₂</h2>
+
+  <div class="eq-block">
+    <span class="eq">N₂ + 3H₂ ⇄(t°, P, кат.) 2NH₃ <span class="cond">— синтез Габера, обратимо</span></span>
+    <span class="eq">N₂ + O₂ →(>1000°C или эл. разряд) 2NO <span class="cond">— только при очень высокой t°</span></span>
+    <span class="eq">N₂ + 3Mg →(t°) Mg₃N₂ <span class="cond">— нитрид магния</span></span>
+    <span class="eq">N₂ + 6Li →(t°) 2Li₃N <span class="cond">— литий реагирует с N₂ даже при н.у. (медленно)</span></span>
+    <span class="eq">N₂ + 3Ca →(t°) Ca₃N₂</span>
+    <span class="eq we">N₂ + Fe, Cu, Ag ↛ <span class="cond">— с малоактивными и средними металлами не реагирует</span></span>
+  </div>
+
+  <div class="box box-info">
+    <div class="box-title">💡 Почему N₂ такой инертный?</div>
+    Тройная связь N≡N — одна из самых прочных в химии (энергия 946 кДж/моль). Поэтому большинство реакций N₂ требует экстремальных условий или катализатора.
+  </div>
+
+  <!-- 4.2 NH₃ как основание -->
+  <h2 class="sub-title">4.2 Аммиак NH₃ — свойства основания</h2>
+  <p class="body">NH₃ — слабое основание. Реагирует с кислотами, образуя соли аммония.</p>
+
+  <div class="eq-block">
+    <span class="eq">NH₃ + HCl → NH₄Cl <span class="cond">— белый дым (качественная реакция на NH₃!)</span></span>
+    <span class="eq">2NH₃ + H₂SO₄ → (NH₄)₂SO₄</span>
+    <span class="eq">NH₃ + HNO₃ → NH₄NO₃</span>
+    <span class="eq">NH₃ + H₂O ⇄ NH₄⁺ + OH⁻ <span class="cond">— слабое основание, реакция обратимая</span></span>
+    <span class="eq">NH₃ + AlCl₃ + 3H₂O → Al(OH)₃↓ + 3NH₄Cl <span class="cond">— осаждение гидроксидов</span></span>
+  </div>
+
+  <!-- 4.3 NH₃ как восстановитель -->
+  <h2 class="sub-title">4.3 Аммиак NH₃ — свойства восстановителя</h2>
+
+  <div class="eq-block">
+    <span class="eq">4NH₃ + 3O₂ →(t°) 2N₂ + 6H₂O <span class="cond">— горение без катализатора → N₂</span></span>
+    <span class="eq">4NH₃ + 5O₂ →(Pt, t°) 4NO + 6H₂O <span class="cond">— каталитическое окисление → NO (производство HNO₃)</span></span>
+    <span class="eq">2NH₃ + 3CuO →(t°) N₂ + 3Cu + 3H₂O <span class="cond">— NH₃ восстанавливает оксиды металлов</span></span>
+    <span class="eq">8NH₃ + 3Cl₂ →(изб. NH₃) N₂ + 6NH₄Cl</span>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">⚠ Главная ловушка — горение NH₃</div>
+    <ul>
+      <li><strong>Без катализатора:</strong> 4NH₃ + 3O₂ → 2<strong>N₂</strong> + 6H₂O — продукт N₂</li>
+      <li><strong>С Pt-катализатором:</strong> 4NH₃ + 5O₂ → 4<strong>NO</strong> + 6H₂O — продукт NO</li>
+      <li>Без указания катализатора — пиши N₂</li>
+    </ul>
+  </div>
+  </div>
+
+</section>
+
+<section class="section fade-in" id="s5">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <h2 class="section-title">🃏 Флэш-карточки — ловушки ЕГЭ</h2>
+  </div>
+  <div class="fc-section-wrap">
+    <p class="body">Карточки идут по одной. Переверни — и ответь себе честно: знал или нет.</p>
+
+    <!-- stats bar -->
+    <div class="fc-stats-row">
+      <div class="fc-stat">Знаю: <span id="fc-know-n">0</span></div>
+      <div class="fc-progress"><div class="fc-progress-fill" id="fc-prog" style="width:0%"></div></div>
+      <div class="fc-stat">Осталось: <span id="fc-left-n">50</span></div>
+    </div>
+
+    <!-- card area -->
+    <div id="fc-main">
+      <div class="fc-card-wrap">
+        <div class="fc-perspective" onclick="fcFlip()">
+          <div class="fc-inner" id="fc-inner">
+            <div class="fc-face fc-front">
+              <div class="fc-tag" id="fc-tag-f">Тема</div>
+              <div class="fc-q-text" id="fc-q-text">…</div>
+            </div>
+            <div class="fc-face fc-back">
+              <div class="fc-tag">Ответ</div>
+              <div class="fc-a-text" id="fc-a-text">…</div>
+            </div>
+          </div>
+        </div>
+        <div class="fc-flip-hint" id="fc-flip-hint">нажми на карточку или Space</div>
+      </div>
+
+      <div class="fc-btn-row" id="fc-btn-row">
+        <button class="fc-btn fc-btn-dontknow" onclick="fcAnswer(false)">Не знаю ✗</button>
+        <button class="fc-btn fc-btn-know" onclick="fcAnswer(true)">Знаю ✓</button>
+      </div>
+
+      <div class="fc-keys">Space — перевернуть &nbsp;·&nbsp; → — Знаю &nbsp;·&nbsp; ← — Не знаю</div>
+    </div>
+
+    <!-- result -->
+    <div class="fc-result" id="fc-result">
+      <div class="fc-res-emoji">🎉</div>
+      <div class="fc-res-title">Все карточки пройдены!</div>
+      <div class="fc-res-cards">
+        <div class="fc-res-card green"><div class="fc-res-num" id="fc-res-know">0</div><div class="fc-res-lbl">Знаю</div></div>
+        <div class="fc-res-card red"><div class="fc-res-num" id="fc-res-dontknow">0</div><div class="fc-res-lbl">Не знаю</div></div>
+        <div class="fc-res-card"><div class="fc-res-num">50</div><div class="fc-res-lbl">Всего</div></div>
+      </div>
+      <button class="fc-restart-btn" onclick="fcRestart()">Пройти снова</button>
+    </div>
+  </div>
+</section>
+
+<section class="section fade-in" id="s6">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <h2 class="section-title">Большой практикум — 60 заданий</h2>
+  </div>
+  <p class="body">Ответь на все 50 вопросов. Неверный ответ — задание вернётся в конце.</p>
+  <div class="prc-shell">
+    <div id="prc-task-area">
+      <div class="prc-prog-bar"><div class="prc-prog-fill" id="prc-fill" style="width:0%"></div></div>
+      <div class="prc-meta">
+        <span class="prc-num" id="prc-num">1 / 50</span>
+        <span id="prc-live">✓ 0 &nbsp; ✗ 0</span>
+      </div>
+      <div class="prc-repeat-notice" id="prc-repeat-notice" style="display:none">🔁 Повтор добавлен в конец очереди</div>
+      <div class="prc-q" id="prc-q"></div>
+      <div class="prc-row">
+        <input class="prc-inp" id="prc-inp" type="text" placeholder="Ответ…">
+        <button class="prc-btn" id="prc-check-btn" onclick="prcCheck()">Проверить</button>
+        <button class="prc-btn" id="prc-next-btn" onclick="prcNext()" style="display:none;background:var(--p700)">Далее →</button>
+      </div>
+      <div class="prc-fb" id="prc-fb"></div>
+      <div class="prc-ans" id="prc-ans" style="display:none"></div>
+    </div>
+    <div class="prc-result-box" id="prc-result" hidden>
+      <div class="prc-grade" id="prc-grade">🎉</div>
+      <div class="prc-pct" id="prc-pct">0%</div>
+      <div class="prc-stat-row">
+        <div><div class="prc-stat-n" id="prc-ok-n">0</div><div class="prc-stat-l">Верно</div></div>
+        <div><div class="prc-stat-n" id="prc-err-n">0</div><div class="prc-stat-l">Ошибок</div></div>
+        <div><div class="prc-stat-n" id="prc-first-n">0</div><div class="prc-stat-l">С первой попытки</div></div>
+      </div>
+      <button class="prc-restart-btn" onclick="prcRestart()">Пройти снова</button>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ══ ФЛЭШ-КАРТОЧКИ ══ */
+const FC=[
+  {t:"Физические",q:"Какой неметалл — жидкость при н.у.?",a:"Br₂ (красно-бурая жидкость)"},
+  {t:"Физические",q:"Цвет паров I₂?",a:"Фиолетовый"},
+  {t:"Физические",q:"Качественная реакция на I₂?",a:"I₂ + крахмал → синий цвет"},
+  {t:"Физические",q:"Жидкий O₂ — какого цвета?",a:"Голубого"},
+  {t:"Физические",q:"Аллотропные модификации кислорода?",a:"O₂ и O₃ (озон)"},
+  {t:"Физические",q:"Аллотропные модификации серы?",a:"Ромбическая S₈ и моноклинная S₈"},
+  {t:"Физические",q:"Цвет газа Cl₂?",a:"Жёлто-зелёный"},
+  {t:"Физические",q:"NO₂ — цвет? NO — цвет?",a:"NO₂ — бурый; NO — бесцветный"},
+  {t:"Физические",q:"Сколько % N₂ в атмосфере?",a:"78%"},
+  {t:"ЭО",q:"Ряд ЭО (убывание)?",a:"F > O > N > Cl > Br > S > C > P ≈ H ≈ Si"},
+  {t:"Галогены",q:"Fe + Cl₂ →(t°) ?",a:"FeCl₃ (не FeCl₂!)"},
+  {t:"Галогены",q:"Fe + I₂ →(t°) ?",a:"FeI₂ (не FeI₃!)"},
+  {t:"Галогены",q:"Cu + Cl₂ →(t°) ?",a:"CuCl₂ (не CuCl!)"},
+  {t:"Галогены",q:"I₂ + H₂ — обратима?",a:"Да! I₂ + H₂ ⇄ 2HI"},
+  {t:"Галогены",q:"F₂ + H₂ → условия?",a:"Взрыв в темноте, −200°C"},
+  {t:"Галогены",q:"Cl₂ + 2NaOH (холод) → ?",a:"NaCl + NaClO + H₂O"},
+  {t:"Галогены",q:"3Cl₂ + 6KOH (t°) → ?",a:"5KCl + KClO₃ + 3H₂O"},
+  {t:"Галогены",q:"I₂ + KOH → (любые условия)?",a:"5KI + KIO₃ + 3H₂O"},
+  {t:"Галогены",q:"Какой галоген реагирует с Au?",a:"F₂ (со всеми металлами!)"},
+  {t:"Галогены",q:"Br₂ + NaCl → ?",a:"Реакция не идёт ↛"},
+  {t:"Галогены",q:"Cl₂ + H₂O → ?",a:"HCl + HClO (хлорная вода)"},
+  {t:"Галогены",q:"F₂ + H₂O → ?",a:"2HF + O₂ (F₂ разлагает воду)"},
+  {t:"Галогены",q:"I₂ + H₂O → ?",a:"Практически не реагирует"},
+  {t:"Галогены",q:"Какой галоген реагирует с конц. HNO₃?",a:"Только I₂"},
+  {t:"Галогены",q:"2F₂ + 4NaOH → ?",a:"4NaF + O₂ + 2H₂O (не диспропорционирование!)"},
+  {t:"Сера",q:"Fe + S →(t°) ?",a:"FeS (не Fe₂S₃!)"},
+  {t:"Сера",q:"Cu + S →(t°) ?",a:"Cu₂S (не CuS!)"},
+  {t:"Сера",q:"Какой металл + S → при н.у.?",a:"Hg → HgS (демеркуризация)"},
+  {t:"Сера",q:"H₂ + S →(t°) обратимо?",a:"H₂S, обратимо ⇄"},
+  {t:"Сера",q:"S + 2H₂SO₄(конц.) →(t°) ?",a:"3SO₂ + 2H₂O"},
+  {t:"Сера",q:"S + 6HNO₃(конц.) →(t°) ?",a:"6NO₂ + H₂SO₄ + 2H₂O"},
+  {t:"Сера",q:"3S + 6KOH →(t°) тип реакции?",a:"Диспропорционирование: K₂SO₃ + 2K₂S"},
+  {t:"Сера",q:"С.о. S в H₂SO₄?",a:"+6"},
+  {t:"Сера",q:"С.о. S в H₂S?",a:"−2"},
+  {t:"Сера",q:"С.о. S в SO₂?",a:"+4"},
+  {t:"Азот",q:"N₂ + H₂ → название процесса?",a:"Синтез Габера: N₂+3H₂ ⇄ 2NH₃"},
+  {t:"Азот",q:"N₂ + O₂ → условия?",a:">1000°C или эл. разряд"},
+  {t:"Азот",q:"Какой металл реагирует с N₂ без нагрева?",a:"Li (литий)"},
+  {t:"Аммиак",q:"NH₃ + HCl → что наблюдается?",a:"Белый дым NH₄Cl"},
+  {t:"Аммиак",q:"NH₃ + O₂ без катализатора → ?",a:"N₂ + H₂O (продукт — N₂!)"},
+  {t:"Аммиак",q:"NH₃ + O₂ + Pt →(t°) ?",a:"NO + H₂O (продукт — NO!)"},
+  {t:"Аммиак",q:"NH₃ — кислота или основание?",a:"Слабое основание"},
+  {t:"Аммиак",q:"NH₃ + AlCl₃ + 3H₂O → ?",a:"Al(OH)₃↓ + NH₄Cl"},
+  {t:"Азот",q:"С.о. N в NH₃?",a:"−3"},
+  {t:"Азот",q:"С.о. N в HNO₃?",a:"+5"},
+  {t:"Азот",q:"С.о. N в NO₂?",a:"+4"},
+  {t:"Азот",q:"N₂ + 3Mg →(t°) ?",a:"Mg₃N₂ (нитрид магния)"},
+  {t:"Кислород",q:"Na горит в O₂ → ?",a:"Na₂O₂ (пероксид, не Na₂O!)"},
+  {t:"Кислород",q:"N₂O + O₂ → ?",a:"Не реагирует! ↛"},
+  {t:"Кислород",q:"H₂S + O₂(нед.) → ? и O₂(изб.) → ?",a:"нед.: S+H₂O; изб.: SO₂+H₂O"},
+];
+/* ── single-card flash mechanism ── */
+let fcQueue=[];     // indices into FC[], remaining + retries
+let fcKnowN=0;
+let fcDontN=0;
+let fcFlipped=false;
+let fcAllDone=false;
+
+/* ── localStorage keys для тренажёров ── */
+const _PRC_KEY='nemetally1_prc';
+const _FC_KEY='nemetally1_fc';
+const _SAVE_TTL=6*24*3600*1000;
+
+function _savePrc(){
+  try{localStorage.setItem(_PRC_KEY,JSON.stringify({
+    ts:Date.now(),q:prcQueue.map(t=>PRC.indexOf(t)),pos:prcPos,
+    ok:prcOk,err:prcErr,first:prcFirst,att:prcAttempts,done:prcDone
+  }));}catch(e){}
+}
+function _loadPrc(){
+  try{const raw=localStorage.getItem(_PRC_KEY);if(!raw)return false;
+    const s=JSON.parse(raw);if(Date.now()-s.ts>_SAVE_TTL){localStorage.removeItem(_PRC_KEY);return false;}
+    prcQueue=s.q.map(i=>PRC[i]);prcPos=s.pos;prcOk=s.ok;prcErr=s.err;
+    prcFirst=s.first;prcAttempts=s.att||{};prcDone=s.done;return true;
+  }catch(e){return false;}
+}
+function _saveFC(){
+  try{localStorage.setItem(_FC_KEY,JSON.stringify({
+    ts:Date.now(),q:[...fcQueue],know:fcKnowN,dontknow:fcDontN,done:fcAllDone
+  }));}catch(e){}
+}
+function _loadFC(){
+  try{const raw=localStorage.getItem(_FC_KEY);if(!raw)return false;
+    const s=JSON.parse(raw);if(Date.now()-s.ts>_SAVE_TTL){localStorage.removeItem(_FC_KEY);return false;}
+    fcQueue=s.q;fcKnowN=s.know;fcDontN=s.dontknow;fcAllDone=s.done;return true;
+  }catch(e){return false;}
+}
+
+function fcShuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.random()*i+1|0;[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+
+function fcInit(){
+  if(_loadFC()){
+    document.getElementById('fc-result').classList.remove('visible');
+    document.getElementById('fc-main').style.display='';
+    if(fcAllDone){
+      document.getElementById('fc-main').style.display='none';
+      document.getElementById('fc-res-know').textContent=fcKnowN;
+      document.getElementById('fc-res-dontknow').textContent=fcDontN;
+      document.getElementById('fc-result').classList.add('visible');
+    } else {
+      fcFlipped=false;fcShowCard();
+    }
+    return;
+  }
+  fcQueue=fcShuffle(FC.map((_,i)=>i));
+  fcKnowN=0;fcDontN=0;fcFlipped=false;
+  document.getElementById('fc-result').classList.remove('visible');
+  document.getElementById('fc-main').style.display='';
+  fcShowCard();
+}
+
+function fcShowCard(){
+  if(!fcQueue.length){fcShowResult();return;}
+  const c=FC[fcQueue[0]];
+  const inner=document.getElementById('fc-inner');
+  // мгновенный сброс без анимации
+  inner.style.transition='none';
+  inner.classList.remove('flipped');
+  document.getElementById('fc-tag-f').textContent=c.t;
+  document.getElementById('fc-q-text').textContent=c.q;
+  document.getElementById('fc-a-text').textContent=c.a;
+  inner.offsetHeight; // принудительный reflow
+  inner.style.transition='';
+  fcFlipped=false;
+  document.getElementById('fc-btn-row').classList.remove('visible');
+  document.getElementById('fc-flip-hint').style.display='';
+  fcUpdateStats();
+}
+
+function fcFlip(){
+  if(fcFlipped)return;
+  fcFlipped=true;
+  document.getElementById('fc-inner').classList.add('flipped');
+  document.getElementById('fc-btn-row').classList.add('visible');
+  document.getElementById('fc-flip-hint').style.display='none';
+}
+
+function fcAnswer(know){
+  if(!fcFlipped)return;
+  const idx=fcQueue.shift();
+  if(know){fcKnowN++;}
+  else{fcDontN++;fcQueue.push(idx);}
+  fcFlipped=false;
+  _saveFC();
+  fcShowCard();
+}
+
+function fcUpdateStats(){
+  const total=FC.length;
+  document.getElementById('fc-know-n').textContent=fcKnowN;
+  document.getElementById('fc-left-n').textContent=fcQueue.length;
+  document.getElementById('fc-prog').style.width=(fcKnowN/total*100)+'%';
+}
+
+function fcShowResult(){
+  fcAllDone=true;_saveFC();if(prcDone)showDoneOverlay();
+  document.getElementById('fc-main').style.display='none';
+  document.getElementById('fc-res-know').textContent=fcKnowN;
+  document.getElementById('fc-res-dontknow').textContent=fcDontN;
+  document.getElementById('fc-result').classList.add('visible');
+}
+
+function fcRestart(){
+  localStorage.removeItem(_FC_KEY);
+  fcAllDone=false;
+  fcQueue=fcShuffle(FC.map((_,i)=>i));
+  fcKnowN=0;fcDontN=0;fcFlipped=false;
+  document.getElementById('fc-result').classList.remove('visible');
+  document.getElementById('fc-main').style.display='';
+  fcShowCard();
+}
+
+document.addEventListener('keydown',function(e){
+  if(document.activeElement&&document.activeElement.tagName==='INPUT')return;
+  if(e.code==='Space'){e.preventDefault();fcFlip();}
+  else if(e.code==='ArrowRight'){e.preventDefault();fcAnswer(true);}
+  else if(e.code==='ArrowLeft'){e.preventDefault();fcAnswer(false);}
+});
+
+fcInit();
+
+/* ══ МИНИ-ТРЕНАЖЁР ══ */
+const PRC=[
+  // Галогены + H₂
+  {q:"H₂ + F₂ →(hν) ?",a:["2HF","HF"],eq:"H₂ + F₂ →(hν) 2HF"},
+  {q:"H₂ + Cl₂ → ?",a:["2HCl","HCl"],eq:"H₂ + Cl₂ → 2HCl"},
+  {q:"H₂ + Br₂ → ?",a:["2HBr","HBr"],eq:"H₂ + Br₂ ⇄ 2HBr"},
+  {q:"H₂ + I₂ → ? (обратимая)",a:["2HI","HI"],eq:"H₂ + I₂ ⇄ 2HI"},
+  // Металлы + галогены
+  {q:"Fe + Cl₂ →(t°) ?",a:["2FeCl3","FeCl3"],eq:"2Fe + 3Cl₂ →(t°) 2FeCl₃"},
+  {q:"Fe + Br₂ →(t°) ?",a:["2FeBr3","FeBr3"],eq:"2Fe + 3Br₂ →(t°) 2FeBr₃"},
+  {q:"Fe + I₂ →(t°) ?",a:["FeI2","2FeI2"],eq:"Fe + I₂ →(t°) FeI₂"},
+  {q:"Cu + Cl₂ →(t°) ?",a:["CuCl2"],eq:"Cu + Cl₂ →(t°) CuCl₂"},
+  {q:"Cu + I₂ →(t°) ?",a:["CuI","2CuI"],eq:"2Cu + I₂ →(t°) 2CuI"},
+  {q:"Al + I₂ →(H₂O) ?",a:["AlI3","2AlI3"],eq:"2Al + 3I₂ →(H₂O) 2AlI₃"},
+  {q:"Al + Cl₂ →(t°) ?",a:["AlCl3","2AlCl3"],eq:"2Al + 3Cl₂ →(t°) 2AlCl₃"},
+  {q:"Na + Cl₂ → ?",a:["NaCl","2NaCl"],eq:"2Na + Cl₂ → 2NaCl"},
+  // Галогены + вода
+  {q:"Cl₂ + H₂O → ?",a:["HCl HClO"],eq:"Cl₂ + H₂O ⇄ HCl + HClO"},
+  {q:"F₂ + H₂O → ?",a:["HF O2","4HF O2"],eq:"2F₂ + 2H₂O → 4HF + O₂"},
+  // Вытеснение галогенов
+  {q:"Cl₂ + KBr → ?",a:["KCl Br2","2KCl Br2"],eq:"Cl₂ + 2KBr → 2KCl + Br₂"},
+  {q:"Cl₂ + KI → ?",a:["KCl I2","2KCl I2"],eq:"Cl₂ + 2KI → 2KCl + I₂"},
+  {q:"Br₂ + KI → ?",a:["KBr I2","2KBr I2"],eq:"Br₂ + 2KI → 2KBr + I₂"},
+  {q:"I₂ + K₂S → ?",a:["KI S","2KI S"],eq:"I₂ + K₂S → 2KI + S↓"},
+  {q:"Cl₂ + H₂S → ?",a:["HCl S","2HCl S"],eq:"Cl₂ + H₂S → 2HCl + S↓"},
+  // Галогены + щёлочи
+  {q:"Cl₂ + KOH(хол.) → ?",a:["KCl KClO H2O"],eq:"Cl₂ + 2KOH(хол.) → KCl + KClO + H₂O"},
+  {q:"Cl₂ + KOH →(t°) ?",a:["KCl KClO3 H2O","5KCl KClO3 H2O"],eq:"3Cl₂ + 6KOH →(t°) 5KCl + KClO₃ + 3H₂O"},
+  {q:"Br₂ + NaOH(хол.) → ?",a:["NaBr NaBrO H2O"],eq:"Br₂ + 2NaOH(хол.) → NaBr + NaBrO + H₂O"},
+  {q:"I₂ + KOH → ?",a:["KI KIO3 H2O","5KI KIO3 H2O"],eq:"3I₂ + 6KOH → 5KI + KIO₃ + 3H₂O"},
+  {q:"I₂ + Ba(OH)₂ → ?",a:["Ba(IO3)2 BaI2 H2O","BaI2 Ba(IO3)2 H2O"],eq:"6I₂ + 6Ba(OH)₂ → Ba(IO₃)₂ + 5BaI₂ + 6H₂O"},
+  {q:"F₂ + NaOH → ?",a:["NaF O2 H2O","4NaF O2 H2O"],eq:"2F₂ + 4NaOH → 4NaF + O₂ + 2H₂O"},
+  {q:"Br₂ + Ba(OH)₂(горяч.) → ?",a:["Ba(BrO3)2 BaBr2 H2O","BaBr2 Ba(BrO3)2 H2O"],eq:"6Br₂ + 6Ba(OH)₂ →(t°) Ba(BrO₃)₂ + 5BaBr₂ + 6H₂O"},
+  {q:"Cl₂ + Ca(OH)₂(хол.) → ?",a:["Ca(OCl)2 CaCl2 H2O","CaCl2 Ca(OCl)2 H2O"],eq:"2Cl₂ + 2Ca(OH)₂(хол.) → Ca(OCl)₂ + CaCl₂ + 2H₂O"},
+  {q:"Cl₂ + Ca(OH)₂(горяч.) → ?",a:["Ca(ClO3)2 CaCl2 H2O","CaCl2 Ca(ClO3)2 H2O"],eq:"6Cl₂ + 6Ca(OH)₂ →(t°) Ca(ClO₃)₂ + 5CaCl₂ + 6H₂O"},
+  {q:"Br₂ + Ca(OH)₂(хол.) → ?",a:["Ca(OBr)2 CaBr2 H2O","CaBr2 Ca(OBr)2 H2O"],eq:"2Br₂ + 2Ca(OH)₂(хол.) → Ca(OBr)₂ + CaBr₂ + 2H₂O"},
+  {q:"Br₂ + Ca(OH)₂(горяч.) → ?",a:["Ca(BrO3)2 CaBr2 H2O","CaBr2 Ca(BrO3)2 H2O"],eq:"6Br₂ + 6Ca(OH)₂ →(t°) Ca(BrO₃)₂ + 5CaBr₂ + 6H₂O"},
+  // Сера
+  {q:"Fe + S →(t°) ?",a:["FeS"],eq:"Fe + S →(t°) FeS"},
+  {q:"Cu + S(нед.) →(t°) ?",a:["Cu2S"],eq:"2Cu + S(нед.) →(t°) Cu₂S"},
+  {q:"Cu + S(изб.) →(t°) ?",a:["CuS"],eq:"Cu + S(изб.) →(t°) CuS"},
+  {q:"Hg + S → ? (н.у.)",a:["HgS"],eq:"Hg + S → HgS"},
+  {q:"H₂ + S →(t°) ?",a:["H2S"],eq:"H₂ + S ⇄ H₂S"},
+  {q:"S + O₂ →(t°) ?",a:["SO2"],eq:"S + O₂ →(t°) SO₂"},
+  {q:"H₂S + O₂(нед.) → ?",a:["S H2O","2S H2O"],eq:"2H₂S + O₂(нед.) → 2S↓ + 2H₂O"},
+  {q:"H₂S + O₂(изб.) → ?",a:["SO2 H2O","2SO2 H2O"],eq:"2H₂S + 3O₂(изб.) → 2SO₂ + 2H₂O"},
+  {q:"SO₂ + O₂ →(V₂O₅, t°) ?",a:["SO3","2SO3"],eq:"2SO₂ + O₂ →(V₂O₅, t°) 2SO₃"},
+  {q:"S + HNO₃(конц.) →(t°) ?",a:["H2SO4 NO2 H2O","H2SO4 6NO2 H2O"],eq:"S + 6HNO₃(конц.) →(t°) H₂SO₄ + 6NO₂↑ + 2H₂O"},
+  {q:"S + H₂SO₄(конц.) →(t°) ?",a:["SO2 H2O","3SO2 H2O"],eq:"S + 2H₂SO₄(конц.) →(t°) 3SO₂↑ + 2H₂O"},
+  {q:"FeS₂ + O₂ → ?",a:["Fe2O3 SO2","2Fe2O3 SO2"],eq:"4FeS₂ + 11O₂ → 2Fe₂O₃ + 8SO₂↑"},
+  {q:"S + KOH →(конц., t°) ? (диспропорц.)",a:["K2S K2SO3 H2O","2K2S K2SO3 H2O"],eq:"3S + 6KOH →(конц., t°) 2K₂S + K₂SO₃ + 3H₂O"},
+  {q:"S + Ba(OH)₂ →(конц., t°) ? (диспропорц.)",a:["BaS BaSO3 H2O","2BaS BaSO3 H2O"],eq:"3S + 3Ba(OH)₂ →(конц., t°) 2BaS + BaSO₃ + 3H₂O"},
+  {q:"S + Ca(OH)₂ →(конц., t°) ? (диспропорц.)",a:["CaS CaSO3 H2O","2CaS CaSO3 H2O"],eq:"3S + 3Ca(OH)₂ →(конц., t°) 2CaS + CaSO₃ + 3H₂O"},
+  // Азот
+  {q:"N₂ + H₂ →(Fe, t°) ?",a:["NH3","2NH3"],eq:"N₂ + 3H₂ ⇄(Fe, t°) 2NH₃"},
+  {q:"N₂ + O₂ →(>1000°C) ?",a:["NO","2NO"],eq:"N₂ + O₂ ⇄(>1000°C) 2NO"},
+  {q:"Li + N₂ → ?",a:["Li3N","2Li3N"],eq:"6Li + N₂ → 2Li₃N"},
+  {q:"Mg + N₂ →(t°) ?",a:["Mg3N2"],eq:"3Mg + N₂ →(t°) Mg₃N₂"},
+  {q:"NH₃ + O₂ → ? (без кат.)",a:["N2 H2O","N2 6H2O"],eq:"4NH₃ + 3O₂ → 2N₂ + 6H₂O"},
+  {q:"NH₃ + O₂ →(Pt, t°) ?",a:["NO H2O","4NO H2O"],eq:"4NH₃ + 5O₂ →(Pt, t°) 4NO + 6H₂O"},
+  {q:"NO + O₂ → ?",a:["NO2","2NO2"],eq:"2NO + O₂ → 2NO₂"},
+  {q:"NO₂ + H₂O → ?",a:["HNO3 NO","2HNO3 NO"],eq:"3NO₂ + H₂O → 2HNO₃ + NO"},
+  {q:"NH₃ + HCl → ?",a:["NH4Cl"],eq:"NH₃ + HCl → NH₄Cl"},
+  {q:"NH₃ + AlCl₃ + H₂O → ?",a:["Al(OH)3 NH4Cl"],eq:"AlCl₃ + 3NH₃ + 3H₂O → Al(OH)₃↓ + 3NH₄Cl"},
+  {q:"CuO + NH₃ →(t°) ?",a:["Cu N2 H2O","3Cu N2 H2O"],eq:"3CuO + 2NH₃ →(t°) 3Cu + N₂ + 3H₂O"},
+  // Кислород
+  {q:"Na + O₂ → ?",a:["Na2O2"],eq:"2Na + O₂ → Na₂O₂"},
+  {q:"FeO + O₂ →(t°) ?",a:["Fe2O3","2Fe2O3"],eq:"4FeO + O₂ →(t°) 2Fe₂O₃"},
+  {q:"ZnS + O₂ → ?",a:["ZnO SO2","2ZnO SO2"],eq:"2ZnS + 3O₂ → 2ZnO + 2SO₂"},
+  {q:"Al + O₂ →(t°) ?",a:["Al2O3","2Al2O3"],eq:"4Al + 3O₂ →(t°) 2Al₂O₃"},
+];
+let prcQueue=[],prcPos=0,prcOk=0,prcErr=0,prcFirst=0,prcAttempts={},prcDone=false;
+function prcInit(){
+  if(_loadPrc()){
+    if(prcDone){
+      document.getElementById('prc-task-area').style.display='none';
+      document.getElementById('prc-result').hidden=false;
+      const pct=Math.round(prcFirst/PRC.length*100);
+      document.getElementById('prc-pct').textContent=pct+'%';
+      document.getElementById('prc-grade').textContent=pct===100?'🏆':pct>=80?'🥇':'🎉';
+      document.getElementById('prc-ok-n').textContent=prcOk;
+      document.getElementById('prc-err-n').textContent=prcErr;
+      document.getElementById('prc-first-n').textContent=prcFirst+' из '+PRC.length;
+    } else {
+      document.getElementById('prc-result').hidden=true;
+      document.getElementById('prc-task-area').style.display='';
+      prcShow();
+    }
+    return;
+  }
+  prcQueue=[...PRC].sort(()=>Math.random()-.5);
+  prcPos=0;prcOk=0;prcErr=0;prcFirst=0;prcAttempts={};
+  document.getElementById('prc-result').hidden=true;
+  document.getElementById('prc-task-area').style.display='';
+  prcShow();
+}
+function prcShow(){
+  const t=prcQueue[prcPos];
+  document.getElementById('prc-q').textContent=t.q;
+  document.getElementById('prc-num').textContent=(prcPos+1)+' / '+prcQueue.length;
+  document.getElementById('prc-live').textContent='✓ '+prcOk+'   ✗ '+prcErr;
+  const pct=Math.round(prcPos/prcQueue.length*100);
+  document.getElementById('prc-fill').style.width=pct+'%';
+  const inp=document.getElementById('prc-inp');
+  inp.value='';inp.className='prc-inp';inp.disabled=false;inp.focus({preventScroll:true});
+  document.getElementById('prc-fb').innerHTML='';document.getElementById('prc-fb').className='prc-fb';
+  document.getElementById('prc-check-btn').disabled=false;
+  document.getElementById('prc-check-btn').style.display='';
+  document.getElementById('prc-next-btn').style.display='none';
+  document.getElementById('prc-ans').style.display='none';
+}
+function normF(s){
+  const sub='₀₁₂₃₄₅₆₇₈₉',sup='⁰¹²³⁴⁵⁶⁷⁸⁹';
+  return s
+    .replace(/[₀₁₂₃₄₅₆₇₈₉]/g,c=>'0123456789'[sub.indexOf(c)])
+    .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g,c=>'0123456789'[sup.indexOf(c)])
+    .replace(/[^a-zа-яёA-ZА-Яё0-9]/g,'')
+    .toLowerCase()
+    .replace(/^\d+/,'');
+}
+function normMulti(s){
+  return s.split(/[+\s]+/).map(p=>normF(p)).filter(p=>p.length>0).sort().join('|');
+}
+function prcCheck(){
+  const inp=document.getElementById('prc-inp');
+  const raw=inp.value.trim();if(!raw)return;
+  const t=prcQueue[prcPos];
+  const accepted=Array.isArray(t.a)?t.a:[t.a];
+  const userN=normMulti(raw);
+  const ok=accepted.some(a=>normMulti(a)===userN);
+  const fb=document.getElementById('prc-fb');
+  const ans=document.getElementById('prc-ans');
+  if(ok){
+    inp.className='prc-inp p-ok';inp.disabled=true;
+    fb.innerHTML='✅ Верно!';fb.className='prc-fb ok';
+    ans.innerHTML='<div class="prc-ans-lbl">Полная реакция</div>'+(t.eq||accepted[0]);
+    ans.style.display='';
+    document.getElementById('prc-check-btn').style.display='none';
+    document.getElementById('prc-next-btn').style.display='';
+    prcOk++;if(!prcAttempts[prcPos])prcFirst++;
+    _savePrc();
+  } else {
+    inp.classList.add('p-err');
+    prcAttempts[prcPos]=(prcAttempts[prcPos]||0)+1;
+    if(prcAttempts[prcPos]===1){
+      prcErr++;prcQueue.push(t);
+      const ntc=document.getElementById('prc-repeat-notice');
+      ntc.style.display='';ntc.textContent='🔁 Повтор добавлен — это задание встретится снова в конце';
+      setTimeout(()=>{ntc.style.display='none';},2500);
+    }
+    fb.innerHTML='❌ Неверно — попробуй ещё раз';fb.className='prc-fb err';
+    setTimeout(()=>{inp.classList.remove('p-err');inp.value='';fb.innerHTML='';fb.className='prc-fb';inp.focus({preventScroll:true});},1800);
+  }
+}
+function prcNext(){
+  prcPos++;
+  _savePrc();
+  if(prcPos>=prcQueue.length)prcFinish(); else prcShow();
+}
+function prcFinish(){
+  document.getElementById('prc-task-area').style.display='none';
+  document.getElementById('prc-result').hidden=false;
+  const pct=Math.round(prcFirst/PRC.length*100);
+  document.getElementById('prc-pct').textContent=pct+'%';
+  document.getElementById('prc-grade').textContent=pct===100?'🏆':pct>=80?'🥇':'🎉';
+  document.getElementById('prc-ok-n').textContent=prcOk;
+  document.getElementById('prc-err-n').textContent=prcErr;
+  document.getElementById('prc-first-n').textContent=prcFirst+' из '+PRC.length;
+  prcDone=true;_savePrc();if(fcAllDone)showDoneOverlay();
+}
+function prcRestart(){
+  localStorage.removeItem(_PRC_KEY);
+  prcQueue=[...PRC].sort(()=>Math.random()-.5);
+  prcPos=0;prcOk=0;prcErr=0;prcFirst=0;prcAttempts={};prcDone=false;
+  document.getElementById('prc-result').hidden=true;
+  document.getElementById('prc-task-area').style.display='';
+  prcShow();
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&e.target===document.getElementById('prc-inp')){
+    e.preventDefault();
+    const nextBtn=document.getElementById('prc-next-btn');
+    if(nextBtn&&nextBtn.style.display!=='none')prcNext(); else prcCheck();
+  }
+});
+function showDoneOverlay(){
+  document.getElementById('done-overlay').style.display='flex';
+  if(typeof markToday==='function')markToday();
+}
+prcInit();
+</script>
+
+</div><!-- /shell -->
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">↑</button>
+
+<script>
+/* ── Прогресс-бар и кнопка наверх ── */
+const pf=document.getElementById('pf');
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  pf.style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';
+  document.getElementById('back-top').classList.toggle('visible',d.scrollTop>400);
+});
+
+/* ── Fade-in при скролле ── */
+document.querySelectorAll('.fade-in').forEach(el=>
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),
+    {threshold:0.06,rootMargin:'0px 0px -30px 0px'}).observe(el));
+
+/* ── Боковое меню ── */
+function openMenu(){document.getElementById('menu-overlay').classList.add('open');document.getElementById('menu-panel').classList.add('open');}
+function closeMenu(){document.getElementById('menu-overlay').classList.remove('open');document.getElementById('menu-panel').classList.remove('open');}
+
+/* ── Полный экран ── */
+function toggleFullscreen(){
+  const btn=document.getElementById('topbar-fs');
+  if(!document.fullscreenElement&&!document.webkitFullscreenElement){
+    const el=document.documentElement;(el.requestFullscreen||el.webkitRequestFullscreen).call(el);
+  } else {
+    (document.exitFullscreen||document.webkitExitFullscreen).call(document);
+  }
+}
+document.addEventListener('fullscreenchange',()=>{const b=document.getElementById('topbar-fs');if(b)b.textContent=document.fullscreenElement?'✕':'⛶';});
+document.addEventListener('webkitfullscreenchange',()=>{const b=document.getElementById('topbar-fs');if(b)b.textContent=document.webkitFullscreenElement?'✕':'⛶';});
+
+/* ── Клавиши ── */
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&e.target.classList.contains('acc-inp')&&!e.target.readOnly){
+    e.preventDefault();const btn=e.target.closest('.acc-task').querySelector('.acc-btn');if(btn&&!btn.disabled)accCheck(btn);return;
+  }
+  const isInput=e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA';
+  if(e.key==='Escape'){closeMenu();return;}
+  if(isInput)return;
+  if(e.key.toLowerCase()==='f'){e.preventDefault();toggleFullscreen();}
+});
+
+/* ── Нормализация ответа ── */
+function normAns(s){
+  const sub='₀₁₂₃₄₅₆₇₈₉';const sup='⁰¹²³⁴⁵⁶⁷⁸⁹';
+  return s.toLowerCase()
+    .replace(/[₀₁₂₃₄₅₆₇₈₉]/g,c=>'0123456789'[sub.indexOf(c)])
+    .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g,c=>'0123456789'[sup.indexOf(c)])
+    .replace(/[↑↓→⇄]/g,'').replace(/\s+/g,'').replace(/[()]/g,'').trim();
+}
+
+/* ── Проверка задания аккордеона ── */
+function accCheck(btn){
+  const task=btn.closest('.acc-task');
+  const inp=task.querySelector('.acc-inp');
+  const fb=task.querySelector('.acc-fb');
+  const raw=inp.value.trim();
+  if(!raw)return;
+  const answers=(task.dataset.answers||'').split('|').map(a=>a.trim());
+  const ok=answers.some(a=>normAns(raw).includes(normAns(a))||normAns(a).includes(normAns(raw)));
+  if(ok){
+    inp.classList.add('acc-ok');inp.classList.remove('acc-err');
+    inp.readOnly=true;btn.disabled=true;
+    fb.textContent='✓ Верно!';fb.className='acc-fb ok';
+    const wrap=task.closest('.acc-wrap');
+    const tasks=[...wrap.querySelectorAll('.acc-task')];
+    const idx=tasks.indexOf(task);
+    if(idx<tasks.length-1){
+      const nxt=tasks[idx+1];nxt.classList.remove('acc-locked');
+      setTimeout(()=>nxt.scrollIntoView({behavior:'smooth',block:'nearest'}),180);
+    } else {
+      const dm=wrap.querySelector('.acc-done-msg');if(dm)dm.hidden=false;
+    }
+    saveProgress();
+  } else {
+    inp.classList.add('acc-err');inp.classList.remove('acc-ok');
+    fb.textContent='✗ Не совсем — попробуй ещё раз';fb.className='acc-fb err';
+    setTimeout(()=>{inp.classList.remove('acc-err');fb.textContent='';fb.className='acc-fb';},1900);
+  }
+}
+
+/* ── localStorage (3 дня) ── */
+const LS_KEY='nemetally1_v2';
+const LS_TTL=3*24*60*60*1000;
+
+function saveProgress(){
+  try{
+    const state={ts:Date.now(),acc:{}};
+    document.querySelectorAll('.acc-wrap').forEach((wrap,wi)=>{
+      wrap.querySelectorAll('.acc-task').forEach((task,ti)=>{
+        const inp=task.querySelector('.acc-inp');
+        if(inp&&inp.readOnly)state.acc[wi+'_'+ti]={val:inp.value};
+        else if(!task.classList.contains('acc-locked'))state.acc[wi+'_'+ti+'_open']=1;
+      });
+    });
+    localStorage.setItem(LS_KEY,JSON.stringify(state));
+  }catch(e){}
+}
+
+function restoreProgress(){
+  try{
+    const raw=localStorage.getItem(LS_KEY);
+    if(!raw)return;
+    const data=JSON.parse(raw);
+    if(Date.now()-data.ts>LS_TTL){localStorage.removeItem(LS_KEY);return;}
+    const s=data.acc||{};
+    document.querySelectorAll('.acc-wrap').forEach((wrap,wi)=>{
+      wrap.querySelectorAll('.acc-task').forEach((task,ti)=>{
+        const d=s[wi+'_'+ti];
+        if(d){
+          const inp=task.querySelector('.acc-inp');const btn=task.querySelector('.acc-btn');const fb=task.querySelector('.acc-fb');
+          if(inp){inp.value=d.val;inp.readOnly=true;inp.classList.add('acc-ok');}
+          if(btn)btn.disabled=true;
+          if(fb){fb.textContent='✓ Верно!';fb.className='acc-fb ok';}
+          task.classList.remove('acc-locked');
+        } else if(s[wi+'_'+ti+'_open']){
+          task.classList.remove('acc-locked');
+        }
+      });
+      const tasks=[...wrap.querySelectorAll('.acc-task')];
+      const allDone=tasks.every(t=>{const i=t.querySelector('.acc-inp');return i&&i.readOnly;});
+      if(allDone){const dm=wrap.querySelector('.acc-done-msg');if(dm)dm.hidden=false;}
+    });
+  }catch(e){}
+}
+
+/* ── История занятий (6 дней) ── */
+const _HIST_KEY='nemetally1_hist';
+function _getHist(){try{return JSON.parse(localStorage.getItem(_HIST_KEY))||[];}catch(e){return[];}}
+function _saveHist(h){try{localStorage.setItem(_HIST_KEY,JSON.stringify(h));}catch(e){}}
+function _todayStr(){return new Date().toISOString().slice(0,10);}
+
+function updateStreak(){
+  const h=_getHist();
+  const c=document.getElementById('tb-streak');
+  if(!c)return;
+  c.innerHTML='';
+  for(let i=5;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const ds=d.toISOString().slice(0,10);
+    const entry=h.find(x=>x.d===ds);
+    const done=entry&&entry.b&&entry.b.length>=1;
+    const dot=document.createElement('div');
+    dot.className='tb-day'+(done?' done':'')+(i===0?' today':'');
+    dot.title=d.toLocaleDateString('ru',{day:'numeric',month:'short'})+': '+(done?'выполнено ✓':'нет данных');
+    c.appendChild(dot);
+  }
+}
+
+function markToday(){
+  const today=_todayStr();
+  const h=_getHist();
+  let entry=h.find(x=>x.d===today);
+  if(!entry){entry={d:today,b:[]};h.push(entry);}
+  if(!entry.b.includes('done'))entry.b.push('done');
+  const cutoff=new Date();cutoff.setDate(cutoff.getDate()-6);
+  _saveHist(h.filter(x=>x.d>=cutoff.toISOString().slice(0,10)));
+  updateStreak();
+}
+
+function clearHistory(){
+  if(!confirm('Сбросить весь прогресс и историю занятий?'))return;
+  try{
+    localStorage.removeItem(LS_KEY);
+    localStorage.removeItem(_HIST_KEY);
+    localStorage.removeItem('nemetally1_prc');
+    localStorage.removeItem('nemetally1_fc');
+  }catch(e){}
+  location.reload();
+}
+
+restoreProgress();
+updateStreak();
+window.scrollTo(0,0);
+</script>
+
+<div class="done-overlay" id="done-overlay" style="display:none">
+  <div class="done-card">
+    <div class="done-emoji">🏆</div>
+    <div class="done-pct">100%</div>
+    <div class="done-title">Все задания выполнены!</div>
+    <div class="done-sub">Практикум и флэш-карты пройдены. Ты молодец!</div>
+    <button class="done-close" onclick="document.getElementById('done-overlay').style.display='none'">Закрыть</button>
+  </div>
+</div>
+</body>
+</html>
