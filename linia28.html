@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Линия 28 · ЕГЭ Химия</title>
+<script>history.scrollRestoration='manual';</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  --p900:#1a3a5c;--p800:#1e4976;--p700:#235a91;--p600:#2b72b8;--p500:#3a8fd4;
+  --p400:#6aaede;--p300:#a8d0ed;--p200:#d6eaf8;--p100:#eaf4fb;--p50:#f5faff;
+  --ink:#0d1f2d;--ink2:#2d4a5e;--ink3:#7a9baf;
+  --line:#d8e8f0;--bg:#f2f7fb;--white:#fff;
+  --green:#1a8c6e;--green-t:#e0f5ef;--green-d:#0a5240;
+  --amber:#b06a10;--amber-t:#faeedd;--amber-d:#6b3a00;
+  --red:#a02525;--red-t:#fceaea;--red-d:#6e1515;
+  --r:12px;--r-sm:8px;
+  --shadow:0 1px 3px rgba(10,30,50,.06),0 4px 16px rgba(10,30,50,.06);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+  --h1:#0a2540;--h2:#1565c0;--h3:#1e88e5;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:17px}
+
+/* TOPBAR */
+#topbar{position:fixed;top:12px;right:16px;z-index:999;display:flex;align-items:center;gap:4px;background:#fff;border:1.5px solid rgba(21,101,192,.3);border-radius:999px;padding:5px 6px;box-shadow:0 4px 20px rgba(21,101,192,.22);cursor:pointer;user-select:none}
+.tb-collapsible{display:flex;align-items:center;gap:4px}
+#topbar .tb-expand{display:none}
+#topbar.collapsed .tb-expand{display:flex}
+#topbar.collapsed .tb-collapsible{display:none}
+#topbar.collapsed{gap:0}
+.tb-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;border-radius:50%;font-size:15px;color:var(--ink3);cursor:pointer;transition:.12s;flex-shrink:0}
+.tb-btn:hover{background:rgba(21,101,192,.1);color:var(--h2)}
+.tb-sep{width:1px;height:16px;background:rgba(21,101,192,.15);margin:0 2px;flex-shrink:0}
+.tb-prog-wrap{width:52px;height:2px;background:rgba(21,101,192,.15);border-radius:1px;flex-shrink:0}
+.tb-prog-fill{height:2px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;border-radius:1px;transition:width .1s}
+.tb-label{font-family:var(--mono);font-size:10px;color:var(--ink3);padding:0 4px;white-space:nowrap}
+.tb-streak{display:flex;gap:3px;align-items:center;padding:0 2px}
+.tb-day{width:7px;height:7px;border-radius:50%;background:rgba(21,101,192,.15);flex-shrink:0;transition:.2s}
+.tb-day.done{background:#1a8c6e}
+.tb-day.today{outline:1.5px solid rgba(21,101,192,.5);outline-offset:1.5px}
+
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(21,101,192,.1);z-index:998}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;transition:width .1s}
+
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#060e2b 0%,#0d2461 38%,#1565c0 72%,#1e88e5 100%);padding:48px 32px 40px;margin:0 -24px 40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;bottom:-30%;left:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(30,136,229,.2) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);border-radius:20px;padding:4px 14px;font-size:12px;font-family:var(--mono);letter-spacing:.6px;margin-bottom:16px}
+.hero h1{font-size:clamp(28px,5vw,46px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#fff;margin-bottom:12px}
+.hero h1 em{color:#90caf9;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.68);line-height:1.7;max-width:540px;margin-bottom:22px}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px}
+.hero-chip{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.17);color:rgba(255,255,255,.88);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+
+/* SECTIONS */
+.section{margin-bottom:48px}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--p200)}
+.section-title{font-size:clamp(16px,2.5vw,21px);font-weight:700;color:var(--p800);line-height:1.2}
+.section-pill{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.8px;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+
+h3.sub{font-size:15px;font-weight:700;color:var(--p700);margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+h3.sub::before{content:'';width:3px;height:16px;background:var(--h2);border-radius:2px;flex-shrink:0}
+
+/* BOXES */
+.box{border-radius:var(--r-sm);padding:12px 16px;margin:10px 0;font-size:15px;line-height:1.75}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:var(--amber-t);border-left:4px solid var(--amber);color:var(--amber-d)}
+.box-title{font-weight:700;font-size:12px;margin-bottom:5px;text-transform:uppercase;letter-spacing:.6px}
+.box ul,.box ol{padding-left:18px;margin:4px 0}
+.box li{margin:3px 0;font-size:15px}
+
+/* FORMULA CARDS */
+.fml-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+@media(max-width:680px){.fml-grid{grid-template-columns:1fr}}
+.fml-card{background:var(--white);border:1.5px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);text-align:center}
+.fml-label{font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.fml-eq{font-family:var(--mono);font-size:17px;font-weight:700;color:var(--h2);margin:6px 0;line-height:1.4}
+.fml-desc{font-size:12.5px;color:var(--ink2);line-height:1.5}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.2;margin:0 2px}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 4px 2px;white-space:nowrap}
+.frac .den{padding:2px 4px 0;white-space:nowrap}
+
+/* ALGO */
+.algo{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.algo-step{display:flex;gap:10px;align-items:flex-start}
+.algo-n{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-family:var(--mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.algo-text{font-size:15px;line-height:1.7;color:var(--ink2)}
+.algo-text code{font-family:var(--mono);font-size:13px;background:var(--p100);color:var(--p800);padding:1px 5px;border-radius:4px}
+
+/* TRAINER SECTION */
+.tr-section{background:var(--white);border:1.5px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow);margin-top:22px}
+.tr-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tr-pill{font-family:var(--mono);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.6px;white-space:nowrap}
+.tr-pill-a{background:#dbeafe;color:#1e3a8a}
+.tr-pill-b{background:#fef3c7;color:#78350f}
+.tr-pill-v1{background:#d1fae5;color:#065f46}
+.tr-pill-v2{background:#ede9fe;color:#4c1d95}
+.tr-pill-v3{background:#fce7f3;color:#831843}
+.tr-pill-v4{background:#fff7ed;color:#9a3412}
+.tr-title{font-size:15px;font-weight:700;color:var(--p800)}
+.tr-prog{font-family:var(--mono);font-size:12px;color:var(--ink3);margin-left:auto}
+.tr-card{background:var(--bg);border:1.5px solid var(--line);border-radius:var(--r-sm);padding:18px 20px;margin-bottom:14px}
+.tr-q{font-size:15.5px;line-height:1.75;color:var(--ink);font-weight:500}
+.tr-ans-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+.tr-input{font-size:20px;width:120px;text-align:center;font-family:var(--mono);border:2px solid var(--line);border-radius:8px;padding:7px 12px;outline:none;background:var(--white);color:var(--ink);transition:border-color .15s}
+.tr-input:focus{border-color:var(--h2)}
+.tr-unit{font-size:14px;color:var(--ink3);font-family:var(--mono);font-weight:700}
+.tr-feedback{min-height:22px;font-size:15px;font-weight:700}
+.tr-feedback.ok{color:var(--green-d)}
+.tr-feedback.err{color:var(--red-d)}
+.tr-btns{display:flex;gap:8px;flex-wrap:wrap}
+.tr-check-btn,.tr-next-btn,.tr-reset-btn{border:none;border-radius:8px;padding:10px 22px;font-size:15px;font-weight:700;cursor:pointer;transition:.12s}
+.tr-check-btn{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff}
+.tr-check-btn:hover{opacity:.9}
+.tr-next-btn{background:var(--green);color:#fff}
+.tr-next-btn:hover{opacity:.9}
+.tr-reset-btn{background:var(--line);color:var(--ink2)}
+.tr-reset-btn:hover{background:var(--p200)}
+.tr-result{text-align:center;padding:32px 20px}
+.tr-result-icon{font-size:52px;margin-bottom:10px}
+.tr-result-title{font-size:22px;font-weight:800;color:var(--green-d);margin-bottom:8px}
+.tr-result-sub{font-size:14px;color:var(--ink3)}
+
+/* SOLUTION BOX */
+.sol-box{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:var(--r-sm);padding:14px 16px;margin-top:14px}
+.sol-eq{font-family:var(--mono);font-size:14px;color:#075985;font-weight:700;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #bae6fd}
+.sol-steps{font-size:14px;color:var(--ink2);line-height:2;font-family:var(--mono)}
+.sol-steps .ans{color:var(--green-d);font-weight:700}
+.sol-n{display:inline-block;width:18px;font-weight:700;color:var(--h2);flex-shrink:0}
+.sol-lbl{color:var(--h1);font-size:12.5px;font-weight:700}
+
+/* CONGRATS */
+#congrats{display:none;position:fixed;inset:0;z-index:2000;background:rgba(10,37,64,.5);align-items:center;justify-content:center}
+#congrats.show{display:flex}
+.cong-card{background:#fff;border-radius:20px;padding:40px 36px;text-align:center;max-width:400px;box-shadow:0 20px 60px rgba(10,37,64,.25)}
+.cong-icon{font-size:64px;margin-bottom:12px}
+.cong-title{font-size:26px;font-weight:800;color:var(--green-d);margin-bottom:8px}
+.cong-sub{font-size:15px;color:var(--ink3);line-height:1.6;margin-bottom:22px}
+.cong-btn{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;border:none;border-radius:10px;padding:12px 28px;font-size:15px;font-weight:700;cursor:pointer}
+/* PERIODIC TABLE */
+.pt-ru{border-collapse:collapse;font-size:11px;white-space:nowrap}
+.pt-ru th,.pt-ru td{padding:0;border:1px solid #c4b5fd}
+.pt-corner{background:#4c1d95;color:#fff;font-size:11px;font-weight:700;text-align:center;padding:4px;min-width:32px;writing-mode:vertical-rl;text-orientation:mixed}
+.pt-ru thead th{background:#5b21b6;color:#fff;font-weight:700;text-align:center;padding:3px 6px;font-size:12px}
+.pt-viii{background:#7c3aed!important}
+.pt-noble-hdr{background:#4b5563!important}
+.pt-period{background:#ede9fe;color:#4c1d95;font-weight:800;font-size:13px;text-align:center;padding:2px 5px;min-width:24px}
+.el6{min-width:54px;max-width:54px;height:56px;text-align:center;padding:2px;vertical-align:top;cursor:default;transition:transform .15s,box-shadow .15s;position:relative}
+.el6:hover{transform:scale(1.18);box-shadow:0 4px 16px #0004;z-index:20}
+.el6 .el-num{display:block;font-size:8px;font-weight:700;opacity:.7;line-height:1.1;text-align:left;padding-left:2px}
+.el6 .el-mass{display:block;font-size:8px;opacity:.65;line-height:1;text-align:right;padding-right:2px}
+.el6 .el-sym{display:block;font-size:17px;font-weight:800;line-height:1.1}
+.el6 .el-name{display:block;font-size:7.5px;opacity:.85;line-height:1.1}
+.el-blank6{background:#f8fafc;min-width:54px}
+.pt-f-label{background:#f5d840;color:#92400e;font-size:10px;font-weight:700;text-align:center;padding:4px 6px;min-width:70px;border:1px solid #7a4208}
+.pt-legend6{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.pt-leg-item6{padding:3px 10px;border-radius:5px;font-size:11px;font-weight:700}
+/* SOLUBILITY TABLE */
+.sol-table{border-collapse:collapse;font-size:12px;white-space:nowrap}
+.sol-table th,.sol-table td{border:1px solid #d1d5db;padding:4px 7px;text-align:center;transition:background .15s,color .15s}
+.sol-table thead th{background:#4c1d95;color:#fff;font-weight:700;cursor:pointer;user-select:none}
+.sol-table thead th:first-child{cursor:default}
+.sol-table thead th.sol-col-active{background:#f59e0b!important;color:#1c1917!important}
+.sol-table tbody th{background:#ede9fe;font-weight:700;color:#4c1d95;text-align:right;padding-right:10px;position:sticky;left:0;cursor:pointer;user-select:none}
+.sol-table tbody th.sol-row-active{background:#f59e0b!important;color:#1c1917!important}
+.sol-col-hl{background:#fef3c7!important}
+.sol-row-hl{background:#fef3c7!important}
+.sol-intersect{background:#f97316!important;color:#fff!important;font-weight:900!important;outline:3px solid #ea580c;outline-offset:-2px;position:relative;z-index:2}
+.sol-P{background:#dcfce7;color:#166534;font-weight:600}
+.sol-H{background:#fee2e2;color:#991b1b;font-weight:600}
+.sol-M{background:#fef9c3;color:#854d0e;font-weight:600}
+.sol-D{background:#f3f4f6;color:#6b7280}
+.sol-Q{background:#f8fafc;color:#94a3b8;font-style:italic}
+.sol-E{background:#f8fafc}
+.sol-legend{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;margin-top:10px}
+.sol-leg{padding:4px 12px;border-radius:6px;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+
+<div id="topbar" class="collapsed" onclick="topbarClick(event)">
+  <span class="tb-expand" style="font-size:18px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--h2);font-weight:700">☰</span>
+  <div class="tb-collapsible">
+    <div class="tb-prog-wrap"><div class="tb-prog-fill" id="tb-pf"></div></div>
+    <span class="tb-label" id="tb-lbl">0 / 45</span>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" onclick="togglePS();event.stopPropagation()" title="Таблица Менделеева (T)">⚗️</button>
+    <button class="tb-btn" onclick="toggleRS();event.stopPropagation()" title="Растворимость (R)">🧪</button>
+    <div class="tb-sep"></div>
+    <div class="tb-streak" id="tb-streak"></div>
+    <button class="tb-btn" onclick="clearAll();event.stopPropagation()" title="Сбросить весь прогресс">🗑️</button>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" onclick="topbarClick(event)" title="Свернуть">✕</button>
+  </div>
+</div>
+
+<div class="shell">
+
+<div class="hero">
+  <div class="hero-tag">ЛИНИЯ 28 · ЕГЭ ХИМИЯ</div>
+  <h1>Смеси и <em>Выход Продукта</em></h1>
+  <p class="hero-sub">Расчёты по уравнению реакции с учётом выхода и технической чистоты вещества.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Выход продукта η%</span>
+    <span class="hero-chip">Блок 1 · 21 задача</span>
+    <span class="hero-chip">Блок 2 · 24 задачи</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- БЛОК 1: ТЕОРИЯ + ПРАКТИКУМЫ А и Б      -->
+<!-- ════════════════════════════════════════ -->
+<div class="section" id="s-b1">
+  <div class="section-header">
+    <div class="section-pill">БЛОК 1</div>
+    <h2 class="section-title">Выход продукта реакции</h2>
+  </div>
+
+  <h3 class="sub">Ключевые формулы</h3>
+  <div class="fml-grid">
+    <div class="fml-card">
+      <div class="fml-label">Выход по объёму</div>
+      <div class="fml-eq">η% = <span class="frac"><span class="num">V<sub>практ</sub></span><span class="den">V<sub>теор</sub></span></span> · 100%</div>
+      <div class="fml-desc">V<sub>практ</sub> = <span class="frac"><span class="num">V<sub>теор</sub> · η%</span><span class="den">100%</span></span></div>
+      <div class="fml-desc">V<sub>теор</sub> = <span class="frac"><span class="num">V<sub>практ</sub> · 100%</span><span class="den">η%</span></span></div>
+    </div>
+    <div class="fml-card">
+      <div class="fml-label">Выход по массе</div>
+      <div class="fml-eq">η% = <span class="frac"><span class="num">m<sub>практ</sub></span><span class="den">m<sub>теор</sub></span></span> · 100%</div>
+      <div class="fml-desc">m<sub>практ</sub> = <span class="frac"><span class="num">m<sub>теор</sub> · η%</span><span class="den">100%</span></span></div>
+      <div class="fml-desc">m<sub>теор</sub> = <span class="frac"><span class="num">m<sub>практ</sub> · 100%</span><span class="den">η%</span></span></div>
+    </div>
+    <div class="fml-card">
+      <div class="fml-label">Моль / масса / объём</div>
+      <div class="fml-eq">n = <span class="frac"><span class="num">m</span><span class="den">M</span></span></div>
+      <div class="fml-desc">m = n · M</div>
+      <div class="fml-desc">n = <span class="frac"><span class="num">V</span><span class="den">22,4</span></span></div>
+      <div class="fml-desc">V = n · 22,4 л/моль</div>
+    </div>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">⚠ Три типа задач</div>
+    <ol>
+      <li><strong>Дано η → найти V<sub>практ</sub> или m<sub>практ</sub></strong> — умножь теоретическое на η% и раздели на 100%</li>
+      <li><strong>Дан V<sub>практ</sub> → найти η</strong> — раздели практическое на теоретическое</li>
+      <li><strong>Дан V<sub>практ</sub> и η → найти исходное</strong> — обратная задача (в смесях)</li>
+    </ol>
+  </div>
+
+  <h3 class="sub">Алгоритм решения</h3>
+  <div class="algo">
+    <div class="algo-step"><div class="algo-n">1</div><div class="algo-text">Напишите уравнение реакции</div></div>
+    <div class="algo-step"><div class="algo-n">2</div><div class="algo-text">Найдите число моль исходного: <code>n = m/M</code> или <code>n = V/22,4</code></div></div>
+    <div class="algo-step"><div class="algo-n">3</div><div class="algo-text">Найдите n<sub>теор</sub> продукта по коэффициентам реакции</div></div>
+    <div class="algo-step"><div class="algo-n">4</div><div class="algo-text">Найдите V<sub>теор</sub> = n·22,4 или m<sub>теор</sub> = n·M</div></div>
+    <div class="algo-step"><div class="algo-n">5</div><div class="algo-text">Если дано η% → <code>V<sub>практ</sub> = V<sub>теор</sub> · η% / 100%</code> &nbsp;|&nbsp; Если дан V<sub>практ</sub> → <code>η% = V<sub>практ</sub> / V<sub>теор</sub> · 100%</code></div></div>
+  </div>
+  <div class="box box-info">
+    <strong>Запомни:</strong> η подставляется в формулы в процентах (например, 75%), деление на 100% автоматически переводит в долю
+  </div>
+
+  <!-- ═══ ПРАКТИКУМ А ═══ -->
+  <div class="tr-section" id="tr-a">
+    <div class="tr-header">
+      <div class="tr-pill tr-pill-a">ПРАКТИКУМ А</div>
+      <div class="tr-title">Найти V или m продукта при заданном η</div>
+      <div class="tr-prog" id="ta-prog">0 / 12</div>
+    </div>
+    <div id="ta-task-area">
+      <div class="tr-card">
+        <div class="tr-q" id="ta-q"></div>
+        <div class="tr-ans-row">
+          <input class="tr-input" id="ta-inp" type="text" inputmode="decimal" placeholder="0" autocomplete="off" onkeydown="if(event.key==='Enter')taCheck()">
+          <span class="tr-unit" id="ta-unit"></span>
+          <div class="tr-feedback" id="ta-fb"></div>
+        </div>
+        <div id="ta-sol" style="display:none"></div>
+      </div>
+      <div class="tr-btns">
+        <button class="tr-check-btn" id="ta-check" onclick="taCheck()">Проверить</button>
+        <button class="tr-next-btn" id="ta-next" style="display:none" onclick="taNext()">Далее →</button>
+        <button class="tr-reset-btn" onclick="taReset()">Сбросить</button>
+      </div>
+    </div>
+    <div id="ta-result" class="tr-result" style="display:none">
+      <div class="tr-result-icon">🎉</div>
+      <div class="tr-result-title">Практикум А выполнен!</div>
+      <div class="tr-result-sub">Все 10 задач решены верно</div>
+      <br><button class="tr-reset-btn" onclick="taReset()">Начать заново</button>
+    </div>
+  </div>
+
+  <!-- ═══ ПРАКТИКУМ Б ═══ -->
+  <div class="tr-section" id="tr-b">
+    <div class="tr-header">
+      <div class="tr-pill tr-pill-b">ПРАКТИКУМ Б</div>
+      <div class="tr-title">Найти выход реакции η (%)</div>
+      <div class="tr-prog" id="tb-prog">0 / 10</div>
+    </div>
+    <div id="tb-task-area">
+      <div class="tr-card">
+        <div class="tr-q" id="tb-q"></div>
+        <div class="tr-ans-row">
+          <input class="tr-input" id="tb-inp" type="text" inputmode="decimal" placeholder="0" autocomplete="off" onkeydown="if(event.key==='Enter')tbCheck()">
+          <span class="tr-unit">%</span>
+          <div class="tr-feedback" id="tb-fb"></div>
+        </div>
+        <div id="tb-sol" style="display:none"></div>
+      </div>
+      <div class="tr-btns">
+        <button class="tr-check-btn" id="tb-check" onclick="tbCheck()">Проверить</button>
+        <button class="tr-next-btn" id="tb-next" style="display:none" onclick="tbNext()">Далее →</button>
+        <button class="tr-reset-btn" onclick="tbReset()">Сбросить</button>
+      </div>
+    </div>
+    <div id="tb-result" class="tr-result" style="display:none">
+      <div class="tr-result-icon">🎉</div>
+      <div class="tr-result-title">Практикум Б выполнен!</div>
+      <div class="tr-result-sub">Все 10 задач решены верно</div>
+      <br><button class="tr-reset-btn" onclick="tbReset()">Начать заново</button>
+    </div>
+  </div>
+
+
+  <h3 class="sub">Алгоритм (обратная задача)</h3>
+  <div class="algo">
+    <div class="algo-step"><div class="algo-n">1</div><div class="algo-text">Найдите n<sub>практ</sub> продукта: <code>n = m/M</code> или <code>n = V/22,4</code></div></div>
+    <div class="algo-step"><div class="algo-n">2</div><div class="algo-text">Найдите n<sub>теор</sub> продукта: <code>n<sub>теор</sub> = n<sub>практ</sub> · 100% / η%</code></div></div>
+    <div class="algo-step"><div class="algo-n">3</div><div class="algo-text">По коэффициентам реакции найдите n исходного вещества</div></div>
+    <div class="algo-step"><div class="algo-n">4</div><div class="algo-text">Найдите массу или объём исходного: <code>m = n·M</code> или <code>V = n·22,4</code></div></div>
+  </div>
+
+  <div class="tr-section" id="tr-v4">
+    <div class="tr-header">
+      <div class="tr-pill tr-pill-v4">ПРАКТИКУМ В</div>
+      <div class="tr-title">Обратная задача: дан V<sub>практ</sub>/m<sub>практ</sub> и η → найти исходное</div>
+      <div class="tr-prog" id="tv4-prog">0 / 3</div>
+    </div>
+    <div id="tv4-task-area">
+      <div class="tr-card">
+        <div class="tr-q" id="tv4-q"></div>
+        <div class="tr-ans-row">
+          <input class="tr-input" id="tv4-inp" type="text" inputmode="decimal" placeholder="0" autocomplete="off" onkeydown="if(event.key==='Enter')v4Check()">
+          <span class="tr-unit" id="tv4-unit"></span>
+          <div class="tr-feedback" id="tv4-fb"></div>
+        </div>
+        <div id="tv4-sol" style="display:none"></div>
+      </div>
+      <div class="tr-btns">
+        <button class="tr-check-btn" id="tv4-check" onclick="v4Check()">Проверить</button>
+        <button class="tr-next-btn" id="tv4-next" style="display:none" onclick="v4Next()">Далее →</button>
+        <button class="tr-reset-btn" onclick="v4Reset()">Сбросить</button>
+      </div>
+    </div>
+    <div id="tv4-result" class="tr-result" style="display:none">
+      <div class="tr-result-icon">🎉</div>
+      <div class="tr-result-title">Практикум В выполнен!</div>
+      <div class="tr-result-sub">Все 3 задачи решены верно</div>
+      <br><button class="tr-reset-btn" onclick="v4Reset()">Начать заново</button>
+    </div>
+  </div>
+
+</div><!-- /section -->
+
+<!-- ════════════════════════════════════════ -->
+<!-- БЛОК 2: ТЕХНИЧЕСКИЕ СМЕСИ              -->
+<!-- ════════════════════════════════════════ -->
+<div class="section" id="s-b2">
+  <div class="section-header">
+    <div class="section-pill">БЛОК 2</div>
+    <h2 class="section-title">Технические смеси</h2>
+  </div>
+
+  <h3 class="sub">Ключевые формулы</h3>
+  <div class="fml-grid">
+    <div class="fml-card">
+      <div class="fml-label">Масса чистого вещества</div>
+      <div class="fml-eq">m<sub>чист.</sub> = <span class="frac"><span class="num">m<sub>образца</sub> · ω<sub>чист.</sub>%</span><span class="den">100%</span></span></div>
+      <div class="fml-desc">ω<sub>чист.</sub> = 100% − ω<sub>прим.</sub></div>
+    </div>
+    <div class="fml-card">
+      <div class="fml-label">Массовая доля примесей</div>
+      <div class="fml-eq">ω<sub>прим.</sub> = <span class="frac"><span class="num">m<sub>прим.</sub></span><span class="den">m<sub>образца</sub></span></span> · 100%</div>
+      <div class="fml-desc">m<sub>прим.</sub> = m<sub>образца</sub> − m<sub>чист.</sub></div>
+    </div>
+    <div class="fml-card">
+      <div class="fml-label">Масса образца (обратная)</div>
+      <div class="fml-eq">m<sub>образца</sub> = <span class="frac"><span class="num">m<sub>чист.</sub> · 100%</span><span class="den">ω<sub>чист.</sub>%</span></span></div>
+      <div class="fml-desc">ω<sub>чист.</sub> = 100% − ω<sub>прим.</sub></div>
+    </div>
+    <div class="fml-card">
+      <div class="fml-label">Объёмная доля</div>
+      <div class="fml-eq">φ% = <span class="frac"><span class="num">V<sub>вещества</sub></span><span class="den">V<sub>смеси</sub></span></span> · 100%</div>
+      <div class="fml-desc">V<sub>вещества</sub> = <span class="frac"><span class="num">V<sub>смеси</sub> · φ%</span><span class="den">100%</span></span></div>
+      <div class="fml-desc">V<sub>смеси</sub> = <span class="frac"><span class="num">V<sub>вещества</sub> · 100%</span><span class="den">φ%</span></span></div>
+    </div>
+    <div class="fml-card">
+      <div class="fml-label">Моль / масса / объём</div>
+      <div class="fml-eq">n = <span class="frac"><span class="num">m</span><span class="den">M</span></span></div>
+      <div class="fml-desc">m = n · M</div>
+      <div class="fml-desc">n = <span class="frac"><span class="num">V</span><span class="den">22,4</span></span></div>
+      <div class="fml-desc">V = n · 22,4 л/моль</div>
+    </div>
+  </div>
+
+  <h3 class="sub">Ключевые понятия</h3>
+  <div class="box box-info">
+    <div class="box-title">Техническое вещество</div>
+    <ul>
+      <li><strong>Технический образец</strong> = чистое вещество + инертные примеси</li>
+      <li><strong>ω(примесей)</strong> — доля примесей; примеси не реагируют</li>
+      <li><strong>ω(чист.) = 100% − ω(прим.)</strong></li>
+      <li><strong>m(чист.)</strong> = m(образца) · ω(чист.) / 100%</li>
+    </ul>
+  </div>
+  <div class="box box-warn">
+    <div class="box-title">⚠ Три типа задач</div>
+    <ol>
+      <li><strong>Тип В1:</strong> дана ω примесей → найти V или m продукта</li>
+      <li><strong>Тип В2:</strong> дан продукт → найти ω примесей (или чистого вещества) в %</li>
+      <li><strong>Тип В3:</strong> дан продукт → найти массу исходного образца</li>
+    </ol>
+  </div>
+
+  <h3 class="sub">Алгоритм (Тип В1)</h3>
+  <div class="algo">
+    <div class="algo-step"><div class="algo-n">1</div><div class="algo-text">Найдите массу чистого вещества: <code>m(чист.) = m(обр.) · (100% − ω(прим.)) / 100%</code></div></div>
+    <div class="algo-step"><div class="algo-n">2</div><div class="algo-text">Найдите число моль: <code>n = m(чист.) / M</code></div></div>
+    <div class="algo-step"><div class="algo-n">3</div><div class="algo-text">По коэффициентам реакции найдите n продукта</div></div>
+    <div class="algo-step"><div class="algo-n">4</div><div class="algo-text">Найдите <code>m = n·M</code> или <code>V = n·22,4</code></div></div>
+  </div>
+
+  <!-- ═══ ПРАКТИКУМ В1 ═══ -->
+  <div class="tr-section" id="tr-v1">
+    <div class="tr-header">
+      <div class="tr-pill tr-pill-v1">ПРАКТИКУМ В1</div>
+      <div class="tr-title">Дана ω примесей → найти V или m продукта</div>
+      <div class="tr-prog" id="tv1-prog">0 / 14</div>
+    </div>
+    <div id="tv1-task-area">
+      <div class="tr-card">
+        <div class="tr-q" id="tv1-q"></div>
+        <div class="tr-ans-row">
+          <input class="tr-input" id="tv1-inp" type="text" inputmode="decimal" placeholder="0" autocomplete="off" onkeydown="if(event.key==='Enter')v1Check()">
+          <span class="tr-unit" id="tv1-unit"></span>
+          <div class="tr-feedback" id="tv1-fb"></div>
+        </div>
+        <div id="tv1-sol" style="display:none"></div>
+      </div>
+      <div class="tr-btns">
+        <button class="tr-check-btn" id="tv1-check" onclick="v1Check()">Проверить</button>
+        <button class="tr-next-btn" id="tv1-next" style="display:none" onclick="v1Next()">Далее →</button>
+        <button class="tr-reset-btn" onclick="v1Reset()">Сбросить</button>
+      </div>
+    </div>
+    <div id="tv1-result" class="tr-result" style="display:none">
+      <div class="tr-result-icon">🎉</div>
+      <div class="tr-result-title">Практикум В1 выполнен!</div>
+      <div class="tr-result-sub">Все 14 задач решены верно</div>
+      <br><button class="tr-reset-btn" onclick="v1Reset()">Начать заново</button>
+    </div>
+  </div>
+
+  <h3 class="sub">Алгоритм (Тип В2)</h3>
+  <div class="algo">
+    <div class="algo-step"><div class="algo-n">1</div><div class="algo-text">По продукту найдите n и m чистого вещества через уравнение реакции</div></div>
+    <div class="algo-step"><div class="algo-n">2</div><div class="algo-text"><code>ω(чист.) = m(чист.) / m(обр.) · 100%</code> &nbsp;|&nbsp; <code>ω(прим.) = 100% − ω(чист.)</code></div></div>
+  </div>
+
+  <!-- ═══ ПРАКТИКУМ В2 ═══ -->
+  <div class="tr-section" id="tr-v2">
+    <div class="tr-header">
+      <div class="tr-pill tr-pill-v2">ПРАКТИКУМ В2</div>
+      <div class="tr-title">Дан продукт → найти ω примесей или чистого вещества (%)</div>
+      <div class="tr-prog" id="tv2-prog">0 / 7</div>
+    </div>
+    <div id="tv2-task-area">
+      <div class="tr-card">
+        <div class="tr-q" id="tv2-q"></div>
+        <div class="tr-ans-row">
+          <input class="tr-input" id="tv2-inp" type="text" inputmode="decimal" placeholder="0" autocomplete="off" onkeydown="if(event.key==='Enter')v2Check()">
+          <span class="tr-unit">%</span>
+          <div class="tr-feedback" id="tv2-fb"></div>
+        </div>
+        <div id="tv2-sol" style="display:none"></div>
+      </div>
+      <div class="tr-btns">
+        <button class="tr-check-btn" id="tv2-check" onclick="v2Check()">Проверить</button>
+        <button class="tr-next-btn" id="tv2-next" style="display:none" onclick="v2Next()">Далее →</button>
+        <button class="tr-reset-btn" onclick="v2Reset()">Сбросить</button>
+      </div>
+    </div>
+    <div id="tv2-result" class="tr-result" style="display:none">
+      <div class="tr-result-icon">🎉</div>
+      <div class="tr-result-title">Практикум В2 выполнен!</div>
+      <div class="tr-result-sub">Все 7 задач решены верно</div>
+      <br><button class="tr-reset-btn" onclick="v2Reset()">Начать заново</button>
+    </div>
+  </div>
+
+  <h3 class="sub">Алгоритм (Тип В3)</h3>
+  <div class="algo">
+    <div class="algo-step"><div class="algo-n">1</div><div class="algo-text">Найдите n продукта: <code>n = m/M</code> или <code>n = V/22,4</code></div></div>
+    <div class="algo-step"><div class="algo-n">2</div><div class="algo-text">По коэффициентам реакции найдите n чистого вещества</div></div>
+    <div class="algo-step"><div class="algo-n">3</div><div class="algo-text">Найдите массу чистого вещества: <code>m(чист.) = n · M</code></div></div>
+    <div class="algo-step"><div class="algo-n">4</div><div class="algo-text">Найдите массу образца: <code>m(образца) = m(чист.) · 100% / ω(чист.)%</code></div></div>
+  </div>
+
+  <!-- ═══ ПРАКТИКУМ В3 ═══ -->
+  <div class="tr-section" id="tr-v3">
+    <div class="tr-header">
+      <div class="tr-pill tr-pill-v3">ПРАКТИКУМ В3</div>
+      <div class="tr-title">Дан продукт → найти массу исходного образца (г)</div>
+      <div class="tr-prog" id="tv3-prog">0 / 3</div>
+    </div>
+    <div id="tv3-task-area">
+      <div class="tr-card">
+        <div class="tr-q" id="tv3-q"></div>
+        <div class="tr-ans-row">
+          <input class="tr-input" id="tv3-inp" type="text" inputmode="decimal" placeholder="0" autocomplete="off" onkeydown="if(event.key==='Enter')v3Check()">
+          <span class="tr-unit">г</span>
+          <div class="tr-feedback" id="tv3-fb"></div>
+        </div>
+        <div id="tv3-sol" style="display:none"></div>
+      </div>
+      <div class="tr-btns">
+        <button class="tr-check-btn" id="tv3-check" onclick="v3Check()">Проверить</button>
+        <button class="tr-next-btn" id="tv3-next" style="display:none" onclick="v3Next()">Далее →</button>
+        <button class="tr-reset-btn" onclick="v3Reset()">Сбросить</button>
+      </div>
+    </div>
+    <div id="tv3-result" class="tr-result" style="display:none">
+      <div class="tr-result-icon">🎉</div>
+      <div class="tr-result-title">Практикум В3 выполнен!</div>
+      <div class="tr-result-sub">Все 3 задачи решены верно</div>
+      <br><button class="tr-reset-btn" onclick="v3Reset()">Начать заново</button>
+    </div>
+  </div>
+
+
+</div><!-- /section b2 -->
+</div><!-- /shell -->
+
+<!-- CONGRATS OVERLAY -->
+<div id="congrats" onclick="this.classList.remove('show')">
+  <div class="cong-card" onclick="event.stopPropagation()">
+    <div class="cong-icon">🏆</div>
+    <div class="cong-title">Оба блока пройдены!</div>
+    <div class="cong-sub">Все 6 практикумов выполнены.<br>Отличная работа!</div>
+    <button class="cong-btn" onclick="document.getElementById('congrats').classList.remove('show')">Закрыть</button>
+  </div>
+</div>
+
+<script>
+// ══════ UTILS ══════
+const TTL=6*24*3600*1000;
+const HIST_KEY='l28_hist';
+
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=0|Math.random()*(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function normNum(s){const n=parseFloat(String(s).trim().replace(',','.'));return isNaN(n)?NaN:Math.round(n*100)/100;}
+function isCorrect(inp,ans){const a=normNum(inp),b=normNum(ans);return !isNaN(a)&&!isNaN(b)&&a===b;}
+
+function solHtml(eq,steps){
+  const numbered=steps.map((s,i)=>{
+    const d=s.indexOf('::');
+    if(d===-1)return '<span class="sol-n">'+(i+1)+'.</span> '+s;
+    return '<span class="sol-n">'+(i+1)+'.</span> <b class="sol-lbl">'+s.slice(0,d)+'</b> — '+s.slice(d+2);
+  }).join('<br>');
+  return '<div class="sol-box"><div class="sol-eq">'+eq+'</div><div class="sol-steps">'+numbered+'</div></div>';
+}
+
+// ══════ SCROLL / TOPBAR ══════
+window.addEventListener('DOMContentLoaded',()=>{
+  window.scrollTo(0,0);
+  buildStreak();
+  taInit();
+  tbInit();
+  v1Init();
+  v2Init();
+  v3Init();
+  v4Init();
+  updateProg();
+});
+window.addEventListener('scroll',()=>{
+  const h=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('pf').style.width=(h>0?window.scrollY/h*100:0)+'%';
+});
+function topbarClick(e){e.stopPropagation();document.getElementById('topbar').classList.toggle('collapsed');}
+
+// ══════ STREAK ══════
+function getHist(){try{const d=JSON.parse(localStorage.getItem(HIST_KEY)||'[]');return Array.isArray(d)?d:[];}catch{return[];}}
+function buildStreak(){
+  const hist=getHist(),el=document.getElementById('tb-streak'),today=new Date();
+  el.innerHTML='';
+  for(let i=5;i>=0;i--){
+    const d=new Date(today);d.setDate(d.getDate()-i);
+    const key=d.toISOString().slice(0,10);
+    const dot=document.createElement('div');
+    dot.className='tb-day'+(hist.includes(key)?' done':'')+(i===0?' today':'');
+    el.appendChild(dot);
+  }
+}
+function markToday(){
+  const hist=getHist(),key=new Date().toISOString().slice(0,10);
+  if(!hist.includes(key))hist.push(key);
+  const cut=new Date();cut.setDate(cut.getDate()-6);
+  const cutKey=cut.toISOString().slice(0,10);
+  try{localStorage.setItem(HIST_KEY,JSON.stringify(hist.filter(k=>k>=cutKey)));}catch{}
+  buildStreak();
+}
+
+// ══════ OVERALL PROGRESS ══════
+let _taOk=0,_tbOk=0,_tv1Ok=0,_tv2Ok=0,_tv3Ok=0,_tv4Ok=0;
+function updateProg(){
+  const done=_taOk+_tbOk+_tv1Ok+_tv2Ok+_tv3Ok+_tv4Ok,total=54;
+  document.getElementById('tb-lbl').textContent=done+' / '+total;
+  document.getElementById('tb-pf').style.width=(done/total*100)+'%';
+}
+function checkCongrats(){if(_taOk>=10&&_tbOk>=10&&_tv1Ok>=14&&_tv2Ok>=7&&_tv3Ok>=3&&_tv4Ok>=10)document.getElementById('congrats').classList.add('show');}
+
+function clearAll(){
+  document.getElementById('clear-confirm-dialog').style.display='flex';
+}
+function _doClearAll(){
+  ['l28_prcA','l28_prcB','l28_prcV1','l28_prcV2','l28_prcV3','l28_prcV4',HIST_KEY].forEach(k=>{try{localStorage.removeItem(k);}catch{}});
+  location.reload();
+}
+
+// ══════ DATA: PRACTICUM A ══════
+const PRCA=[
+  {q:'Вычислите объём (в л, н.у.) газа, полученного при внесении в воду 33,5 г фосфида магния. Выход газообразного продукта составляет 90 %. (Запишите число с точностью до целых.)',unit:'л',a:'10',
+   eq:'Mg₃P₂ + 6H₂O → 3Mg(OH)₂ + 2PH₃',
+   sol:['Найти n::n(Mg₃P₂) = 33,5 / 134 = 0,25 моль','Соотношение по коэффициентам::n<sub>теор</sub>(PH₃) = 2 · 0,25 = 0,5 моль','Найти V<sub>теор</sub>::V<sub>теор</sub>(PH₃) = 0,5 · 22,4 = 11,2 л','Найти V<sub>практ</sub>::V<sub>практ</sub> = 11,2 · 0,9 = <span class="ans">10 л</span>']},
+  {q:'Вычислите объём аммиака (л, н.у.), полученного с выходом 90% при нагревании 13,2 г сульфата аммония с избытком гидроксида кальция. (Запишите число с точностью до целых.)',unit:'л',a:'4',
+   eq:'(NH₄)₂SO₄ + Ca(OH)₂ →t° CaSO₄ + 2NH₃↑ + 2H₂O',
+   sol:['Найти n::n((NH₄)₂SO₄) = 13,2 / 132 = 0,1 моль','Соотношение по коэффициентам::n<sub>теор</sub>(NH₃) = 2 · 0,1 = 0,2 моль','Найти V<sub>теор</sub>::V<sub>теор</sub>(NH₃) = 0,2 · 22,4 = 4,48 л','Найти V<sub>практ</sub>::V<sub>практ</sub> = 4,48 · 0,9 ≈ <span class="ans">4 л</span>']},
+  {q:'Вычислите объём кислорода (л, н.у.), полученного с выходом 90% при термическом разложении 86,8 г оксида ртути(II). (Запишите число с точностью до целых.)',unit:'л',a:'4',
+   eq:'2HgO →t° 2Hg + O₂',
+   sol:['Найти n::n(HgO) = 86,8 / 217 = 0,4 моль','Соотношение по коэффициентам::n<sub>теор</sub>(O₂) = 0,4 / 2 = 0,2 моль','Найти V<sub>теор</sub>::V<sub>теор</sub>(O₂) = 0,2 · 22,4 = 4,48 л','Найти V<sub>практ</sub>::V<sub>практ</sub> = 4,48 · 0,9 ≈ <span class="ans">4 л</span>']},
+  {q:'Сколько граммов продукта образуется в результате окисления 0,6 моль оксида серы(IV) кислородом? Выход продукта считать равным 75%. (Запишите число с точностью до целых.)',unit:'г',a:'36',
+   eq:'2SO₂ + O₂ →V₂O₅, t° 2SO₃',
+   sol:['Найти n::n(SO₂) = 0,6 моль — дано','Соотношение по коэффициентам::n<sub>теор</sub>(SO₃) = n(SO₂) = 0,6 моль (1 : 1)','Найти m<sub>теор</sub>::m<sub>теор</sub>(SO₃) = 0,6 · 80 = 48 г','Найти m<sub>практ</sub>::m<sub>практ</sub> = 48 · 0,75 = <span class="ans">36 г</span>']},
+  {q:'Вычислите объём газа (н. у.), полученного с выходом 90% при сжигании в кислороде 19,2 г сульфида меди(II). (Запишите число с точностью до целых.)',unit:'л',a:'4',
+   eq:'2CuS + 3O₂ →t° 2CuO + 2SO₂',
+   sol:['Найти n::n(CuS) = 19,2 / 96 = 0,2 моль','Соотношение по коэффициентам::n<sub>теор</sub>(SO₂) = n(CuS) = 0,2 моль (1 : 1)','Найти V<sub>теор</sub>::V<sub>теор</sub>(SO₂) = 0,2 · 22,4 = 4,48 л','Найти V<sub>практ</sub>::V<sub>практ</sub> = 4,48 · 0,9 ≈ <span class="ans">4 л</span>']},
+  {q:'Вычислите объём (л, н.у.) газа, полученного с выходом 90% при внесении в воду 28 г лития. (Запишите число с точностью до целых.)',unit:'л',a:'40',
+   eq:'2Li + 2H₂O → 2LiOH + H₂↑',
+   sol:['Найти n::n(Li) = 28 / 7 = 4 моль','Соотношение по коэффициентам::n<sub>теор</sub>(H₂) = 4 / 2 = 2 моль','Найти V<sub>теор</sub>::V<sub>теор</sub>(H₂) = 2 · 22,4 = 44,8 л','Найти V<sub>практ</sub>::V<sub>практ</sub> = 44,8 · 0,9 = <span class="ans">40 л</span>']},
+  {q:'Вычислите массу осадка, полученного с выходом 90 % при пропускании 33,6 л (н.у.) углекислого газа через избыток раствора гидроксида кальция. (Запишите число с точностью до целых.)',unit:'г',a:'135',
+   eq:'CO₂ + Ca(OH)₂ → CaCO₃↓ + H₂O',
+   sol:['Найти n::n(CO₂) = 33,6 / 22,4 = 1,5 моль','Соотношение по коэффициентам::n<sub>теор</sub>(CaCO₃) = 1,5 моль (1 : 1)','Найти m<sub>теор</sub>::m<sub>теор</sub>(CaCO₃) = 1,5 · 100 = 150 г','Найти m<sub>практ</sub>::m<sub>практ</sub> = 150 · 0,9 = <span class="ans">135 г</span>']},
+  {q:'Сколько литров (н.у.) оксида азота(II) образуется при каталитическом окислении 0,56 моль аммиака кислородом? Выход продукта считать равным 100%. (Запишите число с точностью до целых.)',unit:'л',a:'13',
+   eq:'4NH₃ + 5O₂ →кат., t° 4NO + 6H₂O',
+   sol:['Найти n::n(NH₃) = 0,56 моль — дано','Соотношение по коэффициентам::n<sub>теор</sub>(NO) = n(NH₃) = 0,56 моль (1 : 1)','Найти V<sub>теор</sub>::V<sub>теор</sub>(NO) = 0,56 · 22,4 = 12,544 л','Найти V<sub>практ</sub>::V<sub>практ</sub> = V<sub>теор</sub> (η = 100%) → <span class="ans">13 л</span>']},
+  {q:'Вычислите объём (л, н.у.) газа, полученного с выходом 85% при полном термическом разложении 158 г перманганата калия. (Запишите число с точностью до сотых.)',unit:'л',a:'9,52',
+   eq:'2KMnO₄ →t° K₂MnO₄ + MnO₂ + O₂',
+   sol:['Найти n::n(KMnO₄) = 158 / 158 = 1 моль','Соотношение по коэффициентам::n<sub>теор</sub>(O₂) = 1 / 2 = 0,5 моль','Найти V<sub>теор</sub>::V<sub>теор</sub>(O₂) = 0,5 · 22,4 = 11,2 л','Найти V<sub>практ</sub>::V<sub>практ</sub> = 11,2 · 0,85 = <span class="ans">9,52 л</span>']},
+  {q:'Определите объём (л) газа, который образуется при каталитическом окислении сернистого газа 35,85 литрами кислорода, если известно, что выход реакции составляет 45%. (Запишите число с точностью до десятых.)',unit:'л',a:'32.3',
+   eq:'2SO₂ + O₂ →V₂O₅, t° 2SO₃',
+   sol:['Найти n::n(O₂) = 35,85 / 22,4 = 1,6 моль','Соотношение по коэффициентам::n<sub>теор</sub>(SO₃) = 2 · 1,6 = 3,2 моль','Найти V<sub>теор</sub>::V<sub>теор</sub>(SO₃) = 3,2 · 22,4 = 71,68 л','Найти V<sub>практ</sub>::V<sub>практ</sub> = 71,68 · 0,45 = <span class="ans">32,3 л</span>']}
+];
+
+// ══════ DATA: PRACTICUM B ══════
+const PRCB=[
+  {q:'При нагревании 132 г сульфата аммония с избытком гидроксида кальция было получено 38,08 л газа (н.у.). Определите выход продукта реакции в процентах от теоретически возможного. (Запишите число с точностью до целых.)',a:'85',
+   eq:'(NH₄)₂SO₄ + Ca(OH)₂ →t° CaSO₄ + 2NH₃↑ + 2H₂O',
+   sol:['Найти n::n((NH₄)₂SO₄) = 132 / 132 = 1 моль','Соотношение по коэффициентам::n<sub>теор</sub>(NH₃) = 2 · 1 = 2 моль','Найти V<sub>теор</sub>::V<sub>теор</sub>(NH₃) = 2 · 22,4 = 44,8 л','Найти η::η = 38,08 / 44,8 = 0,85 → <span class="ans">85%</span>']},
+  {q:'При взаимодействии 11,2 г железа с избытком хлора образовалось 26 г соли. Вычислите выход продукта реакции в процентах от теоретически возможного. (Запишите число с точностью до целых.)',a:'80',
+   eq:'2Fe + 3Cl₂ → 2FeCl₃',
+   sol:['Найти n::n(Fe) = 11,2 / 56 = 0,2 моль','Соотношение по коэффициентам::n<sub>теор</sub>(FeCl₃) = 0,2 моль (1 : 1)','Найти m<sub>теор</sub>::m<sub>теор</sub>(FeCl₃) = 0,2 · 162,5 = 32,5 г','Найти η::η = 26 / 32,5 = 0,8 → <span class="ans">80%</span>']},
+  {q:'При нагревании 61 г хлората калия в присутствии катализатора было получено 13,44 л (н.у.) кислорода. Определите выход газа в указанной реакции. (Запишите число с точностью до целых.)',a:'80',
+   eq:'2KClO₃ →кат., t° 2KCl + 3O₂',
+   sol:['Найти n::n(KClO₃) = 61 / 122,5 = 0,5 моль','Соотношение по коэффициентам::n<sub>теор</sub>(O₂) = 3 · 0,5 / 2 = 0,75 моль','Найти V<sub>теор</sub>::V<sub>теор</sub>(O₂) = 0,75 · 22,4 = 16,8 л','Найти η::η = 13,44 / 16,8 = 0,8 → <span class="ans">80%</span>']},
+  {q:'При растворении в избытке соляной кислоты 5,4 г алюминия было получено 5,04 л (н.у.) газа. Вычислите выход продукта реакции в процентах от теоретически возможного. (Запишите число с точностью до целых.)',a:'75',
+   eq:'2Al + 6HCl → 2AlCl₃ + 3H₂',
+   sol:['Найти n::n(Al) = 5,4 / 27 = 0,2 моль','Соотношение по коэффициентам::n<sub>теор</sub>(H₂) = 3 · 0,2 / 2 = 0,3 моль','Найти V<sub>теор</sub>::V<sub>теор</sub>(H₂) = 0,3 · 22,4 = 6,72 л','Найти η::η = 5,04 / 6,72 = 0,75 → <span class="ans">75%</span>']},
+  {q:'При сжигании в кислороде 17,6 г сульфида железа(II) было получено 4 л (н.у.) газа. Вычислите выход продукта реакции в процентах от теоретически возможного. (Запишите число с точностью до целых.)',a:'89',
+   eq:'4FeS + 7O₂ →t° 2Fe₂O₃ + 4SO₂',
+   sol:['Найти n::n(FeS) = 17,6 / 88 = 0,2 моль','Соотношение по коэффициентам::n<sub>теор</sub>(SO₂) = n(FeS) = 0,2 моль (1 : 1)','Найти V<sub>теор</sub>::V<sub>теор</sub>(SO₂) = 0,2 · 22,4 = 4,48 л','Найти η::η = 4 / 4,48 = 0,89 → <span class="ans">89%</span>']},
+  {q:'В результате каталитического окисления SO₂ кислородом объёмом 31,36 л (н.у.) образовался SO₃ массой 84 г. Вычислите выход продукта в процентах. (До целых.)',a:'38',
+   eq:'2SO₂ + O₂ →V₂O₅, t° 2SO₃',
+   sol:['Найти n::n(O₂) = 31,36 / 22,4 = 1,4 моль','Соотношение по коэффициентам::n<sub>теор</sub>(SO₃) = 2 · 1,4 = 2,8 моль','Найти m<sub>теор</sub>::m<sub>теор</sub>(SO₃) = 2,8 · 80 = 224 г','Найти η::η = 84 / 224 = 0,375 → <span class="ans">38%</span>']},
+  {q:'В результате взаимодействия водорода с угарным газом объемом 19,94 л (н.у.) образовался метанол массой 12,8 г. Вычислите выход продукта реакции в процентах от теоретически возможного. (Запишите число с точностью до целых.)',a:'45',
+   eq:'CO + 2H₂ →кат., t° CH₃OH',
+   sol:['Найти n::n(CO) = 19,94 / 22,4 = 0,89 моль','Соотношение по коэффициентам::n<sub>теор</sub>(CH₃OH) = 0,89 моль (1 : 1)','Найти m<sub>теор</sub>::m<sub>теор</sub>(CH₃OH) = 0,89 · 32 = 28,48 г','Найти η::η = 12,8 / 28,48 ≈ 0,449 → <span class="ans">45%</span>']},
+  {q:'При взаимодействии хлорида аммония с гидроксидом бария массой 34,2 г образовался аммиак объёмом 6,9 л (н.у.). Вычислите выход продукта в процентах. (До целых.)',a:'77',
+   eq:'2NH₄Cl + Ba(OH)₂ → BaCl₂ + 2NH₃↑ + 2H₂O',
+   sol:['Найти n::n(Ba(OH)₂) = 34,2 / 171 = 0,2 моль','Соотношение по коэффициентам::n<sub>теор</sub>(NH₃) = 2 · 0,2 = 0,4 моль','Найти V<sub>теор</sub>::V<sub>теор</sub>(NH₃) = 0,4 · 22,4 = 8,96 л','Найти η::η = 6,9 / 8,96 = 0,77 → <span class="ans">77%</span>']},
+  {q:'При взаимодействии 33,6 л (н.у.) водорода с избытком азота образовался аммиак массой 5,1 г. Вычислите выход продукта реакции в процентах от теоретически возможного. (Запишите число с точностью до целых.)',a:'30',
+   eq:'N₂ + 3H₂ →кат., t° 2NH₃',
+   sol:['Найти n::n(H₂) = 33,6 / 22,4 = 1,5 моль','Соотношение по коэффициентам::n<sub>теор</sub>(NH₃) = 2 · 1,5 / 3 = 1 моль','Найти m<sub>теор</sub>::m<sub>теор</sub>(NH₃) = 1 · 17 = 17 г','Найти η::η = 5,1 / 17 = 0,3 → <span class="ans">30%</span>']},
+  {q:'При действии избытка аммиачного раствора оксида серебра на 4,4 г ацетальдегида было получено 19,44 г серебра. Определите выход продукта реакции в процентах от теоретически возможного. (Запишите число с точностью до целых.)',a:'90',
+   eq:'CH₃CHO + Ag₂O →NH₃ 2Ag + CH₃COOH',
+   sol:['Найти n::n(CH₃CHO) = 4,4 / 44 = 0,1 моль','Соотношение по коэффициентам::n<sub>теор</sub>(Ag) = 2 · 0,1 = 0,2 моль','Найти m<sub>теор</sub>::m<sub>теор</sub>(Ag) = 0,2 · 108 = 21,6 г','Найти η::η = 19,44 / 21,6 = 0,9 → <span class="ans">90%</span>']}
+];
+
+// ══════ PRACTICUM A ══════
+const KA='l28_prcA';
+let taQ,taCur,taOk,taWr;
+
+function taLoad(){
+  try{
+    const d=JSON.parse(localStorage.getItem(KA)||'null');
+    if(d&&d.ts&&Date.now()-d.ts<TTL){taQ=d.q;taCur=d.cur;taOk=new Set(d.ok);taWr=new Set(d.wr);_taOk=taOk.size;return true;}
+  }catch{}return false;
+}
+function taSave(){try{localStorage.setItem(KA,JSON.stringify({q:taQ,cur:taCur,ok:[...taOk],wr:[...taWr],ts:Date.now()}));}catch{}}
+
+function taInit(){
+  if(!taLoad()){taQ=shuffle(PRCA.map((_,i)=>i));taCur=0;taOk=new Set();taWr=new Set();_taOk=0;}
+  document.getElementById('ta-result').style.display='none';
+  document.getElementById('ta-task-area').style.display='block';
+  taShow();
+}
+function taShow(){
+  if(taOk.size>=PRCA.length){taFinish();return;}
+  const t=PRCA[taQ[taCur]];
+  document.getElementById('ta-q').textContent=t.q;
+  document.getElementById('ta-unit').textContent=t.unit;
+  const sol=document.getElementById('ta-sol');sol.style.display='none';sol.innerHTML='';
+  const fb=document.getElementById('ta-fb');fb.textContent='';fb.className='tr-feedback';
+  document.getElementById('ta-check').style.display='';
+  document.getElementById('ta-next').style.display='none';
+  const inp=document.getElementById('ta-inp');inp.value='';inp.focus({preventScroll:true});
+  document.getElementById('ta-prog').textContent=taOk.size+' / '+PRCA.length;
+}
+function taCheck(){
+  const val=document.getElementById('ta-inp').value;if(!val.trim())return;
+  const t=PRCA[taQ[taCur]],fb=document.getElementById('ta-fb');
+  if(isCorrect(val,t.a)){
+    taOk.add(taQ[taCur]);
+    taWr.delete(taQ[taCur]);_taOk=taOk.size;
+    fb.textContent='✓ Верно!';fb.className='tr-feedback ok';
+    document.getElementById('ta-check').style.display='none';
+    document.getElementById('ta-next').style.display='';
+    const sol=document.getElementById('ta-sol');sol.innerHTML=solHtml(t.eq,t.sol);sol.style.display='block';
+    taSave();document.getElementById('ta-prog').textContent=taOk.size+' / '+PRCA.length;
+    markToday();updateProg();
+    if(taOk.size>=PRCA.length)setTimeout(taFinish,900);
+  }else{
+    const _taFirst=!taWr.has(taQ[taCur]);
+    if(_taFirst){taQ.push(taQ[taCur]);taWr.add(taQ[taCur]);}
+    fb.innerHTML='✗ Неверно — попробуй ещё'+(_taFirst?'<br><span style="font-size:12px;font-weight:400">↩ задание вернётся в конце</span>':'');fb.className='tr-feedback err';
+  }
+}
+function taNext(){taCur++;taSave();taShow();}
+function taFinish(){
+  document.getElementById('ta-task-area').style.display='none';
+  document.getElementById('ta-result').style.display='block';
+  _taOk=PRCA.length;updateProg();checkCongrats();
+}
+function taReset(){
+  try{localStorage.removeItem(KA);}catch{}
+  taQ=shuffle(PRCA.map((_,i)=>i));taCur=0;taOk=new Set();taWr=new Set();_taOk=0;
+  document.getElementById('ta-result').style.display='none';
+  document.getElementById('ta-task-area').style.display='block';
+  taShow();updateProg();
+}
+
+// ══════ PRACTICUM B ══════
+const KB='l28_prcB';
+let tbQ,tbCur,tbOk,tbWr;
+
+function tbLoad(){
+  try{
+    const d=JSON.parse(localStorage.getItem(KB)||'null');
+    if(d&&d.ts&&Date.now()-d.ts<TTL){tbQ=d.q;tbCur=d.cur;tbOk=new Set(d.ok);tbWr=new Set(d.wr);_tbOk=tbOk.size;return true;}
+  }catch{}return false;
+}
+function tbSave(){try{localStorage.setItem(KB,JSON.stringify({q:tbQ,cur:tbCur,ok:[...tbOk],wr:[...tbWr],ts:Date.now()}));}catch{}}
+
+function tbInit(){
+  if(!tbLoad()){tbQ=shuffle(PRCB.map((_,i)=>i));tbCur=0;tbOk=new Set();tbWr=new Set();_tbOk=0;}
+  document.getElementById('tb-result').style.display='none';
+  document.getElementById('tb-task-area').style.display='block';
+  tbShow();
+}
+function tbShow(){
+  if(tbOk.size>=PRCB.length){tbFinish();return;}
+  const t=PRCB[tbQ[tbCur]];
+  document.getElementById('tb-q').textContent=t.q;
+  const sol=document.getElementById('tb-sol');sol.style.display='none';sol.innerHTML='';
+  const fb=document.getElementById('tb-fb');fb.textContent='';fb.className='tr-feedback';
+  document.getElementById('tb-check').style.display='';
+  document.getElementById('tb-next').style.display='none';
+  const inp=document.getElementById('tb-inp');inp.value='';inp.focus({preventScroll:true});
+  document.getElementById('tb-prog').textContent=tbOk.size+' / '+PRCB.length;
+}
+function tbCheck(){
+  const val=document.getElementById('tb-inp').value;if(!val.trim())return;
+  const t=PRCB[tbQ[tbCur]],fb=document.getElementById('tb-fb');
+  if(isCorrect(val,t.a)){
+    tbOk.add(tbQ[tbCur]);
+    tbWr.delete(tbQ[tbCur]);_tbOk=tbOk.size;
+    fb.textContent='✓ Верно!';fb.className='tr-feedback ok';
+    document.getElementById('tb-check').style.display='none';
+    document.getElementById('tb-next').style.display='';
+    const sol=document.getElementById('tb-sol');sol.innerHTML=solHtml(t.eq,t.sol);sol.style.display='block';
+    tbSave();document.getElementById('tb-prog').textContent=tbOk.size+' / '+PRCB.length;
+    markToday();updateProg();
+    if(tbOk.size>=PRCB.length)setTimeout(tbFinish,900);
+  }else{
+    const _tbFirst=!tbWr.has(tbQ[tbCur]);
+    if(_tbFirst){tbQ.push(tbQ[tbCur]);tbWr.add(tbQ[tbCur]);}
+    fb.innerHTML='✗ Неверно — попробуй ещё'+(_tbFirst?'<br><span style="font-size:12px;font-weight:400">↩ задание вернётся в конце</span>':'');fb.className='tr-feedback err';
+  }
+}
+function tbNext(){tbCur++;tbSave();tbShow();}
+function tbFinish(){
+  document.getElementById('tb-task-area').style.display='none';
+  document.getElementById('tb-result').style.display='block';
+  _tbOk=PRCB.length;updateProg();checkCongrats();
+}
+function tbReset(){
+  try{localStorage.removeItem(KB);}catch{}
+  tbQ=shuffle(PRCB.map((_,i)=>i));tbCur=0;tbOk=new Set();tbWr=new Set();_tbOk=0;
+  document.getElementById('tb-result').style.display='none';
+  document.getElementById('tb-task-area').style.display='block';
+  tbShow();updateProg();
+}
+
+// ══════ DATA: PRACTICUM V1 ══════
+const PRCV1=[
+  {q:'Вычислите массу (г) меди, полученной при добавлении к избытку раствора сульфата меди(II) 3 г технического алюминия, в котором массовая доля примеси оксида алюминия составляет 10%. (Запишите число с точностью до десятых.)',unit:'г',a:'9.6',
+   eq:'3CuSO₄ + 2Al → Al₂(SO₄)₃ + 3Cu',
+   sol:['Найти m(чист.)::m(Al) = 3 · (1 − 0,10) = 3 · 0,90 = 2,7 г','Найти n::n(Al) = 2,7 / 27 = 0,1 моль','Соотношение по коэффициентам::n(Cu) = 3/2 · 0,1 = 0,15 моль','Найти m::m(Cu) = 0,15 · 64 = <span class="ans">9,6 г</span>']},
+  {q:'Вычислите объём газа (л, н.у.), полученного при внесении в воду 40 г технического лития, в котором массовая доля примеси оксида лития составляет 30%. (Запишите число с точностью до десятых.)',unit:'л',a:'44.8',
+   eq:'2Li + 2H₂O → 2LiOH + H₂',
+   sol:['Найти m(чист.)::m(Li) = 40 · (1 − 0,30) = 40 · 0,70 = 28 г','Найти n::n(Li) = 28 / 7 = 4 моль','Соотношение по коэффициентам::n(H₂) = 4 / 2 = 2 моль','Найти V::V(H₂) = 2 · 22,4 = <span class="ans">44,8 л</span>']},
+  {q:'Технический карбид алюминия массой 90 г, в котором массовая доля примеси углерода составляет 4%, растворили в избытке соляной кислоты. Определите массу (г) образовавшейся при этом соли. (Запишите число с точностью до десятых.)',unit:'г',a:'320.4',
+   eq:'Al₄C₃ + 12HCl → 4AlCl₃ + 3CH₄',
+   sol:['Найти m(чист.)::m(Al₄C₃) = 90 · (1 − 0,04) = 90 · 0,96 = 86,4 г','Найти n::n(Al₄C₃) = 86,4 / 144 = 0,6 моль','Соотношение по коэффициентам::n(AlCl₃) = 4 · 0,6 = 2,4 моль','Найти m::m(AlCl₃) = 2,4 · 133,5 = <span class="ans">320,4 г</span>']},
+  {q:'Определите массу (г) алюминия, который может быть получен из 6 кг технического оксида алюминия с содержанием основного вещества 93 %. (Запишите число с точностью до целых.)',unit:'г',a:'2954',
+   eq:'Al₂O₃ + 3H₂ →t° 2Al + 3H₂O',
+   sol:['Найти m(чист.)::m(Al₂O₃) = 6000 · 0,93 = 5580 г','Найти n::n(Al₂O₃) = 5580 / 102 = 54,7 моль','Соотношение по коэффициентам::n(Al) = 2 · 54,7 = 109,4 моль','Найти m::m(Al) = 109,4 · 27 = <span class="ans">2954 г</span>']},
+  {q:'Вычислите объём газа (л, н.у.), полученного действием избытка раствора соляной кислоты на 200 г технического сульфида цинка, в котором массовая доля несульфидных примесей составляет 3%. (Запишите число с точностью до десятых.)',unit:'л',a:'44.8',
+   eq:'ZnS + 2HCl → ZnCl₂ + H₂S',
+   sol:['Найти m(чист.)::m(ZnS) = 200 · (1 − 0,03) = 200 · 0,97 = 194 г','Найти n::n(ZnS) = 194 / 97 = 2 моль','Соотношение по коэффициентам::n(H₂S) = 2 моль (1 : 1)','Найти V::V(H₂S) = 2 · 22,4 = <span class="ans">44,8 л</span>']},
+  {q:'Определите массу (г) алюминия, который может быть получен из 2 кг технического оксида алюминия с содержанием основного вещества 90%. (Запишите число с точностью до целых.)',unit:'г',a:'953',
+   eq:'2Al₂O₃ →электролиз 4Al + 3O₂',
+   sol:['Найти m(чист.)::m(Al₂O₃) = 2000 · 0,90 = 1800 г','Найти n::n(Al₂O₃) = 1800 / 102 = 17,65 моль','Соотношение по коэффициентам::n(Al) = 2 · 17,65 = 35,3 моль','Найти m::m(Al) = 35,3 · 27 = <span class="ans">953 г</span>']},
+  {q:'Технический сульфит натрия массой 14 г, в котором массовая доля примеси сульфата натрия составляет 10%, растворили в избытке соляной кислоты. Определите объём (н.у.) выделившегося при этом газа. (Запишите число с точностью до сотых.)',unit:'л',a:'2.24',
+   eq:'Na₂SO₃ + 2HCl → 2NaCl + SO₂ + H₂O',
+   sol:['Найти m(чист.)::m(Na₂SO₃) = 14 · (1 − 0,10) = 14 · 0,90 = 12,6 г','Найти n::n(Na₂SO₃) = 12,6 / 126 = 0,1 моль','Соотношение по коэффициентам::n(SO₂) = 0,1 моль (1 : 1)','Найти V::V(SO₂) = 0,1 · 22,4 = <span class="ans">2,24 л</span>']},
+  {q:'Вычислите объём газа (л, н.у.), полученного действием избытка разбавленного раствора серной кислоты на 156,25 г технического сульфида алюминия, в котором массовая доля несульфидных примесей составляет 4%. (Запишите число с точностью до десятых.)',unit:'л',a:'67.2',
+   eq:'Al₂S₃ + 3H₂SO₄ → Al₂(SO₄)₃ + 3H₂S',
+   sol:['Найти m(чист.)::m(Al₂S₃) = 156,25 · (1 − 0,04) = 156,25 · 0,96 = 150 г','Найти n::n(Al₂S₃) = 150 / 150 = 1 моль','Соотношение по коэффициентам::n(H₂S) = 3 · 1 = 3 моль','Найти V::V(H₂S) = 3 · 22,4 = <span class="ans">67,2 л</span>']},
+  {q:'Какой объём (л, н.у.) ацетилена может быть получен из 2,4 кг технического карбида кальция с массовой долей примесей 20%? (Запишите число с точностью до целых.)',unit:'л',a:'672',
+   eq:'CaC₂ + 2H₂O → Ca(OH)₂ + C₂H₂',
+   sol:['Найти m(чист.)::m(CaC₂) = 2400 · (1 − 0,20) = 2400 · 0,80 = 1920 г','Найти n::n(CaC₂) = 1920 / 64 = 30 моль','Соотношение по коэффициентам::n(C₂H₂) = 30 моль (1 : 1)','Найти V::V(C₂H₂) = 30 · 22,4 = <span class="ans">672 л</span>']},
+  {q:'Вычислите объём газа (л, н.у.), полученного при прокаливании 175 г технического карбоната магния, в котором массовая доля некарбонатных примесей составляет 4%. (Запишите число с точностью до десятых.)',unit:'л',a:'44.8',
+   eq:'MgCO₃ →t° MgO + CO₂',
+   sol:['Найти m(чист.)::m(MgCO₃) = 175 · (1 − 0,04) = 175 · 0,96 = 168 г','Найти n::n(MgCO₃) = 168 / 84 = 2 моль','Соотношение по коэффициентам::n(CO₂) = 2 моль (1 : 1)','Найти V::V(CO₂) = 2 · 22,4 = <span class="ans">44,8 л</span>']},
+  {q:'Технический фосфат кальция массой 775 г, в котором массовая доля нефосфатных примесей составляет 20%, нагрели с кремнеземом и углем. Реакция протекает в соответствии с уравнением Ca₃(PO₄)₂ + 3SiO₂ + 5C → 3CaSiO₃ + 2P + 5CO. Вычислите массу (г) полученного фосфора. (Запишите число с точностью до целых.)',unit:'г',a:'124',
+   eq:'Ca₃(PO₄)₂ + 3SiO₂ + 5C → 3CaSiO₃ + 2P + 5CO',
+   sol:['Найти m(чист.)::m(Ca₃(PO₄)₂) = 775 · (1 − 0,20) = 775 · 0,80 = 620 г','Найти n::n(Ca₃(PO₄)₂) = 620 / 310 = 2 моль','Соотношение по коэффициентам::n(P) = 2 · 2 = 4 моль','Найти m::m(P) = 4 · 31 = <span class="ans">124 г</span>']},
+  {q:'Образец сульфида алюминия массой 25 г с содержанием примесей 10% поместили в раствор гидроксида калия, взятый в избытке. Определите массу тетрагидроксоалюмината калия, который образовался при этом. (Запишите число с точностью до десятых.)',unit:'г',a:'40.2',
+   eq:'Al₂S₃ + 8KOH → 2K[Al(OH)₄] + 3K₂S',
+   sol:['Найти m(чист.)::m(Al₂S₃) = 25 · (1 − 0,10) = 25 · 0,90 = 22,5 г','Найти n::n(Al₂S₃) = 22,5 / 150 = 0,15 моль','Соотношение по коэффициентам::n(K[Al(OH)₄]) = 2 · 0,15 = 0,30 моль','Найти m::m(K[Al(OH)₄]) = 0,30 · 134 = <span class="ans">40,2 г</span>']},
+  {q:'Образец сульфида алюминия массой 500 г с содержанием примесей 10 % растворили в избытке гидроксида натрия. Определите массу сульфида натрия, который образовался при этом. (Запишите число с точностью до целых.)',unit:'г',a:'702',
+   eq:'Al₂S₃ + 8NaOH → 2Na[Al(OH)₄] + 3Na₂S',
+   sol:['Найти m(чист.)::m(Al₂S₃) = 500 · (1 − 0,10) = 500 · 0,90 = 450 г','Найти n::n(Al₂S₃) = 450 / 150 = 3 моль','Соотношение по коэффициентам::n(Na₂S) = 3 · 3 = 9 моль','Найти m::m(Na₂S) = 9 · 78 = <span class="ans">702 г</span>']},
+  {q:'Образец цинка массой 240 г содержит 2,5 % примесей хлорида цинка. Определите объём газа (н.у.), который выделится при растворении указанного образца в соляной кислоте. (Запишите число с точностью до сотых.)',unit:'л',a:'80.64',
+   eq:'Zn + 2HCl → ZnCl₂ + H₂',
+   sol:['Найти m(чист.)::m(Zn) = 240 · (1 − 0,025) = 240 · 0,975 = 234 г','Найти n::n(Zn) = 234 / 65 = 3,6 моль','Соотношение по коэффициентам::n(H₂) = 3,6 моль (1 : 1)','Найти V::V(H₂) = 3,6 · 22,4 = <span class="ans">80,64 л</span>']}
+];
+
+// ══════ DATA: PRACTICUM V2 ══════
+const PRCV2=[
+  {q:'При взаимодействии 2,494 г технического карбоната натрия с избытком азотной кислоты выделилось 0,448 л (н.у.) углекислого газа. Какова массовая доля (%) чистого вещества в этом образце соды? (Запишите число с точностью до целых.)',a:'85',
+   eq:'Na₂CO₃ + 2HNO₃ → 2NaNO₃ + CO₂ + H₂O',
+   sol:['Найти n(продукта)::n(CO₂) = 0,448 / 22,4 = 0,02 моль','Соотношение по коэффициентам::n(Na₂CO₃) = 0,02 моль (1 : 1)','Найти m(чист.)::m(Na₂CO₃) = 0,02 · 106 = 2,12 г','Найти ω::ω(Na₂CO₃) = 2,12 / 2,494 = 0,85 → <span class="ans">85%</span>']},
+  {q:'Из 3,5 кг технического карбоната натрия получили 3510 г хлорида натрия. Вычислите массовую долю (%) карбоната натрия в указанном образце. (Запишите число с точностью до целых.)',a:'91',
+   eq:'Na₂CO₃ + 2HCl → 2NaCl + CO₂ + H₂O',
+   sol:['Найти n(продукта)::n(NaCl) = 3510 / 58,5 = 60 моль','Соотношение по коэффициентам::n(Na₂CO₃) = 60 / 2 = 30 моль','Найти m(чист.)::m(Na₂CO₃) = 30 · 106 = 3180 г','Найти ω::ω(Na₂CO₃) = 3180 / 3500 = 0,909 → <span class="ans">91%</span>']},
+  {q:'При взаимодействии 840 г технического карбоната магния с избытком соляной кислоты образовалось 179,2 л (н.у.) углекислого газа. Определите массовую долю (%) примесей в техническом образце карбоната магния. (Запишите число с точностью до целых.)',a:'20',
+   eq:'MgCO₃ + 2HCl → MgCl₂ + CO₂ + H₂O',
+   sol:['Найти n(продукта)::n(CO₂) = 179,2 / 22,4 = 8 моль','Соотношение по коэффициентам::n(MgCO₃) = 8 моль (1 : 1)','Найти m(чист.)::m(MgCO₃) = 8 · 84 = 672 г','Найти ω(прим.)::m(прим.) = 840 − 672 = 168 г; ω(прим.) = 168 / 840 = 0,20 → <span class="ans">20%</span>']},
+  {q:'При растворении 6,21 г технического алюминия в соляной кислоте образовалось 6,72 л (н.у.) водорода. Определите массовую долю (%) примесей в техническом образце алюминия. (Запишите число с точностью до целых.)',a:'13',
+   eq:'2Al + 6HCl → 2AlCl₃ + 3H₂',
+   sol:['Найти n(продукта)::n(H₂) = 6,72 / 22,4 = 0,3 моль','Соотношение по коэффициентам::n(Al) = 2/3 · 0,3 = 0,2 моль','Найти m(чист.)::m(Al) = 0,2 · 27 = 5,4 г','Найти ω(прим.)::m(прим.) = 6,21 − 5,4 = 0,81 г; ω(прим.) = 0,81 / 6,21 = 0,13 → <span class="ans">13%</span>']},
+  {q:'На взаимодействие с 1,5 кг технического поташа потребовалась соляная кислота, содержащая 730 г хлороводорода. Вычислите массовую долю (%) нерастворимых в кислоте примесей в образце указанного поташа. (Запишите число с точностью до целых.)',a:'8',
+   eq:'K₂CO₃ + 2HCl → 2KCl + CO₂ + H₂O',
+   sol:['Найти n(продукта)::n(HCl) = 730 / 36,5 = 20 моль','Соотношение по коэффициентам::n(K₂CO₃) = 20 / 2 = 10 моль','Найти m(чист.)::m(K₂CO₃) = 10 · 138 = 1380 г','Найти ω(прим.)::m(прим.) = 1500 − 1380 = 120 г; ω(прим.) = 120 / 1500 = 0,08 → <span class="ans">8%</span>']},
+  {q:'На взаимодействие с 2,5 кг технического карбоната натрия потребовалась соляная кислота, содержащая 1,46 кг хлороводорода. Вычислите массовую долю (%) нерастворимых в кислоте примесей в образце технического карбоната натрия. (Запишите число с точностью до десятых.)',a:'15.2',
+   eq:'Na₂CO₃ + 2HCl → 2NaCl + CO₂ + H₂O',
+   sol:['Найти n(продукта)::n(HCl) = 1460 / 36,5 = 40 моль','Соотношение по коэффициентам::n(Na₂CO₃) = 40 / 2 = 20 моль','Найти m(чист.)::m(Na₂CO₃) = 20 · 106 = 2120 г','Найти ω(прим.)::m(прим.) = 2500 − 2120 = 380 г; ω(прим.) = 380 / 2500 = 0,152 → <span class="ans">15,2%</span>']},
+  {q:'При сплавлении гидроксида калия с техническим ацетатом калия массой 2,2 г образовался метан объёмом 448 мл (н.у.). Вычислите массовую долю (%) примесей в техническом образце ацетата калия. (Запишите число с точностью до целых.)',a:'11',
+   eq:'KOH + CH₃COOK →t° CH₄ + K₂CO₃',
+   sol:['Найти n(продукта)::n(CH₄) = 0,448 / 22,4 = 0,02 моль','Соотношение по коэффициентам::n(CH₃COOK) = 0,02 моль (1 : 1)','Найти m(чист.)::m(CH₃COOK) = 0,02 · 98 = 1,96 г','Найти ω(прим.)::m(прим.) = 2,2 − 1,96 = 0,24 г; ω(прим.) = 0,24 / 2,2 = 0,109 → <span class="ans">11%</span>']}
+];
+
+// ══════ DATA: PRACTICUM V3 ══════
+const PRCV3=[
+  {q:'Образец оксида меди(II), содержащий в качестве примеси 5,7% меди, поместили в соляную кислоту. На растворение оксида меди(II) из указанного образца потребовалось 146 г хлороводорода. Вычислите массу нерастворившегося осадка меди. (Запишите число с. точностью до десятых.)',a:'9.7',
+   eq:'CuO + 2HCl → CuCl₂ + H₂O (Cu не реагирует)',
+   sol:['Найти n(HCl)::n(HCl) = 146 / 36,5 = 4 моль','Соотношение по коэффициентам::n(CuO) = 4 / 2 = 2 моль','Найти m(CuO) и m(образца)::m(CuO) = 2 · 80 = 160 г; ω(CuO) = 100% − 5,7% = 94,3% = 0,943; m(образца) = 160 / 0,943 = 169,7 г','Найти m(Cu) нерастворившейся::m(Cu) = 169,7 · 0,057 = <span class="ans">9,7 г</span>']},
+  {q:'Образец оксида меди(II), содержащий 15% примесей меди, поместили в разбавленный раствор серной кислоты. При этом образовалось 352 г сульфата меди(II). Определите массу указанного образца. (Запишите число с точностью до целых.)',a:'207',
+   eq:'CuO + H₂SO₄ → CuSO₄ + H₂O',
+   sol:['Найти n(продукта)::n(CuSO₄) = 352 / 160 = 2,2 моль','Соотношение по коэффициентам::n(CuO) = 2,2 моль (1 : 1)','Найти m(чист.)::m(CuO) = 2,2 · 80 = 176 г','Найти m(образца)::ω(CuO) = 1 − 0,15 = 0,85; m(образца) = 176 / 0,85 = <span class="ans">207 г</span>']},
+  {q:'Образец оксида меди(II), содержащий примесей меди, поместили в разбавленный раствор серной кислоты. При этом образовалось 176 г сульфата меди(II). Определите массу указанного образца, если массовая доля оксида в образце 88 %. (Запишите число с точностью до целых.)',a:'100',
+   eq:'CuO + H₂SO₄ → CuSO₄ + H₂O',
+   sol:['Найти n(продукта)::n(CuSO₄) = 176 / 160 = 1,1 моль','Соотношение по коэффициентам::n(CuO) = 1,1 моль (1 : 1)','Найти m(чист.)::m(CuO) = 1,1 · 80 = 88 г','Найти m(образца)::ω(CuO) = 0,88; m(образца) = 88 / 0,88 = <span class="ans">100 г</span>']}
+];
+
+// ══════ PRACTICUM V4 DATA ══════
+const PRCV4=[
+  {q:'Малахит прокалили и в результате реакции получили 10,08 л газа. Определите массу исходного образца малахита, если известно, что выход данной реакции составил 75% от теоретически возможного. (Запишите число с точностью до десятых.)',unit:'г',a:'133.2',
+   eq:'(CuOH)₂CO₃ → 2CuO + CO₂ + H₂O',
+   sol:['Найти n_практ::n_практ(CO₂) = 10,08 / 22,4 = 0,45 моль','Найти n_теор::n_теор(CO₂) = 0,45 / 0,75 = 0,6 моль','Соотношение по коэффициентам::n((CuOH)₂CO₃) = 0,6 моль (1 : 1)','Найти m::m((CuOH)₂CO₃) = 0,6 · 222 = <span class="ans">133,2 г</span>']},
+  {q:'Определите, какой объём оксида азота(IV) необходимо взять, чтобы при его взаимодействии с гидроксидом калия образовалось 85 г нитрита калия. Известно, что выход данной реакции составляет 79%. (Запишите число с точностью до целых.)',unit:'л',a:'57',
+   eq:'2NO₂ + 2KOH → KNO₂ + KNO₃ + H₂O',
+   sol:['Найти n_практ::n_практ(KNO₂) = 85 / 85 = 1 моль','Найти n_теор::n_теор(KNO₂) = 1 / 0,79 = 1,266 моль','Соотношение по коэффициентам::n(NO₂) = 2 · 1,266 = 2,52 моль','Найти V::V(NO₂) = 2,52 · 22,4 = <span class="ans">57 л</span>']},
+  {q:'При растворении хрома в горячей концентрированной серной кислоте выделилось 13,44 л (н.у.) газа. Вычислите массу (г) хрома, вступившего в реакцию, если выход реакции составляет 86% от теоретически возможного. (Запишите число с точностью до целых)',unit:'г',a:'24',
+   eq:'2Cr + 6H₂SO₄(конц.) → Cr₂(SO₄)₃ + 3SO₂ + 6H₂O',
+   sol:['Найти V_теор::V_теор(SO₂) = 13,44 / 0,86 = 15,63 л','Найти n::n(SO₂) = 15,63 / 22,4 = 0,7 моль','Соотношение по коэффициентам::n(Cr) = 2 · 0,7 / 3 = 0,47 моль','Найти m::m(Cr) = 0,47 · 52 = <span class="ans">24 г</span>']},
+  {q:'При разложении перманганата калия выделилось 16,8 л кислорода (н.у.) с выходом 75% от теоретически возможного. Найдите массу (г) исходного KMnO₄. (До целых.)',unit:'г',a:'316',
+   eq:'2KMnO₄ → K₂MnO₄ + MnO₂ + O₂',
+   sol:['Найти V_теор::V_теор(O₂) = 16,8 / 0,75 = 22,4 л','Найти n::n(O₂) = 22,4 / 22,4 = 1 моль','Соотношение по коэффициентам::n(KMnO₄) = 2 · 1 = 2 моль','Найти m::m(KMnO₄) = 2 · 158 = <span class="ans">316 г</span>']},
+  {q:'При прокаливании карбоната кальция выделилось 17,92 л углекислого газа (н.у.) с выходом 80%. Найдите массу (г) исходного CaCO₃. (До целых.)',unit:'г',a:'100',
+   eq:'CaCO₃ → CaO + CO₂',
+   sol:['Найти V_теор::V_теор(CO₂) = 17,92 / 0,8 = 22,4 л','Найти n::n(CO₂) = 22,4 / 22,4 = 1 моль','Соотношение по коэффициентам::n(CaCO₃) = 1 моль (1 : 1)','Найти m::m(CaCO₃) = 1 · 100 = <span class="ans">100 г</span>']},
+  {q:'При восстановлении оксида железа(III) угарным газом получено 78,4 г железа с выходом 70% от теоретически возможного. Найдите массу (г) исходного Fe₂O₃. (До целых.)',unit:'г',a:'160',
+   eq:'Fe₂O₃ + 3CO → 2Fe + 3CO₂',
+   sol:['Найти n_практ::n_практ(Fe) = 78,4 / 56 = 1,4 моль','Найти n_теор::n_теор(Fe) = 1,4 / 0,7 = 2 моль','Соотношение по коэффициентам::n(Fe₂O₃) = 2 / 2 = 1 моль','Найти m::m(Fe₂O₃) = 1 · 160 = <span class="ans">160 г</span>']},
+  {q:'При каталитическом окислении диоксида серы образовалось 128 г триоксида серы с выходом 80%. Найдите массу (г) исходного SO₂. (До целых.)',unit:'г',a:'128',
+   eq:'2SO₂ + O₂ →(V₂O₅, t°) 2SO₃',
+   sol:['Найти n_практ::n_практ(SO₃) = 128 / 80 = 1,6 моль','Найти n_теор::n_теор(SO₃) = 1,6 / 0,8 = 2 моль','Соотношение по коэффициентам::n(SO₂) = 2 моль (1 : 1)','Найти m::m(SO₂) = 2 · 64 = <span class="ans">128 г</span>']},
+  {q:'При каталитическом окислении аммиака кислородом выделилось 13,44 л оксида азота(II) (н.у.) с выходом 75%. Найдите массу (г) аммиака, вступившего в реакцию. (До десятых.)',unit:'г',a:'13.6',
+   eq:'4NH₃ + 5O₂ →(кат., t°) 4NO + 6H₂O',
+   sol:['Найти V_теор::V_теор(NO) = 13,44 / 0,75 = 17,92 л','Найти n::n(NO) = 17,92 / 22,4 = 0,8 моль','Соотношение по коэффициентам::n(NH₃) = 0,8 моль (1 : 1)','Найти m::m(NH₃) = 0,8 · 17 = <span class="ans">13,6 г</span>']},
+  {q:'В результате синтеза аммиака образовалось 13,6 г NH₃ с выходом 80% от теоретически возможного. Найдите объём (л, н.у.) водорода, израсходованного на реакцию. (До десятых.)',unit:'л',a:'33.6',
+   eq:'N₂ + 3H₂ →(кат., t°) 2NH₃',
+   sol:['Найти n_практ::n_практ(NH₃) = 13,6 / 17 = 0,8 моль','Найти n_теор::n_теор(NH₃) = 0,8 / 0,8 = 1 моль','Соотношение по коэффициентам::n(H₂) = 3/2 · 1 = 1,5 моль','Найти V::V(H₂) = 1,5 · 22,4 = <span class="ans">33,6 л</span>']},
+  {q:'При сгорании водорода в кислороде образовалось 27 г воды. Выход реакции составил 75% от теоретически возможного. Найдите объём (л, н.у.) водорода, вступившего в реакцию. (До десятых.)',unit:'л',a:'44.8',
+   eq:'2H₂ + O₂ → 2H₂O',
+   sol:['Найти n_практ::n_практ(H₂O) = 27 / 18 = 1,5 моль','Найти n_теор::n_теор(H₂O) = 1,5 / 0,75 = 2 моль','Соотношение по коэффициентам::n(H₂) = 2 моль (2 : 2)','Найти V::V(H₂) = 2 · 22,4 = <span class="ans">44,8 л</span>']}
+];
+
+// ══════ PRACTICUM V1 ══════
+const KV1='l28_prcV1';
+let v1Q,v1Cur,v1Ok,v1Wr;
+
+function v1Load(){
+  try{
+    const d=JSON.parse(localStorage.getItem(KV1)||'null');
+    if(d&&d.ts&&Date.now()-d.ts<TTL){v1Q=d.q;v1Cur=d.cur;v1Ok=new Set(d.ok);v1Wr=new Set(d.wr);_tv1Ok=v1Ok.size;return true;}
+  }catch{}return false;
+}
+function v1Save(){try{localStorage.setItem(KV1,JSON.stringify({q:v1Q,cur:v1Cur,ok:[...v1Ok],wr:[...v1Wr],ts:Date.now()}));}catch{}}
+
+function v1Init(){
+  if(!v1Load()){v1Q=shuffle(PRCV1.map((_,i)=>i));v1Cur=0;v1Ok=new Set();v1Wr=new Set();_tv1Ok=0;}
+  document.getElementById('tv1-result').style.display='none';
+  document.getElementById('tv1-task-area').style.display='block';
+  v1Show();
+}
+function v1Show(){
+  if(v1Ok.size>=PRCV1.length){v1Finish();return;}
+  const t=PRCV1[v1Q[v1Cur]];
+  document.getElementById('tv1-q').textContent=t.q;
+  document.getElementById('tv1-unit').textContent=t.unit;
+  const sol=document.getElementById('tv1-sol');sol.style.display='none';sol.innerHTML='';
+  const fb=document.getElementById('tv1-fb');fb.textContent='';fb.className='tr-feedback';
+  document.getElementById('tv1-check').style.display='';
+  document.getElementById('tv1-next').style.display='none';
+  const inp=document.getElementById('tv1-inp');inp.value='';inp.focus({preventScroll:true});
+  document.getElementById('tv1-prog').textContent=v1Ok.size+' / '+PRCV1.length;
+}
+function v1Check(){
+  const val=document.getElementById('tv1-inp').value;if(!val.trim())return;
+  const t=PRCV1[v1Q[v1Cur]],fb=document.getElementById('tv1-fb');
+  if(isCorrect(val,t.a)){
+    v1Ok.add(v1Q[v1Cur]);
+    v1Wr.delete(v1Q[v1Cur]);_tv1Ok=v1Ok.size;
+    fb.textContent='✓ Верно!';fb.className='tr-feedback ok';
+    document.getElementById('tv1-check').style.display='none';
+    document.getElementById('tv1-next').style.display='';
+    const sol=document.getElementById('tv1-sol');sol.innerHTML=solHtml(t.eq,t.sol);sol.style.display='block';
+    v1Save();document.getElementById('tv1-prog').textContent=v1Ok.size+' / '+PRCV1.length;
+    markToday();updateProg();
+    if(v1Ok.size>=PRCV1.length)setTimeout(v1Finish,900);
+  }else{
+    const _v1First=!v1Wr.has(v1Q[v1Cur]);
+    if(_v1First){v1Q.push(v1Q[v1Cur]);v1Wr.add(v1Q[v1Cur]);}
+    fb.innerHTML='✗ Неверно — попробуй ещё'+(_v1First?'<br><span style="font-size:12px;font-weight:400">↩ задание вернётся в конце</span>':'');fb.className='tr-feedback err';
+  }
+}
+function v1Next(){v1Cur++;v1Save();v1Show();}
+function v1Finish(){
+  document.getElementById('tv1-task-area').style.display='none';
+  document.getElementById('tv1-result').style.display='block';
+  _tv1Ok=PRCV1.length;updateProg();checkCongrats();
+}
+function v1Reset(){
+  try{localStorage.removeItem(KV1);}catch{}
+  v1Q=shuffle(PRCV1.map((_,i)=>i));v1Cur=0;v1Ok=new Set();v1Wr=new Set();_tv1Ok=0;
+  document.getElementById('tv1-result').style.display='none';
+  document.getElementById('tv1-task-area').style.display='block';
+  v1Show();updateProg();
+}
+
+// ══════ PRACTICUM V2 ══════
+const KV2='l28_prcV2';
+let v2Q,v2Cur,v2Ok,v2Wr;
+
+function v2Load(){
+  try{
+    const d=JSON.parse(localStorage.getItem(KV2)||'null');
+    if(d&&d.ts&&Date.now()-d.ts<TTL){v2Q=d.q;v2Cur=d.cur;v2Ok=new Set(d.ok);v2Wr=new Set(d.wr);_tv2Ok=v2Ok.size;return true;}
+  }catch{}return false;
+}
+function v2Save(){try{localStorage.setItem(KV2,JSON.stringify({q:v2Q,cur:v2Cur,ok:[...v2Ok],wr:[...v2Wr],ts:Date.now()}));}catch{}}
+
+function v2Init(){
+  if(!v2Load()){v2Q=shuffle(PRCV2.map((_,i)=>i));v2Cur=0;v2Ok=new Set();v2Wr=new Set();_tv2Ok=0;}
+  document.getElementById('tv2-result').style.display='none';
+  document.getElementById('tv2-task-area').style.display='block';
+  v2Show();
+}
+function v2Show(){
+  if(v2Ok.size>=PRCV2.length){v2Finish();return;}
+  const t=PRCV2[v2Q[v2Cur]];
+  document.getElementById('tv2-q').textContent=t.q;
+  const sol=document.getElementById('tv2-sol');sol.style.display='none';sol.innerHTML='';
+  const fb=document.getElementById('tv2-fb');fb.textContent='';fb.className='tr-feedback';
+  document.getElementById('tv2-check').style.display='';
+  document.getElementById('tv2-next').style.display='none';
+  const inp=document.getElementById('tv2-inp');inp.value='';inp.focus({preventScroll:true});
+  document.getElementById('tv2-prog').textContent=v2Ok.size+' / '+PRCV2.length;
+}
+function v2Check(){
+  const val=document.getElementById('tv2-inp').value;if(!val.trim())return;
+  const t=PRCV2[v2Q[v2Cur]],fb=document.getElementById('tv2-fb');
+  if(isCorrect(val,t.a)){
+    v2Ok.add(v2Q[v2Cur]);
+    v2Wr.delete(v2Q[v2Cur]);_tv2Ok=v2Ok.size;
+    fb.textContent='✓ Верно!';fb.className='tr-feedback ok';
+    document.getElementById('tv2-check').style.display='none';
+    document.getElementById('tv2-next').style.display='';
+    const sol=document.getElementById('tv2-sol');sol.innerHTML=solHtml(t.eq,t.sol);sol.style.display='block';
+    v2Save();document.getElementById('tv2-prog').textContent=v2Ok.size+' / '+PRCV2.length;
+    markToday();updateProg();
+    if(v2Ok.size>=PRCV2.length)setTimeout(v2Finish,900);
+  }else{
+    const _v2First=!v2Wr.has(v2Q[v2Cur]);
+    if(_v2First){v2Q.push(v2Q[v2Cur]);v2Wr.add(v2Q[v2Cur]);}
+    fb.innerHTML='✗ Неверно — попробуй ещё'+(_v2First?'<br><span style="font-size:12px;font-weight:400">↩ задание вернётся в конце</span>':'');fb.className='tr-feedback err';
+  }
+}
+function v2Next(){v2Cur++;v2Save();v2Show();}
+function v2Finish(){
+  document.getElementById('tv2-task-area').style.display='none';
+  document.getElementById('tv2-result').style.display='block';
+  _tv2Ok=PRCV2.length;updateProg();checkCongrats();
+}
+function v2Reset(){
+  try{localStorage.removeItem(KV2);}catch{}
+  v2Q=shuffle(PRCV2.map((_,i)=>i));v2Cur=0;v2Ok=new Set();v2Wr=new Set();_tv2Ok=0;
+  document.getElementById('tv2-result').style.display='none';
+  document.getElementById('tv2-task-area').style.display='block';
+  v2Show();updateProg();
+}
+
+// ══════ PRACTICUM V3 ══════
+const KV3='l28_prcV3';
+let v3Q,v3Cur,v3Ok,v3Wr;
+
+function v3Load(){
+  try{
+    const d=JSON.parse(localStorage.getItem(KV3)||'null');
+    if(d&&d.ts&&Date.now()-d.ts<TTL){v3Q=d.q;v3Cur=d.cur;v3Ok=new Set(d.ok);v3Wr=new Set(d.wr);_tv3Ok=v3Ok.size;return true;}
+  }catch{}return false;
+}
+function v3Save(){try{localStorage.setItem(KV3,JSON.stringify({q:v3Q,cur:v3Cur,ok:[...v3Ok],wr:[...v3Wr],ts:Date.now()}));}catch{}}
+
+function v3Init(){
+  if(!v3Load()){v3Q=shuffle(PRCV3.map((_,i)=>i));v3Cur=0;v3Ok=new Set();v3Wr=new Set();_tv3Ok=0;}
+  document.getElementById('tv3-result').style.display='none';
+  document.getElementById('tv3-task-area').style.display='block';
+  v3Show();
+}
+function v3Show(){
+  if(v3Ok.size>=PRCV3.length){v3Finish();return;}
+  const t=PRCV3[v3Q[v3Cur]];
+  document.getElementById('tv3-q').textContent=t.q;
+  const sol=document.getElementById('tv3-sol');sol.style.display='none';sol.innerHTML='';
+  const fb=document.getElementById('tv3-fb');fb.textContent='';fb.className='tr-feedback';
+  document.getElementById('tv3-check').style.display='';
+  document.getElementById('tv3-next').style.display='none';
+  const inp=document.getElementById('tv3-inp');inp.value='';inp.focus({preventScroll:true});
+  document.getElementById('tv3-prog').textContent=v3Ok.size+' / '+PRCV3.length;
+}
+function v3Check(){
+  const val=document.getElementById('tv3-inp').value;if(!val.trim())return;
+  const t=PRCV3[v3Q[v3Cur]],fb=document.getElementById('tv3-fb');
+  if(isCorrect(val,t.a)){
+    v3Ok.add(v3Q[v3Cur]);
+    v3Wr.delete(v3Q[v3Cur]);_tv3Ok=v3Ok.size;
+    fb.textContent='✓ Верно!';fb.className='tr-feedback ok';
+    document.getElementById('tv3-check').style.display='none';
+    document.getElementById('tv3-next').style.display='';
+    const sol=document.getElementById('tv3-sol');sol.innerHTML=solHtml(t.eq,t.sol);sol.style.display='block';
+    v3Save();document.getElementById('tv3-prog').textContent=v3Ok.size+' / '+PRCV3.length;
+    markToday();updateProg();
+    if(v3Ok.size>=PRCV3.length)setTimeout(v3Finish,900);
+  }else{
+    const _v3First=!v3Wr.has(v3Q[v3Cur]);
+    if(_v3First){v3Q.push(v3Q[v3Cur]);v3Wr.add(v3Q[v3Cur]);}
+    fb.innerHTML='✗ Неверно — попробуй ещё'+(_v3First?'<br><span style="font-size:12px;font-weight:400">↩ задание вернётся в конце</span>':'');fb.className='tr-feedback err';
+  }
+}
+function v3Next(){v3Cur++;v3Save();v3Show();}
+function v3Finish(){
+  document.getElementById('tv3-task-area').style.display='none';
+  document.getElementById('tv3-result').style.display='block';
+  _tv3Ok=PRCV3.length;updateProg();checkCongrats();
+}
+function v3Reset(){
+  try{localStorage.removeItem(KV3);}catch{}
+  v3Q=shuffle(PRCV3.map((_,i)=>i));v3Cur=0;v3Ok=new Set();v3Wr=new Set();_tv3Ok=0;
+  document.getElementById('tv3-result').style.display='none';
+  document.getElementById('tv3-task-area').style.display='block';
+  v3Show();updateProg();
+}
+
+// ══════ PRACTICUM V4 ══════
+const KV4='l28_prcV4';
+let v4Q,v4Cur,v4Ok,v4Wr;
+
+function v4Load(){
+  try{
+    const d=JSON.parse(localStorage.getItem(KV4)||'null');
+    if(d&&d.ts&&Date.now()-d.ts<TTL){v4Q=d.q;v4Cur=d.cur;v4Ok=new Set(d.ok);v4Wr=new Set(d.wr);_tv4Ok=v4Ok.size;return true;}
+  }catch{}return false;
+}
+function v4Save(){try{localStorage.setItem(KV4,JSON.stringify({q:v4Q,cur:v4Cur,ok:[...v4Ok],wr:[...v4Wr],ts:Date.now()}));}catch{}}
+
+function v4Init(){
+  if(!v4Load()){v4Q=shuffle(PRCV4.map((_,i)=>i));v4Cur=0;v4Ok=new Set();v4Wr=new Set();_tv4Ok=0;}
+  document.getElementById('tv4-result').style.display='none';
+  document.getElementById('tv4-task-area').style.display='block';
+  v4Show();
+}
+function v4Show(){
+  if(v4Ok.size>=PRCV4.length){v4Finish();return;}
+  const t=PRCV4[v4Q[v4Cur]];
+  document.getElementById('tv4-q').textContent=t.q;
+  document.getElementById('tv4-unit').textContent=t.unit;
+  const sol=document.getElementById('tv4-sol');sol.style.display='none';sol.innerHTML='';
+  const fb=document.getElementById('tv4-fb');fb.textContent='';fb.className='tr-feedback';
+  document.getElementById('tv4-check').style.display='';
+  document.getElementById('tv4-next').style.display='none';
+  const inp=document.getElementById('tv4-inp');inp.value='';inp.focus({preventScroll:true});
+  document.getElementById('tv4-prog').textContent=v4Ok.size+' / '+PRCV4.length;
+}
+function v4Check(){
+  const val=document.getElementById('tv4-inp').value;if(!val.trim())return;
+  const t=PRCV4[v4Q[v4Cur]],fb=document.getElementById('tv4-fb');
+  if(isCorrect(val,t.a)){
+    v4Ok.add(v4Q[v4Cur]);
+    v4Wr.delete(v4Q[v4Cur]);_tv4Ok=v4Ok.size;
+    fb.textContent='✓ Верно!';fb.className='tr-feedback ok';
+    document.getElementById('tv4-check').style.display='none';
+    document.getElementById('tv4-next').style.display='';
+    const sol=document.getElementById('tv4-sol');sol.innerHTML=solHtml(t.eq,t.sol);sol.style.display='block';
+    v4Save();document.getElementById('tv4-prog').textContent=v4Ok.size+' / '+PRCV4.length;
+    markToday();updateProg();
+    if(v4Ok.size>=PRCV4.length)setTimeout(v4Finish,900);
+  }else{
+    const _v4First=!v4Wr.has(v4Q[v4Cur]);
+    if(_v4First){v4Q.push(v4Q[v4Cur]);v4Wr.add(v4Q[v4Cur]);}
+    fb.innerHTML='✗ Неверно — попробуй ещё'+(_v4First?'<br><span style="font-size:12px;font-weight:400">↩ задание вернётся в конце</span>':'');fb.className='tr-feedback err';
+  }
+}
+function v4Next(){v4Cur++;v4Save();v4Show();}
+function v4Finish(){
+  document.getElementById('tv4-task-area').style.display='none';
+  document.getElementById('tv4-result').style.display='block';
+  _tv4Ok=PRCV4.length;updateProg();checkCongrats();
+}
+function v4Reset(){
+  try{localStorage.removeItem(KV4);}catch{}
+  v4Q=shuffle(PRCV4.map((_,i)=>i));v4Cur=0;v4Ok=new Set();v4Wr=new Set();_tv4Ok=0;
+  document.getElementById('tv4-result').style.display='none';
+  document.getElementById('tv4-task-area').style.display='block';
+  v4Show();updateProg();
+}
+
+// ══════ TABLES: PERIODIC + SOLUBILITY ══════
+function togglePS(){const o=document.getElementById('ps-overlay');const shown=o.style.display==='flex';o.style.display=shown?'none':'flex';}
+function toggleRS(){const o=document.getElementById('rs-overlay');const shown=o.style.display==='flex';o.style.display=shown?'none':'flex';if(shown&&window._solReset)window._solReset();}
+
+(function(){
+  let selCol=-1,selRow=-1;
+  window._solReset=function(){selCol=-1;selRow=-1;const t=document.querySelector('.sol-table');if(t)redraw(t);};
+  function redraw(table){
+    const rows=Array.from(table.querySelectorAll('tbody tr'));
+    const headCells=Array.from(table.querySelectorAll('thead tr:last-child th'));
+    table.querySelectorAll('.sol-col-active,.sol-row-active,.sol-col-hl,.sol-row-hl,.sol-intersect')
+      .forEach(x=>x.classList.remove('sol-col-active','sol-row-active','sol-col-hl','sol-row-hl','sol-intersect'));
+    if(selCol>=1){headCells[selCol].classList.add('sol-col-active');rows.forEach(row=>{const c=row.children[selCol];if(c)c.classList.add('sol-col-hl');});}
+    if(selRow>=0){const row=rows[selRow];row.children[0].classList.add('sol-row-active');Array.from(row.children).forEach((c,j)=>{if(j>0)c.classList.add('sol-row-hl');});}
+    if(selCol>=1&&selRow>=0){const cell=rows[selRow]?.children[selCol];if(cell){cell.classList.remove('sol-col-hl','sol-row-hl');cell.classList.add('sol-intersect');}}
+  }
+  document.addEventListener('click',function(e){
+    const th=e.target.closest('.sol-table th');if(!th)return;
+    const table=th.closest('.sol-table');if(!table)return;
+    const rows=Array.from(table.querySelectorAll('tbody tr'));
+    const headCells=Array.from(table.querySelectorAll('thead tr:last-child th'));
+    if(th.closest('thead')){const ci=headCells.indexOf(th);if(ci<1)return;selCol=selCol===ci?-1:ci;}
+    else{const ri=rows.indexOf(th.closest('tr'));if(ri<0)return;selRow=selRow===ri?-1:ri;}
+    redraw(table);
+  });
+})();
+
+document.addEventListener('keydown',function(e){
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+  if(e.key==='t'||e.key==='T'){const ps=document.getElementById('ps-overlay');if(ps.style.display==='flex'){ps.style.display='none';}else{ps.style.display='flex';document.getElementById('rs-overlay').style.display='none';if(window._solReset)window._solReset();}}
+  if(e.key==='r'||e.key==='R'){const rs=document.getElementById('rs-overlay');if(rs.style.display==='flex'){rs.style.display='none';if(window._solReset)window._solReset();}else{rs.style.display='flex';document.getElementById('ps-overlay').style.display='none';}}
+  if(e.key==='Escape'){document.getElementById('ps-overlay').style.display='none';const rs=document.getElementById('rs-overlay');if(rs.style.display==='flex'){rs.style.display='none';if(window._solReset)window._solReset();}}
+});
+</script>
+
+<!-- CLEAR CONFIRM DIALOG -->
+<div id="clear-confirm-dialog" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(6,14,43,.7);align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--white);border-radius:var(--r);padding:28px 24px;max-width:320px;width:100%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.25)">
+    <div style="font-size:32px;margin-bottom:12px">🗑️</div>
+    <div style="font-size:17px;font-weight:800;color:var(--ink);margin-bottom:8px">Сбросить всё?</div>
+    <div style="font-size:14px;color:var(--ink2);margin-bottom:24px;line-height:1.5">Весь прогресс заданий и история за 6 дней будут удалены. Начнёшь заново с нуля.</div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button onclick="_doClearAll()" style="background:#e53935;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:14px;font-weight:700;cursor:pointer">Сбросить</button>
+      <button onclick="document.getElementById('clear-confirm-dialog').style.display='none'" style="background:var(--line);color:var(--ink2);border:none;border-radius:8px;padding:10px 22px;font-size:14px;font-weight:600;cursor:pointer">Отмена</button>
+    </div>
+  </div>
+</div>
+
+<!-- PERIODIC TABLE OVERLAY -->
+<div id="ps-overlay" onclick="if(event.target===this)togglePS()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:16px;padding:20px 24px;max-width:98vw;max-height:92vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div style="font-size:16px;font-weight:800;color:#4c1d95">⚛️ Периодическая система Д.И. Менделеева</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span style="font-size:11px;color:#999;font-family:monospace">T или Esc — закрыть</span>
+        <button onclick="togglePS()" style="background:#f0f0f0;border:none;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:14px;font-weight:700">✕</button>
+      </div>
+    </div>
+    <div class="pt-legend6" style="margin-bottom:10px">
+      <span class="pt-leg-item6" style="background:#8B7ED8;color:#2D1B69">s-элементы</span>
+      <span class="pt-leg-item6" style="background:#6EC9A4;color:#064C30">p-элементы</span>
+      <span class="pt-leg-item6" style="background:#7EC4F0;color:#0A2860">d-элементы</span>
+      <span class="pt-leg-item6" style="background:#F0C840;color:#5A2E04">f-элементы</span>
+    </div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table class="pt-ru">
+    <thead><tr><th rowspan="2" class="pt-corner">Пе&shy;ри&shy;од</th><th colspan="7">Группы</th><th colspan="3">VIII</th><th rowspan="2" class="pt-noble-hdr">0</th></tr>
+    <tr><th>I</th><th>II</th><th>III</th><th>IV</th><th>V</th><th>VI</th><th>VII</th><th class="pt-viii">A</th><th class="pt-viii">B</th><th class="pt-viii">C</th></tr></thead>
+    <tbody>
+    <tr><td class="pt-period">1</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">1</span><span class="el-mass">1,008</span><span class="el-sym">H</span><span class="el-name">Водород</span></td><td colspan="5" class="el-blank6"></td><td class="el6" style="background:#f1f5f9;color:#6b7280;font-style:italic"><span class="el-sym" style="font-size:13px">(H)</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">2</span><span class="el-mass">4,00</span><span class="el-sym">He</span><span class="el-name">Гелий</span></td></tr>
+    <tr><td class="pt-period">2</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">3</span><span class="el-mass">6,94</span><span class="el-sym">Li</span><span class="el-name">Литий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">4</span><span class="el-mass">9,01</span><span class="el-sym">Be</span><span class="el-name">Бериллий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">5</span><span class="el-mass">10,81</span><span class="el-sym">B</span><span class="el-name">Бор</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">6</span><span class="el-mass">12,01</span><span class="el-sym">C</span><span class="el-name">Углерод</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">7</span><span class="el-mass">14,00</span><span class="el-sym">N</span><span class="el-name">Азот</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">8</span><span class="el-mass">16,00</span><span class="el-sym">O</span><span class="el-name">Кислород</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">9</span><span class="el-mass">19,00</span><span class="el-sym">F</span><span class="el-name">Фтор</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">10</span><span class="el-mass">20,18</span><span class="el-sym">Ne</span><span class="el-name">Неон</span></td></tr>
+    <tr><td class="pt-period">3</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">11</span><span class="el-mass">22,99</span><span class="el-sym">Na</span><span class="el-name">Натрий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">12</span><span class="el-mass">24,31</span><span class="el-sym">Mg</span><span class="el-name">Магний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">13</span><span class="el-mass">26,98</span><span class="el-sym">Al</span><span class="el-name">Алюминий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">14</span><span class="el-mass">28,09</span><span class="el-sym">Si</span><span class="el-name">Кремний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">15</span><span class="el-mass">30,97</span><span class="el-sym">P</span><span class="el-name">Фосфор</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">16</span><span class="el-mass">32,06</span><span class="el-sym">S</span><span class="el-name">Сера</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">17</span><span class="el-mass">35,45</span><span class="el-sym">Cl</span><span class="el-name">Хлор</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">18</span><span class="el-mass">39,95</span><span class="el-sym">Ar</span><span class="el-name">Аргон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">4</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">19</span><span class="el-mass">39,10</span><span class="el-sym">K</span><span class="el-name">Калий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">20</span><span class="el-mass">40,08</span><span class="el-sym">Ca</span><span class="el-name">Кальций</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">21</span><span class="el-mass">44,96</span><span class="el-sym">Sc</span><span class="el-name">Скандий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">22</span><span class="el-mass">47,90</span><span class="el-sym">Ti</span><span class="el-name">Титан</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">23</span><span class="el-mass">50,94</span><span class="el-sym">V</span><span class="el-name">Ванадий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">24</span><span class="el-mass">52,00</span><span class="el-sym">Cr</span><span class="el-name">Хром</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">25</span><span class="el-mass">54,94</span><span class="el-sym">Mn</span><span class="el-name">Марганец</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">26</span><span class="el-mass">55,85</span><span class="el-sym">Fe</span><span class="el-name">Железо</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">27</span><span class="el-mass">58,93</span><span class="el-sym">Co</span><span class="el-name">Кобальт</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">28</span><span class="el-mass">58,69</span><span class="el-sym">Ni</span><span class="el-name">Никель</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">29</span><span class="el-mass">63,55</span><span class="el-sym">Cu</span><span class="el-name">Медь</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">30</span><span class="el-mass">65,39</span><span class="el-sym">Zn</span><span class="el-name">Цинк</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">31</span><span class="el-mass">69,72</span><span class="el-sym">Ga</span><span class="el-name">Галлий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">32</span><span class="el-mass">72,59</span><span class="el-sym">Ge</span><span class="el-name">Германий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">33</span><span class="el-mass">74,92</span><span class="el-sym">As</span><span class="el-name">Мышьяк</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">34</span><span class="el-mass">78,96</span><span class="el-sym">Se</span><span class="el-name">Селен</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">35</span><span class="el-mass">79,90</span><span class="el-sym">Br</span><span class="el-name">Бром</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">36</span><span class="el-mass">83,80</span><span class="el-sym">Kr</span><span class="el-name">Криптон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">5</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">37</span><span class="el-mass">85,47</span><span class="el-sym">Rb</span><span class="el-name">Рубидий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">38</span><span class="el-mass">87,62</span><span class="el-sym">Sr</span><span class="el-name">Стронций</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">39</span><span class="el-mass">88,91</span><span class="el-sym">Y</span><span class="el-name">Иттрий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">40</span><span class="el-mass">91,22</span><span class="el-sym">Zr</span><span class="el-name">Цирконий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">41</span><span class="el-mass">92,91</span><span class="el-sym">Nb</span><span class="el-name">Ниобий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">42</span><span class="el-mass">95,94</span><span class="el-sym">Mo</span><span class="el-name">Молибден</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">43</span><span class="el-mass">98,91</span><span class="el-sym">Tc</span><span class="el-name">Технеций</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">44</span><span class="el-mass">101,07</span><span class="el-sym">Ru</span><span class="el-name">Рутений</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">45</span><span class="el-mass">102,91</span><span class="el-sym">Rh</span><span class="el-name">Родий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">46</span><span class="el-mass">106,42</span><span class="el-sym">Pd</span><span class="el-name">Палладий</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">47</span><span class="el-mass">107,87</span><span class="el-sym">Ag</span><span class="el-name">Серебро</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">48</span><span class="el-mass">112,41</span><span class="el-sym">Cd</span><span class="el-name">Кадмий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">49</span><span class="el-mass">114,82</span><span class="el-sym">In</span><span class="el-name">Индий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">50</span><span class="el-mass">118,69</span><span class="el-sym">Sn</span><span class="el-name">Олово</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">51</span><span class="el-mass">121,75</span><span class="el-sym">Sb</span><span class="el-name">Сурьма</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">52</span><span class="el-mass">127,60</span><span class="el-sym">Te</span><span class="el-name">Теллур</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">53</span><span class="el-mass">126,90</span><span class="el-sym">I</span><span class="el-name">Иод</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">54</span><span class="el-mass">131,29</span><span class="el-sym">Xe</span><span class="el-name">Ксенон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">6</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">55</span><span class="el-mass">132,91</span><span class="el-sym">Cs</span><span class="el-name">Цезий</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">56</span><span class="el-mass">137,33</span><span class="el-sym">Ba</span><span class="el-name">Барий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04;opacity:.85"><span class="el-num">57</span><span class="el-mass">138,91</span><span class="el-sym">La</span><span class="el-name">Лантан*</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">72</span><span class="el-mass">178,49</span><span class="el-sym">Hf</span><span class="el-name">Гафний</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">73</span><span class="el-mass">180,95</span><span class="el-sym">Ta</span><span class="el-name">Тантал</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">74</span><span class="el-mass">183,85</span><span class="el-sym">W</span><span class="el-name">Вольфрам</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">75</span><span class="el-mass">186,21</span><span class="el-sym">Re</span><span class="el-name">Рений</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">76</span><span class="el-mass">190,2</span><span class="el-sym">Os</span><span class="el-name">Осмий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">77</span><span class="el-mass">192,22</span><span class="el-sym">Ir</span><span class="el-name">Иридий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">78</span><span class="el-mass">195,08</span><span class="el-sym">Pt</span><span class="el-name">Платина</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">79</span><span class="el-mass">196,97</span><span class="el-sym">Au</span><span class="el-name">Золото</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">80</span><span class="el-mass">200,59</span><span class="el-sym">Hg</span><span class="el-name">Ртуть</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">81</span><span class="el-mass">204,38</span><span class="el-sym">Tl</span><span class="el-name">Таллий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">82</span><span class="el-mass">207,2</span><span class="el-sym">Pb</span><span class="el-name">Свинец</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">83</span><span class="el-mass">208,98</span><span class="el-sym">Bi</span><span class="el-name">Висмут</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">84</span><span class="el-mass">[209]</span><span class="el-sym">Po</span><span class="el-name">Полоний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">85</span><span class="el-mass">[210]</span><span class="el-sym">At</span><span class="el-name">Астат</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">86</span><span class="el-mass">[222]</span><span class="el-sym">Rn</span><span class="el-name">Радон</span></td></tr>
+    <tr><td class="pt-period" rowspan="2">7</td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">87</span><span class="el-mass">[223]</span><span class="el-sym">Fr</span><span class="el-name">Франций</span></td><td class="el6" style="background:#8B7ED8;color:#2D1B69"><span class="el-num">88</span><span class="el-mass">226</span><span class="el-sym">Ra</span><span class="el-name">Радий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04;opacity:.85"><span class="el-num">89</span><span class="el-mass">[227]</span><span class="el-sym">Ac</span><span class="el-name">Актиний**</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">104</span><span class="el-mass">[261]</span><span class="el-sym">Rf</span><span class="el-name">Резерф.</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">105</span><span class="el-mass">[262]</span><span class="el-sym">Db</span><span class="el-name">Дубний</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">106</span><span class="el-mass">[266]</span><span class="el-sym">Sg</span><span class="el-name">Сиборг.</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">107</span><span class="el-mass">[264]</span><span class="el-sym">Bh</span><span class="el-name">Борий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">108</span><span class="el-mass">[269]</span><span class="el-sym">Hs</span><span class="el-name">Хассий</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">109</span><span class="el-mass">[268]</span><span class="el-sym">Mt</span><span class="el-name">Мейтн.</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">110</span><span class="el-mass">[271]</span><span class="el-sym">Ds</span><span class="el-name">Дармш.</span></td><td class="el-blank6"></td></tr>
+    <tr><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">111</span><span class="el-mass">[280]</span><span class="el-sym">Rg</span><span class="el-name">Рентг.</span></td><td class="el6" style="background:#7EC4F0;color:#0A2860"><span class="el-num">112</span><span class="el-mass">[285]</span><span class="el-sym">Cn</span><span class="el-name">Копер.</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">113</span><span class="el-mass">[286]</span><span class="el-sym">Nh</span><span class="el-name">Нихоний</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">114</span><span class="el-mass">[289]</span><span class="el-sym">Fl</span><span class="el-name">Флеровий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">115</span><span class="el-mass">[293]</span><span class="el-sym">Mc</span><span class="el-name">Московий</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">116</span><span class="el-mass">[293]</span><span class="el-sym">Lv</span><span class="el-name">Ливерм.</span></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">117</span><span class="el-mass">[294]</span><span class="el-sym">Ts</span><span class="el-name">Теннесин</span></td><td colspan="3" class="el-blank6"></td><td class="el6" style="background:#6EC9A4;color:#064C30"><span class="el-num">118</span><span class="el-mass">[294]</span><span class="el-sym">Og</span><span class="el-name">Оганесон</span></td></tr>
+    </tbody></table>
+    <div style="margin-top:4px;overflow-x:auto"><table class="pt-ru" style="margin-left:0"><tbody>
+    <tr><td class="pt-f-label">*Лантаноиды<br>Период 6</td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">58</span><span class="el-mass">140,12</span><span class="el-sym">Ce</span><span class="el-name">Церий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">59</span><span class="el-mass">140,91</span><span class="el-sym">Pr</span><span class="el-name">Празеодим</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">60</span><span class="el-mass">144,24</span><span class="el-sym">Nd</span><span class="el-name">Неодим</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">61</span><span class="el-mass">[145]</span><span class="el-sym">Pm</span><span class="el-name">Прометий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">62</span><span class="el-mass">150,36</span><span class="el-sym">Sm</span><span class="el-name">Самарий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">63</span><span class="el-mass">151,97</span><span class="el-sym">Eu</span><span class="el-name">Европий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">64</span><span class="el-mass">157,25</span><span class="el-sym">Gd</span><span class="el-name">Гадолиний</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">65</span><span class="el-mass">158,93</span><span class="el-sym">Tb</span><span class="el-name">Тербий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">66</span><span class="el-mass">162,50</span><span class="el-sym">Dy</span><span class="el-name">Диспрозий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">67</span><span class="el-mass">164,93</span><span class="el-sym">Ho</span><span class="el-name">Гольмий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">68</span><span class="el-mass">167,26</span><span class="el-sym">Er</span><span class="el-name">Эрбий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">69</span><span class="el-mass">168,93</span><span class="el-sym">Tm</span><span class="el-name">Тулий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">70</span><span class="el-mass">173,04</span><span class="el-sym">Yb</span><span class="el-name">Иттербий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">71</span><span class="el-mass">174,97</span><span class="el-sym">Lu</span><span class="el-name">Лютеций</span></td></tr>
+    <tr><td class="pt-f-label">**Актиноиды<br>Период 7</td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">90</span><span class="el-mass">232,04</span><span class="el-sym">Th</span><span class="el-name">Торий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">91</span><span class="el-mass">231,04</span><span class="el-sym">Pa</span><span class="el-name">Протакт.</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">92</span><span class="el-mass">238,03</span><span class="el-sym">U</span><span class="el-name">Уран</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">93</span><span class="el-mass">[237]</span><span class="el-sym">Np</span><span class="el-name">Нептуний</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">94</span><span class="el-mass">[244]</span><span class="el-sym">Pu</span><span class="el-name">Плутоний</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">95</span><span class="el-mass">[243]</span><span class="el-sym">Am</span><span class="el-name">Америций</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">96</span><span class="el-mass">[247]</span><span class="el-sym">Cm</span><span class="el-name">Кюрий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">97</span><span class="el-mass">[247]</span><span class="el-sym">Bk</span><span class="el-name">Берклий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">98</span><span class="el-mass">[251]</span><span class="el-sym">Cf</span><span class="el-name">Калиф.</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">99</span><span class="el-mass">[252]</span><span class="el-sym">Es</span><span class="el-name">Эйнштейн.</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">100</span><span class="el-mass">[257]</span><span class="el-sym">Fm</span><span class="el-name">Фермий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">101</span><span class="el-mass">[258]</span><span class="el-sym">Md</span><span class="el-name">Менделевий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">102</span><span class="el-mass">[259]</span><span class="el-sym">No</span><span class="el-name">Нобелий</span></td><td class="el6" style="background:#F0C840;color:#5A2E04"><span class="el-num">103</span><span class="el-mass">[262]</span><span class="el-sym">Lr</span><span class="el-name">Лоуренсий</span></td></tr>
+    </tbody></table></div></div>
+  </div>
+</div>
+
+<!-- SOLUBILITY TABLE OVERLAY -->
+<div id="rs-overlay" onclick="if(event.target===this)toggleRS()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:16px">
+  <div style="background:#fff;border-radius:16px;padding:18px 22px;max-width:98vw;max-height:93vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <div style="font-size:15px;font-weight:800;color:#4c1d95">🧪 Таблица растворимости кислот, солей и оснований</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span style="font-size:11px;color:#999;font-family:monospace">R или Esc — закрыть</span>
+        <button onclick="toggleRS()" style="background:#f0f0f0;border:none;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:14px;font-weight:700">✕</button>
+      </div>
+    </div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+    <table class="sol-table">
+<thead><tr><th style="min-width:90px"></th><th>H⁺</th><th>Li⁺</th><th>K⁺</th><th>Na⁺</th><th>NH₄⁺</th><th>Ba²⁺</th><th>Ca²⁺</th><th>Mg²⁺</th><th>Sr²⁺</th><th>Al³⁺</th><th>Cr³⁺</th><th>Fe²⁺</th><th>Fe³⁺</th><th>Mn²⁺</th><th>Zn²⁺</th><th>Ag⁺</th><th>Hg²⁺</th><th>Pb²⁺</th><th>Sn²⁺</th><th>Cu²⁺</th></tr></thead>
+<tbody>
+<tr><th>OH⁻</th><td class="sol-E"></td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>F⁻</th><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>Cl⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>Br⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>I⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-Q">?</td></tr>
+<tr><th>S²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-D">–</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>HS⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>SO₃²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>HSO₃⁻</th><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>SO₄²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td></tr>
+<tr><th>HSO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-D">–</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>NO₃⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td></tr>
+<tr><th>NO₂⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-M">M</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>PO₄³⁻</th><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>HPO₄²⁻</th><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-M">M</td><td class="sol-H">H</td><td class="sol-Q">?</td></tr>
+<tr><th>H₂PO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-D">–</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>CO₃²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-D">–</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-H">H</td></tr>
+<tr><th>HCO₃⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>CH₃COO⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-D">–</td><td class="sol-P">P</td></tr>
+<tr><th>SiO₃²⁻</th><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>MnO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td></tr>
+<tr><th>Cr₂O₇²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-M">M</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-M">M</td><td class="sol-Q">?</td><td class="sol-P">P</td></tr>
+<tr><th>CrO₄²⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-H">H</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td><td class="sol-H">H</td></tr>
+<tr><th>ClO₃⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-Q">?</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td></tr>
+<tr><th>ClO₄⁻</th><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-P">P</td><td class="sol-Q">?</td><td class="sol-P">P</td></tr>
+</tbody>
+</table>
+    </div>
+    <div class="sol-legend" style="margin-top:10px">
+      <span class="sol-leg sol-P">Р — растворяется (&gt;1 г/100 г H₂O)</span>
+      <span class="sol-leg sol-M">М — мало растворяется (0,1–1 г)</span>
+      <span class="sol-leg sol-H">Н — не растворяется (&lt;0,01 г)</span>
+      <span class="sol-leg sol-D">– — разлагается в воде</span>
+      <span class="sol-leg sol-Q">? — нет достоверных данных</span>
+    </div>
+    <div style="margin-top:12px;padding:10px 14px;background:linear-gradient(90deg,#fef2f2,#f5d840,#fef9c3);border-radius:8px;border:1px solid #7a4208">
+      <div style="font-size:11px;font-weight:800;color:#92400e;margin-bottom:5px">⚡ РЯД АКТИВНОСТИ / ЭЛЕКТРОХИМИЧЕСКИЙ РЯД НАПРЯЖЕНИЙ</div>
+      <div style="font-size:11px;line-height:1.8;font-family:monospace">
+        <span style="color:#dc2626;font-weight:700">Li Cs Rb K Ba Sr Ca Na Mg Sc Be Ti Hf Al Zr V Mn Cr Zn Fe Cd Co Ni Mo Sn W Pb</span>
+        &nbsp;<b style="font-size:14px;color:#111;padding:0 4px">H</b>&nbsp;
+        <span style="color:#059669;font-weight:700">Ge Sb Bi Cu Re Hg Ag Pd Pt Au</span>
+      </div>
+      <div style="font-size:9px;color:#92400e;margin-top:2px">← активность металлов уменьшается →</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
