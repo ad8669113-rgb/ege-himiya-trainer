@@ -1,0 +1,2486 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ОВР — Задание №19 ЕГЭ по химии</title>
+<script>if('scrollRestoration'in history)history.scrollRestoration='manual';</script>
+<style>
+:root{
+  --bg:#F0F7FF;--surface:#fff;--surface2:#E8F2FF;
+  --navy:#0C1A2E;--ink:#1E3A5F;--muted:#4A6080;--border:#CBD9EE;
+  --blue:#2563EB;--blue-soft:#DBEAFE;
+  --amber:#EA580C;--amber-soft:#FFEDD5;
+  --green:#059669;--green-soft:#D1FAE5;
+  --purple:#7C3AED;--purple-soft:#EDE9FE;
+  --red:#DC2626;--red-soft:#FEE2E2;
+  --gold:#D97706;--gold-soft:#FEF3C7;
+  --r:12px;--rs:8px;
+  --sh:0 2px 12px rgba(12,26,46,.09);
+  --shm:0 4px 24px rgba(12,26,46,.14);
+  --mono:'Courier New','Lucida Console',monospace;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0C1A2E;--surface:#1A2E4A;--surface2:#162540;
+  --navy:#E8F2FF;--ink:#B8D4F0;--muted:#7A9DC0;--border:#2A4060;
+  --blue:#60A5FA;--blue-soft:#1E3A5F;--amber:#FB923C;--amber-soft:#451A03;
+  --green:#34D399;--green-soft:#064E3B;--purple:#A78BFA;--purple-soft:#2E1065;
+  --red:#F87171;--red-soft:#450A0A;--gold:#FCD34D;--gold-soft:#451A03;
+  --sh:0 2px 12px rgba(0,0,0,.3);--shm:0 4px 24px rgba(0,0,0,.4);
+}}
+:root[data-theme="dark"]{
+  --bg:#0C1A2E;--surface:#1A2E4A;--surface2:#162540;
+  --navy:#E8F2FF;--ink:#B8D4F0;--muted:#7A9DC0;--border:#2A4060;
+  --blue:#60A5FA;--blue-soft:#1E3A5F;--amber:#FB923C;--amber-soft:#451A03;
+  --green:#34D399;--green-soft:#064E3B;--purple:#A78BFA;--purple-soft:#2E1065;
+  --red:#F87171;--red-soft:#450A0A;--gold:#FCD34D;--gold-soft:#451A03;
+  --sh:0 2px 12px rgba(0,0,0,.3);--shm:0 4px 24px rgba(0,0,0,.4);
+}
+:root[data-theme="light"]{
+  --bg:#F0F7FF;--surface:#fff;--surface2:#E8F2FF;
+  --navy:#0C1A2E;--ink:#1E3A5F;--muted:#4A6080;--border:#CBD9EE;
+  --blue:#2563EB;--blue-soft:#DBEAFE;--amber:#EA580C;--amber-soft:#FFEDD5;
+  --green:#059669;--green-soft:#D1FAE5;--purple:#7C3AED;--purple-soft:#EDE9FE;
+  --red:#DC2626;--red-soft:#FEE2E2;--gold:#D97706;--gold-soft:#FEF3C7;
+  --sh:0 2px 12px rgba(12,26,46,.09);--shm:0 4px 24px rgba(12,26,46,.14);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  background:var(--bg);color:var(--navy);line-height:1.6;min-height:100vh}
+a{color:var(--blue)}
+
+/* progress */
+#prog-wrap{position:fixed;top:0;left:0;right:0;height:4px;z-index:999;background:var(--border)}
+#prog-bar{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--amber));transition:width .1s linear}
+
+/* header */
+.site-header{background:var(--navy);color:#fff;padding:56px 24px 48px;position:relative;overflow:hidden}
+.site-header::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 80% 20%,rgba(37,99,235,.35) 0%,transparent 60%),
+             radial-gradient(ellipse at 10% 80%,rgba(234,88,12,.2) 0%,transparent 50%);
+  pointer-events:none}
+.header-inner{max-width:820px;margin:0 auto;position:relative}
+.header-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:14px}
+.header-title{font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.1;color:#fff;text-wrap:balance;margin-bottom:16px}
+.header-title span{color:#60A5FA}
+.header-sub{font-size:17px;color:rgba(255,255,255,.65);max-width:560px;line-height:1.5}
+.header-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+  padding:5px 12px;border-radius:100px;background:rgba(255,255,255,.1);
+  color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15)}
+.chip.blue{background:rgba(37,99,235,.3);color:#93C5FD;border-color:rgba(37,99,235,.4)}
+.chip.amber{background:rgba(234,88,12,.3);color:#FED7AA;border-color:rgba(234,88,12,.4)}
+.chip.green{background:rgba(5,150,105,.3);color:#6EE7B7;border-color:rgba(5,150,105,.4)}
+
+/* layout */
+.shell{max-width:820px;margin:0 auto;padding:40px 20px 80px}
+
+/* toc */
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px 28px;margin-bottom:40px;box-shadow:var(--sh)}
+.toc-title{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.toc ol{padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.toc li{font-size:14px}
+.toc a{color:var(--blue);font-weight:500;text-decoration:none}
+.toc a:hover{text-decoration:underline}
+
+/* section */
+.section{margin-bottom:56px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.section-title{font-size:clamp(20px,3.5vw,28px);font-weight:800;color:var(--navy);line-height:1.2;text-wrap:balance;margin-bottom:24px}
+
+/* cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px;box-shadow:var(--sh);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shm)}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card.blue-l{border-left:4px solid var(--blue)}
+.card.amber-l{border-left:4px solid var(--amber)}
+.card.green-l{border-left:4px solid var(--green)}
+.card.purple-l{border-left:4px solid var(--purple)}
+.card.red-l{border-left:4px solid var(--red)}
+.card.gold-l{border-left:4px solid var(--gold)}
+.card-icon{font-size:28px;margin-bottom:10px}
+.card-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.card-body{font-size:14px;color:var(--ink);line-height:1.6}
+.card-body p+p{margin-top:8px}
+.card-body strong{color:var(--navy);font-weight:700}
+
+/* def box */
+.def-box{border-radius:var(--r);padding:20px 24px;border:1.5px solid;margin-bottom:20px;font-size:15px;line-height:1.6}
+.def-box.blue{background:var(--blue-soft);border-color:var(--blue);color:var(--ink)}
+.def-box.amber{background:var(--amber-soft);border-color:var(--amber);color:var(--ink)}
+.def-box.green{background:var(--green-soft);border-color:var(--green);color:var(--ink)}
+.def-box.purple{background:var(--purple-soft);border-color:var(--purple);color:var(--ink)}
+.def-box .label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;opacity:.7}
+.def-box strong{font-weight:800}
+
+/* diagram */
+.diagram{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:24px;margin-bottom:24px;box-shadow:var(--sh);overflow-x:auto}
+.diag-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:15px;margin-bottom:10px}
+.diag-row:last-child{margin-bottom:0}
+.diag-box{padding:8px 14px;border-radius:var(--rs);font-weight:700;font-size:14px;white-space:nowrap}
+.diag-box.ox{background:var(--amber-soft);color:var(--amber);border:1.5px solid var(--amber)}
+.diag-box.red{background:var(--green-soft);color:var(--green);border:1.5px solid var(--green)}
+.diag-box.neutral{background:var(--surface2);color:var(--muted);border:1.5px solid var(--border)}
+.diag-arrow{font-size:18px;color:var(--muted)}
+.diag-e{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--blue);
+  background:var(--blue-soft);padding:3px 8px;border-radius:6px}
+
+/* table */
+.tbl-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border);box-shadow:var(--sh)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface)}
+thead th{background:var(--navy);color:#fff;padding:12px 16px;text-align:left;
+  font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+tbody td{padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even) td{background:var(--surface2)}
+td .ox{color:var(--amber);font-weight:700}
+td .red{color:var(--green);font-weight:700}
+td .both{color:var(--purple);font-weight:700}
+td code{font-family:var(--mono);font-size:13px;background:var(--surface2);padding:1px 5px;border-radius:4px}
+
+/* formula SO notation */
+.so-above{display:inline-flex;flex-direction:column;align-items:center;line-height:1;vertical-align:middle}
+.so-above .so-val{font-family:var(--mono);font-size:11px;font-weight:800;line-height:1;margin-bottom:2px}
+.so-above .so-el{font-size:inherit}
+.so-blue{color:var(--blue)}
+.so-amber{color:var(--amber)}
+.so-green{color:var(--green)}
+.so-red{color:var(--red)}
+.so-muted{color:var(--muted)}
+
+/* ovr reaction box */
+.rxn-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:20px 24px;box-shadow:var(--sh);overflow-x:auto;margin:16px 0}
+.rxn-formula{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--navy);
+  display:flex;align-items:center;flex-wrap:wrap;gap:4px;line-height:2.2}
+.rxn-coef{font-size:15px;font-weight:900;color:var(--blue);margin-right:1px}
+.rxn-plus,.rxn-arr{font-size:17px;color:var(--muted);padding:0 4px}
+.hl-ox{color:var(--amber);border-bottom:2px solid var(--amber)}
+.hl-red{color:var(--green);border-bottom:2px solid var(--green)}
+
+/* steps */
+.steps{display:flex;flex-direction:column;gap:16px}
+.step{display:flex;gap:16px;align-items:flex-start;background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--r);padding:20px;box-shadow:var(--sh)}
+.step-num{min-width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;flex-shrink:0}
+.step-content{flex:1}
+.step-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.step-body{font-size:14px;color:var(--ink);line-height:1.6}
+.step-body code{font-family:var(--mono);font-size:13px;background:var(--blue-soft);
+  padding:1px 5px;border-radius:4px;color:var(--blue)}
+.step-example{margin-top:10px;background:var(--surface2);border-radius:var(--rs);
+  padding:12px 14px;font-size:13px;color:var(--ink);font-family:var(--mono);line-height:1.8;overflow-x:auto}
+.step-example .comm{color:var(--muted);font-family:sans-serif;font-size:12px}
+
+/* electron balance table in step 3 */
+.ebal{width:100%;border-collapse:collapse;font-size:13px;font-family:var(--mono);margin-top:10px}
+.ebal td{padding:6px 10px;border:1px solid var(--border)}
+.ebal th{padding:6px 10px;border:1px solid var(--border);background:var(--surface2);
+  font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-family:sans-serif;font-weight:700}
+.ebal .eox{color:var(--amber);font-weight:700}
+.ebal .ered{color:var(--green);font-weight:700}
+.ebal .emul{color:var(--blue);font-weight:800}
+
+/* error cards */
+.error-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.error-card{background:var(--red-soft);border:1.5px solid var(--red);border-radius:var(--r);padding:20px}
+.error-icon{font-size:24px;margin-bottom:8px}
+.error-title{font-size:14px;font-weight:700;color:var(--red);margin-bottom:8px}
+.error-body{font-size:13px;color:var(--ink);line-height:1.5}
+.error-fix{margin-top:10px;font-size:13px;color:var(--green);font-weight:600;
+  padding-top:10px;border-top:1px solid rgba(220,38,38,.2)}
+
+/* lifehacks */
+.hack-list{display:flex;flex-direction:column;gap:12px}
+.hack{display:flex;gap:14px;align-items:flex-start;background:var(--gold-soft);
+  border:1px solid var(--gold);border-radius:var(--r);padding:16px 18px}
+.hack-icon{font-size:22px;flex-shrink:0}
+.hack-text{font-size:14px;color:var(--ink);line-height:1.5}
+.hack-text strong{color:var(--navy);font-weight:700}
+
+/* ════ CAROUSEL ══════════════════════════════════════ */
+.carousel-wrap{position:relative;user-select:none}
+
+.carousel-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;flex-wrap:wrap;gap:10px
+}
+.carousel-counter{font-size:14px;font-weight:700;color:var(--muted)}
+.carousel-counter span{color:var(--navy);font-size:18px}
+
+.carousel-prog{
+  flex:1;min-width:120px;height:6px;background:var(--surface2);
+  border-radius:100px;overflow:hidden
+}
+.carousel-prog-fill{
+  height:100%;background:linear-gradient(90deg,var(--blue),var(--green));
+  transition:width .35s ease;width:0
+}
+
+#prac-score-bar{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:14px 20px;display:flex;align-items:center;gap:16px;
+  box-shadow:var(--sh);margin-bottom:20px;flex-wrap:wrap
+}
+.ps-label{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.ps-nums{font-size:24px;font-weight:900;color:var(--navy);font-variant-numeric:tabular-nums}
+
+/* the card stage */
+.carousel-stage{
+  perspective:1000px;min-height:320px;
+  display:flex;align-items:stretch
+}
+.ccard{
+  flex:1;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:28px 28px 24px;box-shadow:var(--shm);
+  display:none;flex-direction:column;gap:12px;
+  transition:opacity .22s,transform .22s
+}
+.ccard.active{display:flex}
+.ccard.slide-left{animation:slideLeft .22s ease both}
+.ccard.slide-right{animation:slideRight .22s ease both}
+@keyframes slideLeft{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+@keyframes slideRight{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
+.ccard.correct{border-color:var(--green)}
+.ccard.wrong{border-color:var(--red)}
+
+.ccard-num{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ccard-q{font-size:15px;color:var(--ink);line-height:1.5}
+.ccard-formula{
+  font-family:var(--mono);font-size:22px;font-weight:700;color:var(--navy);
+  background:var(--surface2);border-radius:var(--rs);
+  padding:14px 18px;display:inline-block;letter-spacing:.04em;
+  align-self:flex-start;line-height:2
+}
+.hl{color:var(--amber);border-bottom:2.5px solid var(--amber);padding-bottom:1px}
+.ccard-input-row{display:flex;gap:10px;align-items:center;margin-top:4px}
+.ccard-input{
+  flex:1;padding:11px 14px;font-size:17px;font-family:var(--mono);
+  border:1.5px solid var(--border);border-radius:var(--rs);
+  background:var(--bg);color:var(--navy);outline:none;
+  transition:border-color .2s;max-width:160px
+}
+.ccard-input:focus{border-color:var(--blue)}
+.ccard-input.ok{border-color:var(--green);background:var(--green-soft)}
+.ccard-input.err{border-color:var(--red);background:var(--red-soft)}
+.ccard-input:read-only{opacity:.7}
+.ccard-btn{
+  padding:11px 20px;border-radius:var(--rs);font-size:14px;font-weight:700;
+  cursor:pointer;border:none;background:var(--blue);color:#fff;
+  transition:background .15s,transform .1s;flex-shrink:0
+}
+.ccard-btn:hover{background:var(--ink)}
+.ccard-btn:active{transform:scale(.97)}
+.ccard-btn:disabled{opacity:.5;cursor:default;transform:none}
+.ccard-feedback{font-size:14px;font-weight:600;min-height:22px}
+.ccard-feedback.ok{color:var(--green)}
+.ccard-feedback.err{color:var(--red)}
+@keyframes solReveal{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.sol-open{animation:solReveal .3s ease both}
+
+/* nav buttons */
+.carousel-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px}
+.cnav-btn{
+  width:48px;height:48px;border-radius:50%;border:1.5px solid var(--border);
+  background:var(--surface);color:var(--navy);font-size:20px;cursor:pointer;
+  box-shadow:var(--sh);transition:background .15s,transform .1s;
+  display:flex;align-items:center;justify-content:center
+}
+.cnav-btn:hover{background:var(--surface2);transform:scale(1.06)}
+.cnav-btn:active{transform:scale(.95)}
+.cnav-btn:disabled{opacity:.3;cursor:default;transform:none}
+.cnav-dots{display:flex;gap:6px;align-items:center}
+.cnav-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--border);transition:all .2s;cursor:pointer
+}
+.cnav-dot.act{background:var(--blue);width:24px;border-radius:4px}
+
+/* finish button */
+.finish-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;margin-top:16px;padding:14px 20px;
+  background:var(--navy);color:#fff;border:none;border-radius:var(--r);
+  font-size:15px;font-weight:700;cursor:pointer;
+  box-shadow:var(--shm);transition:background .15s,transform .1s;
+}
+.finish-btn:hover{background:var(--ink);transform:translateY(-1px)}
+.finish-btn:active{transform:scale(.98)}
+
+/* results overlay */
+.results-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(12,26,46,.7);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.results-overlay.show{opacity:1;pointer-events:auto}
+.results-card{
+  background:var(--surface);border-radius:var(--r);padding:36px 32px;
+  max-width:420px;width:100%;box-shadow:0 20px 60px rgba(12,26,46,.3);
+  text-align:center;
+  transform:translateY(30px);transition:transform .3s;
+}
+.results-overlay.show .results-card{transform:none}
+.res-grade{font-size:28px;margin-bottom:16px}
+.res-ring-wrap{display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.res-ring{
+  width:140px;height:140px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.res-ring-inner{
+  width:104px;height:104px;border-radius:50%;
+  background:var(--surface);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:2px;
+  box-shadow:inset 0 0 0 2px var(--border);
+}
+.res-pct{font-size:34px;font-weight:900;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums}
+.res-pct-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.res-stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px
+}
+.res-stat{
+  background:var(--surface2);border-radius:var(--rs);padding:12px;
+}
+.res-stat-num{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums}
+.res-stat-num.good{color:var(--green)}
+.res-stat-num.bad{color:var(--red)}
+.res-stat-label{font-size:12px;color:var(--muted);margin-top:2px}
+.res-err-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:13px;border-radius:var(--rs);
+  background:var(--red-soft);color:var(--red);
+  border:1.5px solid var(--red);font-size:14px;font-weight:700;
+  cursor:pointer;transition:background .15s;margin-bottom:10px;
+}
+.res-err-btn:hover{background:var(--red);color:#fff}
+.res-retry-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:13px;border-radius:var(--rs);
+  background:var(--blue-soft);color:var(--blue);
+  border:1.5px solid var(--blue);font-size:14px;font-weight:700;
+  cursor:pointer;transition:background .15s;
+}
+.res-retry-btn:hover{background:var(--blue);color:#fff}
+.res-close{
+  position:absolute;top:16px;right:16px;
+  width:32px;height:32px;border-radius:50%;
+  background:var(--surface2);border:1px solid var(--border);
+  font-size:16px;cursor:pointer;color:var(--muted);
+  display:flex;align-items:center;justify-content:center;
+}
+.res-close:hover{background:var(--border)}
+
+/* error mode section */
+.error-mode-section{
+  display:none;margin-top:32px;padding:24px;
+  background:var(--red-soft);border:2px solid var(--red);
+  border-radius:var(--r);
+}
+.em-header{
+  display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap
+}
+.em-badge{
+  font-size:12px;font-weight:700;padding:4px 12px;border-radius:100px;
+  background:var(--red);color:#fff;letter-spacing:.05em;text-transform:uppercase;
+}
+.em-title{font-size:18px;font-weight:800;color:var(--navy)}
+.em-sub{font-size:13px;color:var(--ink);margin-bottom:16px;line-height:1.5}
+
+/* homework */
+.hw-block{background:linear-gradient(135deg,var(--navy) 0%,var(--ink) 100%);
+  border-radius:var(--r);padding:32px;color:#fff;margin-top:24px;box-shadow:var(--shm)}
+.hw-title{font-size:20px;font-weight:900;margin-bottom:6px}
+.hw-sub{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:24px}
+.hw-links{display:flex;flex-direction:column;gap:12px}
+.hw-link{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);border-radius:var(--rs);
+  padding:14px 18px;text-decoration:none;color:#fff;transition:background .15s}
+.hw-link:hover{background:rgba(255,255,255,.14);color:#fff}
+.hw-link-icon{font-size:22px;flex-shrink:0}
+.hw-link-info{flex:1}
+.hw-link-title{font-size:14px;font-weight:700;margin-bottom:2px}
+.hw-link-desc{font-size:12px;color:rgba(255,255,255,.55)}
+.hw-link-arrow{opacity:.4;font-size:18px;flex-shrink:0}
+
+/* back to top / theme */
+#back-top{position:fixed;bottom:24px;right:20px;width:44px;height:44px;border-radius:50%;
+  background:var(--navy);color:#fff;border:none;font-size:18px;cursor:pointer;
+  box-shadow:var(--shm);display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:100}
+#back-top.show{opacity:1;pointer-events:auto}
+#back-top:hover{transform:translateY(-3px)}
+
+/* fade-in */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease}
+.fade-in.visible{opacity:1;transform:none}
+
+/* two-col for def boxes */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+
+/* mobile */
+@media(max-width:600px){
+  .shell{padding:24px 14px 80px}
+  .site-header{padding:40px 16px 36px}
+  .card-grid,.error-cards{grid-template-columns:1fr}
+  .ans-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+  .step{gap:12px}
+  .step-num{min-width:34px;height:34px;font-size:15px}
+  .hw-block{padding:24px 18px}
+  .diag-row{font-size:13px}
+  .two-col{grid-template-columns:1fr}
+  .ccard{padding:20px 16px}
+  .ccard-formula{font-size:18px}
+  .rxn-formula{font-size:14px}
+  .so-above .so-val{font-size:10px}
+}
+@media(max-width:380px){
+  .header-title{font-size:24px}
+  .ccard-input{font-size:15px}
+}
+
+/* ─── LINE-19 ALL DONE OVERLAY ───────────────── */
+#l19-done-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(12,26,46,.55);backdrop-filter:blur(4px);
+  display:none;overflow:hidden;
+}
+#l19-done-card{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  background:#fff;border-radius:24px;
+  padding:40px 32px 36px;text-align:center;
+  box-shadow:0 24px 64px rgba(12,26,46,.35);
+  max-width:360px;width:90%;
+  z-index:1;
+}
+@keyframes confettiFall{
+  0%  {transform:translateY(-10px) rotate(0deg);   opacity:1}
+  85% {opacity:1}
+  100%{transform:translateY(105vh) rotate(800deg); opacity:0}
+}
+@keyframes l19CardPop{
+  0%  {transform:translate(-50%,-50%) scale(.7);opacity:0}
+  70% {transform:translate(-50%,-50%) scale(1.04)}
+  100%{transform:translate(-50%,-50%) scale(1);  opacity:1}
+}
+#l19-done-card.pop{animation:l19CardPop .45s cubic-bezier(.34,1.56,.64,1) both}
+
+/* ─── TOPBAR ──────────────────────────────────── */
+#topbar{position:fixed;top:12px;right:16px;z-index:999;display:flex;align-items:center;gap:4px;background:var(--surface);border:1.5px solid rgba(37,99,235,.3);border-radius:999px;padding:5px 6px;box-shadow:0 4px 20px rgba(37,99,235,.2);transition:all .25s ease;cursor:pointer;user-select:none}
+.tb-collapsible{display:flex;align-items:center;gap:4px}
+#topbar .tb-expand{display:none}
+#topbar.collapsed .tb-expand{display:flex}
+#topbar.collapsed .tb-collapsible{display:none}
+#topbar.collapsed{gap:0}
+.tb-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;border-radius:50%;font-size:15px;color:var(--muted);cursor:pointer;transition:.12s;flex-shrink:0}
+.tb-btn:hover{background:var(--blue-soft);color:var(--blue)}
+.tb-sep{width:1px;height:16px;background:rgba(37,99,235,.15);margin:0 2px;flex-shrink:0}
+.tb-badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.7px;color:var(--blue);padding:0 4px;white-space:nowrap;text-transform:uppercase}
+.tb-prog-wrap{width:52px;height:2px;background:rgba(37,99,235,.15);border-radius:1px;flex-shrink:0}
+.tb-prog-fill{height:2px;background:linear-gradient(90deg,var(--blue),#60a5fa);width:0;border-radius:1px;transition:width .1s}
+.tb-label{font-family:var(--mono);font-size:10px;color:var(--muted);padding:0 4px;white-space:nowrap}
+.tb-streak{display:flex;gap:3px;align-items:center;padding:0 2px}
+.tb-day{width:7px;height:7px;border-radius:50%;background:rgba(37,99,235,.15);flex-shrink:0;transition:.2s}
+.tb-day.done{background:var(--green)}
+.tb-day.today{outline:1.5px solid rgba(37,99,235,.5);outline-offset:1.5px}
+/* ─── SIDE MENU ───────────────────────────────── */
+#menu-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:1000}
+#menu-overlay.open{display:block}
+#menu-panel{position:fixed;top:0;left:0;width:280px;height:100vh;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:20px;z-index:1001;box-shadow:4px 0 20px rgba(37,99,235,.12);transform:translateX(-100%);transition:transform .3s ease}
+#menu-panel.open{transform:none}
+.mp-title{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;padding:10px 12px 4px;font-family:var(--mono)}
+.mp-item{padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--ink);display:flex;gap:10px;align-items:center;margin-bottom:1px;transition:.1s;text-decoration:none}
+.mp-item:hover{background:var(--blue-soft);color:var(--blue)}
+.mp-close{background:none;border:none;font-size:20px;color:var(--muted);cursor:pointer;padding:4px;float:right;margin-bottom:8px}
+/* ─── HERO ────────────────────────────────────── */
+.hero{background:linear-gradient(135deg,#060e2b 0%,#0d2461 38%,#1565c0 72%,#1e88e5 100%);padding:48px 32px 40px;margin:0 -24px 40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;bottom:-30%;left:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.2) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);border-radius:20px;padding:4px 14px;font-size:12px;font-family:var(--mono);letter-spacing:.6px;margin-bottom:16px}
+.hero h1{font-size:clamp(26px,5vw,44px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#fff;margin-bottom:12px}
+.hero h1 em{color:#93c5fd;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.68);line-height:1.7;max-width:540px;margin-bottom:22px}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px}
+.hero-chip{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.17);color:rgba(255,255,255,.88);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+@media(max-width:600px){.hero{padding:40px 16px 32px;margin:0 -14px 32px}}
+</style>
+</head>
+<body>
+
+<div id="prog-wrap"><div id="prog-bar"></div></div>
+
+<!-- TOPBAR -->
+<div id="topbar" class="collapsed" onclick="toggleTopbar(event)" title="Нажми чтобы развернуть">
+  <span class="tb-expand" style="font-size:18px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--blue);font-weight:700">☰</span>
+  <div class="tb-collapsible">
+    <button class="tb-btn" onclick="openMenu()" title="Меню">☰</button>
+    <div class="tb-sep"></div>
+    <span class="tb-badge">ЛИНИЯ 19 · ЕГЭ ХИМИЯ</span>
+    <div class="tb-sep"></div>
+    <div class="tb-prog-wrap"><div class="tb-prog-fill" id="tb-pf"></div></div>
+    <span class="tb-label" id="tb-lbl">0%</span>
+    <div class="tb-sep"></div>
+    <div class="tb-streak" id="tb-streak"></div>
+    <button class="tb-btn" onclick="clearAll()" title="Сбросить всё">🗑️</button>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" onclick="toggleTopbar(event)" title="Свернуть">✕</button>
+  </div>
+</div>
+
+<!-- SIDE MENU -->
+<div id="menu-overlay" onclick="closeMenu()"></div>
+<div id="menu-panel">
+  <button class="mp-close" onclick="closeMenu()">✕</button>
+  <div class="mp-title">Теория</div>
+  <a class="mp-item" href="#s1" onclick="closeMenu()">🔬 Что такое ОВР</a>
+  <a class="mp-item" href="#s2" onclick="closeMenu()">⚡ Окислитель и восстановитель</a>
+  <a class="mp-item" href="#s4" onclick="closeMenu()">⚖️ Электронный баланс</a>
+  <div class="mp-title" style="margin-top:12px">Задачи</div>
+  <a class="mp-item" href="#s8" onclick="closeMenu()">📝 70 задач — степень окисления</a>
+  <div class="mp-title" style="margin-top:12px">Типы заданий</div>
+  <a class="mp-item" href="#t1" onclick="closeMenu()">🔷 Тип 1 — Ион → ОВР-свойство</a>
+  <a class="mp-item" href="#t2" onclick="closeMenu()">🔷 Тип 2 — Схема реакции → изменение СО</a>
+  <a class="mp-item" href="#t3" onclick="closeMenu()">🔷 Тип 3 — Схема → свойство элемента</a>
+  <a class="mp-item" href="#t4" onclick="closeMenu()">🔷 Тип 4 — Уравнение → формула окислителя</a>
+  <a class="mp-item" href="#t5" onclick="closeMenu()">🔷 Тип 5 — СО → уравнение реакции</a>
+</div>
+
+<div class="shell">
+
+<div class="hero">
+  <div class="hero-tag">ЛИНИЯ 19 · ЕГЭ ХИМИЯ · 1 БАЛЛ</div>
+  <h1>Окислительно-<br><em>восстановительные</em><br>реакции</h1>
+  <p class="hero-sub">Полный разбор: что такое ОВР, окислители и восстановители, метод электронного баланса и 70 задач на степень окисления.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">🔬 Теория ОВР</span>
+    <span class="hero-chip">⚡ Окислители</span>
+    <span class="hero-chip">🔋 Восстановители</span>
+    <span class="hero-chip">70 задач</span>
+    <span class="hero-chip">1 балл</span>
+  </div>
+</div>
+
+<!-- ══ S1 ══ -->
+<section class="section fade-in" id="s1">
+  <div class="section-label">Раздел 1</div>
+  <h2 class="section-title">Что такое ОВР — простым языком</h2>
+  <div class="def-box blue">
+    <div class="label">Определение</div>
+    <strong>Окислительно-восстановительные реакции (ОВР)</strong> — это реакции, в ходе которых <strong>степени окисления</strong> атомов элементов изменяются. Одни атомы <strong>отдают электроны</strong>, другие — <strong>принимают</strong>.
+  </div>
+  <p style="font-size:15px;color:var(--ink);margin-bottom:20px;line-height:1.7">
+    Представь атом как человека с деньгами. Отдаёт деньги — «беднеет» (степень окисления растёт). Получает — «богатеет» (степень окисления падает). Электроны — это валюта химии.
+  </p>
+  <div class="diagram">
+    <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Схема ОВР</div>
+    <div class="diag-row">
+      <div class="diag-box ox">Окислитель</div>
+      <span class="diag-arrow">+</span>
+      <div class="diag-box red">Восстановитель</div>
+      <span class="diag-arrow">→</span>
+      <div class="diag-box neutral">Продукт восст.</div>
+      <span class="diag-arrow">+</span>
+      <div class="diag-box neutral">Продукт окисл.</div>
+    </div>
+    <div class="diag-row" style="margin-top:14px;gap:6px;align-items:center">
+      <div style="flex:1;height:2px;background:var(--amber);border-radius:2px"></div>
+      <div class="diag-e">e⁻ переходят от восстановителя к окислителю</div>
+      <div style="flex:1;height:2px;background:var(--green);border-radius:2px"></div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card blue-l fade-in">
+      <div class="card-icon">⚡</div>
+      <div class="card-title">Электроны — главное</div>
+      <div class="card-body">В ОВР всегда передаются электроны. Нет передачи электронов — нет ОВР.</div>
+    </div>
+    <div class="card green-l fade-in">
+      <div class="card-icon">⚖️</div>
+      <div class="card-title">Баланс электронов</div>
+      <div class="card-body">Сколько e⁻ отдал восстановитель — столько принял окислитель. Основа метода электронного баланса.</div>
+    </div>
+    <div class="card amber-l fade-in">
+      <div class="card-icon">🔄</div>
+      <div class="card-title">Две полуреакции</div>
+      <div class="card-body">Любую ОВР можно разбить на <strong>окисление</strong> (отдача e⁻) и <strong>восстановление</strong> (приём e⁻). Они происходят одновременно.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S2 ══ -->
+<section class="section fade-in" id="s2">
+  <div class="section-label">Раздел 2</div>
+  <h2 class="section-title">Окислитель и восстановитель</h2>
+  <div class="two-col">
+    <div class="def-box amber">
+      <div class="label">Окислитель</div>
+      <strong>Принимает e⁻ → восстанавливается</strong><br>
+      → степень окисления <strong>понижается ↓</strong><br><br>
+      Атом получает электроны — сам при этом <em>восстанавливается</em>.
+    </div>
+    <div class="def-box green">
+      <div class="label">Восстановитель</div>
+      <strong>Отдаёт e⁻ → окисляется</strong><br>
+      → степень окисления <strong>повышается ↑</strong><br><br>
+      Атом теряет электроны — сам при этом <em>окисляется</em>.
+    </div>
+  </div>
+  <div class="def-box purple" style="margin-bottom:24px">
+    <div class="label">Хитрость — запомни наоборот!</div>
+    <strong>Окислитель</strong> — сам <em>восстанавливается</em> (С.О. ↓)&nbsp;&nbsp;|&nbsp;&nbsp;
+    <strong>Восстановитель</strong> — сам <em>окисляется</em> (С.О. ↑)<br><br>
+    Окислитель окисляет <em>других</em>, а сам принимает e⁻ и восстанавливается.
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Свойство</th>
+          <th>🟠 Окислитель</th>
+          <th>🟢 Восстановитель</th>
+          <th>🔵 И то и другое</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Что делает</strong></td><td>Принимает e⁻</td><td>Отдаёт e⁻</td><td>И то и другое</td></tr>
+        <tr><td><strong>Процесс</strong></td><td class="ox">Восстанавливается</td><td class="red">Окисляется</td><td class="both">Диспропорционирование</td></tr>
+        <tr><td><strong>С.О.</strong></td><td>Понижается ↓</td><td>Повышается ↑</td><td>Промежуточная</td></tr>
+        <tr><td><strong>Примеры</strong></td>
+          <td><code>KMn<sup>+7</sup>O₄</code>, <code>HN<sup>+5</sup>O₃</code></td>
+          <td><code>N<sup>−3</sup>H₃</code>, <code>H₂S<sup>−2</sup></code></td>
+          <td><code>S<sup>+4</sup>O₂</code>, <code>HN<sup>+3</sup>O₂</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ══ S4 — ALGORITHM ══ -->
+<section class="section fade-in" id="s4">
+  <div class="section-label">Раздел 3</div>
+  <h2 class="section-title">Алгоритм решения задания №19</h2>
+
+  <p style="font-size:15px;color:var(--ink);margin-bottom:16px;line-height:1.7">
+    Разберём на конкретной реакции — одной из самых частых на ЕГЭ:
+  </p>
+
+  <!-- исходная реакция без СО -->
+  <div class="rxn-box">
+    <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Исходная реакция</div>
+    <div class="rxn-formula" style="font-size:17px">
+      KMnO₄ &nbsp;<span class="rxn-plus">+</span>&nbsp; H₂S &nbsp;<span class="rxn-plus">+</span>&nbsp; H₂SO₄ &nbsp;<span class="rxn-arr">→</span>&nbsp; MnSO₄ &nbsp;<span class="rxn-plus">+</span>&nbsp; S↓ &nbsp;<span class="rxn-plus">+</span>&nbsp; K₂SO₄ &nbsp;<span class="rxn-plus">+</span>&nbsp; H₂O
+    </div>
+  </div>
+
+  <div class="steps">
+
+    <!-- ШАГ 1 -->
+    <div class="step fade-in">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Расставь степени окисления у всех элементов</div>
+        <div class="step-body">
+          Начинай с элементов с постоянной С.О.: металлы I А (+1), II А (+2), F (−1), O (−2), H (+1). Переменные элементы — через уравнение суммы.
+
+          <!-- реакция с С.О. над каждым элементом -->
+          <div class="rxn-box" style="margin-top:14px;background:var(--surface2)">
+            <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px">Реакция со степенями окисления</div>
+            <div style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--navy);line-height:3;display:flex;flex-wrap:wrap;align-items:center;gap:4px;overflow-x:auto">
+
+              <!-- KMnO4 -->
+              <span class="so-above"><span class="so-val so-blue">+1</span><span class="so-el">K</span></span><span class="so-above"><span class="so-val so-amber hl-ox" style="text-decoration:underline;text-decoration-color:var(--amber)">+7</span><span class="so-el">Mn</span></span><span class="so-above"><span class="so-val so-muted">−2</span><span class="so-el">O</span></span><span style="color:var(--muted);font-size:13px">₄</span>
+
+              <span style="color:var(--muted);padding:0 4px">+</span>
+
+              <!-- H2S -->
+              <span class="so-above"><span class="so-val so-muted">+1</span><span class="so-el">H</span></span><span style="color:var(--muted);font-size:13px">₂</span><span class="so-above"><span class="so-val so-green hl-red" style="text-decoration:underline;text-decoration-color:var(--green)">−2</span><span class="so-el">S</span></span>
+
+              <span style="color:var(--muted);padding:0 4px">+</span>
+
+              <!-- H2SO4 -->
+              <span class="so-above"><span class="so-val so-muted">+1</span><span class="so-el">H</span></span><span style="color:var(--muted);font-size:13px">₂</span><span class="so-above"><span class="so-val so-muted">+6</span><span class="so-el">S</span></span><span class="so-above"><span class="so-val so-muted">−2</span><span class="so-el">O</span></span><span style="color:var(--muted);font-size:13px">₄</span>
+
+              <span style="color:var(--muted);padding:0 8px">→</span>
+
+              <!-- MnSO4 -->
+              <span class="so-above"><span class="so-val so-green">+2</span><span class="so-el">Mn</span></span><span class="so-above"><span class="so-val so-muted">+6</span><span class="so-el">S</span></span><span class="so-above"><span class="so-val so-muted">−2</span><span class="so-el">O</span></span><span style="color:var(--muted);font-size:13px">₄</span>
+
+              <span style="color:var(--muted);padding:0 4px">+</span>
+
+              <!-- S0 -->
+              <span class="so-above"><span class="so-val so-amber">0</span><span class="so-el">S</span></span>↓
+
+              <span style="color:var(--muted);padding:0 4px">+</span>
+
+              <!-- K2SO4 -->
+              <span class="so-above"><span class="so-val so-muted">+1</span><span class="so-el">K</span></span><span style="color:var(--muted);font-size:13px">₂</span><span class="so-above"><span class="so-val so-muted">+6</span><span class="so-el">S</span></span><span class="so-above"><span class="so-val so-muted">−2</span><span class="so-el">O</span></span><span style="color:var(--muted);font-size:13px">₄</span>
+
+              <span style="color:var(--muted);padding:0 4px">+</span>
+
+              <!-- H2O -->
+              <span class="so-above"><span class="so-val so-muted">+1</span><span class="so-el">H</span></span><span style="color:var(--muted);font-size:13px">₂</span><span class="so-above"><span class="so-val so-muted">−2</span><span class="so-el">O</span></span>
+            </div>
+            <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:12px;font-size:13px">
+              <span style="background:var(--amber-soft);color:var(--amber);padding:4px 10px;border-radius:6px;font-weight:700">🟠 Mn: +7 → изменилась!</span>
+              <span style="background:var(--green-soft);color:var(--green);padding:4px 10px;border-radius:6px;font-weight:700">🟢 S: −2 → изменилась!</span>
+              <span style="background:var(--surface);color:var(--muted);padding:4px 10px;border-radius:6px;border:1px solid var(--border)">K, H, O — не изменились</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ШАГ 2 -->
+    <div class="step fade-in">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Найди атомы, у которых изменилась С.О. — определи окислитель и восстановитель</div>
+        <div class="step-body">
+          Сравни С.О. в реагентах и продуктах. Повысилась → окисление (восстановитель). Понизилась → восстановление (окислитель).
+          <div class="step-example">
+<span class="ebal" style="display:table;width:auto">
+Mn: <span style="color:var(--amber)">+7</span> → <span style="color:var(--green)">+2</span>  &nbsp; С.О. понизилась → восстанавливается → <b>окислитель</b> (KMnO₄)
+S:  <span style="color:var(--green)">−2</span> → <span style="color:var(--amber)">0</span>   &nbsp;&nbsp; С.О. повысилась  → окисляется     → <b>восстановитель</b> (H₂S)
+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /steps -->
+</section>
+
+<!-- ══ S5 — REMOVED ══ -->
+<section class="section fade-in" id="s5" style="display:none">
+  <div class="section-label">Раздел 5</div>
+  <h2 class="section-title">Сильные окислители и восстановители</h2>
+
+  <div class="def-box blue" style="margin-bottom:24px">
+    <div class="label">Правило прогноза</div>
+    <strong>Высшая С.О.</strong> → только окислитель &nbsp;|&nbsp; <strong>Низшая С.О.</strong> → только восстановитель &nbsp;|&nbsp; <strong>Промежуточная</strong> → и то и другое
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px">
+
+    <!-- ОКИСЛИТЕЛИ -->
+    <div class="card amber-l fade-in">
+      <div class="card-icon">⚡</div>
+      <div class="card-title">Только окислители — С.О. понижается после стрелки</div>
+      <div class="card-body">
+        Атомы в <strong>высшей</strong> С.О. — принимают e⁻, некуда повышать.<br><br>
+        <div style="display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:13px">
+          <div style="background:var(--amber-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">KMnO₄ — Mn: +7 → +2</div>
+            2KMn<span style="color:var(--amber);font-size:11px;vertical-align:super">+7</span>O₄ + 5H₂S + 3H₂SO₄<br>→ 2Mn<span style="color:var(--green);font-size:11px;vertical-align:super">+2</span>SO₄ + 5S↓ + K₂SO₄ + 8H₂O
+          </div>
+          <div style="background:var(--amber-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">HNO₃ (конц.) — N: +5 → +4</div>
+            Cu + 4HN<span style="color:var(--amber);font-size:11px;vertical-align:super">+5</span>O₃(конц.)<br>→ Cu(NO₃)₂ + 2N<span style="color:var(--green);font-size:11px;vertical-align:super">+4</span>O₂↑ + 2H₂O
+          </div>
+          <div style="background:var(--amber-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">H₂SO₄ (конц.) — S: +6 → +4</div>
+            Zn + 2H₂S<span style="color:var(--amber);font-size:11px;vertical-align:super">+6</span>O₄(конц.)<br>→ ZnSO₄ + S<span style="color:var(--green);font-size:11px;vertical-align:super">+4</span>O₂↑ + 2H₂O
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ВОССТАНОВИТЕЛИ -->
+    <div class="card green-l fade-in">
+      <div class="card-icon">🔋</div>
+      <div class="card-title">Только восстановители — С.О. повышается после стрелки</div>
+      <div class="card-body">
+        Атомы в <strong>низшей</strong> С.О. — отдают e⁻, некуда понижать.<br><br>
+        <div style="display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:13px">
+          <div style="background:var(--green-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">H₂S — S: −2 → +4</div>
+            2H₂S<span style="color:var(--red);font-size:11px;vertical-align:super">−2</span> + 3O₂<br>→ 2S<span style="color:var(--amber);font-size:11px;vertical-align:super">+4</span>O₂ + 2H₂O
+          </div>
+          <div style="background:var(--green-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">NH₃ — N: −3 → +2</div>
+            4N<span style="color:var(--red);font-size:11px;vertical-align:super">−3</span>H₃ + 5O₂<br>→ 4N<span style="color:var(--amber);font-size:11px;vertical-align:super">+2</span>O + 6H₂O
+          </div>
+          <div style="background:var(--green-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">Na — Na: 0 → +1</div>
+            2Na<span style="color:var(--red);font-size:11px;vertical-align:super">0</span> + Cl₂<br>→ 2Na<span style="color:var(--amber);font-size:11px;vertical-align:super">+1</span>Cl
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- И ТО И ДРУГОЕ -->
+    <div class="card purple-l fade-in">
+      <div class="card-icon">🔄</div>
+      <div class="card-title">И окислитель, и восстановитель — после стрелки С.О. одного элемента и повышается, и понижается</div>
+      <div class="card-body">
+        Атомы с <strong>промежуточной</strong> С.О. — могут и отдавать, и принимать e⁻.<br><br>
+        <div style="display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:13px">
+          <div style="background:var(--purple-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--purple);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">Cl₂ — Cl: 0 → −1 и 0 → +1</div>
+            Cl₂<span style="color:var(--purple);font-size:11px;vertical-align:super">0</span> + 2NaOH<br>→ NaCl<span style="color:var(--green);font-size:11px;vertical-align:super">−1</span> + NaClO<span style="color:var(--amber);font-size:11px;vertical-align:super">+1</span> + H₂O
+          </div>
+          <div style="background:var(--purple-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--purple);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">H₂O₂ — O: −1 → −2 и −1 → 0</div>
+            2H₂O<span style="color:var(--purple);font-size:11px;vertical-align:super">−1</span>₂<br>→ 2H₂O<span style="color:var(--green);font-size:11px;vertical-align:super">−2</span> + O<span style="color:var(--amber);font-size:11px;vertical-align:super">0</span>₂↑
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- НЕ ОВР -->
+    <div class="card red-l fade-in">
+      <div class="card-icon">🚫</div>
+      <div class="card-title">Это НЕ ОВР — С.О. не меняется!</div>
+      <div class="card-body">
+        Если степени окисления всех элементов <strong>одинаковы</strong> в реагентах и продуктах — это не ОВР.<br><br>
+        <div style="display:flex;flex-direction:column;gap:10px;font-family:var(--mono);font-size:13px">
+          <div style="background:var(--red-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--red);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">Нейтрализация — СО не меняются</div>
+            Na<span style="color:var(--muted);font-size:10px;vertical-align:super">+1</span>OH + HCl → Na<span style="color:var(--muted);font-size:10px;vertical-align:super">+1</span>Cl + H₂O<br>
+            <span style="font-family:sans-serif;font-size:11px;color:var(--red)">Na: +1→+1, Cl: −1→−1 ❌ ОВР</span>
+          </div>
+          <div style="background:var(--red-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--red);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">Обмен — СО не меняются</div>
+            BaCl₂ + Na₂SO₄ → BaSO₄↓ + 2NaCl<br>
+            <span style="font-family:sans-serif;font-size:11px;color:var(--red)">Ba: +2→+2, S: +6→+6 ❌ ОВР</span>
+          </div>
+          <div style="background:var(--red-soft);border-radius:var(--rs);padding:10px 12px;line-height:1.8">
+            <div style="font-family:sans-serif;font-size:11px;font-weight:700;color:var(--red);margin-bottom:4px;letter-spacing:.06em;text-transform:uppercase">Разложение карбоната — СО не меняются</div>
+            CaCO₃ → CaO + CO₂<br>
+            <span style="font-family:sans-serif;font-size:11px;color:var(--red)">Ca: +2→+2, C: +4→+4 ❌ ОВР</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ S7 — REMOVED ══ -->
+<section class="section fade-in" id="s7" style="display:none">
+  <div class="section-label">Раздел 7</div>
+  <h2 class="section-title">Лайфхаки для задания №19</h2>
+  <div class="hack-list">
+    <div class="hack fade-in">
+      <div class="hack-icon">🎯</div>
+      <div class="hack-text"><strong>«ПОВО» — мнемоника</strong><br>
+      <strong>П</strong>ринимает → <strong>О</strong>кислитель → <strong>В</strong>осстанавливается. Отдаёт → Восстановитель → Окисляется.</div>
+    </div>
+    <div class="hack fade-in">
+      <div class="hack-icon">⚡</div>
+      <div class="hack-text"><strong>«Флажки» — быстрое распознавание</strong><br>
+      Увидел KMnO₄, K₂Cr₂O₇, HNO₃ (конц.), H₂SO₄ (конц.) — сразу пиши «окислитель». H₂S, KI, NH₃, металл — «восстановитель».</div>
+    </div>
+    <div class="hack fade-in">
+      <div class="hack-icon">📊</div>
+      <div class="hack-text"><strong>Метод «стрелка» для С.О.</strong><br>
+      Нарисуй над формулой стрелку: С.О. в реагенте → С.О. в продукте. Стрелка ↑ = окисление, ↓ = восстановление.</div>
+    </div>
+    <div class="hack fade-in">
+      <div class="hack-icon">🚀</div>
+      <div class="hack-text"><strong>Порядок расстановки С.О.</strong><br>
+      Сначала K, Na, Ca, Ba, F. Потом O, H. Последними — переменные (N, S, Mn, Cr, Fe) через сумму = заряду.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S8 — CAROUSEL ══ -->
+<section class="section fade-in" id="s8">
+  <div class="section-label">Раздел 4</div>
+  <h2 class="section-title">70 задач — определи степень окисления</h2>
+
+  <!-- NOTEBOOK INSTRUCTION -->
+  <div style="background:var(--gold-soft);border:2px solid var(--gold);border-radius:var(--r);padding:20px 22px;margin-bottom:24px">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">📓 Задание в тетрадь</div>
+    <p style="font-size:15px;color:var(--navy);font-weight:700;margin-bottom:8px">Для каждого из 45 соединений запиши в тетрадь решение по образцу:</p>
+    <div style="background:var(--surface);border-radius:var(--rs);padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--ink);line-height:2;overflow-x:auto">
+      <div style="color:var(--muted);font-family:sans-serif;font-size:11px;margin-bottom:4px">ОБРАЗЕЦ — Na₂SO₄</div>
+      сульфат натрия = Na (+1·2) − (−2·4) = <span style="color:var(--blue);font-weight:800">+6</span>
+    </div>
+    <p style="font-size:13px;color:var(--ink);margin-top:10px">Для ионов: сумма С.О. всех атомов = <strong>заряду иона</strong>, а не нулю.</p>
+    <div style="background:var(--surface);border-radius:var(--rs);padding:14px 16px;font-family:var(--mono);font-size:13px;color:var(--ink);line-height:2;overflow-x:auto;margin-top:8px">
+      <div style="color:var(--muted);font-family:sans-serif;font-size:11px;margin-bottom:4px">ОБРАЗЕЦ для иона — SO₄²⁻</div>
+      сульфат-ион = (−2·4) − (−2) = <span style="color:var(--blue);font-weight:800">+6</span>
+    </div>
+  </div>
+
+  <p style="font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.5">
+    Карточки идут по одной. Ошибся — задание вернётся в конце очереди. <strong>1–30</strong> — вещества · <strong>31–55</strong> — ионы и скобки · <strong>56–60</strong> — ионы кислых солей · <strong>61–70</strong> — кислые соли
+  </p>
+
+  <div id="s8-wrap">
+    <div id="s8-card" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;box-shadow:var(--sh)">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+        <span id="s8-prog-text" style="font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap">0 / 70</span>
+        <div style="flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden">
+          <div id="s8-prog-fill" style="height:100%;background:linear-gradient(90deg,var(--blue),var(--green));width:0;transition:width .4s ease"></div>
+        </div>
+      </div>
+      <div id="s8-badge-row" style="margin-bottom:10px"></div>
+      <div id="s8-q" style="font-size:13px;color:var(--muted);margin-bottom:10px"></div>
+      <div id="s8-formula" class="ccard-formula"></div>
+      <div class="ccard-input-row" style="margin-top:16px">
+        <input id="s8-inp" class="ccard-input" type="text" placeholder="напр. +6" maxlength="4" autocomplete="off">
+        <button id="s8-check-btn" class="ccard-btn">Проверить</button>
+      </div>
+      <div id="s8-feedback" class="ccard-feedback"></div>
+      <div id="s8-solution" style="display:none;margin-top:10px;font-size:13px;color:var(--muted);padding:8px 12px;background:var(--surface2);border-radius:var(--rs)"></div>
+      <div style="margin-top:16px">
+        <button id="s8-next-btn" style="display:none;padding:8px 22px;border-radius:var(--r);border:none;background:var(--blue);color:#fff;font-size:14px;font-weight:700;cursor:pointer">Далее →</button>
+      </div>
+    </div>
+    <div id="s8-result" style="display:none;text-align:center;padding:40px 20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh)">
+      <div id="s8-res-grade" style="font-size:40px;margin-bottom:16px"></div>
+      <div id="s8-res-msg" style="font-size:16px;color:var(--ink);font-weight:700;margin-bottom:24px"></div>
+      <button onclick="s8Reset()" style="padding:10px 24px;border-radius:var(--r);border:none;background:var(--blue);color:#fff;font-size:14px;font-weight:700;cursor:pointer">🔄 Начать заново</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ТИП 1 ══ -->
+<section class="section fade-in" id="t1">
+  <div class="section-label">Тип 1</div>
+  <h2 class="section-title">Ион → ОВР-свойство</h2>
+
+  <div style="background:var(--blue-soft);border-left:4px solid var(--blue);border-radius:0 var(--rs) var(--rs) 0;padding:16px 20px;margin-bottom:24px;font-size:15px;color:var(--ink)">
+    <strong>Как решать:</strong> смотришь на степень окисления элемента в ионе.<br>
+    — Низшая СО → <strong>только восстановитель</strong> (отдаёт электроны)<br>
+    — Высшая СО → <strong>только окислитель</strong> (принимает электроны)<br>
+    — Промежуточная СО → <strong>и окислитель, и восстановитель</strong><br>
+    — Нет переменной СО → <strong>не проявляет ОВР свойств</strong>
+  </div>
+
+  <div id="tr-wrap-t1">
+    <div id="tr-card-t1" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;box-shadow:var(--sh)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span id="t1-prog-text" style="font-size:13px;font-weight:700;color:var(--muted)">0 / 14</span>
+      </div>
+      <div style="height:6px;background:var(--surface2);border-radius:3px;margin-bottom:20px">
+        <div id="t1-prog-fill" style="height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:3px;transition:width .3s"></div>
+      </div>
+      <div id="t1-q" style="font-size:14px;font-weight:700;color:var(--muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em">Загрузка…</div>
+      <div id="t1-table" style="margin-bottom:18px"></div>
+      <input id="t1-inp" type="text" maxlength="3" placeholder="___"
+        style="display:block;width:120px;font-size:28px;font-weight:800;letter-spacing:.2em;text-align:center;padding:10px 16px;border:2px solid var(--border);border-radius:var(--rs);background:var(--surface);color:var(--navy);margin-bottom:12px;outline:none">
+      <button id="t1-check-btn" style="padding:10px 28px;border-radius:var(--rs);border:none;background:var(--blue);color:#fff;font-size:15px;font-weight:700;cursor:pointer">Проверить</button>
+      <div id="t1-feedback" style="margin-top:12px;font-size:15px;font-weight:700;min-height:22px"></div>
+      <div id="t1-solution" style="display:none;margin-top:10px;font-size:14px;color:var(--muted);background:var(--surface2);border-radius:var(--rs);padding:12px 16px;line-height:1.6"></div>
+      <button id="t1-next-btn" style="display:none;margin-top:14px;padding:10px 28px;border-radius:var(--rs);border:none;background:var(--green);color:#fff;font-size:15px;font-weight:700;cursor:pointer">Далее →</button>
+    </div>
+    <div id="t1-result" style="display:none;text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:40px 24px;box-shadow:var(--sh)">
+      <div id="t1-res-grade" style="font-size:40px;margin-bottom:16px"></div>
+      <div id="t1-res-msg" style="font-size:16px;color:var(--ink);font-weight:700;margin-bottom:24px"></div>
+      <button onclick="t1Reset()" style="padding:10px 24px;border-radius:var(--r);border:none;background:var(--blue);color:#fff;font-size:14px;font-weight:700;cursor:pointer">🔄 Начать заново</button>
+    </div>
+  </div>
+</section>
+
+<script>
+// stub: queues blockDone calls that arrive before the real implementation loads
+window._bdQueue=[];
+window.blockDone=function(id){window._bdQueue.push(id);};
+</script>
+
+<script>
+(function(){
+  const SAVE_KEY='l19_t1', TTL=6*24*3600*1000;
+  const TASKS=[
+    {n:1,  ions:['N³⁻','Zn²⁺','Mn²⁺'],
+     opts:['только окислитель','только восстановитель','и окислитель, и восстановитель','не проявляет окислительно-восстановительных свойств'],
+     ans:'213',
+     sol:'А) в ионе N³⁻ азот находится в низшей степени окисления –3 и не способен принимать электроны. Является только восстановителем → 2<br>Б) в ионе Zn²⁺ цинк находится в высшей степени окисления +2 и не способен отдавать электроны. Является только окислителем → 1<br>В) в ионе Mn²⁺ марганец находится в промежуточной степени окисления +2 и способен как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 3'},
+    {n:2,  ions:['S²⁻','NO₂⁻','Fe²⁺'],
+     opts:['только окислитель','только восстановитель','и окислитель, и восстановитель','не проявляет окислительно-восстановительных свойств'],
+     ans:'233',
+     sol:'А) в ионе S²⁻ сера находится в низшей степени окисления –2 и не способна принимать электроны. Является только восстановителем → 2<br>Б) в ионе NO₂⁻ азот находится в промежуточной степени окисления +3 и способен как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 3<br>В) в ионе Fe²⁺ железо находится в промежуточной степени окисления +2 и способно как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 3'},
+    {n:3,  ions:['S²⁻','NO₂⁻','H⁺'],
+     opts:['является только окислителем','является только восстановителем','является и окислителем, и восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'231',
+     sol:'А) в ионе S²⁻ сера находится в низшей степени окисления –2 и не способна принимать электроны. Является только восстановителем → 2<br>Б) в ионе NO₂⁻ азот находится в промежуточной степени окисления +3 и способен как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 3<br>В) в ионе H⁺ водород находится в высшей степени окисления +1 и не способен отдавать электроны. Является только окислителем → 1'},
+    {n:4,  ions:['K⁺','Cl⁻','O₂²⁻'],
+     opts:['является только окислителем','является и окислителем, и восстановителем','является только восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'132',
+     sol:'А) в ионе K⁺ калий находится в высшей степени окисления +1 и способен только принимать электроны. Является только окислителем → 1<br>Б) в ионе Cl⁻ хлор находится в низшей степени окисления –1 и способен только отдавать электроны. Является только восстановителем → 3<br>В) в ионе O₂²⁻ кислород находится в промежуточной степени окисления –1 и способен как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 2'},
+    {n:5,  ions:['MnO₄²⁻','S²⁻','O₂²⁻'],
+     opts:['является окислителем','является восстановителем','является и окислителем, и восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'323',
+     sol:'А) в ионе MnO₄²⁻ марганец находится в промежуточной степени окисления +6 и способен как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 3<br>Б) в ионе S²⁻ сера находится в низшей степени окисления –2 и не способна принимать электроны. Является только восстановителем → 2<br>В) в ионе O₂²⁻ кислород находится в промежуточной степени окисления –1 и способен как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 3'},
+    {n:6,  ions:['Fe³⁺','H⁻','O²⁻'],
+     opts:['является и окислителем, и восстановителем','является восстановителем','является окислителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'122',
+     sol:'А) в ионе Fe³⁺ железо находится в промежуточной степени окисления +3 и способно как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 1<br>Б) в ионе H⁻ водород находится в низшей степени окисления –1 и не способен принимать электроны. Является только восстановителем → 2<br>В) в ионе O²⁻ кислород находится в низшей степени окисления –2 и не способен принимать электроны. Является только восстановителем → 2'},
+    {n:7,  ions:['Fe³⁺','Fe²⁺','Cu²⁺'],
+     opts:['является окислителем','является восстановителем','является и окислителем, и восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'331',
+     sol:'А) в ионе Fe³⁺ железо находится в промежуточной степени окисления +3 и способно как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 3<br>Б) в ионе Fe²⁺ железо находится в промежуточной степени окисления +2 и способно как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 3<br>В) в ионе Cu²⁺ медь находится в высшей степени окисления +2 и не способна отдавать электроны. Является только окислителем → 1'},
+    {n:8,  ions:['CrO₂⁻','Ca²⁺','H⁻'],
+     opts:['является и окислителем, и восстановителем','является только окислителем','является только восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'123',
+     sol:'А) в ионе CrO₂⁻ хром находится в промежуточной степени окисления +3 и способен как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 1<br>Б) в ионе Ca²⁺ кальций находится в высшей степени окисления +2 и не способен отдавать электроны. Является только окислителем → 2<br>В) в ионе H⁻ водород находится в низшей степени окисления –1 и не способен принимать электроны. Является только восстановителем → 3'},
+    {n:9,  ions:['F⁻','Cl⁻','FeO₂⁻'],
+     opts:['является окислителем','не проявляет окислительно-восстановительных свойств','является и окислителем, и восстановителем','является восстановителем'],
+     ans:'443',
+     sol:'А) в ионе F⁻ фтор находится в низшей степени окисления –1 и не способен принимать электроны. Является только восстановителем → 4<br>Б) в ионе Cl⁻ хлор находится в низшей степени окисления –1 и не способен принимать электроны. Является только восстановителем → 4<br>В) в ионе FeO₂⁻ железо находится в промежуточной степени окисления +3 и способно как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 3'},
+    {n:10, ions:['ClO₃⁻','H₂PO₂⁻','Cu²⁺'],
+     opts:['является окислителем','является восстановителем','является и окислителем, и восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'331',
+     sol:'А) в ионе ClO₃⁻ хлор находится в промежуточной степени окисления +5 и способен как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 3<br>Б) в ионе H₂PO₂⁻ фосфор находится в промежуточной степени окисления +1 и способен как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 3<br>В) в ионе Cu²⁺ медь находится в высшей степени окисления +2 и способна только принимать электроны. Является окислителем → 1'},
+    {n:11, ions:['Na⁺','MnO₄²⁻','H⁻'],
+     opts:['является только окислителем','не проявляет окислительно-восстановительных свойств','является и окислителем, и восстановителем','является только восстановителем'],
+     ans:'134',
+     sol:'А) в ионе Na⁺ натрий находится в высшей степени окисления +1 и не способен отдавать электроны. Является только окислителем → 1<br>Б) в ионе MnO₄²⁻ марганец находится в промежуточной степени окисления +6 и способен как отдавать, так и принимать электроны. Является и окислителем, и восстановителем → 3<br>В) в ионе H⁻ водород находится в низшей степени окисления –1 и не способен принимать электроны. Является только восстановителем → 4'},
+    {n:12, ions:['Cl⁻','Fe³⁺','Mg²⁺'],
+     opts:['является только окислителем','является только восстановителем','является и окислителем, и восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'231',
+     sol:'А) в ионе Cl⁻ хлор находится в низшей степени окисления –1 и не способен принимать электроны. Является только восстановителем → 2<br>Б) в ионе Fe³⁺ железо находится в промежуточной степени окисления +3 и способно как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 3<br>В) в ионе Mg²⁺ магний находится в высшей степени окисления +2 и не способен отдавать электроны. Является только окислителем → 1'},
+    {n:13, ions:['SO₃²⁻','H⁺','Cu⁺'],
+     opts:['является окислителем','является восстановителем','является и окислителем, и восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'313',
+     sol:'А) в ионе SO₃²⁻ сера находится в промежуточной степени окисления +4 и способна как принимать, так и отдавать электроны. Является и окислителем, и восстановителем → 3<br>Б) в ионе H⁺ водород находится в высшей степени окисления +1 и не способен отдавать электроны. Является только окислителем → 1<br>В) в ионе Cu⁺ медь находится в промежуточной степени окисления +1 и способна как отдавать, так и принимать электроны. Является и окислителем, и восстановителем → 3'},
+    {n:14, ions:['Br⁻','Cu⁺','N³⁻'],
+     opts:['является окислителем','является восстановителем','является и окислителем, и восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'232',
+     sol:'А) в ионе Br⁻ бром находится в низшей степени окисления –1 и не способен принимать электроны. Является только восстановителем → 2<br>Б) в ионе Cu⁺ медь находится в промежуточной степени окисления +1 и способна как отдавать, так и принимать электроны. Является и окислителем, и восстановителем → 3<br>В) в ионе N³⁻ азот находится в низшей степени окисления –3 и не способен принимать электроны. Является только восстановителем → 2'},
+  ];
+  function norm(s){ return s.trim().replace(/[^0-9]/g,''); }
+  function shuffle(a){ let b=a.slice(); for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]} return b; }
+  function $i(id){ return document.getElementById(id); }
+  function _save(){ try{localStorage.setItem(SAVE_KEY,JSON.stringify({q:queue.map(i=>TASKS[i].n),cur,answered:[...answered],wrongIds:[...wrongIds],wp:[...wrongAtPos],ts:Date.now()}));}catch(e){} }
+  function _load(){
+    try{
+      const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+      if(!d||Date.now()-d.ts>TTL)return false;
+      const nMap={}; TASKS.forEach((t,i)=>nMap[t.n]=i);
+      queue=d.q.map(n=>nMap[n]).filter(i=>i!==undefined);
+      if(!queue.length)return false;
+      cur=d.cur||0; answered=new Set(d.answered||[]); wrongIds=new Set(d.wrongIds||[]); wrongAtPos=new Set(d.wp||[]);
+      return true;
+    }catch(e){return false;}
+  }
+  let queue,cur,answered,wrongIds,wrongAtPos;
+  function init(){
+    if(!_load()){
+      queue=shuffle(TASKS.map((_,i)=>i));
+      cur=0; answered=new Set(); wrongIds=new Set(); wrongAtPos=new Set();
+    }
+    if(cur>=queue.length){ showResult(); return; }
+    render();
+  }
+  function render(){
+    const t=TASKS[queue[cur]];
+    $i('t1-prog-text').textContent=answered.size+' / '+TASKS.length;
+    $i('t1-prog-fill').style.width=(answered.size/TASKS.length*100)+'%';
+    $i('t1-q').textContent='Установите соответствие между формулой иона и окислительно-восстановительными свойствами, которые он способен проявлять: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.';
+    $i('t1-table').innerHTML='<table style="width:100%;border-collapse:collapse;margin-top:10px"><thead><tr><th style="text-align:left;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--surface2);color:var(--ink);padding:8px 12px 8px 0;width:45%">ФОРМУЛА ИОНА</th><th style="text-align:left;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--surface2);color:var(--ink);padding:8px 0 8px 16px">ОКИСЛИТЕЛЬНО-ВОССТАНОВИТЕЛЬНЫЕ СВОЙСТВА</th></tr></thead><tbody>'+
+      t.ions.map((ion,i)=>'<tr><td style="font-weight:800;font-size:17px;padding:5px 12px 5px 0;vertical-align:top">'+['А','Б','В'][i]+') '+ion+'</td><td style="font-size:14px;color:var(--ink);padding:5px 0 5px 16px;vertical-align:top">'+(i+1)+') '+t.opts[i]+'</td></tr>').join('')+
+      '<tr><td></td><td style="font-size:14px;color:var(--ink);padding:5px 0 5px 16px">4) '+t.opts[3]+'</td></tr>'+
+    '</tbody></table>';
+    $i('t1-feedback').textContent=''; $i('t1-feedback').style.color='';
+    $i('t1-solution').style.display='none'; $i('t1-next-btn').style.display='none';
+    $i('t1-check-btn').style.display=''; $i('t1-inp').value=''; $i('t1-inp').focus({preventScroll:true});
+  }
+  function check(){
+    const t=TASKS[queue[cur]];
+    const val=norm($i('t1-inp').value);
+    if(!val){return;}
+    if(val===t.ans){
+      if(!wrongAtPos.has(cur)) answered.add(t.n);
+      $i('t1-prog-text').textContent=answered.size+' / '+TASKS.length;
+      $i('t1-prog-fill').style.width=(answered.size/TASKS.length*100)+'%';
+      $i('t1-feedback').textContent='✓ Верно!'; $i('t1-feedback').style.color='var(--green)';
+      $i('t1-solution').innerHTML=t.sol; $i('t1-solution').style.display='block'; $i('t1-solution').classList.remove('sol-open'); void $i('t1-solution').offsetWidth; $i('t1-solution').classList.add('sol-open');
+      $i('t1-check-btn').style.display='none'; $i('t1-next-btn').style.display='';
+      _save();
+    } else {
+      wrongIds.add(t.n); if(!wrongAtPos.has(cur)){ queue.push(queue[cur]); wrongAtPos.add(cur); }
+      $i('t1-feedback').textContent='✗ Неверно, попробуй ещё раз'; $i('t1-feedback').style.color='var(--red)';
+      $i('t1-inp').value=''; $i('t1-inp').focus({preventScroll:true});
+      _save();
+    }
+  }
+  function next(){ cur++; _save(); if(cur>=queue.length){showResult();}else{render();} }
+  function showResult(){
+    $i('tr-card-t1').style.display='none'; $i('t1-result').style.display='block';
+    const perfect=wrongIds.size===0;
+    $i('t1-res-grade').textContent=perfect?'🏆':'✅';
+    $i('t1-res-msg').textContent=perfect?'Идеально! Все 14 заданий — с первого раза!':'Готово! Все 14 заданий пройдены.';
+    try{localStorage.setItem(SAVE_KEY+'_done','1');}catch(e){}
+    if(window.blockDone) window.blockDone('tr-wrap-t1');
+  }
+  window.t1Reset=function(){
+    try{localStorage.removeItem(SAVE_KEY);localStorage.removeItem(SAVE_KEY+'_done');}catch(e){}
+    queue=shuffle(TASKS.map((_,i)=>i)); cur=0; answered=new Set(); wrongIds=new Set(); wrongAtPos=new Set();
+    $i('tr-card-t1').style.display=''; $i('t1-result').style.display='none';
+    render();
+  };
+  $i('t1-check-btn').addEventListener('click',check);
+  $i('t1-inp').addEventListener('keydown',function(e){if(e.key==='Enter')check();});
+  $i('t1-next-btn').addEventListener('click',next);
+  setTimeout(init,0);
+})();
+</script>
+
+<!-- ══ ТИП 2 ══ -->
+<section class="section fade-in" id="t2">
+  <div class="section-label">Тип 2</div>
+  <h2 class="section-title">Схема реакции → изменение степени окисления</h2>
+
+  <div style="background:var(--blue-soft);border-left:4px solid var(--blue);border-radius:0 var(--rs) var(--rs) 0;padding:16px 20px;margin-bottom:24px;font-size:15px;color:var(--ink)">
+    <strong>Как решать:</strong> найди окислитель или восстановитель в реакции и отследи, как меняется его СО от левой части к правой.<br>
+    — Восстановитель <strong>повышает</strong> СО (отдаёт электроны)<br>
+    — Окислитель <strong>понижает</strong> СО (принимает электроны)
+  </div>
+
+  <div id="tr-wrap-t2">
+    <div id="tr-card-t2" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;box-shadow:var(--sh)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span id="t2-prog-text" style="font-size:13px;font-weight:700;color:var(--muted)">0 / 14</span>
+      </div>
+      <div style="height:6px;background:var(--surface2);border-radius:3px;margin-bottom:20px">
+        <div id="t2-prog-fill" style="height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:3px;transition:width .3s"></div>
+      </div>
+      <div id="t2-q" style="font-size:14px;color:var(--ink);margin-bottom:12px;line-height:1.5"></div>
+      <div id="t2-table" style="margin-bottom:18px"></div>
+      <input id="t2-inp" type="text" maxlength="3" placeholder="___"
+        style="display:block;width:120px;font-size:28px;font-weight:800;letter-spacing:.2em;text-align:center;padding:10px 16px;border:2px solid var(--border);border-radius:var(--rs);background:var(--surface);color:var(--navy);margin-bottom:12px;outline:none">
+      <button id="t2-check-btn" style="padding:10px 28px;border-radius:var(--rs);border:none;background:var(--blue);color:#fff;font-size:15px;font-weight:700;cursor:pointer">Проверить</button>
+      <div id="t2-feedback" style="margin-top:12px;font-size:15px;font-weight:700;min-height:22px"></div>
+      <div id="t2-solution" style="display:none;margin-top:10px;font-size:14px;color:var(--muted);background:var(--surface2);border-radius:var(--rs);padding:12px 16px;line-height:1.6"></div>
+      <button id="t2-next-btn" style="display:none;margin-top:14px;padding:10px 28px;border-radius:var(--rs);border:none;background:var(--green);color:#fff;font-size:15px;font-weight:700;cursor:pointer">Далее →</button>
+    </div>
+    <div id="t2-result" style="display:none;text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:40px 24px;box-shadow:var(--sh)">
+      <div id="t2-res-grade" style="font-size:40px;margin-bottom:16px"></div>
+      <div id="t2-res-msg" style="font-size:16px;color:var(--ink);font-weight:700;margin-bottom:24px"></div>
+      <button onclick="t2Reset()" style="padding:10px 24px;border-radius:var(--r);border:none;background:var(--blue);color:#fff;font-size:14px;font-weight:700;cursor:pointer">🔄 Начать заново</button>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const SAVE_KEY='l19_t2', TTL=6*24*3600*1000;
+  const TASKS=[
+    {n:18,
+     q:'Установите соответствие между схемой реакции и изменением степени окисления восстановителя в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ ВОССТАНОВИТЕЛЯ',
+     rows:['Cu₂O + H₂SO₄ → CuSO₄ + SO₂ + H₂O','Cu + HNO₃ → Cu(NO₃)₂ + NO₂ + H₂O','CuO + H₂ → Cu + H₂O'],
+     opts:['+6 → +4','+1 → +2','0 → +2','0 → +1'],
+     ans:'234',
+     sol:'А) медь повышает степень окисления с +1 до +2 → 2<br>Б) медь повышает степень окисления с 0 до +2 → 3<br>В) водород повышает степень окисления с 0 до +1 → 4'},
+    {n:19,
+     q:'Установите соответствие между схемой реакции и изменением степени окисления окислителя в данной реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ ОКИСЛИТЕЛЯ',
+     rows:['KOH + Cl₂ →(t°) KCl + KClO₃ + H₂O','KClO₃ → KCl + O₂','KClO + H₂O₂ → KClO₃ + H₂O'],
+     opts:['0 → −1','−2 → 0','+5 → −1','−1 → −2'],
+     ans:'134',
+     sol:'А) хлор меняет степень окисления с 0 до −1 → 1<br>Б) хлор меняет степень окисления с +5 до −1 → 3<br>В) кислород меняет степень окисления с −1 до −2 → 4'},
+    {n:20,
+     q:'Установите соответствие между схемой реакции и изменением степени окисления элемента-окислителя в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ ЭЛЕМЕНТА-ОКИСЛИТЕЛЯ',
+     rows:['C + CuO →(t°) Cu + CO','CO + H₂ → CH₄ + H₂O','C + H₂SO₄ →(t°) SO₂ + CO₂ + H₂O'],
+     opts:['+6 → +4','+2 → +4','+2 → −4','+2 → 0'],
+     ans:'431',
+     sol:'А) медь меняет степень окисления с +2 до 0 → 4<br>Б) углерод меняет степень окисления с +2 до −4 → 3<br>В) сера меняет степень окисления с +6 до +4 → 1'},
+    {n:21,
+     q:'Установите соответствие между схемой реакции и изменением степени окисления окислителя в данной реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ ОКИСЛИТЕЛЯ',
+     rows:['P + HNO₃ → H₃PO₄ + NO₂ + H₂O','Cu + KNO₃ + H₂SO₄ → CuSO₄ + NO + K₂SO₄ + H₂O','Zn + HNO₃ → Zn(NO₃)₂ + N₂O + H₂O'],
+     opts:['+5 → +2','+5 → −3','+5 → +1','+5 → +4'],
+     ans:'413',
+     sol:'А) азот понижает степень окисления с +5 до +4 → 4<br>Б) азот понижает степень окисления с +5 до +2 → 1<br>В) азот понижает степень окисления с +5 до +1 → 3'},
+    {n:22,
+     q:'Установите соответствие между схемой реакции и изменением степени окисления окислителя в данной реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ ОКИСЛИТЕЛЯ',
+     rows:['KClO₄ → KCl + O₂','KClO₃ → KCl + KClO₄','KClO₃ → KCl + O₂'],
+     opts:['+7 → −1','−2 → 0','+5 → −1','+1 → −1'],
+     ans:'133',
+     sol:'А) хлор меняет степень окисления с +7 до −1 → 1<br>Б) хлор меняет степень окисления с +5 до −1 → 3<br>В) хлор меняет степень окисления с +5 до −1 → 3'},
+    {n:23,
+     q:'Установите соответствие между схемой реакции и изменением степени окисления восстановителя в данной реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ ВОССТАНОВИТЕЛЯ',
+     rows:['CuCl + H₂SO₄(конц.) →(t°) CuSO₄ + SO₂ + HCl + H₂O','Cu₂O + H₂SO₄(конц.) →(t°) CuSO₄ + SO₂ + H₂O','CuO + H₂ → Cu + H₂O'],
+     opts:['+4 → +6','0 → +1','+5 → +2','+1 → +2'],
+     ans:'442',
+     sol:'А) медь повышает степень окисления с +1 в хлориде меди(I) (CuCl) до +2 в сульфате меди(II) (CuSO₄) → 4<br>Б) медь повышает степень окисления с +1 в оксиде меди(I) (Cu₂O) до +2 в сульфате меди(II) (CuSO₄) → 4<br>В) водород повышает степень окисления с 0 в простом веществе (H₂) до +1 в воде (H₂O) → 2'},
+    {n:24,
+     q:'Установите соответствие между схемой реакции и изменением степени окисления восстановителя в данной реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ ВОССТАНОВИТЕЛЯ',
+     rows:['I₂ + HNO₃ → HIO₃ + NO₂ + H₂O','NH₄NO₃ → N₂O + H₂O','I₂ + KOH → KIO₃ + KI + H₂O'],
+     opts:['+1 → +2','0 → +5','−3 → +1','+4 → +5'],
+     ans:'232',
+     sol:'А) йод повышает степень окисления с 0 в простом веществе (I₂) до +5 в йодноватой кислоте (HIO₃) → 2<br>Б) азот повышает степень окисления с −3 в нитрате аммония (NH₄NO₃) до +1 в оксиде азота(I) (N₂O) → 3<br>В) йод повышает степень окисления с 0 в простом веществе (I₂) до +5 в йодате калия (KIO₃) → 2'},
+    {n:25,
+     q:'Установите соответствие между схемой реакции и изменением степени окисления восстановителя в ней: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ ВОССТАНОВИТЕЛЯ',
+     rows:['KNO₃ → KNO₂ + O₂','KNO₃ + P → KNO₂ + P₂O₅','NO₂ + KOH → KNO₂ + KNO₃ + H₂O'],
+     opts:['+4 → +5','+3 → +5','−2 → 0','0 → +5'],
+     ans:'341',
+     sol:'А) кислород повышает степень окисления с −2 до 0 → 3<br>Б) фосфор повышает степень окисления с 0 до +5 → 4<br>В) азот повышает степень окисления с +4 до +5 → 1'},
+    {n:26,
+     q:'Установите соответствие между схемой реакции и изменением степени окисления окислителя в данной реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ ОКИСЛИТЕЛЯ',
+     rows:['NO₃⁻ + SO₃²⁻ → NO₂⁻ + SO₄²⁻','NO₃⁻ + S²⁻ + H⁺ → H₂O + NO + SO₄²⁻','NO₂⁻ + H₂O₂ → NO₃⁻ + H₂O'],
+     opts:['−1 → −2','+5 → +2','+5 → +3','−2 → +6'],
+     ans:'321',
+     sol:'А) азот понижает степень окисления с +5 в нитрат-ионе (NO₃⁻) до +3 в нитрит-ионе (NO₂⁻) → 3<br>Б) азот понижает степень окисления с +5 в нитрат-ионе (NO₃⁻) до +2 в оксиде азота(II) (NO) → 2<br>В) кислород понижает степень окисления с −1 в пероксиде водорода (H₂O₂) до −2 в воде (H₂O) → 1'},
+    {n:27,
+     q:'Установите соответствие между уравнением реакции и изменением степени окисления азота, происходящим в ходе этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ АЗОТА',
+     rows:['2NO + O₂ → 2NO₂','4NH₃ + 5O₂ → 4NO + 6H₂O','4NO₂ + 2H₂O + O₂ → 4HNO₃'],
+     opts:['от −3 до +2','от +4 до +5','от +3 до +2','от +2 до +4'],
+     ans:'412',
+     sol:'А) азот меняет степень окисления от +2 до +4 → 4<br>Б) азот меняет степень окисления от −3 до +2 → 1<br>В) азот меняет степень окисления от +4 до +5 → 2'},
+    {n:28,
+     q:'Установите соответствие между уравнением реакции и изменением степени окисления окислителя в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ ОКИСЛИТЕЛЯ',
+     rows:['H₂S + 2Li = Li₂S + H₂','4NO₂ + 2H₂O + O₂ = 4HNO₃','SO₂ + NO₂ = SO₃ + NO'],
+     opts:['+4 → +2','0 → −2','+4 → +6','+1 → 0'],
+     ans:'421',
+     sol:'А) водород понижает степень окисления с +1 в сероводороде (H₂S) до 0 в молекулярном водороде (H₂) → 4<br>Б) кислород понижает степень окисления с 0 в молекулярном кислороде (O₂) до −2 в азотной кислоте (HNO₃) → 2<br>В) азот понижает степень окисления с +4 в оксиде азота(IV) (NO₂) до +2 в оксиде азота(II) (NO) → 1'},
+    {n:29,
+     q:'Установите соответствие между уравнением реакции и изменением степени окисления восстановителя в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ ВОССТАНОВИТЕЛЯ',
+     rows:['H₂S + 2K = K₂S + H₂','4NO₂ + 2H₂O + O₂ = 4HNO₃','SO₂ + NO₂ = SO₃ + NO'],
+     opts:['−2 → 0','+4 → +5','+4 → +6','0 → +1'],
+     ans:'423',
+     sol:'А) калий повышает степень окисления с 0 в простом веществе (K) до +1 в сульфиде калия (K₂S) → 4<br>Б) азот повышает степень окисления с +4 в оксиде азота(IV) (NO₂) до +5 в азотной кислоте (HNO₃) → 2<br>В) сера повышает степень окисления с +4 в оксиде серы(IV) (SO₂) до +6 в оксиде серы(VI) (SO₃) → 3'},
+    {n:30,
+     q:'Установите соответствие между уравнением реакции и изменением степени окисления окислителя в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ ОКИСЛИТЕЛЯ',
+     rows:['2KI + Br₂ = 2KBr + I₂','H₂S + I₂ = S + 2HI','2SO₃ + 2NaI = I₂ + SO₂ + Na₂SO₄'],
+     opts:['0 → −1','+1 → 0','0 → −2','+6 → +4'],
+     ans:'114',
+     sol:'А) бром понижает степень окисления с 0 в молекулярном броме (Br₂) до −1 в бромиде калия (KBr) → 1<br>Б) йод понижает степень окисления с 0 в молекулярном йоде (I₂) до −1 в йодоводороде (HI) → 1<br>В) сера понижает степень окисления с +6 в оксиде серы(VI) (SO₃) до +4 в оксиде серы(IV) (SO₂) → 4'},
+    {n:31,
+     q:'Установите соответствие между уравнением реакции и изменением степени окисления окислителя в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ ОКИСЛИТЕЛЯ',
+     rows:['2HCl + Mg = MgCl₂ + H₂','S + 2HI = H₂S + I₂','CO + NO₂ = CO₂ + NO'],
+     opts:['−1 → 0','0 → −2','+4 → +2','+1 → 0'],
+     ans:'423',
+     sol:'А) водород понижает степень окисления с +1 в соляной кислоте (HCl) до 0 в простом веществе (H₂) → 4<br>Б) сера понижает степень окисления с 0 в простом веществе (S) до −1 в сероводороде (H₂S) → 2<br>В) азот понижает степень окисления с +4 в оксиде азота(IV) (NO₂) до +2 в оксиде азота(II) (NO) → 3'},
+  ];
+  function norm(s){ return s.trim().replace(/[^0-9]/g,''); }
+  function shuffle(a){ let b=a.slice(); for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]} return b; }
+  function $i(id){ return document.getElementById(id); }
+  function _save(){ try{localStorage.setItem(SAVE_KEY,JSON.stringify({q:queue.map(i=>TASKS[i].n),cur,answered:[...answered],wrongIds:[...wrongIds],wp:[...wrongAtPos],ts:Date.now()}));}catch(e){} }
+  function _load(){
+    try{
+      const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+      if(!d||Date.now()-d.ts>TTL)return false;
+      const nMap={}; TASKS.forEach((t,i)=>nMap[t.n]=i);
+      queue=d.q.map(n=>nMap[n]).filter(i=>i!==undefined);
+      if(!queue.length)return false;
+      cur=d.cur||0; answered=new Set(d.answered||[]); wrongIds=new Set(d.wrongIds||[]); wrongAtPos=new Set(d.wp||[]);
+      return true;
+    }catch(e){return false;}
+  }
+  let queue,cur,answered,wrongIds,wrongAtPos;
+  function init(){
+    if(!_load()){ queue=shuffle(TASKS.map((_,i)=>i)); cur=0; answered=new Set(); wrongIds=new Set(); wrongAtPos=new Set(); }
+    if(cur>=queue.length){ showResult(); return; }
+    render();
+  }
+  function render(){
+    const t=TASKS[queue[cur]];
+    $i('t2-prog-text').textContent=answered.size+' / '+TASKS.length;
+    $i('t2-prog-fill').style.width=(answered.size/TASKS.length*100)+'%';
+    $i('t2-q').textContent=t.q;
+    $i('t2-table').innerHTML='<table style="width:100%;border-collapse:collapse;margin-top:10px"><thead><tr>'+
+      '<th style="text-align:left;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--surface2);color:var(--ink);padding:8px 12px 8px 0;width:55%">'+t.lh+'</th>'+
+      '<th style="text-align:left;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--surface2);color:var(--ink);padding:8px 0 8px 16px">'+t.rh+'</th>'+
+      '</tr></thead><tbody>'+
+      t.rows.map((r,i)=>'<tr><td style="font-size:14px;font-weight:700;padding:5px 12px 5px 0;vertical-align:top">'+['А','Б','В'][i]+') '+r+'</td>'+
+        '<td style="font-size:14px;color:var(--ink);padding:5px 0 5px 16px;vertical-align:top">'+(i+1)+') '+t.opts[i]+'</td></tr>').join('')+
+      '<tr><td></td><td style="font-size:14px;color:var(--ink);padding:5px 0 5px 16px">4) '+t.opts[3]+'</td></tr>'+
+    '</tbody></table>';
+    $i('t2-feedback').textContent=''; $i('t2-feedback').style.color='';
+    $i('t2-solution').style.display='none'; $i('t2-next-btn').style.display='none';
+    $i('t2-check-btn').style.display=''; $i('t2-inp').value=''; $i('t2-inp').focus({preventScroll:true});
+  }
+  function check(){
+    const t=TASKS[queue[cur]];
+    const val=norm($i('t2-inp').value);
+    if(!val) return;
+    if(val===t.ans){
+      if(!wrongAtPos.has(cur)) answered.add(t.n);
+      $i('t2-prog-text').textContent=answered.size+' / '+TASKS.length;
+      $i('t2-prog-fill').style.width=(answered.size/TASKS.length*100)+'%';
+      $i('t2-feedback').textContent='✓ Верно!'; $i('t2-feedback').style.color='var(--green)';
+      $i('t2-solution').innerHTML=t.sol; $i('t2-solution').style.display='block'; $i('t2-solution').classList.remove('sol-open'); void $i('t2-solution').offsetWidth; $i('t2-solution').classList.add('sol-open');
+      $i('t2-check-btn').style.display='none'; $i('t2-next-btn').style.display='';
+      _save();
+    } else {
+      wrongIds.add(t.n); if(!wrongAtPos.has(cur)){ queue.push(queue[cur]); wrongAtPos.add(cur); }
+      $i('t2-feedback').textContent='✗ Неверно, попробуй ещё раз'; $i('t2-feedback').style.color='var(--red)';
+      $i('t2-inp').value=''; $i('t2-inp').focus({preventScroll:true});
+      _save();
+    }
+  }
+  function next(){ cur++; _save(); if(cur>=queue.length) showResult(); else render(); }
+  function showResult(){
+    $i('tr-card-t2').style.display='none'; $i('t2-result').style.display='block';
+    const perfect=wrongIds.size===0;
+    $i('t2-res-grade').textContent=perfect?'🏆':'✅';
+    $i('t2-res-msg').textContent=perfect?'Идеально! Все 14 заданий — с первого раза!':'Готово! Все 14 заданий пройдены.';
+    try{localStorage.setItem(SAVE_KEY+'_done','1');}catch(e){}
+    if(window.blockDone) window.blockDone('tr-wrap-t2');
+  }
+  window.t2Reset=function(){
+    try{localStorage.removeItem(SAVE_KEY);localStorage.removeItem(SAVE_KEY+'_done');}catch(e){}
+    queue=shuffle(TASKS.map((_,i)=>i)); cur=0; answered=new Set(); wrongIds=new Set(); wrongAtPos=new Set();
+    $i('tr-card-t2').style.display=''; $i('t2-result').style.display='none';
+    render();
+  };
+  $i('t2-check-btn').addEventListener('click',check);
+  $i('t2-inp').addEventListener('keydown',function(e){if(e.key==='Enter')check();});
+  $i('t2-next-btn').addEventListener('click',next);
+  setTimeout(init,0);
+})();
+</script>
+
+<!-- ══ ТИП 3 ══ -->
+<section class="section fade-in" id="t3">
+  <div class="section-label">Тип 3</div>
+  <h2 class="section-title">Схема реакции → свойство элемента (окислитель/восстановитель)</h2>
+
+  <div style="background:var(--blue-soft);border-left:4px solid var(--blue);border-radius:0 var(--rs) var(--rs) 0;padding:16px 20px;margin-bottom:24px;font-size:15px;color:var(--ink)">
+    <strong>Как решать:</strong> отследи, как меняется степень окисления указанного элемента в каждой реакции.<br>
+    — СО <strong>повышается</strong> → элемент является <strong>восстановителем</strong><br>
+    — СО <strong>понижается</strong> → элемент является <strong>окислителем</strong><br>
+    — СО <strong>и повышается и понижается</strong> → и окислитель, и восстановитель<br>
+    — СО <strong>не меняется</strong> → не проявляет ОВС
+  </div>
+
+  <div id="tr-wrap-t3">
+    <div id="tr-card-t3" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;box-shadow:var(--sh)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span id="t3-prog-text" style="font-size:13px;font-weight:700;color:var(--muted)">0 / 14</span>
+      </div>
+      <div style="height:6px;background:var(--surface2);border-radius:3px;margin-bottom:20px">
+        <div id="t3-prog-fill" style="height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:3px;transition:width .3s"></div>
+      </div>
+      <div id="t3-q" style="font-size:14px;color:var(--ink);margin-bottom:12px;line-height:1.5"></div>
+      <div id="t3-table" style="margin-bottom:18px"></div>
+      <input id="t3-inp" type="text" maxlength="3" placeholder="___"
+        style="display:block;width:120px;font-size:28px;font-weight:800;letter-spacing:.2em;text-align:center;padding:10px 16px;border:2px solid var(--border);border-radius:var(--rs);background:var(--surface);color:var(--navy);margin-bottom:12px;outline:none">
+      <button id="t3-check-btn" style="padding:10px 28px;border-radius:var(--rs);border:none;background:var(--blue);color:#fff;font-size:15px;font-weight:700;cursor:pointer">Проверить</button>
+      <div id="t3-feedback" style="margin-top:12px;font-size:15px;font-weight:700;min-height:22px"></div>
+      <div id="t3-solution" style="display:none;margin-top:10px;font-size:14px;color:var(--muted);background:var(--surface2);border-radius:var(--rs);padding:12px 16px;line-height:1.6"></div>
+      <button id="t3-next-btn" style="display:none;margin-top:14px;padding:10px 28px;border-radius:var(--rs);border:none;background:var(--green);color:#fff;font-size:15px;font-weight:700;cursor:pointer">Далее →</button>
+    </div>
+    <div id="t3-result" style="display:none;text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:40px 24px;box-shadow:var(--sh)">
+      <div id="t3-res-grade" style="font-size:40px;margin-bottom:16px"></div>
+      <div id="t3-res-msg" style="font-size:16px;color:var(--ink);font-weight:700;margin-bottom:24px"></div>
+      <button onclick="t3Reset()" style="padding:10px 24px;border-radius:var(--r);border:none;background:var(--blue);color:#fff;font-size:14px;font-weight:700;cursor:pointer">🔄 Начать заново</button>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const SAVE_KEY='l19_t3', TTL=6*24*3600*1000;
+  const TASKS=[
+    {n:32,
+     q:'Установите соответствие между схемой реакции и свойством углерода, которое он проявляет в данной реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'СВОЙСТВО УГЛЕРОДА',
+     rows:['CO + Na₂O₂ → Na₂CO₃','C + HNO₃ → CO₂ + NO₂ + H₂O','CO + H₂ → CH₃OH'],
+     opts:['является окислителем','является восстановителем','является и окислителем и восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'221',
+     sol:'А) углерод повышает степень окисления с +2 в угарном газе (CO) до +4 в карбонате натрия (Na₂CO₃). Является только восстановителем → 2<br>Б) углерод повышает степень окисления с 0 в простом веществе (C) до +4 в углекислом газе (CO₂). Является только восстановителем → 2<br>В) углерод понижает степень окисления с +2 в угарном газе (CO) до −2 в метаноле (CH₃OH). Является только окислителем → 1'},
+    {n:33,
+     q:'Установите соответствие между уравнением реакции и свойством атома фосфора в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'СВОЙСТВО АТОМА ФОСФОРА',
+     rows:['Р + 5НNО₃ = Н₃РО₄ + 5NO₂ + Н₂О','2Н₃РО₄ + Mg = Mg(H₂PO₄)₂ + Н₂','РН₃ + 2О₂ = Н₃РО₄'],
+     opts:['только окислитель','только восстановитель','и окислитель, и восстановитель','не проявляет окислительно-восстановительных свойств'],
+     ans:'242',
+     sol:'А) фосфор повышает степень окисления с 0 в простом веществе (Р) до +5 в фосфорной кислоте (H₃PO₄). Является восстановителем → 2<br>Б) фосфор не меняет степень окисления в ходе реакции. Не проявляет окислительно-восстановительных свойств → 4<br>В) фосфор повышает степень окисления с −3 в фосфине (PH₃) до +5 в фосфорной кислоте (H₃PO₄). Является восстановителем → 2'},
+    {n:34,
+     q:'Установите соответствие между схемой реакции и свойством азота, которое он проявляет в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'СВОЙСТВО АЗОТА',
+     rows:['NH₄Cl + FeO → FeCl₂ + NH₃ + H₂O','Cu + NO₂ → N₂ + CuO','NO₂ + O₂ + H₂O → HNO₃'],
+     opts:['является окислителем','является восстановителем','является и окислителем и восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'412',
+     sol:'А) азот не меняет степень окисления в ходе реакции. Не проявляет окислительно-восстановительных свойств → 4<br>Б) азот понижает степень окисления с +4 в оксиде азота(IV) (NO₂) до 0 в молекулярном азоте (N₂). Является только окислителем → 1<br>В) азот повышает степень окисления с +4 в оксиде азота(IV) (NO₂) до +5 в азотной кислоте (HNO₃). Является только восстановителем → 2'},
+    {n:35,
+     q:'Установите соответствие между схемой реакции и свойством кремния, которое он проявляет в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'СВОЙСТВО КРЕМНИЯ',
+     rows:['Si + C → SiC','Si + Mg → Mg₂Si','SiO₂ + Mg → Si + MgO'],
+     opts:['является окислителем','является восстановителем','является и окислителем и восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'211',
+     sol:'А) кремний повышает степень окисления с 0 в простом веществе (Si) до +4 в карбиде кремния (SiC). Является только восстановителем → 2<br>Б) кремний понижает степень окисления с 0 в простом веществе (Si) до −4 в силициде магния (Mg₂Si). Является только окислителем → 1<br>В) кремний понижает степень окисления с +4 в оксиде кремния(IV) (SiO₂) до 0 в простом веществе (Si). Является только окислителем → 1'},
+    {n:36,
+     q:'Установите соответствие между схемой реакции и свойством углерода, которое он проявляет в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'СВОЙСТВО УГЛЕРОДА',
+     rows:['Na₂CO₃ + HCl → NaCl + H₂O + CO₂','C + H₂SO₄ → CO₂ + SO₂ + H₂O','CO + NaOH → HCOONa'],
+     opts:['является окислителем','является восстановителем','является и окислителем и восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'424',
+     sol:'А) углерод не меняет степень окисления в ходе реакции. Не проявляет окислительно-восстановительных свойств → 4<br>Б) углерод повышает степень окисления с 0 в простом веществе (C) до +4 в углекислом газе (CO₂). Является только восстановителем → 2<br>В) углерод не меняет степень окисления в ходе реакции. Не проявляет окислительно-восстановительных свойств → 4'},
+    {n:37,
+     q:'Установите соответствие между схемой реакции и свойством серы, которое она проявляет в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'СВОЙСТВО СЕРЫ',
+     rows:['Na₂SO₃ → Na₂S + Na₂SO₄','H₂S + Cl₂ → S + HCl','SO₂ + NaOH → Na₂SO₃ + H₂O'],
+     opts:['является окислителем','является восстановителем','является и окислителем и восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'324',
+     sol:'А) сера повышает степень окисления с +4 в сульфите натрия (Na₂SO₃) до +6 в сульфате натрия (Na₂SO₄) и понижает степень окисления до −2 в сульфиде натрия (Na₂S). Является и окислителем, и восстановителем → 3<br>Б) сера повышает степень окисления с −2 в сероводороде (H₂S) до 0 в простом веществе (S). Является только восстановителем → 2<br>В) сера не меняет степень окисления в ходе реакции. Не проявляет окислительно-восстановительных свойств → 4'},
+    {n:38,
+     q:'Установите соответствие между схемой реакции и свойством углерода, которое он проявляет в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'СВОЙСТВО УГЛЕРОДА',
+     rows:['(NH₄)₂CO₃ → NH₃ + H₂O + CO₂','C + Na₂SO₄ → CO₂ + Na₂S','CO + CuO → CO₂ + Cu'],
+     opts:['является окислителем','является восстановителем','является и окислителем и восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'422',
+     sol:'А) углерод не меняет степень окисления в ходе реакции. Не проявляет окислительно-восстановительных свойств → 4<br>Б) углерод повышает степень окисления с 0 в простом веществе (C) до +4 в углекислом газе (CO₂). Является только восстановителем → 2<br>В) углерод повышает степень окисления с +2 в угарном газе (CO) до +4 в углекислом газе (CO₂). Является только восстановителем → 2'},
+    {n:39,
+     q:'Установите соответствие между уравнением реакции и свойством атома йода в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'СВОЙСТВО АТОМА ЙОДА',
+     rows:['2HIO₃ + 5H₂O₂ = I₂ + 5O₂ + 6H₂O','2FeI₂ + 13Cl₂ + 12H₂O = 2FeCl₃ + 4HIO₃ + 20HCl','2SO₃ + 2NaI = I₂ + SO₂ + Na₂SO₄'],
+     opts:['только окислитель','только восстановитель','и окислитель, и восстановитель','не проявляет окислительно-восстановительных свойств'],
+     ans:'122',
+     sol:'А) йод понижает степень окисления с +5 в йодноватой кислоте (HIO₃) до 0 в молекулярном йоде (I₂). Является только окислителем → 1<br>Б) йод повышает степень окисления с −1 в йодиде железа(II) (FeI₂) до +5 в йодноватой кислоте (HIO₃). Является только восстановителем → 2<br>В) йод повышает степень окисления с −1 в йодиде натрия (NaI) до 0 в молекулярном йоде (I₂). Является только восстановителем → 2'},
+    {n:40,
+     q:'Установите соответствие между уравнением реакции и свойством атома брома в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'СВОЙСТВО АТОМА БРОМА',
+     rows:['NaBrO₃ + 2NH₃ = N₂ + 3H₂O + NaBr','3K₂S + 2FeBr₃ = 2FeS + S + 6KBr','3Br₂ + 6KOH = 5KBr + KBrO₃ + 3H₂O'],
+     opts:['только окислитель','только восстановитель','и окислитель, и восстановитель','не проявляет окислительно-восстановительных свойств'],
+     ans:'143',
+     sol:'А) бром понижает степень окисления с +5 в бромате калия (KBrO₃) до −1 в бромиде калия (KBr). Является только окислителем → 1<br>Б) бром не меняет степень окисления в ходе реакции. Не проявляет окислительно-восстановительных свойств → 4<br>В) бром повышает степень окисления с 0 в молекулярном броме (Br₂) до +5 в бромате калия (KBrO₃) и понижает степень окисления до −1 в бромиде калия (KBr). Является и окислителем, и восстановителем → 3'},
+    {n:41,
+     q:'Установите соответствие между схемой реакции и свойством атома марганца в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'СВОЙСТВО АТОМА МАРГАНЦА',
+     rows:['K₂MnO₄ + H₂O → KMnO₄ + MnO₂ + KOH','KMnO₄ → K₂MnO₄ + MnO₂ + O₂','H₂O₂ + KMnO₄ + H₂SO₄ → MnSO₄ + O₂ + K₂SO₄ + H₂O'],
+     opts:['только окислитель','только восстановитель','и окислитель, и восстановитель','не проявляет окислительно-восстановительных свойств'],
+     ans:'311',
+     sol:'А) марганец повышает степень окисления с +6 в манганате калия (K₂MnO₄) до +7 в перманганате калия (KMnO₄) и понижает степень окисления до +4 в оксиде марганца(IV) (MnO₂). Является и окислителем, и восстановителем → 3<br>Б) марганец понижает степень окисления с +7 в перманганате калия (KMnO₄) до +6 в манганате калия (K₂MnO₄) и до +4 в оксиде марганца(IV) (MnO₂). Является только окислителем → 1<br>В) марганец понижает степень окисления с +7 в перманганате калия (KMnO₄) до +2 в сульфате марганца(II) (MnSO₄). Является только окислителем → 1'},
+    {n:42,
+     q:'Установите соответствие между уравнением реакции и свойством атома азота в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'СВОЙСТВО АТОМА АЗОТА',
+     rows:['2NH₃ + 6MnO₂ = N₂ + 3Mn₂O₃ + 3H₂O','2NO₂ + H₂O = HNO₂ + HNO₃','NH₄Cl + NaOH = NH₃ + H₂O + NaCl'],
+     opts:['только окислитель','только восстановитель','и окислитель, и восстановитель','не проявляет окислительно-восстановительных свойств'],
+     ans:'234',
+     sol:'А) азот повышает степень окисления с −3 в аммиаке (NH₃) до 0 в молекулярном азоте (N₂). Является восстановителем → 2<br>Б) азот повышает степень окисления с +4 в оксиде азота(IV) (NO₂) до +5 в азотной кислоте (HNO₃) и понижает до +3 в азотистой кислоте (HNO₂). Является и окислителем, и восстановителем → 3<br>В) азот не меняет степень окисления в ходе реакции. Не проявляет окислительно-восстановительных свойств → 4'},
+    {n:43,
+     q:'Установите соответствие между уравнением реакции и свойством атома меди в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'СВОЙСТВО АТОМА МЕДИ',
+     rows:['Cu₂O + 3H₂SO₄ = 2CuSO₄ + SO₂ + 3H₂O','Cu + 4HNO₃ = Cu(NO₃)₂ + 2NO₂ + 2H₂O','3CuO + 2NH₃ = N₂ + 3Cu + 3H₂O'],
+     opts:['только окислитель','только восстановитель','и окислитель, и восстановитель','не проявляет окислительно-восстановительных свойств'],
+     ans:'221',
+     sol:'А) медь повышает степень окисления с +1 в оксиде меди(I) (Cu₂O) до +2 в сульфате меди(II) (CuSO₄). Является только восстановителем → 2<br>Б) медь повышает степень окисления с 0 в простом веществе (Cu) до +2 в нитрате меди(II) (Cu(NO₃)₂). Является только восстановителем → 2<br>В) медь понижает степень окисления с +2 в оксиде меди(II) (CuO) до 0 в простом веществе (Cu). Является только окислителем → 1'},
+    {n:44,
+     q:'Установите соответствие между схемой реакции и свойством фосфора, которое он проявляет в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'СВОЙСТВО ФОСФОРА',
+     rows:['P + S → P₂S₃','P₄ + KOH + H₂O → PH₃ + KH₂PO₂','Ca₃P₂ + HCl → CaCl₂ + PH₃'],
+     opts:['только окислитель','только восстановитель','и окислитель, и восстановитель','не проявляет окислительно-восстановительных свойств'],
+     ans:'234',
+     sol:'А) фосфор повышает степень окисления с 0 в простом веществе (P) до +3 в сульфиде фосфора(III) (P₂S₃). Является только восстановителем → 2<br>Б) фосфор повышает степень окисления с 0 в простом веществе (P) до +1 в гипофосфите калия (KH₂PO₂) и понижает до −3 в фосфине (PH₃). Является и окислителем, и восстановителем → 3<br>В) фосфор не меняет степень окисления в ходе реакции. Не проявляет окислительно-восстановительных свойств → 4'},
+    {n:45,
+     q:'Установите соответствие между схемой реакции и свойством фосфора, которое он проявляет в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'СВОЙСТВО ФОСФОРА',
+     rows:['H₃PO₄ →(t°) H₄P₂O₇','H₃PO₃ + HNO₃ →(t°) H₃PO₄ + NO + H₂O','H₃PO₃ →(t°) PH₃ + H₃PO₄'],
+     opts:['является окислителем','является восстановителем','является и окислителем, и восстановителем','не проявляет окислительно-восстановительных свойств'],
+     ans:'423',
+     sol:'А) фосфор не меняет степень окисления в ходе реакции. Не проявляет окислительно-восстановительных свойств → 4<br>Б) фосфор повышает степень окисления с +3 в фосфористой кислоте (H₃PO₃) до +5 в фосфорной кислоте (H₃PO₄). Является только восстановителем → 2<br>В) фосфор повышает степень окисления с +3 в фосфористой кислоте (H₃PO₃) до +5 в фосфорной кислоте (H₃PO₄) и понижает до −3 в фосфине (PH₃). Является и окислителем, и восстановителем → 3'},
+  ];
+  function norm(s){ return s.trim().replace(/[^0-9]/g,''); }
+  function shuffle(a){ let b=a.slice(); for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]} return b; }
+  function $i(id){ return document.getElementById(id); }
+  function _save(){ try{localStorage.setItem(SAVE_KEY,JSON.stringify({q:queue.map(i=>TASKS[i].n),cur,answered:[...answered],wrongIds:[...wrongIds],wp:[...wrongAtPos],ts:Date.now()}));}catch(e){} }
+  function _load(){
+    try{
+      const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+      if(!d||Date.now()-d.ts>TTL)return false;
+      const nMap={}; TASKS.forEach((t,i)=>nMap[t.n]=i);
+      queue=d.q.map(n=>nMap[n]).filter(i=>i!==undefined);
+      if(!queue.length)return false;
+      cur=d.cur||0; answered=new Set(d.answered||[]); wrongIds=new Set(d.wrongIds||[]); wrongAtPos=new Set(d.wp||[]);
+      return true;
+    }catch(e){return false;}
+  }
+  let queue,cur,answered,wrongIds,wrongAtPos;
+  function init(){
+    if(!_load()){ queue=shuffle(TASKS.map((_,i)=>i)); cur=0; answered=new Set(); wrongIds=new Set(); wrongAtPos=new Set(); }
+    if(cur>=queue.length){ showResult(); return; }
+    render();
+  }
+  function render(){
+    const t=TASKS[queue[cur]];
+    $i('t3-prog-text').textContent=answered.size+' / '+TASKS.length;
+    $i('t3-prog-fill').style.width=(answered.size/TASKS.length*100)+'%';
+    $i('t3-q').textContent=t.q;
+    $i('t3-table').innerHTML='<table style="width:100%;border-collapse:collapse;margin-top:10px"><thead><tr>'+
+      '<th style="text-align:left;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--surface2);color:var(--ink);padding:8px 12px 8px 0;width:55%">'+t.lh+'</th>'+
+      '<th style="text-align:left;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--surface2);color:var(--ink);padding:8px 0 8px 16px">'+t.rh+'</th>'+
+      '</tr></thead><tbody>'+
+      t.rows.map((r,i)=>'<tr><td style="font-size:14px;font-weight:700;padding:5px 12px 5px 0;vertical-align:top">'+['А','Б','В'][i]+') '+r+'</td>'+
+        '<td style="font-size:14px;color:var(--ink);padding:5px 0 5px 16px;vertical-align:top">'+(i+1)+') '+t.opts[i]+'</td></tr>').join('')+
+      '<tr><td></td><td style="font-size:14px;color:var(--ink);padding:5px 0 5px 16px">4) '+t.opts[3]+'</td></tr>'+
+    '</tbody></table>';
+    $i('t3-feedback').textContent=''; $i('t3-feedback').style.color='';
+    $i('t3-solution').style.display='none'; $i('t3-next-btn').style.display='none';
+    $i('t3-check-btn').style.display=''; $i('t3-inp').value=''; $i('t3-inp').focus({preventScroll:true});
+  }
+  function check(){
+    const t=TASKS[queue[cur]];
+    const val=norm($i('t3-inp').value);
+    if(!val) return;
+    if(val===t.ans){
+      if(!wrongAtPos.has(cur)) answered.add(t.n);
+      $i('t3-prog-text').textContent=answered.size+' / '+TASKS.length;
+      $i('t3-prog-fill').style.width=(answered.size/TASKS.length*100)+'%';
+      $i('t3-feedback').textContent='✓ Верно!'; $i('t3-feedback').style.color='var(--green)';
+      $i('t3-solution').innerHTML=t.sol; $i('t3-solution').style.display='block'; $i('t3-solution').classList.remove('sol-open'); void $i('t3-solution').offsetWidth; $i('t3-solution').classList.add('sol-open');
+      $i('t3-check-btn').style.display='none'; $i('t3-next-btn').style.display='';
+      _save();
+    } else {
+      wrongIds.add(t.n); if(!wrongAtPos.has(cur)){ queue.push(queue[cur]); wrongAtPos.add(cur); }
+      $i('t3-feedback').textContent='✗ Неверно, попробуй ещё раз'; $i('t3-feedback').style.color='var(--red)';
+      $i('t3-inp').value=''; $i('t3-inp').focus({preventScroll:true});
+      _save();
+    }
+  }
+  function next(){ cur++; _save(); if(cur>=queue.length) showResult(); else render(); }
+  function showResult(){
+    $i('tr-card-t3').style.display='none'; $i('t3-result').style.display='block';
+    const perfect=wrongIds.size===0;
+    $i('t3-res-grade').textContent=perfect?'🏆':'✅';
+    $i('t3-res-msg').textContent=perfect?'Идеально! Все 14 заданий — с первого раза!':'Готово! Все 14 заданий пройдены.';
+    try{localStorage.setItem(SAVE_KEY+'_done','1');}catch(e){}
+    if(window.blockDone) window.blockDone('tr-wrap-t3');
+  }
+  window.t3Reset=function(){
+    try{localStorage.removeItem(SAVE_KEY);localStorage.removeItem(SAVE_KEY+'_done');}catch(e){}
+    queue=shuffle(TASKS.map((_,i)=>i)); cur=0; answered=new Set(); wrongIds=new Set(); wrongAtPos=new Set();
+    $i('tr-card-t3').style.display=''; $i('t3-result').style.display='none';
+    render();
+  };
+  $i('t3-check-btn').addEventListener('click',check);
+  $i('t3-inp').addEventListener('keydown',function(e){if(e.key==='Enter')check();});
+  $i('t3-next-btn').addEventListener('click',next);
+  setTimeout(init,0);
+})();
+</script>
+
+<!-- ══ ТИП 4 ══ -->
+<section class="section fade-in" id="t4">
+  <div class="section-label">Тип 4</div>
+  <h2 class="section-title">Уравнение реакции → формула окислителя/восстановителя</h2>
+
+  <div style="background:var(--blue-soft);border-left:4px solid var(--blue);border-radius:0 var(--rs) var(--rs) 0;padding:16px 20px;margin-bottom:24px;font-size:15px;color:var(--ink)">
+    <strong>Как решать:</strong> найди в каждой реакции, какое вещество меняет степень окисления в нужную сторону.<br>
+    — Восстановитель <strong>повышает</strong> СО → запиши формулу вещества, содержащего этот элемент в исходной смеси<br>
+    — Окислитель <strong>понижает</strong> СО → запиши формулу соответствующего вещества-реагента
+  </div>
+
+  <div id="tr-wrap-t4">
+    <div id="tr-card-t4" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;box-shadow:var(--sh)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span id="t4-prog-text" style="font-size:13px;font-weight:700;color:var(--muted)">0 / 14</span>
+      </div>
+      <div style="height:6px;background:var(--surface2);border-radius:3px;margin-bottom:20px">
+        <div id="t4-prog-fill" style="height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:3px;transition:width .3s"></div>
+      </div>
+      <div id="t4-q" style="font-size:14px;color:var(--ink);margin-bottom:12px;line-height:1.5"></div>
+      <div id="t4-table" style="margin-bottom:18px"></div>
+      <input id="t4-inp" type="text" maxlength="4" placeholder="___"
+        style="display:block;width:140px;font-size:28px;font-weight:800;letter-spacing:.2em;text-align:center;padding:10px 16px;border:2px solid var(--border);border-radius:var(--rs);background:var(--surface);color:var(--navy);margin-bottom:12px;outline:none">
+      <button id="t4-check-btn" style="padding:10px 28px;border-radius:var(--rs);border:none;background:var(--blue);color:#fff;font-size:15px;font-weight:700;cursor:pointer">Проверить</button>
+      <div id="t4-feedback" style="margin-top:12px;font-size:15px;font-weight:700;min-height:22px"></div>
+      <div id="t4-solution" style="display:none;margin-top:10px;font-size:14px;color:var(--muted);background:var(--surface2);border-radius:var(--rs);padding:12px 16px;line-height:1.6"></div>
+      <button id="t4-next-btn" style="display:none;margin-top:14px;padding:10px 28px;border-radius:var(--rs);border:none;background:var(--green);color:#fff;font-size:15px;font-weight:700;cursor:pointer">Далее →</button>
+    </div>
+    <div id="t4-result" style="display:none;text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:40px 24px;box-shadow:var(--sh)">
+      <div id="t4-res-grade" style="font-size:40px;margin-bottom:16px"></div>
+      <div id="t4-res-msg" style="font-size:16px;color:var(--ink);font-weight:700;margin-bottom:24px"></div>
+      <button onclick="t4Reset()" style="padding:10px 24px;border-radius:var(--r);border:none;background:var(--blue);color:#fff;font-size:14px;font-weight:700;cursor:pointer">🔄 Начать заново</button>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const SAVE_KEY='l19_t4', TTL=6*24*3600*1000;
+  const TASKS=[
+    {n:49,
+     q:'Установите соответствие между уравнением реакции и формулой восстановителя в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'ФОРМУЛА ВОССТАНОВИТЕЛЯ', lw:'60%',
+     rows:['2NH₃ + 2Na = 2NaNH₂ + H₂','H₂S + 2Na = Na₂S + H₂','4NH₃ + 6NO = 5N₂ + 6H₂O'],
+     opts:['NO','NH₃','Na','H₂S'],
+     ans:'332',
+     sol:'А) натрий повышает степень окисления с 0 в простом веществе (Na) до +1 в амиде натрия (NaNH₂). Формула восстановителя – Na → 3<br>Б) натрий повышает степень окисления с 0 в простом веществе (Na) до +1 в сульфиде натрия (Na₂S). Формула восстановителя – Na → 3<br>В) азот повышает степень окисления с −3 в аммиаке (NH₃) до 0 в молекулярном азоте (N₂). Формула восстановителя – NH₃ → 2'},
+    {n:50,
+     q:'Установите соответствие между схемой реакции и формулой восстановителя в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'ФОРМУЛА ВОССТАНОВИТЕЛЯ', lw:'60%',
+     rows:['NO₂ + H₂O + O₂ → HNO₃','Cu + HNO₃ → Cu(NO₃)₂ + NO + H₂O','NH₃ + CuO → Cu + N₂ + H₂O'],
+     opts:['NH₃','CuO','NO₂','Cu'],
+     ans:'341',
+     sol:'А) азот повышает степень окисления с +4 в оксиде азота(IV) (NO₂) до +5 в азотной кислоте (HNO₃). Формула восстановителя – NO₂ → 3<br>Б) медь повышает степень окисления с 0 в простом веществе (Cu) до +2 в нитрате меди(II) (Cu(NO₃)₂). Формула восстановителя – Cu → 4<br>В) азот повышает степень окисления с −3 в аммиаке (NH₃) до 0 в молекулярном азоте (N₂). Формула восстановителя – NH₃ → 1'},
+    {n:51,
+     q:'Установите соответствие между уравнением реакции и веществом-окислителем в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'ОКИСЛИТЕЛЬ', lw:'62%',
+     rows:['N₂O + H₂ = N₂ + H₂O','H₂ + 2Li = 2LiH','N₂H₄ + 2N₂O = 3N₂ + 2H₂O','N₂H₄ + H₂ = 2NH₃'],
+     opts:['N₂H₄','N₂O','N₂','H₂','Li'],
+     ans:'2421',
+     sol:'А) азот понижает степень окисления с +1 в оксиде азота(I) (N₂O) до 0 в молекулярном азоте (N₂). Окислитель – N₂O → 2<br>Б) водород понижает степень окисления с 0 в молекулярном водороде (H₂) до −1 в гидриде лития (LiH). Окислитель – H₂ → 4<br>В) азот понижает степень окисления с +1 в оксиде азота(I) (N₂O) до 0 в молекулярном азоте (N₂). Окислитель – N₂O → 2<br>Г) азот понижает степень окисления с −2 в гидразине (N₂H₄) до −3 в аммиаке (NH₃). Окислитель – N₂H₄ → 1'},
+    {n:52,
+     q:'Установите соответствие между уравнением реакции и формулой восстановителя в данной реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'ФОРМУЛА ВОССТАНОВИТЕЛЯ', lw:'60%',
+     rows:['2H₂S + SO₂ = 3S + 2H₂O','S + 2HI = I₂ + H₂S','SO₂ + NO₂ = SO₃ + NO'],
+     opts:['H₂S','HI','S','SO₂'],
+     ans:'124',
+     sol:'А) сера повышает степень окисления с −2 в сероводороде (H₂S) до 0 в простом веществе (S). Формула восстановителя – H₂S → 1<br>Б) йод повышает степень окисления с −1 в йодоводороде (HI) до 0 в молекулярном йоде (I₂). Формула восстановителя – HI → 2<br>В) сера повышает степень окисления с +4 в оксиде серы(IV) (SO₂) до +6 в оксиде серы(VI) (SO₃). Формула восстановителя – SO₂ → 4'},
+    {n:53,
+     q:'Установите соответствие между уравнением реакции и формулой восстановителя в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'ФОРМУЛА ВОССТАНОВИТЕЛЯ', lw:'60%',
+     rows:['2H₂S + SO₂ = 3S + 2H₂O','Br₂ + SO₂ + 2H₂O = H₂SO₄ + 2HBr','SO₂ + H₂O₂ = H₂SO₄'],
+     opts:['H₂O₂','H₂S','Br₂','SO₂'],
+     ans:'244',
+     sol:'А) сера повышает степень окисления с −2 в сероводороде (H₂S) до 0 в простом веществе (S). Формула восстановителя – H₂S → 2<br>Б) сера повышает степень окисления с +4 в оксиде серы(IV) (SO₂) до +6 в серной кислоте (H₂SO₄). Формула восстановителя – SO₂ → 4<br>В) сера повышает степень окисления с +4 в оксиде серы(IV) (SO₂) до +6 в серной кислоте (H₂SO₄). Формула восстановителя – SO₂ → 4'},
+    {n:54,
+     q:'Установите соответствие между уравнением реакции и формулой вещества, являющегося восстановителем в данной реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'ФОРМУЛА ВОССТАНОВИТЕЛЯ', lw:'60%',
+     rows:['2H₂S + SO₂ = 3S + 2H₂O','SO₂ + NO₂ = SO₃ + NO','S + 2HI = I₂ + H₂S'],
+     opts:['H₂S','S','SO₂','HI'],
+     ans:'134',
+     sol:'А) сера повышает степень окисления с −2 в сероводороде (H₂S) до 0 в простом веществе (S). Формула восстановителя – H₂S → 1<br>Б) сера повышает степень окисления с +4 в сернистом газе (SO₂) до +6 в оксиде серы(VI) (SO₃). Формула восстановителя – SO₂ → 3<br>В) йод повышает степень окисления с −1 в йодоводороде (HI) до 0 в простом веществе (I₂). Формула восстановителя – HI → 4'},
+    {n:55,
+     q:'Установите соответствие между схемой реакции и формулой восстановителя в ней: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'ФОРМУЛА ВОССТАНОВИТЕЛЯ', lw:'60%',
+     rows:['Cl₂ + KOH → KCl + KClO + H₂O','H₂O₂ + Ag₂O → H₂O + Ag + O₂','H₂O₂ + Cl₂ → HCl + O₂'],
+     opts:['KOH','Cl₂','H₂O₂','Ag₂O'],
+     ans:'233',
+     sol:'А) хлор повышает степень окисления с 0 в простом веществе (Cl₂) до +1 в гипохлорите калия (KClO). Формула восстановителя – Cl₂ → 2<br>Б) кислород повышает степень окисления с −1 в пероксиде водорода (H₂O₂) до 0 в простом веществе (O₂). Формула восстановителя – H₂O₂ → 3<br>В) кислород повышает степень окисления с −1 в пероксиде водорода (H₂O₂) до 0 в простом веществе (O₂). Формула восстановителя – H₂O₂ → 3'},
+    {n:56,
+     q:'Установите соответствие между схемой реакции и формулой вещества-восстановителя в данной реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'ФОРМУЛА ВОССТАНОВИТЕЛЯ', lw:'60%',
+     rows:['NO₂ + H₂O + O₂ → HNO₃','Cu + HNO₃ → Cu(NO₃)₂ + NO + H₂O','NH₃ + CuO → Cu + N₂ + H₂O'],
+     opts:['NH₃','CuO','NO₂','Cu'],
+     ans:'341',
+     sol:'А) азот повышает степень окисления с +4 в оксиде азота(IV) (NO₂) до +5 в азотной кислоте (HNO₃). Формула восстановителя – NO₂ → 3<br>Б) медь повышает степень окисления с 0 в простом веществе (Cu) до +2 в нитрате меди(II) (Cu(NO₃)₂). Формула восстановителя – Cu → 4<br>В) азот повышает степень окисления с −3 в аммиаке (NH₃) до 0 в простом веществе (N₂). Формула восстановителя – NH₃ → 1'},
+    {n:57,
+     q:'Установите соответствие между схемой реакции и формулой вещества, которое является в этой реакции восстановителем: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'ФОРМУЛА ВОССТАНОВИТЕЛЯ', lw:'60%',
+     rows:['Cl₂ + KOH → KCl + KClO₃ + H₂O','H₂O₂ + I₂ → HIO₃ + H₂O','Cl₂ + I₂ → I₂Cl₆'],
+     opts:['KOH','Cl₂','H₂O₂','I₂'],
+     ans:'244',
+     sol:'А) хлор повышает степень окисления с 0 в простом веществе (Cl₂) до +5 в хлорате калия (KClO₃). Формула восстановителя – Cl₂ → 2<br>Б) йод повышает степень окисления с 0 в простом веществе (I₂) до +5 в йодноватой кислоте (HIO₃). Формула восстановителя – I₂ → 4<br>В) йод повышает степень окисления с 0 в простом веществе (I₂) до +3 в гексахлориде дийода (I₂Cl₆). Формула восстановителя – I₂ → 4'},
+    {n:58,
+     q:'Установите соответствие между уравнением реакции и формулой вещества-окислителя в данной реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'ФОРМУЛЫ ВЕЩЕСТВ', lw:'60%',
+     rows:['N₂O + H₂ → N₂ + H₂O','H₂ + 2Li → 2LiH','N₂H₄ + 2N₂O → 3N₂ + 2H₂O'],
+     opts:['N₂H₄','N₂O','Li','H₂'],
+     ans:'242',
+     sol:'А) азот понижает степень окисления с +1 в оксиде азота(I) (N₂O) до 0 в простом веществе (N₂). Формула окислителя – N₂O → 2<br>Б) водород понижает степень окисления с 0 в молекулярном водороде (H₂) до −1 в гидриде лития (LiH). Формула окислителя – H₂ → 4<br>В) азот понижает степень окисления с +1 в оксиде азота(I) (N₂O) до 0 в молекулярном азоте (N₂). Формула окислителя – N₂O → 2'},
+    {n:59,
+     q:'Установите соответствие между уравнением реакции и формулой вещества, которое в данной реакции является окислителем: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'ФОРМУЛА ОКИСЛИТЕЛЯ', lw:'60%',
+     rows:['2S + C → CS₂','2SO₃ + 2KI → I₂ + SO₂ + K₂SO₄','S + 3NO₂ → SO₃ + 3NO'],
+     opts:['NO₂','S','SO₃','C'],
+     ans:'231',
+     sol:'А) сера понижает степень окисления с 0 в простом веществе (S) до −2 в сероуглероде (CS₂). Формула окислителя – S → 2<br>Б) сера понижает степень окисления с +6 в оксиде серы(VI) (SO₃) до +4 в оксиде серы(IV) (SO₂). Формула окислителя – SO₃ → 3<br>В) азот понижает степень окисления с +4 в оксиде азота(IV) (NO₂) до +2 в оксиде азота(II) (NO). Формула окислителя – NO₂ → 1'},
+    {n:60,
+     q:'Установите соответствие между уравнением реакции и формулой вещества восстановителя в данной реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'СХЕМА РЕАКЦИИ', rh:'ФОРМУЛА ВОССТАНОВИТЕЛЯ', lw:'60%',
+     rows:['2NH₃ + 2Na → 2NaNH₂ + H₂','H₂S + 2Na → Na₂S + H₂','4NH₃ + 6NO → 5N₂ + 6H₂O'],
+     opts:['NO','H₂S','NH₃','Na'],
+     ans:'443',
+     sol:'А) натрий повышает степень окисления с 0 в простом веществе (Na) до +1 в амиде натрия (NaNH₂). Формула восстановителя – Na → 4<br>Б) натрий повышает степень окисления с 0 в простом веществе (Na) до +1 в сульфиде (Na₂S). Формула восстановителя – Na → 4<br>В) азот повышает степень окисления с −3 в аммиаке (NH₃) до 0 в простом веществе (N₂). Формула восстановителя – NH₃ → 3'},
+    {n:61,
+     q:'Установите соответствие между уравнением реакции и формулой вещества, являющегося восстановителем в данной реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'ВОССТАНОВИТЕЛЬ', lw:'60%',
+     rows:['2H₂S + 3O₂ = 2SO₂ + 2H₂O','2NH₃ + 2Na = 2NaNH₂ + H₂','4NH₃ + 6NO = 5N₂ + 6H₂O'],
+     opts:['NO','H₂S','NH₃','Na'],
+     ans:'243',
+     sol:'А) сера повышает степень окисления с −2 в сероводороде (H₂S) до +4 в оксиде серы(IV) (SO₂). Формула восстановителя – H₂S → 2<br>Б) натрий повышает степень окисления с 0 в простом веществе (Na) до +1 в амиде натрия (NaNH₂). Формула восстановителя – Na → 4<br>В) азот повышает степень окисления с −3 в аммиаке (NH₃) до 0 в простом веществе (N₂). Формула восстановителя – NH₃ → 3'},
+    {n:62,
+     q:'Установите соответствие между уравнением реакции и формулой окислителя в этой реакции: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'УРАВНЕНИЕ РЕАКЦИИ', rh:'ФОРМУЛА ОКИСЛИТЕЛЯ', lw:'60%',
+     rows:['N₂O + H₂ = N₂ + H₂O','H₂ + N₂H₄ = 2NH₃','N₂H₄ + 2N₂O = 3N₂ + 2H₂O'],
+     opts:['N₂O','H₂','N₂H₄','N₂'],
+     ans:'131',
+     sol:'А) азот понижает степень окисления с +1 в оксиде азота(I) (N₂O) до 0 в молекулярном азоте (N₂). Формула окислителя – N₂O → 1<br>Б) азот понижает степень окисления с −2 в гидразине (N₂H₄) до −3 в аммиаке (NH₃). Формула окислителя – N₂H₄ → 3<br>В) азот понижает степень окисления с +1 в оксиде азота(I) (N₂O) до 0 в молекулярном азоте (N₂). Формула окислителя – N₂O → 1'},
+  ];
+  const LETTERS=['А','Б','В','Г','Д'];
+  function norm(s){ return s.trim().replace(/[^0-9]/g,''); }
+  function shuffle(a){ let b=a.slice(); for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]} return b; }
+  function $i(id){ return document.getElementById(id); }
+  function _save(){ try{localStorage.setItem(SAVE_KEY,JSON.stringify({q:queue.map(i=>TASKS[i].n),cur,answered:[...answered],wrongIds:[...wrongIds],wp:[...wrongAtPos],ts:Date.now()}));}catch(e){} }
+  function _load(){
+    try{
+      const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+      if(!d||Date.now()-d.ts>TTL)return false;
+      const nMap={}; TASKS.forEach((t,i)=>nMap[t.n]=i);
+      queue=d.q.map(n=>nMap[n]).filter(i=>i!==undefined);
+      if(!queue.length)return false;
+      cur=d.cur||0; answered=new Set(d.answered||[]); wrongIds=new Set(d.wrongIds||[]); wrongAtPos=new Set(d.wp||[]);
+      return true;
+    }catch(e){return false;}
+  }
+  let queue,cur,answered,wrongIds,wrongAtPos;
+  function init(){
+    if(!_load()){ queue=shuffle(TASKS.map((_,i)=>i)); cur=0; answered=new Set(); wrongIds=new Set(); wrongAtPos=new Set(); }
+    if(cur>=queue.length){ showResult(); return; }
+    render();
+  }
+  function render(){
+    const t=TASKS[queue[cur]];
+    $i('t4-prog-text').textContent=answered.size+' / '+TASKS.length;
+    $i('t4-prog-fill').style.width=(answered.size/TASKS.length*100)+'%';
+    $i('t4-q').textContent=t.q;
+    $i('t4-inp').maxLength=t.ans.length;
+    $i('t4-inp').placeholder='_'.repeat(t.ans.length);
+    const maxR=Math.max(t.rows.length,t.opts.length);
+    let tbody='';
+    for(let i=0;i<maxR;i++){
+      const lCell=i<t.rows.length?'<b>'+LETTERS[i]+')</b> '+t.rows[i]:'';
+      const rCell=i<t.opts.length?(i+1)+') '+t.opts[i]:'';
+      tbody+='<tr><td style="font-size:14px;padding:5px 12px 5px 0;vertical-align:top">'+lCell+'</td>'+
+             '<td style="font-size:14px;font-weight:700;color:var(--navy);padding:5px 0 5px 16px;vertical-align:top;white-space:nowrap">'+rCell+'</td></tr>';
+    }
+    $i('t4-table').innerHTML='<table style="width:100%;border-collapse:collapse;margin-top:10px"><thead><tr>'+
+      '<th style="text-align:left;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--surface2);color:var(--ink);padding:8px 12px 8px 0;width:'+(t.lw||'60%')+'">'+t.lh+'</th>'+
+      '<th style="text-align:left;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--surface2);color:var(--ink);padding:8px 0 8px 16px">'+t.rh+'</th>'+
+      '</tr></thead><tbody>'+tbody+'</tbody></table>';
+    $i('t4-feedback').textContent=''; $i('t4-feedback').style.color='';
+    $i('t4-solution').style.display='none'; $i('t4-next-btn').style.display='none';
+    $i('t4-check-btn').style.display=''; $i('t4-inp').value=''; $i('t4-inp').focus({preventScroll:true});
+  }
+  function check(){
+    const t=TASKS[queue[cur]];
+    const val=norm($i('t4-inp').value);
+    if(!val) return;
+    if(val===t.ans){
+      if(!wrongAtPos.has(cur)) answered.add(t.n);
+      $i('t4-prog-text').textContent=answered.size+' / '+TASKS.length;
+      $i('t4-prog-fill').style.width=(answered.size/TASKS.length*100)+'%';
+      $i('t4-feedback').textContent='✓ Верно!'; $i('t4-feedback').style.color='var(--green)';
+      $i('t4-solution').innerHTML=t.sol; $i('t4-solution').style.display='block'; $i('t4-solution').classList.remove('sol-open'); void $i('t4-solution').offsetWidth; $i('t4-solution').classList.add('sol-open');
+      $i('t4-check-btn').style.display='none'; $i('t4-next-btn').style.display='';
+      _save();
+    } else {
+      wrongIds.add(t.n); if(!wrongAtPos.has(cur)){ queue.push(queue[cur]); wrongAtPos.add(cur); }
+      $i('t4-feedback').textContent='✗ Неверно, попробуй ещё раз'; $i('t4-feedback').style.color='var(--red)';
+      $i('t4-inp').value=''; $i('t4-inp').focus({preventScroll:true});
+      _save();
+    }
+  }
+  function next(){ cur++; _save(); if(cur>=queue.length) showResult(); else render(); }
+  function showResult(){
+    $i('tr-card-t4').style.display='none'; $i('t4-result').style.display='block';
+    const perfect=wrongIds.size===0;
+    $i('t4-res-grade').textContent=perfect?'🏆':'✅';
+    $i('t4-res-msg').textContent=perfect?'Идеально! Все 14 заданий — с первого раза!':'Готово! Все 14 заданий пройдены.';
+    try{localStorage.setItem(SAVE_KEY+'_done','1');}catch(e){}
+    if(window.blockDone) window.blockDone('tr-wrap-t4');
+  }
+  window.t4Reset=function(){
+    try{localStorage.removeItem(SAVE_KEY);localStorage.removeItem(SAVE_KEY+'_done');}catch(e){}
+    queue=shuffle(TASKS.map((_,i)=>i)); cur=0; answered=new Set(); wrongIds=new Set(); wrongAtPos=new Set();
+    $i('tr-card-t4').style.display=''; $i('t4-result').style.display='none';
+    render();
+  };
+  $i('t4-check-btn').addEventListener('click',check);
+  $i('t4-inp').addEventListener('keydown',function(e){if(e.key==='Enter')check();});
+  $i('t4-next-btn').addEventListener('click',next);
+  setTimeout(init,0);
+})();
+</script>
+
+<!-- ══ ТИП 5 ══ -->
+<section class="section fade-in" id="t5">
+  <div class="section-label">Тип 5</div>
+  <h2 class="section-title">Изменение СО → уравнение реакции</h2>
+
+  <div style="background:var(--blue-soft);border-left:4px solid var(--blue);border-radius:0 var(--rs) var(--rs) 0;padding:16px 20px;margin-bottom:24px;font-size:15px;color:var(--ink)">
+    <strong>Как решать:</strong> по заданному изменению СО (например, Fe⁺² → Fe⁺³) найди реакцию, в которой именно этот элемент меняет степень окисления указанным образом. Обрати внимание на формулы веществ — нужен конкретный элемент в конкретном соединении.
+  </div>
+
+  <div id="tr-wrap-t5">
+    <div id="tr-card-t5" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;box-shadow:var(--sh)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <span id="t5-prog-text" style="font-size:13px;font-weight:700;color:var(--muted)">0 / 9</span>
+      </div>
+      <div style="height:6px;background:var(--surface2);border-radius:3px;margin-bottom:20px">
+        <div id="t5-prog-fill" style="height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:3px;transition:width .3s"></div>
+      </div>
+      <div id="t5-q" style="font-size:14px;color:var(--ink);margin-bottom:12px;line-height:1.5"></div>
+      <div id="t5-table" style="margin-bottom:18px"></div>
+      <input id="t5-inp" type="text" maxlength="3" placeholder="___"
+        style="display:block;width:120px;font-size:28px;font-weight:800;letter-spacing:.2em;text-align:center;padding:10px 16px;border:2px solid var(--border);border-radius:var(--rs);background:var(--surface);color:var(--navy);margin-bottom:12px;outline:none">
+      <button id="t5-check-btn" style="padding:10px 28px;border-radius:var(--rs);border:none;background:var(--blue);color:#fff;font-size:15px;font-weight:700;cursor:pointer">Проверить</button>
+      <div id="t5-feedback" style="margin-top:12px;font-size:15px;font-weight:700;min-height:22px"></div>
+      <div id="t5-solution" style="display:none;margin-top:10px;font-size:14px;color:var(--muted);background:var(--surface2);border-radius:var(--rs);padding:12px 16px;line-height:1.6"></div>
+      <button id="t5-next-btn" style="display:none;margin-top:14px;padding:10px 28px;border-radius:var(--rs);border:none;background:var(--green);color:#fff;font-size:15px;font-weight:700;cursor:pointer">Далее →</button>
+    </div>
+    <div id="t5-result" style="display:none;text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:40px 24px;box-shadow:var(--sh)">
+      <div id="t5-res-grade" style="font-size:40px;margin-bottom:16px"></div>
+      <div id="t5-res-msg" style="font-size:16px;color:var(--ink);font-weight:700;margin-bottom:24px"></div>
+      <button onclick="t5Reset()" style="padding:10px 24px;border-radius:var(--r);border:none;background:var(--blue);color:#fff;font-size:14px;font-weight:700;cursor:pointer">🔄 Начать заново</button>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const SAVE_KEY='l19_t5', TTL=6*24*3600*1000;
+  const TASKS=[
+    {n:63,
+     q:'Установите соответствие между изменением степени окисления элемента и уравнением реакции, в которой это изменение происходит: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ', rh:'УРАВНЕНИЕ РЕАКЦИИ',
+     rows:['Fe⁺² → Fe⁺³','Mn⁺⁷ → Mn⁺⁴','Mn⁺⁴ → Mn⁺²'],
+     opts:['FeCl₂ + Na₂S → FeS + 2NaCl','MnO₂ + 4HCl → Cl₂ + MnCl₂ + 2H₂O','5FeCl₂ + KMnO₄ + 8HCl → 5FeCl₃ + KCl + MnCl₂ + 4H₂O','2KMnO₄ + S → K₂SO₄ + 2MnO₂'],
+     ans:'342',
+     sol:'А) железо меняет степень окисления с +2 до +3 при взаимодействии хлорида железа(II) с подкисленным раствором перманганата калия → 3<br>Б) марганец меняет степень окисления с +7 до +4 при взаимодействии перманганата калия с серой → 4<br>В) марганец меняет степень окисления с +4 до +2 при взаимодействии оксида марганца(IV) с соляной кислотой → 2'},
+    {n:64,
+     q:'Установите соответствие между изменением степени окисления элемента и уравнением реакции, в которой это изменение происходит: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ', rh:'УРАВНЕНИЕ РЕАКЦИИ',
+     rows:['I⁻¹ → I⁰','I⁰ → I⁺⁵','I⁺⁵ → I⁻¹'],
+     opts:['HIO₃ + 3SO₂ + 3H₂O = 3H₂SO₄ + HI','5H₂S + 2HIO₃ = 5S + I₂ + 6H₂O','6KOH + 3I₂ = 5KI + KIO₃ + 3H₂O','H₂O₂ + 2HI = I₂ + 2H₂O'],
+     ans:'431',
+     sol:'А) йод меняет степень окисления с −1 до 0 при взаимодействии пероксида водорода с йодоводородом → 4<br>Б) йод меняет степень окисления с 0 до +5 при взаимодействии йода с гидроксидом калия → 3<br>В) йод меняет степень окисления с +5 до −1 при взаимодействии йодноватой кислоты с оксидом серы(IV) в водном растворе → 1'},
+    {n:65,
+     q:'Установите соответствие между изменением степени окисления элемента и схемой реакции, в которой это изменение происходит: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ', rh:'СХЕМА РЕАКЦИИ',
+     rows:['Fe⁰ → Fe⁺²','Fe⁺³ → Fe⁺²','Fe⁺³ → Fe⁰'],
+     opts:['HCl + Fe → FeCl₂ + H₂','Fe + Cl₂ → FeCl₃','Fe₂O₃ + Al → Fe + Al₂O₃','FeCl₃ + Cu → FeCl₂ + CuCl₂'],
+     ans:'143',
+     sol:'А) железо меняет степень окисления с 0 до +2 при взаимодействии соляной кислоты с железом → 1<br>Б) железо меняет степень окисления с +3 до +2 при взаимодействии хлорида железа(III) с медью → 4<br>В) железо меняет степень окисления с +3 до 0 при взаимодействии оксида железа(III) с алюминием → 3'},
+    {n:66,
+     q:'Установите соответствие между изменением степени окисления фосфора и уравнением реакции, в которой это изменение происходит: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ', rh:'УРАВНЕНИЕ РЕАКЦИИ',
+     rows:['P⁰ → P⁺³','P⁻³ → P⁺⁵','P⁺⁵ → P⁰'],
+     opts:['P₂O₅ + 6NaOH = 2Na₃PO₄ + 3H₂O','PH₃ + 4H₂SO₄ = H₃PO₄ + 4SO₂ + 4H₂O','4P + 3O₂ = 2P₂O₃','Ca₃(PO₄)₂ + 5C + 3SiO₂ = 2P + 3CaSiO₃ + 5CO'],
+     ans:'324',
+     sol:'А) фосфор меняет степень окисления с 0 до +3 при взаимодействии фосфора с кислородом → 3<br>Б) фосфор меняет степень окисления с −3 до +5 при взаимодействии фосфина с серной кислотой → 2<br>В) фосфор меняет степень окисления с +5 до 0 при взаимодействии фосфата кальция с углеродом и оксидом кремния(IV) → 4'},
+    {n:67,
+     q:'Установите соответствие между изменением степени окисления элемента и уравнением реакции, в которой это изменение происходит: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ', rh:'УРАВНЕНИЕ РЕАКЦИИ',
+     rows:['Cr⁺⁶ → Cr⁺³','S⁻² → S⁺⁴','Mn⁺⁷ → Mn⁺⁴'],
+     opts:['S + H₂ = H₂S','H₂S + 3H₂SO₄(конц.) = 4SO₂ + 4H₂O','3Na₂SO₃ + 2KMnO₄ + H₂O = 3Na₂SO₄ + 2MnO₂ + 2KOH','2Na₂CrO₄ + 16HCl(конц.) = 2CrCl₃ + 3Cl₂ + 4NaCl + 8H₂O'],
+     ans:'423',
+     sol:'А) хром меняет степень окисления с +6 до +3 при взаимодействии дихромата натрия с концентрированной соляной кислотой → 4<br>Б) сера меняет степень окисления с −2 до +4 при взаимодействии сероводорода с концентрированной серной кислотой → 2<br>В) марганец меняет степень окисления с +7 до +4 при взаимодействии водного раствора перманганата калия с сульфитом натрия → 3'},
+    {n:68,
+     q:'Установите соответствие между изменением степени окисления элемента и уравнением реакции, в которой это изменение происходит: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ', rh:'УРАВНЕНИЕ РЕАКЦИИ',
+     rows:['N⁺³ → N⁺⁵','Fe⁺³ → Fe⁰','Cr⁺³ → Cr⁺⁶'],
+     opts:['FeCl₃ + Al = AlCl₃ + Fe','2FeCl₃ + Fe = 3FeCl₂','NaNO₂ + H₂O₂ = NaNO₃ + H₂O','2CrCl₃ + 3KBrO + 10KOH = 2K₂CrO₄ + 3KBr + 6KCl + 5H₂O'],
+     ans:'314',
+     sol:'А) азот меняет степень окисления с +3 до +5 при взаимодействии нитрита натрия с перекисью водорода → 3<br>Б) железо меняет степень окисления с +3 до 0 при взаимодействии хлорида железа(III) с алюминием → 1<br>В) хром меняет степень окисления с +3 до +6 при взаимодействии хлорида хрома(III) с гипобромитом калия и гидроксидом калия → 4'},
+    {n:69,
+     q:'Установите соответствие между изменением степени окисления элемента и уравнением реакции, в которой это изменение происходит: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ', rh:'УРАВНЕНИЕ РЕАКЦИИ',
+     rows:['O⁻¹ → O⁰','H⁰ → H⁻¹','Ag⁺¹ → Ag⁰'],
+     opts:['H₂O₂ + 2KI = I₂ + 2KOH','2HIO₃ + 5H₂O₂ = I₂ + 5O₂ + 6H₂O','2Na + H₂ = 2NaH','2AgNO₃ + Zn = 2Ag + Zn(NO₃)₂'],
+     ans:'234',
+     sol:'А) кислород меняет степень окисления с −1 до 0 при взаимодействии йодноватой кислоты с перекисью водорода → 2<br>Б) водород меняет степень окисления с 0 до −1 при взаимодействии натрия с водородом → 3<br>В) серебро меняет степень окисления с +1 до 0 при взаимодействии нитрата серебра с цинком → 4'},
+    {n:70,
+     q:'Установите соответствие между изменением степени окисления элемента и уравнением реакции, в которой это изменение происходит: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ', rh:'УРАВНЕНИЕ РЕАКЦИИ',
+     rows:['Mn⁺⁷ → Mn⁺⁶','S⁰ → S⁺⁴','Mn⁺⁷ → Mn⁺²'],
+     opts:['MnO₂ + 4HCl = MnCl₂ + Cl₂ + 2H₂O','2KMnO₄ + NaNO₂ + 2KOH = 2K₂MnO₄ + NaNO₃ + H₂O','2KMnO₄ + 10NaI + 8H₂SO₄ = 2MnSO₄ + 5Na₂SO₄ + K₂SO₄ + 5I₂ + 8H₂O','S + O₂ = SO₂'],
+     ans:'243',
+     sol:'А) марганец меняет степень окисления с +7 до +6 при взаимодействии перманганата калия с нитритом натрия и гидроксидом калия → 2<br>Б) сера меняет степень окисления с 0 до +4 при взаимодействии серы с кислородом → 4<br>В) марганец меняет степень окисления с +7 до +2 при взаимодействии перманганата калия с иодидом натрия и серной кислотой → 3'},
+    {n:71,
+     q:'Установите соответствие между изменением степени окисления элемента и уравнением реакции, в которой это изменение происходит: к каждой позиции, обозначенной буквой, подберите соответствующую позицию, обозначенную цифрой.',
+     lh:'ИЗМЕНЕНИЕ СТЕПЕНИ ОКИСЛЕНИЯ', rh:'УРАВНЕНИЕ РЕАКЦИИ',
+     rows:['N⁺⁵ → N⁺²','Fe⁺³ → Fe⁺²','Cl⁺⁵ → Cl⁻¹'],
+     opts:['2FeCl₃ + Fe = 3FeCl₂','Fe + 4HNO₃ = Fe(NO₃)₃ + NO + 2H₂O','Cu + 4HNO₃ = Cu(NO₃)₂ + 2NO₂ + 2H₂O','NaClO₃ + Cr₂O₃ + 4NaOH = NaCl + 2Na₂CrO₄ + 2H₂O'],
+     ans:'214',
+     sol:'А) азот меняет степень окисления с +5 до +2 при взаимодействии железа с азотной кислотой → 2<br>Б) железо меняет степень окисления с +3 до +2 при взаимодействии хлорида железа(III) с железом → 1<br>В) хлор меняет степень окисления с +5 до −1 при взаимодействии хлората натрия с оксидом хрома(III) и гидроксидом натрия → 4'},
+  ];
+  const LETTERS=['А','Б','В'];
+  function norm(s){ return s.trim().replace(/[^0-9]/g,''); }
+  function shuffle(a){ let b=a.slice(); for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]} return b; }
+  function $i(id){ return document.getElementById(id); }
+  function _save(){ try{localStorage.setItem(SAVE_KEY,JSON.stringify({q:queue.map(i=>TASKS[i].n),cur,answered:[...answered],wrongIds:[...wrongIds],wp:[...wrongAtPos],ts:Date.now()}));}catch(e){} }
+  function _load(){
+    try{
+      const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');
+      if(!d||Date.now()-d.ts>TTL)return false;
+      const nMap={}; TASKS.forEach((t,i)=>nMap[t.n]=i);
+      queue=d.q.map(n=>nMap[n]).filter(i=>i!==undefined);
+      if(!queue.length)return false;
+      cur=d.cur||0; answered=new Set(d.answered||[]); wrongIds=new Set(d.wrongIds||[]); wrongAtPos=new Set(d.wp||[]);
+      return true;
+    }catch(e){return false;}
+  }
+  let queue,cur,answered,wrongIds,wrongAtPos;
+  function init(){
+    if(!_load()){ queue=shuffle(TASKS.map((_,i)=>i)); cur=0; answered=new Set(); wrongIds=new Set(); wrongAtPos=new Set(); }
+    if(cur>=queue.length){ showResult(); return; }
+    render();
+  }
+  function render(){
+    const t=TASKS[queue[cur]];
+    $i('t5-prog-text').textContent=answered.size+' / '+TASKS.length;
+    $i('t5-prog-fill').style.width=(answered.size/TASKS.length*100)+'%';
+    $i('t5-q').textContent=t.q;
+    const maxR=Math.max(t.rows.length,t.opts.length);
+    let tbody='';
+    for(let i=0;i<maxR;i++){
+      const lCell=i<t.rows.length?'<b>'+LETTERS[i]+')</b> '+t.rows[i]:'';
+      const rCell=i<t.opts.length?(i+1)+') '+t.opts[i]:'';
+      tbody+='<tr><td style="font-size:14px;font-weight:700;color:var(--navy);padding:5px 12px 5px 0;vertical-align:top;white-space:nowrap">'+lCell+'</td>'+
+             '<td style="font-size:14px;padding:5px 0 5px 16px;vertical-align:top">'+rCell+'</td></tr>';
+    }
+    $i('t5-table').innerHTML='<table style="width:100%;border-collapse:collapse;margin-top:10px"><thead><tr>'+
+      '<th style="text-align:left;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--surface2);color:var(--ink);padding:8px 12px 8px 0;width:28%">'+t.lh+'</th>'+
+      '<th style="text-align:left;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;background:var(--surface2);color:var(--ink);padding:8px 0 8px 16px">'+t.rh+'</th>'+
+      '</tr></thead><tbody>'+tbody+'</tbody></table>';
+    $i('t5-feedback').textContent=''; $i('t5-feedback').style.color='';
+    $i('t5-solution').style.display='none'; $i('t5-next-btn').style.display='none';
+    $i('t5-check-btn').style.display=''; $i('t5-inp').value=''; $i('t5-inp').focus({preventScroll:true});
+  }
+  function check(){
+    const t=TASKS[queue[cur]];
+    const val=norm($i('t5-inp').value);
+    if(!val) return;
+    if(val===t.ans){
+      if(!wrongAtPos.has(cur)) answered.add(t.n);
+      $i('t5-prog-text').textContent=answered.size+' / '+TASKS.length;
+      $i('t5-prog-fill').style.width=(answered.size/TASKS.length*100)+'%';
+      $i('t5-feedback').textContent='✓ Верно!'; $i('t5-feedback').style.color='var(--green)';
+      $i('t5-solution').innerHTML=t.sol; $i('t5-solution').style.display='block'; $i('t5-solution').classList.remove('sol-open'); void $i('t5-solution').offsetWidth; $i('t5-solution').classList.add('sol-open');
+      $i('t5-check-btn').style.display='none'; $i('t5-next-btn').style.display='';
+      _save();
+    } else {
+      wrongIds.add(t.n); if(!wrongAtPos.has(cur)){ queue.push(queue[cur]); wrongAtPos.add(cur); }
+      $i('t5-feedback').textContent='✗ Неверно, попробуй ещё раз'; $i('t5-feedback').style.color='var(--red)';
+      $i('t5-inp').value=''; $i('t5-inp').focus({preventScroll:true});
+      _save();
+    }
+  }
+  function next(){ cur++; _save(); if(cur>=queue.length) showResult(); else render(); }
+  function showResult(){
+    $i('tr-card-t5').style.display='none'; $i('t5-result').style.display='block';
+    const perfect=wrongIds.size===0;
+    $i('t5-res-grade').textContent=perfect?'🏆':'✅';
+    $i('t5-res-msg').textContent=perfect?'Идеально! Все 9 заданий — с первого раза!':'Готово! Все 9 заданий пройдены.';
+    try{localStorage.setItem(SAVE_KEY+'_done','1');}catch(e){}
+    if(window.blockDone) window.blockDone('tr-wrap-t5');
+  }
+  window.t5Reset=function(){
+    try{localStorage.removeItem(SAVE_KEY);localStorage.removeItem(SAVE_KEY+'_done');}catch(e){}
+    queue=shuffle(TASKS.map((_,i)=>i)); cur=0; answered=new Set(); wrongIds=new Set(); wrongAtPos=new Set();
+    $i('tr-card-t5').style.display=''; $i('t5-result').style.display='none';
+    render();
+  };
+  $i('t5-check-btn').addEventListener('click',check);
+  $i('t5-inp').addEventListener('keydown',function(e){if(e.key==='Enter')check();});
+  $i('t5-next-btn').addEventListener('click',next);
+  setTimeout(init,0);
+})();
+</script>
+
+<!-- ══ S9 — DELETED ══ -->
+<section id="s9" style="display:none">
+  <h2></h2>
+
+  <!-- ПРИСТУПИТЬ -->
+  <div style="background:var(--surface);border:2px dashed var(--blue);border-radius:var(--r);padding:14px 18px;margin-bottom:24px;font-size:15px;color:var(--ink)">
+    ☝️ После перехода по ссылке нажми кнопку <strong style="color:var(--blue)">«Приступить»</strong> — без этого ответы не засчитаются ни в задании №19, ни в линии 5.
+  </div>
+
+  <!-- ИНСТРУКЦИЯ ПО ТЕТРАДИ -->
+  <div style="background:var(--gold-soft);border:2px solid var(--gold);border-radius:var(--r);padding:20px 24px;margin-bottom:28px">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">📓 Как оформлять решение в тетради — задание №19</div>
+
+    <p style="font-size:15px;color:var(--navy);font-weight:700;margin-bottom:14px">Для каждой реакции из задания №19 выполни в тетради три шага:</p>
+
+    <div style="display:flex;flex-direction:column;gap:14px">
+
+      <!-- ШАГ 1 -->
+      <div style="background:var(--surface);border-radius:var(--rs);padding:14px 16px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:8px">Шаг 1 — Расставь степени окисления над каждым элементом</div>
+        <p style="font-size:13px;color:var(--ink);margin-bottom:10px">Над каждым символом элемента в реакции запиши его степень окисления. Это обязательно для всех атомов — и тех, что меняют С.О., и тех, что не меняют.</p>
+        <div style="font-family:var(--mono);font-size:14px;color:var(--ink);line-height:2.2;overflow-x:auto;padding:4px 0">
+          <span style="display:inline-block;position:relative;padding-top:18px">
+            <!-- степени над символами через sup-эмуляцию -->
+            <span style="font-size:11px;color:var(--red);font-weight:700;vertical-align:super">0</span>Zn
+          </span>
+          &thinsp;+&thinsp;
+          <span style="font-size:11px;color:var(--red);font-weight:700;vertical-align:super">+1</span>H<sub>2</sub>
+          <span style="font-size:11px;color:var(--muted);font-weight:700;vertical-align:super">−2</span>SO<sub>4</sub>
+          &thinsp;→&thinsp;
+          <span style="font-size:11px;color:var(--green);font-weight:700;vertical-align:super">+2</span>ZnSO<sub>4</sub>
+          &thinsp;+&thinsp;
+          <span style="font-size:11px;color:var(--green);font-weight:700;vertical-align:super">0</span>H<sub>2</sub>↑
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:6px">Zn: 0 → +2 &nbsp;|&nbsp; H: +1 → 0 &nbsp;|&nbsp; S и O не меняются</p>
+      </div>
+
+      <!-- ШАГ 2 -->
+      <div style="background:var(--surface);border-radius:var(--rs);padding:14px 16px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:8px">Шаг 2 — Укажи, кто окислитель, кто восстановитель</div>
+        <p style="font-size:13px;color:var(--ink);margin-bottom:8px">Рядом с реакцией стрелками покажи изменение степени окисления и подпиши роль:</p>
+        <div style="font-family:var(--mono);font-size:13px;color:var(--ink);line-height:2">
+          Zn<sup>0</sup> − 2e⁻ → Zn<sup>+2</sup> &nbsp;&nbsp;<span style="color:var(--red);font-weight:700">восстановитель (окисляется)</span><br>
+          H<sup>+1</sup> + 2e⁻ → H<sup>0</sup> &nbsp;&nbsp;&nbsp;<span style="color:var(--blue);font-weight:700">окислитель (восстанавливается)</span>
+        </div>
+      </div>
+
+      <!-- ШАГ 3 -->
+      <div style="background:var(--surface);border-radius:var(--rs);padding:14px 16px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:8px">Шаг 3 — Запиши ответ</div>
+        <div style="font-family:var(--mono);font-size:13px;color:var(--ink);line-height:2">
+          Окислитель: H<sub>2</sub>SO<sub>4</sub> (атом <strong>H</strong>)<br>
+          Восстановитель: <strong>Zn</strong>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="font-size:13px;color:var(--navy);font-weight:600;margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+      ⚠️ Степени окисления расставляй над реакцией ручкой другого цвета — так проверяющий сразу видит ход твоих рассуждений. Без этого оформления решение не засчитывается полностью.
+    </p>
+  </div>
+
+  <!-- ЗАДАНИЕ №19 -->
+  <div style="border:2.5px solid var(--blue);border-radius:var(--r);overflow:hidden;margin-bottom:20px">
+    <div style="background:var(--blue);padding:12px 18px;display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:14px;font-weight:700;color:#fff">1. Задание №19 — ОВР, электронный баланс</span>
+    </div>
+    <div style="padding:16px 18px;background:var(--surface);display:flex;flex-direction:column;gap:14px">
+      <div style="font-size:13px;color:var(--ink);line-height:1.7">
+        <strong>Порядок работы:</strong> открой задание → нажми «Приступить» → решай каждую реакцию сам → оформляй в тетради по образцу выше (степени окисления ручкой другого цвета над каждым элементом) → только потом смотри разбор.<br><br>
+        После прохождения теста обязательно проведи <strong>работу над ошибками</strong>: посмотри, в чём была ошибка, разбери реакцию заново и закрепи.
+      </div>
+      <a href="https://neofamily.ru/himiya/variants/my/1763409?uuid=c717d984-d291-48b1-8a0a-da7f134d6d48" target="_blank" rel="noopener"
+        style="display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;font-size:15px;font-weight:700;padding:13px 22px;border-radius:var(--rs);text-decoration:none;width:fit-content">
+        🔗 Открыть задание №19
+        <span style="font-size:18px">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ЛИНИЯ 5 -->
+  <div style="border:2.5px solid var(--green);border-radius:var(--r);overflow:hidden;margin-bottom:20px">
+    <div style="background:var(--green);padding:12px 18px;display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:14px;font-weight:700;color:#fff">2. Линия 5 — тренировка</span>
+    </div>
+    <div style="padding:16px 18px;background:var(--surface);display:flex;flex-direction:column;gap:14px">
+      <div style="font-size:13px;color:var(--ink);line-height:1.7">
+        <strong>Выполняй внимательно, вникая в каждое задание.</strong><br><br>
+        При возникновении затруднений — обязательно открой свои конспекты и повтори нужный материал, прежде чем смотреть ответ.<br><br>
+        Если возникла проблема с решением — разбери, в чём именно была ошибка, и закрепи этот момент. После прохождения теста проведи <strong>работу над ошибками</strong>: вернись к неверным ответам, разбери каждый и запиши правильное решение в тетрадь.
+      </div>
+      <a href="https://neofamily.ru/himiya/variants/my/786424?uuid=59c40bba-e124-41c2-820b-513c0121fccf" target="_blank" rel="noopener"
+        style="display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;font-size:15px;font-weight:700;padding:13px 22px;border-radius:var(--rs);text-decoration:none;width:fit-content">
+        🔗 Открыть линию 5
+        <span style="font-size:18px">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</div><!-- /shell -->
+
+<!-- ══ ALL-DONE OVERLAY ══ -->
+<div id="l19-done-overlay">
+  <div id="l19-done-card">
+    <div style="font-size:64px;line-height:1;margin-bottom:14px">🎉</div>
+    <div style="font-size:22px;font-weight:800;color:#0C1A2E;margin-bottom:10px">Поздравляем!</div>
+    <div style="font-size:15px;color:#4A6080;line-height:1.65;margin-bottom:8px">
+      Ты выполнил <strong style="color:#2563EB">все задания по Линии 19</strong> —<br>
+      задание №19 ЕГЭ по химии.<br>
+      Так держать! 🏆
+    </div>
+    <div style="font-size:13px;color:#7A9DC0;margin-bottom:28px">Все типы пройдены, включая повторы</div>
+    <button onclick="document.getElementById('l19-done-overlay').style.display='none'"
+      style="padding:13px 36px;border-radius:12px;border:none;background:#2563EB;color:#fff;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(37,99,235,.35)">
+      Закрыть
+    </button>
+  </div>
+</div>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">↑</button>
+
+<script>
+window.addEventListener('load',function(){window.scrollTo(0,0);});
+
+/* ─────────────────────────────────────────────────
+   TASKS
+───────────────────────────────────────────────── */
+const TASKS=[
+  {n:1,  ask:'Na₂<span class="hl">S</span>O₄',   hint:'S в сульфате натрия',          ans:'+6'},
+  {n:2,  ask:'K<span class="hl">Mn</span>O₄',    hint:'Mn в перманганате калия',       ans:'+7'},
+  {n:3,  ask:'<span class="hl">Cr</span>₂O₃',    hint:'Cr в оксиде хрома(III)',        ans:'+3'},
+  {n:4,  ask:'H<span class="hl">N</span>O₃',     hint:'N в азотной кислоте',           ans:'+5'},
+  {n:5,  ask:'<span class="hl">Fe</span>₂O₃',    hint:'Fe в оксиде железа(III)',       ans:'+3'},
+  {n:6,  ask:'K₂<span class="hl">Cr</span>₂O₇',  hint:'Cr в дихромате калия',          ans:'+6'},
+  {n:7,  ask:'<span class="hl">Mn</span>O₂',     hint:'Mn в диоксиде марганца',        ans:'+4'},
+  {n:8,  ask:'H₂<span class="hl">S</span>',      hint:'S в сероводороде',              ans:'-2'},
+  {n:9,  ask:'<span class="hl">N</span>H₃',      hint:'N в аммиаке',                   ans:'-3'},
+  {n:10, ask:'<span class="hl">C</span>O₂',      hint:'C в углекислом газе',           ans:'+4'},
+  {n:11, ask:'H<span class="hl">N</span>O₂',     hint:'N в азотистой кислоте',         ans:'+3'},
+  {n:12, ask:'Na₂<span class="hl">S</span>O₃',   hint:'S в сульфите натрия',           ans:'+4'},
+  {n:13, ask:'<span class="hl">S</span>O₂',      hint:'S в диоксиде серы',             ans:'+4'},
+  {n:14, ask:'<span class="hl">C</span>H₄',      hint:'C в метане',                    ans:'-4'},
+  {n:15, ask:'<span class="hl">N</span>O₂',      hint:'N в диоксиде азота',            ans:'+4'},
+  {n:16, ask:'<span class="hl">N</span>₂O',      hint:'N в оксиде азота(I)',            ans:'+1'},
+  {n:17, ask:'H<span class="hl">Cl</span>O₄',    hint:'Cl в хлорной кислоте',          ans:'+7'},
+  {n:18, ask:'Na<span class="hl">Cl</span>O₃',   hint:'Cl в хлорате натрия',           ans:'+5'},
+  {n:19, ask:'H<span class="hl">Cl</span>O',     hint:'Cl в хлорноватистой кислоте',   ans:'+1'},
+  {n:20, ask:'H₂<span class="hl">O</span>₂',     hint:'O в пероксиде водорода',        ans:'-1'},
+  {n:21, ask:'Na₂<span class="hl">O</span>₂',    hint:'O в пероксиде натрия',          ans:'-1'},
+  {n:22, ask:'<span class="hl">N</span>₂O₃',     hint:'N в оксиде азота(III)',          ans:'+3'},
+  {n:23, ask:'Ca₃(<span class="hl">P</span>O₄)₂',hint:'P в ортофосфате кальция',       ans:'+5'},
+  {n:24, ask:'K₂<span class="hl">Mn</span>O₄',   hint:'Mn в манганате калия',           ans:'+6'},
+  {n:25, ask:'<span class="hl">P</span>H₃',      hint:'P в фосфине',                   ans:'-3'},
+  {n:26, ask:'<span class="hl">N</span>₂H₄',     hint:'N в гидразине',                 ans:'-2'},
+  {n:27, ask:'H₃<span class="hl">P</span>O₃',    hint:'P в фосфористой кислоте',       ans:'+3'},
+  {n:28, ask:'<span class="hl">O</span>F₂',      hint:'O в дифториде кислорода',       ans:'+2'},
+  {n:29, ask:'<span class="hl">Fe</span>O',      hint:'Fe в оксиде железа(II)',        ans:'+2'},
+  {n:30, ask:'Na<span class="hl">Cl</span>O₂',   hint:'Cl в хлорите натрия',           ans:'+3'},
+  // ── ИОНЫ (31–45) ──────────────────────────────
+  {n:31, ask:'<span class="hl">S</span>O₄²⁻',      hint:'S в сульфат-ионе',               ans:'+6', ion:true},
+  {n:32, ask:'<span class="hl">N</span>O₃⁻',       hint:'N в нитрат-ионе',                ans:'+5', ion:true},
+  {n:33, ask:'<span class="hl">P</span>O₄³⁻',      hint:'P в фосфат-ионе',                ans:'+5', ion:true},
+  {n:34, ask:'<span class="hl">C</span>O₃²⁻',      hint:'C в карбонат-ионе',              ans:'+4', ion:true},
+  {n:35, ask:'<span class="hl">Mn</span>O₄⁻',      hint:'Mn в перманганат-ионе',          ans:'+7', ion:true},
+  {n:36, ask:'<span class="hl">Cr</span>₂O₇²⁻',   hint:'Cr в дихромат-ионе',             ans:'+6', ion:true},
+  {n:37, ask:'<span class="hl">Cr</span>O₄²⁻',     hint:'Cr в хромат-ионе',               ans:'+6', ion:true},
+  {n:38, ask:'<span class="hl">Cl</span>O₃⁻',      hint:'Cl в хлорат-ионе',               ans:'+5', ion:true},
+  {n:39, ask:'<span class="hl">N</span>O₂⁻',       hint:'N в нитрит-ионе',                ans:'+3', ion:true},
+  {n:40, ask:'<span class="hl">S</span>O₃²⁻',      hint:'S в сульфит-ионе',               ans:'+4', ion:true},
+  {n:41, ask:'<span class="hl">N</span>H₄⁺',       hint:'N в катионе аммония',            ans:'-3', ion:true},
+  {n:42, ask:'<span class="hl">Mn</span>O₄²⁻',     hint:'Mn в манганат-ионе',             ans:'+6', ion:true},
+  {n:43, ask:'<span class="hl">I</span>O₃⁻',       hint:'I в иодат-ионе',                 ans:'+5', ion:true},
+  {n:44, ask:'H<span class="hl">P</span>O₄²⁻',     hint:'P в гидрофосфат-ионе',           ans:'+5', ion:true},
+  {n:45, ask:'<span class="hl">Cl</span>O⁻',       hint:'Cl в гипохлорит-ионе',           ans:'+1', ion:true},
+  // ── СОЕДИНЕНИЯ СО СКОБКАМИ (46–55) ────────────
+  {n:46, ask:'Al₂(<span class="hl">C</span>O₃)₃',   hint:'C в карбонате алюминия',          ans:'+4', bracket:true},
+  {n:47, ask:'Fe₂(<span class="hl">S</span>O₄)₃',   hint:'S в сульфате железа(III)',         ans:'+6', bracket:true},
+  {n:48, ask:'Cu(<span class="hl">N</span>O₃)₂',    hint:'N в нитрате меди(II)',             ans:'+5', bracket:true},
+  {n:49, ask:'Ca(H<span class="hl">C</span>O₃)₂',   hint:'C в гидрокарбонате кальция',      ans:'+4', bracket:true},
+  {n:50, ask:'<span class="hl">Fe</span>(OH)₃',    hint:'Fe в гидроксиде железа(III)',     ans:'+3', bracket:true},
+  {n:51, ask:'<span class="hl">Cr</span>(OH)₃',    hint:'Cr в гидроксиде хрома(III)',      ans:'+3', bracket:true},
+  {n:52, ask:'Ba(<span class="hl">Mn</span>O₄)₂',  hint:'Mn в перманганате бария',          ans:'+7', bracket:true},
+  {n:53, ask:'K<span class="hl">Al</span>(SO₄)₂',  hint:'Al в квасцах KAl(SO₄)₂',          ans:'+3', bracket:true},
+  {n:54, ask:'NH₄H<span class="hl">C</span>O₃',    hint:'C в гидрокарбонате аммония',       ans:'+4', bracket:true},
+  {n:55, ask:'Mg₃(<span class="hl">P</span>O₄)₂',   hint:'P в фосфате магния',               ans:'+5', bracket:true},
+  // ── ИОНЫ КИСЛЫХ СОЛЕЙ (56–60) ────────────────
+  {n:56, ask:'H<span class="hl">C</span>O₃⁻',    hint:'C в гидрокарбонат-ионе',           ans:'+4', ion:true, acidSalt:true},
+  {n:57, ask:'H<span class="hl">S</span>O₄⁻',    hint:'S в гидросульфат-ионе',            ans:'+6', ion:true, acidSalt:true},
+  {n:58, ask:'H<span class="hl">S</span>O₃⁻',    hint:'S в гидросульфит-ионе',            ans:'+4', ion:true, acidSalt:true},
+  {n:59, ask:'H₂<span class="hl">P</span>O₄⁻',   hint:'P в дигидрофосфат-ионе',           ans:'+5', ion:true, acidSalt:true},
+  {n:60, ask:'H<span class="hl">S</span>⁻',       hint:'S в гидросульфид-ионе',            ans:'-2', ion:true, acidSalt:true},
+  // ── КИСЛЫЕ СОЛИ — СОЕДИНЕНИЯ (61–70) ─────────
+  {n:61, ask:'NaH<span class="hl">S</span>O₄',    hint:'S в гидросульфате натрия',          ans:'+6', acidSalt:true},
+  {n:62, ask:'NaH<span class="hl">S</span>O₃',    hint:'S в гидросульфите натрия',          ans:'+4', acidSalt:true},
+  {n:63, ask:'NaH<span class="hl">C</span>O₃',    hint:'C в гидрокарбонате натрия',         ans:'+4', acidSalt:true},
+  {n:64, ask:'Na₂H<span class="hl">P</span>O₄',   hint:'P в гидрофосфате натрия',           ans:'+5', acidSalt:true},
+  {n:65, ask:'NaH₂<span class="hl">P</span>O₄',   hint:'P в дигидрофосфате натрия',         ans:'+5', acidSalt:true},
+  {n:66, ask:'NaH<span class="hl">S</span>',       hint:'S в гидросульфиде натрия',          ans:'-2', acidSalt:true},
+  {n:67, ask:'Ca(H<span class="hl">S</span>)₂',   hint:'S в гидросульфиде кальция',         ans:'-2', acidSalt:true, bracket:true},
+  {n:68, ask:'Ba(H<span class="hl">C</span>O₃)₂', hint:'C в гидрокарбонате бария',          ans:'+4', acidSalt:true, bracket:true},
+  {n:69, ask:'KH<span class="hl">C</span>O₃',     hint:'C в гидрокарбонате калия',          ans:'+4', acidSalt:true},
+  {n:70, ask:'K₂H<span class="hl">P</span>O₄',    hint:'P в гидрофосфате калия',            ans:'+5', acidSalt:true},
+];
+
+/* ─────────────────────────────────────────────────
+   S8 TRAINER — очередь + повторы (linia-3 механизм)
+───────────────────────────────────────────────── */
+(function(){
+  const SAVE_KEY='l19_s8';
+  const TTL=6*24*3600*1000;
+
+  function norm(s){
+    return s.trim()
+      .replace(/−/g,'-').replace(/–/g,'-')
+      .replace(/\s/g,'')
+      .replace(/^([0-9])/,'+$1');
+  }
+
+  function shuffle(a){
+    for(let i=a.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));
+      [a[i],a[j]]=[a[j],a[i]];
+    }
+    return a;
+  }
+
+  function $id(id){ return document.getElementById(id); }
+
+  function _save(){
+    try{
+      localStorage.setItem(SAVE_KEY,JSON.stringify({
+        v:1,ts:Date.now(),
+        qRem:queue.slice(cur).map(t=>t.n),
+        answered:[...answered],
+        wrongIds:[...wrongIds],
+        wp:[...wrongAtPos].filter(p=>p>=cur).map(p=>p-cur)
+      }));
+    }catch(e){}
+  }
+
+  function _saveDone(){
+    try{ localStorage.setItem(SAVE_KEY+'_done','1'); }catch(e){}
+  }
+
+  function _load(){
+    try{
+      const raw=localStorage.getItem(SAVE_KEY);
+      if(!raw) return null;
+      const d=JSON.parse(raw);
+      if(!d||Date.now()-d.ts>TTL) return null;
+      return d;
+    }catch(e){ return null; }
+  }
+
+  let queue,answered,wrongIds,cur,wrongAtPos;
+
+  function init(){
+    const saved=_load();
+    if(saved&&saved.qRem){
+      answered=new Set(saved.answered||[]);
+      wrongIds=new Set(saved.wrongIds||[]);
+      wrongAtPos=new Set(saved.wp||[]);
+      const byN=Object.fromEntries(TASKS.map(t=>[t.n,t]));
+      queue=saved.qRem.map(n=>byN[n]).filter(Boolean);
+      cur=0;
+      if(queue.length===0){ showResult(); return; }
+    } else {
+      answered=new Set(); wrongIds=new Set(); wrongAtPos=new Set();
+      queue=shuffle([...TASKS]); cur=0;
+    }
+    render();
+  }
+
+  function render(){
+    if(cur>=queue.length){ showResult(); return; }
+    const t=queue[cur];
+    const isIon=t.ion||false;
+    const isBracket=t.bracket||false;
+    const isAcidSalt=t.acidSalt||false;
+
+    let badge='';
+    if(isIon)         badge='<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:var(--purple-soft);color:var(--purple);letter-spacing:.06em;text-transform:uppercase">ИОН</span>';
+    else if(isBracket)badge='<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:var(--green-soft);color:var(--green);letter-spacing:.06em;text-transform:uppercase">( )</span>';
+    else if(isAcidSalt)badge='<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:#fff8e0;color:#b87a00;letter-spacing:.06em;text-transform:uppercase">КИСЛАЯ СОЛЬ</span>';
+    else               badge='<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:var(--surface2);color:var(--muted);letter-spacing:.06em;text-transform:uppercase">ВЕЩЕСТВО</span>';
+    $id('s8-badge-row').innerHTML=badge;
+
+    const qText=isIon
+      ?'Определите С.О. выделенного элемента в ионе (сумма С.О. = заряду иона):'
+      :(isBracket)?'Определите С.О. выделенного элемента. Учти индексы в скобках:'
+      :(isAcidSalt)?'Определите С.О. выделенного элемента в кислой соли:'
+      :'Определите степень окисления выделенного элемента:';
+    $id('s8-q').textContent=qText;
+    $id('s8-formula').innerHTML=t.ask;
+
+    const inp=$id('s8-inp');
+    inp.value=''; inp.readOnly=false; inp.className='ccard-input';
+    $id('s8-check-btn').style.display='';
+    $id('s8-check-btn').disabled=false;
+    $id('s8-check-btn').textContent='Проверить';
+    $id('s8-feedback').className='ccard-feedback';
+    $id('s8-feedback').textContent='';
+    $id('s8-solution').style.display='none';
+    $id('s8-solution').textContent='';
+    $id('s8-next-btn').style.display='none';
+    prog();
+    setTimeout(()=>inp.focus({preventScroll:true}),100);
+  }
+
+  function prog(){
+    $id('s8-prog-text').textContent=answered.size+' / '+TASKS.length;
+    $id('s8-prog-fill').style.width=(answered.size/TASKS.length*100)+'%';
+  }
+
+  function check(){
+    const t=queue[cur];
+    const inp=$id('s8-inp');
+    const raw=inp.value.trim();
+    if(!raw){ inp.focus({preventScroll:true}); return; }
+    const ok=norm(raw)===norm(t.ans);
+    if(ok){
+      inp.readOnly=true;
+      inp.className='ccard-input ok';
+      $id('s8-feedback').className='ccard-feedback ok';
+      $id('s8-feedback').textContent='✓ Верно!';
+      if(!wrongAtPos.has(cur)) answered.add(t.n);
+      $id('s8-solution').style.display='block'; $id('s8-solution').classList.remove('sol-open'); void $id('s8-solution').offsetWidth; $id('s8-solution').classList.add('sol-open');
+      $id('s8-solution').textContent=t.hint+' → '+t.ans;
+      $id('s8-check-btn').style.display='none';
+      $id('s8-next-btn').style.display='inline-flex';
+      prog();
+    } else {
+      wrongIds.add(t.n); if(!wrongAtPos.has(cur)){ queue.push(queue[cur]); wrongAtPos.add(cur); }
+      inp.className='ccard-input err';
+      $id('s8-feedback').className='ccard-feedback err';
+      $id('s8-feedback').textContent='✗ Неверно, попробуй ещё раз';
+      inp.value='';
+      setTimeout(()=>inp.focus({preventScroll:true}),50);
+    }
+    _save();
+  }
+
+  function next(){ cur++; _save(); render(); }
+
+  function showResult(){
+    $id('s8-card').style.display='none';
+    $id('s8-result').style.display='block';
+    const noErr=wrongIds.size===0;
+    $id('s8-res-grade').textContent=noErr?'🏆':'🎉';
+    $id('s8-res-msg').textContent=noErr
+      ?'Идеально! Все 70 заданий без ошибок!'
+      :'Выполнено! Ошибок было: '+wrongIds.size;
+    _saveDone();
+    if(window.blockDone) window.blockDone('s8-wrap');
+  }
+
+  window.s8Reset=function(){
+    try{
+      localStorage.removeItem(SAVE_KEY);
+      localStorage.removeItem(SAVE_KEY+'_done');
+    }catch(e){}
+    $id('s8-card').style.display='';
+    $id('s8-result').style.display='none';
+    answered=new Set(); wrongIds=new Set(); wrongAtPos=new Set();
+    queue=shuffle([...TASKS]); cur=0;
+    render();
+  };
+
+  $id('s8-check-btn').addEventListener('click',check);
+  $id('s8-inp').addEventListener('keydown',e=>{ if(e.key==='Enter') check(); });
+  $id('s8-next-btn').addEventListener('click',next);
+
+  setTimeout(init,0);
+})();
+
+/* ─────────────────────────────────────────────────
+   ТОПБАР
+───────────────────────────────────────────────── */
+function toggleTopbar(e){
+  if(e&&e.target&&e.target.closest('.tb-btn')&&!e.target.closest('.tb-expand'))return;
+  document.getElementById('topbar').classList.toggle('collapsed');
+}
+function openMenu(){
+  document.getElementById('menu-overlay').classList.add('open');
+  document.getElementById('menu-panel').classList.add('open');
+}
+function closeMenu(){
+  document.getElementById('menu-overlay').classList.remove('open');
+  document.getElementById('menu-panel').classList.remove('open');
+}
+
+/* ─────────────────────────────────────────────────
+   ИСТОРИЯ — 6 ДНЕЙ
+───────────────────────────────────────────────── */
+const _HIST_KEY='l19_history';
+function _getHist(){try{return JSON.parse(localStorage.getItem(_HIST_KEY))||[];}catch(e){return[];}}
+function _saveHist(h){try{localStorage.setItem(_HIST_KEY,JSON.stringify(h));}catch(e){}}
+function _todayStr(){return new Date().toISOString().slice(0,10);}
+function updateStreak(){
+  const h=_getHist();
+  const c=document.getElementById('tb-streak');
+  if(!c)return;
+  c.innerHTML='';
+  for(let i=5;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);
+    const ds=d.toISOString().slice(0,10);
+    const entry=h.find(x=>x.d===ds);
+    const n=entry?entry.b.length:0;
+    const dot=document.createElement('div');
+    dot.className='tb-day'+(n>=1?' done':'')+(i===0?' today':'');
+    const label=d.toLocaleDateString('ru',{day:'numeric',month:'short'});
+    dot.title=label+': '+(n>=1?'✓ выполнено':'нет данных');
+    c.appendChild(dot);
+  }
+}
+function clearAll(){
+  try{
+    ['l19_s8','l19_s8_done','l19_t1','l19_t1_done','l19_t2','l19_t2_done',
+     'l19_t3','l19_t3_done','l19_t4','l19_t4_done','l19_t5','l19_t5_done',
+     _HIST_KEY].forEach(k=>localStorage.removeItem(k));
+  }catch(e){}
+  location.reload();
+}
+updateStreak();
+
+/* ─────────────────────────────────────────────────
+   blockDone
+───────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────
+   CONFETTI
+───────────────────────────────────────────────── */
+function _launchConfetti(){
+  const overlay=document.getElementById('l19-done-overlay');
+  overlay.style.display='block';
+  const card=document.getElementById('l19-done-card');
+  card.classList.remove('pop');
+  void card.offsetWidth;
+  card.classList.add('pop');
+  const colors=['#2563EB','#059669','#EA580C','#7C3AED','#DC2626','#D97706','#FF69B4','#00CED1','#F59E0B','#10B981'];
+  for(let i=0;i<150;i++){
+    const el=document.createElement('div');
+    const rect=Math.random()>.4;
+    const size=rect?(3+Math.random()*7)+'px':(5+Math.random()*9)+'px';
+    el.style.cssText=
+      'position:absolute;pointer-events:none;'+
+      'left:'+Math.random()*100+'%;'+
+      'top:-12px;'+
+      'width:'+(rect?(3+Math.random()*7)+'px':size)+';'+
+      'height:'+(rect?(8+Math.random()*14)+'px':size)+';'+
+      'background:'+colors[Math.floor(Math.random()*colors.length)]+';'+
+      'border-radius:'+(rect?'2px':'50%')+';'+
+      'animation:confettiFall '+(1.8+Math.random()*3.5)+'s linear '+(Math.random()*1.2)+'s forwards;';
+    overlay.appendChild(el);
+  }
+  setTimeout(()=>{
+    overlay.querySelectorAll('div:not(#l19-done-card):not(#l19-done-card *)').forEach(el=>el.remove());
+  },7000);
+}
+
+/* ─────────────────────────────────────────────────
+   blockDone
+───────────────────────────────────────────────── */
+const _L19_BLOCKS=['s8-wrap','tr-wrap-t1','tr-wrap-t2','tr-wrap-t3','tr-wrap-t4','tr-wrap-t5'];
+const _completedBlocks=new Set();
+window.blockDone=function(id){
+  const today=_todayStr();
+  const h=_getHist();
+  let entry=h.find(x=>x.d===today);
+  if(!entry){entry={d:today,b:[]};h.push(entry);}
+  if(!entry.b.includes(id))entry.b.push(id);
+  const cutoff=new Date();cutoff.setDate(cutoff.getDate()-6);
+  _saveHist(h.filter(x=>x.d>=cutoff.toISOString().slice(0,10)));
+  updateStreak();
+  _completedBlocks.add(id);
+  if(_L19_BLOCKS.every(b=>_completedBlocks.has(b))){
+    setTimeout(_launchConfetti,600);
+  }
+};
+// flush queue of blockDone calls that arrived before this definition
+(window._bdQueue||[]).forEach(id=>window.blockDone(id));
+window._bdQueue=[];
+
+/* ─────────────────────────────────────────────────
+   SCROLL PROGRESS + BACK TOP
+───────────────────────────────────────────────── */
+window.addEventListener('scroll', () => {
+  const s = document.documentElement;
+  const p = Math.min((s.scrollTop / (s.scrollHeight - s.clientHeight)) * 100, 100);
+  document.getElementById('prog-bar').style.width = p + '%';
+  document.getElementById('tb-pf').style.width = p + '%';
+  document.getElementById('tb-lbl').textContent = Math.round(p) + '%';
+  document.getElementById('back-top').classList.toggle('show', s.scrollTop > 400);
+}, {passive:true});
+
+
+/* ─────────────────────────────────────────────────
+   SCROLL ANIMATIONS
+───────────────────────────────────────────────── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
