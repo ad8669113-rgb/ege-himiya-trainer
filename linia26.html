@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Линия 26 · ЕГЭ Химия</title>
+<script>history.scrollRestoration='manual';</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  --p900:#1a3a5c;--p800:#1e4976;--p700:#235a91;--p600:#2b72b8;--p500:#3a8fd4;
+  --p400:#6aaede;--p300:#a8d0ed;--p200:#d6eaf8;--p100:#eaf4fb;--p50:#f5faff;
+  --ink:#0d1f2d;--ink2:#2d4a5e;--ink3:#7a9baf;
+  --line:#d8e8f0;--bg:#f2f7fb;--white:#fff;
+  --green:#1a8c6e;--green-t:#e0f5ef;--green-d:#0a5240;
+  --amber:#b06a10;--amber-t:#faeedd;--amber-d:#6b3a00;
+  --red:#a02525;--red-t:#fceaea;--red-d:#6e1515;
+  --r:12px;--r-sm:8px;
+  --shadow:0 1px 3px rgba(10,30,50,.06),0 4px 16px rgba(10,30,50,.06);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+  --h1:#0a2540;--h2:#1565c0;--h3:#1e88e5;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:17px}
+
+/* TOPBAR */
+#topbar{position:fixed;top:12px;right:16px;z-index:999;display:flex;align-items:center;gap:4px;background:#fff;border:1.5px solid rgba(21,101,192,.3);border-radius:999px;padding:5px 6px;box-shadow:0 4px 20px rgba(21,101,192,.22);cursor:pointer;user-select:none}
+.tb-collapsible{display:flex;align-items:center;gap:4px}
+#topbar .tb-expand{display:none}
+#topbar.collapsed .tb-expand{display:flex}
+#topbar.collapsed .tb-collapsible{display:none}
+#topbar.collapsed{gap:0}
+.tb-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;border-radius:50%;font-size:15px;color:var(--ink3);cursor:pointer;transition:.12s;flex-shrink:0}
+.tb-btn:hover{background:rgba(21,101,192,.1);color:var(--h2)}
+.tb-sep{width:1px;height:16px;background:rgba(21,101,192,.15);margin:0 2px;flex-shrink:0}
+.tb-prog-wrap{width:52px;height:2px;background:rgba(21,101,192,.15);border-radius:1px;flex-shrink:0}
+.tb-prog-fill{height:2px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;border-radius:1px;transition:width .1s}
+.tb-label{font-family:var(--mono);font-size:10px;color:var(--ink3);padding:0 4px;white-space:nowrap}
+.tb-streak{display:flex;gap:3px;align-items:center;padding:0 2px}
+.tb-day{width:7px;height:7px;border-radius:50%;background:rgba(21,101,192,.15);flex-shrink:0;transition:.2s}
+.tb-day.done{background:#1a8c6e}
+.tb-day.today{outline:1.5px solid rgba(21,101,192,.5);outline-offset:1.5px}
+
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(21,101,192,.1);z-index:998}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;transition:width .1s}
+
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#060e2b 0%,#0d2461 38%,#1565c0 72%,#1e88e5 100%);padding:48px 32px 40px;margin:0 -24px 40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;bottom:-30%;left:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(30,136,229,.2) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);border-radius:20px;padding:4px 14px;font-size:12px;font-family:var(--mono);letter-spacing:.6px;margin-bottom:16px}
+.hero h1{font-size:clamp(28px,5vw,46px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#fff;margin-bottom:12px}
+.hero h1 em{color:#90caf9;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.68);line-height:1.7;max-width:540px;margin-bottom:22px}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px}
+.hero-chip{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.17);color:rgba(255,255,255,.88);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+
+/* SECTIONS */
+.section{margin-bottom:48px}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--p200)}
+.section-title{font-size:clamp(16px,2.5vw,21px);font-weight:700;color:var(--p800);line-height:1.2}
+.section-pill{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.8px;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+
+h3.sub{font-size:15px;font-weight:700;color:var(--p700);margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+h3.sub::before{content:'';width:3px;height:16px;background:var(--h2);border-radius:2px;flex-shrink:0}
+
+/* BOXES */
+.box{border-radius:var(--r-sm);padding:12px 16px;margin:10px 0;font-size:15px;line-height:1.75}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:var(--amber-t);border-left:4px solid var(--amber);color:var(--amber-d)}
+.box-green{background:var(--green-t);border-left:4px solid var(--green);color:var(--green-d)}
+.box-title{font-weight:700;font-size:12px;margin-bottom:5px;text-transform:uppercase;letter-spacing:.6px}
+.box ul,.box ol{padding-left:18px;margin:4px 0}
+.box li{margin:3px 0;font-size:15px}
+
+/* FORMULA CARDS */
+.fml-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:14px 0}
+@media(max-width:680px){.fml-grid{grid-template-columns:1fr}}
+.fml-card{background:var(--white);border:1.5px solid var(--line);border-radius:var(--r);padding:18px 16px;box-shadow:var(--shadow);text-align:center}
+.fml-label{font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+.fml-eq{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--h2);margin:6px 0;line-height:1.6}
+.fml-desc{font-size:13px;color:var(--ink2);line-height:1.6;margin-top:8px}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.2;margin:0 2px}
+.frac .num{border-bottom:1.5px solid currentColor;padding:0 4px 2px;white-space:nowrap}
+.frac .den{padding:2px 4px 0;white-space:nowrap}
+
+/* ALGO */
+.algo{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.algo-step{display:flex;gap:10px;align-items:flex-start}
+.algo-n{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-family:var(--mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.algo-text{font-size:15px;line-height:1.7;color:var(--ink2)}
+.algo-text code{font-family:var(--mono);font-size:13px;background:var(--p100);color:var(--p800);padding:1px 5px;border-radius:4px}
+
+/* CHANGES TABLE */
+.ch-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+.ch-table th{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;padding:9px 12px;text-align:left;font-weight:700;font-size:12px;letter-spacing:.4px}
+.ch-table th:not(:first-child){text-align:center}
+.ch-table td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:middle;font-size:14px}
+.ch-table td:not(:first-child){text-align:center;font-family:var(--mono);font-size:13px}
+.ch-table tr:last-child td{border-bottom:none}
+.ch-table tr:nth-child(even) td{background:var(--p50)}
+.ch-same{color:var(--ink3)}
+.ch-up{color:var(--green-d);font-weight:700}
+.ch-down{color:var(--red-d);font-weight:700}
+.action-col{font-weight:600;color:var(--ink)}
+
+/* TRAINER SECTION */
+.tr-section{background:var(--white);border:1.5px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow);margin-top:22px}
+.tr-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tr-pill{font-family:var(--mono);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.6px;white-space:nowrap}
+.tr-pill-1a{background:#dbeafe;color:#1e3a8a}
+.tr-pill-1b{background:#fef3c7;color:#78350f}
+.tr-pill-1v{background:#d1fae5;color:#065f46}
+.tr-pill-1g{background:#ede9fe;color:#4c1d95}
+.tr-pill-2a{background:#fce7f3;color:#831843}
+.tr-pill-2b{background:#fff7ed;color:#9a3412}
+.tr-title{font-size:15px;font-weight:700;color:var(--p800)}
+.tr-prog{font-family:var(--mono);font-size:12px;color:var(--ink3);margin-left:auto}
+.tr-card{background:var(--bg);border:1.5px solid var(--line);border-radius:var(--r-sm);padding:18px 20px;margin-bottom:14px}
+.tr-q{font-size:15.5px;line-height:1.75;color:var(--ink);font-weight:500}
+.tr-ans-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+.tr-input{font-size:20px;width:120px;text-align:center;font-family:var(--mono);border:2px solid var(--line);border-radius:8px;padding:7px 12px;outline:none;background:var(--white);color:var(--ink);transition:border-color .15s}
+.tr-input:focus{border-color:var(--h2)}
+.tr-unit{font-size:14px;color:var(--ink3);font-family:var(--mono);font-weight:700}
+.tr-feedback{min-height:22px;font-size:15px;font-weight:700}
+.tr-feedback.ok{color:var(--green-d)}
+.tr-feedback.err{color:var(--red-d)}
+.tr-btns{display:flex;gap:8px;flex-wrap:wrap}
+.tr-check-btn,.tr-next-btn,.tr-reset-btn{border:none;border-radius:8px;padding:10px 22px;font-size:15px;font-weight:700;cursor:pointer;transition:.12s}
+.tr-check-btn{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff}
+.tr-check-btn:hover{opacity:.9}
+.tr-next-btn{background:var(--green);color:#fff}
+.tr-next-btn:hover{opacity:.9}
+.tr-reset-btn{background:var(--line);color:var(--ink2)}
+.tr-reset-btn:hover{background:var(--p200)}
+.tr-result{text-align:center;padding:32px 20px}
+.tr-result-icon{font-size:52px;margin-bottom:10px}
+.tr-result-title{font-size:22px;font-weight:800;color:var(--green-d);margin-bottom:8px}
+.tr-result-sub{font-size:14px;color:var(--ink3)}
+
+/* SOLUTION BOX */
+.sol-box{background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:var(--r-sm);padding:14px 16px;margin-top:14px}
+.sol-eq{font-family:var(--mono);font-size:14px;color:#075985;font-weight:700;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #bae6fd}
+.sol-steps{font-size:14px;color:var(--ink2);line-height:2;font-family:var(--mono)}
+.sol-steps .ans{color:var(--green-d);font-weight:700}
+.sol-n{display:inline-block;width:18px;font-weight:700;color:var(--h2)}
+.sol-lbl{color:var(--h1);font-size:12.5px;font-weight:700}
+
+/* CONGRATS */
+#congrats{display:none;position:fixed;inset:0;z-index:2000;background:rgba(10,37,64,.5);align-items:center;justify-content:center}
+#congrats.show{display:flex}
+.cong-card{background:#fff;border-radius:20px;padding:40px 36px;text-align:center;max-width:400px;box-shadow:0 20px 60px rgba(10,37,64,.25)}
+.cong-icon{font-size:64px;margin-bottom:12px}
+.cong-title{font-size:26px;font-weight:800;color:var(--green-d);margin-bottom:8px}
+.cong-sub{font-size:15px;color:var(--ink3);line-height:1.6;margin-bottom:22px}
+.cong-btn{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;border:none;border-radius:10px;padding:12px 28px;font-size:15px;font-weight:700;cursor:pointer}
+
+/* CONFIRM DIALOG */
+#clear-confirm-dialog{display:none;position:fixed;inset:0;z-index:3000;background:rgba(10,37,64,.5);align-items:center;justify-content:center}
+.confirm-card{background:#fff;border-radius:16px;padding:28px 32px;text-align:center;max-width:360px;box-shadow:0 8px 32px rgba(10,37,64,.2)}
+.confirm-title{font-size:18px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.confirm-sub{font-size:14px;color:var(--ink3);margin-bottom:20px}
+.confirm-btns{display:flex;gap:10px;justify-content:center}
+.confirm-cancel{background:var(--line);color:var(--ink2);border:none;border-radius:8px;padding:9px 20px;font-size:14px;font-weight:700;cursor:pointer}
+.confirm-ok{background:var(--red);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:14px;font-weight:700;cursor:pointer}
+
+/* PURE-SUBSTANCE RULE BOX */
+.pure-rule{display:flex;gap:10px;background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:10px;padding:12px 14px;margin:0 0 12px;font-size:13px;line-height:1.6;color:var(--ink2)}
+.pure-rule-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.pure-rule ul{margin:4px 0 0;padding-left:18px}
+.pure-rule li{margin-bottom:2px}
+.pure-rule b{color:var(--ink)}
+
+/* CUP DIAGRAMS */
+.cup-explain{background:#fafcff;border:1.5px solid var(--p200);border-radius:var(--r);padding:16px 18px;margin:0 0 20px}
+.cup-explain-title{font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.7px;margin-bottom:14px}
+.cup-row{display:flex;align-items:flex-end;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.cup-item{display:flex;flex-direction:column;align-items:center;gap:5px}
+.cup-lbl{font-size:12px;font-family:var(--mono);font-weight:700;color:var(--ink2);white-space:nowrap}
+.cup-op{font-size:26px;font-weight:800;color:var(--ink);padding-bottom:34px;line-height:1}
+.cup-eq{text-align:center;font-family:var(--mono);font-size:13.5px;line-height:2;color:var(--ink2)}
+.cup-eq .step{display:block}
+.cup-eq .ans{color:var(--green);font-weight:700;font-size:15px}
+.cup-divider{width:60%;height:1px;background:var(--line);margin:8px auto}
+</style>
+</head>
+<body>
+
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+
+<div id="topbar" class="collapsed" onclick="topbarClick(event)">
+  <span class="tb-expand" style="font-size:18px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--h2);font-weight:700">☰</span>
+  <div class="tb-collapsible">
+    <div class="tb-prog-wrap"><div class="tb-prog-fill" id="tb-pf"></div></div>
+    <span class="tb-label" id="tb-lbl">0 / 49</span>
+    <div class="tb-sep"></div>
+    <div class="tb-streak" id="tb-streak"></div>
+    <button class="tb-btn" onclick="clearAll();event.stopPropagation()" title="Сбросить весь прогресс">🗑️</button>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" onclick="topbarClick(event)" title="Свернуть">✕</button>
+  </div>
+</div>
+
+<div class="shell">
+
+<div class="hero">
+  <div class="hero-tag">ЛИНИЯ 26 · ЕГЭ ХИМИЯ</div>
+  <h1>Расчёты с <em>массовой долей</em></h1>
+  <p class="hero-sub">Нахождение массы вещества, исходного раствора и новой концентрации после изменения состава раствора.</p>
+  <div class="hero-chips">
+    <span class="hero-chip" style="background:#1e88e5;border-color:#42a5f5;color:#fff;font-weight:700">Базовый уровень · 1 балл</span>
+    <span class="hero-chip">ω = m(в-ва) / m(р-ра) · 100%</span>
+    <span class="hero-chip">Блок I · 22 задачи</span>
+    <span class="hero-chip">Блок II · 27 задач</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════ -->
+<!-- БЛОК I: через уравнение с x            -->
+<!-- ════════════════════════════════════════ -->
+<div class="section" id="s-b1">
+  <div class="section-header">
+    <div class="section-pill">БЛОК I</div>
+    <h2 class="section-title">Расчёты на нахождение массы</h2>
+  </div>
+
+  <!-- ═══ ОБЪЯСНЕНИЕ 1А ═══ -->
+  <div class="pure-rule">
+    <div class="pure-rule-icon">ℹ</div>
+    <div><b>Правило чистых веществ</b> (если процент не задан в условии)
+      <ul>
+        <li>Чистая вода (H₂O) — <b>ω = 0%</b> &nbsp;(нет растворённого вещества, всё — растворитель)</li>
+        <li>Чистая соль / любое чистое вещество — <b>ω = 100%</b> &nbsp;(нет растворителя, всё — вещество)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cup-explain">
+    <div class="cup-explain-title">Тип 1А · Добавление воды (разбавление)</div>
+    <div class="cup-row">
+      <div class="cup-item">
+        <div class="cup-lbl">18%</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">150 г</div>
+      </div>
+      <div class="cup-op">+</div>
+      <div class="cup-item">
+        <div class="cup-lbl">0%&nbsp;(H₂O)</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#e0f7fa" stroke="#64b5f6" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#64b5f6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">x г</div>
+      </div>
+      <div class="cup-op">=</div>
+      <div class="cup-item">
+        <div class="cup-lbl">10%</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">(150+x) г</div>
+      </div>
+    </div>
+    <div class="cup-divider"></div>
+    <div class="cup-eq">
+      <span class="step">18·150 + 0·x = 10·(150 + x)</span>
+      <span class="step">2700 = 1500 + 10x</span>
+      <span class="step">10x = 1200 &nbsp;→&nbsp; x = 1200 ÷ 10 &nbsp;→&nbsp; <span class="ans">x = 120 г</span></span>
+    </div>
+  </div>
+
+  <div class="cup-explain" style="margin-top:0">
+    <div class="cup-explain-title">Тип 1А · Выпаривание воды (концентрирование)</div>
+    <div class="cup-row">
+      <div class="cup-item">
+        <div class="cup-lbl">12%</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">300 г</div>
+      </div>
+      <div class="cup-op">−</div>
+      <div class="cup-item">
+        <div class="cup-lbl">0%&nbsp;(пары)</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#e0f7fa" stroke="#64b5f6" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#64b5f6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">x г</div>
+      </div>
+      <div class="cup-op">=</div>
+      <div class="cup-item">
+        <div class="cup-lbl">16%</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">(300−x) г</div>
+      </div>
+    </div>
+    <div class="cup-divider"></div>
+    <div class="cup-eq">
+      <span class="step">12·300 − 0·x = 16·(300 − x)</span>
+      <span class="step">3600 = 4800 − 16x</span>
+      <span class="step">16x = 1200 &nbsp;→&nbsp; x = 1200 ÷ 16 &nbsp;→&nbsp; <span class="ans">x = 75 г</span></span>
+    </div>
+  </div>
+
+  <!-- ═══ ТРЕНАЖЁР 1А ═══ -->
+  <div class="tr-section" id="tr-1a">
+    <div class="tr-header">
+      <div class="tr-pill tr-pill-1a">ТРЕНАЖЁР 1А</div>
+      <div class="tr-title">Найти массу воды (добавили или выпарили)</div>
+      <div class="tr-prog" id="t1a-prog">0 / 6</div>
+    </div>
+    <div id="t1a-area">
+      <div class="tr-card">
+        <div class="tr-q" id="t1a-q"></div>
+        <div class="tr-ans-row">
+          <input class="tr-input" id="t1a-inp" type="text" inputmode="decimal" placeholder="0" autocomplete="off" onkeydown="if(event.key==='Enter')t1aCheck()">
+          <span class="tr-unit" id="t1a-unit">г</span>
+          <div class="tr-feedback" id="t1a-fb"></div>
+        </div>
+        <div id="t1a-sol" style="display:none"></div>
+      </div>
+      <div class="tr-btns">
+        <button class="tr-check-btn" id="t1a-check" onclick="t1aCheck()">Проверить</button>
+        <button class="tr-next-btn" id="t1a-next" style="display:none" onclick="t1aNext()">Далее →</button>
+        <button class="tr-reset-btn" onclick="t1aReset()">Сбросить</button>
+      </div>
+    </div>
+    <div id="t1a-result" class="tr-result" style="display:none">
+      <div class="tr-result-icon">🎉</div>
+      <div class="tr-result-title">Тренажёр 1А выполнен!</div>
+      <div class="tr-result-sub">Все 6 задач решены верно</div>
+      <br><button class="tr-reset-btn" onclick="t1aReset()">Начать заново</button>
+    </div>
+  </div>
+
+  <!-- ═══ ОБЪЯСНЕНИЕ 1Б ═══ -->
+  <div class="pure-rule">
+    <div class="pure-rule-icon">ℹ</div>
+    <div><b>Правило чистых веществ</b> (если процент не задан в условии)
+      <ul>
+        <li>Чистая вода (H₂O) — <b>ω = 0%</b> &nbsp;(нет растворённого вещества, всё — растворитель)</li>
+        <li>Чистая соль / любое чистое вещество — <b>ω = 100%</b> &nbsp;(нет растворителя, всё — вещество)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cup-explain">
+    <div class="cup-explain-title">Тип 1Б · Добавление чистого вещества (100%)</div>
+    <div class="cup-row">
+      <div class="cup-item">
+        <div class="cup-lbl">2%</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">130 г</div>
+      </div>
+      <div class="cup-op">+</div>
+      <div class="cup-item">
+        <div class="cup-lbl">100%&nbsp;(соль)</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#fef9c3" stroke="#ca8a04" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#ca8a04" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">x г</div>
+      </div>
+      <div class="cup-op">=</div>
+      <div class="cup-item">
+        <div class="cup-lbl">5%</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">(130+x) г</div>
+      </div>
+    </div>
+    <div class="cup-divider"></div>
+    <div class="cup-eq">
+      <span class="step">2·130 + 100·x = 5·(130 + x)</span>
+      <span class="step">260 + 100x = 650 + 5x</span>
+      <span class="step">95x = 390 &nbsp;→&nbsp; x = 390 ÷ 95 &nbsp;→&nbsp; <span class="ans">x ≈ 4,1 г</span></span>
+    </div>
+  </div>
+
+  <!-- ═══ ТРЕНАЖЁР 1Б ═══ -->
+  <div class="tr-section" id="tr-1b">
+    <div class="tr-header">
+      <div class="tr-pill tr-pill-1b">ТРЕНАЖЁР 1Б</div>
+      <div class="tr-title">Найти массу соли</div>
+      <div class="tr-prog" id="t1b-prog">0 / 6</div>
+    </div>
+    <div id="t1b-area">
+      <div class="tr-card">
+        <div class="tr-q" id="t1b-q"></div>
+        <div class="tr-ans-row">
+          <input class="tr-input" id="t1b-inp" type="text" inputmode="decimal" placeholder="0" autocomplete="off" onkeydown="if(event.key==='Enter')t1bCheck()">
+          <span class="tr-unit" id="t1b-unit">г</span>
+          <div class="tr-feedback" id="t1b-fb"></div>
+        </div>
+        <div id="t1b-sol" style="display:none"></div>
+      </div>
+      <div class="tr-btns">
+        <button class="tr-check-btn" id="t1b-check" onclick="t1bCheck()">Проверить</button>
+        <button class="tr-next-btn" id="t1b-next" style="display:none" onclick="t1bNext()">Далее →</button>
+        <button class="tr-reset-btn" onclick="t1bReset()">Сбросить</button>
+      </div>
+    </div>
+    <div id="t1b-result" class="tr-result" style="display:none">
+      <div class="tr-result-icon">🎉</div>
+      <div class="tr-result-title">Тренажёр 1Б выполнен!</div>
+      <div class="tr-result-sub">Все 6 задач решены верно</div>
+      <br><button class="tr-reset-btn" onclick="t1bReset()">Начать заново</button>
+    </div>
+  </div>
+
+  <!-- ═══ ОБЪЯСНЕНИЕ 1В ═══ -->
+  <div class="pure-rule">
+    <div class="pure-rule-icon">ℹ</div>
+    <div><b>Правило чистых веществ</b> (если процент не задан в условии)
+      <ul>
+        <li>Чистая вода (H₂O) — <b>ω = 0%</b> &nbsp;(нет растворённого вещества, всё — растворитель)</li>
+        <li>Чистая соль / любое чистое вещество — <b>ω = 100%</b> &nbsp;(нет растворителя, всё — вещество)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cup-explain">
+    <div class="cup-explain-title">Тип 1В · Найти массу исходного раствора (x в первом стакане)</div>
+    <div class="cup-row">
+      <div class="cup-item">
+        <div class="cup-lbl">17%</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">x г</div>
+      </div>
+      <div class="cup-op">+</div>
+      <div class="cup-item">
+        <div class="cup-lbl">0%&nbsp;(H₂O)</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#e0f7fa" stroke="#64b5f6" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#64b5f6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">15 г</div>
+      </div>
+      <div class="cup-op">=</div>
+      <div class="cup-item">
+        <div class="cup-lbl">10%</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">(x+15) г</div>
+      </div>
+    </div>
+    <div class="cup-divider"></div>
+    <div class="cup-eq">
+      <span class="step">17·x + 0·15 = 10·(x + 15)</span>
+      <span class="step">17x = 10x + 150</span>
+      <span class="step">7x = 150 &nbsp;→&nbsp; x = 150 ÷ 7 &nbsp;→&nbsp; <span class="ans">x ≈ 21,4 г</span></span>
+    </div>
+  </div>
+
+  <!-- ═══ ТРЕНАЖЁР 1В ═══ -->
+  <div class="tr-section" id="tr-1v">
+    <div class="tr-header">
+      <div class="tr-pill tr-pill-1v">ТРЕНАЖЁР 1В</div>
+      <div class="tr-title">Найти массу исходного раствора</div>
+      <div class="tr-prog" id="t1v-prog">0 / 5</div>
+    </div>
+    <div id="t1v-area">
+      <div class="tr-card">
+        <div class="tr-q" id="t1v-q"></div>
+        <div class="tr-ans-row">
+          <input class="tr-input" id="t1v-inp" type="text" inputmode="decimal" placeholder="0" autocomplete="off" onkeydown="if(event.key==='Enter')t1vCheck()">
+          <span class="tr-unit" id="t1v-unit">г</span>
+          <div class="tr-feedback" id="t1v-fb"></div>
+        </div>
+        <div id="t1v-sol" style="display:none"></div>
+      </div>
+      <div class="tr-btns">
+        <button class="tr-check-btn" id="t1v-check" onclick="t1vCheck()">Проверить</button>
+        <button class="tr-next-btn" id="t1v-next" style="display:none" onclick="t1vNext()">Далее →</button>
+        <button class="tr-reset-btn" onclick="t1vReset()">Сбросить</button>
+      </div>
+    </div>
+    <div id="t1v-result" class="tr-result" style="display:none">
+      <div class="tr-result-icon">🎉</div>
+      <div class="tr-result-title">Тренажёр 1В выполнен!</div>
+      <div class="tr-result-sub">Все 5 задач решены верно</div>
+      <br><button class="tr-reset-btn" onclick="t1vReset()">Начать заново</button>
+    </div>
+  </div>
+
+  <!-- ═══ ОБЪЯСНЕНИЕ 1Г ═══ -->
+  <div class="pure-rule">
+    <div class="pure-rule-icon">ℹ</div>
+    <div><b>Правило чистых веществ</b> (если процент не задан в условии)
+      <ul>
+        <li>Чистая вода (H₂O) — <b>ω = 0%</b> &nbsp;(нет растворённого вещества, всё — растворитель)</li>
+        <li>Чистая соль / любое чистое вещество — <b>ω = 100%</b> &nbsp;(нет растворителя, всё — вещество)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cup-explain">
+    <div class="cup-explain-title">Тип 1Г · Смешивание двух растворов (x во втором стакане)</div>
+    <div class="cup-row">
+      <div class="cup-item">
+        <div class="cup-lbl">65%</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">x г</div>
+      </div>
+      <div class="cup-op">+</div>
+      <div class="cup-item">
+        <div class="cup-lbl">10%</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">270 г</div>
+      </div>
+      <div class="cup-op">=</div>
+      <div class="cup-item">
+        <div class="cup-lbl">20%</div>
+        <svg viewBox="0 0 72 58" width="70" height="56" style="display:block"><polygon points="4,2 68,2 61,56 11,56" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/><line x1="2" y1="2" x2="70" y2="2" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="cup-lbl">(x+270) г</div>
+      </div>
+    </div>
+    <div class="cup-divider"></div>
+    <div class="cup-eq">
+      <span class="step">65·x + 10·270 = 20·(x + 270)</span>
+      <span class="step">65x + 2700 = 20x + 5400</span>
+      <span class="step">45x = 2700 &nbsp;→&nbsp; x = 2700 ÷ 45 &nbsp;→&nbsp; <span class="ans">x = 60 г</span></span>
+    </div>
+  </div>
+
+  <!-- ═══ ТРЕНАЖЁР 1Г ═══ -->
+  <div class="tr-section" id="tr-1g">
+    <div class="tr-header">
+      <div class="tr-pill tr-pill-1g">ТРЕНАЖЁР 1Г</div>
+      <div class="tr-title">Найти массу добавляемого раствора (смешивание)</div>
+      <div class="tr-prog" id="t1g-prog">0 / 5</div>
+    </div>
+    <div id="t1g-area">
+      <div class="tr-card">
+        <div class="tr-q" id="t1g-q"></div>
+        <div class="tr-ans-row">
+          <input class="tr-input" id="t1g-inp" type="text" inputmode="decimal" placeholder="0" autocomplete="off" onkeydown="if(event.key==='Enter')t1gCheck()">
+          <span class="tr-unit" id="t1g-unit">г</span>
+          <div class="tr-feedback" id="t1g-fb"></div>
+        </div>
+        <div id="t1g-sol" style="display:none"></div>
+      </div>
+      <div class="tr-btns">
+        <button class="tr-check-btn" id="t1g-check" onclick="t1gCheck()">Проверить</button>
+        <button class="tr-next-btn" id="t1g-next" style="display:none" onclick="t1gNext()">Далее →</button>
+        <button class="tr-reset-btn" onclick="t1gReset()">Сбросить</button>
+      </div>
+    </div>
+    <div id="t1g-result" class="tr-result" style="display:none">
+      <div class="tr-result-icon">🎉</div>
+      <div class="tr-result-title">Тренажёр 1Г выполнен!</div>
+      <div class="tr-result-sub">Все 5 задач решены верно</div>
+      <br><button class="tr-reset-btn" onclick="t1gReset()">Начать заново</button>
+    </div>
+  </div>
+
+</div><!-- /БЛОК I -->
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- БЛОК II: прямой расчёт                 -->
+<!-- ════════════════════════════════════════ -->
+<div class="section" id="s-b2">
+  <div class="section-header">
+    <div class="section-pill">БЛОК II</div>
+    <h2 class="section-title">Прямой расчёт по формуле · 27 задач</h2>
+  </div>
+
+  <!-- ═══ ФОРМУЛЫ БЛОК II ═══ -->
+  <div class="box box-warn" style="margin-bottom:16px">
+    <div class="box-title">Основные понятия — простым языком</div>
+    <p style="margin:6px 0 10px">Представь, что ты растворил <b>соль в воде</b>:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;margin-bottom:12px">
+      <div style="background:#fff;border-radius:8px;padding:10px 6px;border:1.5px solid var(--amber)">
+        <div style="font-size:20px">🧂</div>
+        <div style="font-size:12px;font-weight:700;color:var(--ink);margin-top:4px">Вещество</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px">то, что растворяем (соль, кислота, сахар…)</div>
+      </div>
+      <div style="background:#fff;border-radius:8px;padding:10px 6px;border:1.5px solid var(--amber)">
+        <div style="font-size:20px">💧</div>
+        <div style="font-size:12px;font-weight:700;color:var(--ink);margin-top:4px">Растворитель</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px">то, в чём растворяем (вода)</div>
+      </div>
+      <div style="background:#fff;border-radius:8px;padding:10px 6px;border:1.5px solid var(--amber)">
+        <div style="font-size:20px">🥛</div>
+        <div style="font-size:12px;font-weight:700;color:var(--ink);margin-top:4px">Раствор</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px">вещество + растворитель вместе</div>
+      </div>
+    </div>
+    <p style="margin:0 0 6px"><b>Массовая доля (ω)</b> — это сколько вещества в 100 г раствора.</p>
+    <p style="margin:0;font-size:14px;color:var(--ink2)">Пример: раствор с ω = 10% — в каждых <b>100 г</b> раствора содержится <b>10 г соли</b> и 90 г воды.</p>
+  </div>
+
+  <div class="box box-info" style="margin-bottom:16px">
+    <div class="box-title">Шаг 1 — найти массу вещества</div>
+    <div style="text-align:center;margin:12px 0 10px">
+      <div style="display:inline-block;border:1.5px solid var(--p400);border-radius:8px;padding:14px 28px;background:#fff">
+        <span style="font-family:var(--mono);font-size:17px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px;white-space:nowrap">
+          <span><i>m</i>(вещества) =</span>
+          <span style="display:inline-flex;flex-direction:column;align-items:center;gap:2px">
+            <span style="border-bottom:2px solid var(--ink);padding:0 4px 3px"><i>ω</i> · <i>m</i>(раствора)</span>
+            <span style="padding-top:3px">100%</span>
+          </span>
+        </span>
+      </div>
+    </div>
+    <p style="margin:6px 0 4px"><b>Где:</b></p>
+    <ul style="margin:0;padding-left:20px;line-height:2;font-size:14px;color:var(--ink2)">
+      <li><i>m</i>(вещества) — масса растворённого вещества, г;</li>
+      <li><i>ω</i> — массовая доля вещества, %;</li>
+      <li><i>m</i>(раствора) — масса раствора, г.</li>
+    </ul>
+  </div>
+
+  <div class="box box-info" style="margin-bottom:20px">
+    <div class="box-title">Шаг 2 — найти новую массовую долю</div>
+    <div style="margin:12px -16px 10px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px 4px">
+      <div style="display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap;min-width:max-content">
+        <span><i>ω</i>(в-ва) =</span>
+        <span style="display:inline-flex;flex-direction:column;align-items:center">
+          <span style="border-bottom:2px solid var(--ink);padding:0 6px 3px"><i>m</i>(в-ва) ± <i>m</i>(соли<sub>1</sub>) ± <i>m</i>(соли<sub>2</sub>)</span>
+          <span style="padding-top:3px"><i>m</i>(р-ра) ± <i>m</i>(соли<sub>1</sub>) ± <i>m</i>(соли<sub>2</sub>) ± <i>m</i>(H<sub>2</sub>O)</span>
+        </span>
+        <span>· 100%</span>
+      </div>
+    </div>
+    <p style="margin:8px 0 4px"><b>Что означает каждый элемент:</b></p>
+    <ul style="margin:0;padding-left:20px;line-height:1.9;font-size:14px;color:var(--ink2)">
+      <li><i>ω</i>(в-ва) — массовая доля искомого вещества в растворе после всех изменений, %.</li>
+      <li><i>m</i>(в-ва) — исходная масса вещества, массовую долю которого нужно найти, г.</li>
+      <li><i>m</i>(соли<sub>1</sub>) — масса первой добавленной или удалённой соли, г.</li>
+      <li><i>m</i>(соли<sub>2</sub>) — масса второй добавленной или удалённой соли, г.</li>
+      <li><i>m</i>(р-ра) — исходная масса раствора, г.</li>
+      <li><i>m</i>(H<sub>2</sub>O) — масса добавленной или удалённой воды, г.</li>
+      <li>± — знак выбирается в зависимости от того, добавляют вещество или удаляют его.</li>
+      <li>·100% — умножение результата на 100%, чтобы получить массовую долю в процентах.</li>
+    </ul>
+  </div>
+
+  <div class="box box-warn" style="margin-bottom:20px">
+    <div class="box-title">⚠ Правило воды — запомни раз и навсегда</div>
+    <p style="margin:6px 0 4px">Вода — <b>только в знаменатель</b> (только к массе раствора).<br>
+    <b>Никогда в числитель</b> (к массе вещества).</p>
+    <p style="margin:6px 0 0;font-size:14px;color:var(--ink2)">Вода — это растворитель, а не растворённое вещество. При добавлении воды масса вещества не меняется — меняется только масса раствора.</p>
+  </div>
+
+  <!-- ═══ ТРЕНАЖЁР 2А ═══ -->
+  <div class="tr-section" id="tr-2a">
+    <div class="tr-header">
+      <div class="tr-pill tr-pill-2a">ТРЕНАЖЁР 2А</div>
+      <div class="tr-title">Изменили состав одного раствора</div>
+      <div class="tr-prog" id="t2a-prog">0 / 21</div>
+    </div>
+    <div id="t2a-area">
+      <div class="tr-card">
+        <div class="tr-q" id="t2a-q"></div>
+        <div class="tr-ans-row">
+          <input class="tr-input" id="t2a-inp" type="text" inputmode="decimal" placeholder="0" autocomplete="off" onkeydown="if(event.key==='Enter')t2aCheck()">
+          <span class="tr-unit" id="t2a-unit">%</span>
+          <div class="tr-feedback" id="t2a-fb"></div>
+        </div>
+        <div id="t2a-sol" style="display:none"></div>
+      </div>
+      <div class="tr-btns">
+        <button class="tr-check-btn" id="t2a-check" onclick="t2aCheck()">Проверить</button>
+        <button class="tr-next-btn" id="t2a-next" style="display:none" onclick="t2aNext()">Далее →</button>
+        <button class="tr-reset-btn" onclick="t2aReset()">Сбросить</button>
+      </div>
+    </div>
+    <div id="t2a-result" class="tr-result" style="display:none">
+      <div class="tr-result-icon">🎉</div>
+      <div class="tr-result-title">Тренажёр 2А выполнен!</div>
+      <div class="tr-result-sub">Все 21 задача решена верно</div>
+      <br><button class="tr-reset-btn" onclick="t2aReset()">Начать заново</button>
+    </div>
+  </div>
+
+  <!-- ═══ ФОРМУЛЫ 2Б ═══ -->
+  <div class="cup-explain-title" style="font-size:13px;font-weight:700;color:var(--p800);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px">Подтип · Смешивание двух растворов</div>
+  <div class="box box-info" style="margin-bottom:16px">
+    <div class="box-title">Шаг 1 — найти массу вещества в каждом растворе</div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px">
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap">
+        <span><i>m</i>(вещества<sub>1</sub>) =</span>
+        <span style="display:inline-flex;flex-direction:column;align-items:center">
+          <span style="border-bottom:2px solid var(--ink);padding:0 6px 3px"><i>ω</i><sub>1</sub> · <i>m</i>(раствора<sub>1</sub>)</span>
+          <span style="padding-top:3px">100%</span>
+        </span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap">
+        <span><i>m</i>(вещества<sub>2</sub>) =</span>
+        <span style="display:inline-flex;flex-direction:column;align-items:center">
+          <span style="border-bottom:2px solid var(--ink);padding:0 6px 3px"><i>ω</i><sub>2</sub> · <i>m</i>(раствора<sub>2</sub>)</span>
+          <span style="padding-top:3px">100%</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="box box-info" style="margin-bottom:20px">
+    <div class="box-title">Шаг 2 — найти массовую долю соли</div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px -16px 0;padding:0 16px 4px">
+      <div style="display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap;min-width:max-content">
+        <span><i>ω</i>(соли) =</span>
+        <span style="display:inline-flex;flex-direction:column;align-items:center">
+          <span style="border-bottom:2px solid var(--ink);padding:0 6px 3px"><i>m</i>(вещества<sub>1</sub>) ± <i>m</i>(вещества<sub>2</sub>)</span>
+          <span style="padding-top:3px"><i>m</i>(раствора<sub>1</sub>) ± <i>m</i>(раствора<sub>2</sub>)</span>
+        </span>
+        <span>· 100%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ТРЕНАЖЁР 2Б ═══ -->
+  <div class="tr-section" id="tr-2b">
+    <div class="tr-header">
+      <div class="tr-pill tr-pill-2b">ТРЕНАЖЁР 2Б</div>
+      <div class="tr-title">Смешивание двух растворов</div>
+      <div class="tr-prog" id="t2b-prog">0 / 6</div>
+    </div>
+    <div id="t2b-area">
+      <div class="tr-card">
+        <div class="tr-q" id="t2b-q"></div>
+        <div class="tr-ans-row">
+          <input class="tr-input" id="t2b-inp" type="text" inputmode="decimal" placeholder="0" autocomplete="off" onkeydown="if(event.key==='Enter')t2bCheck()">
+          <span class="tr-unit" id="t2b-unit">%</span>
+          <div class="tr-feedback" id="t2b-fb"></div>
+        </div>
+        <div id="t2b-sol" style="display:none"></div>
+      </div>
+      <div class="tr-btns">
+        <button class="tr-check-btn" id="t2b-check" onclick="t2bCheck()">Проверить</button>
+        <button class="tr-next-btn" id="t2b-next" style="display:none" onclick="t2bNext()">Далее →</button>
+        <button class="tr-reset-btn" onclick="t2bReset()">Сбросить</button>
+      </div>
+    </div>
+    <div id="t2b-result" class="tr-result" style="display:none">
+      <div class="tr-result-icon">🎉</div>
+      <div class="tr-result-title">Тренажёр 2Б выполнен!</div>
+      <div class="tr-result-sub">Все 6 задач решены верно</div>
+      <br><button class="tr-reset-btn" onclick="t2bReset()">Начать заново</button>
+    </div>
+  </div>
+
+</div><!-- /БЛОК II -->
+
+</div><!-- /shell -->
+
+<!-- CONGRATS OVERLAY -->
+<div id="congrats">
+  <div class="cong-card">
+    <div class="cong-icon">🏆</div>
+    <div class="cong-title">Линия 26 пройдена!</div>
+    <div class="cong-sub">Все 49 задач решены верно. Расчёты с массовой долей — освоено!</div>
+    <button class="cong-btn" onclick="document.getElementById('congrats').classList.remove('show')">Закрыть</button>
+  </div>
+</div>
+
+<!-- CONFIRM CLEAR DIALOG -->
+<div id="clear-confirm-dialog">
+  <div class="confirm-card">
+    <div class="confirm-title">Сбросить весь прогресс?</div>
+    <div class="confirm-sub">Все решённые задачи будут сброшены. Это нельзя отменить.</div>
+    <div class="confirm-btns">
+      <button class="confirm-cancel" onclick="document.getElementById('clear-confirm-dialog').style.display='none'">Отмена</button>
+      <button class="confirm-ok" onclick="_doClearAll()">Сбросить</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+// УТИЛИТЫ
+// ══════════════════════════════════════════
+const TTL=6*24*3600*1000;
+const HIST_KEY='l26_hist';
+const TOTAL=49;
+
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=0|Math.random()*(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+function normNum(s){const n=parseFloat(String(s).trim().replace(',','.'));return isNaN(n)?NaN:Math.round(n*100)/100;}
+function isCorrect(inp,ans){const a=normNum(inp),b=normNum(ans);return !isNaN(a)&&!isNaN(b)&&a===b;}
+
+function solHtml(eq,steps){
+  const rows=steps.map((s,i)=>{
+    const d=s.indexOf('::');
+    if(d===-1)return '<span class="sol-n">'+(i+1)+'.</span> '+s;
+    return '<span class="sol-n">'+(i+1)+'.</span> <b class="sol-lbl">'+s.slice(0,d)+'</b> — '+s.slice(d+2);
+  }).join('<br>');
+  return '<div class="sol-box"><div class="sol-eq">'+eq+'</div><div class="sol-steps">'+rows+'</div></div>';
+}
+
+// ══════════════════════════════════════════
+// ИНИЦИАЛИЗАЦИЯ / СКРОЛЛ / ТОПБАР
+// ══════════════════════════════════════════
+window.addEventListener('DOMContentLoaded',()=>{
+  window.scrollTo(0,0);
+  buildStreak();
+  t1aInit();t1bInit();t1vInit();t1gInit();
+  t2aInit();t2bInit();
+  updateProg();
+});
+window.addEventListener('scroll',()=>{
+  const h=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('pf').style.width=(h>0?window.scrollY/h*100:0)+'%';
+});
+function topbarClick(e){e.stopPropagation();document.getElementById('topbar').classList.toggle('collapsed');}
+
+// ══════════════════════════════════════════
+// ИСТОРИЯ (STREAK)
+// ══════════════════════════════════════════
+function getHist(){try{const d=JSON.parse(localStorage.getItem(HIST_KEY)||'[]');return Array.isArray(d)?d:[];}catch{return[];}}
+function buildStreak(){
+  const hist=getHist(),el=document.getElementById('tb-streak'),today=new Date();
+  el.innerHTML='';
+  for(let i=5;i>=0;i--){
+    const d=new Date(today);d.setDate(d.getDate()-i);
+    const key=d.toISOString().slice(0,10);
+    const dot=document.createElement('div');
+    dot.className='tb-day'+(hist.includes(key)?' done':'')+(i===0?' today':'');
+    el.appendChild(dot);
+  }
+}
+function markToday(){
+  const hist=getHist(),key=new Date().toISOString().slice(0,10);
+  if(!hist.includes(key))hist.push(key);
+  const cut=new Date();cut.setDate(cut.getDate()-6);
+  const cutKey=cut.toISOString().slice(0,10);
+  try{localStorage.setItem(HIST_KEY,JSON.stringify(hist.filter(k=>k>=cutKey)));}catch{}
+  buildStreak();
+}
+
+// ══════════════════════════════════════════
+// ОБЩИЙ ПРОГРЕСС
+// ══════════════════════════════════════════
+let _t1aOk=0,_t1bOk=0,_t1vOk=0,_t1gOk=0,_t2aOk=0,_t2bOk=0;
+function updateProg(){
+  const done=_t1aOk+_t1bOk+_t1vOk+_t1gOk+_t2aOk+_t2bOk;
+  document.getElementById('tb-lbl').textContent=done+' / '+TOTAL;
+  document.getElementById('tb-pf').style.width=(done/TOTAL*100)+'%';
+}
+function checkCongrats(){
+  if(_t1aOk>=D1A.length&&D1A.length>0&&
+     _t1bOk>=D1B.length&&D1B.length>0&&
+     _t1vOk>=D1V.length&&D1V.length>0&&
+     _t1gOk>=D1G.length&&D1G.length>0&&
+     _t2aOk>=D2A.length&&D2A.length>0&&
+     _t2bOk>=D2B.length&&D2B.length>0)
+    document.getElementById('congrats').classList.add('show');
+}
+function clearAll(){document.getElementById('clear-confirm-dialog').style.display='flex';}
+function _doClearAll(){
+  ['l26_1a','l26_1b','l26_1v','l26_1g','l26_2a','l26_2b',HIST_KEY].forEach(k=>{try{localStorage.removeItem(k);}catch{}});
+  location.reload();
+}
+
+// ══════════════════════════════════════════
+// УНИВЕРСАЛЬНАЯ ФАБРИКА ТРЕНАЖЁРА
+// ══════════════════════════════════════════
+function makeTrainer(id,key,data,defaultUnit,setOk){
+  let Q,Cur,Ok,Wr;
+
+  function load(){
+    try{
+      const d=JSON.parse(localStorage.getItem(key)||'null');
+      if(d&&d.ts&&Date.now()-d.ts<TTL){Q=d.q;Cur=d.cur;Ok=new Set(d.ok);Wr=new Set(d.wr);setOk(Ok.size);return true;}
+    }catch{}return false;
+  }
+  function save(){try{localStorage.setItem(key,JSON.stringify({q:Q,cur:Cur,ok:[...Ok],wr:[...Wr],ts:Date.now()}));}catch{}}
+
+  function init(){
+    if(!load()){Q=shuffle(data.map((_,i)=>i));Cur=0;Ok=new Set();Wr=new Set();setOk(0);}
+    document.getElementById(id+'-result').style.display='none';
+    document.getElementById(id+'-area').style.display='block';
+    show();
+  }
+  function show(){
+    if(data.length===0){document.getElementById(id+'-q').textContent='';return;}
+    if(Ok.size>=data.length){finish();return;}
+    const t=data[Q[Cur]];
+    document.getElementById(id+'-q').textContent=t.q;
+    const unitEl=document.getElementById(id+'-unit');
+    if(unitEl)unitEl.textContent=t.unit||defaultUnit;
+    const sol=document.getElementById(id+'-sol');sol.style.display='none';sol.innerHTML='';
+    const fb=document.getElementById(id+'-fb');fb.textContent='';fb.className='tr-feedback';
+    document.getElementById(id+'-check').style.display='';
+    document.getElementById(id+'-next').style.display='none';
+    const inp=document.getElementById(id+'-inp');inp.value='';inp.focus({preventScroll:true});
+    document.getElementById(id+'-prog').textContent=Ok.size+' / '+data.length;
+  }
+  function check(){
+    const val=document.getElementById(id+'-inp').value;if(!val.trim())return;
+    const t=data[Q[Cur]],fb=document.getElementById(id+'-fb');
+    if(isCorrect(val,t.a)){
+      Ok.add(Q[Cur]);Wr.delete(Q[Cur]);setOk(Ok.size);
+      fb.textContent='✓ Верно!';fb.className='tr-feedback ok';
+      document.getElementById(id+'-check').style.display='none';
+      document.getElementById(id+'-next').style.display='';
+      const sol=document.getElementById(id+'-sol');sol.innerHTML=solHtml(t.eq,t.sol);sol.style.display='block';
+      save();document.getElementById(id+'-prog').textContent=Ok.size+' / '+data.length;
+      markToday();updateProg();
+      if(Ok.size>=data.length)setTimeout(finish,900);
+    }else{
+      const first=!Wr.has(Q[Cur]);
+      if(first){Q.push(Q[Cur]);Wr.add(Q[Cur]);}
+      fb.innerHTML='✗ Неверно — попробуй ещё'+(first?'<br><span style="font-size:12px;font-weight:400">↩ задание вернётся в конце</span>':'');
+      fb.className='tr-feedback err';
+    }
+  }
+  function next(){Cur++;save();show();}
+  function finish(){
+    document.getElementById(id+'-area').style.display='none';
+    document.getElementById(id+'-result').style.display='block';
+    setOk(data.length);updateProg();checkCongrats();
+  }
+  function reset(){
+    try{localStorage.removeItem(key);}catch{}
+    Q=shuffle(data.map((_,i)=>i));Cur=0;Ok=new Set();Wr=new Set();setOk(0);
+    document.getElementById(id+'-result').style.display='none';
+    document.getElementById(id+'-area').style.display='block';
+    show();updateProg();
+  }
+  return{init,check,next,reset};
+}
+
+// ══════════════════════════════════════════
+// ДАННЫЕ — БЛОК I
+// ══════════════════════════════════════════
+const D1A=[
+  {q:'Сколько граммов воды следует добавить к 600 г 10%-ного раствора нитрата аммония, чтобы массовая доля соли стала равной 3%? (Запишите число с точностью до целых.)',a:'1400',unit:'г',
+   eq:'10·600 + 0·x = 3·(600 + x)',
+   sol:['Обозначение::x = масса добавляемой воды (г). Вода — 0%, не меняет числитель.',
+        'Уравнение::10·600 + 0·x = 3·(600 + x)',
+        'Решаю::6000 = 1800 + 3x → 3x = 4200 → x = <span class="ans">1400 г</span>']},
+  {q:'Сколько граммов воды следует добавить к 250 г 12%-ного раствора нитрата цинка, чтобы массовая доля соли стала равной 8%? (Запишите число с точностью до целых.)',a:'125',unit:'г',
+   eq:'12·250 + 0·x = 8·(250 + x)',
+   sol:['Обозначение::x = масса добавляемой воды (г). Вода — 0%, не меняет числитель.',
+        'Уравнение::12·250 + 0·x = 8·(250 + x)',
+        'Решаю::3000 = 2000 + 8x → 8x = 1000 → x = <span class="ans">125 г</span>']},
+  {q:'Сколько граммов воды следует добавить к 150 г 18 % -ного раствора нитрата цинка, чтобы массовая доля соли стала равной 10 %? (Запишите число с точностью до целых).',a:'120',unit:'г',
+   eq:'18·150 + 0·x = 10·(150 + x)',
+   sol:['Обозначение::x = масса добавляемой воды (г).',
+        'Уравнение::18·150 + 0·x = 10·(150 + x)',
+        'Решаю::2700 = 1500 + 10x → 10x = 1200 → x = <span class="ans">120 г</span>']},
+  {q:'Сколько граммов воды нужно добавить к 150 г раствора соли с массовой долей 40%, чтобы получить 25%-ый раствор? (Запишите число с точностью до целых.)',a:'90',unit:'г',
+   eq:'40·150 + 0·x = 25·(150 + x)',
+   sol:['Обозначение::x = масса добавляемой воды (г).',
+        'Уравнение::40·150 + 0·x = 25·(150 + x)',
+        'Решаю::6000 = 3750 + 25x → 25x = 2250 → x = <span class="ans">90 г</span>']},
+  {q:'Сколько граммов воды следует выпарить из 400 г 10 %-ного раствора хлорида аммония, чтобы массовая доля соли в растворе стала равной 14 %? (Запишите число с точностью до десятых).',a:'114.3',unit:'г',
+   eq:'10·400 − 0·x = 14·(400 − x)',
+   sol:['Обозначение::x = масса выпариваемой воды (г). Вода — 0%, числитель не убывает.',
+        'Уравнение::10·400 − 0·x = 14·(400 − x)',
+        'Решаю::4000 = 5600 − 14x → 14x = 1600 → x ≈ <span class="ans">114,3 г</span>']},
+  {q:'Сколько граммов воды следует выпарить из 300 г 12%-ного раствора хлорида калия, чтобы массовая доля соли в растворе стала равной 16%? (Запишите число с точностью до целых.)',a:'75',unit:'г',
+   eq:'12·300 − 0·x = 16·(300 − x)',
+   sol:['Обозначение::x = масса выпариваемой воды (г).',
+        'Уравнение::12·300 − 0·x = 16·(300 − x)',
+        'Решаю::3600 = 4800 − 16x → 16x = 1200 → x = <span class="ans">75 г</span>']}
+];
+const D1B=[
+  {q:'Сколько граммов хлорида бария следует растворить в 114 г 10%-ного раствора этой соли, чтобы её массовая доля стала равной 15%? (Запишите число с точностью до десятых.)',a:'6.7',unit:'г',
+   eq:'10·114 + 100·x = 15·(114 + x)',
+   sol:['Обозначение::x = масса добавляемой соли (г). Чистая соль — 100%, идёт и в числитель, и в знаменатель.',
+        'Уравнение::10·114 + 100·x = 15·(114 + x)',
+        'Раскрываю::1140 + 100x = 1710 + 15x → 85x = 570',
+        'Решаю::x = 570 / 85 ≈ <span class="ans">6,7 г</span>']},
+  {q:'Вычислите массу нитрата калия (в граммах), которую следует растворить в 150 г раствора с массовой долей этой соли 10% для получения раствора с массовой долей 12%. (Запишите число с точностью до десятых.)',a:'3.4',unit:'г',
+   eq:'10·150 + 100·x = 12·(150 + x)',
+   sol:['Обозначение::x = масса добавляемой соли (г).',
+        'Уравнение::10·150 + 100·x = 12·(150 + x)',
+        'Раскрываю::1500 + 100x = 1800 + 12x → 88x = 300',
+        'Решаю::x = 300 / 88 ≈ <span class="ans">3,4 г</span>']},
+  {q:'Сколько граммов хлорида бария следует растворить в 114 г 7%-ного раствора этой соли, чтобы её массовая доля стала равной 12%? (Запишите число с точностью до десятых.)',a:'6.5',unit:'г',
+   eq:'7·114 + 100·x = 12·(114 + x)',
+   sol:['Обозначение::x = масса добавляемой соли (г).',
+        'Уравнение::7·114 + 100·x = 12·(114 + x)',
+        'Раскрываю::798 + 100x = 1368 + 12x → 88x = 570',
+        'Решаю::x = 570 / 88 ≈ <span class="ans">6,5 г</span>']},
+  {q:'Сколько граммов уксусной кислоты следует растворить в 150 г столового 5%-го уксуса для получения 10%-го раствора? (Запишите число с точностью до десятых.)',a:'8.3',unit:'г',
+   eq:'5·150 + 100·x = 10·(150 + x)',
+   sol:['Обозначение::x = масса уксусной кислоты (г). Чистая кислота — 100%.',
+        'Уравнение::5·150 + 100·x = 10·(150 + x)',
+        'Раскрываю::750 + 100x = 1500 + 10x → 90x = 750',
+        'Решаю::x = 750 / 90 ≈ <span class="ans">8,3 г</span>']},
+  {q:'Сколько граммов нитрата кальция следует растворить в 150 г его 10%-ного раствора, чтобы массовая доля соли стала равной 15%? (Запишите число с точностью до десятых.)',a:'8.8',unit:'г',
+   eq:'10·150 + 100·x = 15·(150 + x)',
+   sol:['Обозначение::x = масса добавляемой соли (г).',
+        'Уравнение::10·150 + 100·x = 15·(150 + x)',
+        'Раскрываю::1500 + 100x = 2250 + 15x → 85x = 750',
+        'Решаю::x = 750 / 85 ≈ <span class="ans">8,8 г</span>']},
+  {q:'Сколько граммов хлорида бария следует добавить к 200 г 5%-го раствора этой соли, чтобы массовая доля соли в растворе стала 8%? (Запишите число с точностью до десятых.)',a:'6.5',unit:'г',
+   eq:'5·200 + 100·x = 8·(200 + x)',
+   sol:['Обозначение::x = масса добавляемой соли (г).',
+        'Уравнение::5·200 + 100·x = 8·(200 + x)',
+        'Раскрываю::1000 + 100x = 1600 + 8x → 92x = 600',
+        'Решаю::x = 600 / 92 ≈ <span class="ans">6,5 г</span>']}
+];
+const D1V=[
+  {q:'Сколько граммов 15% раствора нитрата бария необходимо взять, чтобы при добавлении 30 г воды массовая доля соли в растворе стала равна 10%? (Запишите число с точностью до целых.)',a:'60',unit:'г',
+   eq:'15·x + 0·30 = 10·(x + 30)',
+   sol:['Обозначение::x = масса исходного раствора (г). Вода — 0%, не меняет числитель.',
+        'Уравнение::15·x + 0·30 = 10·(x + 30)',
+        'Раскрываю::15x = 10x + 300 → 5x = 300',
+        'Решаю::x = <span class="ans">60 г</span>']},
+  {q:'Сколько граммов 20%-ного раствора сульфата меди(II) надо взять, чтобы при выпаривании 10 г воды получить раствор с массовой долей соли 25 %? (Запишите число с точностью до целых).',a:'50',unit:'г',
+   eq:'20·x − 0·10 = 25·(x − 10)',
+   sol:['Обозначение::x = масса исходного раствора (г). Вода — 0%, числитель не убывает.',
+        'Уравнение::20·x − 0·10 = 25·(x − 10)',
+        'Раскрываю::20x = 25x − 250 → 5x = 250',
+        'Решаю::x = <span class="ans">50 г</span>']},
+  {q:'Сколько граммов 14%-ного раствора сульфата меди(II) надо взять, чтобы при выпаривании 10 г воды получить раствор с массовой долей соли 18%? (Запишите число с точностью до целых.)',a:'45',unit:'г',
+   eq:'14·x − 0·10 = 18·(x − 10)',
+   sol:['Обозначение::x = масса исходного раствора (г).',
+        'Уравнение::14·x − 0·10 = 18·(x − 10)',
+        'Раскрываю::14x = 18x − 180 → 4x = 180',
+        'Решаю::x = <span class="ans">45 г</span>']},
+  {q:'Сколько граммов 8%-го раствора сульфата меди(II) надо взять, чтобы при выпаривании 10 г воды получить раствор с массовой долей соли 12%?(Запишите число с точностью до целых.)',a:'30',unit:'г',
+   eq:'8·x − 0·10 = 12·(x − 10)',
+   sol:['Обозначение::x = масса исходного раствора (г).',
+        'Уравнение::8·x − 0·10 = 12·(x − 10)',
+        'Раскрываю::8x = 12x − 120 → 4x = 120',
+        'Решаю::x = <span class="ans">30 г</span>']},
+  {q:'Сколько граммов 12%-го раствора сульфата меди(II) надо взять, чтобы при добавлении 10 г этой же соли получить раствор с массовой долей соли 18%? (Запишите число с точностью до десятых.)',a:'136.7',unit:'г',
+   eq:'12·x + 100·10 = 18·(x + 10)',
+   sol:['Обозначение::x = масса исходного раствора (г). Чистая соль — 100%.',
+        'Уравнение::12·x + 100·10 = 18·(x + 10)',
+        'Раскрываю::12x + 1000 = 18x + 180 → 820 = 6x',
+        'Решаю::x = 820 / 6 ≈ <span class="ans">136,7 г</span>']}
+];
+const D1G=[
+  {q:'Сколько граммов 30%-ного раствора нитрата натрия надо добавить к 80 г 10%-ного раствора этой же соли, чтобы получить 15%-ный раствор? (Запишите число с точностью до десятых.)',a:'26.7',unit:'г',
+   eq:'10·80 + 30·x = 15·(80 + x)',
+   sol:['Обозначение::x = масса добавляемого 30%-ного раствора (г).',
+        'Уравнение::10·80 + 30·x = 15·(80 + x)',
+        'Раскрываю::800 + 30x = 1200 + 15x → 15x = 400',
+        'Решаю::x = 400 / 15 ≈ <span class="ans">26,7 г</span>']},
+  {q:'Сколько граммов 15%-ного раствора нитрата натрия надо добавить к 60 г 7%-ного раствора этой же соли, чтобы получить 10%-ный раствор? (Запишите число с точностью до целых.)',a:'36',unit:'г',
+   eq:'7·60 + 15·x = 10·(60 + x)',
+   sol:['Обозначение::x = масса добавляемого 15%-ного раствора (г).',
+        'Уравнение::7·60 + 15·x = 10·(60 + x)',
+        'Раскрываю::420 + 15x = 600 + 10x → 5x = 180',
+        'Решаю::x = <span class="ans">36 г</span>']},
+  {q:'Сколько граммов 20%-ного раствора нитрата натрия надо добавить к 80 г 10%-ного раствора этой же соли, чтобы получить 15%-ный раствор? (Запишите число с точностью до целых.)',a:'80',unit:'г',
+   eq:'10·80 + 20·x = 15·(80 + x)',
+   sol:['Обозначение::x = масса добавляемого 20%-ного раствора (г).',
+        'Уравнение::10·80 + 20·x = 15·(80 + x)',
+        'Раскрываю::800 + 20x = 1200 + 15x → 5x = 400',
+        'Решаю::x = <span class="ans">80 г</span>']},
+  {q:'Сколько граммов 18 %-ного раствора нитрата натрия надо добавить к 110 г 8 %-ного раствора этой же соли, чтобы получить 12 %-ный раствор? (Запишите число с точностью до десятых.)',a:'73.3',unit:'г',
+   eq:'8·110 + 18·x = 12·(110 + x)',
+   sol:['Обозначение::x = масса добавляемого 18%-ного раствора (г).',
+        'Уравнение::8·110 + 18·x = 12·(110 + x)',
+        'Раскрываю::880 + 18x = 1320 + 12x → 6x = 440',
+        'Решаю::x = 440 / 6 ≈ <span class="ans">73,3 г</span>']},
+  {q:'Сколько граммов 16%-го раствора нитрата натрия надо добавить к 85 г 7%-го раствора этой же соли, чтобы получить 10%-ый раствор? (Запишите число с точностью до десятых.)',a:'42.5',unit:'г',
+   eq:'7·85 + 16·x = 10·(85 + x)',
+   sol:['Обозначение::x = масса добавляемого 16%-ного раствора (г).',
+        'Уравнение::7·85 + 16·x = 10·(85 + x)',
+        'Раскрываю::595 + 16x = 850 + 10x → 6x = 255',
+        'Решаю::x = <span class="ans">42,5 г</span>']}
+];
+
+// ══════════════════════════════════════════
+// ДАННЫЕ — БЛОК II
+// ══════════════════════════════════════════
+const D2A=[
+  // только вода (2)
+  {q:'Чему равна массовая доля серной кислоты в растворе, полученном после добавления 20 г воды к 80 г её 10 %-ного раствора? (Запишите число с точностью до целых.)',a:'8',unit:'%',
+   eq:'ω(нов) = m(в-ва) / (m(р-ра) + m(воды)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 80 · 10/100 = 8 г — не меняется при добавлении воды',
+        'Шаг 2 (новая ω)::ω(нов) = 8 / (80 + 20) · 100% = 8/100 · 100% = <span class="ans">8%</span>']},
+  {q:'Чему равна массовая доля азотной кислоты в растворе, полученном после добавления 20 г воды к 320 г раствора с массовой долей 2,5 %? (Запишите число с точностью до сотых.)',a:'2.35',unit:'%',
+   eq:'ω(нов) = m(в-ва) / (m(р-ра) + m(воды)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 320 · 2,5/100 = 8 г — не меняется',
+        'Шаг 2 (новая ω)::ω(нов) = 8 / (320 + 20) · 100% = 8/340 · 100% ≈ <span class="ans">2,35%</span>']},
+  // только соль (4)
+  {q:'К 135 г раствора с массовой долей соли 22% добавили 25 г этой же соли. Вычислите массовую долю (%) соли в полученном растворе. (Запишите число с точностью до десятых.)',a:'34.2',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(соли)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 135 · 22/100 = 29,7 г',
+        'Шаг 2 (новая ω)::ω(нов) = (29,7 + 25) / (135 + 25) · 100% = 54,7/160 · 100% ≈ <span class="ans">34,2%</span>']},
+  {q:'К раствору хлорида кальция массой 90 г с массовой долей 5 % добавили 10 г этой же соли. Массовая доля соли в полученном растворе равна __%. (Запишите число с точностью до десятых.)',a:'14.5',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(соли)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 90 · 5/100 = 4,5 г',
+        'Шаг 2 (новая ω)::ω(нов) = (4,5 + 10) / (90 + 10) · 100% = 14,5/100 · 100% = <span class="ans">14,5%</span>']},
+  {q:'К раствору хлорида кальция массой 140 г с массовой долей 5% добавили 10 г этой же соли. Чему равна массовая доля соли в полученном растворе? (Запишите число с точностью до десятых.)',a:'11.3',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(соли)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 140 · 5/100 = 7 г',
+        'Шаг 2 (новая ω)::ω(нов) = (7 + 10) / (140 + 10) · 100% = 17/150 · 100% ≈ <span class="ans">11,3%</span>']},
+  {q:'К раствору сульфида калия массой 60 г с массовой долей 4 % добавили 5,6 г этой же соли. Чему равна массовая доля соли в полученном растворе? (Запишите число с точностью до десятых.)',a:'12.2',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(соли)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 60 · 4/100 = 2,4 г',
+        'Шаг 2 (новая ω)::ω(нов) = (2,4 + 5,6) / (60 + 5,6) · 100% = 8/65,6 · 100% ≈ <span class="ans">12,2%</span>']},
+  // соль + вода (10)
+  {q:'К 50 г раствора хлорида кальция с массовой долей 4% добавили 13 г этой же соли и 27 г воды. Какова массовая доля соли в полученном растворе? (Запишите число с точностью до десятых.)',a:'16.7',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(соли) + m(воды)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 50 · 4/100 = 2 г',
+        'Шаг 2 (новая ω)::ω(нов) = (2 + 13) / (50 + 13 + 27) · 100% = 15/90 · 100% ≈ <span class="ans">16,7%</span>']},
+  {q:'К 115 г раствора с массовой долей нитрата калия 20% добавили 58 мл воды и 27 г этой же соли. Вычислите массовую долю соли (в %) в полученном растворе. (Запишите число с точностью до целых.)',a:'25',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(воды) + m(соли)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 115 · 20/100 = 23 г',
+        'Шаг 2 (новая ω)::ω(нов) = (23 + 27) / (115 + 58 + 27) · 100% = 50/200 · 100% = <span class="ans">25%</span>']},
+  {q:'К 220 г раствора с массовой долей гидроксида натрия 20% добавили 44 г воды и 36 г той же щёлочи. Вычислите массовую долю (%) гидроксида натрия в полученном растворе. (Запишите число с точностью до десятых.)',a:'26.7',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(щёлочи)) / (m(р-ра) + m(воды) + m(щёлочи)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 220 · 20/100 = 44 г',
+        'Шаг 2 (новая ω)::ω(нов) = (44 + 36) / (220 + 44 + 36) · 100% = 80/300 · 100% ≈ <span class="ans">26,7%</span>']},
+  {q:'К 130 г раствора с массовой долей соли 20 % добавили 14 г этой же соли и 16 мл воды. Какова массовая доля соли в образовавшемся растворе? (Запишите число с точностью до целых).',a:'25',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(соли) + m(воды)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 130 · 20/100 = 26 г',
+        'Шаг 2 (новая ω)::ω(нов) = (26 + 14) / (130 + 14 + 16) · 100% = 40/160 · 100% = <span class="ans">25%</span>']},
+  {q:'К 75 г раствора ацетата натрия с массовой долей 6 % добавили 10 г этой же соли и 25 г воды. Определите массовую долю соли в полученном растворе. (Запишите число с точностью до десятых.)',a:'13.2',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(соли) + m(воды)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 75 · 6/100 = 4,5 г',
+        'Шаг 2 (новая ω)::ω(нов) = (4,5 + 10) / (75 + 10 + 25) · 100% = 14,5/110 · 100% ≈ <span class="ans">13,2%</span>']},
+  {q:'К 820 г раствора нитрата кальция с массовой долей 10 % добавили 20 г той же соли и 60 мл воды. Какова массовая доля соли в образовавшемся растворе? (Запишите число с точностью до десятых.)',a:'11.3',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(соли) + m(воды)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 820 · 10/100 = 82 г',
+        'Шаг 2 (новая ω)::ω(нов) = (82 + 20) / (820 + 20 + 60) · 100% = 102/900 · 100% ≈ <span class="ans">11,3%</span>']},
+  {q:'К 110 г раствора с массовой долей хлорида магния 10% добавили 40 мл воды и 16 г этой же соли. Определите массовую долю (%) соли в полученном растворе. (Запишите число с точностью до десятых.)',a:'16.3',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(воды) + m(соли)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 110 · 10/100 = 11 г',
+        'Шаг 2 (новая ω)::ω(нов) = (11 + 16) / (110 + 40 + 16) · 100% = 27/166 · 100% ≈ <span class="ans">16,3%</span>']},
+  {q:'К 95 г 20%-го раствора соли добавили 40 мл воды и 10 г этой же соли. Определите массовую долю (%) соли в полученном растворе. (Запишите число с точностью до целых.)',a:'20',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(воды) + m(соли)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 95 · 20/100 = 19 г',
+        'Шаг 2 (новая ω)::ω(нов) = (19 + 10) / (95 + 40 + 10) · 100% = 29/145 · 100% = <span class="ans">20%</span>']},
+  {q:'К 85 г 30%-го раствора хлорида кальция добавили 5,5 мл воды и 14,5 г этой же соли. Определите массовую долю (%) соли в полученном растворе. (Запишите число с точностью до целых.)',a:'38',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(воды) + m(соли)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 85 · 30/100 = 25,5 г',
+        'Шаг 2 (новая ω)::ω(нов) = (25,5 + 14,5) / (85 + 5,5 + 14,5) · 100% = 40/105 · 100% ≈ <span class="ans">38%</span>']},
+  {q:'К 75 г раствора с массовой долей соли 6% добавили 10 г соли этой же соли и 25 г воды. Определите массовую долю (%) соли в полученном растворе. (Запишите число с точностью до сотых.)',a:'13.18',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(соли) + m(воды)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 75 · 6/100 = 4,5 г',
+        'Шаг 2 (новая ω)::ω(нов) = (4,5 + 10) / (75 + 10 + 25) · 100% = 14,5/110 · 100% ≈ <span class="ans">13,18%</span>']},
+  // соль + выпаривание (4)
+  {q:'К 130 г раствора с массовой долей нитрата магния 10% добавили 17 г этой же соли и выпарили 17 мл воды. Вычислите массовую долю соли в полученном растворе. (Запишите число с точностью до целых.)',a:'23',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(соли) − m(воды)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 130 · 10/100 = 13 г',
+        'Шаг 2 (новая ω)::ω(нов) = (13 + 17) / (130 + 17 − 17) · 100% = 30/130 · 100% ≈ <span class="ans">23%</span>']},
+  {q:'К 160 г раствора хлорида кальция с массовой долей 15% добавили 12 г этой же соли, а затем выпарили из раствора 12 г воды. Какова массовая доля (в %) хлорида кальция в образовавшемся растворе? (Запишите число с точностью до десятых.)',a:'22.5',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(соли) − m(воды)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 160 · 15/100 = 24 г',
+        'Шаг 2 (новая ω)::ω(нов) = (24 + 12) / (160 + 12 − 12) · 100% = 36/160 · 100% = <span class="ans">22,5%</span>']},
+  {q:'К 160 г раствора хлорида кальция с массовой долей 5% добавили 12 г этой же соли, а затем выпарили из раствора 12 мл воды. Какова массовая доля (в %) хлорида кальция в образовавшемся растворе? (Запишите число с точностью до десятых.)',a:'12.5',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(соли) − m(воды)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 160 · 5/100 = 8 г',
+        'Шаг 2 (новая ω)::ω(нов) = (8 + 12) / (160 + 12 − 12) · 100% = 20/160 · 100% = <span class="ans">12,5%</span>']},
+  {q:'К 130 г раствора нитрата магния с массовой долей соли 10% добавили 17 г этой же соли и выпарили 27 мл воды. Определите массовую долю соли в полученном растворе. (Запишите число с точностью до целых.)',a:'25',unit:'%',
+   eq:'ω(нов) = (m(в-ва) + m(соли)) / (m(р-ра) + m(соли) − m(воды)) · 100%',
+   sol:['Шаг 1 (масса вещества)::m(в-ва) = 130 · 10/100 = 13 г',
+        'Шаг 2 (новая ω)::ω(нов) = (13 + 17) / (130 + 17 − 27) · 100% = 30/120 · 100% = <span class="ans">25%</span>']},
+  // кристаллизация (1)
+  {q:'Из 118 г 18%-ного раствора карбоната натрия выпарили 25 г воды, выделилось 15 г осадка безводной соли. Определите массовую долю карбоната натрия в образовавшемся растворе. (Запишите число с точностью до целых.)',a:'8',unit:'%',
+   eq:'ω(нов) = (m(в-ва) − m(осадка)) / (m(р-ра) − m(воды) − m(осадка)) · 100%',
+   sol:['Шаг 1 (масса Na₂CO₃)::m(Na₂CO₃) = 118 · 18/100 = 21,24 г — до изменений',
+        'После кристаллизации::m(Na₂CO₃) в р-ре = 21,24 − 15 = 6,24 г (осадок выходит из числителя)',
+        'Масса раствора::m(р-ра) = 118 − 25 − 15 = 78 г (минус вода, минус осадок)',
+        'Шаг 2 (новая ω)::ω(нов) = 6,24 / 78 · 100% = <span class="ans">8%</span>']}
+];
+const D2B=[
+  {q:'Смешали два раствора: один массой 260 г и с массовой долей соли 3%, второй массой 140 г и с массовой долей этой же соли 1%. Чему равна массовая доля соли в образовавшемся растворе? (Запишите число с точностью до десятых.)',a:'2.3',unit:'%',
+   eq:'ω(нов) = (m₁·ω₁/100 + m₂·ω₂/100) / (m₁ + m₂) · 100%',
+   sol:['Шаг 1 (масса соли в каждом)::m₁(в-ва) = 260 · 3/100 = 7,8 г;  m₂(в-ва) = 140 · 1/100 = 1,4 г',
+        'Шаг 2 (суммарно)::m(в-ва) = 7,8 + 1,4 = 9,2 г;  m(р-ра) = 260 + 140 = 400 г',
+        'Ответ::ω(нов) = 9,2 / 400 · 100% = <span class="ans">2,3%</span>']},
+  {q:'Смешали 600 г раствора с массовой долей соли 10% и 800 г раствора с массовой долей 20%. Какова массовая доля (%) соли в полученном растворе? (Запишите число с точностью до десятых.)',a:'15.7',unit:'%',
+   eq:'ω(нов) = (m₁·ω₁/100 + m₂·ω₂/100) / (m₁ + m₂) · 100%',
+   sol:['Шаг 1 (масса соли в каждом)::m₁(в-ва) = 600 · 10/100 = 60 г;  m₂(в-ва) = 800 · 20/100 = 160 г',
+        'Шаг 2 (суммарно)::m(в-ва) = 60 + 160 = 220 г;  m(р-ра) = 600 + 800 = 1400 г',
+        'Ответ::ω(нов) = 220 / 1400 · 100% ≈ <span class="ans">15,7%</span>']},
+  {q:'Смешали два раствора: один массой 130 г с массовой долей соли 6 %, другой — массой 70 г с массовой долей этой же соли 2%. Массовая доля соли, содержащейся в образовавшемся растворе, равна __%. (Запишите число с точностью до десятых.)',a:'4.6',unit:'%',
+   eq:'ω(нов) = (m₁·ω₁/100 + m₂·ω₂/100) / (m₁ + m₂) · 100%',
+   sol:['Шаг 1 (масса соли в каждом)::m₁(в-ва) = 130 · 6/100 = 7,8 г;  m₂(в-ва) = 70 · 2/100 = 1,4 г',
+        'Шаг 2 (суммарно)::m(в-ва) = 7,8 + 1,4 = 9,2 г;  m(р-ра) = 130 + 70 = 200 г',
+        'Ответ::ω(нов) = 9,2 / 200 · 100% = <span class="ans">4,6%</span>']},
+  {q:'Смешали два раствора: один массой 180 г с массовой долей соли 25 %, другой — массой 250 г с массовой долей этой же соли 2%. Какова массовая доля (%) соли в образовавшемся растворе? (Запишите число с точностью до десятых.)',a:'11.6',unit:'%',
+   eq:'ω(нов) = (m₁·ω₁/100 + m₂·ω₂/100) / (m₁ + m₂) · 100%',
+   sol:['Шаг 1 (масса соли в каждом)::m₁(в-ва) = 180 · 25/100 = 45 г;  m₂(в-ва) = 250 · 2/100 = 5 г',
+        'Шаг 2 (суммарно)::m(в-ва) = 45 + 5 = 50 г;  m(р-ра) = 180 + 250 = 430 г',
+        'Ответ::ω(нов) = 50 / 430 · 100% ≈ <span class="ans">11,6%</span>']},
+  {q:'Смешали 200 г 10% и 300 г 20% соляной кислоты. Вычислите массовую долю хлороводорода в полученном растворе. (Запишите число с точностью до целых.)',a:'16',unit:'%',
+   eq:'ω(нов) = (m₁·ω₁/100 + m₂·ω₂/100) / (m₁ + m₂) · 100%',
+   sol:['Шаг 1 (масса HCl в каждом)::m₁(HCl) = 200 · 10/100 = 20 г;  m₂(HCl) = 300 · 20/100 = 60 г',
+        'Шаг 2 (суммарно)::m(HCl) = 20 + 60 = 80 г;  m(р-ра) = 200 + 300 = 500 г',
+        'Ответ::ω(нов) = 80 / 500 · 100% = <span class="ans">16%</span>']},
+  {q:'Смешали 250 г раствора с массовой долей соли 12% и 300 г раствора с массовой долей той же соли 8%. Вычислите массу (г) соли в полученном растворе. (Запишите число с точностью до целых.)',a:'54',unit:'г',
+   eq:'m(соли) = m₁·ω₁/100 + m₂·ω₂/100',
+   sol:['Шаг 1 (масса соли в первом)::m₁(соли) = 250 · 12/100 = 30 г',
+        'Шаг 2 (масса соли во втором)::m₂(соли) = 300 · 8/100 = 24 г',
+        'Ответ::m(соли) = 30 + 24 = <span class="ans">54 г</span>']}
+];
+
+// ══════════════════════════════════════════
+// ЭКЗЕМПЛЯРЫ ТРЕНАЖЁРОВ
+// ══════════════════════════════════════════
+const T1A=makeTrainer('t1a','l26_1a',D1A,'г',v=>{_t1aOk=v;});
+const T1B=makeTrainer('t1b','l26_1b',D1B,'г',v=>{_t1bOk=v;});
+const T1V=makeTrainer('t1v','l26_1v',D1V,'г',v=>{_t1vOk=v;});
+const T1G=makeTrainer('t1g','l26_1g',D1G,'г',v=>{_t1gOk=v;});
+const T2A=makeTrainer('t2a','l26_2a',D2A,'%',v=>{_t2aOk=v;});
+const T2B=makeTrainer('t2b','l26_2b',D2B,'%',v=>{_t2bOk=v;});
+
+function t1aInit(){T1A.init();} function t1aCheck(){T1A.check();} function t1aNext(){T1A.next();} function t1aReset(){T1A.reset();}
+function t1bInit(){T1B.init();} function t1bCheck(){T1B.check();} function t1bNext(){T1B.next();} function t1bReset(){T1B.reset();}
+function t1vInit(){T1V.init();} function t1vCheck(){T1V.check();} function t1vNext(){T1V.next();} function t1vReset(){T1V.reset();}
+function t1gInit(){T1G.init();} function t1gCheck(){T1G.check();} function t1gNext(){T1G.next();} function t1gReset(){T1G.reset();}
+function t2aInit(){T2A.init();} function t2aCheck(){T2A.check();} function t2aNext(){T2A.next();} function t2aReset(){T2A.reset();}
+function t2bInit(){T2B.init();} function t2bCheck(){T2B.check();} function t2bNext(){T2B.next();} function t2bReset(){T2B.reset();}
+</script>
+</body>
+</html>
