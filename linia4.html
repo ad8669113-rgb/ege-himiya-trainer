@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Химическая связь и кристаллические решётки — ЕГЭ Химия 2026–2027</title>
+<style>
+:root{
+  --p900:#1E2F3B;--p800:#354957;--p700:#4A6273;
+  --p600:#70889B;--p500:#8A9FAD;--p400:#A5B6BF;
+  --p300:#B8C5CB;--p200:#CDDADF;--p100:#DCE5E9;--p50:#EEF1F3;
+  --ink:#1A2730;--ink2:#354957;--ink3:#70889B;
+  --line:#B8C5CB;--card:#E6EDF1;--bg:#F5F4F4;--white:#fff;
+  --green:#91AA91;--green-t:#E4ECE3;--green-d:#315C45;
+  --amber:#B46A00;--amber-t:#FDF5E6;--amber-d:#4A2B00;
+  --red:#CB8E83;--red-t:#F3E5E1;--red-d:#914B42;
+  --r:12px;--r-sm:8px;--r-lg:20px;
+  --shadow:0 1px 3px rgba(53,73,87,.06),0 4px 16px rgba(53,73,87,.06);
+  --shm:0 4px 20px rgba(112,136,155,.18);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+  --text:var(--ink);--text2:var(--ink2);--text3:var(--ink3);
+  --accent:var(--p600);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{padding-bottom:56px;font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:17px;font-weight:500}
+
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:var(--p100);z-index:999}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--p600),var(--p400));width:0;transition:width .1s}
+
+.shell{width:100%;margin:0 auto;padding:0 clamp(16px,5vw,72px) 80px}
+
+/* HERO — тёмный слейт с горошками */
+.hero{
+  background: #354957;
+  padding:56px clamp(20px,5vw,72px) 48px;
+  margin:0 calc(-1*clamp(16px,5vw,72px)) 48px;
+  position:relative;
+  overflow:hidden;
+  border-radius:0 0 var(--r-lg) var(--r-lg);
+  z-index:1;
+}
+.hero::before{content:none}
+.hero-bg-art{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible}
+.hero::after{
+  content:'';
+  position:absolute;
+  top:-40%;
+  right:-10%;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(74,98,115,.20) 0%,transparent 70%);
+  pointer-events:none;
+  z-index:0;
+}
+.hero-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:rgba(255,255,255,.11);
+  border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.82);
+  border-radius:20px;
+  padding:4px 14px;
+  font-size:12px;
+  font-family:var(--mono);
+  letter-spacing:.6px;
+  margin-bottom:20px;
+  position:relative;
+  z-index:1;
+}
+.hero h1{
+  font-size:clamp(28px,5vw,48px);
+  font-weight:800;
+  line-height:1.06;
+  letter-spacing:-.03em;
+  color:#fff;
+  margin-bottom:14px;
+  position:relative;
+  z-index:1;
+}
+.hero h1 em{color:#B8C5CB;font-style:normal}
+.hero-sub{
+  font-size:16px;
+  color:rgba(255,255,255,.75);
+  line-height:1.7;
+  max-width:560px;
+  margin-bottom:28px;
+  position:relative;
+  z-index:1;
+}
+.hero-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  position:relative;
+  z-index:1;
+}
+.hero-chip{
+  background:rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.22);
+  color:rgba(255,255,255,.9);
+  padding:5px 14px;
+  border-radius:16px;
+  font-size:12.5px;
+  font-weight:500;
+}
+
+.section{margin-bottom:56px}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--p200)}
+.section-num{width:38px;height:38px;border-radius:10px;flex-shrink:0;background:linear-gradient(135deg,#354957,#70889B);color:#fff;font-family:var(--mono);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(74,98,115,.35)}
+.section-title{font-size:clamp(20px,2.5vw,26px);font-weight:800;color:var(--ink);line-height:1.2}
+
+h2.sub-title{font-size:21px;font-weight:800;color:var(--p700);margin:28px 0 12px;display:flex;align-items:center;gap:8px}
+h2.sub-title::before{content:'';width:4px;height:20px;background:var(--p500);border-radius:2px;flex-shrink:0}
+h3.mini-title{font-size:15px;font-weight:700;color:var(--ink);margin:18px 0 8px}
+p.body{font-size:16.5px;line-height:1.75;color:var(--ink2);margin-bottom:14px;font-weight:500}
+p.body strong{color:var(--ink)}
+p.body strong{color:var(--ink)}
+
+.box{border-radius:var(--r-sm);padding:14px 18px;margin:14px 0;font-size:clamp(15.5px,1.7vw,17px);line-height:1.75;font-weight:500}
+.box-title{font-weight:800;font-size:clamp(14px,1.5vw,15.5px);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:#FFF8E1;border-left:4px solid #F59E0B;color:#78350F}
+.box-danger{background:var(--red-t);border-left:4px solid var(--red);color:var(--red-d)}
+.box-success{background:var(--green-t);border-left:4px solid var(--green);color:var(--green-d)}
+.box-remember{background:#EDE9F5;border-left:4px solid #9B8BB5;color:#3D2F5C}
+.box-trap{background:var(--red-t);border-left:4px solid var(--red);color:var(--red-d)}
+.box ul,.box ol{padding-left:20px;margin:6px 0}
+.box li{margin:5px 0;font-size:clamp(14.5px,1.6vw,16px)}
+
+.eq-block{background:var(--white);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 18px;margin:10px 0;box-shadow:var(--shadow)}
+.eq{font-family:var(--mono);font-size:clamp(15px,1.8vw,17px);font-weight:700;color:var(--p900);line-height:2.2;display:block}
+.eq-hdr{display:block;background:linear-gradient(90deg,#DCE5E9,#EEF1F3);border-left:4px solid #70889B;border-radius:0 6px 6px 0;padding:5px 12px;margin:10px 0 4px;font-family:var(--font);font-size:13px;font-weight:700;color:#1E2F3B}
+
+.table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);margin:14px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:clamp(14px,1.5vw,15.5px)}
+.table-wrap th{background:linear-gradient(135deg,#354957,#70889B);color:#fff;font-weight:600;padding:10px 14px;text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;font-family:var(--mono)}
+td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--p50)}
+tr:hover td{background:var(--p100);transition:background .15s}
+
+.chip{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.5px;padding:3px 9px;border-radius:5px;font-weight:600;white-space:nowrap}
+.chip-blue{background:#EEF2FF;color:#3730A3}
+.chip-green{background:#D1FAE5;color:#065F46}
+.chip-red{background:#FEE2E2;color:#991B1B}
+.chip-yellow{background:#FEF3C7;color:#92400E}
+.chip-purple{background:#EDE9FE;color:#4C1D95}
+
+.scheme-box{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;background:var(--white);border:1.5px solid var(--p200);border-radius:var(--r);padding:18px;margin:14px 0;box-shadow:var(--shadow)}
+.scheme-cell{border:1.5px solid var(--p400);border-radius:8px;padding:8px 14px;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--p800);background:var(--p50);text-align:center;white-space:nowrap}
+.scheme-arrow{font-size:20px;color:var(--p500);font-weight:700}
+.scheme-plus{font-size:18px;color:var(--ink3);font-weight:700}
+
+.alg-box{background:var(--white);border:2px solid var(--p400);border-radius:var(--r);padding:20px 24px;margin:14px 0;box-shadow:var(--shadow)}
+.alg-step{display:flex;align-items:center;gap:12px;padding:8px 0}
+.alg-num{width:30px;height:30px;border-radius:50%;background:var(--p600);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;font-family:var(--mono)}
+.alg-arrow{text-align:center;color:var(--p400);font-size:18px;line-height:1;padding:2px 0}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:12px 0}
+@media(max-width:700px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+.bond-card{border-radius:var(--r-sm);padding:16px 18px;border:1.5px solid;transition:transform .15s,box-shadow .15s}
+.bond-card:hover{transform:translateY(-2px);box-shadow:var(--shm)}
+.bond-card .bond-name{font-size:16px;font-weight:800;margin-bottom:6px}
+.bond-card .bond-desc{font-size:14px;line-height:1.65;color:var(--text2)}
+.bond-card .bond-examples{font-size:13px;color:var(--p700);font-weight:700;margin-top:6px;font-family:var(--mono)}
+.bond-card.c-nonpolar{border-color:#7B9EB5;background:#EAF0F5}
+.bond-card.c-polar{border-color:#9B8BB5;background:#EDE9F5}
+.bond-card.ionic{border-color:#CB8E83;background:#F3E5E1}
+.bond-card.metallic{border-color:#C4A95A;background:#F5EFD8}
+.bond-card.hydrogen{border-color:#91AA91;background:#E4ECE3}
+
+.lattice-card{border-radius:var(--r-sm);padding:16px 18px;border:1.5px solid;transition:transform .15s,box-shadow .15s}
+.lattice-card:hover{transform:translateY(-2px);box-shadow:var(--shm)}
+.lattice-card .lat-name{font-size:16px;font-weight:800;margin-bottom:4px}
+.lattice-card .lat-nodes{font-size:14px;color:var(--text2);margin-bottom:4px}
+.lattice-card .lat-props{font-size:13px;color:var(--text3);line-height:1.65}
+.lattice-card .lat-examples{font-size:13px;color:var(--p700);font-weight:700;margin-top:4px;font-family:var(--mono)}
+.lattice-card.lat-molecular{border-color:#7B9EB5;background:#EAF0F5}
+.lattice-card.lat-atomic{border-color:#9B8BB5;background:#EDE9F5}
+.lattice-card.lat-ionic{border-color:#CB8E83;background:#F3E5E1}
+.lattice-card.lat-metallic{border-color:#C4A95A;background:#F5EFD8}
+
+.must-memo{background:#F3E5E1;border:2px solid #CB8E83;border-radius:var(--r-sm);padding:14px 18px;margin:14px 0}
+.must-memo .mm-hd{color:#914B42;font-weight:800;font-size:13.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.must-memo ul{margin:0;padding-left:18px;font-size:14.5px;line-height:1.8}
+
+.trap-box{background:#fff5f5;border:2px solid #ef4444;border-radius:var(--r-sm);padding:14px 18px;margin:14px 0}
+.trap-box .trap-hd{color:#dc2626;font-weight:800;font-size:13.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.trap-box ul{margin:0;padding-left:18px;font-size:14.5px;line-height:1.8}
+
+.ege-tip{background:#FEF3C7;border:2px solid #F59E0B;border-radius:var(--r-sm);padding:14px 18px;margin:14px 0}
+.ege-tip .tip-hd{color:#92400E;font-weight:800;font-size:13.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.ege-tip ul{margin:0;padding-left:18px;font-size:13px;line-height:1.8}
+
+/* флэшкарты */
+.fc-section{background:linear-gradient(135deg,#354957,#70889B);border-radius:var(--r-lg);padding:32px 28px;margin:48px 0;color:#fff}
+.fc-header{text-align:center;margin-bottom:24px}
+.fc-title{font-size:clamp(18px,3vw,26px);font-weight:700;color:#fff;margin-bottom:6px}
+.fc-sub{font-size:14px;color:rgba(255,255,255,.65);line-height:1.6}
+.fc-stats{display:flex;justify-content:center;gap:24px;margin-bottom:16px;font-size:13px;color:rgba(255,255,255,.7);font-family:var(--mono)}
+.fc-stats span{color:#fff;font-weight:700;font-size:16px}
+.fc-counter{text-align:center;font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.5);margin-bottom:14px}
+.fc-perspective{perspective:900px;width:100%;max-width:560px;margin:0 auto;cursor:pointer}
+.fc-inner{position:relative;width:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,0,.2,1);min-height:180px}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);display:flex;align-items:center;justify-content:center;padding:24px 28px;text-align:center;min-height:180px;flex-direction:column;gap:8px}
+.fc-front{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);font-size:clamp(15px,2.5vw,19px);font-family:var(--mono);color:#fff;line-height:1.5}
+.fc-back{background:var(--white);transform:rotateY(180deg);font-family:var(--mono);font-size:clamp(13px,2vw,16px);color:#1E2F3B;line-height:1.6}
+.fc-hint{font-family:var(--font);font-size:12px;color:var(--ink3);margin-top:6px;font-style:italic}
+.fc-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:4px}
+.fc-back-tag{font-size:10px;font-family:var(--font);letter-spacing:1.5px;text-transform:uppercase;color:var(--p600);margin-bottom:4px}
+.fc-flip-btn{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:14px;font-weight:600;border-radius:var(--r-sm);padding:11px 26px;cursor:pointer;transition:background .2s;margin:18px auto;width:fit-content}
+.fc-flip-btn:hover{background:rgba(255,255,255,.25)}
+.fc-btn-row{display:none;gap:12px;justify-content:center;margin-top:14px}
+.fc-btn-know{background:#315C45;color:#fff;border:none;border-radius:var(--r-sm);padding:11px 26px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-know:hover{background:#264F38}
+.fc-btn-dontknow{background:#914B42;color:#fff;border:none;border-radius:var(--r-sm);padding:11px 26px;font-size:14px;font-weight:700;cursor:pointer;flex:1;max-width:200px;transition:background .15s}
+.fc-btn-dontknow:hover{background:#7A3D35}
+.fc-keys{text-align:center;font-size:11.5px;color:rgba(255,255,255,.35);margin-top:12px;font-family:var(--mono)}
+.fc-result{display:none;text-align:center;padding:20px}
+.fc-result h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:12px}
+.fc-res-row{display:flex;gap:16px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.fc-res-card{background:rgba(255,255,255,.1);border-radius:var(--r-sm);padding:12px 22px;min-width:100px}
+.fc-res-num{font-size:28px;font-weight:700}
+.fc-res-lbl{font-size:11px;color:rgba(255,255,255,.6);font-family:var(--mono);margin-top:2px}
+.fc-restart-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.fc-restart-btn{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);color:#fff;border-radius:var(--r-sm);padding:9px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
+.fc-restart-btn:hover{background:rgba(255,255,255,.25)}
+.fc-restart-btn.primary{background:#70889B;border-color:#70889B}
+
+#back-top{position:fixed;bottom:24px;right:24px;width:42px;height:42px;border-radius:12px;background:var(--p600);color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(0,136,176,.35);display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .2s;opacity:0;pointer-events:none}
+#back-top.visible{opacity:1;pointer-events:all}
+#back-top:hover{transform:translateY(-2px)}
+
+@media(max-width:540px){.shell{padding:0 14px 60px}.hero{padding:36px 14px 32px;margin:0 -14px 32px}.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* === ТОПБАР === */
+#topbar{position:fixed;top:12px;right:12px;z-index:10000}
+#tb-inner{background:rgba(53,73,87,.18);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:999px;padding:5px 10px;display:flex;align-items:center;gap:5px;border:1px solid rgba(255,255,255,.12);box-shadow:0 2px 16px rgba(26,39,48,.18);transition:all .3s}
+#tb-inner button{background:none;border:none;color:rgba(255,255,255,.75);font-size:15px;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;padding:0;flex-shrink:0}
+#tb-inner button:hover{background:rgba(255,255,255,.12);color:#fff}
+#tb-inner button.active{background:rgba(145,170,145,.25);color:#91AA91}
+.tb-collapsible{display:flex;align-items:center;gap:5px;overflow:hidden;transition:width .3s,opacity .3s;width:auto;opacity:1}
+#tb-inner.collapsed .tb-collapsible{width:0;opacity:0;pointer-events:none}
+#tb-inner.collapsed #tb-collapse{transform:rotate(180deg)}
+#tb-collapse{font-size:14px!important}
+#tb-streak{display:flex;align-items:center;gap:3px;padding:0 4px}
+.streak-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18);display:inline-block}
+.streak-dot.active{background:#91AA91}
+.tb-sep{width:1px;height:20px;background:rgba(255,255,255,.15);flex-shrink:0}
+#tb-size{width:60px;accent-color:#91AA91;cursor:pointer}
+/* === БОКОВОЕ МЕНЮ === */
+#menu-overlay{position:fixed;inset:0;background:rgba(26,39,48,.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:none;z-index:9998}
+body.menu-open #menu-overlay{display:block}
+#menu-panel{position:fixed;right:0;top:0;bottom:0;width:280px;background:#fff;z-index:9999;transform:translateX(100%);transition:transform .3s;overflow-y:auto;box-shadow:-4px 0 32px rgba(26,39,48,.15)}
+body.menu-open #menu-panel{transform:translateX(0)}
+#menu-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--ink3);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+#menu-close:hover{background:var(--p50)}
+#menu-panel nav{padding:52px 20px 24px}
+#menu-panel nav h3{font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:1.5px;margin:0 0 10px}
+#menu-panel nav a{display:block;padding:9px 12px;border-radius:var(--r-sm);color:var(--ink);font-size:14px;text-decoration:none;transition:background .15s;line-height:1.3}
+#menu-panel nav a:hover{background:var(--p50);color:var(--p800)}
+#menu-panel nav .menu-num{display:inline-block;width:22px;height:22px;border-radius:6px;background:var(--p600);color:#fff;font-size:11px;font-weight:700;text-align:center;line-height:22px;margin-right:8px;flex-shrink:0}
+/* === GLORY OVERLAY === */
+#glory-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(26,39,48,.7);z-index:99999;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.glory-box{background:#fff;border-radius:24px;width:min(420px,90vw);text-align:center;box-shadow:0 24px 80px rgba(26,39,48,.35);animation:gloryPop .45s cubic-bezier(.34,1.56,.64,1) both;overflow:hidden}
+.glory-top{background:linear-gradient(135deg,#354957 0%,#4A6273 100%);padding:36px 32px 28px;position:relative;overflow:hidden}
+.glory-top::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(255,255,255,.12) 0%,transparent 60%)}
+.glory-stars{font-size:22px;letter-spacing:4px;margin-bottom:10px;position:relative;z-index:1}
+.glory-trophy{font-size:64px;line-height:1;position:relative;z-index:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,.25))}
+.glory-body{padding:28px 36px 32px}
+.glory-box h2{font-size:26px;font-weight:800;color:var(--p800);margin:0 0 8px;letter-spacing:-.02em}
+.glory-box p{color:var(--ink3);font-size:15px;margin-bottom:24px;line-height:1.6}
+.glory-close{background:linear-gradient(135deg,#4A6273,#354957);color:#fff;border:none;border-radius:10px;padding:13px 40px;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.01em;transition:opacity .15s}
+.glory-close:hover{opacity:.88}
+@keyframes gloryPop{from{transform:scale(.55);opacity:0}to{transform:scale(1);opacity:1}}
+/* === ХОЛСТ === */
+#draw-canvas{position:fixed;inset:0;z-index:5000;pointer-events:none;display:none}
+/* === TRAINER === */
+.section-pill{display:inline-block;font-size:11px;font-weight:800;color:#fff;border-radius:4px;padding:3px 10px;letter-spacing:.03em}
+.section-pill.tasks{background:linear-gradient(135deg,var(--p800),var(--p600))}
+.tr-card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shm);margin:20px 0}
+.tr-q{font-size:16px;line-height:1.75;color:var(--ink);font-weight:500;margin-bottom:16px}
+.tr-opts-label{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--p700);border-radius:4px;padding:2px 10px;letter-spacing:.03em;margin-bottom:8px;margin-top:10px}
+.tr-opts{margin-top:8px;padding:12px 16px;background:var(--bg);border:1.5px solid var(--line);border-radius:8px;font-size:14px;color:var(--ink);line-height:2}
+.tr-input-row{display:flex;align-items:center;gap:12px;margin:16px 0}
+.tr-input{font-size:22px;max-width:160px;letter-spacing:.14em;text-align:center;font-family:var(--mono);border:2px solid var(--line);border-radius:8px;padding:8px 12px;outline:none;width:100%;background:#fff;color:var(--ink);transition:border-color .15s}
+.tr-input:focus{border-color:var(--p700)}
+.tr-input.ok{border-color:var(--green);background:var(--green-t)}
+.tr-input.err{border-color:var(--red);background:var(--red-t)}
+.tr-feedback{min-height:20px;font-size:15px;font-weight:700;margin-top:8px}
+.tr-feedback.ok{color:var(--green-d)}
+.tr-feedback.err{color:var(--red-d)}
+.tr-sol{margin-top:12px;padding:12px 16px;background:var(--green-t);border:1.5px solid var(--green);border-radius:8px;font-size:13px;font-weight:400;color:var(--ink);line-height:1.75}
+.tr-sol-lbl{display:block;font-size:11px;font-weight:800;color:var(--green-d);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.tr-sol-text{white-space:normal}
+.tr-btns{display:flex;gap:10px;margin:14px 0}
+.tr-check-btn,.tr-next-btn,.tr-reset-btn{border:none;border-radius:8px;padding:11px 26px;font-size:16px;font-weight:700;cursor:pointer;transition:.12s}
+.tr-check-btn{background:linear-gradient(135deg,var(--p800),var(--p600));color:#fff}
+.tr-check-btn:hover{opacity:.9}
+.tr-next-btn{background:var(--green-d);color:#fff}
+.tr-next-btn:hover{opacity:.9}
+.tr-reset-btn{background:var(--line);color:var(--ink)}
+.tr-result{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:28px 22px;text-align:center;display:none;margin:4px 0}
+.tr-score{font-size:40px;font-weight:900;color:var(--p700);font-family:var(--mono);margin-bottom:6px}
+.tr-label{font-size:13px;color:var(--ink3);margin:0 0 18px}
+.tr-done{display:none;font-size:18px;margin-top:14px;color:var(--green-d);font-weight:700}
+.tr-repeat-notice{background:#F5EDD8;border:1px solid #9a6b30;border-radius:8px;padding:8px 14px;font-size:13px;color:#5a3a10;margin-bottom:10px;text-align:center;font-weight:600;display:none}
+.tr-progress{font-size:12px;color:var(--ink3);font-family:var(--mono);white-space:nowrap}
+.tr-prog-bar-fill{height:4px;background:linear-gradient(90deg,var(--p700),var(--p500));width:0;border-radius:2px;transition:width .3s}
+</style>
+</head>
+<body>
+<!-- ТОПБАР -->
+<div id="topbar">
+  <div id="tb-inner">
+    <button id="tb-menu" onclick="openMenu()" title="Меню">☰</button>
+    <div class="tb-collapsible">
+      <button id="tb-fs" onclick="tbToggleFS()" title="Полный экран">⛶</button>
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Наверх">↑</button>
+      <div class="tb-sep"></div>
+      <div id="tb-streak"></div>
+      <div class="tb-sep"></div>
+      <button id="tb-pencil" onclick="tbPencil()" title="Карандаш">✏️</button>
+      <button id="tb-eraser" onclick="tbEraser()" title="Ластик">🧹</button>
+      <button onclick="tbClearCanvas()" title="Очистить холст">🗑️</button>
+      <input type="range" id="tb-size" min="2" max="20" value="4" title="Размер">
+      <div class="tb-sep"></div>
+      <button onclick="clearHistory()" title="Очистить историю">🗑</button>
+    </div>
+    <button id="tb-collapse" onclick="tbToggle()" title="Свернуть">‹</button>
+  </div>
+</div>
+<!-- БОКОВОЕ МЕНЮ -->
+<div id="menu-overlay" onclick="closeMenu()"></div>
+<div id="menu-panel">
+  <button id="menu-close" onclick="closeMenu()">✕</button>
+  <nav>
+    <h3>Разделы</h3>
+    <a href="#s1"><span class="menu-num">1</span>Что такое химическая связь</a>
+    <a href="#s9"><span class="menu-num">2</span>Кристаллические решётки</a>
+    <a href="#s2"><span class="menu-num">3</span>Ковалентная неполярная</a>
+    <a href="#s3"><span class="menu-num">4</span>Ковалентная полярная</a>
+    <a href="#s4"><span class="menu-num">5</span>Донорно-акцепторный механизм</a>
+    <a href="#s5"><span class="menu-num">6</span>Ионная связь</a>
+    <a href="#s6"><span class="menu-num">7</span>Металлическая связь</a>
+    <a href="#s7"><span class="menu-num">8</span>Водородная связь</a>
+    <a href="#s10"><span class="menu-num">9</span>Молекулярная решётка</a>
+    <a href="#s11"><span class="menu-num">10</span>Атомная решётка</a>
+    <a href="#s15"><span class="menu-num">11</span>Типичные ошибки ЕГЭ</a>
+    <a href="#s16"><span class="menu-num">12</span>Флэш-карточки</a>
+  </nav>
+  <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line)">
+    <button onclick="trResetAll()" style="width:100%;padding:9px 14px;background:var(--red-t);color:var(--red-d);border:1.5px solid var(--red);border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;text-align:left">Сбросить весь прогресс тренажёра</button>
+  </div>
+</div>
+<!-- GLORY OVERLAY -->
+<div id="glory-overlay"><div class="glory-box"><div class="glory-top"><div class="glory-stars">⭐️ ⭐️ ⭐️</div><div class="glory-trophy">🏆</div></div><div class="glory-body"><h2>Все задания решены!</h2><p>Отличная работа!<br>Прогресс сохранён.</p><div style="display:inline-block;background:linear-gradient(135deg,#E4ECE3,#d0e3cf);color:#315C45;font-size:15px;font-weight:800;border-radius:8px;padding:8px 20px;margin-bottom:20px;letter-spacing:.02em">✅ 100% тема освоена</div><br><button class="glory-close" onclick="document.getElementById('glory-overlay').style.display='none'">Закрыть</button></div></div></div>
+<!-- ХОЛСТ -->
+<canvas id="draw-canvas"></canvas>
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <svg class="hero-bg-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+    <!-- ГРАФИТ (honeycomb) — левый нижний угол -->
+    <g stroke="rgba(255,255,255,0.11)" stroke-width="1.5" fill="none">
+      <polygon points="22,355 11,374 -11,374 -22,355 -11,336 11,336"/>
+      <polygon points="66,355 55,374 33,374 22,355 33,336 55,336"/>
+      <polygon points="110,355 99,374 77,374 66,355 77,336 99,336"/>
+      <polygon points="154,355 143,374 121,374 110,355 121,336 143,336"/>
+      <polygon points="44,316 33,335 11,335 0,316 11,297 33,297"/>
+      <polygon points="88,316 77,335 55,335 44,316 55,297 77,297"/>
+      <polygon points="132,316 121,335 99,335 88,316 99,297 121,297"/>
+      <polygon points="176,316 165,335 143,335 132,316 143,297 165,297"/>
+      <polygon points="22,277 11,296 -11,296 -22,277 -11,258 11,258"/>
+      <polygon points="66,277 55,296 33,296 22,277 33,258 55,258"/>
+      <polygon points="110,277 99,296 77,296 66,277 77,258 99,258"/>
+      <polygon points="154,277 143,296 121,296 110,277 121,258 143,258"/>
+      <polygon points="44,238 33,257 11,257 0,238 11,219 33,219"/>
+      <polygon points="88,238 77,257 55,257 44,238 55,219 77,219"/>
+      <polygon points="132,238 121,257 99,257 88,238 99,219 121,219"/>
+      <polygon points="22,199 11,218 -11,218 -22,199 -11,180 11,180"/>
+      <polygon points="66,199 55,218 33,218 22,199 33,180 55,180"/>
+    </g>
+    <text x="66" y="174" font-family="'Courier New',monospace" font-size="9" fill="rgba(255,255,255,0.18)" text-anchor="middle" letter-spacing="0.5">графит</text>
+    <!-- АЛМАЗ (кубическая решётка) — правый верхний угол -->
+    <g stroke="rgba(255,255,255,0.10)" stroke-width="1.5" fill="none">
+      <line x1="685" y1="15" x2="745" y2="15"/><line x1="745" y1="15" x2="805" y2="15"/><line x1="805" y1="15" x2="865" y2="15"/>
+      <line x1="685" y1="75" x2="745" y2="75"/><line x1="745" y1="75" x2="805" y2="75"/><line x1="805" y1="75" x2="865" y2="75"/>
+      <line x1="685" y1="135" x2="745" y2="135"/><line x1="745" y1="135" x2="805" y2="135"/><line x1="805" y1="135" x2="865" y2="135"/>
+      <line x1="685" y1="195" x2="745" y2="195"/><line x1="745" y1="195" x2="805" y2="195"/><line x1="805" y1="195" x2="865" y2="195"/>
+      <line x1="685" y1="15" x2="685" y2="75"/><line x1="745" y1="15" x2="745" y2="75"/><line x1="805" y1="15" x2="805" y2="75"/><line x1="865" y1="15" x2="865" y2="75"/>
+      <line x1="685" y1="75" x2="685" y2="135"/><line x1="745" y1="75" x2="745" y2="135"/><line x1="805" y1="75" x2="805" y2="135"/><line x1="865" y1="75" x2="865" y2="135"/>
+      <line x1="685" y1="135" x2="685" y2="195"/><line x1="745" y1="135" x2="745" y2="195"/><line x1="805" y1="135" x2="805" y2="195"/><line x1="865" y1="135" x2="865" y2="195"/>
+      <line x1="715" y1="45" x2="685" y2="15"/><line x1="715" y1="45" x2="745" y2="15"/><line x1="715" y1="45" x2="685" y2="75"/><line x1="715" y1="45" x2="745" y2="75"/>
+      <line x1="775" y1="45" x2="745" y2="15"/><line x1="775" y1="45" x2="805" y2="15"/><line x1="775" y1="45" x2="745" y2="75"/><line x1="775" y1="45" x2="805" y2="75"/>
+      <line x1="835" y1="45" x2="805" y2="15"/><line x1="835" y1="45" x2="865" y2="15"/><line x1="835" y1="45" x2="805" y2="75"/><line x1="835" y1="45" x2="865" y2="75"/>
+      <line x1="715" y1="105" x2="685" y2="75"/><line x1="715" y1="105" x2="745" y2="75"/><line x1="715" y1="105" x2="685" y2="135"/><line x1="715" y1="105" x2="745" y2="135"/>
+      <line x1="775" y1="105" x2="745" y2="75"/><line x1="775" y1="105" x2="805" y2="75"/><line x1="775" y1="105" x2="745" y2="135"/><line x1="775" y1="105" x2="805" y2="135"/>
+      <line x1="835" y1="105" x2="805" y2="75"/><line x1="835" y1="105" x2="865" y2="75"/><line x1="835" y1="105" x2="805" y2="135"/><line x1="835" y1="105" x2="865" y2="135"/>
+      <line x1="715" y1="165" x2="685" y2="135"/><line x1="715" y1="165" x2="745" y2="135"/><line x1="715" y1="165" x2="685" y2="195"/><line x1="715" y1="165" x2="745" y2="195"/>
+      <line x1="775" y1="165" x2="745" y2="135"/><line x1="775" y1="165" x2="805" y2="135"/><line x1="775" y1="165" x2="745" y2="195"/><line x1="775" y1="165" x2="805" y2="195"/>
+      <line x1="835" y1="165" x2="805" y2="135"/><line x1="835" y1="165" x2="865" y2="135"/><line x1="835" y1="165" x2="805" y2="195"/><line x1="835" y1="165" x2="865" y2="195"/>
+    </g>
+    <g fill="rgba(255,255,255,0.18)">
+      <circle r="4" cx="685" cy="15"/><circle r="4" cx="745" cy="15"/><circle r="4" cx="805" cy="15"/><circle r="4" cx="865" cy="15"/>
+      <circle r="4" cx="685" cy="75"/><circle r="4" cx="745" cy="75"/><circle r="4" cx="805" cy="75"/><circle r="4" cx="865" cy="75"/>
+      <circle r="4" cx="685" cy="135"/><circle r="4" cx="745" cy="135"/><circle r="4" cx="805" cy="135"/><circle r="4" cx="865" cy="135"/>
+      <circle r="4" cx="685" cy="195"/><circle r="4" cx="745" cy="195"/><circle r="4" cx="805" cy="195"/><circle r="4" cx="865" cy="195"/>
+    </g>
+    <g fill="rgba(255,255,255,0.13)">
+      <circle r="3" cx="715" cy="45"/><circle r="3" cx="775" cy="45"/><circle r="3" cx="835" cy="45"/>
+      <circle r="3" cx="715" cy="105"/><circle r="3" cx="775" cy="105"/><circle r="3" cx="835" cy="105"/>
+      <circle r="3" cx="715" cy="165"/><circle r="3" cx="775" cy="165"/><circle r="3" cx="835" cy="165"/>
+    </g>
+    <text x="775" y="216" font-family="'Courier New',monospace" font-size="9" fill="rgba(255,255,255,0.18)" text-anchor="middle" letter-spacing="0.5">алмаз</text>
+    <!-- H2O молекула -->
+    <g stroke="rgba(255,255,255,0.14)" stroke-width="1.5">
+      <line x1="318" y1="68" x2="294" y2="48"/><line x1="318" y1="68" x2="342" y2="48"/>
+    </g>
+    <circle r="9" cx="318" cy="68" fill="rgba(255,255,255,0.14)"/>
+    <circle r="6" cx="294" cy="48" fill="rgba(255,255,255,0.11)"/>
+    <circle r="6" cx="342" cy="48" fill="rgba(255,255,255,0.11)"/>
+    <text x="318" y="72" font-family="'Courier New',monospace" font-size="8" fill="rgba(255,255,255,0.32)" text-anchor="middle" font-weight="bold">O</text>
+    <text x="294" y="51" font-family="'Courier New',monospace" font-size="7" fill="rgba(255,255,255,0.24)" text-anchor="middle">H</text>
+    <text x="342" y="51" font-family="'Courier New',monospace" font-size="7" fill="rgba(255,255,255,0.24)" text-anchor="middle">H</text>
+    <!-- CO2 (двойные связи) -->
+    <g stroke="rgba(255,255,255,0.13)" stroke-width="1.5">
+      <line x1="453" y1="162" x2="488" y2="162"/><line x1="453" y1="168" x2="488" y2="168"/>
+      <line x1="510" y1="162" x2="545" y2="162"/><line x1="510" y1="168" x2="545" y2="168"/>
+    </g>
+    <circle r="7" cx="446" cy="165" fill="rgba(255,255,255,0.11)"/>
+    <circle r="9" cx="499" cy="165" fill="rgba(255,255,255,0.14)"/>
+    <circle r="7" cx="552" cy="165" fill="rgba(255,255,255,0.11)"/>
+    <text x="446" y="168" font-family="'Courier New',monospace" font-size="8" fill="rgba(255,255,255,0.28)" text-anchor="middle">O</text>
+    <text x="499" y="168" font-family="'Courier New',monospace" font-size="8" fill="rgba(255,255,255,0.32)" text-anchor="middle" font-weight="bold">C</text>
+    <text x="552" y="168" font-family="'Courier New',monospace" font-size="8" fill="rgba(255,255,255,0.28)" text-anchor="middle">O</text>
+    <!-- CH4 тетраэдр -->
+    <g stroke="rgba(255,255,255,0.13)" stroke-width="1.5">
+      <line x1="230" y1="150" x2="230" y2="122"/><line x1="230" y1="150" x2="256" y2="168"/>
+      <line x1="230" y1="150" x2="204" y2="168"/><line x1="230" y1="150" x2="230" y2="178"/>
+    </g>
+    <circle r="9" cx="230" cy="150" fill="rgba(255,255,255,0.14)"/>
+    <circle r="5.5" cx="230" cy="118" fill="rgba(255,255,255,0.10)"/>
+    <circle r="5.5" cx="260" cy="170" fill="rgba(255,255,255,0.10)"/>
+    <circle r="5.5" cx="200" cy="170" fill="rgba(255,255,255,0.10)"/>
+    <circle r="5.5" cx="230" cy="182" fill="rgba(255,255,255,0.10)"/>
+    <text x="230" y="154" font-family="'Courier New',monospace" font-size="8" fill="rgba(255,255,255,0.32)" text-anchor="middle" font-weight="bold">C</text>
+    <text x="230" y="121" font-family="'Courier New',monospace" font-size="6.5" fill="rgba(255,255,255,0.22)" text-anchor="middle">H</text>
+    <text x="262" y="173" font-family="'Courier New',monospace" font-size="6.5" fill="rgba(255,255,255,0.22)" text-anchor="middle">H</text>
+    <text x="198" y="173" font-family="'Courier New',monospace" font-size="6.5" fill="rgba(255,255,255,0.22)" text-anchor="middle">H</text>
+    <text x="230" y="186" font-family="'Courier New',monospace" font-size="6.5" fill="rgba(255,255,255,0.22)" text-anchor="middle">H</text>
+    <!-- NaCl ионная пара -->
+    <line x1="590" y1="58" x2="618" y2="58" stroke="rgba(255,255,255,0.13)" stroke-width="1.5"/>
+    <circle r="11" cx="577" cy="58" fill="rgba(255,255,255,0.09)" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
+    <circle r="8" cx="631" cy="58" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.11)" stroke-width="1"/>
+    <text x="577" y="61" font-family="'Courier New',monospace" font-size="7" fill="rgba(255,255,255,0.26)" text-anchor="middle">Na⁺</text>
+    <text x="631" y="61" font-family="'Courier New',monospace" font-size="7" fill="rgba(255,255,255,0.26)" text-anchor="middle">Cl⁻</text>
+    <!-- H2 простая молекула -->
+    <line x1="390" y1="34" x2="420" y2="34" stroke="rgba(255,255,255,0.11)" stroke-width="1.5"/>
+    <circle r="6" cx="384" cy="34" fill="rgba(255,255,255,0.10)"/>
+    <circle r="6" cx="426" cy="34" fill="rgba(255,255,255,0.10)"/>
+    <text x="384" y="37" font-family="'Courier New',monospace" font-size="7" fill="rgba(255,255,255,0.22)" text-anchor="middle">H</text>
+    <text x="426" y="37" font-family="'Courier New',monospace" font-size="7" fill="rgba(255,255,255,0.22)" text-anchor="middle">H</text>
+  </svg>
+  <div class="hero-tag">ЕГЭ Химия 2026–2027 · Задание №4</div>
+  <h1>Химическая связь<br>и <em>кристаллические<br>решётки</em></h1>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px;">
+    <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:6px;padding:4px 12px;font-size:12px;font-weight:700;color:#fff;letter-spacing:.03em;">Линия 4</span>
+    <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:6px;padding:4px 12px;font-size:12px;font-weight:700;color:#fff;letter-spacing:.03em;">1 первичный балл</span>
+    <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:6px;padding:4px 12px;font-size:12px;font-weight:700;color:#fff;letter-spacing:.03em;">Выбрать 2 ответа из 5</span>
+  </div>
+  <p class="hero-sub">Полный конспект для подготовки к заданию №4. Всё, что нужно знать о типах связей и решёток — от простого к сложному.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Ковалентная неполярная</span>
+    <span class="hero-chip">Ковалентная полярная</span>
+    <span class="hero-chip">Ионная</span>
+    <span class="hero-chip">Металлическая</span>
+    <span class="hero-chip">Водородная</span>
+    <span class="hero-chip">Молекулярная решётка</span>
+    <span class="hero-chip">Атомная решётка</span>
+    <span class="hero-chip">Ионная решётка</span>
+    <span class="hero-chip">Металлическая решётка</span>
+  </div>
+</div>
+
+<!-- SECTION 1 -->
+<section class="section" id="s1">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2 class="section-title">Что такое химическая связь</h2>
+  </div>
+  <div class="acc-body">
+    <p class="body"><strong>Химическая связь</strong> — это взаимодействие между атомами, благодаря которому они объединяются в молекулы, ионные соединения и кристаллы. В основе любой связи лежит <strong>электростатическое притяжение</strong> между заряженными частицами.</p>
+    <div class="box box-info"><div class="box-title">📌 Почему это важно?</div>Тип химической связи определяет <strong>физические свойства</strong> вещества: растворимость, электропроводность, температуру плавления, твёрдость, реакционную способность. Без понимания связей нельзя понять химию.</div>
+    <h2 class="sub-title">Основные виды химической связи</h2>
+    <div class="grid-2">
+      <div class="bond-card c-nonpolar"><div class="bond-name">🔵 Ковалентная неполярная</div><div class="bond-desc">Между <strong>одинаковыми</strong> атомами неметаллов. Общая электронная пара не смещена.</div><div class="bond-examples">H₂, O₂, N₂</div></div>
+      <div class="bond-card c-polar"><div class="bond-name">🟣 Ковалентная полярная</div><div class="bond-desc">Между <strong>разными</strong> атомами неметаллов. Общая пара смещена к более электроотрицательному атому.</div><div class="bond-examples">HCl, H₂O, NH₃, SO₂, CO₂, HF, H₂S</div></div>
+      <div class="bond-card ionic"><div class="bond-name">🔴 Ионная</div><div class="bond-desc">Между <strong>металлом и неметаллом</strong> (или NH₄⁺ и кислотным остатком). Полная передача электрона.</div><div class="bond-examples">NaCl, KNO₃, CaCl₂, Al₂O₃, NH₄Cl, NaOH</div></div>
+      <div class="bond-card metallic"><div class="bond-name">🟡 Металлическая</div><div class="bond-desc">В <strong>металлах и сплавах</strong>. Катионы металлов в «электронном газе».</div><div class="bond-examples">Fe, Cu, Al, Na, Zn, сталь, бронза</div></div>
+      <div class="bond-card hydrogen" style="grid-column:1/3;"><div class="bond-name">🟢 Водородная</div><div class="bond-desc">Связь <strong>между молекулами</strong>. Возникает только когда водород соединён с <strong>F, O или N</strong>: то есть в молекуле есть H–F, H–O или H–N. С другими элементами — водородной связи нет.</div><div class="bond-examples">HF, H₂O, H₂O₂, NH₃, спирты, карбоновые кислоты, фенолы, амины</div></div>
+    </div>
+    <div class="must-memo"><div class="mm-hd">📌 Запомни главное</div><ul><li><strong>Ковалентная</strong> — всегда между <strong>неметаллами</strong> (одинаковые → неполярная, разные → полярная)</li><li><strong>Ионная</strong> — всегда с участием <strong>металла</strong> (или NH₄⁺)</li><li><strong>Металлическая</strong> — только в <strong>металлах</strong> и сплавах</li><li><strong>Водородная</strong> — только если есть <strong>H–F, H–O или H–N</strong></li></ul></div>
+  </div>
+</section>
+
+<!-- SECTION 9 (кристаллические решётки — перемещён сюда) -->
+<section class="section" id="s9">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2 class="section-title">Кристаллические решётки — общее понятие</h2>
+  </div>
+  <div class="acc-body">
+    <div class="box box-info"><div class="box-title">📖 Что такое кристаллическая решётка?</div><strong>Кристаллическая решётка</strong> — правильное периодическое расположение частиц (атомов, молекул или ионов) в пространстве. Тип решётки определяет физические свойства вещества.</div>
+    <div class="grid-2">
+      <div class="lattice-card lat-molecular"><div class="lat-name">🔵 Молекулярная</div><div class="lat-nodes">В узлах — <strong>молекулы</strong><br><em>только у жидких и газообразных неметаллов</em></div><div class="lat-props">Низкие Тпл, летучие, хрупкие</div><div class="lat-examples">H₂O, CO₂, I₂, HCl, S₈, P₄</div></div>
+      <div class="lattice-card lat-atomic"><div class="lat-name">🟣 Атомная</div><div class="lat-nodes">В узлах — <strong>атомы</strong><br><em>только у твёрдых неметаллов</em></div><div class="lat-props">Очень высокие Тпл, очень твёрдые</div><div class="lat-examples">Алмаз, Si, SiO₂, B, SiC</div></div>
+      <div class="lattice-card lat-ionic"><div class="lat-name">🔴 Ионная</div><div class="lat-nodes">В узлах — <strong>ионы</strong> (+ и −)<br><em>только металл + неметалл</em></div><div class="lat-props">Высокие Тпл, твёрдые, хрупкие, проводят в расплаве</div><div class="lat-examples">NaCl, KNO₃, CaO, NaOH, NH₄Cl</div></div>
+      <div class="lattice-card lat-metallic"><div class="lat-name">🟡 Металлическая</div><div class="lat-nodes">В узлах — <strong>атомы и катионы</strong> металлов<br><em>только в металлах и сплавах металлов</em></div><div class="lat-props">Пластичные, блестящие, тепло- и электропроводные</div><div class="lat-examples">Все металлы и сплавы</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2 -->
+<section class="section" id="s2">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2 class="section-title">Ковалентная неполярная связь</h2>
+  </div>
+  <div class="acc-body">
+    <div class="box box-info"><div class="box-title">📖 Определение</div><strong>Ковалентная неполярная связь</strong> — связь, образованная <strong>одинаковыми</strong> атомами-неметаллами за счёт общей электронной пары. Электронная пара <strong>не смещена</strong> ни к одному из атомов (разность ЭО = 0).</div>
+    <h2 class="sub-title">Механизм образования</h2>
+    <p class="body">Каждый атом даёт по одному электрону в общее пользование. Образуется общая электронная пара — так возникает связь. Чем больше общих пар, тем <strong>кратнее</strong> связь.</p>
+    <div class="scheme-box"><div class="scheme-cell">H·</div><div class="scheme-plus">+</div><div class="scheme-cell">·H</div><div class="scheme-arrow">→</div><div class="scheme-cell">H:H</div><div class="scheme-arrow" style="font-size:14px;color:var(--text3)">(H–H)</div></div>
+    <div class="table-wrap"><table><thead><tr><th>Вещество</th><th>Формула</th><th>Кратность</th><th>Обозначение</th></tr></thead><tbody><tr><td>Водород</td><td>H₂</td><td>одинарная</td><td>H–H</td></tr><tr><td>Кислород</td><td>O₂</td><td>двойная</td><td>O=O</td></tr><tr><td>Азот</td><td>N₂</td><td>тройная</td><td>N≡N</td></tr></tbody></table></div>
+    <div class="box box-warn">
+      <div class="box-title">⚠️ Важные исключения — неполярная связь там, где не ждёшь</div>
+      <div style="display:grid;gap:14px;margin-top:4px;">
+
+        <div style="background:#fff;border-radius:8px;padding:12px 14px;border:1.5px solid var(--amber);">
+          <div style="font-weight:800;font-size:15px;margin-bottom:4px;">PH₃ — фосфин</div>
+          <div>Электроотрицательность фосфора и водорода почти одинакова (ЭО(P) ≈ ЭО(H)), поэтому связь P–H считается <strong>ковалентной неполярной</strong>.</div>
+          <div style="font-family:var(--mono);font-size:15px;font-weight:700;margin-top:8px;color:var(--amber-d);letter-spacing:1px;">H–P–H<br>&nbsp;&nbsp;&nbsp;|<br>&nbsp;&nbsp;&nbsp;H</div>
+        </div>
+
+        <div style="background:#fff;border-radius:8px;padding:12px 14px;border:1.5px solid var(--amber);">
+          <div style="font-weight:800;font-size:15px;margin-bottom:4px;">Пероксиды — H₂O₂, Na₂O₂</div>
+          <div>В пероксидах два кислорода соединены напрямую. Связь <strong>O–O</strong> — между одинаковыми атомами → <strong>неполярная</strong>. Связь O–H — между разными атомами → полярная.</div>
+          <div style="font-family:var(--mono);font-size:16px;font-weight:700;margin-top:8px;color:var(--amber-d);letter-spacing:2px;">H–O–O–H</div>
+          <div style="font-size:13px;color:var(--ink3);margin-top:4px;">полярная&nbsp;&nbsp;↑ неполярная ↑&nbsp;&nbsp;полярная</div>
+        </div>
+
+        <div style="background:#fff;border-radius:8px;padding:12px 14px;border:1.5px solid var(--amber);">
+          <div style="font-weight:800;font-size:15px;margin-bottom:4px;">CaC₂ — карбид кальция</div>
+          <div>Содержит ион C₂²⁻, в котором два атома углерода соединены тройной связью. Связь <strong>C≡C — неполярная</strong>, связь Ca²⁺–C₂²⁻ — ионная.</div>
+          <div style="font-family:var(--mono);font-size:16px;font-weight:700;margin-top:8px;color:var(--amber-d);letter-spacing:2px;">Ca²⁺ &nbsp;[C≡C]²⁻</div>
+        </div>
+
+        <div style="background:#fff;border-radius:8px;padding:12px 14px;border:1.5px solid var(--amber);">
+          <div style="font-weight:800;font-size:15px;margin-bottom:4px;">Углеводороды с C–C связью</div>
+          <div>Если в углеводороде больше одного атома углерода, то между ними связь <strong>C–C (или C=C, C≡C)</strong> — она <strong>неполярная</strong>, потому что углерод соединён с углеродом. Связи C–H при этом полярные.</div>
+          <div style="font-family:var(--mono);font-size:15px;font-weight:700;margin-top:8px;color:var(--amber-d);">C₂H₆: &nbsp;H₃C–CH₃ &nbsp;→ C–C неполярная<br>C₂H₄: &nbsp;H₂C=CH₂ → C=C неполярная<br>C₂H₂: &nbsp;HC≡CH &nbsp;&nbsp;→ C≡C неполярная</div>
+        </div>
+
+      </div>
+    </div>
+    <div style="margin-top:28px;padding-top:20px;border-top:2px solid var(--line);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><div class="section-pill tasks">ЗАДАНИЯ</div><span style="font-size:15px;font-weight:700;color:var(--p700)">Практика · 30 заданий</span></div>
+      <div class="tr-card" id="tr-b3-card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><span class="tr-progress" id="tr-b3-prog">1/30</span><div style="flex:1;height:4px;background:var(--line);border-radius:2px;"><div class="tr-prog-bar-fill" id="tr-b3-bar"></div></div></div>
+        <div class="tr-q" id="tr-b3-q"></div>
+        <div class="tr-input-row"><input class="tr-input" id="tr-b3-input" type="text" inputmode="numeric" maxlength="2" onkeydown="if(event.key==='Enter')trCheck('b3')"></div>
+        <div class="tr-repeat-notice" id="tr-b3-rn">🔁 Задание добавлено в конец — повторишь позже</div>
+        <div class="tr-feedback" id="tr-b3-fb"></div>
+        <div class="tr-btns"><button class="tr-check-btn" id="tr-b3-check" onclick="trCheck('b3')">Проверить</button><button class="tr-next-btn" id="tr-b3-next" style="display:none" onclick="trNext('b3')">Далее →</button></div>
+      </div>
+      <div class="tr-result" id="tr-b3-result"><div class="tr-score" id="tr-b3-score"></div><div class="tr-label">из 30 заданий выполнено верно</div><div style="display:flex;gap:8px;justify-content:center;"><button class="tr-reset-btn" onclick="trReset('b3')">Начать заново</button></div><div class="tr-done" id="tr-b3-done">🎉 Все верно! Блок пройден!</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 -->
+<section class="section" id="s3">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2 class="section-title">Ковалентная полярная связь</h2>
+  </div>
+  <div class="acc-body">
+    <div class="box box-info"><div class="box-title">📖 Определение</div><strong>Ковалентная полярная связь</strong> — связь между <strong>разными</strong> атомами-неметаллами. Общая электронная пара <strong>смещена</strong> к более электроотрицательному атому, поэтому на атомах возникают <strong>δ+</strong> и <strong>δ−</strong>.</div>
+    <div class="scheme-box" style="flex-direction:column;gap:8px;"><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center;"><div class="scheme-cell" style="background:#fef9c3;border-color:#D97706;">H (δ+)</div><div class="scheme-plus">—</div><div class="scheme-cell" style="background:#fef2f2;border-color:#EF4444;">Cl (δ−)</div></div><div style="font-size:13px;color:var(--text2);">ЭО(H) = 2,1 &lt; ЭО(Cl) = 3,0 → пара смещена к хлору</div></div>
+    <h3 class="mini-title">📋 Примеры веществ</h3>
+    <div class="box" style="background:var(--bg2);border:1px solid var(--line);"><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;"><div><strong>HCl</strong> — хлороводород</div><div><strong>H₂O</strong> — вода</div><div><strong>NH₃</strong> — аммиак</div><div><strong>H₂S</strong> — сероводород</div><div><strong>SO₂</strong> — диоксид серы</div><div><strong>HF</strong> — фтороводород</div><div><strong>CO₂</strong> — углекислый газ</div><div><strong>NO</strong> — оксид азота(II)</div><div><strong>PCl₃</strong> — трихлорид фосфора</div><div><strong>SiCl₄</strong> — четыреххлористый кремний</div></div></div>
+    <div style="margin-top:28px;padding-top:20px;border-top:2px solid var(--line);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><div class="section-pill tasks">ЗАДАНИЯ</div><span style="font-size:15px;font-weight:700;color:var(--p700)">Практика · 22 задания</span></div>
+      <div class="tr-card" id="tr-b4-card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><span class="tr-progress" id="tr-b4-prog">1/22</span><div style="flex:1;height:4px;background:var(--line);border-radius:2px;"><div class="tr-prog-bar-fill" id="tr-b4-bar"></div></div></div>
+        <div class="tr-q" id="tr-b4-q"></div>
+        <div class="tr-input-row"><input class="tr-input" id="tr-b4-input" type="text" inputmode="numeric" maxlength="2" onkeydown="if(event.key==='Enter')trCheck('b4')"></div>
+        <div class="tr-repeat-notice" id="tr-b4-rn">🔁 Задание добавлено в конец — повторишь позже</div>
+        <div class="tr-feedback" id="tr-b4-fb"></div>
+        <div class="tr-btns"><button class="tr-check-btn" id="tr-b4-check" onclick="trCheck('b4')">Проверить</button><button class="tr-next-btn" id="tr-b4-next" style="display:none" onclick="trNext('b4')">Далее →</button></div>
+      </div>
+      <div class="tr-result" id="tr-b4-result"><div class="tr-score" id="tr-b4-score"></div><div class="tr-label">из 22 заданий выполнено верно</div><div style="display:flex;gap:8px;justify-content:center;"><button class="tr-reset-btn" onclick="trReset('b4')">Начать заново</button></div><div class="tr-done" id="tr-b4-done">🎉 Все верно! Блок пройден!</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 -->
+<section class="section" id="s4">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <h2 class="section-title">Донорно-акцепторный механизм</h2>
+  </div>
+  <div class="acc-body">
+    <div class="box box-info"><div class="box-title">📖 Что это?</div><strong>Донорно-акцепторный механизм</strong> — способ образования ковалентной связи, при котором один атом (<strong>донор</strong>) предоставляет готовую электронную пару, а другой (<strong>акцептор</strong>) — пустую орбиталь.</div>
+    <div class="scheme-box" style="flex-direction:column;gap:8px;"><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center;"><div class="scheme-cell" style="background:#dcfce7;border-color:#10B981;">NH₃ <span style="font-size:11px;font-weight:400;">(донор)</span></div><div class="scheme-plus">+</div><div class="scheme-cell" style="background:#fee2e2;border-color:#EF4444;">H⁺ <span style="font-size:11px;font-weight:400;">(акцептор)</span></div><div class="scheme-arrow">→</div><div class="scheme-cell" style="background:#fef9c3;border-color:#D97706;">[NH₄]⁺</div></div><div style="font-size:13px;color:var(--text2);">NH₃ отдаёт пару, H⁺ принимает → образуется ион аммония</div></div>
+    <h2 class="sub-title">Где встречается</h2>
+    <div class="must-memo" style="margin-bottom:16px;"><div class="mm-hd">📌 Всё что ниже — преподаватель спросит напрямую. Выучи наизусть.</div></div>
+    <div class="grid-2"><div class="box" style="border:1.5px solid var(--p400);background:var(--p50);"><div style="font-weight:700;color:var(--p700);margin-bottom:8px;">🧪 В неорганике</div><ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.8;"><li><strong>NH₄⁺</strong> — в солях аммония (NH₄Cl, (NH₄)₂SO₄, NH₄NO₃, NH₄F и др.)</li><li><strong>PH₄⁺</strong> — хлорид фосфония (PH₄Cl)</li><li><strong>H₃O⁺</strong> — ион гидроксония</li><li><strong>CO</strong> (угарный газ) — одна из связей по ДАМ</li><li><strong>O₃</strong> (озон) — одна из O–O связей по ДАМ</li><li><strong>HNO₃, N₂O₅, KNO₃</strong> — одна из N–O связей по ДАМ</li></ul></div><div class="box" style="border:1.5px solid var(--p400);background:var(--p50);"><div style="font-weight:700;color:var(--p700);margin-bottom:8px;">🧪 В органике</div><ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.8;"><li><strong>Соли аминов</strong> — CH₃–NH₃⁺Cl⁻</li><li><strong>Комплексные соединения</strong> — [Cu(NH₃)₄]SO₄</li></ul></div></div>
+    <div class="trap-box"><div class="trap-hd">⚠️ Частая ошибка</div><ul><li><strong>NH₃</strong> (аммиак) — <strong>не</strong> содержит связей по ДАМ. Связь по ДАМ появляется <strong>только в NH₄⁺</strong> (ионе аммония).</li><li><strong>NH₄Cl</strong> — внутри NH₄⁺ есть одна связь по ДАМ.</li></ul></div>
+    <div style="margin-top:28px;padding-top:20px;border-top:2px solid var(--line);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><div class="section-pill tasks">ЗАДАНИЯ</div><span style="font-size:15px;font-weight:700;color:var(--p700)">Практика · 19 заданий</span></div>
+      <div class="tr-card" id="tr-b5-card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><span class="tr-progress" id="tr-b5-prog">1/19</span><div style="flex:1;height:4px;background:var(--line);border-radius:2px;"><div class="tr-prog-bar-fill" id="tr-b5-bar"></div></div></div>
+        <div class="tr-q" id="tr-b5-q"></div>
+        <div class="tr-input-row"><input class="tr-input" id="tr-b5-input" type="text" inputmode="numeric" maxlength="2" onkeydown="if(event.key==='Enter')trCheck('b5')"></div>
+        <div class="tr-repeat-notice" id="tr-b5-rn">🔁 Задание добавлено в конец — повторишь позже</div>
+        <div class="tr-feedback" id="tr-b5-fb"></div>
+        <div class="tr-btns"><button class="tr-check-btn" id="tr-b5-check" onclick="trCheck('b5')">Проверить</button><button class="tr-next-btn" id="tr-b5-next" style="display:none" onclick="trNext('b5')">Далее →</button></div>
+      </div>
+      <div class="tr-result" id="tr-b5-result"><div class="tr-score" id="tr-b5-score"></div><div class="tr-label">из 19 заданий выполнено верно</div><div style="display:flex;gap:8px;justify-content:center;"><button class="tr-reset-btn" onclick="trReset('b5')">Начать заново</button></div><div class="tr-done" id="tr-b5-done">🎉 Все верно! Блок пройден!</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5 -->
+<section class="section" id="s5">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <h2 class="section-title">Ионная связь</h2>
+  </div>
+  <div class="acc-body">
+    <div class="box box-info"><div class="box-title">📖 Определение</div><strong>Ионная связь</strong> — это связь, которая возникает между <strong>металлом и неметаллом</strong>, а также между <strong>аммонием (NH₄⁺) и неметаллом</strong>.</div>
+    <div class="scheme-box" style="flex-direction:column;gap:8px;"><div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center;"><div class="scheme-cell" style="background:#EEF2FF;border-color:#6366F1;">Na⁰ <span style="font-size:11px;font-weight:400;">(отдаёт e⁻)</span></div><div class="scheme-arrow" style="font-size:14px;">→</div><div class="scheme-cell" style="background:#fef2f2;border-color:#EF4444;">Na⁺</div><div class="scheme-plus">+</div><div class="scheme-cell" style="background:#fef2f2;border-color:#EF4444;">Cl⁻</div></div><div style="font-size:13px;color:var(--text2);">Na⁺ + Cl⁻ → NaCl (хлорид натрия)</div></div>
+    <h2 class="sub-title">Когда связь ионная?</h2>
+    <div class="grid-2"><div><div class="box box-success"><div class="box-title">✅ Ионная связь есть</div><ul><li><strong>Металл + неметалл</strong> — NaCl, CaO, KF, MgBr₂, BaS, Na₂S</li><li><strong>NH₄⁺ + кислотный остаток</strong> — NH₄Cl, (NH₄)₂SO₄, NH₄NO₃, NH₄F</li><li><strong>Сложные ионы</strong> — NaNO₃ (Na⁺···NO₃⁻), K₂SO₄</li></ul></div></div><div><div class="box box-danger"><div class="box-title">❌ НЕ ионная</div><ul><li><strong>Кислоты</strong> — HCl, H₂SO₄, HNO₃ (ков. полярная)</li><li><strong>Оксиды неметаллов</strong> — SO₂, CO₂, NO₂ (ков. полярная)</li><li><strong>NH₃</strong> — нет иона NH₄⁺ (ков. полярная)</li><li><strong>NaOH</strong> — Na⁺···OH⁻ ионная, но внутри OH⁻ — O–H полярная</li></ul></div></div></div>
+    <div class="box box-remember"><div class="box-title">🧠 Лайфхак</div>Видишь формулу: <strong>металл + неметалл</strong> → скорее всего ионная. Видишь <strong>только неметаллы</strong> → ковалентная полярная.</div>
+    <div class="box box-warn"><div class="box-title">💡 Подсказка — как быстро определить</div>Чтобы в соединении была ионная связь, нужно два условия: <strong>1)</strong> вещество твёрдое (соль, оксид металла, гидроксид металла); <strong>2)</strong> в формуле есть хотя бы один <strong>металл</strong> (или NH₄⁺). Если оба условия выполнены — связь ионная.</div>
+    <div style="margin-top:28px;padding-top:20px;border-top:2px solid var(--line);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><div class="section-pill tasks">ЗАДАНИЯ</div><span style="font-size:15px;font-weight:700;color:var(--p700)">Практика · 10 заданий</span></div>
+      <div class="tr-card" id="tr-b6-card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><span class="tr-progress" id="tr-b6-prog">1/10</span><div style="flex:1;height:4px;background:var(--line);border-radius:2px;"><div class="tr-prog-bar-fill" id="tr-b6-bar"></div></div></div>
+        <div class="tr-q" id="tr-b6-q"></div>
+        <div class="tr-input-row"><input class="tr-input" id="tr-b6-input" type="text" inputmode="numeric" maxlength="2" onkeydown="if(event.key==='Enter')trCheck('b6')"></div>
+        <div class="tr-repeat-notice" id="tr-b6-rn">🔁 Задание добавлено в конец — повторишь позже</div>
+        <div class="tr-feedback" id="tr-b6-fb"></div>
+        <div class="tr-btns"><button class="tr-check-btn" id="tr-b6-check" onclick="trCheck('b6')">Проверить</button><button class="tr-next-btn" id="tr-b6-next" style="display:none" onclick="trNext('b6')">Далее →</button></div>
+      </div>
+      <div class="tr-result" id="tr-b6-result"><div class="tr-score" id="tr-b6-score"></div><div class="tr-label">из 10 заданий выполнено верно</div><div style="display:flex;gap:8px;justify-content:center;"><button class="tr-reset-btn" onclick="trReset('b6')">Начать заново</button></div><div class="tr-done" id="tr-b6-done">🎉 Все верно! Блок пройден!</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6 -->
+<section class="section" id="s6">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <h2 class="section-title">Металлическая связь</h2>
+  </div>
+  <div class="acc-body">
+    <div class="box box-info"><div class="box-title">📖 Определение</div><strong>Металлическая связь</strong> возникает только в <strong>металлах, которые стоят в одиночестве</strong> (чистые металлы: Fe, Cu, Al…) <strong>либо связаны между собой</strong> — то есть в сплавах (<strong>металл + металл</strong>): сталь, бронза, латунь.</div>
+
+    <div class="must-memo"><div class="mm-hd">📌 Вещества с металлической связью</div><ul><li><strong>Все металлы:</strong> Na, K, Fe, Cu, Al, Zn, Hg, Ag, Au, Pt</li><li><strong>Сплавы:</strong> сталь, бронза, латунь</li></ul></div>
+    <div style="margin-top:28px;padding-top:20px;border-top:2px solid var(--line);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><div class="section-pill tasks">ЗАДАНИЯ</div><span style="font-size:15px;font-weight:700;color:var(--p700)">Практика · 5 заданий</span></div>
+      <div class="tr-card" id="tr-b7-card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><span class="tr-progress" id="tr-b7-prog">1/5</span><div style="flex:1;height:4px;background:var(--line);border-radius:2px;"><div class="tr-prog-bar-fill" id="tr-b7-bar"></div></div></div>
+        <div class="tr-q" id="tr-b7-q"></div>
+        <div class="tr-input-row"><input class="tr-input" id="tr-b7-input" type="text" inputmode="numeric" maxlength="2" onkeydown="if(event.key==='Enter')trCheck('b7')"></div>
+        <div class="tr-repeat-notice" id="tr-b7-rn">🔁 Задание добавлено в конец — повторишь позже</div>
+        <div class="tr-feedback" id="tr-b7-fb"></div>
+        <div class="tr-btns"><button class="tr-check-btn" id="tr-b7-check" onclick="trCheck('b7')">Проверить</button><button class="tr-next-btn" id="tr-b7-next" style="display:none" onclick="trNext('b7')">Далее →</button></div>
+      </div>
+      <div class="tr-result" id="tr-b7-result"><div class="tr-score" id="tr-b7-score"></div><div class="tr-label">из 5 заданий выполнено верно</div><div style="display:flex;gap:8px;justify-content:center;"><button class="tr-reset-btn" onclick="trReset('b7')">Начать заново</button></div><div class="tr-done" id="tr-b7-done">🎉 Все верно! Блок пройден!</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7 -->
+<section class="section" id="s7">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <h2 class="section-title">Водородная связь</h2>
+  </div>
+  <div class="acc-body">
+    <div class="box box-info"><div class="box-title">📖 Определение</div><strong>Водородная связь</strong> — это <strong>межмолекулярная</strong> связь, то есть связь <strong>между молекулами</strong>. Она возникает между водородом и фтором (<strong>H–F</strong>), водородом и кислородом (<strong>H–O</strong>), водородом и азотом (<strong>H–N</strong>). Если водород соединён с любым другим элементом — водородной связи нет.</div>
+    <div class="box" style="background:var(--bg2);border:1.5px solid var(--line);text-align:center;padding:16px;"><div style="font-size:15px;font-family:var(--mono);color:#3730A3;letter-spacing:2px;margin-bottom:6px;">δ+H–Fδ− ··· δ+H–Fδ−</div><div style="font-size:12px;color:var(--text2);">··· — водородная связь (пунктирная)</div></div>
+    <h3 class="mini-title">✅ Вещества с водородной связью</h3>
+    <div class="must-memo" style="margin-bottom:12px;"><div class="mm-hd">📌 Эти примеры нужно знать наизусть — преподаватель спросит.</div></div>
+    <div class="box box-success" style="border:1px solid #6EE7B7;margin-bottom:6px;">
+      <ul>
+        <li><strong>HF</strong> — фтороводород (самая прочная водородная связь)</li>
+        <li><strong>H₂O</strong> — вода</li>
+        <li><strong>H₂O₂</strong> — пероксид водорода</li>
+        <li><strong>NH₃</strong> — аммиак</li>
+      </ul>
+    </div>
+    <div style="display:grid;gap:10px;margin-bottom:14px;">
+
+      <div style="background:#E4ECE3;border-radius:8px;padding:12px 14px;border:1px solid #91AA91;">
+        <div style="font-weight:800;margin-bottom:4px;">Спирты — группа <span style="font-family:var(--mono);">–OH</span>, окончание <em>-ол</em></div>
+        <div style="font-family:var(--mono);font-size:14px;color:var(--green-d);margin-bottom:4px;">этанол C₂H₅–OH, пропанол C₃H₇–OH</div>
+        <div style="font-size:13px;color:var(--ink3);">⚠️ <strong>Бензол</strong> и <strong>стирол</strong> — не спирты, хотя оканчиваются на -ол. Водородной связи нет.</div>
+      </div>
+
+      <div style="background:#E4ECE3;border-radius:8px;padding:12px 14px;border:1px solid #91AA91;">
+        <div style="font-weight:800;margin-bottom:4px;">Карбоновые кислоты — группа <span style="font-family:var(--mono);">–COOH</span></div>
+        <div style="font-family:var(--mono);font-size:14px;color:var(--green-d);">уксусная CH₃–COOH, муравьиная H–COOH</div>
+      </div>
+
+      <div style="background:#E4ECE3;border-radius:8px;padding:12px 14px;border:1px solid #91AA91;">
+        <div style="font-weight:800;margin-bottom:6px;">Фенолы — бензольное кольцо + <span style="font-family:var(--mono);">–OH</span></div>
+        <div style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--green-d);line-height:1.6;">
+          &nbsp;&nbsp;&nbsp;OH<br>
+          &nbsp;&nbsp;&nbsp;|<br>
+          [бензол]
+        </div>
+        <div style="font-size:13px;color:var(--ink3);margin-top:4px;">фенол C₆H₅–OH</div>
+      </div>
+
+      <div style="background:#E4ECE3;border-radius:8px;padding:12px 14px;border:1px solid #91AA91;">
+        <div style="font-weight:800;margin-bottom:4px;">Амины — группа <span style="font-family:var(--mono);">–NH₂</span> (или –NH–), слово <em>амин</em> в названии</div>
+        <div style="font-family:var(--mono);font-size:14px;color:var(--green-d);">метиламин CH₃–NH₂, анилин C₆H₅–NH₂</div>
+      </div>
+
+      <div style="background:#E4ECE3;border-radius:8px;padding:12px 14px;border:1px solid #91AA91;">
+        <div style="font-weight:800;margin-bottom:4px;">Аминокислоты — две группы сразу: <span style="font-family:var(--mono);">–NH₂</span> и <span style="font-family:var(--mono);">–COOH</span></div>
+        <div style="font-family:var(--mono);font-size:14px;color:var(--green-d);">глицин NH₂–CH₂–COOH</div>
+        <div style="font-size:13px;color:var(--ink3);margin-top:4px;">NH₂ даёт H–N (водородная связь), COOH даёт H–O (водородная связь)</div>
+      </div>
+
+    </div>
+    <div class="grid-2"><div><h3 class="mini-title">❌ НЕТ водородной связи</h3><div class="box box-danger" style="border:1px solid #FCA5A5;"><ul><li><strong>PH₃, H₂S, HCl, HBr, HI, CH₄, SiH₄</strong></li></ul></div></div><div><div class="box box-remember"><div class="box-title">🧠 Запомни тройку</div>Водородная связь только при <strong>H–F, H–O, H–N</strong>!</div></div></div>
+    <div class="ege-tip"><div class="tip-hd">⭐ Чаще всего в ЕГЭ</div><ul><li>У какого вещества есть водородная связь? → проверяй наличие <strong>H–F, H–O или H–N</strong></li><li><strong>PH₃</strong> и <strong>H₂S</strong> — частые ловушки! У них <strong>нет</strong> водородной связи.</li></ul></div>
+    <div style="margin-top:28px;padding-top:20px;border-top:2px solid var(--line);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><div class="section-pill tasks">ЗАДАНИЯ</div><span style="font-size:15px;font-weight:700;color:var(--p700)">Практика · 30 заданий</span></div>
+      <div class="tr-card" id="tr-b8-card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><span class="tr-progress" id="tr-b8-prog">1/30</span><div style="flex:1;height:4px;background:var(--line);border-radius:2px;"><div class="tr-prog-bar-fill" id="tr-b8-bar"></div></div></div>
+        <div class="tr-q" id="tr-b8-q"></div>
+        <div class="tr-input-row"><input class="tr-input" id="tr-b8-input" type="text" inputmode="numeric" maxlength="2" onkeydown="if(event.key==='Enter')trCheck('b8')"></div>
+        <div class="tr-repeat-notice" id="tr-b8-rn">🔁 Задание добавлено в конец — повторишь позже</div>
+        <div class="tr-feedback" id="tr-b8-fb"></div>
+        <div class="tr-btns"><button class="tr-check-btn" id="tr-b8-check" onclick="trCheck('b8')">Проверить</button><button class="tr-next-btn" id="tr-b8-next" style="display:none" onclick="trNext('b8')">Далее →</button></div>
+      </div>
+      <div class="tr-result" id="tr-b8-result"><div class="tr-score" id="tr-b8-score"></div><div class="tr-label">из 30 заданий выполнено верно</div><div style="display:flex;gap:8px;justify-content:center;"><button class="tr-reset-btn" onclick="trReset('b8')">Начать заново</button></div><div class="tr-done" id="tr-b8-done">🎉 Все верно! Блок пройден!</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 10 -->
+<section class="section" id="s10">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <h2 class="section-title">Молекулярная решётка</h2>
+  </div>
+  <div class="acc-body">
+    <div class="box box-info"><div class="box-title">📖 Определение</div>В узлах молекулярной решётки — <strong>молекулы</strong>. Связи между молекулами — слабые (Ван-дер-Ваальса или водородные). Молекулярная решётка — только у <strong>жидких и газообразных неметаллов</strong> (а также у летучих твёрдых: I₂, S₈, P₄).</div>
+    <h3 class="mini-title">📋 Примеры</h3><div class="box" style="background:var(--card);border:2px solid var(--p400);box-shadow:var(--shm);"><div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;"><div><strong>H₂, N₂, O₂</strong> — газы</div><div><strong>F₂, Cl₂, Br₂</strong> — галогены</div><div><strong>I₂</strong> — твёрдый (возгоняется)</div><div><strong>P₄, S₈</strong></div><div><strong>H₂O, H₂O₂</strong></div><div><strong>CO₂, SO₂, SO₃</strong></div><div><strong>HCl, HF</strong></div><div><strong>CH₄, C₂H₆, NH₃</strong></div><div><strong>Фосфор белый P₄</strong> — молекулярная решётка</div></div></div>
+    <div style="margin-top:28px;padding-top:20px;border-top:2px solid var(--line);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><div class="section-pill tasks">ЗАДАНИЯ</div><span style="font-size:15px;font-weight:700;color:var(--p700)">Практика · 11 заданий</span></div>
+      <div class="tr-card" id="tr-b10-card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><span class="tr-progress" id="tr-b10-prog">1/11</span><div style="flex:1;height:4px;background:var(--line);border-radius:2px;"><div class="tr-prog-bar-fill" id="tr-b10-bar"></div></div></div>
+        <div class="tr-q" id="tr-b10-q"></div>
+        <div class="tr-input-row"><input class="tr-input" id="tr-b10-input" type="text" inputmode="numeric" maxlength="2" onkeydown="if(event.key==='Enter')trCheck('b10')"></div>
+        <div class="tr-repeat-notice" id="tr-b10-rn">🔁 Задание добавлено в конец — повторишь позже</div>
+        <div class="tr-feedback" id="tr-b10-fb"></div>
+        <div class="tr-btns"><button class="tr-check-btn" id="tr-b10-check" onclick="trCheck('b10')">Проверить</button><button class="tr-next-btn" id="tr-b10-next" style="display:none" onclick="trNext('b10')">Далее →</button></div>
+      </div>
+      <div class="tr-result" id="tr-b10-result"><div class="tr-score" id="tr-b10-score"></div><div class="tr-label">из 11 заданий выполнено верно</div><div style="display:flex;gap:8px;justify-content:center;"><button class="tr-reset-btn" onclick="trReset('b10')">Начать заново</button></div><div class="tr-done" id="tr-b10-done">🎉 Все верно! Блок пройден!</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 11 -->
+<section class="section" id="s11">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <h2 class="section-title">Атомная решётка</h2>
+  </div>
+  <div class="acc-body">
+    <div class="box box-info"><div class="box-title">📖 Определение</div>В узлах атомной решётки — <strong>атомы</strong>, соединённые ковалентными связями по всему кристаллу. Атомная решётка — только у <strong>твёрдых неметаллов</strong>. Очень твёрдые, очень высокие Тпл.</div>
+    <h3 class="mini-title">📋 Примеры</h3>
+    <div class="must-memo"><div class="mm-hd">📌 Эти примеры нужно знать наизусть — преподаватель спросит.</div></div>
+    <div class="box" style="background:var(--card);border:2px solid var(--p400);box-shadow:var(--shm);">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div><strong>Алмаз C</strong></div>
+        <div><strong>Графит C</strong></div>
+        <div><strong>Si</strong> — кремний</div>
+        <div><strong>B</strong> — бор</div>
+        <div colspan="2"><strong>Соединения кремния:</strong></div>
+        <div><strong>SiO₂</strong> — кварц, стекло</div>
+        <div><strong>H₂SiO₃</strong> — кремниевая кислота</div>
+        <div><strong>Фосфор чёрный P</strong></div>
+        <div><strong>Красный фосфор P</strong></div>
+      </div>
+    </div>
+    <div style="margin-top:28px;padding-top:20px;border-top:2px solid var(--line);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><div class="section-pill tasks">ЗАДАНИЯ</div><span style="font-size:15px;font-weight:700;color:var(--p700)">Практика · 6 заданий</span></div>
+      <div class="tr-card" id="tr-b11-card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;"><span class="tr-progress" id="tr-b11-prog">1/6</span><div style="flex:1;height:4px;background:var(--line);border-radius:2px;"><div class="tr-prog-bar-fill" id="tr-b11-bar"></div></div></div>
+        <div class="tr-q" id="tr-b11-q"></div>
+        <div class="tr-input-row"><input class="tr-input" id="tr-b11-input" type="text" inputmode="numeric" maxlength="2" onkeydown="if(event.key==='Enter')trCheck('b11')"></div>
+        <div class="tr-repeat-notice" id="tr-b11-rn">🔁 Задание добавлено в конец — повторишь позже</div>
+        <div class="tr-feedback" id="tr-b11-fb"></div>
+        <div class="tr-btns"><button class="tr-check-btn" id="tr-b11-check" onclick="trCheck('b11')">Проверить</button><button class="tr-next-btn" id="tr-b11-next" style="display:none" onclick="trNext('b11')">Далее →</button></div>
+      </div>
+      <div class="tr-result" id="tr-b11-result"><div class="tr-score" id="tr-b11-score"></div><div class="tr-label">из 6 заданий выполнено верно</div><div style="display:flex;gap:8px;justify-content:center;"><button class="tr-reset-btn" onclick="trReset('b11')">Начать заново</button></div><div class="tr-done" id="tr-b11-done">🎉 Все верно! Блок пройден!</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 15 -->
+<section class="section" id="s15">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <h2 class="section-title">Типичные ошибки и ловушки ЕГЭ</h2>
+  </div>
+  <div class="acc-body">
+    <div class="box box-danger"><div class="box-title">🚨 Частые ошибки</div><ul><li><strong>NaOH:</strong> считают только ионную, но есть O–H полярная.</li><li><strong>NH₄Cl:</strong> считают все связи ионными, но внутри NH₄⁺ — ков. полярная + ДАМ.</li><li><strong>PH₃:</strong> считают полярной, а она неполярная.</li><li><strong>HCl:</strong> считают водородную связь – её нет!</li><li><strong>Графит:</strong> считают непроводящим – а он проводит ток.</li></ul></div>
+    <div class="trap-box"><div class="trap-hd">⚠️ Ловушки</div><ul><li>«Ковалентная связь есть во всех веществах» — НЕТ! В NaCl её нет.</li><li>«Водородная связь у всех водородсодержащих» — НЕТ! Только у H–F, H–O, H–N.</li><li>«Все твёрдые вещества имеют атомную решётку» — НЕТ! Есть молекулярные (I₂) и ионные (NaCl).</li></ul></div>
+    <div class="must-memo"><div class="mm-hd">📌 Экспресс-шпаргалка для задания №4</div><ul><li><strong>Неполярная:</strong> H₂, O₂, N₂, F₂, Cl₂, Br₂, I₂, P₄, S₈, PH₃, пероксиды (O–O), CaC₂ (C≡C)</li><li><strong>Полярная:</strong> HCl, H₂O, NH₃, H₂S, SO₂, HF, CO₂, NO, PCl₃, SiCl₄</li><li><strong>Ионная:</strong> NaCl, KNO₃, CaCl₂, Al₂O₃, NaOH, NH₄Cl, Na₂CO₃</li><li><strong>Металлическая:</strong> все металлы и сплавы</li><li><strong>Водородная:</strong> HF, H₂O, H₂O₂, NH₃, спирты, кислоты, фенолы, амины</li></ul></div>
+  </div>
+</section>
+
+<!-- SECTION 16 — ФЛЭШКАРТЫ -->
+<section class="section" id="s16">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <h2 class="section-title">🧠 50 флэш-карточек</h2>
+  </div>
+  <div class="acc-body">
+    <div class="fc-section" style="margin:0;background:linear-gradient(135deg,#354957,#70889B);border-radius:var(--r-lg);padding:32px 28px;color:#fff">
+      <div class="fc-header"><div class="fc-title">🃏 50 флэш-карточек — Химическая связь и решётки</div><div class="fc-sub">Нажми на карточку чтобы перевернуть. Отмечай что знаешь, а что нет.</div></div>
+      <div class="fc-stats">Знаю: <span id="fc-know">0</span> &nbsp;|&nbsp; Не знаю: <span id="fc-dk">0</span> &nbsp;|&nbsp; Осталось: <span id="fc-left">50</span></div>
+      <div class="fc-counter" id="fc-counter">Карточка 1 из 50</div>
+      <div class="fc-perspective" onclick="fcFlip()"><div class="fc-inner" id="fc-inner"><div class="fc-face fc-front"><div class="fc-tag" id="fc-tag">ВОПРОС</div><div id="fc-front-text"></div></div><div class="fc-face fc-back"><div class="fc-back-tag" id="fc-back-tag">ОТВЕТ</div><div id="fc-back-text"></div><div class="fc-hint" id="fc-hint"></div></div></div></div>
+      <button class="fc-flip-btn" onclick="fcFlip()">🔄 Перевернуть</button>
+      <div class="fc-btn-row" id="fc-btn-row"><button class="fc-btn-know" onclick="fcAnswer(true)">✓ Знаю</button><button class="fc-btn-dontknow" onclick="fcAnswer(false)">✗ Не знаю</button></div>
+      <div class="fc-keys">пробел — перевернуть · ← не знаю · → знаю</div>
+      <div class="fc-result" id="fc-result"><h3>🎉 Готово!</h3><div class="fc-res-row"><div class="fc-res-card"><div class="fc-res-num" id="res-know" style="color:#1D9E75">0</div><div class="fc-res-lbl">ЗНАЮ</div></div><div class="fc-res-card"><div class="fc-res-num" id="res-dk" style="color:#C0392B">0</div><div class="fc-res-lbl">НЕ ЗНАЮ</div></div></div><div class="fc-restart-row"><button class="fc-restart-btn primary" onclick="fcRestart(false)">Сначала (все)</button><button class="fc-restart-btn" onclick="fcRestart(true)">Только ошибки</button></div></div>
+    </div>
+  </div>
+</section>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+</div><!-- /shell -->
+
+<script>
+// ================================================================
+//  ЗАДАНИЯ ДЛЯ ТРЕНАЖЁРА
+// ================================================================
+var TR_TASKS = {
+  b3: [
+    {q:'Из предложенного перечня веществ выберите два соединения, в которых присутствует ковалентная неполярная связь.',opts:'1) аммиак<br>2) йод<br>3) кислород<br>4) вода<br>5) метан',ans:'23'},
+    {q:'Из предложенного перечня веществ выберите два вещества, в которых присутствует ковалентная неполярная химическая связь.',opts:'1) пероксид водорода<br>2) метанол<br>3) этан<br>4) гидроксид натрия<br>5) вода',ans:'13'},
+    {q:'Из предложенного перечня веществ выберите два соединения, в которых присутствует ковалентная неполярная связь.',opts:'1) азот<br>2) йод<br>3) фосфорная кислота<br>4) вода<br>5) метан',ans:'12'},
+    {q:'Из предложенного перечня веществ выберите два вещества, в которых присутствует ковалентная неполярная химическая связь.',opts:'1) натрий<br>2) оксид натрия<br>3) фторид натрия<br>4) фтор<br>5) пероксид натрия',ans:'45'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная неполярная химическая связь.',opts:'1) PCl₃<br>2) HBr<br>3) F₂<br>4) H₂O₂<br>5) Ba(OH)₂',ans:'34'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная неполярная химическая связь.',opts:'1) азот<br>2) белый фосфор<br>3) бромоводород<br>4) оксид серы(IV)<br>5) оксид калия',ans:'12'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная неполярная химическая связь.',opts:'1) хлор<br>2) фтороводород<br>3) сульфид аммония<br>4) этан<br>5) аммиак',ans:'14'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная неполярная химическая связь.',opts:'1) CaO<br>2) BaO₂<br>3) C₂H₆<br>4) Na₂O<br>5) Na',ans:'23'},
+    {q:'Из предложенного перечня выберите два вещества, в которых одновременно присутствуют ковалентная неполярная и ионная химические связи.',opts:'1) тетрахлорметан<br>2) ацетиленид натрия<br>3) оксид фосфора(III)<br>4) бензоат калия<br>5) глицерин',ans:'24'},
+    {q:'Из предложенного перечня выберите два вещества с ионной кристаллической решеткой, в которых присутствует ковалентная неполярная химическая связь.',opts:'1) силикат кальция<br>2) пероксид натрия<br>3) ацетиленид натрия<br>4) гидроксид бария<br>5) этиленгликоль',ans:'23'},
+    {q:'Из предложенного перечня выберите два вещества, которые имеют молекулярную кристаллическую решетку и содержат ковалентные неполярные связи.',opts:'1) оксид меди(II)<br>2) оксид углерода(II)<br>3) пропан<br>4) белый фосфор<br>5) гидроксид натрия',ans:'34'},
+    {q:'Из предложенного перечня выберите два вещества немолекулярного строения, в которых отсутствует ковалентная неполярная связь.',opts:'1) алмаз<br>2) сернистый газ<br>3) хлороводород<br>4) хлорид аммония<br>5) сульфат натрия',ans:'45'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная полярная и ковалентная неполярная химическая связь.',opts:'1) этан<br>2) гидроксид кальция<br>3) пероксид водорода<br>4) сульфат натрия<br>5) оксид натрия',ans:'13'},
+    {q:'Из предложенного перечня выберите два соединения, имеющих молекулярную кристаллическую решетку и содержащих ковалентную неполярную химическую связь.',opts:'1) C₂H₄<br>2) PCl₃<br>3) CaC₂<br>4) Cl₂O<br>5) Cl₂',ans:'15'},
+    {q:'Из предложенного перечня выберите два вещества молекулярного строения, в которых присутствует ковалентная неполярная связь.',opts:'1) метилформиат<br>2) серная кислота<br>3) этиленгликоль<br>4) бутадиен-1,3<br>5) этилат натрия',ans:'34'},
+    {q:'Из предложенного перечня выберите два вещества с ковалентной неполярной химической связью, которые имеют молекулярную кристаллическую решетку.',opts:'1) пероксид водорода<br>2) хлороводород<br>3) кремний<br>4) азот<br>5) графит',ans:'14'},
+    {q:'Из предложенного перечня выберите два вещества немолекулярного строения, которые имеют ковалентную неполярную химическую связь.',opts:'1) пероксид водорода<br>2) ацетон<br>3) кремний<br>4) фенолят натрия<br>5) медь',ans:'34'},
+    {q:'Из предложенного перечня выберите два вещества с ковалентной неполярной химической связью, которые имеют немолекулярное строение.',opts:'1) пероксид натрия<br>2) пероксид водорода<br>3) кремний<br>4) азот<br>5) оксид кремния(IV)',ans:'13'},
+    {q:'Из предложенного перечня выберите два вещества немолекулярного строения, которые имеют ковалентную неполярную химическую связь.',opts:'1) ацетиленид натрия<br>2) бром<br>3) алмаз<br>4) гидроксид натрия<br>5) оксид кремния(IV)',ans:'13'},
+    {q:'Из предложенного перечня выберите два вещества, в каждом из которых присутствует как ионная, так и ковалентная неполярная химическая связь.',opts:'1) пероксид натрия<br>2) диэтиловый эфир<br>3) фосфат натрия<br>4) бензоат аммония<br>5) метилацетат',ans:'14'},
+    {q:'Из предложенного перечня выберите два вещества с молекулярной кристаллической решеткой, которые имеют ковалентную неполярную химическую связь.',opts:'1) метан<br>2) карбид кальция<br>3) пероксид водорода<br>4) формальдегид<br>5) циклопентан',ans:'35'},
+    {q:'Из предложенного перечня выберите два вещества немолекулярного строения с ковалентной неполярной химической связью.',opts:'1) оксид кремния<br>2) алмаз<br>3) белый фосфор<br>4) пероксид натрия<br>5) метиловый спирт',ans:'24'},
+    {q:'Из предложенного перечня веществ выберите два вещества молекулярного строения, в которых присутствует ковалентная неполярная связь.',opts:'1) аммиак<br>2) иод<br>3) кислород<br>4) оксид магния<br>5) метан',ans:'23'},
+    {q:'Из предложенного перечня выберите два вещества немолекулярного строения, которые имеют ковалентную неполярную химическую связь.',opts:'1) кремний<br>2) азот<br>3) алмаз<br>4) водород<br>5) кремнезём',ans:'13'},
+    {q:'Из предложенного перечня выберите два вещества с ковалентной неполярной химической связью, которые имеют молекулярную кристаллическую решётку.',opts:'1) бром<br>2) метанол<br>3) циклопропан<br>4) хлороводород<br>5) пероксид натрия',ans:'13'},
+    {q:'Из предложенного перечня выберите два вещества, в которых одновременно присутствуют ковалентная неполярная и ионная химические связи.',opts:'1) бензоат калия<br>2) глицерин<br>3) ацетиленид натрия<br>4) оксид фосфора(III)<br>5) тетрахлорметан',ans:'13'},
+    {q:'Из предложенного перечня веществ выберите два вещества молекулярного строения, в которых присутствует ковалентная неполярная связь.',opts:'1) водород<br>2) иод<br>3) азотная кислота<br>4) вода<br>5) метан',ans:'12'},
+    {q:'Из предложенного перечня выберите два вещества с ионной кристаллической решеткой, в которых присутствует ковалентная неполярная химическая связь.',opts:'1) этиленгликоль<br>2) гидроксид бария<br>3) силикат кальция<br>4) ацетиленид натрия<br>5) пероксид натрия',ans:'45'},
+    {q:'Из предложенного перечня веществ выберите два вещества молекулярного строения, которые содержат ковалентную неполярную связь.',opts:'1) KNO₃<br>2) SiO₂<br>3) C₆H₁₄<br>4) N₂H₄<br>5) HBr',ans:'34'},
+    {q:'Из предложенного перечня выберите два вещества с ковалентной неполярной химической связью, которые имеют молекулярную кристаллическую решётку.',opts:'1) азот<br>2) кремний<br>3) графит<br>4) хлороводород<br>5) пероксид водорода',ans:'15'}
+  ],
+  b4: [
+    {q:'Из предложенного перечня веществ выберите два соединения, в которых присутствует ковалентная полярная химическая связь.',opts:'1) оксид кремния(IV)<br>2) оксид лития<br>3) хлорид лития<br>4) силикат лития<br>5) кремний',ans:'14'},
+    {q:'Из предложенного перечня веществ выберите два соединения, в которых присутствует ковалентная полярная химическая связь.',opts:'1) хлорид серы(II)<br>2) хлорид рубидия<br>3) хлорид лития<br>4) хлорид аммония<br>5) хлор',ans:'14'},
+    {q:'Из предложенного перечня выберите два соединения, в которых присутствует ковалентная полярная химическая связь.',opts:'1) хлорид калия<br>2) оксид серы(IV)<br>3) кремний<br>4) оксид натрия<br>5) силикат натрия',ans:'25'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная полярная химическая связь.',opts:'1) P₄<br>2) CH₃OH<br>3) (NH₄)₂S<br>4) BaF₂<br>5) K₂O',ans:'23'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная полярная химическая связь.',opts:'1) оксид кремния(IV)<br>2) оксид бария<br>3) бромид бария<br>4) нитрат бария<br>5) белый фосфор',ans:'14'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная полярная химическая связь.',opts:'1) оксид бария<br>2) фторид натрия<br>3) фторид серы(VI)<br>4) сульфат магния<br>5) ромбическая сера',ans:'34'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная полярная химическая связь.',opts:'1) метанол<br>2) йодид калия<br>3) белый фосфор<br>4) ацетат калия<br>5) оксид калия',ans:'14'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная полярная химическая связь.',opts:'1) карбонат натрия<br>2) хлорид натрия<br>3) бром<br>4) метан<br>5) графит',ans:'14'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная полярная химическая связь.',opts:'1) хлорид лития<br>2) гидроксид натрия<br>3) карбонат магния<br>4) бромид кальция<br>5) оксид калия',ans:'23'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная полярная химическая связь.',opts:'1) натрий<br>2) угарный газ<br>3) иодид натрия<br>4) хлорид фосфора(III)<br>5) кислород',ans:'24'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная полярная химическая связь.',opts:'1) азот<br>2) хлороводород<br>3) аммиак<br>4) водород<br>5) хлор',ans:'23'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная полярная химическая связь.',opts:'1) хлороводород<br>2) цинк<br>3) хлорид цинка<br>4) хлорид аммония<br>5) хлор',ans:'14'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная полярная химическая связь.',opts:'1) фтор<br>2) фторид лития<br>3) фтороводород<br>4) фторид кислорода<br>5) фторид калия',ans:'34'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ковалентная полярная связь.',opts:'1) CsCl<br>2) PBr₃<br>3) NH₄NO₃<br>4) SrO<br>5) P₄',ans:'23'},
+    {q:'Из предложенного перечня выберите два вещества немолекулярного строения, в которых представлена ковалентная полярная связь.',opts:'1) диметиламин<br>2) бензойная кислота<br>3) сульфид калия<br>4) нитрат аммония<br>5) формиат кальция',ans:'45'},
+    {q:'Из предложенного перечня выберите два вещества с атомной кристаллической решеткой, в которых присутствует ковалентная полярная химическая связь.',opts:'1) кремнезем<br>2) кремний<br>3) хлорид кремния(IV)<br>4) карбид кремния<br>5) графит',ans:'14'},
+    {q:'Из предложенного перечня выберите два вещества с ионной кристаллической решеткой, в которых присутствует ковалентная полярная химическая связь.',opts:'1) оксид натрия<br>2) хлороводород<br>3) гидроксид калия<br>4) пероксид бария<br>5) сульфат лития',ans:'35'},
+    {q:'Из предложенного перечня выберите два вещества немолекулярного строения, в которых присутствует ковалентная полярная химическая связь.',opts:'1) хлорид аммония<br>2) пероксид натрия<br>3) бромид лития<br>4) сероводород<br>5) оксид кремния(IV)',ans:'15'},
+    {q:'Из предложенного перечня выберите два вещества с молекулярной кристаллической решеткой, которые имеют ковалентную полярную химическую связь.',opts:'1) бром<br>2) бромид аммония<br>3) бромид фосфора(III)<br>4) бромид калия<br>5) бензол',ans:'35'},
+    {q:'Из предложенного перечня выберите два вещества молекулярного строения, в которых присутствует ковалентная полярная связь.',opts:'1) иод<br>2) оксид серы(IV)<br>3) марганец<br>4) хлорид кальция<br>5) азотная кислота',ans:'25'},
+    {q:'Из предложенного перечня выберите два вещества молекулярного строения, в которых присутствует ковалентная полярная химическая связь.',opts:'1) азот<br>2) хлорид серы(II)<br>3) оксид кремния(IV)<br>4) азотная кислота<br>5) сульфат калия',ans:'24'},
+    {q:'Из предложенного перечня веществ выберите два вещества ионного строения, в которых присутствует ковалентная полярная связь.',opts:'1) хлороводород<br>2) карбонат натрия<br>3) оксид серы(IV)<br>4) аммиак<br>5) сульфат железа(II)',ans:'25'}
+  ],
+  b5: [
+    {q:'Из предложенного перечня веществ выберите два соединения, в которых одна из ковалентных связей образована по донорно-акцепторному механизму.',opts:'1) LiOH<br>2) Li₃PO₄<br>3) (NH₄)₂HPO₄<br>4) NH₄F<br>5) H₃PO₄',ans:'34'},
+    {q:'Из предложенного перечня веществ выберите два соединения, в которых одна из ковалентных связей образована по донорно-акцепторному механизму.',opts:'1) K₃PO₄<br>2) NH₄HSO₄<br>3) H₂SO₄<br>4) KOH<br>5) NH₄Cl',ans:'25'},
+    {q:'Из предложенного перечня выберите два вещества, в которых одна из ковалентных связей образована по донорно-акцепторному механизму.',opts:'1) сульфит натрия<br>2) карбонат бария<br>3) ацетат аммония<br>4) гидроксид стронция<br>5) сульфат аммония',ans:'35'},
+    {q:'Из предложенного перечня выберите два вещества, в которых одна из ковалентных связей образована по донорно-акцепторному механизму.',opts:'1) CH₃OH<br>2) CH₃NH₂<br>3) NH₄HCO₃<br>4) CH₃CHO<br>5) CH₃COONH₄',ans:'35'},
+    {q:'Из предложенного перечня выберите два вещества немолекулярного строения, которые имеют ковалентную связь, образованную по донорно-акцепторному механизму.',opts:'1) гидроксид натрия<br>2) сульфат аммония<br>3) хлорид аммония<br>4) азотная кислота<br>5) аммиак',ans:'23'},
+    {q:'Из предложенного перечня выберите два типа химических связей, которые реализуются в хлориде аммония.',opts:'1) ионная<br>2) водородная<br>3) донорно-акцепторная<br>4) ковалентная полярная<br>5) ковалентная неполярная',ans:'14'},
+    {q:'Из предложенного перечня веществ выберите два вещества, в которых есть связь, образованная по донорно-акцепторному механизму.',opts:'1) фосфин<br>2) угарный газ<br>3) бурый газ<br>4) аммиак<br>5) нитрат аммония',ans:'25'},
+    {q:'Из предложенного перечня веществ выберите два вещества, в которых есть связь, образованная по донорно-акцепторному механизму.',opts:'1) хлорид аммония<br>2) нитрит натрия<br>3) фосген<br>4) угарный газ<br>5) гашеная известь',ans:'14'},
+    {q:'Из предложенного перечня веществ выберите два вещества, в которых одна ковалентная связь образована по донорно-акцепторному механизму.',opts:'1) угольная кислота<br>2) хлорид аммония<br>3) гидроксид калия<br>4) оксид кремния<br>5) гидросульфат аммония',ans:'25'},
+    {q:'Из предложенного перечня выберите два вещества, в каждом из которых присутствует связь, образованная по донорно-акцепторному механизму.',opts:'1) CO<br>2) NH₄Cl<br>3) Al(OH)₃<br>4) NO<br>5) Al₂O₃',ans:'12'},
+    {q:'Из предложенного перечня выберите два вещества, которые содержат хотя бы одну связь, образованную по донорно-акцепторному механизму.',opts:'1) хлорид метилэтиламмония<br>2) карбонат цинка<br>3) гидроксид алюминия<br>4) бурый газ<br>5) угарный газ',ans:'15'},
+    {q:'Из предложенного перечня веществ выберите два вещества, в которых присутствует связь, образованная по донорно-акцепторному механизму.',opts:'1) хромат натрия<br>2) метиламин<br>3) сульфат аммония<br>4) аммиак<br>5) угарный газ',ans:'35'},
+    {q:'Из предложенного перечня веществ выберите два вещества, в которых есть связь, образованная по донорно-акцепторному механизму.',opts:'1) NH₄Br<br>2) KNO₂<br>3) CO<br>4) CH₃Cl<br>5) H₂SO₄',ans:'13'},
+    {q:'Из предложенного перечня выберите два типа связей, которые присутствуют в молекуле хлорида аммония.',opts:'1) ковалентная полярная<br>2) ковалентная неполярная<br>3) ионная<br>4) донорно-акцепторная<br>5) водородная',ans:'13'},
+    {q:'Из предложенного перечня веществ выберите два вещества, в которых присутствует связь, образованная по донорно-акцепторному механизму.',opts:'1) метанол<br>2) йодид аммония<br>3) озон<br>4) азот<br>5) сульфат натрия',ans:'23'},
+    {q:'Из предложенного перечня выберите два вещества немолекулярного строения, содержащие ковалентную связь, образованную по донорно-акцепторному механизму.',opts:'1) CO<br>2) NH₃<br>3) AlPO₄<br>4) NH₄OH<br>5) NH₄Cl',ans:'45'},
+    {q:'Из предложенного перечня выберите два соединения, в которых одна из ковалентных связей образована по донорно-акцепторному механизму.',opts:'1) CO₂<br>2) NH₃<br>3) NH₄HCO₃<br>4) PH₃<br>5) CH₃COONH₄',ans:'35'},
+    {q:'Из предложенного перечня выберите два вещества немолекулярного строения, содержащие ковалентную связь, образованную по донорно-акцепторному механизму.',opts:'1) KNO₂<br>2) (NH₄)₂CO₃<br>3) O₃<br>4) CO<br>5) NH₄NO₃',ans:'25'},
+    {q:'Из предложенного перечня выберите два вещества молекулярного строения, содержащие связь, образованную по донорно-акцепторному механизму.',opts:'1) NH₄Cl<br>2) CO<br>3) NH₄NO₃<br>4) HNO₃<br>5) Na[Al(OH)₄]',ans:'24'}
+  ],
+  b6: [
+    {q:'Из предложенного перечня веществ выберите два вещества, в которых присутствует ионная химическая связь.',opts:'1) KCl<br>2) KNO₃<br>3) H₃BO₃<br>4) H₂SO₄<br>5) PCl₃',ans:'12'},
+    {q:'Из предложенного перечня веществ выберите два соединения, в которых присутствует ионная связь.',opts:'1) хлороводород<br>2) хлорид натрия<br>3) оксид серы(IV)<br>4) аммиак<br>5) оксид натрия',ans:'25'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ионная химическая связь.',opts:'1) Ca(ClO₂)₂<br>2) HClO₃<br>3) NH₄Cl<br>4) HClO₄<br>5) Cl₂O₇',ans:'13'},
+    {q:'Из предложенного перечня выберите два соединения, в которых присутствует ионная химическая связь.',opts:'1) H₂SO₃<br>2) NaNO₂<br>3) SCl₂<br>4) KF<br>5) CH₂Cl₂',ans:'24'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ионная химическая связь.',opts:'1) фторид натрия<br>2) оксид кремния(IV)<br>3) сульфат натрия<br>4) алмаз<br>5) этанол',ans:'13'},
+    {q:'Из предложенного перечня выберите два вещества, которые имеют ионную кристаллическую решетку.',opts:'1) HF<br>2) KF<br>3) I₂<br>4) N₂O<br>5) Li₂O',ans:'25'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ионная химическая связь.',opts:'1) графит<br>2) калий<br>3) фторид аммония<br>4) гидрид калия<br>5) этанол',ans:'34'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует ионная химическая связь.',opts:'1) оксид кремния(IV)<br>2) оксид лития<br>3) фтороводород<br>4) серная кислота<br>5) гидроксид натрия',ans:'25'},
+    {q:'Из предложенного перечня выберите два вещества, в которых присутствует и ионная, и ковалентная химическая связь.',opts:'1) хлорид фосфора(III)<br>2) серная кислота<br>3) фосфат калия<br>4) сульфат аммония<br>5) аммиак',ans:'34'},
+    {q:'Из предложенного перечня выберите два соединения, в которых присутствует ионная химическая связь.',opts:'1) Ca(ClO₂)₂<br>2) HClO₃<br>3) NH₄Cl<br>4) HClO₄<br>5) Cl₂O₇',ans:'13'}
+  ],
+  b7: [
+    {q:'Из предложенного перечня веществ выберите два вещества, в которых присутствует металлическая связь.',opts:'1) пиролюзит<br>2) железная окалина<br>3) железо<br>4) барий<br>5) кислород',ans:'34'},
+    {q:'Из предложенного перечня выберите два вещества, которые имеют металлическую кристаллическую решетку.',opts:'1) Sn<br>2) B<br>3) Se<br>4) Sr<br>5) Cl₂',ans:'14'},
+    {q:'Из предложенного перечня выберите два вещества с металлической кристаллической решеткой.',opts:'1) гипс<br>2) железо<br>3) белый фосфор<br>4) алмаз<br>5) магний',ans:'25'},
+    {q:'Из предложенного перечня выберите два вещества, которые имеют металлическую кристаллическую решетку.',opts:'1) C<br>2) Se<br>3) Si<br>4) Fe<br>5) Pb',ans:'45'},
+    {q:'Из предложенного перечня веществ выберите два вещества, для которых характерна металлическая кристаллическая решетка.',opts:'1) C<br>2) Ba<br>3) Sr<br>4) N₂<br>5) K₂O',ans:'23'}
+  ],
+  b8: [
+    {q:'Из предложенного перечня веществ выберите два вещества, для каждого из которых характерно наличие водородной связи между молекулами.',opts:'1) вода<br>2) сероводород<br>3) водород<br>4) оксид азота(IV)<br>5) фтороводород',ans:'15'},
+    {q:'Из предложенного перечня выберите два вещества, между молекулами которых образуется водородная связь.',opts:'1) C₂H₄<br>2) NH₃<br>3) SiH₄<br>4) CH₃OH<br>5) CH₃COOCH₃',ans:'24'},
+    {q:'Из предложенного перечня выберите два вещества, между молекулами которых образуется водородная связь.',opts:'1) метанол<br>2) муравьиная кислота<br>3) водород<br>4) метан<br>5) сероводород',ans:'12'},
+    {q:'Из предложенного перечня выберите два вещества, между молекулами которых существует водородная связь.',opts:'1) метиламин<br>2) бензальдегид<br>3) глицерин<br>4) диэтиловый эфир<br>5) дивинил',ans:'13'},
+    {q:'Из предложенного перечня выберите два соединения, между молекулами каждого из которых образуется водородная связь.',opts:'1) HCOOCH₃<br>2) HCOOH<br>3) HF<br>4) HCHO<br>5) CH₄',ans:'23'},
+    {q:'Из предложенного перечня выберите два вещества, между молекулами которых существует водородная связь.',opts:'1) метан<br>2) метанол<br>3) фосфин<br>4) водород<br>5) муравьиная кислота',ans:'25'},
+    {q:'Из предложенного перечня выберите два вещества, между молекулами которых существует водородная связь.',opts:'1) фтороводород<br>2) ацетон<br>3) иодоводород<br>4) пропанол-2<br>5) силан',ans:'14'},
+    {q:'Из предложенного перечня выберите два вещества, между молекулами которых образуется водородная связь.',opts:'1) водород<br>2) метанол<br>3) толуол<br>4) метаналь<br>5) метановая кислота',ans:'25'},
+    {q:'Из предложенного перечня выберите два вещества, между молекулами которых существует водородная связь.',opts:'1) фтороводород<br>2) вода<br>3) декан<br>4) этан<br>5) водород',ans:'12'},
+    {q:'Из предложенного перечня выберите два вещества, между молекулами которых существует водородная связь.',opts:'1) этан<br>2) метиламин<br>3) фосфин<br>4) метанол<br>5) водород',ans:'24'},
+    {q:'Из предложенного перечня выберите два вещества, между молекулами которых существует водородная связь.',opts:'1) фтороводород<br>2) силан<br>3) метан<br>4) бензол<br>5) метиламин',ans:'15'},
+    {q:'Из предложенного перечня выберите два вещества, между молекулами которых существует водородная связь.',opts:'1) метиламин<br>2) этан<br>3) фосфин<br>4) водород<br>5) метанол',ans:'15'},
+    {q:'Из предложенного перечня выберите два вещества, для каждого из которых характерно наличие водородных связей между молекулами.',opts:'1) этанол<br>2) этандиовая кислота<br>3) диметиловый эфир<br>4) метан<br>5) этин',ans:'12'},
+    {q:'Из предложенного перечня выберите два вещества, для каждого из которых характерно наличие водородных связей между молекулами.',opts:'1) глицерин<br>2) кумол<br>3) фосфин<br>4) стеариновая кислота<br>5) этин',ans:'14'},
+    {q:'Из предложенного перечня выберите два вещества, для каждого из которых характерно наличие водородных связей между молекулами.',opts:'1) силан<br>2) циклогексан<br>3) формальдегид<br>4) муравьиная кислота<br>5) фенол',ans:'45'},
+    {q:'Из предложенного перечня выберите два вещества, для каждого из которых характерно наличие водородных связей между молекулами.',opts:'1) плавиковая кислота<br>2) изобутан<br>3) этен<br>4) метан<br>5) этановая кислота',ans:'15'},
+    {q:'Из предложенного перечня выберите два вещества, для каждого из которых характерно наличие водородных связей между молекулами.',opts:'1) диэтиловый эфир<br>2) метилацетат<br>3) изопропиловый спирт<br>4) ацетон<br>5) аммиак',ans:'35'},
+    {q:'Из предложенного перечня выберите два вещества, для каждого из которых характерно наличие водородных связей между молекулами.',opts:'1) фосфин<br>2) аммиак<br>3) вода<br>4) ацетилен<br>5) этилен',ans:'23'},
+    {q:'Из предложенного перечня выберите два вещества, для каждого из которых характерно наличие водородных связей между молекулами.',opts:'1) глицилглицин<br>2) глицерин<br>3) этин<br>4) циклобутан<br>5) стирол',ans:'12'},
+    {q:'Из предложенного перечня выберите два вещества, для каждого из которых характерно наличие водородных связей между молекулами.',opts:'1) щавелевая кислота<br>2) октан<br>3) силан<br>4) этен<br>5) фтороводород',ans:'15'},
+    {q:'Из предложенного перечня выберите два вещества, для каждого из которых характерно наличие водородных связей между молекулами.',opts:'1) кумол<br>2) стирол<br>3) масляная кислота<br>4) этиленгликоль<br>5) ацетальдегид',ans:'34'},
+    {q:'Из предложенного перечня выберите два вещества, для каждого из которых характерно наличие водородных связей между молекулами.',opts:'1) метилбензол<br>2) анилин<br>3) диметиловый эфир<br>4) вода<br>5) метилбензоат',ans:'24'},
+    {q:'Из предложенного перечня выберете два вещества, между молекулами которых образуются водородные связи.',opts:'1) CH₃CHO<br>2) C₆H₅OH<br>3) HF<br>4) CH₃CH₂CH₂CHO<br>5) C₆H₅CH₃',ans:'23'},
+    {q:'Из предложенного перечня веществ выберите два вещества, которые имеют водородные связи между молекулами.',opts:'1) стирол<br>2) уксусная кислота<br>3) ацетальдегид<br>4) азот<br>5) этанол',ans:'25'},
+    {q:'Из предложенного перечня выберете два вещества, для каждого из которых характерно наличие водородных связей.',opts:'1) водород<br>2) глицерин<br>3) ацетальдегид<br>4) муравьиная кислота<br>5) метан',ans:'24'},
+    {q:'Из предложенного перечня выберите два вещества, между молекулами которых образуется водородная связь.',opts:'1) ацетон<br>2) пропиловый спирт<br>3) серная кислота<br>4) метан<br>5) бромид бария',ans:'23'},
+    {q:'Из предложенного перечня выберите два вещества, между молекулами которого образуется водородная связь.',opts:'1) HI<br>2) H₂O<br>3) HNO₃<br>4) CO<br>5) N₂',ans:'23'},
+    {q:'Из предложенного перечня выберете два вещества, для каждого из которых характерно образование водородных связей между молекулами.',opts:'1) уксусный альдегид<br>2) этиловый спирт<br>3) сульфат меди(II)<br>4) оксид железа(III)<br>5) азотная кислота',ans:'25'},
+    {q:'Из предложенного перечня выберите два вещества, для каждого из которых характерно наличие водородных связей.',opts:'1) NH₃<br>2) NaH<br>3) SiH₄<br>4) CH₄<br>5) CH₃COOH',ans:'15'},
+    {q:'Из предложенного перечня выберите два вещества, для каждого из которых характерно наличие водородной связи между молекулами.',opts:'1) формальдегид<br>2) глицерин<br>3) бензол<br>4) уксусная кислота<br>5) толуол',ans:'24'}
+  ],
+  b10: [
+    {q:'Из предложенного перечня выберите два вещества, которые в твердом состоянии имеют молекулярную кристаллическую решетку.',opts:'1) оксид серы(VI)<br>2) ацетальдегид<br>3) кремнезем<br>4) калий<br>5) формиат калия',ans:'12'},
+    {q:'Из предложенного перечня выберите два вещества, которые в твердом состоянии имеют молекулярное строение.',opts:'1) глюкоза<br>2) алмаз<br>3) оксид цинка<br>4) аммиак<br>5) гидроксид натрия',ans:'14'},
+    {q:'Из предложенного перечня веществ выберите два соединения, которые имеют молекулярную кристаллическую решётку.',opts:'1) Na₂O<br>2) I₂<br>3) KCl<br>4) SiO₂<br>5) H₂O',ans:'25'},
+    {q:'Из предложенного перечня веществ выберите два вещества, которые имеют молекулярную кристаллическую решетку.',opts:'1) H₂<br>2) NaH<br>3) SiO₂<br>4) NO₂<br>5) PbO₂',ans:'14'},
+    {q:'Из предложенного перечня веществ выберите два вещества, которые имеют молекулярную кристаллическую решетку.',opts:'1) CO₂<br>2) SiO₂<br>3) NH₃<br>4) NaH<br>5) PbO₂',ans:'13'},
+    {q:'Из предложенного перечня веществ выберите два вещества, которые имеют молекулярную кристаллическую решетку.',opts:'1) хлороводород<br>2) цинк<br>3) хлорид цинка<br>4) хлорид аммония<br>5) хлор',ans:'15'},
+    {q:'Из предложенного перечня выберите два вещества, которые имеют молекулярную кристаллическую решетку.',opts:'1) графит<br>2) цезий<br>3) фтор<br>4) кислород<br>5) кремнезем',ans:'34'},
+    {q:'Из предложенного перечня выберите два вещества, которые имеют молекулярную кристаллическую решетку.',opts:'1) аммиак<br>2) кремний<br>3) бром<br>4) карбид кремния<br>5) карбонат аммония',ans:'13'},
+    {q:'Из предложенного перечня выберите два вещества, которые имеют молекулярную кристаллическую решетку.',opts:'1) бензол<br>2) йодид калия<br>3) фенолят калия<br>4) йод<br>5) медь',ans:'14'},
+    {q:'Из предложенного перечня выберите два вещества, которые в твердом состоянии имеют молекулярную кристаллическую решетку.',opts:'1) фтороводород<br>2) хлорид натрия<br>3) уксусная кислота<br>4) гидроксид натрия<br>5) оксид кремния(IV)',ans:'13'},
+    {q:'Из предложенного перечня выберите два вещества, каждое из которых имеет молекулярную кристаллическую решётку.',opts:'1) этанол<br>2) угарный газ<br>3) хлорид аммония<br>4) оксид натрия<br>5) ацетат натрия',ans:'12'}
+  ],
+  b11: [
+    {q:'Из предложенного перечня веществ выберите два вещества, которые имеют атомную кристаллическую решётку.',opts:'1) белый фосфор<br>2) сера<br>3) графит<br>4) кремний<br>5) натрий',ans:'34'},
+    {q:'Из предложенного перечня выберите два вещества, которые имеют атомную кристаллическую решетку.',opts:'1) карбид кремния<br>2) карбонат кальция<br>3) алмаз<br>4) фенол<br>5) аммиак',ans:'13'},
+    {q:'Из предложенного перечня выберите два вещества, которые имеют атомную кристаллическую решетку.',opts:'1) оксид углерода(IV)<br>2) оксид кремния(IV)<br>3) карбид кремния<br>4) оксид калия<br>5) карбид кальция',ans:'23'},
+    {q:'Из предложенного перечня выберите два вещества, которые имеют атомную кристаллическую решетку.',opts:'1) цинк<br>2) алмаз<br>3) кремнезем<br>4) угарный газ<br>5) хлорид калия',ans:'23'},
+    {q:'Из предложенного перечня выберите два вещества с атомной кристаллической решеткой.',opts:'1) сульфид бария<br>2) ромбическая сера<br>3) оксид кремния(IV)<br>4) гидроксид калия<br>5) карбид кремния',ans:'35'},
+    {q:'Из предложенного перечня выберите два вещества с атомной кристаллической решёткой.',opts:'1) карбид кремния<br>2) гидроксид калия<br>3) оксид кремния<br>4) ромбическая сера<br>5) сульфид бария',ans:'13'}
+  ]
+};
+
+
+// === ПОЯСНЕНИЯ К ЗАДАНИЯМ ===
+var _SOL_b6=['Ионной называется связь между металлом и неметаллом.\n\n1) хлорид калия подходит, есть ионная связь между K и Cl\n2) нитрат калия подходит, есть ионная связь между K и O\n3) борная кислота не подходит, не содержит ионную связь\n4) серная кислота не подходит, не содержит ионную связь\n5) хлорид фосфора(III) не подходит, не содержит ионную связь',
+'Ионной называется связь между металлом и неметаллом.\n\n1) хлороводород не подходит, не содержит ионную связь (HCl)\n2) хлорид натрия подходит, есть ионная связь между Na и Cl (NaCl)\n3) оксид серы(IV) не подходит, не содержит ионную связь (SO2)\n4) аммиак не подходит, не содержит ионную связь (NH3)\n5) оксид натрия подходит, есть ионная связь между Na и O (Na2O)',
+'Ионной называется связь между металлом и неметаллом.\n\n1) хлорит кальция подходит, есть ионная связь между Ca и Cl\n2) хлорноватая кислота не подходит, не содержит ионную связь\n\n3) хлорид аммония подходит, есть ионная связь между NH4 и Cl–\n4) хлорная кислота не подходит, не содержит ионную связь\n5) оксид хлора(VII) не подходит, не содержит ионную связь',
+'Ионной называется связь между металлом и неметаллом.\n\n1) сернистая кислота не подходит, не содержит ионную связь\n2) нитрит натрия подходит, содержит ионную связь между Na и O\n3) хлорид серы(II) не подходит, не содержит ионную связь\n4) фторид калия подходит, содержит ионную связь между K и F\n5) дихлорметан не подходит, не содержит ионную связь',
+'Ионной называется связь между металлом и неметаллом.\n\n1) фторид натрия подходит, содержит ионную связь между Na и F (NaF)\n2) оксид кремния не подходит, не содержит ионную связь (SiO2)\n3) сульфат натрия подходит, содержит ионную связь между Na и O (Na2SO4)\n4) алмаз не подходит, не содержит ионную связь (С)\n5) этанол не подходит, не содержит ионную связь (CH3–CH2–OH)',
+'Ионную кристаллическую решетку имеют все вещества с ионной связью.\n\n1) фтороводород не подходит, имеет молекулярную кристаллическую решетку\n2) фторид калия подходит, есть ионная связь между K и F\n3) йод не подходит, имеет молекулярную кристаллическую решетку\n4) оксид азота(I) не подходит, имеет молекулярную кристаллическую решетку\n5) оксид лития подходит, есть ионная связь между Li и O',
+'Ионной называется связь между металлом и неметаллом.\n\n1) графит не подходит, не содержит ионную связь (С)\n2) калий не подходит, не содержит ионную связь\n3) фторид аммония подходит, содержит ионную связь между NH4 и F– (NH4F)\n4) гидрид калия подходит, содержит ионную связь между K и H (KH)\n5) этанол не подходит, не содержит ионную связь (CH3–CH2–OH)',
+'Ионной называется связь между металлом и неметаллом.\n\n1) оксид кремния(IV) не подходит, не содержит ионную связь (SiO2)\n2) оксид лития подходит, содержит ионную связь между Li и O (Li2O)\n3) фтороводород не подходит, не содержит ионную связь (HF)\n4) серная кислота не подходит, не содержит ионную связь (H2SO4)\n5) гидроксид натрия подходит, содержит ионную связь между Na и O (NaOH)',
+'Ионной называется связь между металлом и неметаллом. Ковалентной называется связь между\nдвумя неметаллами.\n\n1) хлорид фосфора(III) не подходит, у него нет ионной связи (PCl3)\n2) серная кислота не подходит, у неё нет ионной связи (H2SO4)\n3) фосфат калия подходит, у него есть ионная связь между K и P и ковалентная связь между P и\nO (K3PO4)\n4) сульфат аммония подходит, у него есть ионная связь между NH4 и SO4– и ковалентная связь\nмежду S и O ((NH4)2SO4)\n5) аммиак не подходит, у него нет ионной связи (NH3)',
+''];
+var _SOL_b3=['Ковалентной неполярной называется связь между двумя одинаковыми неметаллами.\n\n1) аммиак не подходит, не содержит ковалентную неполярную связь (NH3)\n2) йод подходит, есть связь между атомами йода (I2)\n\n3) кислород подходит, есть связь между атомами кислорода (O2)\n4) вода не подходит, не содержит ковалентную неполярную связь (H2O)\n5) метан не подходит, не содержит ковалентную неполярную связь (CH4)',
+'Ковалентной неполярной называется связь между двумя одинаковыми неметаллами.\n\n1) пероксид водорода подходит, есть связь между атомами кислорода (H2O2)\n2) метанол не подходит, не содержит ковалентную неполярную связь (CH3–OH)\n3) этан подходит, есть связь между атомами углерода (CH3–CH3)\n4) гидроксид натрия не подходит, не содержит ковалентную неполярную связь (NaOH)\n5) вода не подходит, не содержит ковалентную неполярную связь (H2O)',
+'Ковалентной неполярной называется связь между двумя одинаковыми неметаллами.\n\n1) азот подходит, есть связь между атомами азота (N2)\n2) йод подходит, есть связь между атомами йода (I2)\n3) фосфорная кислота не подходит, не содержит ковалентную неполярную связь (H3PO4)\n4) вода не подходит, не содержит ковалентную неполярную связь (H2O)\n5) метан не подходит, не содержит ковалентную неполярную связь (CH4)',
+'Ковалентной неполярной называется связь между двумя одинаковыми неметаллами.\n\n1) натрий не подходит, не содержит ковалентную неполярную связь\n2) оксид натрия не подходит, не содержит ковалентную неполярную связь (Na2O)\n3) фторид натрия не подходит, не содержит ковалентную неполярную связь (NaF)\n4) фтор подходит, есть связь между атомами фтора (F2)\n5) пероксид натрия подходит, есть связь между атомами кислорода (Na2O2)',
+'Ковалентной неполярной называется связь между двумя одинаковыми неметаллами.\n\n1) хлорид фосфора(III) не подходит, не содержит ковалентную неполярную связь\n2) бромоводородная кислота не подходит, не содержит ковалентную неполярную связь\n3) фтор подходит, содержит ковалентную неполярную связь между атомами фтора\n4) пероксид водорода подходит, содержит ковалентную неполярную связь между атомами\nкислорода\n5) гидроксид бария не подходит, не содержит ковалентную неполярную связь',
+'Ковалентной неполярной называется связь между двумя одинаковыми неметаллами.\n\n1) азот (N2), содержит ковалентную неполярную связь N–N\n2) белый фосфор (P), содержит ковалентную неполярную связь P–P\n3) бромоводород (HBr), не содержит ковалентную неполярную связь\n4) оксид серы(IV) (SO2), не содержит ковалентную неполярную связь\n5) оксид калия (K2O), не содержит ковалентную неполярную связь',
+'Ковалентной неполярной называется связь между двумя одинаковыми неметаллами.\n\n1) хлор подходит, содержит ковалентную неполярную связь между атомами хлора (Cl2)\n2) фтороводород не подходит, не содержит ковалентную неполярную связь (HF)\n3) сульфид аммония не подходит, не содержит ковалентную неполярную связь ((NH4)2S)\n4) этан подходит, содержит ковалентную неполярную связь между атомами углерода (CH3–CH3)\n5) аммиак не подходит, не содержит ковалентную неполярную связь (NH3)',
+'Ковалентной неполярной называется связь между двумя одинаковыми неметаллами.\n\n1) оксид кальция не подходит, не содержит ковалентную неполярную связь\n2) пероксид бария подходит, содержит ковалентную неполярную связь между атомами кислорода\n\n3) этан подходит, содержит ковалентную неполярную связь между атомами углерода\n4) оксид натрия не подходит, не содержит ковалентную неполярную связь\n5) натрий не подходит, не содержит ковалентную неполярную связь',
+'Ковалентной неполярной называется связь между двумя одинаковыми неметаллами. Ионной\nназывается связь между металлом и неметаллом.\n\n1) тетрахлорметан не подходит, у него только ковалентная полярная связь (CCl4)\n2) ацетиленид натрия подходит, у него есть ковалентная неполярная связь между атомами\nуглерода и ионная связь между Na и C (NaC≡CH)\n3) оксид фосфора(III) не подходит, у него нет ионной связи (P2O3)\n4) бензоат калия подходит, у него есть и ковалентная неполярная связь между атомами углерода\nи ионная связь между O и K (C6H5–COOK)\n5) глицерин не подходит, у него нет ионной связи (HO–CH2–CH(OH)–CH2–OH)',
+'Ионную кристаллическую решетку имеют все вещества с ионной связью. Ковалентной\nнеполярной называется связь между двумя одинаковыми неметаллами.\n\n1) силикат кальция не подходит, у него ионная кристаллическая решетка, но нет ковалентной\nнеполярной связи (CaSiO3)\n2) пероксид натрия подходит, у него ионная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами кислорода (Na2O2)\n3) ацетиленид натрия подходит, у него ионная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами углерода (NaC≡CH)\n4) гидроксид бария не подходит, у него ионная кристаллическая решетка, но нет ковалентной\nнеполярной связи (Ba(OH)2)\n5) этиленгликоль не подходит, у него молекулярная кристаллическая решетка (HO–CH2–CH2–\nOH)',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой). Ковалентной неполярной\nназывается связь между двумя одинаковыми неметаллами.\n\n1) оксид меди(II) не подходит, у него ионная кристаллическая решетка (CuO)\n2) оксид углерода(II) не подходит, у него молекулярная кристаллическая решетка, но нет\nковалентной неполярной связи (CO)\n3) пропан подходит, у него молекулярная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами углерода (CH3–CH2–CH3)\n4) белый фосфор подходит, у него молекулярная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами фосфора (P4)\n5) гидроксид натрия не подходит, у него ионная кристаллическая решетка (NaOH)',
+'Немолекулярное строение имеют вещества с ионной, атомной или металлической\nкристаллической решеткой. Ковалентной неполярной называется связь между двумя\nодинаковыми неметаллами.\n\n1) алмаз не подходит, у него атомная кристаллическая решетка, но в нем присутствует\nковалентная неполярная связь (С)\n2) сернистый газ не подходит, у него молекулярная кристаллическая решетка (SO2)\n3) хлороводород не подходит, у него молекулярная кристаллическая решетка (HCl)\n4) хлорид аммония подходит, у него ионная кристаллическая решетка и нет ковалентной\nнеполярной связи (NH4Cl)\n5) сульфат натрия подходит, у него ионная кристаллическая решетка и нет ковалентной\nнеполярной связи (Na2SO4)',
+'Ковалентной полярной называется связь между двумя разными неметаллами. Ковалентной\nнеполярной называется связь между двумя одинаковыми неметаллами.\n\n1) этан подходит, у него есть связь между двумя разными неметаллами (C и H) и связь между\nдвумя одинаковыми неметаллами (C и C) (CH3–CH3)\n2) гидроксид кальция не подходит, у него есть связь между двумя разными неметаллами (O и H),\nно нет связи между двумя одинаковыми неметаллами (Ca(OH)2)\n3) пероксид водорода подходит, у него есть связь между двумя разными неметаллами (O и H) и\nсвязь между двумя одинаковыми неметаллами (O и O) (H2O2)\n4) сульфат натрия не подходит, у него есть связь между двумя разными неметаллами (S и O), но\nнет связи между двумя одинаковыми неметаллами (Na2SO4)\n5) оксид натрия не подходит, он не содержит ковалентные связи (Na2O)',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой). Ковалентной неполярной\nназывается связь между двумя одинаковыми неметаллами.\n\n1) этилен подходит, у него молекулярная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами углерода\n2) хлорид фосфора(III) не подходит, у него молекулярная кристаллическая решетка, но нет\nковалентной неполярной связи\n3) карбид кальция не подходит, у него ионная кристаллическая решетка\n4) оксид хлора(I) не подходит, у него молекулярная кристаллическая решетка, но нет ковалентной\nнеполярной связи\n5) хлор подходит, у него молекулярная кристаллическая решетка и есть ковалентная неполярная\nсвязь между атомами хлора',
+'Молекулярное строение имеют вещества с молекулярной кристаллической решеткой.\nКовалентной неполярной называется связь между двумя одинаковыми неметаллами.\n\n1) метилформиат не подходит, у него молекулярное строение, но нет ковалентной неполярной\nсвязи (HCOOCH3)\n2) серная кислота не подходит, у неё молекулярное строение, но нет ковалентной неполярной\nсвязи (H2SO4)\n3) этиленгликоль подходит, у него молекулярная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами углерода (HO–CH2–CH2–OH)\n4) бутадиен-1,3 подходит, у него молекулярная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами углерода (CH2=CH–CH=CH2)\n5) этилат натрия не подходит, у него ионная кристаллическая решетка (CH3–CH2–ONa)',
+'Ковалентной неполярной называется связь между двумя одинаковыми неметаллами.\nМолекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой).\n\n1) пероксид водорода подходит, у него молекулярная кристаллическая решетка и есть\nковалентная неполярная связь между атомами кислорода (H2O2)\n2) хлороводород не подходит, у него молекулярная кристаллическая решетка, но нет ковалентной\nнеполярной связи (HCl)\n3) кремний не подходит, у него атомная кристаллическая решетка\n4) азот подходит, у него молекулярная кристаллическая решетка и есть ковалентная неполярная\nсвязь между атомами азота (N2)\n5) графит не подходит, у него атомная кристаллическая решетка (С)',
+'Немолекулярное строение имеют вещества с ионной, атомной или металлической\nкристаллической решеткой. Ковалентной неполярной называется связь между двумя\nодинаковыми неметаллами.\n\n1) пероксид водорода не подходит, у него молекулярная кристаллическая решетка (H2O2)\n2) ацетон не подходит, у него молекулярная кристаллическая решетка (CH3–C(O)–CH3)\n3) кремний подходит, у него атомная кристаллическая решетка и есть ковалентная неполярная\nсвязь между атомами кремния\n4) фенолят натрия подходит, у него ионная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами углерода (C6H5ONa)\n5) медь не подходит, у нее металлическая кристаллическая решетка, но нет ковалентной\nнеполярной связи',
+'Ковалентной неполярной называется связь между двумя одинаковыми неметаллами.\nНемолекулярное строение имеют вещества с ионной, атомной или металлической\nкристаллической решеткой.\n\n1) пероксид натрия подходит, у него ионная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами кислорода (Na2O2)\n2) пероксид водорода не подходит, у него молекулярная кристаллическая решетка (H2O2)\n3) кремний подходит, у него атомная кристаллическая решетка и есть ковалентная неполярная\nсвязь между атомами кремния\n4) азот не подходит, у него молекулярная кристаллическая решетка (N2)\n5) оксид кремния(IV) не подходит, у него атомная кристаллическая решетка, но нет ковалентной\nнеполярной связи (SiO2)',
+'Немолекулярное строение имеют вещества с ионной, атомной или металлической\nкристаллической решеткой. Ковалентной неполярной называется связь между двумя\nодинаковыми неметаллами.\n\n1) ацетиленид натрия подходит, у него ионная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами углерода (NaC≡CH)\n2) бром не подходит, у него молекулярная кристаллическая решетка (Br2)\n3) алмаз подходит, у него атомная кристаллическая решетка и есть ковалентная неполярная\nсвязь между атомами углерода (С)\n4) гидроксид натрия не подходит, у него ионная кристаллическая решетка, но нет ковалентной\nнеполярной связи (NaOH)\n5) оксид кремния(IV) не подходит, у него атомная кристаллическая решетка, но нет ковалентной\nнеполярной связи (SiO2)',
+'Ионной называется связь между металлом и неметаллом. Ковалентной неполярной называется\nсвязь между двумя одинаковыми неметаллами.\n\n1) пероксид натрия подходит, у него есть ионная связь между Na и O и ковалентная неполярная\nсвязь между атомами кислорода (Na2O2)\n2) диэтиловый эфир не подходит, у него нет ионной связи (CH3–СH2–O–СH2–CH3)\n3) фосфат натрия не подходит, у него есть ионная связь между Na и P, но нет ковалентной\n\nнеполярной связи (Na3PO4)\n4) бензоат аммония подходит, у него есть ионная связь между NH4+ и C6H5COO– и ковалентная\nнеполярная связь между атомами углерода (C6H5–COONH4)\n5) метилацетат не подходит, у него нет ионной связи (CH3COOCH3)',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой). Ковалентной неполярной\nназывается связь между двумя одинаковыми неметаллами.\n\n1) метан не подходит, у него молекулярная кристаллическая решетка, но нет ковалентной\nнеполярной связи (CН4)\n2) карбид кальция не подходит, у него ионная кристаллическая решетка (СаС2)\n3) пероксид водорода подходит, у него молекулярная кристаллическая решетка и есть\nковалентная неполярная связь между атомами кислорода (H2O2)\n4) формальдегид не подходит, у него молекулярная кристаллическая решетка, но нет\nковалентной неполярной связи (HCHO)\n5) циклопентан подходит, у него молекулярная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами углерода (C5H10)',
+'К веществам немолекулярного строения относятся соединения с атомной, ионной и\nметаллической кристаллическими решетками. Ковалентной неполярной называется связь между\nдвумя одинаковыми неметаллами.\n\n1) оксид кремния не подходит, у него атомная кристаллическая решетка, но нет ковалентной\nнеполярной связи (SiO2)\n2) алмаз подходит, у него атомная кристаллическая решетка и есть ковалентная неполярная\nсвязь между атомами углерода (C)\n3) белый фосфор не подходит, у него молекулярная кристаллическая решетка (P4)\n\n4) пероксид натрия подходит, у него ионная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами кислорода (Na2O2)\n5) метиловый спирт не подходит, у него молекулярная кристаллическая решетка (CH3–OH)',
+'Молекулярное строение имеют вещества с молекулярной кристаллической решеткой.\nКовалентной неполярной называется связь между двумя одинаковыми неметаллами.\n\n1) аммиак не подходит, у него молекулярная кристаллическая решетка, но нет ковалентной\nнеполярной связи (NH3)\n2) йод подходит, у него молекулярная кристаллическая решетка и есть ковалентная неполярная\nсвязь между атомами йода (I2)\n3) кислород подходит, у него молекулярная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами кислорода (O2)\n4) оксид магния не подходит, у него ионная кристаллическая решетка (MgO)\n5) метан не подходит, у него молекулярная кристаллическая решетка, но нет ковалентной\nнеполярной связи (CH4)',
+'Немолекулярное строение имеют вещества с ионной, атомной или металлической\nкристаллической решеткой. Ковалентной неполярной называется связь между двумя\nодинаковыми неметаллами.\n\n1) кремний подходит, у него атомная кристаллическая решетка и есть ковалентная неполярная\nсвязь между атомами кремния (Si)\n2) азот не подходит, у него молекулярная кристаллическая решетка (N2)\n3) алмаз подходит, у него атомная кристаллическая решетка и есть ковалентная неполярная\nсвязь между атомами углерода (C)\n\n4) водород не подходит, у него молекулярная кристаллическая решетка (H2)\n5) кремнезем не подходит, у него атомная кристаллическая решетка, но нет ковалентной\nнеполярной связи (SiO2)',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой). Ковалентной неполярной\nназывается связь между двумя одинаковыми неметаллами.\n\n1) бром подходит, у него молекулярная кристаллическая решетка и есть ковалентная неполярная\nсвязь между атомами брома (Br2)\n2) метанол не подходит, у него молекулярная кристаллическая решетка, но нет ковалентной\nнеполярной связи (CH3–OH)\n3) циклопропан подходит, у него молекулярная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами углерода (C3H6)\n4) хлороводород не подходит, у него молекулярная кристаллическая решетка, но нет ковалентной\nнеполярной связи (HCl)\n5) пероксид натрия не подходит, у него ионная кристаллическая решетка',
+'Ковалентной неполярной называется связь между двумя одинаковыми неметаллами. Ионной\nназывается связь между металлом и неметаллом.\n\n1) бензоат калия подходит, содержит ковалентную неполярную связь между атомами углерода,\nионную связь между C6H5COO– и K+ (C6H5–COOK)\n2) глицерин не подходит, не содержит ионных связей (HO–CH2–CH(OH)–CH2–OH)\n3) ацетиленид натрия подходит, содержит ковалентную неполярную связь между атомами\nуглерода, ионную связь между HC≡C– и Na+ (HC≡CNa)\n\n4) оксид фосфора(III) не подходит, не содержит ионных и ковалентных неполярных связей (P2O3)\n5) тетрахлорметан не подходит, не содержит ионных и ковалентных неполярных связей (CCl4)',
+'Молекулярное строение имеют вещества с молекулярной кристаллической решеткой.\nМолекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой).\n\nКовалентной неполярной называется связь между двумя одинаковыми неметаллами.\n\n1) водород подходит, у него молекулярная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами водорода (H2)\n2) йод подходит, у него молекулярная кристаллическая решетка и есть ковалентная неполярная\nсвязь между атомами йода (I2)\n3) азотная кислота не подходит, у нее молекулярная кристаллическая решетка, но нет\nковалентной неполярной связи (HNO3)\n4) вода не подходит, у нее молекулярная кристаллическая решетка, но нет ковалентной\nнеполярной связи (H2O)\n5) метан не подходит, у него молекулярная кристаллическая решетка, но нет ковалентной\nнеполярной связи (CH4)',
+'Ионная кристаллическая решетка у всех веществ, содержащих ионную связь. Ковалентной\nнеполярной называется связь между двумя одинаковыми неметаллами.\n\n1) этиленгликоль не подходит, у него молекулярная кристаллическая решетка (HO–CH2–CH2–OH)\n2) гидроксид бария не подходит, у него ионная кристаллическая решетка, но нет ковалентной\nнеполярной связи (Ba(OH)2)\n3) силикат кальция не подходит, у него ионная кристаллическая решетка, но нет ковалентной\n\nнеполярной связи (CaSiO3)\n4) ацетиленид натрия подходит, у него ионная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами углерода (HC≡CNa)\n5) пероксид натрия подходит, у него ионная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами кислорода (Na2O2)',
+'Молекулярное строение имеют вещества с молекулярной кристаллической решеткой.\nМолекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой).\nКовалентной неполярной называется связь между двумя одинаковыми неметаллами.\n\n1) нитрат калия не подходит, у него ионная кристаллическая решетка\n2) оксид кремния(IV) не подходит, у него атомная кристаллическая решетка\n3) гексан подходит, у него молекулярная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами углерода\n4) гидразин подходит, у него молекулярная кристаллическая решетка и есть ковалентная\nнеполярная связь между атомами азота\n5) бромоводород не подходит, у него молекулярная кристаллическая решетка, но нет\nковалентной неполярной связи',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой). Ковалентной неполярной\nназывается связь между двумя одинаковыми неметаллами.\n\n1) азот подходит, у него молекулярная кристаллическая решетка и есть ковалентная неполярная\nсвязь между атомами азота (N2)\n2) кремний не подходит, у него атомная кристаллическая решетка (Si)\n\n3) графит не подходит, у него атомная кристаллическая решетка (C)\n4) хлороводород не подходит, у него молекулярная кристаллическая решетка, но нет ковалентной\nнеполярной связи (HCl)\n5) пероксид водорода подходит, у него молекулярная кристаллическая решетка и есть\nковалентная неполярная связь между атомами кислорода (H2O2)'];
+var _SOL_b4=['Ковалентной полярной называется связь между двумя разными неметаллами.\n\n1) оксид кремния(IV) подходит, содержит ковалентную полярную связь между Si и O (SiO2)\n2) оксид лития не подходит, не содержит ковалентную полярную связь (Li2O)\n3) хлорид лития не подходит, не содержит ковалентную полярную связь (LiCl)\n4) силикат лития подходит, содержит ковалентную полярную связь между Si и O (Li2SiO3)\n5) кремний не подходит, не содержит ковалентную полярную связь',
+'Ковалентной полярной называется связь между двумя разными неметаллами.\n\n1) хлорид серы(II) подходит, содержит ковалентную полярную связь между S и Cl (SCl2)\n2) хлорид рубидия не подходит, не содержит ковалентную полярную связь (RbCl)\n3) хлорид лития не подходит, не содержит ковалентную полярную связь (LiCl)\n4) хлорид аммония подходит, содержит ковалентную полярную связь между N и H (NH4Cl)\n5) хлор не подходит, не содержит ковалентную полярную связь (Cl2)',
+'Ковалентной полярной называется связь между двумя разными неметаллами.\n\n1) хлорид калия не подходит, не содержит ковалентную полярную связь (KCl)\n2) оксид серы(IV) подходит, содержит ковалентную полярную связь между S и O (SO2)\n3) кремний не подходит, не содержит ковалентную полярную связь (Si)\n4) оксид натрия не подходит, не содержит ковалентную полярную связь (Na2O)\n5) силикат натрия подходит, содержит ковалентную полярную связь между Si и O (Na2SiO3)',
+'Ковалентной полярной называется связь между двумя разными неметаллами.\n\n1) фосфор не подходит, не содержит ковалентную полярную связь\n2) метанол подходит, содержит ковалентную полярную связь между C и H\n3) сульфид аммония подходит, содержит ковалентные полярные связи между N и H\n4) фторид бария не подходит, не содержит ковалентную полярную связь\n5) оксид калия не подходит, не содержит ковалентную полярную связь',
+'Ковалентной полярной называется связь между двумя разными неметаллами.\n\n1) оксид кремния(IV) подходит, содержит ковалентную полярную связь между Si и O (SiO2)\n2) оксид бария не подходит, не содержит ковалентную полярную связь (BaO)\n3) бромид бария не подходит, не содержит ковалентную полярную связь (BaBr2)\n4) нитрат бария, подходит, содержит ковалентную полярную связь между N и O (Ba(NO3)2)\n5) белый фосфор не подходит, не содержит ковалентную полярную связь (P)',
+'Ковалентной полярной называется связь между двумя разными неметаллами.\n\n1) оксид бария не подходит, не содержит ковалентную полярную связь (BaO)\n2) фторид натрия не подходит, не содержит ковалентную полярную связь (NaF)\n3) фторид серы(VI) подходит, содержит ковалентную полярную связь между S и F (SF6)\n4) сульфат магния подходит, содержит ковалентную полярную связь между S и O (MgSO4)\n5) ромбическая сера не подходит, не содержит ковалентную полярную связь',
+'Ковалентной полярной называется связь между двумя разными неметаллами.\n\n1) метанол подходит, содержит ковалентную полярную связь между C и O(CH3–OH)\n2) йодид калия не подходит, не содержит ковалентную полярную связь (KI)\n3) белый фосфор не подходит, не содержит ковалентную полярную связь\n4) ацетат калия подходит, содержит ковалентную полярную связь между C и O (CH3–COOK)\n5) оксид калия не подходит, не содержит ковалентную полярную связь (K2O)',
+'Ковалентной полярной называется связь между двумя разными неметаллами.\n\n1) карбонат натрия подходит, содержит ковалентную полярную связь между C и O (Na2CO3)\n2) хлорид натрия не подходит, не содержит ковалентную полярную связь (NaCl)\n3) бром не подходит, не содержит ковалентную полярную химическую связь (Br2)\n4) метан подходит, содержит ковалентную полярную связь между C и H (CН4)\n5) графит не подходит не содержит ковалентную полярную химическую связь (С)',
+'Ковалентной полярной называется связь между двумя разными неметаллами.\n\n1) хлорид лития не подходит, не содержит ковалентную полярную связь (LiCl)\n2) гидроксид натрия подходит, содержит ковалентную полярную связь между O и H (NaOH)\n3) карбонат магния подходит, содержит ковалентную полярную связь между C и O (MgCO3)\n4) бромид кальция не подходит, не содержит ковалентную полярную связь (CaBr2)\n5) оксид калия не подходит, не содержит ковалентную полярную связь (K2O)',
+'Ковалентной полярной называется связь между двумя разными неметаллами.\n\n1) натрий не подходит, не содержит ковалентную полярную связь\n2) угарный газ подходит, содержит ковалентную полярную связь между C и O (CO)\n3) иодид натрия не подходит, не содержит ковалентную полярную связь (NaI)\n4) хлорид фосфора(III) подходит, содержит ковалентную полярную связь между P и Cl (PCl3)\n5) кислород не подходит, не содержит ковалентную полярную связь (O2)',
+'Ковалентной полярной называется связь между двумя разными неметаллами.\n\n1) азот не подходит, не содержит ковалентную полярную связь (N2)\n2) хлороводород подходит, содержит ковалентную полярную связь между H и Cl (HCl)\n3) аммиак подходит, содержит ковалентную полярную связь между N и H (NH3)\n4) водород не подходит, не содержит ковалентную полярную связь (H2)\n5) хлор не подходит, не содержит ковалентную полярную связь (Cl2)',
+'Ковалентной полярной называется связь между двумя разными неметаллами.\n\n1) хлороводород подходит, содержит ковалентную полярную связь между H и Cl (HCl)\n2) цинк не подходит, не содержит ковалентную полярную связь\n3) хлорид цинка не подходит, не содержит ковалентную полярную связь (ZnCl2)\n4) хлорид аммония подходит, содержит ковалентную полярную связь между N и H (NH4Cl)\n5) хлор не подходит, не содержит ковалентную полярную связь (Cl2)',
+'Ковалентной полярной называется связь между двумя разными неметаллами.\n\n1) фтор не подходит, не содержит ковалентную полярную связь (F2)\n2) фторид лития не подходит, не содержит ковалентную полярную связь (LiF)\n3) фтороводород подходит, содержит ковалентную полярную связь между H и F (HF)\n\n4) фторид кислорода подходит, содержит ковалентную полярную связь между O и F (OF2)\n5) фторид калия не подходит, не содержит ковалентную полярную связь (KF)',
+'Ковалентной полярной называется связь между двумя разными неметаллами.\n\n1) хлорид цезия не подходит, не содержит ковалентную полярную связь\n2) бромид фосфора(III) подходит, содержит ковалентную полярную связь между P и Br\n3) нитрат аммония подходит, содержит ковалентную полярную связь между N и H\n4) оксид стронция не подходит, не содержит ковалентную полярную связь\n5) фосфор не подходит, не содержит ковалентную полярную связь',
+'Немолекулярное строение имеют вещества с ионной, атомной или металлической\nкристаллической решеткой. Ковалентной полярной называется связь между двумя разными\nнеметаллами.\n\n1) диметиламин не подходит, у него молекулярная кристаллическая решетка (CH3–NH–CH3)\n2) бензойная кислота не подходит, у неё молекулярная кристаллическая решетка (C6H5–COOH)\n3) сульфид калия не подходит, у него ионная кристаллическая решетка, но нет ковалентной\nполярной связи (K2S)\n4) нитрат аммония подходит, у него ионная кристаллическая решетка и есть ковалентная\nполярная связь между N и O (NH4NO3)\n5) формиат кальция подходит, у него ионная кристаллическая решетка и есть ковалентная\nполярная связь между C и O ((HCOO)2Ca)',
+'Атомную кристаллическую решетку имеют C (алмаз и графит), Si, SiO2, SiC. Ковалентной\nполярной называется связь между двумя разными неметаллами.\n\n1) кремнезем подходит, у него атомная кристаллическая решетка и есть ковалентная полярная\nсвязь между Si и O (SiO2)\n2) кремний не подходит, у него атомная кристаллическая решетка, но нет ковалентной полярной\nсвязи\n3) хлорид кремния(IV) не подходит, у него молекулярная кристаллическая решетка (SICl4)\n4) карбид кремния подходит, у него атомная кристаллическая решетка и есть ковалентная\nполярная связь между Si и C (SiC)\n5) графит не подходит, у него атомная кристаллическая решетка, но нет ковалентной полярной\nсвязи (С)',
+'Ионную кристаллическую решетку имеют все вещества с ионной связью. Ковалентной полярной\nназывается связь между двумя разными неметаллами.\n\n1) оксид натрия не подходит, у него ионная кристаллическая решетка, но нет ковалентной\nполярной связи (Na2O)\n2) хлороводород не подходит, у него молекулярная кристаллическая решетка (HCl)\n3) гидроксид калия подходит, у него ионная кристаллическая решетка и есть ковалентная\nполярная связь между O и H (KOH)\n4) пероксид бария не подходит, у него ионная кристаллическая решетка, но нет ковалентной\nполярной связи (BaO2)\n5) сульфат лития подходит, у него ионная кристаллическая решетка и есть ковалентная полярная\nсвязь между S и O (Li2SO4)',
+'Немолекулярное строение имеют вещества с ионной, атомной или металлической\nкристаллической решеткой. Ковалентной полярной называется связь между двумя разными\nнеметаллами.\n\n1) хлорид аммония подходит, у него ионная кристаллическая решетка и есть ковалентная\nполярная связь между N и H (NH4Cl)\n2) пероксид натрия не подходит, у него ионная кристаллическая решетка, но нет ковалентной\nполярной связи (Na2O2)\n3) бромид лития не подходит, у него ионная кристаллическая решетка, но нет ковалентной\nполярной связи (LiBr)\n4) сероводород не подходит, у него молекулярная кристаллическая решетка (H2S)\n5) оксид кремния(IV) подходит, у него атомная кристаллическая решетка и есть ковалентная\nполярная связь между Si и O (SiO2)',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой). Ковалентной полярной\nназывается связь между двумя разными неметаллами.\n\n1) бром не подходит, у него молекулярная кристаллическая решетка, но нет ковалентной\nполярной связи (Br2)\n2) бромид аммония не подходит, у него ионная кристаллическая решетка (NH4Br)\n3) бромид фосфора(III) подходит, у него молекулярная кристаллическая решетка и есть\nковалентная полярная связь между P и Br (PBr3)\n4) бромид калия не подходит, у него ионная кристаллическая решетка (KBr)\n5) бензол подходит, у него молекулярная кристаллическая решетка и есть ковалентная полярная\nсвязь между C и H (C6H6)',
+'Молекулярное строение имеют вещества с молекулярной кристаллической решеткой.\nКовалентной полярной называется связь между двумя разными неметаллами.\n\n1) йод не подходит, у него молекулярная кристаллическая решетка, но нет ковалентной полярной\nсвязи (I2)\n2) оксид серы(IV) подходит, у него молекулярная кристаллическая решетка и есть ковалентная\nполярная связь между S и O (SO2)\n3) марганец не подходит, у него металлическая кристаллическая решетка (Mn)\n4) хлорид кальция не подходит, у него ионная кристаллическая решетка (CaCl2)\n5) азотная кислота подходит, у нее молекулярная кристаллическая решетка и есть ковалентная\nполярная связь между H и O, N и O (HNO3)',
+'Молекулярное строение имеют вещества с молекулярной кристаллической решеткой.\nМолекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой). Ковалентной полярной\nназывается связь между двумя разными неметаллами.\n\n1) азот не подходит, у него молекулярная кристаллическая решетка, но нет ковалентной полярной\nсвязи (N2)\n2) хлорид серы(II) подходит, у него молекулярная кристаллическая решетка и есть ковалентная\nполярная связь между Cl и S (SCl2)\n3) оксид кремния(IV) не подходит, у него атомная кристаллическая решетка (SiO2)\n4) азотная кислота подходит, у нее молекулярная кристаллическая решетка и есть ковалентная\nполярная связь между H и O, N и O (HNO3)\n5) сульфат калия не подходит, у него ионная кристаллическая решетка (K2SO4)',
+'Ионное строение имеют вещества с ионной кристаллической решеткой. Ковалентной полярной\nназывается связь между двумя разными неметаллами.\n\n1) хлороводород не подходит, у него молекулярная кристаллическая решетка (HCl)\n2) карбонат натрия подходит, у него ионная кристаллическая решетка и есть ковалентная\nполярная связь между C и O (Na2CO3)\n3) оксид серы(IV) не подходит, у него молекулярная кристаллическая решетка (SO2)\n4) аммиак не подходит, у него молекулярная кристаллическая решетка (NH3)\n5) сульфат железа(II) подходит, у него ионная кристаллическая решетка и есть ковалентная\nполярная связь между S и O (FeSO4)'];
+var _SOL_b8=['Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N–H,\nO–H или F–H.\n\n1) вода подходит, у неё есть связь O–H (H2O)\n2) сероводород не подходит, водород связан только с атомом серы (H2S)\n3) водород не подходит, атомы водорода в молекуле связаны только между собой (H2)\n4) оксид азота(IV) не подходит, в нём нет атомов водорода (NO2)\n5) фтороводород подходит, у него есть связь F–H (HF)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N–H,\nO–H или F–H.\n\n1) этен не подходит, водород связан только с атомом углерода (C2H4)\n2) аммиак подходит, у него есть связь N–H (NH3)\n3) силан не подходит, водород связан только с атомом кремния (SiH4)\n4) метанол подходит, у него есть связь O–H (CH3OH)\n5) метилацетат не подходит, водород связан только с атомом углерода (CH3COOCH3)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N–H,\nO–H или F–H.\n\n1) метанол подходит, у него есть связь O–H (CH3–OH)\n2) муравьиная кислота подходит, у нее есть связь O–H (HCOOH)\n3) водород не подходит, атомы водорода в молекуле связаны между собой (H2)\n4) метан не подходит, водород связан только с атомом углерода (CH4)\n5) сероводород не подходит, водород связан только с атомом сера (H2S)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N–H,\nO–H или F–H.\n\n1) метиламин подходит, у него есть связь N–H (CH3–NH2)\n2) бензальдегид не подходит, водород связан только с атомом углерода (C6H5–CHO)\n3) глицерин подходит, у него есть связь O–H (HO–CH2–CH(OH)–CH2–OH)\n4) диэтиловый эфир не подходит, водород связан только с атомом углерода (CH3–СH2–O–СH2–\nCH3)\n5) дивинил не подходит, водород связан только с атомом углерода (CH2=CH–CH=CH2)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N–H,\nO–H или F–H.\n\n1) метилформиат не подходит, водород связан только с атомом углерода\n2) муравьиная кислота подходит, есть связь O–H\n3) фтороводород подходит, есть связь F–H\n4) метаналь не подходит, водород связан только с атомом углерода\n5) метан не подходит, водород связан только с атомом углерода',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N–H,\nO–H или F–H.\n\n1) метан не подходит, водород связан только с атомом углерода (CH4)\n2) метанол подходит, у него есть связь O–H (CH3–OH)\n3) фосфин не подходит, водород связан только с атомом фосфора (PH3)\n4) водород не подходит, атомы водорода в молекуле связаны между собой (H2)\n5) муравьиная кислота подходит, у неё есть связь O–H (HCOOH)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N–H,\nO–H или F–H.\n\n1) фтороводород подходит, у него есть связь F–H (HF)\n2) ацетон не подходит, водород связан только с атомом углерода (CH3–C(O)–CH3)\n3) иодоводород не подходит, водород связан только с атомом иода (HI)\n4) пропанол-2 подходит, у него есть связь O–H (CH3–CH(OH)–CH3)\n5) силан не подходит, водород связан только с атомом кремния (SiH4)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N–H,\nO–H или F–H.\n\n1) водород не подходит, атомы водорода в молекуле связаны между собой (H2)\n2) метанол подходит, у него есть связь O–H (CH3–OH)\n3) толуол не подходит, водород связан только с атомом углерода (C6H5–CH3)\n4) метаналь не подходит, водород связан только с атомом углерода (HCHO)\n5) метановая кислота подходит, у неё есть связь O–H (HCOOH)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N–H,\nO–H или F–H.\n\n1) фтороводород подходит, у него есть связь F–H (HF)\n2) вода подходит, у нее есть связь O–H (H2O)\n3) декан не подходит, водород связан только с атомом углерода (C10H22)\n4) этан не подходит, водород связан только с атомом углерода (C2H6)\n5) водород не подходит, атомы водороды связаны только между собой в молекуле (H2)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N–H,\nO–H или F–H.\n\n1) этан не подходит, водород связан только с атомом углерода (CH3–CH3)\n2) метиламин подходит, у него есть связь N–H (CH3–NH2)\n3) фосфин не подходит, водород связан только с атомом фосфора (PH3)\n4) метанол подходит, у него есть связь O–H (CH3–OH)\n5) водород не подходит, водород связан только с атомом водорода (H2)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N–H,\nO–H или F–H.\n\n1) фтороводород подходит, у него есть связь F–H (HF)\n2) силан не подходит, водород связан только с атомом кремния (SiH4)\n3) метан не подходит, водород связан только с атомом углерода (CH4)\n4) бензол не подходит, водород связан только с атомом углерода (C6H6)\n5) метиламин подходит, у него есть связь N–H (CH3–NH2)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N–H,\nO–H или F–H.\n\n1) метиламин подходит, у него есть связь N–H (CH3–NH2)\n2) этан не подходит, водород связан только с атомом углерода (CH3–CH3)\n3) фосфин не подходит, водород связан только с атомом фосфора (PH3)\n4) водород не подходит, атомы водорода в молекуле связаны только между собой (H2)\n5) метанол подходит, у него есть связь O–H (CH3–OH)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) этанол подходит, у него есть связь O-H (CH3–CH2–OH)\n2) этандиовая кислота подходит, у нее есть связь O-H (HOOC–COOH)\n3) диметиловый эфир не подходит, водород связан только с атомом углерода (CH3–O–CH3)\n4) метан не подходит, водород связан только с атомом углерода (CH4)\n5) этин не подходит, водород связан только с атомом углерода (HC≡CH)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) глицерин подходит, у него есть связь O-H (HO–CH2–CH(OH)–CH2–OH)\n2) кумол не подходит, водород связан только с атомом углерода (C6H5–CH(CH3)2)\n3) фосфин не подходит, водород связан только с атомом фосфора (PH3)\n4) стеариновая кислота подходит, у нее есть связь O-H (C17H35COOH)\n5) этин не подходит, водород связан только с атомом углерода (HC≡CH)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) силан не подходит, водород связан только с атомом кремния (SiH4)\n2) циклогексан не подходит, водород связан только с атомом углерода (C6H12)\n3) формальдегид не подходит, водород связан только с атомом углерода (HCHO)\n4) муравьиная кислота подходит, у нее есть связь O-H (HCOOH)\n5) фенол подходит, у него есть связь O-H (C6H5–OH)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) плавиковая кислота подходит, у нее есть связь F-H (HF)\n2) изобутан не подходит, водород связан только с атомом углерода ((СН3)3СН)\n3) этен не подходит, водород связан только с атомом углерода (CH2=CH2)\n4) метан не подходит, водород связан только с атомом углерода (CH4)\n5) этановая кислота подходит, у нее есть связь O-H (CH3COOH)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) диэтиловый эфир не подходит, водород связан только с атомом углерода (CH3–CH2–O–CH2–CH3)\n2) метилацетат не подходит, водород связан только с атомом углерода (CH3–COOCH3)\n3) изопропиловый спирт подходит, у него есть связь O-H (CH3–CH(OH)–CH3)\n4) ацетон не подходит, водород связан только с атомом углерода (CH3–C(O)–CH3)\n5) аммиак подходит, у него есть связь N-H (NH3)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) фосфин не подходит, водород связан только с атомом фосфора (PH3)\n2) аммиак подходит, у него есть связь N-H (NH3)\n3) вода подходит, у нее есть связь O-H (H2O)\n4) ацетилен не подходит, водород связан только с атомом углерода (HC≡CH)\n5) этилен не подходит, водород связан только с атомом углерода (CH2=CH2)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) глицилглицин подходит, у него есть связи O-H и N-H (H2N–CH2–C(O)–N(H)–CH2–COOH)\n2) глицерин подходит, у него есть связь O-H (HO–CH2–CH(OH)–CH2–OH)\n3) этин не подходит, водород связан только с атомом углерода (CH≡CH)\n4) циклобутан не подходит, водород связан только с атомом углерода (C4H8)\n5) стирол не подходит, водород связан только с атомом углерода (C6H5–CH=CH2)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) щавелевая кислота подходит, у нее есть связь O-H (HOOC–COOH)\n2) октан не подходит, водород связан только с атомом углерода (C8H18)\n3) силан не подходит, водород связан только с атомом кремния (SiH4)\n4) этен не подходит, водород связан только с атомом углерода (CH2=CH2)\n5) фтороводород подходит, у него есть связь F-H (HF)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) кумол не подходит, водород связан только с атомом углерода (C6H5–CH(CH3)2)\n2) стирол не подходит, водород связан только с атомом углерода (C6H5–CH=CH2)\n3) масляная кислота подходит, у нее есть связь O-H (CH3–CH2–CH2–COOH)\n4) этиленгликоль подходит, у него есть связь O-H (HO–CH2–CH2–OH)\n5) ацетальдегид не подходит, водород связан только с атомом углерода (CH3–CHO)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) метилбензол не подходит, водород связан только с атомом углерода (C6H5–CH3)\n2) анилин подходит, у него есть связь N-H (C6H5–NH2)\n3) диметиловый эфир не подходит, водород связан только с атомом углерода (CH3–O–CH3)\n4) вода подходит, у нее есть связь O-H (H2O)\n5) метилбензоат не подходит, водород связан только с атомом углерода (C6H5COOCH3)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) этаналь не подходит, водород связан только с атомом углерода (CH3–CHO)\n2) фенол подходит, у него есть связь O-H (C6H5OH)\n3) плавиковая кислота подходит, у нее есть связь F-H (HF)\n4) бутаналь не подходит, водород связан только с атомом углерода (CH3–CH2–CH2–CHO)\n5) толуол не подходит, водород связан только с атомом углерода (C6H5–CH3)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) стирол не подходит, водород связан только с атомом углерода (C6H5–CH=CH2)\n2) уксусная кислота подходит, у нее есть связь O-H (CH3–COOH)\n3) ацетальдегид не подходит, водород связан только с атомом углерода (CH3–CHO)\n4) азот не подходит, у него нет атомов водорода (N2)\n5) этанол подходит, у него есть связь O-H (CH3–CH2–OH)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) водород не подходит, атомы водорода связаны только между собой в молекуле (H2)\n2) глицерин подходит, у него есть связь O-H (OH–CH2–CH(OH)–CH2–OH)\n3) ацетальдегид не подходит, водород связан только с атомом углерода (CH3–CHO)\n4) муравьиная кислота подходит, у нее есть связь O-H (HCOOH)\n5) метан не подходит, водород связан только с атомом углерода (CH4)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) ацетон не подходит, водород связан только с атомами углерода (CH3C(O)CH3)\n2) пропиловый спирт подходит, у него есть связь O-H (C2H5OH)\n3) серная кислота подходит, у нее есть связь O-H (H2SO4)\n4) метан не подходит, водород связан только с атомами углерода (CH4)\n5) бромид бария не подходит, в его составе нет водорода (BaBr2)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) йодоводородная кислота не подходит, водород связан только с атомом йода\n2) вода подходит, у нее есть связь O-H\n3) азотная кислота подходит, у нее есть связь O-H\n4) угарный газ не подходит, в его составе нет водорода\n5) азот не подходит, в его составе нет водорода',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) уксусный альдегид не подходит, водород связан только с атомами углерода (CH3CHO)\n2) этиловый спирт подходит, у него есть связь O-H (C2H5OH)\n3) сульфат меди(II) не подходит, не содержит атомов водорода (CuSO4)\n4) оксид железа(III) не подходит, не содержит атомов водорода (Fe2O3)\n5) азотная кислота подходит, у нее есть связь O-H (HNO3)',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N-H, O-H или F-H.\n\n1) аммиак подходит, у него есть связь N-H\n2) гидрид натрия не подходит, водород связан с атомом натрия\n3) силан не подходит, водород связан с атомом кремния\n4) метан не подходит, водород связан с атомом углерода\n5) уксусная кислота подходит, у нее есть связь O-H',
+'Водородная связь между молекулами образуется в том случае, если в молекулах есть связи N–H, O–H или F–H.\n\n1) формальдегид не подходит, водород связан только с атомом углерода (HCHO)\n2) глицерин подходит, у него есть связь O–H (HO–CH2–CH(OH)–CH2–OH)\n3) бензол не подходит, водород связан только с атомом углерода (C6H6)\n4) уксусная кислота подходит, у неё есть связь O–H (CH3COOH)\n5) толуол не подходит, водород связан только с атомом углерода (C6H5–CH3)'];
+var _SOL_b5=['Донорно-акцепторная связь есть в NH4 , CO, O3, комплексных соединениях и нитрат-ионе.\n\n1) гидроксид лития не подходит, не содержит донорно-акцепторную связь\n2) фосфат лития не подходит, не содержит донорно-акцепторной связи\n3) гидрофосфат аммония подходит, содержит донорно-акцепторную связь\n4) фторид аммония подходит, содержит донорно-акцепторную связь\n5) ортофосфорная кислота не подходит, не содержит донорно-акцепторную связь',
+'Донорно-акцепторная связь есть в NH4 , CO, O3, комплексных соединениях и нитрат-ионе.\n\n1) фосфат калия не подходит, не содержит донорно-акцепторную связь\n2) гидросульфат аммония подходит, содержит донорно-акцепторную связь\n3) серная кислота не подходит, не содержит донорно-акцепторную связь\n4) гидроксид калия не подходит, не содержит донорно-акцепторную связь\n5) хлорид аммония подходит, содержит донорно-акцепторную связь',
+'Донорно-акцепторная связь есть в NH4 , CO, O3, комплексных соединениях и нитрат-ионе.\n\n1) сульфит натрия не подходит, не содержит донорно-акцепторную связь (Na2SO3)\n2) карбонат бария не подходит, не содержит донорно-акцепторную связь (BaCO3)\n\n3) ацетат аммония подходит, содержит донорно-акцепторную связь (CH3COONH4)\n4) гидроксид стронция не подходит, не содержит донорно-акцепторную связь (Sr(OH)2)\n5) сульфат аммония подходит, содержит донорно-акцепторную связь ((NH4)2SO4)',
+'Донорно-акцепторная связь есть в NH4 , CO, O3, комплексных соединениях и нитрат-ионе.\n\n1) метанол не подходит, не содержит донорно-акцепторную связь\n2) метиламин не подходит, не содержит донорно-акцепторную связь\n3) гидрокарбонат аммония подходит, содержит донорно-акцепторную связь\n4) этаналь не подходит, не содержит донорно-акцепторную связь\n5) ацетат аммония подходит, содержит донорно-акцепторную связь',
+'Немолекулярное строение имеют вещества с ионной, атомной или металлической\nкристаллической решеткой. Донорно-акцепторная связь есть в NH4+, CO, O3, комплексных\nсоединениях и нитрат-ионе.\n\n1) гидроксид натрия не подходит, у него ионная кристаллическая решетка, но нет ковалентной\nсвязи, образованной по донорно-акцепторному механизму (NaOH)\n2) сульфат аммония подходит, у него ионная кристаллическая решетка и есть связь,\nобразованная по донорно-акцепторному механизму ((NH4)2SO4)\n3) хлорид аммония подходит, у него ионная кристаллическая решетка и есть связь, образованная\nпо донорно-акцепторному механизму (NH4Cl)\n4) азотная кислота не подходит, у нее молекулярная кристаллическая решетка (HNO3)\n5) аммиак не подходит, у него молекулярная кристаллическая решетка (NH3)',
+'Хлорид аммония (NH4Cl) содержит ионную связь между ионом аммония и кислотным остатком и ковалентные полярные связи между атомами водорода и азота. Донорно-акцепторным называется механизм образования связи, он не является типом химической связи.',
+'Веществами с донорно-акцепторным механизмом образования связи являются NH4⁺, CO, O3, комплексные соединения и нитрат-ион.\n\n1) фосфин не подходит, не содержит донорно-акцепторную связь (PH3)\n2) угарный газ подходит, содержит донорно-акцепторную связь (CO)\n3) бурый газ не подходит, не содержит донорно-акцепторную связь (NO2)\n4) аммиак не подходит, не содержит донорно-акцепторную связь (NH3)\n5) нитрат аммония подходит, содержит донорно-акцепторную связь (NH4NO3)',
+'Веществами с донорно-акцепторным механизмом образования связи являются NH4⁺, CO, O3, комплексные соединения и нитрат-ион.\n\n1) хлорид аммония подходит, содержит донорно-акцепторную связь (NH4Cl)\n2) нитрит натрия не подходит, не содержит донорно-акцепторную связь (NaNO2)\n3) фосген не подходит, не содержит донорно-акцепторную связь (COCl2)\n4) угарный газ подходит, содержит донорно-акцепторную связь (CO)\n5) гашеная известь не подходит, не содержит донорно-акцепторную связь (Ca(OH)2)',
+'Ковалентной называется связь между неметаллами. Веществами с донорно-акцепторным механизмом образования связи являются NH4⁺, CO, O3, комплексные соединения и нитрат-ион.\n\n1) угольная кислота не подходит, не содержит донорно-акцепторную связь (H2CO3)\n2) хлорид аммония подходит, содержит ковалентную связь, образованную по донорно-акцепторному механизму (NH4Cl)\n3) гидроксид калия не подходит, не содержит донорно-акцепторную связь (KOH)\n4) оксид кремния не подходит, не содержит донорно-акцепторную связь (SiO2)\n5) гидросульфат аммония подходит, содержит ковалентную связь, образованную по донорно-акцепторному механизму (NH4HSO4)',
+'Веществами с донорно-акцепторным механизмом образования связи являются NH4⁺, CO, O3, комплексные соединения и нитрат-ион.\n\n1) угарный газ подходит, содержит донорно-акцепторную связь (CO)\n2) хлорид аммония подходит, содержит донорно-акцепторную связь (NH4Cl)\n3) гидроксид алюминия не подходит, не содержит донорно-акцепторную связь (Al(OH)3)\n4) оксид азота(II) не подходит, не содержит донорно-акцепторную связь (NO)\n5) оксид алюминия не подходит, не содержит донорно-акцепторную связь (Al2O3)',
+'Донорно-акцепторная связь есть в: NH4+, солях аминов, CO, O3, NO3– и комплексных соединениях.\n\n1) хлорид метилэтиламмония подходит, содержит донорно-акцепторную связь ([CH3NHC2H5]+Cl–)\n2) карбонат цинка не подходит, не содержит донорно-акцепторную связь (ZnCO3)\n3) гидроксид алюминия не подходит, не содержит донорно-акцепторную связь (Al(OH)3)\n4) бурый газ не подходит, не содержит донорно-акцепторную связь (NO2)\n5) угарный газ подходит, содержит донорно-акцепторную связь (CO)',
+'Донорно-акцепторная связь есть в: NH4+, солях аминов, CO, O3, NO3– и комплексных соединениях.\n\n1) хромат натрия не подходит, не содержит донорно-акцепторную связь (Na2CrO4)\n2) метиламин не подходит, не содержит донорно-акцепторную связь (CH3NH2)\n3) сульфат аммония подходит, содержит донорно-акцепторную связь ((NH4)2SO4)\n4) аммиак не подходит, не содержит донорно-акцепторную связь (NH3)\n5) угарный газ подходит, содержит донорно-акцепторную связь (CO)',
+'Донорно-акцепторная связь есть в NH4+, CO, O3, комплексных соединениях и нитрат-ионе.\n\n1) бромид аммония подходит, содержит донорно-акцепторную связь\n2) нитрит калия не подходит, не содержит донорно-акцепторную связь\n3) угарный газ подходит, содержит донорно-акцепторную связь\n4) хлорметан не подходит, не содержит донорно-акцепторную связь\n5) серная кислота не подходит, не содержит донорно-акцепторную связь',
+'Молекула хлорида аммония (NH4Cl) содержит ковалентную полярную связь между атомами азота и водорода и ионную связь между ионом аммония и хлорид-ионом.',
+'Донорно-акцепторная связь есть в: NH4+, солях аминов, CO, O3, NO3– и комплексных соединениях.\n\n1) метанол не подходит, не содержит донорно-акцепторную связь (CH3OH)\n2) йодид аммония подходит, содержит донорно-акцепторную связь (NH4I)\n3) озон подходит, содержит донорно-акцепторную связь (O3)\n4) азот не подходит, не содержит донорно-акцепторную связь (N2)\n5) сульфат натрия не подходит, не содержит донорно-акцепторную связь (Na2SO4)',
+'Немолекулярное строение имеют вещества с ионной, атомной или металлической кристаллической решеткой. Донорно-акцепторная связь есть в: NH4+, солях аминов, CO, O3, NO3– и комплексных соединениях.\n\n1) угарный газ не подходит, у него молекулярная кристаллическая решетка\n2) аммиак не подходит, у него молекулярная кристаллическая решетка\n3) фосфат алюминия не подходит, у него ионная кристаллическая решетка, но нет ковалентной связи, образованной по донорно-акцепторному механизму\n4) гидрат аммиака подходит, у него ионная кристаллическая решетка и есть ковалентная связь, образованная по донорно-акцепторному механизму\n5) хлорид аммония подходит, у него ионная кристаллическая решетка и есть ковалентная связь, образованная по донорно-акцепторному механизму',
+'Донорно-акцепторная связь есть в: NH4+, солях аминов, CO, O3, NO3– и комплексных соединениях.\n\n1) углекислый газ не подходит, у него нет ковалентной связи, образованной по донорно-акцепторному механизму\n2) аммиак не подходит, у него нет ковалентной связи, образованной по донорно-акцепторному механизму\n3) гидрокарбонат аммония подходит, у него есть ковалентная связь, образованная по донорно-акцепторному механизму\n4) фосфин не подходит, у него нет ковалентной связи, образованной по донорно-акцепторному механизму\n5) ацетат аммония подходит, у него есть ковалентная связь, образованная по донорно-акцепторному механизму',
+'Немолекулярное строение имеют вещества с ионной, атомной или металлической кристаллической решеткой. Донорно-акцепторная связь есть в NH4+, солях аминов, CO, O3, NO3– и комплексных соединениях.\n\n1) нитрит калия не подходит, у него ионная кристаллическая решетка, но нет ковалентной связи, образованной по донорно-акцепторному механизму\n2) карбонат аммония подходит, у него ионная кристаллическая решетка и есть связь, образованная по донорно-акцепторному механизму\n3) озон не подходит, у него молекулярная кристаллическая решетка\n4) угарный газ не подходит, у него молекулярная кристаллическая решетка\n5) нитрат аммония подходит, у него ионная кристаллическая решетка и есть связь, образованная по донорно-акцепторному механизму',
+'Молекулярное строение имеют вещества с молекулярной кристаллической решеткой. Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные связи (за исключением веществ с атомной кристаллической решеткой). Донорно-акцепторная связь есть в: NH4+, солях аминов, CO, O3, NO3– и комплексных соединениях.\n\n1) хлорид аммония не подходит, у него ионная кристаллическая решетка\n2) угарный газ подходит, у него молекулярная кристаллическая решетка и есть ковалентная связь, образованная по донорно-акцепторному механизму\n3) нитрат аммония не подходит, у него ионная кристаллическая решетка\n4) азотная кислота подходит, у нее молекулярная кристаллическая решетка и есть ковалентная связь, образованная по донорно-акцепторному механизму\n5) тетрагидроксоалюминат натрия не подходит, у него ионная кристаллическая решетка'];
+var _SOL_b11=['Атомную кристаллическую решетку имеют C (алмаз и графит), Si, SiO2, SiC.\n\n1) белый фосфор не подходит, у него молекулярная кристаллическая решетка\n2) сера не подходит, у неё молекулярная кристаллическая решетка\n3) графит подходит, у него атомная кристаллическая решетка\n4) кремний подходит, у него атомная кристаллическая решетка\n5) натрий не подходит, у него металлическая кристаллическая решетка',
+'Атомную кристаллическую решетку имеют C (алмаз и графит), Si, SiO2, SiC.\n\n1) карбид кремния подходит, имеет атомную кристаллическую решетку (SiC)\n2) карбонат кальция не подходит, имеет ионную кристаллическую решётку (CaCO3)\n3) алмаз подходит, имеет атомную кристаллическую решетку (С)\n4) фенол не подходит, имеет молекулярную кристаллическую решетку (C6H5–OH)\n5) аммиак не подходит, имеет молекулярную кристаллическую решетку (NH3)',
+'Атомную кристаллическую решетку имеют C (алмаз и графит), Si, SiO2, SiC.\n\n1) оксид углерода(IV) не подходит, имеет молекулярную кристаллическую решётку (СO2)\n2) оксид кремния(IV) подходит, имеет атомную кристаллическую решетку (SiO2)\n3) карбид кремния подходит, имеет атомную кристаллическую решетку (SiC)\n4) оксид калия не подходит, имеет ионную кристаллическую решетку (K2O)\n5) карбид кальция не подходит, имеет ионную кристаллическую решетку (СаС2)',
+'Атомную кристаллическую решетку имеют C (алмаз и графит), Si, SiO2, SiC.\n\n1) цинк не подходит, у него металлическая кристаллическая решетка\n2) алмаз подходит, у него атомная кристаллическая решетка (С)\n3) кремнезем подходит, у него атомная кристаллическая решетка (SiO2)\n4) угарный газ не подходит, у него молекулярная кристаллическая решетка (CO)\n5) хлорид калия не подходит, у него ионная кристаллическая решетка (KCl)',
+'Атомную кристаллическую решетку имеют C (алмаз и графит), Si, SiO2, SiC.\n\n1) сульфид бария не подходит, у него ионная кристаллическая решетка (BaS)\n2) ромбическая сера не подходит, у неё молекулярная кристаллическая решетка (S)\n3) оксид кремния(IV) подходит, у него атомная кристаллическая решетка (SiO2)\n4) гидроксид калия не подходит, у него ионная кристаллическая решетка (KOH)\n5) карбид кремния подходит, у него атомная кристаллическая решетка (SiC)',
+'Атомную кристаллическую решетку имеют C (алмаз и графит), Si, SiO2, SiC.\n\n1) карбид кремния подходит, у него атомная кристаллическая решетка (SiC)\n2) гидроксид калия не подходит, у него ионная кристаллическая решетка (KOH)\n3) оксид кремния(IV) подходит, у него атомная кристаллическая решетка (SiO2)\n4) ромбическая сера не подходит, у нее молекулярная кристаллическая решетка (S8)\n5) сульфид бария не подходит, у него ионная кристаллическая решетка (BaS)'];
+var _SOL_b10=['Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой).\n\n1) оксид серы(VI) подходит, имеет молекулярную кристаллическую решетку (SO3)\n2) ацетальдегид подходит, имеет молекулярную кристаллическую решетку (CH3–CHO)\n3) кремнезем не подходит, имеет атомную кристаллическую решетку (SiO2)\n\n4) калий не подходит, имеет металлическую кристаллическую решетку\n5) формиат калия не подходит, имеет ионную кристаллическую решетку (HCOOK)',
+'Молекулярное строение имеют вещества с молекулярной кристаллической решеткой.\n\n1) глюкоза подходит, имеет молекулярную кристаллическую решётку (C6H12O6)\n2) алмаз не подходит, имеет атомную кристаллическую решётку (С)\n3) оксид цинка не подходит, имеет ионную кристаллическую решётку (ZnO)\n4) аммиак подходит, имеет молекулярную кристаллическую решётку (NH3)\n5) гидроксид натрия не подходит, имеет ионную кристаллическую решётку (NaOH)',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой).\n\n1) оксид натрия не подходит, имеет ионную кристаллическую решётку\n2) йод подходит, имеет молекулярную кристаллическую решётку\n3) хлорид калия не подходит, имеет ионную кристаллическую решётку\n4) оксид кремния(IV) не подходит, имеет атомную кристаллическую решётку\n5) вода подходит, имеет молекулярную кристаллическую решётку',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой).\n\n1) водород подходит, имеет молекулярную кристаллическую решётку\n2) гидрид натрия не подходит, имеет ионную кристаллическую решетку\n3) оксид кремния(IV) не подходит, имеет атомную кристаллическую решетку\n4) оксид азота(IV) подходит, имеет молекулярную кристаллическую решётку\n5) оксид свинца(IV) не подходит, имеет ионную кристаллическую решетку',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой).\n\n1) оксид углерода(IV) подходит, имеет молекулярную кристаллическую решётку\n2) оксид кремния(IV) не подходит, имеет атомную кристаллическую решётку\n3) аммиак подходит, имеет молекулярную кристаллическую решётку\n4) гидрид натрия не подходит, имеет ионную кристаллическую решётку\n5) оксид свинца(IV) не подходит, имеет ионную кристаллическую решётку',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой).\n\n1) хлороводород подходит, имеет молекулярную кристаллическую решётку (HCl)\n2) цинк не подходит, имеет металлическую кристаллическую решетку\n3) хлорид цинка не подходит, имеет ионную кристаллическую решетку (ZnCl2)\n4) хлорид аммония не подходит, имеет ионную кристаллическую решетку (NH4Cl)\n5) хлор подходит, имеет молекулярную кристаллическую решётку (Cl2)',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой).\n\n1) графит не подходит, у него атомная кристаллическая решётка (С)\n2) цезий не подходит, у него металлическая кристаллическая решётка\n3) фтор подходит, у него молекулярная кристаллическая решётка (F2)\n4) кислород подходит, у него молекулярная кристаллическая решетка (O2)\n5) кремнезем не подходит, у него атомная кристаллическая решётка (SiO2)',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой).\n\n1) аммиак подходит, у него молекулярная кристаллическая решётка (NH3)\n2) кремний не подходит, у него атомная кристаллическая решётка\n3) бром подходит, у него молекулярная кристаллическая решетка (Br2)\n4) карбид кремния не подходит, у него атомная кристаллическая решётка (SiC)\n5) карбонат аммония не подходит, у него ионная кристаллическая решетка ((NH4)2СO3)',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой).\n\n1) бензол подходит, имеет молекулярную кристаллическую решетку (C6H6)\n2) йодид калия не подходит, имеет ионную кристаллическую решётку (KI)\n3) фенолят калия не подходит, имеет ионную кристаллическую решетку (C6H5OK)\n4) йод подходит, имеет молекулярную кристаллическую решетку (I2)\n5) медь не подходит, имеет металлическую кристаллическую решетку',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой).\n\n1) фтороводород подходит, у него молекулярная кристаллическая решетка (HF)\n2) хлорид натрия не подходит, у него ионная кристаллическая решетка (NaCl)\n3) уксусная кислота подходит, у неё молекулярная кристаллическая решетка (CH3COOH)\n4) гидроксид натрия не подходит, у него ионная кристаллическая решетка (NaOH)\n5) оксид кремния(IV) не подходит, у него атомная кристаллическая решетка (SiO2)',
+'Молекулярную кристаллическую решетку имеют вещества, содержащие только ковалентные\nсвязи (за исключением веществ с атомной кристаллической решеткой).\n\n1) этанол подходит, у него молекулярная кристаллическая решетка (CH3–CH2–OH)\n2) угарный газ подходит, у него молекулярная кристаллическая решетка (CO)\n3) хлорид аммония не подходит, у него ионная кристаллическая решетка (NH4Cl)\n4) оксид натрия не подходит, у него ионная кристаллическая решетка (Na2O)\n5) ацетат натрия не подходит, у него ионная кристаллическая решетка (CH3–COONa)'];
+var _SOL_b7=['Металлической называется связь в металлах.\n\n1) пиролюзит не подходит, содержит ионную связь (MnO2)\n2) железная окалина не подходит, содержит ионную связь (Fe3O4)\n3) железо подходит, содержит металлическую связь\n4) барий подходит, содержит металлическую связь\n5) кислород не подходит, содержит ковалентную неполярную связь (O2)',
+'Металлическая кристаллическая решетка характерная для металлов.\n\n1) олово подходит, у него металлическая кристаллическая решетка\n2) бор не подходит, у него атомная кристаллическая решетка\n3) селен не подходит, у него молекулярная кристаллическая решетка\n4) стронций подходит, у него металлическая кристаллическая решетка\n5) хлор не подходит, у него молекулярная кристаллическая решетка (Cl2)',
+'Металлическую кристаллическую решетку имеют все вещества с металлическими связями.\n\n1) гипс не подходит, у него ионная кристаллическая решетка (CaSO4)\n2) железо подходит, у него металлическую кристаллическая решетка\n3) белый фосфор не подходит, у него молекулярная кристаллическая решетка (P4)\n4) алмаз не подходит, у него атомная кристаллическая решетка (C)\n5) магний подходит, у него металлическая кристаллическая решетка',
+'Металлическую кристаллическую решетку имеют все вещества с металлическими связями.\n\n1) углерод не подходит, у него атомная кристаллическая решетка\n2) селен не подходит, у него молекулярная кристаллическая решетка\n3) кремний не подходит, у него атомная кристаллическая решетка\n4) железо подходит, у него металлическая кристаллическая решетка\n5) свинец подходит, у него металлическая кристаллическая решетка',
+'Металлическую кристаллическую решетку имеют вещества с металлической связью.\n\n1) углерод не подходит, у него атомная кристаллическая решетка\n2) барий подходит, у него металлическая кристаллическая решетка\n3) стронций подходит, у него металлическая кристаллическая решетка\n4) азот не подходит, у него молекулярная кристаллическая решетка\n5) оксид калия не подходит, у него ионная кристаллическая решетка'];
+var _SOL={b6:_SOL_b6,b3:_SOL_b3,b4:_SOL_b4,b8:_SOL_b8,b5:_SOL_b5,b11:_SOL_b11,b10:_SOL_b10,b7:_SOL_b7};
+
+// ================================================================
+//  ТРЕНАЖЁР
+// ================================================================
+var _tr={};
+var _ALL_TR=['b3','b4','b5','b6','b7','b8','b10','b11'];
+var _TR_SAVE_KEY='linia4_tr2';
+var _TR_TTL=6*24*3600*1000;
+
+function _saveTrAll(){
+  try{
+    var out={ts:Date.now(),blocks:{}};
+    _ALL_TR.forEach(function(b){var s=_tr[b];if(s)out.blocks[b]={queue:s.queue,done:s.done,total:s.total,attempts:s.attempts||{},first:s.first||0,rep:s.rep||0};});
+    localStorage.setItem(_TR_SAVE_KEY,JSON.stringify(out));
+  }catch(e){}
+}
+function _loadTrAll(){
+  try{
+    var raw=localStorage.getItem(_TR_SAVE_KEY);if(!raw)return false;
+    var d=JSON.parse(raw);if(Date.now()-d.ts>_TR_TTL){localStorage.removeItem(_TR_SAVE_KEY);return false;}
+    _ALL_TR.forEach(function(b){if(d.blocks&&d.blocks[b]){var s=d.blocks[b];_tr[b]={queue:s.queue,done:s.done,total:s.total||TR_TASKS[b].length,attempts:s.attempts||{},first:s.first||0,rep:s.rep||0};}});
+    return true;
+  }catch(e){return false;}
+}
+
+function _trState(b){
+  if(!_tr[b]){var n=TR_TASKS[b].length;_tr[b]={queue:[],done:0,total:n,attempts:{},first:0,rep:0};for(var i=0;i<n;i++)_tr[b].queue.push(i);}
+  return _tr[b];
+}
+function trRender(b){
+  var s=_trState(b),t,bar,inp,nx,ck,rn;
+  if(!s.queue.length){_trShowResult(b);return;}
+  t=TR_TASKS[b][s.queue[0]];
+  document.getElementById('tr-'+b+'-prog').textContent=(s.done+1)+'/'+s.total+(s.rep>0?' 🔁'+s.rep:'');
+  bar=document.getElementById('tr-'+b+'-bar');
+  if(bar)bar.style.width=Math.round(s.done/s.total*100)+'%';
+  document.getElementById('tr-'+b+'-q').innerHTML=t.q+'<div class="tr-opts"><span class="tr-opts-label">Варианты</span><br>'+t.opts+'</div>';
+  inp=document.getElementById('tr-'+b+'-input');inp.value='';inp.className='tr-input';
+  document.getElementById('tr-'+b+'-fb').innerHTML='';document.getElementById('tr-'+b+'-fb').className='tr-feedback';
+  rn=document.getElementById('tr-'+b+'-rn');if(rn)rn.style.display='none';
+  nx=document.getElementById('tr-'+b+'-next');if(nx)nx.style.display='none';
+  ck=document.getElementById('tr-'+b+'-check');if(ck)ck.style.display='';
+  inp.focus();
+}
+
+function trCheck(b){
+  var s=_trState(b),t,inp,fb,vs,as,nx,ck,idx;
+  if(!s.queue.length)return;
+  idx=s.queue[0];
+  t=TR_TASKS[b][idx];
+  inp=document.getElementById('tr-'+b+'-input');
+  var v=inp.value.replace(/\s/g,'');
+  if(!v)return;
+  fb=document.getElementById('tr-'+b+'-fb');
+  vs=v.split('').sort().join('');
+  as=t.ans.split('').sort().join('');
+  if(vs===as){
+    inp.className='tr-input ok';fb.className='tr-feedback ok';
+    var _st=(_SOL[b]&&_SOL[b][idx])||'';
+    var sol=_st?'<div class="tr-sol"><div class="tr-sol-lbl">📖 Пояснение</div><div class="tr-sol-text">'+_st.replace(/\n/g,'<br>')+'</div></div>':'';
+    s.done++;s.queue.shift();
+    if(!s.attempts[idx]){s.first++;fb.innerHTML='✓ Верно!'+sol;}
+    else{fb.innerHTML='✓ Верно!'+sol;}
+    nx=document.getElementById('tr-'+b+'-next');if(nx)nx.style.display='';
+    ck=document.getElementById('tr-'+b+'-check');if(ck)ck.style.display='none';
+    _saveTrAll();
+  }else{
+    s.attempts[idx]=(s.attempts[idx]||0)+1;
+    inp.className='tr-input err';fb.className='tr-feedback err';
+    if(s.attempts[idx]===1){
+      s.rep++;s.queue.push(idx);
+      var ntc=document.getElementById('tr-'+b+'-rn');
+      if(ntc){ntc.style.display='';setTimeout(function(){ntc.style.display='none';},2500);}
+      document.getElementById('tr-'+b+'-prog').textContent=(s.done+1)+'/'+s.total+' 🔁'+s.rep;
+    }
+    fb.textContent='✗ Неверно — попробуй ещё раз';
+    inp.value='';
+    setTimeout(function(){inp.className='tr-input';inp.focus();},600);
+    _saveTrAll();
+  }
+}
+function trNext(b){
+  var s=_tr[b];if(!s)return;
+  if(!s.queue.length)_trShowResult(b);else trRender(b);
+}
+function trReset(b){
+  var n=TR_TASKS[b].length,i;
+  _tr[b]={queue:[],done:0,total:n,attempts:{},first:0,rep:0};
+  for(i=0;i<n;i++)_tr[b].queue.push(i);
+  document.getElementById('tr-'+b+'-result').style.display='none';
+  document.getElementById('tr-'+b+'-card').style.display='block';
+  _saveTrAll();
+  trRender(b);
+}
+function trResetAll(){
+  if(!confirm('Сбросить весь прогресс тренажёра? Это удалит все сохранённые результаты.'))return;
+  try{localStorage.removeItem(_TR_SAVE_KEY);}catch(e){}
+  _ALL_TR.forEach(function(b){
+    var n=TR_TASKS[b].length,i;
+    _tr[b]={queue:[],done:0,total:n,attempts:{},first:0,rep:0};
+    for(i=0;i<n;i++)_tr[b].queue.push(i);
+    document.getElementById('tr-'+b+'-result').style.display='none';
+    document.getElementById('tr-'+b+'-card').style.display='block';
+    trRender(b);
+  });
+  closeMenu();
+}
+function _trShowResult(b){
+  var s=_tr[b];
+  document.getElementById('tr-'+b+'-card').style.display='none';
+  var res=document.getElementById('tr-'+b+'-result');res.style.display='block';
+  document.getElementById('tr-'+b+'-score').textContent=s.done;
+  var doneEl=document.getElementById('tr-'+b+'-done');
+  if(doneEl)doneEl.style.display=(s.done===s.total)?'':'none';
+  if(typeof markToday==='function')markToday();
+  if(s.done===s.total)_checkAllTrDone();
+}
+function _checkAllTrDone(){
+  var allDone=_ALL_TR.every(function(b){var s=_tr[b];return s&&s.done===s.total;});
+  if(allDone){var ov=document.getElementById('glory-overlay');if(ov){ov.style.display='flex';void ov.offsetWidth;}}
+}
+
+// ================================================================
+//  FLASHCARDS — 50 карточек (19 теория + 31 практика)
+// ================================================================
+const FC_CARDS = [
+  // Блок 1. Теория (19)
+  { q: 'Что такое химическая связь?', a: 'Взаимодействие между атомами, благодаря которому они объединяются в молекулы, ионные соединения и кристаллы.', tag: 'Теория' },
+  { q: 'Какие виды химической связи существуют?', a: 'Ковалентная (неполярная и полярная), ионная, металлическая, водородная.', tag: 'Теория' },
+  { q: 'Что такое ковалентная связь?', a: 'Связь, образованная за счёт общих электронных пар между атомами неметаллов.', tag: 'Теория' },
+  { q: 'Что такое ковалентная неполярная связь?', a: 'Связь между одинаковыми атомами неметаллов (электронная пара не смещена).', tag: 'Теория' },
+  { q: 'Что такое ковалентная полярная связь?', a: 'Связь между разными атомами неметаллов (электронная пара смещена к более ЭО атому).', tag: 'Теория' },
+  { q: 'Что такое ионная связь?', a: 'Связь между ионами за счёт электростатического притяжения (металл + неметалл или NH₄⁺ + кислотный остаток).', tag: 'Теория' },
+  { q: 'Что такое металлическая связь?', a: 'Связь между катионами металлов и обобществлёнными электронами («электронный газ»).', tag: 'Теория' },
+  { q: 'Что такое водородная связь?', a: 'Межмолекулярная связь (связь между молекулами). Возникает если в молекуле есть H–F, H–O или H–N. С другими элементами водородной связи нет.', tag: 'Теория' },
+  { q: 'При каком условии возникает водородная связь?', a: 'Водород должен быть соединён с F, O или N. Только H–F, H–O, H–N дают водородную связь. PH₃, H₂S, HCl — водородной связи нет.', tag: 'Теория' },
+  { q: 'Приведите примеры веществ с водородной связью.', a: 'HF, H₂O, H₂O₂, NH₃, спирты, карбоновые кислоты, фенолы, амины.', tag: 'Теория' },
+  { q: 'Что такое донорно-акцепторный механизм?', a: 'Способ образования ковалентной связи, где донор даёт пару, а акцептор – пустую орбиталь.', tag: 'Теория' },
+  { q: 'Примеры соединений с ДАМ-связью.', a: 'NH₄Cl, PH₄Cl, H₃O⁺, CO, O₃, HNO₃, N₂O₅, комплексные соединения, соли аминов.', tag: 'Теория' },
+  { q: 'Что такое кристаллическая решётка?', a: 'Правильное периодическое расположение частиц (атомов, молекул или ионов) в пространстве.', tag: 'Теория' },
+  { q: 'Какие виды кристаллических решёток существуют?', a: 'Молекулярная, атомная, ионная, металлическая.', tag: 'Теория' },
+  { q: 'Что такое атомная кристаллическая решётка?', a: 'Решётка, в узлах которой атомы, соединённые ковалентными связями по всему кристаллу (только твёрдые).', tag: 'Теория' },
+  { q: 'Что такое молекулярная кристаллическая решётка?', a: 'Решётка, в узлах которой молекулы, связанные слабыми силами (характерна для газов и жидкостей).', tag: 'Теория' },
+  { q: 'Что такое ионная кристаллическая решётка?', a: 'Решётка, в узлах которой катионы и анионы, удерживаемые электростатическим притяжением.', tag: 'Теория' },
+  { q: 'Что такое металлическая кристаллическая решётка?', a: 'Решётка, в узлах которой атомы и катионы металлов, между которыми свободные электроны.', tag: 'Теория' },
+  { q: 'Что такое σ- и π-связи?', a: 'σ – перекрывание вдоль оси; π – по бокам. Одинарная = 1σ, двойная = 1σ+1π, тройная = 1σ+2π.', tag: 'Теория' },
+  // Блок 2. Практика (31)
+  { q: 'Определите тип связи и решётки для NaCl.', a: 'Ионная связь, ионная решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для MgO.', a: 'Ионная связь, ионная решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для Al₂O₃.', a: 'Ионная связь, ионная решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для NH₄Cl.', a: 'Ионная (NH₄⁺–Cl⁻) + ков. полярная (N–H, одна ДАМ), ионная решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для NaOH.', a: 'Ионная (Na–O) + ков. полярная (O–H), ионная решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для NaNO₃.', a: 'Ионная (Na⁺–NO₃⁻) + ков. полярная (N–O), ионная решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для H₂O.', a: 'Ков. полярная, молекулярная решётка (жидкость); есть водородная связь.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для NH₃.', a: 'Ков. полярная, молекулярная решётка (газ); есть водородная связь.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для HF.', a: 'Ков. полярная, молекулярная решётка (газ); есть водородная связь.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для CH₃OH (метанол).', a: 'Ков. полярная, молекулярная решётка (жидкость); есть водородная связь.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для CH₃COOH (уксусная кислота).', a: 'Ков. полярная, молекулярная решётка (жидкость); есть водородная связь.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для HCl.', a: 'Ков. полярная, молекулярная решётка (газ); водородной связи нет.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для CH₄.', a: 'Ков. полярная, молекулярная решётка (газ); водородной связи нет.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для PH₃.', a: 'Ков. неполярная, молекулярная решётка (газ); водородной связи нет.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для H₂S.', a: 'Ков. полярная, молекулярная решётка (газ); водородной связи нет.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для CO₂.', a: 'Ков. полярная, молекулярная решётка (газ).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для SO₂.', a: 'Ков. полярная, молекулярная решётка (газ).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для SiO₂ (кварц).', a: 'Ков. полярная, атомная решётка (твёрдое).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для Si (кремний).', a: 'Ков. неполярная, атомная решётка (твёрдое).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для C (алмаз).', a: 'Ков. неполярная, атомная решётка (твёрдое).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для C (графит).', a: 'Ков. неполярная, атомная решётка (твёрдое, проводник).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для P (красный фосфор).', a: 'Ков. неполярная, атомная решётка (твёрдое).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для I₂.', a: 'Ков. неполярная, молекулярная решётка (твёрдое, возгоняется).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для P₄ (белый фосфор).', a: 'Ков. неполярная, молекулярная решётка (твёрдое).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для S₈ (сера).', a: 'Ков. неполярная, молекулярная решётка (твёрдое).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для O₂.', a: 'Ков. неполярная, молекулярная решётка (газ).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для Br₂.', a: 'Ков. неполярная, молекулярная решётка (жидкость).', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для Fe.', a: 'Металлическая связь, металлическая решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для Cu.', a: 'Металлическая связь, металлическая решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для Al.', a: 'Металлическая связь, металлическая решётка.', tag: 'Практика' },
+  { q: 'Определите тип связи и решётки для Na.', a: 'Металлическая связь, металлическая решётка.', tag: 'Практика' }
+];
+
+// ================================================================
+//  ЛОГИКА ФЛЭШКАРТ
+// ================================================================
+let fcDeck=[...Array(FC_CARDS.length).keys()];
+let fcPos=0,fcFlipped=false,fcKnow=0,fcDk=0,fcDontKnowList=[];
+
+function fcRender(){
+  const idx=fcDeck[fcPos];
+  const card=FC_CARDS[idx];
+  document.getElementById('fc-front-text').textContent=card.q;
+  document.getElementById('fc-back-text').textContent='';
+  document.getElementById('fc-hint').textContent='';
+  document.getElementById('fc-tag').textContent=card.tag||'ВОПРОС';
+  document.getElementById('fc-back-tag').textContent='ОТВЕТ';
+  document.getElementById('fc-counter').textContent=`Карточка ${fcPos+1} из ${fcDeck.length}`;
+  document.getElementById('fc-know').textContent=fcKnow;
+  document.getElementById('fc-dk').textContent=fcDk;
+  document.getElementById('fc-left').textContent=fcDeck.length-fcPos;
+  const inner=document.getElementById('fc-inner');
+  inner.classList.remove('flipped');
+  fcFlipped=false;
+  document.getElementById('fc-btn-row').style.display='none';
+}
+
+function fcFlip(){
+  const inner=document.getElementById('fc-inner');
+  fcFlipped=!fcFlipped;
+  inner.classList.toggle('flipped',fcFlipped);
+  if(fcFlipped){
+    inner.addEventListener('transitionend',function onDone(){
+      inner.removeEventListener('transitionend',onDone);
+      if(!fcFlipped)return;
+      const card=FC_CARDS[fcDeck[fcPos]];
+      document.getElementById('fc-back-text').textContent=card.a;
+      document.getElementById('fc-btn-row').style.display='flex';
+    });
+  } else {
+    document.getElementById('fc-back-text').textContent='';
+    document.getElementById('fc-btn-row').style.display='none';
+  }
+}
+
+function fcAnswer(know){
+  if(know){fcKnow++;}else{fcDk++;fcDontKnowList.push(fcDeck[fcPos]);}
+  fcPos++;
+  if(fcPos>=fcDeck.length){
+    document.getElementById('res-know').textContent=fcKnow;
+    document.getElementById('res-dk').textContent=fcDk;
+    document.getElementById('fc-inner').parentElement.style.display='none';
+    document.querySelector('.fc-flip-btn').style.display='none';
+    document.getElementById('fc-btn-row').style.display='none';
+    document.querySelector('.fc-keys').style.display='none';
+    document.getElementById('fc-counter').style.display='none';
+    document.querySelector('.fc-stats').style.display='none';
+    document.getElementById('fc-result').style.display='block';
+  } else {
+    fcRender();
+  }
+}
+
+function fcRestart(onlyWrong){
+  fcKnow=0;fcDk=0;
+  fcDeck=onlyWrong&&fcDontKnowList.length?[...fcDontKnowList]:[...Array(FC_CARDS.length).keys()];
+  fcDontKnowList=[];fcPos=0;
+  document.getElementById('fc-inner').parentElement.style.display='';
+  document.querySelector('.fc-flip-btn').style.display='';
+  document.querySelector('.fc-keys').style.display='';
+  document.getElementById('fc-counter').style.display='';
+  document.querySelector('.fc-stats').style.display='';
+  document.getElementById('fc-result').style.display='none';
+  fcRender();
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.code==='Space'){e.preventDefault();fcFlip();}
+  if(e.code==='ArrowRight'&&fcFlipped)fcAnswer(true);
+  if(e.code==='ArrowLeft'&&fcFlipped)fcAnswer(false);
+});
+
+// ================================================================
+//  ОБЩИЕ СКРИПТЫ
+// ================================================================
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop||document.body.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('pf').style.width=pct+'%';
+  document.getElementById('back-top').classList.toggle('visible',pct>8);
+});
+
+
+// ================================================================
+//  ТОПБАР
+// ================================================================
+function tbToggle(){
+  var inner = document.getElementById('tb-inner');
+  inner.classList.toggle('collapsed');
+  localStorage.setItem('linia4_tb_collapsed', inner.classList.contains('collapsed')?'1':'0');
+}
+function tbToggleFS(){
+  if(!document.fullscreenElement) document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();
+  else document.exitFullscreen&&document.exitFullscreen();
+}
+function openMenu(){ document.body.classList.add('menu-open'); }
+function closeMenu(){ document.body.classList.remove('menu-open'); }
+
+// ================================================================
+//  ИСТОРИЯ / СТРИК
+// ================================================================
+var _HIST_KEY = 'linia4_hist';
+function _today(){
+  var d=new Date();
+  return d.getFullYear()+'-'+(d.getMonth()+1<10?'0':'')+(d.getMonth()+1)+'-'+(d.getDate()<10?'0':'')+d.getDate();
+}
+function markToday(){
+  var hist=JSON.parse(localStorage.getItem(_HIST_KEY)||'[]');
+  var t=_today();
+  if(!hist.includes(t)){ hist.push(t); if(hist.length>7) hist=hist.slice(-7); localStorage.setItem(_HIST_KEY,JSON.stringify(hist)); }
+  updateStreak();
+}
+function updateStreak(){
+  var hist=JSON.parse(localStorage.getItem(_HIST_KEY)||'[]');
+  var el=document.getElementById('tb-streak');
+  if(!el) return;
+  var today=new Date(); var dots='';
+  for(var i=5;i>=0;i--){
+    var d=new Date(today); d.setDate(today.getDate()-i);
+    var ds=d.getFullYear()+'-'+(d.getMonth()+1<10?'0':'')+(d.getMonth()+1)+'-'+(d.getDate()<10?'0':'')+d.getDate();
+    dots+='<span class="streak-dot'+(hist.includes(ds)?' active':'')+'"></span>';
+  }
+  el.innerHTML=dots;
+}
+function clearHistory(){
+  if(confirm('Очистить историю чтения?')){ localStorage.removeItem(_HIST_KEY); updateStreak(); }
+}
+
+// ================================================================
+//  ХОЛСТ ДЛЯ РИСОВАНИЯ
+// ================================================================
+var _canvas=null, _ctx=null, _drawing=false, _tool=null, _laserTrail=[];
+function _initCanvas(){
+  _canvas=document.getElementById('draw-canvas');
+  _canvas.width=window.innerWidth; _canvas.height=window.innerHeight;
+  _ctx=_canvas.getContext('2d');
+  _canvas.addEventListener('mousedown',function(e){if(!_tool)return;_drawing=true;_ctx.beginPath();_ctx.moveTo(e.clientX,e.clientY)});
+  _canvas.addEventListener('mousemove',function(e){
+    if(!_drawing||!_tool) return;
+    if(_tool==='eraser'){
+      var s=parseInt(document.getElementById('tb-size').value)*3;
+      _ctx.clearRect(e.clientX-s/2,e.clientY-s/2,s,s);
+    } else {
+      _ctx.lineTo(e.clientX,e.clientY);
+      _ctx.strokeStyle=_tool==='laser'?'rgba(255,80,80,.7)':'rgba(53,73,87,.85)';
+      _ctx.lineWidth=parseInt(document.getElementById('tb-size').value);
+      _ctx.lineCap='round'; _ctx.stroke();
+      if(_tool==='laser') _laserTrail.push({x:e.clientX,y:e.clientY,t:Date.now()});
+    }
+  });
+  _canvas.addEventListener('mouseup',function(){_drawing=false});
+  window.addEventListener('resize',function(){_canvas.width=window.innerWidth;_canvas.height=window.innerHeight});
+  if(_tool==='laser') requestAnimationFrame(_laserFade);
+}
+function _laserFade(){
+  var now=Date.now();
+  _laserTrail=_laserTrail.filter(function(p){return now-p.t<800});
+  requestAnimationFrame(_laserFade);
+}
+function tbPencil(){
+  _tool=_tool==='pencil'?null:'pencil';
+  _canvas.style.pointerEvents=_tool?'all':'none';
+  _canvas.style.display=_tool?'block':'none';
+  document.getElementById('tb-pencil').classList.toggle('active',_tool==='pencil');
+  document.getElementById('tb-eraser').classList.remove('active');
+}
+function tbEraser(){
+  _tool=_tool==='eraser'?null:'eraser';
+  _canvas.style.pointerEvents=_tool?'all':'none';
+  _canvas.style.display=_tool?'block':'none';
+  document.getElementById('tb-eraser').classList.toggle('active',_tool==='eraser');
+  document.getElementById('tb-pencil').classList.remove('active');
+}
+function tbClearCanvas(){
+  if(_ctx) _ctx.clearRect(0,0,_canvas.width,_canvas.height);
+}
+
+// ================================================================
+//  ИНИЦИАЛИЗАЦИЯ
+// ================================================================
+var _scrollMarked=false;
+document.addEventListener('DOMContentLoaded', function() {
+  _loadTrAll();
+  _ALL_TR.forEach(function(b){
+    var s=_tr[b];
+    if(s&&s.queue.length===0&&s.done>0){_trShowResult(b);}else{trRender(b);}
+  });
+  fcRender();
+  updateStreak();
+  _initCanvas();
+  if(localStorage.getItem('linia4_tb_collapsed')==='1') tbToggle();
+});
+window.addEventListener('scroll',function(){
+  if(!_scrollMarked){ _scrollMarked=true; markToday(); }
+});
+</script>
+</body>
+</html>
