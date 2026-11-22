@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<title>Гидролиз и pH — ЕГЭ</title>
+<style>
+:root{
+  color-scheme: only light;
+  --p900:#2D1B69;--p800:#3D2785;--p700:#4E35A0;
+  --p600:#6248C4;--p500:#7B61DB;--p400:#9B84E8;
+  --p300:#BDB2F3;--p200:#DBD5F8;--p100:#F0EEFF;--p50:#F8F7FF;
+  --ink:#1C1B29;--ink2:#3E3C5A;--ink3:#8A88A8;
+  --line:#E2E5EC;--bg:#F6F5FC;--white:#fff;
+  --green:#1D9E75;--green-t:#E1F5EE;--green-d:#085041;
+  --amber:#BA7517;--amber-t:#FAEEDA;--amber-d:#633806;
+  --red:#A32D2D;--red-t:#FCEBEB;--red-d:#7A2020;
+  --r:12px;--r-sm:8px;--r-lg:20px;
+  --shadow:0 1px 3px rgba(20,21,26,.06),0 4px 16px rgba(20,21,26,.06);
+  --shm:0 4px 20px rgba(60,40,160,.12);
+  --font:'Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+  --h1:#062030;--h2:#0C6B8E;--h3:#0891B2;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.65;font-size:17px;font-weight:450}
+
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:3px;background:var(--p100);z-index:999}
+.prog-bar-fill{height:3px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;transition:width .1s}
+
+.shell{max-width:960px;margin:0 auto;padding:0 24px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--h1) 0%,#0A4D6A 45%,var(--h2) 75%,var(--h3) 100%);padding:48px 32px 40px;margin:0 -24px 40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;bottom:-30%;left:-5%;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(8,145,178,.18) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;top:-20%;right:5%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);border-radius:20px;padding:4px 14px;font-size:12px;font-family:var(--mono);letter-spacing:.6px;margin-bottom:16px}
+.hero h1{font-size:clamp(28px,5vw,46px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#fff;margin-bottom:12px;position:relative;z-index:1;text-wrap:balance}
+.hero h1 em{color:#67E8F9;font-style:normal}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.68);line-height:1.7;max-width:540px;margin-bottom:22px;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.hero-chip{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.17);color:rgba(255,255,255,.88);padding:5px 14px;border-radius:16px;font-size:12.5px;font-weight:500}
+
+/* SECTIONS */
+.section{margin-bottom:44px}
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--p200)}
+.section-title{font-size:clamp(16px,2.5vw,21px);font-weight:700;color:var(--p800);line-height:1.2;text-wrap:balance}
+.section-pill{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.8px;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+
+h3.sub{font-size:17px;font-weight:800;color:var(--p700);margin:22px 0 10px;display:flex;align-items:center;gap:8px}
+h3.sub::before{content:'';width:3px;height:16px;background:var(--h2);border-radius:2px;flex-shrink:0}
+
+/* BOXES */
+.box{border-radius:var(--r-sm);padding:14px 18px;margin:10px 0;font-size:16px;line-height:1.75}
+.box-info{background:var(--p100);border-left:4px solid var(--p500);color:var(--p800)}
+.box-warn{background:var(--amber-t);border-left:4px solid var(--amber);color:var(--amber-d)}
+.box-danger{background:var(--red-t);border-left:4px solid var(--red);color:var(--red-d)}
+.box-success{background:var(--green-t);border-left:4px solid var(--green);color:var(--green-d)}
+.box-title{font-weight:800;font-size:13px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.6px}
+.box ul,.box ol{padding-left:18px;margin:4px 0}
+.box li{margin:4px 0;font-size:16px}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--line);margin:12px 0;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;background:var(--white);font-size:15px}
+th{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-weight:700;padding:10px 14px;text-align:left;font-size:13px;letter-spacing:.3px}
+td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.55}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--p50)}
+td code{font-family:var(--mono);font-size:12px;background:var(--p100);padding:1px 4px;border-radius:3px;color:var(--p800)}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+@media(max-width:680px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* SALT TYPE CARDS */
+.salt-card{border-radius:var(--r);padding:16px;border:1.5px solid;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px}
+.sc-neutral{background:#F0FDF4;border-color:#4ADE80}
+.sc-alk{background:#EFF6FF;border-color:#60A5FA}
+.sc-acid{background:#FEF2F2;border-color:#F87171}
+.sc-both{background:#FAF5FF;border-color:#C084FC}
+.sc-irr{background:#FFF7ED;border-color:#FB923C}
+.salt-tag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;padding:2px 8px;border-radius:100px;width:fit-content}
+.tag-n{background:#DCFCE7;color:#166534}
+.tag-a{background:#DBEAFE;color:#1E40AF}
+.tag-c{background:#FEE2E2;color:#991B1B}
+.tag-b{background:#F3E8FF;color:#6B21A8}
+.tag-i{background:#FFEDD5;color:#9A3412}
+.sc-title{font-weight:800;font-size:15px;line-height:1.3}
+.sc-body{font-size:14px;line-height:1.65;color:var(--ink2)}
+.sc-eq{font-family:var(--mono);font-size:13px;color:var(--ink3);margin-top:2px;word-break:break-word}
+.sc-ph{font-weight:700;font-size:14px;margin-top:2px}
+.ph-n{color:#166534}.ph-a{color:#1E40AF}.ph-c{color:#991B1B}.ph-7{color:#166534}
+
+/* pH SCALE */
+.ph-scale{margin:14px 0;border-radius:var(--r-sm);overflow:hidden;box-shadow:var(--shadow)}
+.ph-bar{height:36px;background:linear-gradient(to right,#9b1a1a,#d04020,#e07030,#c0a020,#80b030,#30a060,#1888a0,#1048b0,#180868);display:flex;align-items:center;position:relative}
+.ph-num{position:absolute;color:rgba(255,255,255,.9);font-family:var(--mono);font-size:9.5px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.7);transform:translateX(-50%);top:50%;margin-top:-6px}
+.ph-zones{display:flex}
+.ph-zone{flex:1;text-align:center;padding:5px 4px;font-size:11px;font-weight:700;border-right:1px solid var(--line)}
+.ph-zone:last-child{border-right:none}
+.ph-acid{background:#FEE2E2;color:#991B1B}
+.ph-neut{background:#DCFCE7;color:#166534}
+.ph-alk{background:#DBEAFE;color:#1E40AF}
+
+/* ALGO */
+.algo{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.algo-step{display:flex;gap:10px;align-items:flex-start}
+.algo-n{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;font-family:var(--mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.algo-text{font-size:15px;line-height:1.65;color:var(--ink2)}
+.algo-text strong{color:var(--ink)}
+
+/* INLINE NOTE */
+.note{background:linear-gradient(135deg,var(--p100),var(--p50));border:1.5px solid var(--p300);border-radius:var(--r);padding:14px 18px;margin:14px 0}
+.note-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--p600);margin-bottom:6px;font-weight:700}
+.note ul{padding-left:16px}
+.note li{font-size:15px;color:var(--p800);padding:3px 0}
+
+/* ── TRAINER ── */
+#tr-wrap{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--shadow);margin-bottom:24px}
+.tr-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid var(--p200)}
+.tr-title{font-size:18px;font-weight:700;color:var(--p800)}
+.tr-stats{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.ts-item{display:flex;align-items:baseline;gap:4px;font-size:13px;color:var(--ink3)}
+.ts-num{font-size:18px;font-weight:800;font-variant-numeric:tabular-nums}
+.ts-num.green{color:var(--green)}
+.ts-num.red{color:var(--red)}
+.ts-num.amber{color:var(--amber)}
+.ts-num.gray{color:var(--ink3)}
+.tr-prog-wrap{margin-bottom:16px}
+.tr-prog-lbl{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3);margin-bottom:4px;font-family:var(--mono)}
+.tr-prog-track{height:6px;background:var(--p100);border-radius:100px;overflow:hidden}
+.tr-prog-fill{height:100%;background:linear-gradient(90deg,var(--h2),var(--green));transition:width .3s}
+.tr-card{background:var(--bg);border:1.5px solid var(--p200);border-radius:var(--r);padding:20px;margin-bottom:14px;min-height:120px}
+.tr-dir-tag{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 11px;border-radius:100px;margin-bottom:10px}
+.tag-asc{background:#DBEAFE;color:#1E40AF}
+.tag-desc{background:#FDE8D8;color:#9A3412}
+.tr-subs{display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin:4px 0}
+.tr-sub{display:flex;align-items:baseline;gap:6px;font-size:14px}
+.tr-sub-n{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--ink3);min-width:18px;flex-shrink:0}
+.tr-sub-f{font-family:var(--mono);font-weight:600;color:var(--ink)}
+.tr-question{font-size:13px;color:var(--ink3);margin-top:8px;font-style:italic}
+.tr-input-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0}
+.tr-input{padding:9px 14px;font-size:22px;font-family:var(--mono);border:2px solid var(--line);border-radius:var(--r-sm);background:var(--bg);color:var(--ink);outline:none;transition:border-color .2s;max-width:140px;width:100%;letter-spacing:.14em;text-align:center;font-weight:700}
+.tr-input:focus{border-color:var(--h2)}
+.tr-input.ok{border-color:var(--green);background:var(--green-t)}
+.tr-input.err{border-color:var(--red);background:var(--red-t)}
+.tr-input:read-only{opacity:.7}
+.tr-btn{padding:9px 22px;border:none;border-radius:var(--r-sm);font-size:14px;font-weight:700;cursor:pointer;background:var(--p600);color:#fff;transition:background .15s,transform .1s}
+.tr-btn:hover{background:var(--p700);transform:translateY(-1px)}
+.tr-btn:disabled{opacity:.45;cursor:default;transform:none}
+.tr-btn-ok{background:var(--green)}
+.tr-btn-ok:hover{background:var(--green-d)}
+.tr-feedback{font-size:14px;font-weight:600;min-height:20px;margin:2px 0 8px}
+.tr-feedback.ok{color:var(--green)}
+.tr-feedback.err{color:var(--red)}
+.tr-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap}
+.tr-nav-btns{display:flex;gap:6px}
+.tr-nav-btns button{min-width:40px;height:40px;border-radius:50%;font-size:17px;background:var(--white);border:1.5px solid var(--line);color:var(--ink);cursor:pointer;transition:background .15s;display:flex;align-items:center;justify-content:center}
+.tr-nav-btns button:hover:not(:disabled){background:var(--p100)}
+.tr-nav-btns button:disabled{opacity:.3;cursor:default}
+.tr-penalty{background:var(--red-t);border:1px solid var(--red);border-radius:var(--r-sm);padding:4px 11px;font-size:12px;color:var(--red-d);font-weight:600;display:none}
+.tr-penalty.show{display:inline-block}
+.tr-result{background:var(--white);border-radius:var(--r);padding:28px;text-align:center;box-shadow:var(--shm);border:1px solid var(--line);display:none}
+.tr-result .gr{font-size:28px;margin-bottom:4px}
+.tr-result .pct{font-size:44px;font-weight:900;color:var(--p700)}
+.tr-result .rs{display:flex;justify-content:center;gap:24px;margin:12px 0 20px;flex-wrap:wrap}
+.tr-result .rn{font-size:24px;font-weight:800}
+.tr-result .rl{font-size:12px;color:var(--ink3)}
+.tr-result .ra{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.err-badge{background:var(--red-t);border:2px solid var(--red);border-radius:var(--r);padding:10px 16px;margin-bottom:14px;display:none;align-items:center;gap:12px;flex-wrap:wrap;font-weight:700;color:var(--red-d)}
+.err-badge.show{display:flex}
+
+#btt{position:fixed;bottom:24px;right:24px;width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(8,107,142,.35);display:flex;align-items:center;justify-content:center;transition:opacity .2s,transform .2s;opacity:0;pointer-events:none}
+#btt.vis{opacity:1;pointer-events:all}
+#btt:hover{transform:translateY(-2px)}
+.fade-in{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.fade-in.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:540px){
+  .shell{padding:0 14px 60px}
+  .hero{padding:32px 16px 28px;margin:0 -14px 28px}
+  .tr-subs{grid-template-columns:1fr}
+  .tr-input{max-width:100%}
+}
+
+/* TOPBAR */
+#topbar{position:fixed;top:12px;right:16px;z-index:999;display:flex;align-items:center;gap:4px;background:#fff;border:1.5px solid rgba(12,107,142,.3);border-radius:999px;padding:5px 6px;box-shadow:0 4px 20px rgba(12,107,142,.22);transition:all .25s ease;cursor:pointer;user-select:none}
+.tb-collapsible{display:flex;align-items:center;gap:4px}
+#topbar .tb-expand{display:none}
+#topbar.collapsed .tb-expand{display:flex}
+#topbar.collapsed .tb-collapsible{display:none}
+#topbar.collapsed{gap:0}
+.tb-btn{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;border-radius:50%;font-size:15px;color:var(--ink3);cursor:pointer;transition:.12s;flex-shrink:0}
+.tb-btn:hover{background:rgba(12,107,142,.1);color:var(--h2)}
+.tb-sep{width:1px;height:16px;background:rgba(12,107,142,.15);margin:0 2px;flex-shrink:0}
+.tb-badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.7px;color:var(--h2);padding:0 4px;white-space:nowrap;text-transform:uppercase}
+.tb-prog-wrap{width:52px;height:2px;background:rgba(12,107,142,.15);border-radius:1px;flex-shrink:0}
+.tb-prog-fill{height:2px;background:linear-gradient(90deg,var(--h2),var(--h3));width:0;border-radius:1px;transition:width .1s}
+.tb-label{font-family:var(--mono);font-size:10px;color:var(--ink3);padding:0 4px;white-space:nowrap}
+.tb-streak{display:flex;gap:3px;align-items:center;padding:0 2px}
+.tb-day{width:7px;height:7px;border-radius:50%;background:rgba(12,107,142,.15);flex-shrink:0;transition:.2s}
+.tb-day.done{background:var(--green)}
+.tb-day.today{outline:1.5px solid rgba(12,107,142,.5);outline-offset:1.5px}
+/* SIDE MENU */
+#menu-overlay{display:none;position:fixed;inset:0;background:rgba(6,32,48,.3);z-index:1000}
+#menu-overlay.open{display:block}
+#menu-panel{position:fixed;top:0;left:0;width:300px;height:100vh;background:#fff;border-right:1px solid var(--line);overflow-y:auto;padding:20px;z-index:1001;box-shadow:4px 0 20px rgba(12,107,142,.12);transform:translateX(-100%);transition:transform .3s ease}
+#menu-panel.open{transform:none}
+.mp-title{font-size:11px;font-weight:800;color:var(--ink3);letter-spacing:1.5px;text-transform:uppercase;padding:10px 12px 4px;font-family:var(--mono)}
+.mp-item{padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--ink2);display:flex;gap:10px;align-items:center;margin-bottom:1px;transition:.1s;text-decoration:none}
+.mp-item:hover{background:var(--p100);color:var(--h2)}
+.mp-close{background:none;border:none;font-size:20px;color:var(--ink3);cursor:pointer;padding:4px;float:right;margin-bottom:8px}
+/* QUIZ ENGINE */
+.fc-progress{display:flex;gap:3px;margin-bottom:14px;flex-wrap:wrap}
+.fc-dot{width:8px;height:8px;border-radius:50%;background:var(--p200);flex-shrink:0}
+.fc-dot.done{background:var(--green)}
+.fc-dot.curr{background:var(--h2)}
+.tr-check-btn,.tr-next-btn,.tr-reset-btn{border:none;border-radius:8px;padding:11px 26px;font-size:16px;font-weight:700;cursor:pointer;transition:.12s}
+.tr-check-btn{background:linear-gradient(135deg,var(--h1),var(--h2));color:#fff}
+.tr-check-btn:hover{opacity:.9}
+.tr-next-btn{background:var(--green);color:#fff}
+.tr-reset-btn{background:var(--line);color:var(--ink2)}
+.tr-quiz-inp{width:100%;padding:11px 14px;font-size:22px;font-family:var(--mono);border:2px solid var(--line);border-radius:var(--r-sm);background:var(--bg);color:var(--ink);outline:none;transition:border-color .2s;letter-spacing:.14em;text-align:center;max-width:160px}
+.tr-quiz-inp:focus{border-color:var(--h2)}
+.tr-quiz-inp:disabled{opacity:.65;cursor:default}
+@keyframes _quizShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.quiz-shake{animation:_quizShake .5s ease}
+.tr-qcard{background:#fff;border:1.5px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow)}
+.tr-qresult{background:#fff;border:1.5px solid var(--line);border-radius:var(--r);padding:28px 22px;box-shadow:var(--shadow);text-align:center}
+</style>
+</head>
+<body>
+<div class="prog-bar-wrap"><div class="prog-bar-fill" id="pf"></div></div>
+
+<!-- TOPBAR -->
+<div id="topbar" class="collapsed" onclick="toggleTopbar(event)" title="Нажми чтобы развернуть">
+  <span class="tb-expand" style="font-size:18px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--h2);font-weight:700">☰</span>
+  <div class="tb-collapsible">
+    <button class="tb-btn" onclick="openMenu()" title="Меню">☰</button>
+    <div class="tb-sep"></div>
+    <span class="tb-badge">ЛИНИЯ 21 · ЕГЭ ХИМИЯ · 1 БАЛЛ</span>
+    <div class="tb-sep"></div>
+    <div class="tb-prog-wrap"><div class="tb-prog-fill" id="tb-pf"></div></div>
+    <span class="tb-label" id="tb-lbl">0%</span>
+    <div class="tb-sep"></div>
+    <div class="tb-streak" id="tb-streak"></div>
+    <button class="tb-btn" onclick="clearAll(event)" title="Сбросить всё">🗑️</button>
+    <div class="tb-sep"></div>
+    <button class="tb-btn" onclick="toggleTopbar(event)" title="Свернуть">✕</button>
+  </div>
+</div>
+
+<!-- SIDE MENU -->
+<div id="menu-overlay" onclick="closeMenu()"></div>
+<div id="menu-panel">
+  <button class="mp-close" onclick="closeMenu()">✕</button>
+  <div class="mp-title">Теория</div>
+  <a class="mp-item" href="#" onclick="closeMenu()">⚡ Электролиты и диссоциация</a>
+  <a class="mp-item" href="#" onclick="closeMenu()">🌡️ Среда растворов и pH</a>
+  <a class="mp-item" href="#" onclick="closeMenu()">🧪 4 типа гидролиза</a>
+  <a class="mp-item" href="#" onclick="closeMenu()">📊 Шкала pH: что помнить</a>
+  <div class="mp-title" style="margin-top:12px">Тренажёр ЕГЭ</div>
+  <a class="mp-item" href="#trainer-section" onclick="closeMenu()">📝 Линия 21 · 50 заданий</a>
+</div>
+
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">ЕГЭ Химия · Линия 21 · 1 балл</div>
+  <h1>Гидролиз<br><em>и pH растворов</em></h1>
+  <p class="hero-sub">Электролиты, среда растворов, 4 типа гидролиза солей — от базы до уверенного ответа в задании 21.</p>
+  <div class="hero-chips">
+    <span class="hero-chip">Электролиты</span>
+    <span class="hero-chip">Шкала pH</span>
+    <span class="hero-chip">4 типа гидролиза</span>
+    <span class="hero-chip">41 задание ЕГЭ</span>
+  </div>
+</div>
+
+<!-- БЛОК 1: ЭЛЕКТРОЛИТЫ -->
+<div class="section fade-in">
+  <div class="section-header">
+    <span class="section-pill">ОСНОВЫ</span>
+    <span class="section-title">Электролиты и диссоциация</span>
+  </div>
+
+  <div class="box box-info">
+    <div class="box-title">Определение</div>
+    <strong>Электролитическая диссоциация</strong> — распад вещества на ионы при растворении или расплавлении. <strong>Электролиты</strong> — вещества, растворы которых проводят ток. <strong>Неэлектролиты</strong> — не проводят (большинство органических, CO, N₂O, NO, SiO₂).
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Категория</th><th>Сильные электролиты (α ≈ 1)</th><th>Слабые электролиты (α ≪ 1)</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Кислоты</strong></td>
+          <td>H₂SO₄, HNO₃, HCl, HBr, HI, HClO₃, HClO₄, HBrO₃, HBrO₄, HIO₃, HMnO₄, H₂CrO₄, H₂Cr₂O₇</td>
+          <td>H₂SO₃, H₂S, HNO₂, HF, H₃PO₄, H₃PO₃, H₂CO₃, H₂SiO₃, HClO, HBrO, карбоновые кислоты</td>
+        </tr>
+        <tr>
+          <td><strong>Основания</strong></td>
+          <td>Щёлочи: LiOH, NaOH, KOH, RbOH, CsOH, Ca(OH)₂, Sr(OH)₂, Ba(OH)₂</td>
+          <td>Все нерастворимые основания, амфотерные гидроксиды, NH₃·H₂O</td>
+        </tr>
+        <tr>
+          <td><strong>Соли</strong></td>
+          <td>Растворимые соли (→ ионное уравнение пишется в виде ионов)</td>
+          <td>Нерастворимые и малорастворимые соли (⇌)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">🔑 Как определить силу кислоты</h3>
+
+  <div class="box box-info" style="margin-bottom:12px">
+    <div class="box-title">Кислородсодержащие кислоты — правило (O − H)</div>
+    <p style="margin-bottom:10px">Посчитай количество атомов кислорода и вычти количество атомов водорода:</p>
+    <div style="text-align:center;font-size:17px;font-weight:800;letter-spacing:0.03em;color:var(--h2);margin:10px 0 14px">O − H ≥ 2 → <span style="color:var(--green-d)">сильная</span> &nbsp;|&nbsp; O − H ≤ 1 → <span style="color:var(--red)">слабая</span></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Кислота</th><th>O</th><th>H</th><th>O − H</th><th>Сила</th></tr></thead>
+        <tbody>
+          <tr><td>H₂SO₄</td><td>4</td><td>2</td><td style="font-weight:700;color:var(--green-d)">2</td><td style="color:var(--green-d);font-weight:700">Сильная</td></tr>
+          <tr><td>HNO₃</td><td>3</td><td>1</td><td style="font-weight:700;color:var(--green-d)">2</td><td style="color:var(--green-d);font-weight:700">Сильная</td></tr>
+          <tr><td>H₂SO₃</td><td>3</td><td>2</td><td style="font-weight:700;color:var(--red)">1</td><td style="color:var(--red);font-weight:700">Слабая</td></tr>
+          <tr><td>H₃PO₄</td><td>4</td><td>3</td><td style="font-weight:700;color:var(--red)">1</td><td style="color:var(--red);font-weight:700">Слабая</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+    <div class="box box-warn" style="margin:0">
+      <div class="box-title">Бескислородные кислоты</div>
+      <p style="margin-bottom:8px">Все <strong>сильные</strong>, кроме двух исключений:</p>
+      <ul style="list-style:disc;padding-left:18px;font-size:14px">
+        <li><strong>H₂S</strong> — сероводород → <span style="color:var(--red)">слабая</span></li>
+        <li><strong>HF</strong> — фтороводородная → <span style="color:var(--red)">слабая</span></li>
+      </ul>
+      <p style="margin-top:8px;font-size:13px;color:var(--ink3)">HCl, HBr, HI — сильные</p>
+    </div>
+    <div class="box box-warn" style="margin:0">
+      <div class="box-title">Органические кислоты</div>
+      <p style="margin-bottom:8px">Все <strong>слабые</strong> без исключений:</p>
+      <ul style="list-style:disc;padding-left:18px;font-size:14px">
+        <li>CH₃COOH — уксусная</li>
+        <li>HCOOH — муравьиная</li>
+        <li>C₆H₅COOH — бензойная</li>
+        <li>и другие карбоновые кислоты</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">Важно для ионных уравнений</div>
+    В ионных уравнениях на ионы расписываются <strong>только сильные электролиты</strong>. Слабые электролиты, осадки и газы остаются в молекулярном виде.
+  </div>
+</div>
+
+<!-- БЛОК 2: СРЕДА И pH -->
+<div class="section fade-in">
+  <div class="section-header">
+    <span class="section-pill">СРЕДА</span>
+    <span class="section-title">Среда растворов и pH</span>
+  </div>
+
+  <p style="font-size:14px;margin-bottom:12px"><strong>pH</strong> — водородный показатель: <strong>pH = −log₁₀C(H⁺)</strong>. Количественная мера кислотности раствора.</p>
+
+  <!-- pH scale visual -->
+  <div class="ph-scale">
+    <div class="ph-bar">
+      <span class="ph-num" style="left:6.7%">1</span>
+      <span class="ph-num" style="left:20%">3</span>
+      <span class="ph-num" style="left:40%">6</span>
+      <span class="ph-num" style="left:50%">7</span>
+      <span class="ph-num" style="left:60%">8</span>
+      <span class="ph-num" style="left:80%">11</span>
+      <span class="ph-num" style="left:93.3%">13</span>
+    </div>
+    <div class="ph-zones">
+      <div class="ph-zone ph-acid" style="flex:7">Кислая &nbsp;pH &lt; 7</div>
+      <div class="ph-zone ph-neut" style="flex:1">7</div>
+      <div class="ph-zone ph-alk" style="flex:7">Щелочная &nbsp;pH &gt; 7</div>
+    </div>
+  </div>
+
+  <h3 class="sub">Индикаторы</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Индикатор</th>
+          <th style="background:#B91C1C">Кислая (pH &lt; 7)</th>
+          <th style="background:#6B7280">Нейтральная (pH = 7)</th>
+          <th style="background:#1D4ED8">Щелочная (pH &gt; 7)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Лакмус</strong><br><span style="font-size:11px;color:var(--ink3);font-style:italic">🍗 KFC: <b style="color:#B91C1C">К</b>расный — <b style="color:#6B21A8">Ф</b>иолетовый — си<b style="color:#1D4ED8">С</b>ний</span></td>
+          <td style="color:#B91C1C;font-weight:700">красная</td>
+          <td style="color:#6B21A8;font-weight:700">фиолетовая</td>
+          <td style="color:#1D4ED8;font-weight:700">синяя</td>
+        </tr>
+        <tr>
+          <td><strong>Фенолфталеин</strong><br><span style="font-size:11px;color:var(--ink3);font-style:italic">🫐 Фенолфталеиновый — в щелочах малиновый</span></td>
+          <td>бесцветная</td>
+          <td>бесцветная</td>
+          <td style="color:#BE185D;font-weight:700">малиновая</td>
+        </tr>
+        <tr>
+          <td><strong>Метилоранж</strong><br><span style="font-size:11px;color:var(--ink3);font-style:italic">🍰 КОРЖ: <b style="color:#B91C1C">К</b>расный — <b style="color:#D97706">О</b>ранжевый — <b style="color:#D97706">Ж</b>ёлтый</span></td>
+          <td style="color:#B91C1C;font-weight:700">красная</td>
+          <td style="color:#D97706;font-weight:700">оранжевая</td>
+          <td style="color:#D97706;font-weight:700">жёлтая</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box box-warn">
+    <div class="box-title">Ловушка ЕГЭ — фенолфталеин</div>
+    Фенолфталеин <strong>не различает кислую и нейтральную среды</strong> — в обоих случаях бесцветный. Лакмус и метилоранж — универсальные (определяют все три среды).
+  </div>
+
+  <h3 class="sub">Диапазоны pH по типу вещества</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>pH</th><th>Среда</th><th>Типичные вещества</th></tr></thead>
+      <tbody>
+        <tr><td><code>&lt;1</code></td><td style="color:#B91C1C;font-weight:700">Сильнокислая</td><td>Сильные кислоты (H₂SO₄, HCl, HNO₃), гидросульфаты</td></tr>
+        <tr><td><code>3–6</code></td><td style="color:#B91C1C">Слабокислая</td><td>Слабые кислоты; соли, гидролизующиеся по катиону</td></tr>
+        <tr><td><code>= 7</code></td><td style="color:#166534;font-weight:700">Нейтральная</td><td>Вода; соли сильной кислоты + сильного основания; соли слабой кислоты + слабого основания (гидролиз по катиону и аниону одновременно, среды компенсируют друг друга)</td></tr>
+        <tr><td><code>8–11</code></td><td style="color:#1D4ED8">Слабощелочная</td><td>Соли, гидролизующиеся по аниону; NH₃·H₂O</td></tr>
+        <tr><td><code>&gt;12</code></td><td style="color:#1D4ED8;font-weight:700">Сильнощелочная</td><td>Щёлочи (NaOH, KOH, Ca(OH)₂, Ba(OH)₂)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- БЛОК 3: ГИДРОЛИЗ СОЛЕЙ -->
+<div class="section fade-in">
+  <div class="section-header">
+    <span class="section-pill">ГЛАВНОЕ</span>
+    <span class="section-title">Гидролиз солей</span>
+  </div>
+
+  <div class="box box-info">
+    <div class="box-title">Определение</div>
+    <strong>Гидролиз</strong> — реакция ионного обмена соли с водой, приводящая к образованию <strong>слабого электролита</strong> и изменению среды раствора. Идёт ступенчато, никогда не до конца (кроме необратимого гидролиза).
+  </div>
+
+  <h3 class="sub">4 типа солей по гидролизу</h3>
+  <div class="grid-2">
+    <!-- Тип 1 -->
+    <div class="salt-card sc-neutral">
+      <span class="salt-tag tag-n">Тип 1 · Гидролиза нет</span>
+      <div class="sc-title">Сильная кислота + Сильное основание</div>
+      <div class="sc-body">Соль не гидролизуется. Оба иона слабых электролитов не образуются.</div>
+      <div class="sc-eq">NaCl, KNO₃, CaCl₂, BaBr₂, Na₂SO₄</div>
+      <div class="sc-ph ph-7">pH = 7 · нейтральная</div>
+    </div>
+    <!-- Тип 2 -->
+    <div class="salt-card sc-alk">
+      <span class="salt-tag tag-a">Тип 2 · Гидролиз по аниону</span>
+      <div class="sc-title">Слабая кислота + Сильное основание</div>
+      <div class="sc-body">Анион взаимодействует с водой: A⁻ + HOH ⇌ HA + OH⁻<br>Образуется слабая кислота и OH⁻.</div>
+      <div class="sc-eq">Na₂CO₃, CH₃COONa, K₂S, KF, NaHCO₃, K₃PO₄</div>
+      <div class="sc-ph ph-a">pH &gt; 7 · щелочная</div>
+    </div>
+    <!-- Тип 3 -->
+    <div class="salt-card sc-acid">
+      <span class="salt-tag tag-c">Тип 3 · Гидролиз по катиону</span>
+      <div class="sc-title">Сильная кислота + Слабое основание</div>
+      <div class="sc-body">Катион взаимодействует с водой: M²⁺ + HOH ⇌ MOH⁺ + H⁺<br>Образуется слабое основание и H⁺.</div>
+      <div class="sc-eq">CuSO₄, FeCl₃, AlCl₃, ZnSO₄, NH₄Cl, MgSO₄</div>
+      <div class="sc-ph ph-c">pH &lt; 7 · кислая</div>
+    </div>
+    <!-- Тип 4 -->
+    <div class="salt-card sc-both">
+      <span class="salt-tag tag-b">Тип 4 · По катиону и аниону</span>
+      <div class="sc-title">Слабая кислота + Слабое основание</div>
+      <div class="sc-body">Гидролизуется и катион, и анион. Среда определяется соотношением сил. Часто — <strong>необратимый</strong> гидролиз.</div>
+      <div class="sc-eq">CH₃COONH₄, (NH₄)₂CO₃, Al₂S₃, Cr₂S₃</div>
+      <div class="sc-ph ph-7">pH ≈ 7 · близко к нейтральной</div>
+    </div>
+  </div>
+
+  <!-- Необратимый гидролиз -->
+  <div class="salt-card sc-irr" style="margin-top:12px">
+    <span class="salt-tag tag-i">Особый случай · Необратимый гидролиз</span>
+    <div class="sc-title">Слабая летучая кислота + Слабое нерастворимое основание (знаки «?» и «−» в таблице растворимости)</div>
+    <div class="sc-body">Гидролиз идёт <strong>до конца</strong>. Такие соли не существуют в растворе — сразу разлагаются.</div>
+    <div class="sc-eq">Al₂S₃ + 6H₂O → 2Al(OH)₃↓ + 3H₂S↑&nbsp;&nbsp;|&nbsp;&nbsp;Cr₂S₃, Al₂(CO₃)₃ и др.</div>
+  </div>
+
+  <h3 class="sub">Правило: чем слабее — тем сильнее гидролиз</h3>
+  <p style="font-size:14px;margin-bottom:8px">Чем слабее электролит, тем сильнее гидролизуется соль по соответствующему иону. Пример: Na₂S гидролизуется сильнее, чем NaF (H₂S слабее HF).</p>
+</div>
+
+<!-- БЛОК 4: КИСЛЫЕ СОЛИ + АЛГОРИТМ -->
+<div class="section fade-in">
+  <div class="section-header">
+    <span class="section-pill">АЛГОРИТМ</span>
+    <span class="section-title">Как определить среду — алгоритм ЕГЭ</span>
+  </div>
+
+  <div class="algo">
+    <div class="algo-step">
+      <div class="algo-n">1</div>
+      <div class="algo-text"><strong>Написать формулу</strong>, если дано название вещества.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">2</div>
+      <div class="algo-text"><strong>Проверить растворимость</strong> по таблице. Нерастворимые соли — гидролиза нет.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">3</div>
+      <div class="algo-text"><strong>Определить кислоту и основание</strong>, из которых образована соль.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">4</div>
+      <div class="algo-text"><strong>Оценить силу:</strong> щёлочи (сильные) = LiOH, NaOH, KOH, RbOH, CsOH, Ca(OH)₂, Sr(OH)₂, Ba(OH)₂; сильные кислоты = H₂SO₄, HNO₃, HCl, HBr, HI, HClO₃, HClO₄, HBrO₄, HIO₃, HMnO₄.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">5</div>
+      <div class="algo-text"><strong>Применить тип:</strong> слабая кислота → pH &gt; 7; слабое основание → pH &lt; 7; оба слабые → pH ≈ 7; оба сильные → pH = 7.</div>
+    </div>
+    <div class="algo-step">
+      <div class="algo-n">6</div>
+      <div class="algo-text"><strong>Сравнить pH:</strong> сильная кислота &lt; слабая кислота &lt; соль (гидр. по катиону) &lt; нейтральная соль ≈ 7 &lt; соль (гидр. по аниону) &lt; щёлочь.</div>
+    </div>
+  </div>
+
+  <h3 class="sub">Кислые соли слабых кислот — особый случай</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Кислая соль</th><th>Преобладает</th><th>Среда</th></tr></thead>
+      <tbody>
+        <tr><td><code>NaHS, NaHCO₃, Na₂HPO₄</code></td><td>Гидролиз по аниону (анион очень слабой кислоты)</td><td style="color:#1D4ED8;font-weight:700">Щелочная</td></tr>
+        <tr><td><code>NaHSO₃, NaH₂PO₄</code></td><td>Диссоциация кислого аниона (кислота средней силы)</td><td style="color:#B91C1C;font-weight:700">Кислая</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <div class="note-label">Запомни для ЕГЭ</div>
+    <ul>
+      <li><strong>KHCO₃, NaHCO₃</strong> — щелочная среда (H₂CO₃ очень слабая)</li>
+      <li><strong>NaHS, NaHCO₃, Na₂HPO₄</strong> — щелочная</li>
+      <li>Гидросульфаты (<strong>NaHSO₄</strong>) — кислая (диссоциируют как кислота!)</li>
+      <li>Соли с катионом <strong>NH₄⁺</strong> всегда кислят раствор</li>
+      <li><strong>Cs⁺, Rb⁺, Ba²⁺, Sr²⁺, Ca²⁺</strong> — катионы сильных оснований, гидролиза нет</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ТРЕНАЖЁР ЕГЭ -->
+<div class="section fade-in" id="trainer-section">
+  <div class="section-header">
+    <span class="section-pill">ПРАКТИКА</span>
+    <span class="section-title">Тренажёр ЕГЭ — Линия 21 · 50 заданий</span>
+  </div>
+
+  <div class="box box-info" style="margin-bottom:12px">
+    <strong>Формат задания:</strong> дано 4 вещества — определи среду каждого раствора и расставь номера в порядке возрастания или убывания pH. Введи ответ — 4 цифры подряд (например: <code>4321</code>). При ошибке — задание уходит в конец очереди.
+  </div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+    <div style="flex:1;min-width:220px;background:#DBEAFE;border:1.5px solid #60A5FA;border-radius:var(--r-sm);padding:12px 14px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#1E40AF;margin-bottom:6px">▲ Возрастание pH</div>
+      <div style="font-size:22px;font-weight:900;font-family:var(--mono);color:#1E3A8A;letter-spacing:.06em">КНЩ</div>
+      <div style="font-size:13px;color:#1E40AF;margin-top:4px"><b>К</b>ислая → <b>Н</b>ейтральная → <b>Щ</b>елочная</div>
+      <div style="font-size:12px;color:#3B82F6;margin-top:4px">pH растёт слева направо</div>
+    </div>
+    <div style="flex:1;min-width:220px;background:#FDE8D8;border:1.5px solid #FB923C;border-radius:var(--r-sm);padding:12px 14px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#9A3412;margin-bottom:6px">▼ Убывание pH</div>
+      <div style="font-size:22px;font-weight:900;font-family:var(--mono);color:#7C2D12;letter-spacing:.06em">ЩНК</div>
+      <div style="font-size:13px;color:#9A3412;margin-top:4px"><b>Щ</b>елочная → <b>Н</b>ейтральная → <b>К</b>ислая</div>
+      <div style="font-size:12px;color:#F97316;margin-top:4px">pH убывает слева направо</div>
+    </div>
+  </div>
+
+  <div id="l21-quiz"></div>
+</div>
+
+</div><!-- /shell -->
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* ── HISTORY ─────────────────────────────────── */
+const _HIST_KEY='l21_history';
+function _todayStr(){return new Date().toISOString().slice(0,10);}
+function _getHist(){try{return JSON.parse(localStorage.getItem(_HIST_KEY))||[];}catch(e){return[];}}
+function _saveHist(h){const cut=new Date();cut.setDate(cut.getDate()-5);const cs=cut.toISOString().slice(0,10);try{localStorage.setItem(_HIST_KEY,JSON.stringify(h.filter(x=>x.d>=cs)));}catch(e){}}
+
+function updateStreak(){
+  const h=_getHist(),today=_todayStr();
+  const days=[];
+  for(let i=5;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push(d.toISOString().slice(0,10));}
+  const el=document.getElementById('tb-streak');
+  if(!el)return;
+  el.innerHTML='';
+  days.forEach(d=>{
+    const dot=document.createElement('div');
+    dot.className='tb-day';
+    const entry=h.find(x=>x.d===d);
+    if(entry&&entry.b&&entry.b.length>0)dot.classList.add('done');
+    if(d===today)dot.classList.add('today');
+    el.appendChild(dot);
+  });
+}
+
+/* ── blockDone ─────────────────────────────────── */
+const _completedBlocks=new Set();
+window.blockDone=function(id){
+  _completedBlocks.add(id);
+  updateProgress();
+  const h=_getHist(),today=_todayStr();
+  let entry=h.find(x=>x.d===today);
+  if(!entry){entry={d:today,b:[]};h.push(entry);}
+  if(!entry.b.includes(id))entry.b.push(id);
+  _saveHist(h);updateStreak();
+};
+
+/* ── PROGRESS ──────────────────────────────────── */
+const _L21_BLOCKS=['l21_q1'];
+function _loadCompleted(){
+  const cut=Date.now()-6*24*60*60*1000;
+  _L21_BLOCKS.forEach(id=>{
+    try{
+      const s=JSON.parse(localStorage.getItem('l10_'+id));
+      if(!s)return;
+      if(!s.ts||s.ts<cut){localStorage.removeItem('l10_'+id);return;}
+      if(s.queue&&s.queue.length===0)_completedBlocks.add(id);
+    }catch(e){}
+  });
+}
+function updateProgress(){
+  const pct=Math.round(_completedBlocks.size/_L21_BLOCKS.length*100);
+  const pf=document.getElementById('pf');
+  if(pf)pf.style.width=pct+'%';
+}
+function _updateTopbarQuizProgress(done,total){
+  const tbpf=document.getElementById('tb-pf'),lbl=document.getElementById('tb-lbl');
+  const pct=total>0?Math.round(done/total*100):0;
+  if(tbpf)tbpf.style.width=pct+'%';
+  if(lbl)lbl.textContent=done+' / '+total;
+}
+
+/* ── TOPBAR / MENU ─────────────────────────────── */
+function toggleTopbar(e){
+  e.stopPropagation();
+  document.getElementById('topbar').classList.toggle('collapsed');
+}
+function openMenu(){document.getElementById('menu-overlay').classList.add('open');document.getElementById('menu-panel').classList.add('open');}
+function closeMenu(){document.getElementById('menu-overlay').classList.remove('open');document.getElementById('menu-panel').classList.remove('open');}
+
+/* ── CLEAR ALL ─────────────────────────────────── */
+function clearAll(e){
+  if(e)e.stopPropagation();
+  if(!confirm('Сбросить прогресс тренажёра?'))return;
+  try{localStorage.removeItem('l10_l21_q1');}catch(e2){}
+  _completedBlocks.clear();
+  updateProgress();
+  _updateTopbarQuizProgress(0,window._flashCards['l21-quiz']?window._flashCards['l21-quiz'].length:50);
+  resetQuiz('l21-quiz','l21_q1');
+}
+
+/* ── QUIZ ENGINE ──────────────────────────────── */
+window._flashStates={};window._flashCards={};
+function _fyShuffle(a){for(let i=a.length-1;i>0;i--){const j=0|Math.random()*(i+1);[a[i],a[j]]=[a[j],a[i]];}}
+const _TTL=6*24*3600*1000;
+function _saveFlash(wid,bid){try{localStorage.setItem('l10_'+bid,JSON.stringify({...window._flashStates[wid],ts:Date.now()}));}catch(e){}}
+function _grpQueue(cards){const q=cards.map((_,i)=>i);_fyShuffle(q);return q;}
+function initQuiz(wid,bid,cards){
+  window._flashCards[wid]=cards;
+  let s;try{s=JSON.parse(localStorage.getItem('l10_'+bid));}catch(e){}
+  if(s&&s.ts&&Date.now()-s.ts>_TTL)s=null;
+  if(!s||!Array.isArray(s.queue)){s={queue:_grpQueue(cards)};}
+  window._flashStates[wid]=s;_renderQuiz(wid,bid);
+}
+function _renderQuiz(wid,bid){
+  const wrap=document.getElementById(wid),s=window._flashStates[wid],cards=window._flashCards[wid];
+  if(!wrap||!s||!cards)return;
+  const total=cards.length;
+  if(!s.queue.length){
+    window.blockDone(bid);
+    _updateTopbarQuizProgress(total,total);
+    wrap.innerHTML=`<div class="tr-qresult"><div style="font-size:40px;margin-bottom:8px">🎉</div><div style="font-size:20px;font-weight:800;color:var(--green-d);margin-bottom:6px">Все ${total} карточек пройдены!</div><div style="font-size:14px;color:var(--ink3);margin-bottom:18px">Блок засчитан!</div><button class="tr-reset-btn" onclick="resetQuiz('${wid}','${bid}')">Пройти заново ↺</button></div>`;
+    return;
+  }
+  const idx=s.queue[0],card=cards[idx],done=total-s.queue.length;
+  _updateTopbarQuizProgress(done,total);
+  const dots=cards.slice(0,Math.min(total,30)).map((_,i)=>`<span class="fc-dot${i<done?' done':i===done?' curr':''}"></span>`).join('');
+  wrap.innerHTML=`<div class="tr-qcard">
+<div class="fc-progress">${dots}</div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+  <span style="font-family:var(--mono);font-size:11px;color:var(--h2)">${done+1} / ${total} · осталось: ${s.queue.length}</span>
+</div>
+<div style="font-size:14px;font-weight:600;color:var(--ink2);margin-bottom:10px">${card.q}</div>
+<div style="margin:0 0 12px">
+  <input id="${wid}-inp" class="tr-quiz-inp" type="text" maxlength="4" placeholder="4 цифры" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter')checkQuiz('${wid}','${bid}')">
+</div>
+<div id="${wid}-fb" style="display:none"></div>
+<div id="${wid}-btns" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+  <button class="tr-check-btn" onclick="checkQuiz('${wid}','${bid}')">Проверить →</button>
+</div></div>`;
+  document.getElementById(wid+'-inp').focus();
+}
+function checkQuiz(wid,bid){
+  const s=window._flashStates[wid],cards=window._flashCards[wid];
+  const card=cards[s.queue[0]];
+  const inp=document.getElementById(wid+'-inp');
+  const val=inp.value.trim().replace(/\s+/g,'');
+  if(!val)return;
+  inp.disabled=true;
+  const fb=document.getElementById(wid+'-fb');
+  const btns=document.getElementById(wid+'-btns');
+  const correct=(card.answers||[]).some(a=>a===val);
+  if(correct){
+    fb.style.display='block';
+    inp.style.borderColor='var(--green)';
+    fb.innerHTML=`<div style="background:var(--green-t);border-left:4px solid var(--green);border-radius:var(--r-sm);padding:14px 18px;margin:0 0 16px;font-size:14px;color:var(--green-d);line-height:1.85"><b>✓ Правильно!</b></div>`;
+    btns.innerHTML=`<button class="tr-next-btn" id="${wid}-nxt" onclick="quizNext('${wid}','${bid}')">Следующая →</button>`;
+    setTimeout(()=>document.getElementById(wid+'-nxt')?.focus(),0);
+  }else{
+    s.queue.push(s.queue[0]);
+    _saveFlash(wid,bid);
+    inp.style.borderColor='var(--red)';
+    inp.classList.add('quiz-shake');
+    setTimeout(()=>{
+      inp.style.borderColor='';
+      inp.classList.remove('quiz-shake');
+      inp.value='';
+      inp.disabled=false;
+      inp.focus();
+    },600);
+  }
+}
+function quizNext(wid,bid){const s=window._flashStates[wid];s.queue.shift();_saveFlash(wid,bid);_renderQuiz(wid,bid);}
+function resetQuiz(wid,bid){try{localStorage.removeItem('l10_'+bid);}catch(e){}const c=window._flashCards[wid];window._flashStates[wid]={queue:_grpQueue(c)};_renderQuiz(wid,bid);}
+
+/* ── QUIZ CARD DATA — 50 заданий NeoFamily ──── */
+const _pre='Для веществ, приведённых в перечне, определите характер среды их водных растворов.<br>';
+const _suf_asc='<br>Запишите номера веществ в порядке возрастания значения рН их водных растворов, учитывая, что концентрация веществ во всех растворах (моль/л) одинаковая.';
+const _suf_desc='<br>Запишите номера веществ в порядке убывания значения рН их водных растворов, учитывая, что концентрация веществ во всех растворах (моль/л) одинаковая.';
+const _suf_decr='<br>Запишите номера веществ в порядке уменьшения значения рН их водных растворов, учитывая, что концентрация веществ во всех растворах (моль/л) одинаковая.';
+const _pre2='Для веществ, приведённых в перечне, определите характер среды их водных растворов, имеющих одинаковую концентрацию (моль/л).<br>';
+const _suf_asc2='<br>Запишите номера веществ в порядке возрастания значения pH их водных растворов.';
+function _q2(subs,suf){return _pre2+'1) '+subs[0]+'<br>2) '+subs[1]+'<br>3) '+subs[2]+'<br>4) '+subs[3]+suf;}
+function _q(subs,suf){return _pre+'1) '+subs[0]+'<br>2) '+subs[1]+'<br>3) '+subs[2]+'<br>4) '+subs[3]+suf;}
+const CARDS=[
+  {q:_q(['FeCl₃','NaNO₂','Ca(NO₃)₂','HBr'],_suf_asc),answers:['4132']},
+  {q:_q(['КNO₂','NаСlО₄','Cr(NO₃)₃','Sr(OH)₂'],_suf_asc),answers:['3214']},
+  {q:_q(['ZnCl₂','K₃PO₄','HNO₃','LiOH'],_suf_desc),answers:['4213']},
+  {q:_q(['Na₃PO₄','HCl','KBr','(NH₄)₂SO₄'],_suf_asc),answers:['2431']},
+  {q:_q(['CaCl₂','(NH₄)₂SO₄','NaHCO₃','H₂SO₄'],_suf_desc),answers:['3124']},
+  {q:_q(['KNO₂','KClO₄','Sr(OH)₂','HBr'],_suf_asc),answers:['4213']},
+  {q:_q(['HClO₃','CH₃COOK','Sr(OH)₂','KI'],_suf_desc),answers:['3241']},
+  {q:_q(['хлорид цинка','сульфид калия','азотная кислота','гидроксид кальция'],_suf_asc),answers:['3124']},
+  {q:_q(['K₃PO₄','H₂SO₄','Pb(NO₃)₂','KClO₃'],_suf_asc),answers:['2341']},
+  {q:_q(['Fe(NO₃)₃','HCl','KClO₄','KHCO₃'],_suf_asc),answers:['2134']},
+  {q:_q(['NaOH','Na₂S','MgCl₂','HCl'],_suf_asc),answers:['4321']},
+  {q:_q(['LiOH','NaNO₃','K₂S','ZnBr₂'],_suf_asc),answers:['4231']},
+  {q:_q(['Na₃PO₄','CuCl₂','NaNO₃','HClO₄'],_suf_asc),answers:['4231']},
+  {q:_q(['KHCO₃','(NH₄)₂SO₄','NaClO₃','HBr'],_suf_decr),answers:['1324']},
+  {q:_q(['Fe(NO₃)₂','K₂SO₃','Na₂SO₄','НClO₃'],_suf_asc),answers:['4132']},
+  {q:_q(['CH₃COONa','Mg(NO₃)₂','BaCl₂','H₂SO₄'],_suf_asc),answers:['4231']},
+  {q:_q(['Na₂SO₄','Fe(NO₃)₃','K₂SO₃','НClO₃'],_suf_asc),answers:['4213']},
+  {q:_q(['хлорид аммония','бромоводород','гидроксид цезия','силикат калия'],_suf_asc),answers:['2143']},
+  {q:_q(['ацетат кальция','перхлорат калия','гидроксид стронция','метановая кислота'],_suf_asc),answers:['4213']},
+  {q:_q(['сероводород','аммиак','бромоводород','нитрат бария'],_suf_asc),answers:['3142']},
+  {q:_q(['силикат натрия','фосфорная кислота','нитрат кальция','гидроксид бария'],_suf_asc),answers:['2314']},
+  {q:_q(['H₂S','Na₃PO₄','HNO₃','LiCl'],_suf_asc),answers:['3142']},
+  {q:_q(['сульфат железа(III)','нитрат бария','сульфид натрия','азотная кислота'],_suf_asc),answers:['4123']},
+  {q:_q(['H₃PO₄','Na₃PO₄','NaNO₃','Ba(OH)₂'],_suf_asc),answers:['1324']},
+  {q:_q(['сероводород','иодоводород','сульфат лития','карбонат рубидия'],_suf_asc),answers:['2134']},
+  {q:_q(['Na₂CO₃','H₃PO₄','Ba(NO₃)₂','Ca(OH)₂'],_suf_asc),answers:['2314']},
+  {q:_q(['сульфат аммония','ацетат калия','нитрат бария','гидроксид калия'],_suf_asc),answers:['1324']},
+  {q:_q(['NH₄Br','HI','Na₂SiO₃','KClO₄'],_suf_asc),answers:['2143']},
+  {q:_q(['Pb(NO₃)₂','Ca(ClO)₂','NaI','KOH'],_suf_asc),answers:['1324']},
+  {q:_q(['C₆H₅OK','NaClO₄','Cr(NO₃)₃','Sr(OH)₂'],_suf_asc),answers:['3214']},
+  {q:_q(['уксусная кислота','метиламин','азотная кислота','гидроксид кальция'],_suf_asc),answers:['3124']},
+  {q:_q(['бромид хрома(III)','ацетат калия','иодоводород','нитрат лития'],_suf_asc),answers:['3142']},
+  {q:_q(['(NH₄)₂SO₄','NH₃','CsOH','HClO₃'],_suf_desc),answers:['3214']},
+  {q:_q(['HCOOH','CH₃COOK','Sr(OH)₂','KI'],_suf_desc),answers:['3241']},
+  {q:_q(['H₂S','NaNO₂','Ca(NO₃)₂','HBr'],_suf_asc),answers:['4132']},
+  {q:_q(['H₂S','CH₃COONH₄','CH₃NH₂','HClO₃'],_suf_asc),answers:['4123']},
+  {q:_q(['(HCOO)₂Ca','KClO₄','Sr(OH)₂','HCOOH'],_suf_asc),answers:['4213']},
+  {q:_q(['Cr(NO₃)₃','Ca(OH)₂','CH₃COONH₄','HClO₄'],_suf_asc),answers:['4132']},
+  {q:_q(['NH₄NO₃','HNO₃','Na₂S','K₂SO₄'],_suf_asc),answers:['2143']},
+  {q:_q(['NH₄NO₃','СН₃СООК','ВаСl₂','RbOH'],_suf_asc),answers:['1324']},
+  {q:_q(['NaClO₃','KClO','(NH₄)₂SO₄','HI'],_suf_desc),answers:['2134']},
+  {q:_q(['СН₃NH₂','KClO₄','Al(NO₃)₃','Ba(OH)₂'],_suf_desc),answers:['4123']},
+  {q:_q(['Fe₂(SO₄)₃','LiNO₃','K₂SiO₃','H₂SO₄'],_suf_asc),answers:['4123']},
+  {q:_q(['FeBr₃','HCOONa','HBr','LiOH'],_suf_asc),answers:['3124']},
+  {q:_q(['СН₃СООН','К₃РО₄','HNO₃','LiOH'],_suf_desc),answers:['4213']},
+  {q:_q(['NaF','RbOH','HCl','CaBr₂'],_suf_asc),answers:['3412']},
+  {q:_q(['Al(NO₃)₃','NH₃','CH₃COONH₄','HClO₃'],_suf_asc),answers:['4132']},
+  {q:_q(['Zn(NO₃)₂','CsOH','CaBr₂','K₃PO₄'],_suf_asc),answers:['1342']},
+  {q:_q2(['H₂SO₄','Na₂S','AlCl₃','CaCl₂'],_suf_asc2),answers:['1342']},
+  {q:_q2(['KNO₂','LiOH','ZnSO₄','Ba(NO₃)₂'],_suf_asc2),answers:['3412']},
+];
+
+/* ── SCROLL PROGRESS & BACK-TO-TOP ───────────── */
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('pf').style.width=(h>0?window.scrollY/h*100:0)+'%';
+  document.getElementById('btt').classList.toggle('vis',window.scrollY>300);
+});
+
+/* ── FADE IN ─────────────────────────────────── */
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')});},{threshold:0.07});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+/* ── INIT ────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded',function(){
+  _loadCompleted();
+  updateProgress();
+  updateStreak();
+  initQuiz('l21-quiz','l21_q1',CARDS);
+});
+</script>
+</body>
+</html>
